@@ -1,0 +1,126 @@
+# Framings — what /test-strategy must hold against agent defaults
+
+A test strategy produced by an agent without explicit framing tends to drift toward a test plan: a list of cases, a coverage target, a sequence of build-then-verify. That isn't a test strategy. The framings below are non-negotiable defaults grounded in Edmund Pringle's quality framework, captured here so each sub-step can apply them without re-deriving from first principles.
+
+When you see "see FRAMINGS.md #N" in a sub-step file, it means that framing is load-bearing for that step. Don't skip it.
+
+---
+
+## #1 — Investigation, not checking, is the dominant frame
+
+**Checking** is confirming specific things work the way we expect. Mechanical, repeatable, automatable.
+**Investigating** is discovering what's actually going on, especially in places nobody thought to look. Creative, exploratory.
+
+Most teams pour almost all their effort into checking and almost none into investigation. **The test strategy must reverse that emphasis.** If the strategy reads as a list of test cases or coverage targets, it's wrong — that's a test plan masquerading as a strategy.
+
+The test strategy answers: *what's actually true about this product, and where do we need to find out?* Not: *what cases verify the spec?*
+
+Source: Ed's `core/Testing.md`, `quality-strategy/concept-testing-definition.md`.
+
+---
+
+## #2 — Test phase is a terrible idea
+
+The test strategy is not "what we do at the end." It shapes the work from day one. Architecture choices, technology choices, assumptions about users — these have enormous quality implications, and testing thinking has to be present when they're made.
+
+**The strategy should include testing thinking from the start of the project, not from the start of a "test phase."** A produced test strategy that sequences design → build → test is wrong.
+
+Source: Ed's `quality-strategy/concept-testing-starts-at-the-start.md`.
+
+---
+
+## #3 — Independence of perspective: don't read the code first
+
+If you study the code before testing, you test against the builder's mental model. You verify that the code does what the code was written to do. You don't discover whether the code does what the *stakeholders* need.
+
+**The /test-strategy pre-read explicitly excludes source code.** Inputs are the quality strategy + an inventory of test infrastructure (test/, spec/, CI config, existing test docs). The agent runs the strategy from this independent footing, not from code-grounded assumptions.
+
+This applies to AI agents doing testing too: their fresh-eyes perspective is valuable for the same reason a human tester's independence is valuable. If it gets contaminated by reading source first, that perspective is gone and can't be recovered.
+
+Source: Ed's `quality-strategy/concept-testing-without-seeing-code.md`.
+
+---
+
+## #4 — Asking and testing are parallel, not substitutes
+
+Both fill in the actual/confidence columns of the risk map. They answer different questions:
+
+- **Asking the builder** tells you what was *intended* and what the builder *believes* is true.
+- **Testing the product** tells you what *actually happens* when you use it.
+
+The gap between intended and actual is where the most important bugs live.
+
+The test strategy should plan for both. Don't collapse them — testing isn't a substitute for asking, and asking isn't a substitute for testing.
+
+Source: Ed's `quality-strategy/concept-testing-without-seeing-code.md`.
+
+---
+
+## #5 — Don't import old-world costs
+
+Many "we don't test that" decisions are inherited from the human-cost era. *Not worth writing tests for edge cases — a human would spend an hour on it.* *Not worth checking all variations — that's expensive manual testing.*
+
+With agents, lots of "not worth it" becomes trivially cheap. Edge cases in seconds. Every variation in parallel. Every code path explored.
+
+**The strategy must challenge inherited assumptions about scope.** During learning-needs derivation, prompt explicitly: *what would you have said "not worth testing" under human costs that's now cheap?*
+
+Source: Ed's `heuristics/Heuristic 9 - Don't Import Old-World Costs.md`.
+
+---
+
+## #6 — Economics shift: checking is nearly free, investigation is the bottleneck
+
+In the human-centric era, you sampled because you couldn't check everything. With agents, checking everything is feasible. What's expensive is *deciding what to check* — generating good hypotheses, understanding what failures mean, thinking creatively about edge cases.
+
+**Allocation should reflect this rebalance.** Use agents for exhaustive checking. Reserve human time for investigation, judgment, and the questions agents can't ask themselves. Don't spend human time on what agents can check.
+
+Source: Ed's `heuristics/Heuristic 13 - Economics of Checking vs Investigating Shift with Agents.md`.
+
+---
+
+## #7 — Agent output needs different review
+
+Humans make inconsistent, visible mistakes. Agents make consistent, plausible-looking mistakes. They follow instructions precisely but misunderstand intent. They produce output that satisfies the literal request but misses the point.
+
+**Review processes designed for human error patterns will miss agent error patterns.** When agents do testing, the review pattern has to look for: *Does this actually solve the problem? Are the assumptions correct? Is this internally self-consistent in a way that hides a misunderstanding?*
+
+The allocation step must say so explicitly when assigning testing work to agents.
+
+Source: Ed's `heuristics/Heuristic 14 - Agent Output Needs Different Review.md`.
+
+---
+
+## #8 — Proxies are not quality
+
+A bug count is not quality. Test coverage is not quality. They're indirect signals that correlate with what you actually care about — but correlation is not identity.
+
+The moment you treat the proxy as the goal, you've lost sight of quality. You optimise for the proxy.
+
+**The strategy should call out which proxies it uses, what they're measuring, and what they might miss.** It should not include proxy targets as goals. Worth a guard at the closing step: *if you're tempted to write "achieve 80% coverage" as a goal, stop — that's a proxy, not the thing.*
+
+Source: Ed's `heuristics/Heuristic 4 - Proxies Are Not Quality.md`.
+
+---
+
+## #9 — Smells matter, and agents don't have them
+
+A smell is the intuitive feeling that something's off, before you can articulate why. Years of pattern recognition compressed into instant reaction. Smells fire before evidence, before data confirms a problem.
+
+**Agents don't have smells.** They process inputs and produce outputs without the pattern-matched discomfort that would make a human pause. This is one of their most significant blind spots.
+
+If the strategy fully delegates investigation to agents, it loses the smell layer. **Allocation should include a deliberate question: where do humans need to *feel* the product, not just check it?**
+
+Source: Ed's `smells/Smells.md`.
+
+---
+
+## #10 — Known risk and unknown risk are different problems
+
+**Known risk** = we know enough to know quality is below where we want. The cost is fixing.
+**Unknown risk** = we don't know enough to assess quality. The cost is testing to find out.
+
+These get conflated. A strategy that says "test more" in response to known risk is wrong — known risk needs fixing, not investigating. A strategy that says "fix it" in response to unknown risk is wrong — you don't know what to fix yet.
+
+**The learning-needs derivation should split them.** Each tier item should be honest about which kind of risk it's addressing. Items addressing unknown risk produce information; items addressing known risk produce fixes (and may not belong in a test strategy at all — they belong in the quality strategy's plan of work).
+
+Source: Ed's `core/Risk.md`, `quality-strategy/concept-risk.md`.

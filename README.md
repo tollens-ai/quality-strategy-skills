@@ -52,9 +52,9 @@ Then in any project: `/quality-strategy` to start. Output goes to `quality/strat
 
 ## How long does it take?
 
-A serious quality strategy from `/quality-strategy` typically takes **1–2 hours** of focused interview. The skill is designed to be **paused and resumed** at natural break points — and is opinionated about which sub-steps belong tightly together and which are natural seams.
+Plan for **one to two working days** of real thinking — not elapsed time, but cognitive time. A serious quality strategy is exhausting work. The interview surfaces decisions you've been avoiding, contradictions you didn't know you were carrying, and stakeholder questions you can't answer off the top of your head. You can't plough through it in one sitting and produce anything honest.
 
-In practice most users do `/quality-strategy` over **2–3 sessions**, with `/clear` between. The skill suggests when to take a break and when to push on. The strategy doc is written incrementally so any partial run is durable.
+Expect to spread it across **several sessions** of 60–90 minutes each, with `/clear` between, ideally across multiple days. The skill is designed for that — sub-steps are durable across interruptions, and natural break points are flagged. If yours takes a day or longer, that's a sign real thinking is happening. If it takes less than a couple of hours total, you've probably been answering too quickly.
 
 ## What's where
 
