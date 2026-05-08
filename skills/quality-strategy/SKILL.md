@@ -1,0 +1,191 @@
+---
+name: quality-strategy
+description: Produce or revise a quality strategy for a project — a business-level document defining who matters, what they value, where the gaps are, and what to do about it. Use when starting a project, planning a major release, or when "quality" is being talked about vaguely.
+---
+
+# Quality Strategy
+
+This skill walks a structured interview to produce `quality/strategy.md` — a business-level document defining what success looks like for the project and how to get there. It is grounded in Edmund Pringle's quality framework.
+
+The skill is intentionally long. A serious quality strategy can take an hour or more to produce well. The work is broken into 21 small sub-steps so progress is legible, the user can pause at any point, and the strategy doc accumulates incrementally — what's already been written is durable across interruptions.
+
+## Before you start
+
+Read `PHILOSOPHY.md` at the repo root if you haven't already. The disciplines that recur in every step — interview don't infer; ask rather than guess; record assumptions; understand the why; make confidence visible; push back on vagueness; make non-goals explicit; stay sequential — are non-negotiable and applied throughout.
+
+## Scope of this skill — first release only
+
+The depth analysis in this skill (stakeholders, three-lens, non-goals, dimensions, risk map, plan of work) focuses on **one release at a time** — typically the next release the team is about to ship. Future releases are noted briefly during sub-step 2.1 (Roadmap) so the strategy isn't blind to what's coming, but the analysis depth is for the immediate release.
+
+This is deliberate: the context of a release shapes the strategy heavily, and pre-running the deep analysis for releases that haven't yet had their context resolved produces speculation, not strategy. When the team is ready to start a future release, re-invoke the skill in new-release mode (see Revision mode below) to produce a fresh strategy for it. Some sections (team, workflows, roadmap) carry over with incremental updates; others (stakeholders, dimensions, risk map, plan of work) are largely rewritten because the release context has changed.
+
+## How this skill is structured
+
+The work is divided into 7 steps, each with one or more sub-steps. Each sub-step lives in its own file under `steps/`. The full sequence:
+
+| Sub-step | File | Produces |
+|---|---|---|
+| 0 — Pre-read | `steps/0-pre-read/0-dispatch.md` | Project digest at `quality/pre-read.md` |
+| 1.1 Purpose | `steps/1-context/1-1-purpose.md` | Product purpose, immediate goal, longer-term ambition |
+| 1.2 Team | `steps/1-context/1-2-team.md` | Roles including agent team members |
+| 1.3 Workflows | `steps/1-context/1-3-workflows.md` | How work actually flows |
+| 1.4 Release workflow | `steps/1-context/1-4-release-workflow.md` | How releases ship |
+| 1.5 Budget | `steps/1-context/1-5-budget.md` | Resources and constraints |
+| 2.1 Roadmap | `steps/2-releases/2-1-roadmap.md` | Per-release purposes |
+| 3.1 Identify stakeholders | `steps/3-stakeholders/3-1-identify.md` | Who matters per release |
+| 3.2 Three-lens analysis | `steps/3-stakeholders/3-2-three-lens.md` | Delight / Good Enough / Dealbreaker per stakeholder |
+| 4.1 Non-goals | `steps/4-non-goals/4-1-non-goals.md` | Explicit exclusions per release |
+| 5.1 Dimension inventory (raw) | `steps/5-dimensions/5-1-inventory.md` | Bottom-up + top-down (subagent) + reconcile → raw consolidated inventory |
+| 5.2 Unpack pass | `steps/5-dimensions/5-2-unpack.md` | Split composite dimensions into sub-dimensions where priorities differ |
+| 5.3 Old/new-world pass | `steps/5-dimensions/5-3-old-new-world.md` | Split trap dimensions where the audience (human vs agent) changes the rating |
+| 5.4 Rate dimensions | `steps/5-dimensions/5-4-rate.md` | H/M/L/None per dimension with rationale |
+| 5.5 Sanity checks | `steps/5-dimensions/5-5-checks.md` | Distribution, stakeholder coverage, tensions, non-goal alignment |
+| 6.1 Required levels | `steps/6-risk-map/6-1-required.md` | What level is needed for each H/M dimension |
+| 6.2 Actual levels | `steps/6-risk-map/6-2-actual.md` | Where we are on each H/M dimension |
+| 6.3 Gap and confidence | `steps/6-risk-map/6-3-gap-and-confidence.md` | The risk map combining required + actual + confidence on both sides |
+| 7.1 Derive actions | `steps/7-plan-of-work/7-1-derive.md` | What needs doing, drawn from the risk map |
+| 7.2 Classify | `steps/7-plan-of-work/7-2-classify.md` | Each action as testing / stakeholder / fixing |
+| 7.3 Sequence | `steps/7-plan-of-work/7-3-sequence.md` | Phasing and dependencies |
+
+## Execution rules — non-negotiable
+
+1. **Execute the sub-steps strictly in order.** Later sub-steps depend on earlier ones.
+
+2. **Read one sub-step file at a time.** Do not read sub-step *N+1* until you have completed sub-step *N*. Reading multiple sub-step files at once leads to racing through the work and producing a strategy that looks complete but skipped the substance.
+
+3. **For each sub-step:**
+   - Read its file.
+   - Execute the pre-read, interview, and section-writing as the file directs.
+   - Run the **"This sub-step is DONE when"** checklist at the end of the file.
+   - If any check fails, return to questioning. Do not proceed.
+   - When all checks pass:
+     - **At intermediate sub-steps** (1.1–1.4, 3.1, 5.1–5.4, 6.1–6.2, 7.1–7.2), do a light wrap-up: summarise in 2–4 lines and ask *"any quick concerns, or ready to continue?"* Move on at yes.
+     - **At step boundaries** (end of sub-steps 1.5, 2.1, 3.2, 4.1, 5.5, 6.3, 7.3), run the **substantive checkpoint** (see below) on the whole step's output. Only proceed after explicit, considered confirmation.
+   - Only then read the next sub-step file.
+
+4. **Write output incrementally.** As each sub-step completes, append the relevant section to `quality/strategy.md`. If a session is interrupted, what's already written is durable.
+
+## Substantive checkpoint at step boundaries
+
+This is the single most important user-facing pattern in the skill. The strategy is waterfall — mistakes caught early cost minutes; mistakes caught late cost hours of rework. We need a real engagement gate at each major step transition.
+
+**Where it runs.** At the end of each of the 7 steps — the close of sub-steps **1.5, 2.1, 3.2, 4.1, 5.5, 6.3, 7.3** — not at every sub-step. Per-sub-step transitions get a light wrap-up. The substantive checkpoint runs at step boundaries because that's when:
+
+- The user has a complete chunk of strategy to evaluate (a whole Part of the doc, not a fragment).
+- The user can read back the whole step and ask *"does this hang together?"* rather than evaluating a single piece in isolation. Smells about priorities or completeness usually only become visible when you can see the whole step at once — you can't tell if a stakeholder's three lenses are right by looking at one stakeholder; you tell by looking at all of them together.
+- Cross-step revisions become tractable. Doing later steps often surfaces things that change earlier steps' answers (e.g. while doing dimensions in Step 5, you realise a stakeholder's bar from Step 3 was wrong). The step-boundary checkpoint is when that gets acted on.
+
+### The pattern at each step boundary
+
+1. Summarise the *whole step's* output back to the user in 5–8 lines, hitting the consequential decisions across all sub-steps in the step. Not a recap of process — a recap of decisions.
+
+2. Run the substantive checkpoint:
+
+   > *"Take a real moment to read this back. We've completed [Step name]. Is anything off — even if you can't articulate why? Anything that gives you a weird feeling? Anything in earlier steps that, in light of this work, you now think is wrong? Even vague unease is worth surfacing. Catching it now is cheap; catching it later costs hours of rework."*
+
+3. **Wait for the user's response.** Treat any of the following as signals to dig in, *not* as confirmation:
+   - "I think so."
+   - "Looks fine I guess."
+   - Silence.
+   - "Yeah, sure."
+   - Any hesitation or non-committal response.
+
+   Honest follow-up: *"What's making it 'I guess' rather than 'yes'? Even a vague feeling is worth investigating — that's a smell, and smells are signal."*
+
+4. **If the user surfaces something**, treat it as a finding:
+   - **Articulable concern about this step** — address it now. Re-do the relevant sub-step.
+   - **Articulable concern about an earlier step** — surface explicitly: *"That's about [earlier step]. Want to revisit that section before continuing? Or note as `OPEN QUESTION` and keep going?"* Cross-step revision is first-class, not a failure.
+   - **Vague unease, can't articulate** — investigate together. Probing questions: *"What part of the section draws your eye?" "If you imagine this strategy in six months, where would the regret most likely come from?" "What's the closest you can get to naming it?"* Either it resolves and the section is corrected, or it remains as `OPEN QUESTION:` with the user's explicit acknowledgement that we're proceeding with that risk visible.
+
+5. **Only move on after explicit, considered confirmation** — not silence, not a non-committal response, not a polite "yes" with hesitation behind it.
+
+### Per-sub-step (intermediate) wrap-up
+
+At the end of intermediate sub-steps (1.1–1.4, 3.1, 5.1–5.4, 6.1–6.2, 7.1–7.2), do a **light wrap-up only**: summarise back in 2–4 lines, ask *"Any quick concerns, or ready to continue?"* — get a yes, move on. Save the deep engagement for the step boundary. The user can't really evaluate intermediate sub-steps in isolation anyway — full evaluation needs the whole step in view.
+
+## Initial pre-read
+
+Before reading sub-step 1.1, run sub-step 0 (`steps/0-pre-read/0-dispatch.md`). It dispatches a subagent that reads the project and produces a structured digest at `quality/pre-read.md`. Subsequent sub-steps reference the digest as starting hypothesis material so the main agent does not have to load the whole project into its own context window.
+
+## Pause and resume
+
+This skill produces a long interview — typically 1–2 hours of focused work for a serious strategy. The user will want breaks. Be **opinionated** about where to take them: some sub-steps belong tightly together and breaking between them costs working memory; others are natural seams.
+
+### Stick-together sets — keep going, do not suggest `/clear`
+
+These sub-step sequences depend heavily on the user's live working memory from the previous sub-step. The strategy doc captures the artefact, but not the live discussion (which stakeholder felt thin, which trade-off was surfaced, which dimension nearly got dropped). Breaking in the middle forces the next sub-step to re-orient from cold doc — losing real signal.
+
+- **3.1 → 3.2** — stakeholder identification flows into three-lens. The discussion about who matters and why is the working memory for the lens analysis.
+- **5.1 → 5.2 → 5.3** — the inventory evolves through unpack and old/new-world. The user's mental model of the dimensions accumulates across all three.
+- **6.1 → 6.2 → 6.3** — required, actual, gap. Each H/M dimension should stay fresh across all three; jumping between dimensions while context is cold loses precision.
+
+When the user is partway through a stick-together set, do not suggest `/clear`. If they ask to take a break, tell them: *"This sub-step is part of a tight sequence with the next — we'd lose some working memory if we broke here. Want to push through to [end of set], or take a longer break before starting fresh?"* Let them choose; just be explicit about the cost.
+
+### Natural break points — recommend `/clear` here
+
+After any of these, the conversation is at a natural seam and `/clear` loses nothing important (the strategy doc + pre-read digest are the source of truth):
+
+- After sub-step 0 (pre-read)
+- After Step 1 (after 1.5)
+- After Step 2 (after 2.1)
+- After Step 3 (after 3.2)
+- After Step 4 (after 4.1)
+- After 5.3 (inventory complete)
+- After 5.5 (Step 5 complete)
+- After Step 6 (after 6.3)
+- After Step 7 (before review)
+
+At each of these natural break points, **proactively suggest `/clear`** rather than waiting for the user to notice the conversation is long: *"That's a natural break point. The strategy doc captures everything we've agreed; if you'd like to take a break or do this in another session, this is a good place to `/clear` and resume."* Don't make the user notice and ask.
+
+### Step 5 specifically
+
+Step 5 is the longest single step (five sub-steps, with 5.1–5.3 stick-together). Before starting 5.1, check in: *"Step 5 (Quality Dimensions) is the longest step — five sub-steps, three of which (5.1–5.3) work best done in one session. If you're tight on time, this is a good place to take a break first."*
+
+### Resumption
+
+On re-invocation, detect the state of `quality/strategy.md`. If a partial strategy exists:
+
+- Read the existing doc to determine the last completed sub-step.
+- Tell the user: *"I see a partial strategy. Last completed: sub-step X.Y. Want to resume from X.Y+1, or revisit something earlier first?"*
+- If the user is resuming into the middle of a stick-together set (e.g. they completed 5.1 in the prior session and are now resuming at 5.2), name it: *"Note that 5.2 is part of a stick-together set with 5.1 and 5.3 — re-orient from the inventory in `quality/strategy.md` before we start to recover the working memory."*
+- Resume from the user's chosen sub-step.
+
+### Within a sub-step
+
+"Let me come back to that" is allowed. Record the deferred item as `OPEN QUESTION: <one-line description>` in the relevant section of the strategy doc. The sub-step's DONE checklist tolerates flagged-as-deferred items, as long as they are explicitly recorded. The final review skill will surface all open questions across the strategy.
+
+## Revision mode
+
+If `quality/strategy.md` already exists at full length (i.e. all sub-steps were completed in a prior session), ask the user before doing anything else:
+
+> I see a complete strategy. Are we:
+> (a) starting fresh and replacing it;
+> (b) revisiting specific sections of the current strategy;
+> (c) doing a full re-walk of the current strategy, using the existing content as starting hypothesis;
+> (d) **starting a new release** — in which case I'll archive the current strategy to `quality/archive/strategy-<release-name>-<YYYY-MM-DD>.md` and produce a fresh one for the new release?
+
+- For (a), proceed normally; the existing file will be overwritten as you go.
+- For (b), ask which sub-steps; jump to those, skip the rest.
+- For (c), proceed through all sub-steps but reference the existing content as starting hypothesis rather than starting from scratch.
+- For (d) — **new-release mode** — archive the current strategy first, then walk all sub-steps. Sub-steps that change less between releases (1.1 Purpose, 1.2 Team, 1.3 Workflows, 1.4 Release workflow, 1.5 Budget, 2.1 Roadmap) should pre-load the archived prior version's section as starting hypothesis and ask "what's changed?". Sub-steps that change more (3.1, 3.2, 4.1, 5.x, 6.x, 7.x) start more or less from scratch because the release context is fundamentally different.
+
+## Final step: review
+
+After sub-step 7.3 is complete, invoke `/quality-strategy-review` on the produced doc. The review skill is the source of truth for "is this strategy any good" — it applies the seven indicators of a good strategy and runs mechanical oracle checks (missing non-goals; all-High dimension ratings; percentage confidences; missing three-lens entries; etc.).
+
+If the review surfaces failures, return to the relevant sub-step(s) and re-do. The strategy is not done until the review passes.
+
+## Escalation points — stop and ask the user
+
+Pause the skill and surface a question (rather than push through) when:
+
+- The user cannot identify any clear stakeholders. Strategy is impossible without this.
+- The user gives contradictory answers across sub-steps. Surface the contradiction; do not paper over it.
+- The budget or timeline does not match the ambition. Make the mismatch explicit; let the user decide.
+- "Everything is critical" — the user resists naming non-goals. Push: *"What would you cut if you had half the time?"*
+- You catch yourself filling in an answer the user has not given. Stop. Ask. Record the assumption explicitly if you must proceed.
+
+## Output
+
+- `quality/strategy.md` at the project root — the strategy itself. Visible, top-level, meant to be read.
+- `quality/pre-read.md` — the project digest produced by sub-step 0. Working artefact; informs but does not become part of the strategy.

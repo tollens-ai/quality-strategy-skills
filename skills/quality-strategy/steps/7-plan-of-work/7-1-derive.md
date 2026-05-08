@@ -1,0 +1,88 @@
+# Sub-step 7.1 — Derive actions
+
+## Goal
+
+Translate the risk map into a list of actions. This is the first of three sub-steps in Step 7 (Plan of Work); it just enumerates what needs doing, without yet classifying or sequencing.
+
+The plan of work falls naturally out of the risk map. It is not a separate creative exercise; it is the logical consequence of everything built so far.
+
+## What you need from the previous sub-step
+
+Read all of Part 6 (Risk Map) from `quality/strategy.md`, especially the "Hottest items" and "Patterns and dependencies" sections.
+
+## What to cover
+
+By the end of this sub-step the strategy doc must capture, for the first release:
+
+1. **An enumerated list of actions** — one per row of the risk map that has a non-zero gap, plus actions to resolve high-impact unknowns (low-confidence rows).
+2. **For each action:** what it is, what gap or unknown it addresses, and which dimension(s) it touches.
+3. **Actions for resolving unknowns first** — for every **Unknown actual** and every **Low-confidence required or actual** on a high-impact dimension, an action that resolves the gap (testing/asking for Unknowns; either testing or fixing for Lows depending on whether the gap or the assessment is the issue).
+4. **Don't classify yet** — that's sub-step 7.2. Just enumerate.
+
+## How to ask
+
+This sub-step is mostly mechanical derivation, but the user should review the list before it gets locked in.
+
+Walk through the risk map systematically:
+
+- For each row with a non-zero gap, propose an action that would close it (or part of it).
+- For each **Unknown actual** on a high-impact dimension, propose a testing or stakeholder-asking action. For each **Low-confidence row** on a high-impact dimension, propose either a testing/asking action (if the issue is the assessment) or a fixing action (if the issue is the known gap).
+- Group actions that resolve multiple risk-map entries efficiently — *"a single conversation with the founder might answer five questions; a single test session might assess three dimensions."*
+
+Surface back to the user as a draft list. Ask: *"Did I miss anything? Anything here that doesn't actually need doing?"*
+
+You have explicit permission and encouragement to:
+
+- Combine actions where one piece of work resolves multiple risk-map entries.
+- Drop actions where the user confirms the gap is acceptable as-is (these become non-goal-confirming notes in the strategy).
+- Surface actions the user mentioned in earlier sub-steps that didn't make it into the risk map — late additions are fine.
+
+What you must not do:
+
+- Classify actions as testing / stakeholder / fixing yet. That's 7.2.
+- Sequence actions yet. That's 7.3.
+- Skip Unknown actuals or Low-confidence rows on high-impact dimensions. They generate the most valuable actions in early-stage projects — testing/asking work for Unknowns, fixing or testing work for Lows depending on the gap.
+- Propose an action for every dimension regardless of gap. None-rated and small-gap dimensions don't need actions.
+
+## Push back when
+
+- The user wants to drop an action on a high-impact, low-confidence dimension without justification. *"This is an unknown on a dimension we said matters. What would change your mind about needing to find out?"*
+- The action list is short and the risk map has many gaps. *"There are X gaps in the map; we've only listed Y actions. What about Z?"*
+- An action is described too vaguely to act on. *"What specifically would the work involve? Who, how long, what does done look like?"*
+
+## This sub-step is DONE when
+
+- [ ] Every non-zero-gap row in the risk map either has an action OR has been actively confirmed as acceptable as-is.
+- [ ] Every **Unknown actual** and every **Low-confidence row** on a high-impact dimension has at least one action — and the action type matches (testing/asking for Unknowns; testing or fixing for Lows depending on whether the assessment or the gap is the problem).
+- [ ] Each action is specific enough to act on (who could do it, what done looks like).
+- [ ] Each action notes which gap or unknown it addresses.
+- [ ] Any deferred items are recorded as `OPEN QUESTION:`.
+- [ ] Pre-read sources are cited in the section's evidence field, naming actual files referenced (not blank, not placeholder).
+- [ ] The user has been given a 2–4 line wrap-up, asked if any quick concerns, and confirmed ready to continue. (Substantive checkpoint runs at step boundaries — see SKILL.md.)
+
+If any check fails, return to the questioning. Do not move to sub-step 7.2.
+
+## Output
+
+Append to `quality/strategy.md`:
+
+```markdown
+## Part 7: Plan of Work
+
+### Action list (unsorted)
+
+For the first release:
+
+1. **<Short title.>** <One- or two-line description.> Addresses: <gap or unknown from risk map>. Touches: <dimension(s)>.
+2. **<…>**
+
+…
+
+**Sources consulted from pre-read:** <bullet list>
+
+**Assumptions made:** <bullet list, or "none">
+
+**Open questions from this sub-step:** <bullet list, or "none">
+```
+
+Once written, summarise back in 3–5 lines and ask the user (light wrap-up only — the substantive checkpoint runs at the step boundary, see SKILL.md): *"Ready to move on to sub-step 7.2 (Classify actions)?"*
