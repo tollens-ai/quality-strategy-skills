@@ -250,6 +250,22 @@ These are calls made during design discussion before the skill is built. They'll
 
 ---
 
+## Single source of truth for user-facing copy; pointer-style for framework concepts
+
+**What we did.** Established two patterns to control duplication and prevent drift:
+
+- **User-facing copy** (timing expectations, audience description, what skills will/won't do, install instructions) lives canonically in `README.md`. Other files trim to operational essentials and reference README for full context. Example: agent-facing context-setting in `quality-strategy/SKILL.md` says "see README for full context" rather than restating the timing prose.
+- **Framework concepts** (framings, principles, indicators) live canonically in `FRAMINGS.md` / `INDICATORS.md` / `PHILOSOPHY.md`. Sub-step files name them inline with a one-line gist (`"FRAMINGS.md #6 — economics shift. [application context for this sub-step]"`) and apply them in the sub-step's specific context. No re-explanation from scratch.
+- **Per-sub-step boilerplate** (`## Goal`, `## Output`, `## Push back when` etc.) remains duplicated by intent — see the "Per-sub-step boilerplate" entry above. That decision still stands until real-world testing tells us whether agents reliably re-read SKILL.md at every sub-step boundary.
+
+**Why.** Duplication of agent-facing operational reminders is justified — agents are unreliable at following "open this other file" pointers, and a sub-step file that re-states the relevant framing inline is more robust. Duplication of user-facing copy is just maintenance burden — when the timing claim was 5 places, updating one was easy to forget. The bug was caught in audit, not by users; better to prevent it. The pointer-with-application pattern for framings is already followed in practice (sub-step files name framings rather than re-explaining); this entry just makes the rule explicit.
+
+**What would change our mind.** If real-world running shows agents miss framing references when the sub-step file just points at FRAMINGS.md (i.e. they don't internalise the framing without inline restatement). If we accumulate user-facing copy that genuinely needs to differ across audiences in ways the "single canonical source + pointers" rule can't accommodate. If the pointer-with-application pattern produces sub-step files that are too terse for agents to act on without re-reading FRAMINGS.md.
+
+**How we'd know.** Audit drift after a few iterations. If the same fact appears in 3+ places with diverging wording, the rule isn't being applied. If agents visibly miss framings the sub-step file pointed at (output drifts from the framing's intent), the discipline needs to swing back toward inline restatement. If we never need to update user-facing copy in more than one place, the rule is doing its job.
+
+---
+
 ## Two review subagents (simulation + oracle), not three
 
 **What we did.** /test-strategy-review uses two subagents instead of /quality-strategy-review's three. Subagent A: forward simulation. Subagent B: mechanical oracle. Cross-cutting consistency (strategy ↔ test-strategy alignment) is folded into the simulation pass — checking whether execution moves the strategy *includes* checking that the test strategy and strategy don't contradict each other.

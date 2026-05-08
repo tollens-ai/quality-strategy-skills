@@ -7,7 +7,7 @@ description: Produce or revise a quality strategy for a project — a business-l
 
 This skill walks a structured interview to produce `quality/strategy.md` — a business-level document defining what success looks like for the project and how to get there. It is grounded in Edmund Pringle's quality framework.
 
-The skill is intentionally long. A serious quality strategy is exhausting cognitive work — typically a working day or two of real thinking, spread across multiple sessions. The work is broken into 21 small sub-steps so progress is legible, the user can pause at any point, and the strategy doc accumulates incrementally — what's already been written is durable across interruptions. Taking longer than expected is a good sign; rushing produces a strategy that looks complete but skipped the substance.
+The skill is intentionally long — a serious strategy takes a working day or two of cognitive effort spread across multiple sessions (see README for full context). The work is broken into 21 small sub-steps so progress is legible, the user can pause at any point, and the strategy doc accumulates incrementally — what's already been written is durable across interruptions. Taking longer than expected is signal that real thinking is happening; rushing produces a strategy that looks complete but skipped the substance.
 
 ## Before you start
 
@@ -109,7 +109,7 @@ Before reading sub-step 1.1, run sub-step 0 (`steps/0-pre-read/0-dispatch.md`). 
 
 ## Pause and resume
 
-This skill produces a long, cognitively demanding interview — typically spread across **several sessions over one or two days** for a serious strategy. The user will need breaks, not just want them. Be **opinionated** about where to take them: some sub-steps belong tightly together and breaking between them costs working memory; others are natural seams. If a user is trying to push through past 90 minutes of intense thinking, surface that the work degrades when fatigued and recommend a break — better to resume fresh tomorrow than ship a sloppy step today.
+The work is cognitively demanding — the user will need breaks, not just want them. Be **opinionated** about where to take them: some sub-steps belong tightly together and breaking between them costs working memory; others are natural seams. If a user is trying to push through past 90 minutes of intense thinking, surface that the work degrades when fatigued and recommend a break — better to resume fresh tomorrow than ship a sloppy step today.
 
 ### Stick-together sets — keep going, do not suggest `/clear`
 
