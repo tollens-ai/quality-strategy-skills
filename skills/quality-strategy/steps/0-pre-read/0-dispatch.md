@@ -97,7 +97,9 @@ What shape the system has, and what dimensions that shape implies will matter do
 
 ### Reconciliation
 
-When all three subagents return, write `quality/pre-read.md` with this structure:
+When all three subagents return, **first save each subagent's returned digest verbatim** to a scratch file — `quality/.scratch/0-pre-read-docs.md`, `quality/.scratch/0-pre-read-code.md`, `quality/.scratch/0-pre-read-design.md` — before reconciling. These are the sealed-dispatch scratch files `/quality-strategy-review` audits (see SKILL.md → "Sealed-context dispatch and scratch files"); they are the hard evidence the three dispatches actually happened. They are working state, not part of the strategy.
+
+Then write `quality/pre-read.md` with this structure:
 
 ```markdown
 # Pre-read digest for <project>
@@ -133,6 +135,7 @@ Order within the file is **most-actionable first**: the synthesis and discrepanc
 
 - [ ] Three subagents have been dispatched in parallel with framework-grounding instructions.
 - [ ] All three digests have returned.
+- [ ] Each returned digest has been saved verbatim to its scratch file (`quality/.scratch/0-pre-read-{docs,code,design}.md`).
 - [ ] `quality/pre-read.md` has been written with the synthesis, discrepancies, and three digest sections in the order above.
 - [ ] You have read the synthesis and discrepancies sections yourself and noted, in your working memory, the 3–5 most striking findings to confirm in upcoming sub-steps.
 

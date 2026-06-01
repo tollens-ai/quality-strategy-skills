@@ -1,0 +1,131 @@
+---
+name: operational-distillation
+description: Turn a complete-but-dense quality or test strategy into something operational — a 6–10 line TL;DR plus a one-page triage rubric (and an optional operator cheat sheet) placed at the top of the doc, so a returning reader re-orients in seconds instead of skimming hundreds of lines. Use from /quality-strategy at the end of the plan of work, or standalone to distill any existing strategy.
+---
+
+# Operational Distillation
+
+A finished strategy is optimised for the moment it was written, not the moment it's read. Someone returning weeks later — or an agent picking it up cold to triage a new finding — has to skim the whole thing to re-anchor. This skill adds the consumption-time layer the strategy lacks: a short distillation at the top that lets a reader re-orient fast and triage without reading end-to-end.
+
+It produces, at the top of the strategy doc:
+
+1. **An Operational TL;DR** (6–10 lines) — what this project is, who matters most, the hottest risks right now, and what the plan's first moves are.
+2. **A one-page triage rubric** — how to map a new thing (a bug, a request, a complaint, an unexpected result) to this strategy and decide what to do, without escalation.
+3. **(Optional) an operator cheat sheet** — only when the project has recurring operational decisions worth a quick-reference (common commands, "if X then Y" rules). Skip it when there's nothing real to put there; an empty cheat sheet is worse than none.
+
+The distillation is a *view* of the strategy, not a second source of truth. It restates and points into the body; it never asserts anything the body doesn't.
+
+## Resolving file paths — do this first
+
+This skill is part of the `quality-strategy` plugin. Before anything else, resolve two absolute paths and use them throughout:
+
+- **PLUGIN_ROOT** — the plugin's install directory: `${CLAUDE_PLUGIN_ROOT}` (Claude Code expands this to an absolute path when it loads this file; read it off and note it down). The grounding file this skill reads — `PHILOSOPHY.md` — lives under it.
+- **PROJECT_DIR** — the absolute path of the project whose strategy you're distilling (normally the current working directory; confirm with the user if it's ambiguous). The strategy docs live under `$PROJECT_DIR/quality/`.
+
+File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **Substitute the resolved absolute paths before you act on them.** The Read tool does no variable expansion and resolves relative paths against the current working directory, not this skill's directory — so an unsubstituted placeholder or a bare relative path will fail.
+
+## When to use
+
+- **From `/quality-strategy`** — invoked at the end of sub-step 7.3 (plan of work), once the strategy is content-complete and before / as part of the final review. Output: the TL;DR + triage rubric inserted at the top of `quality/strategy.md`.
+- **Standalone** — to distill any existing `quality/strategy.md` (or `quality/test-strategy.md`) that lacks an operational layer, or to refresh one that's drifted from the body after revisions.
+
+## What you need
+
+- **Grounding.** Read `$PLUGIN_ROOT/PHILOSOPHY.md` — in particular the indicators this skill serves: *quick re-orientation* and *decision support at the edges*.
+- **The strategy.** Read `$PROJECT_DIR/quality/strategy.md` end-to-end. You cannot distill what you haven't read; a TL;DR written from the headings alone will be wrong.
+
+## The work, in order
+
+### 1. Read the whole strategy and extract the load-bearing few
+
+From the full doc, pull only what a returning reader most needs:
+
+- **What & for whom** — purpose (Part 1) and the one or two stakeholders who matter most (Part 3).
+- **What good looks like, sharply** — the dimensions rated H and the Dealbreakers (Parts 3, 5).
+- **Where we actually are** — the hottest risk-map rows: largest gaps in highest-impact dimensions, and the most consequential Unknowns (Part 6).
+- **First moves** — the plan's earliest / blocking actions (Part 7, Phase 0–1).
+- **What's deliberately out** — the one or two non-goals most likely to be mistaken for gaps (Part 4).
+
+### 2. Write the Operational TL;DR (6–10 lines)
+
+Tight, plain, scannable. Every line earns its place. It answers, in order: what is this, who matters most, what's the sharpest quality bar, where's the biggest risk right now, what's the first move, what's deliberately out of scope. No process narration, no hedging prose — a returning reader's fastest path back to context.
+
+### 3. Write the one-page triage rubric
+
+A reader hits a new thing — a bug report, a feature ask, a complaint, an odd result — and needs to decide *what bucket is this, does it matter, what do I do* without escalating. Give them the decision aid:
+
+- **Map to a dimension / stakeholder** — "is this about a dimension we rated H/M, and whose bar does it touch?"
+- **Severity from the strategy** — touches a Dealbreaker → urgent; touches an H gap → important; touches a None / non-goal → likely out of scope, say so and stop.
+- **Route** — testing question → `/test-strategy` learning need; stakeholder question → confirm the bar; fixing → the plan of work.
+- **When in doubt** — the one or two questions that resolve most ambiguity for *this* project.
+
+Keep it to a page. It's a rubric, not a runbook.
+
+### 4. (Optional) operator cheat sheet
+
+Only if the project has recurring operational decisions or commands worth a quick reference. If there's nothing real, omit the section entirely and say why in one line to the user. Do not manufacture filler.
+
+### 5. Place it at the top and check it against the body
+
+Insert the distillation immediately after the title and `Last updated` line, above the `## Strategy job` paragraph and Part 1. Then re-read it against the body: every claim in the TL;DR and rubric must be supported by the body, and nothing load-bearing in the body (a Dealbreaker, the hottest risk) should be absent from the TL;DR. The distillation is a faithful view — if it and the body disagree, the body wins and the distillation is wrong.
+
+## Push back when
+
+- The user wants the TL;DR to add detail or nuance the body doesn't contain. *"The distillation is a view of the strategy, not a place to add to it. If that nuance matters, it belongs in the body first."*
+- The body is thin or contradictory. *"A distillation can't fix a strategy that isn't there. This reads as incomplete in Part X — worth finishing or reviewing before we distill."* (Distilling a broken strategy produces a confident-looking but misleading TL;DR.)
+- The cheat sheet would be filler. Omit it.
+
+## This skill is DONE when
+
+- [ ] The full strategy has been read end-to-end (not just headings).
+- [ ] An Operational TL;DR of 6–10 lines sits at the top, covering what / who / sharpest bar / hottest risk / first move / key non-goal.
+- [ ] A one-page triage rubric is present and usable to triage a new finding without escalation.
+- [ ] The operator cheat sheet is either present with real content or deliberately omitted.
+- [ ] Every distillation claim is supported by the body, and no load-bearing body item is missing from the TL;DR.
+- [ ] The distillation is placed above `## Strategy job` and Part 1, not buried.
+- [ ] (When run from `/quality-strategy`) a scratch file is written recording what was extracted (see Output).
+
+## Output
+
+The TL;DR + triage rubric (+ optional cheat sheet) inserted at the top of `$PROJECT_DIR/quality/strategy.md`:
+
+```markdown
+# Quality Strategy: <project name>
+
+*Last updated: <YYYY-MM-DD>*
+
+## Operational TL;DR
+
+- **What:** <one line>
+- **Who matters most:** <stakeholder(s)>
+- **Sharpest bar:** <the Dealbreaker / top H dimension>
+- **Hottest risk now:** <largest gap or most consequential Unknown> → see Part 6
+- **First move:** <Phase 0–1 action> → see Part 7
+- **Deliberately out:** <key non-goal> → see Part 4
+  <6–10 lines total>
+
+## Triage rubric
+
+*New bug / request / complaint / odd result → how to place it:*
+
+1. **Which dimension & stakeholder?** …
+2. **How severe (from the strategy)?** Dealbreaker → urgent; H gap → important; None / non-goal → out of scope, stop.
+3. **Route:** testing → … ; stakeholder → … ; fixing → … .
+4. **When in doubt:** <the one or two clarifying questions for this project>.
+
+<!-- optional -->
+## Operator cheat sheet
+
+<recurring decisions / commands / if-X-then-Y, or omitted>
+
+## Strategy job
+
+<existing paragraph>
+
+## Part 1: Context
+…
+```
+
+When run from `/quality-strategy`, also write a scratch file at `$PROJECT_DIR/quality/.scratch/7.3-operational-distillation.md` recording which Parts the distillation drew from (the sealed-dispatch scratch file the review skill audits — see `/quality-strategy` SKILL.md, "Sealed-context dispatch and scratch files").
+
+Standalone, insert the distillation into the doc as above and confirm to the user what was added.

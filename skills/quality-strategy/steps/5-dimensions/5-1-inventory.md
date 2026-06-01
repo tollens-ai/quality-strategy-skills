@@ -65,7 +65,7 @@ Use the `Agent` tool with `subagent_type: general-purpose`. The brief:
 
 ### 3. Consolidate
 
-When the subagent returns, reconcile against the bottom-up list:
+When the subagent returns, **first save its returned top-down list verbatim** to `quality/.scratch/5.1-dimension-scout.md` — the sealed-dispatch scratch file `/quality-strategy-review` audits (see SKILL.md → "Sealed-context dispatch and scratch files"). Then reconcile against the bottom-up list:
 
 - **In both lists** — keep, take the better-reasoned justification from either.
 - **Bottom-up only** — keep; these emerged from real project context.
@@ -102,7 +102,7 @@ What you must not do:
 ## This sub-step is DONE when
 
 - [ ] A bottom-up candidate list has been generated from Parts 1–4 and the pre-read.
-- [ ] The dimension-scout subagent has been dispatched and returned a top-down candidate list.
+- [ ] The dimension-scout subagent has been dispatched and returned a top-down candidate list, saved verbatim to `quality/.scratch/5.1-dimension-scout.md`.
 - [ ] The two lists have been consolidated, with subagent-only candidates explicitly resolved (added or dropped) by the user.
 - [ ] The raw inventory is captured with a one-line reason for each dimension.
 - [ ] Any deferred items are recorded as `OPEN QUESTION:`.
@@ -128,7 +128,7 @@ This inventory is **raw** — sub-step 5.2 will unpack composite dimensions; sub
 
 **Sources consulted from pre-read:** <bullet list>
 
-**Subagent dispatched:** dimension-scout for top-down reference-list pass.
+**Subagent dispatched:** dimension-scout for top-down reference-list pass (scratch: `quality/.scratch/5.1-dimension-scout.md`).
 
 **Assumptions made:** <bullet list, or "none">
 

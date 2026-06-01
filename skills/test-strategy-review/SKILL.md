@@ -162,7 +162,7 @@ Use the `Agent` tool with two calls in a single message.
 > - `$PROJECT_DIR/quality/test-strategy.md`
 > - `$PROJECT_DIR/quality/test-pre-read.md` (if it exists)
 >
-> Run the twelve oracle checks defined in INDICATORS.md (the "Mechanical oracle checks" section). For each, classify as **PASS / FLAG / FAIL** and write one line of explanation. For FLAGs and FAILs, include a one-line "what to fix" plus the meta-note about which sub-step's DONE should have caught this.
+> Run the twelve oracle checks defined in INDICATORS.md (the "Mechanical oracle checks" section), plus check 13 below. For each, classify as **PASS / FLAG / FAIL** and write one line of explanation. For FLAGs and FAILs, include a one-line "what to fix" plus the meta-note about which sub-step's DONE should have caught this.
 >
 > The twelve checks (see INDICATORS.md for full text):
 >
@@ -178,10 +178,11 @@ Use the `Agent` tool with two calls in a single message.
 > 10. Independence preserved (no source code files in pre-read).
 > 11. Calibration ↔ update protocol alignment.
 > 12. Open questions consolidated.
+> 13. **Scratch-file audit.** The Q2 tooling-and-oracle check is a sealed-context dispatch (`/tooling-adequacy`, invoked after learning needs). If the test strategy claims that check ran — or simply has learning needs whose oracle adequacy was assessed — verify its scratch file exists at `$PROJECT_DIR/quality/.scratch/3.5-tooling-adequacy.md`. A claimed-but-missing scratch file is a FAIL: hard evidence the Q2 dispatch was fabricated rather than run. An empty/stub scratch file is a FLAG (audit theatre).
 >
-> **Severity:** FAIL on checks 1–3 is a blocker. The rest are flags.
+> **Severity:** FAIL on checks 1–3 and 13 is a blocker. The rest are flags.
 >
-> Output format: a markdown list of the twelve checks with PASS/FLAG/FAIL, one-line explanation, suggested fix where applicable, and meta-note for FAIL/FLAG cases.
+> Output format: a markdown list of the thirteen checks with PASS/FLAG/FAIL, one-line explanation, suggested fix where applicable, and meta-note for FAIL/FLAG cases.
 
 ### 3. Collapse and filter (main agent)
 
@@ -205,7 +206,7 @@ Three guidelines:
 
 **Blockers** (must fix before declaring strategy done):
 
-- Oracle FAIL on checks 1–3 (five-field learning needs / risk-map coverage / Dealbreaker prioritisation).
+- Oracle FAIL on checks 1–3 (five-field learning needs / risk-map coverage / Dealbreaker prioritisation) or check 13 (missing scratch file for the claimed Q2 dispatch — a fabrication signal).
 - Forward simulation reveals execution would *not* meaningfully advance the strategy.
 - Hard contradiction between test strategy and quality strategy (e.g. Tier-1 investigation of something the strategy says is a non-goal).
 - Any indicator rated WEAK with concrete evidence the team would not be able to act on the strategy as written.

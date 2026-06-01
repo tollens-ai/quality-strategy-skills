@@ -54,6 +54,8 @@ This skill works through the four quality questions (introduced in sub-step 1). 
 
 So after sub-step 3 (learning needs) and before sub-step 4 (allocation), **invoke `/tooling-adequacy`** on the learning-needs list. It assesses, per learning need, whether the *instrument* (to exercise/observe) and the *oracle* (to judge correctness) are adequate, and returns any **build items** — instrument or oracle gaps, including simulated/reference oracles worth constructing. Carry those build items forward to sub-step 5, which marks the affected learning needs as blocked-on-tooling rather than papering over them.
 
+This is a **sealed-context dispatch**: it writes its assessment to `quality/.scratch/3.5-tooling-adequacy.md` as hard evidence the Q2 check ran. `/test-strategy-review` audits for that scratch file — a claimed-but-missing dispatch is a fabrication signal. `quality/.scratch/` is working state, not part of the strategy.
+
 ## Pause and resume
 
 This skill is shorter and lighter cognitively than /quality-strategy — most of the heavy thinking lives in the strategy itself. Typically completable in **one or two focused sessions** rather than spread across days. There are no formal stick-together sets. The user can stop anywhere; the doc accumulates incrementally.

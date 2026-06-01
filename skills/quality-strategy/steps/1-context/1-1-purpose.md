@@ -17,6 +17,14 @@ By the end of this sub-step the strategy doc must capture:
 1. **The product's purpose** — the problem it solves, expressed not as a feature list but as a "what would the world look different if this product existed" statement. One to three sentences.
 2. **The immediate goal of this version** — what scope is in vs out for the version being built right now.
 3. **The longer-term ambition** — where this is heading, if different from the immediate goal. (If the user says it is the same, capture that and move on.)
+4. **The strategy's job, right now** — what this strategy is *for*. This sets the right output and the right review severity for everything downstream (see SKILL.md → "The four-question frame and the strategy's job"). Ask the user to pick the closest:
+   - **Durable production strategy** — active product/release; ongoing quality management.
+   - **Pre-implementation strategy** — little or no code yet; the job is to focus the build and name what evidence the first implementation must produce.
+   - **Agentic one-shot experiment** — the main question is whether the docs can steer an agent to a correct, usable artifact with minimal human steering.
+   - **Lightweight slice / prototype** — many production dimensions should be explicitly None, not gaps.
+   - (or something else — capture it in their words).
+
+   This is the strategy *job* axis. Note project *shape* too if it's obvious (solo / team / org; shipped / not-yet-shipped / returning-from-dormant; agent-driven build or runtime or neither) — shape affects how you *phrase* later questions, not how deep the analysis goes.
 
 ## How to ask
 
@@ -43,12 +51,14 @@ What you must not do:
 - The purpose is so abstract it could describe any project ("we want to make great software"). *"Specifically, who would be unhappy if this didn't exist?"*
 - The user describes the immediate goal and longer-term ambition as identical without examining the question. *"Is the longer-term goal really the same, or is this version a stepping stone?"*
 - The user describes the longer-term ambition in marketing language. *"In concrete terms — what does the product do for someone in two years that it doesn't do today?"*
+- The user reaches for "durable production strategy" by default when there's no code yet. *"If the implementation doesn't exist, most actuals are unknown — that's a pre-implementation strategy, and its job is to focus the build, not to manage production quality. Which fits better?"* The job category drives how the rest of the strategy — and its review — is weighted, so it's worth getting right here.
 
 ## This sub-step is DONE when
 
 - [ ] The product's purpose is captured as a problem-solved statement, not a feature list.
 - [ ] The immediate goal is concrete enough that you could decide whether a candidate feature is in or out of scope.
 - [ ] The longer-term ambition is captured (or explicitly noted as identical to the immediate goal, with the user having confirmed they considered the question).
+- [ ] The strategy's job is captured as a one-paragraph `## Strategy job` statement at the top of the doc, naming the job category, what evidence the strategy must produce, and what's deliberately out of scope for this job.
 - [ ] Any items where the user said "come back to that" are recorded as `OPEN QUESTION:` lines in the strategy doc.
 - [ ] Pre-read sources are cited in the section's evidence field, naming actual files referenced (not blank, not placeholder).
 - [ ] The user has been given a 2–4 line wrap-up, asked if any quick concerns, and confirmed ready to continue. (Substantive checkpoint runs at step boundaries — see SKILL.md.)
@@ -63,6 +73,10 @@ Append the following to `quality/strategy.md`. If the file does not exist, creat
 # Quality Strategy: <project name>
 
 *Last updated: <YYYY-MM-DD>*
+
+## Strategy job
+
+<One paragraph. Which job this strategy is for right now — durable production / pre-implementation / agentic one-shot / lightweight slice (or the user's own framing). What evidence this strategy must produce to do that job. What's deliberately out of scope because of the job. (Project shape, if noted, can sit here too in a clause.) Example: "This strategy is pre-implementation. Its job is not to manage production quality; it is to make a one-shot implementation attempt more likely to succeed and to define what evidence the final report must leave so we can judge the workflow. Production observability, analytics, and broad compatibility are deliberately out of scope.">
 
 ## Part 1: Context
 
