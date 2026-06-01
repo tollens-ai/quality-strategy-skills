@@ -36,6 +36,7 @@ Six sub-steps, each in its own file under `steps/`. Run them strictly in order.
 | 1 — Purpose | `steps/1-purpose.md` | The opening section of the test strategy — what we're investigating and why |
 | 2 — Principles | `steps/2-principles.md` | Six governing principles, stated and confirmed (or deliberately tweaked) |
 | 3 — Learning needs | `steps/3-learning-needs.md` | Impact-tiered list of information needs, each with question + methods + exit criterion |
+| 3.5 — Tooling & oracle adequacy | invoke `/tooling-adequacy` (separate skill) | Per learning need: is the *instrument* (exercise/observe) and the *oracle* (judge correctness) adequate? Produces build items that gate sub-step 5 |
 | 4 — Allocation | `steps/4-allocation.md` | Hypothesis allocation table with confidence column; two-voice exchange between agent and user |
 | 5 — Closing | `steps/5-closing.md` | What we're not testing + update protocol (including allocation re-rating) |
 
@@ -46,6 +47,12 @@ Six sub-steps, each in its own file under `steps/`. Run them strictly in order.
 3. **At the end of each sub-step**, run its DONE checklist. If a check fails, return to the work; do not proceed.
 4. **Write output incrementally** to `quality/test-strategy.md`. If a session is interrupted, what's already written is durable.
 5. **At the end of sub-step 5**, summarise the whole produced doc back to the user and check for unease before declaring complete. Same substantive-checkpoint pattern as /quality-strategy, but only at the very end — sub-step boundaries get light wrap-ups.
+
+## The four-question frame, and where Q2 runs
+
+This skill works through the four quality questions (introduced in sub-step 1). It is how the team answers **"is what we have actually good?"** (Q3) — by planning the investigation. Doing that honestly requires **Q2 — "how do we know?"** to be settled first: the instruments and oracles that produce a finding must themselves be adequate, or the finding is built on sand.
+
+So after sub-step 3 (learning needs) and before sub-step 4 (allocation), **invoke `/tooling-adequacy`** on the learning-needs list. It assesses, per learning need, whether the *instrument* (to exercise/observe) and the *oracle* (to judge correctness) are adequate, and returns any **build items** — instrument or oracle gaps, including simulated/reference oracles worth constructing. Carry those build items forward to sub-step 5, which marks the affected learning needs as blocked-on-tooling rather than papering over them.
 
 ## Pause and resume
 

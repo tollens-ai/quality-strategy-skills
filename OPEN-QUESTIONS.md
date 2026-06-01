@@ -526,4 +526,16 @@ These are the design decisions worked out across the May–June 2026 design sess
 
 ---
 
+## Oracles folded into /tooling-adequacy (vs the planned /oracle-adequacy)
+
+**What we did.** Made oracle adequacy a first-class axis *inside* `/tooling-adequacy` (the Q2 skill for `/test-strategy`): each learning need is assessed for both an adequate instrument (exercise/observe) and an adequate oracle (judge correctness), including constructing simulated/reference oracles. The design doc separately plans `/oracle-adequacy` as the Q2 skill for `/quality-strategy`'s actual-state assessment (Phase 2).
+
+**Why.** For testing you cannot judge tooling adequacy without judging oracle adequacy — a perfect instrument with no oracle answers nothing. Splitting "tooling" and "oracle" into separate skills for the *same* (test) context would fragment one question. Keeping them together also lets the skill kill the old-world "no oracle ⇒ untestable" reflex (FRAMINGS #5) by proposing cheap simulated/reference oracles.
+
+**What would change our mind.** If `/oracle-adequacy` (Phase 2) and `/tooling-adequacy` end up duplicating so much oracle-assessment logic that a single shared skill (parameterised by context) is cleaner. If the name `tooling-adequacy` misleads users into thinking it ignores oracles — a rename might be warranted.
+
+**How we'd know.** When Phase 2 builds `/oracle-adequacy`, check how much of `/tooling-adequacy`'s oracle core it reuses; if near-total, factor a shared core or merge. Watch standalone invocations — do users reach for `/tooling-adequacy` expecting oracle help, or are they surprised it covers oracles?
+
+---
+
 *Add new items to this file when we make calls under uncertainty. Revisit after each real-world run.*

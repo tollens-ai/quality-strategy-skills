@@ -29,6 +29,14 @@ This section makes the testing scope explicit by saying what's *out*. Three sour
 
 Each non-target needs a one-line reason. *"We're not testing scalability"* is incomplete; *"We're not testing scalability — strategy Part 5 rates it None for this release; revisit at GA"* is right.
 
+### Blocked on tooling & oracles
+
+The `/tooling-adequacy` check (run after sub-step 3) may have found learning needs whose *instrument* or *oracle* isn't adequate yet — a harness to build, a reference/simulated oracle to write, a property set to define. **Don't paper over these.** List each blocked learning need with the build item it's waiting on, and state plainly that the strategy can't say what to test there until that lands:
+
+> *"The 'does sync survive flaky connectivity' investigation is **blocked** on building network-fault injection. We can't tell you what to test there until it exists. Rerun this strategy after it lands."*
+
+This is honesty about the strategy's own limits, not a refusal — the blocked area stays visible in the doc rather than being silently dropped or filled with investigation the tooling and oracles can't actually support. Distinguish it from *"what we're not testing"*: a non-target is a deliberate choice not to look; a blocked area is something we *do* want to know but can't yet. If `/tooling-adequacy` returned no build items, say so — every learning need has an adequate instrument and oracle.
+
 ### Update protocol
 
 The update protocol is what stops the test strategy becoming frozen. Three triggers:
@@ -93,6 +101,7 @@ The pattern (mirrored from /quality-strategy SKILL.md):
 ## This sub-step is DONE when
 
 - [ ] "What we're not testing" section exists with explicit reasons for each non-target.
+- [ ] Blocked-on-tooling section reflects `/tooling-adequacy`'s build items (each blocked learning need named with its build item), or states none.
 - [ ] Update protocol section exists with three named triggers (after-tier, after-cycle, at-release).
 - [ ] Calibration triggers from sub-step 4 are referenced in the after-cycle update.
 - [ ] Proxy guard applied if proxy creep was spotted; not added prophylactically if not.
@@ -115,6 +124,14 @@ Testing effort is finite. These are explicit non-targets so they don't quietly c
 
 - **<non-target>** — <one-line reason, with reference to strategy Part 4 / Part 5 / sub-step that surfaced it>
 - ...
+
+## Blocked on tooling & oracles
+
+These learning needs can't be answered yet — the instrument or oracle they need (per `/tooling-adequacy`) must be built first. Recorded here so they're not silently dropped, and distinct from non-targets above: we *do* want to know these.
+
+- **<learning need>** — blocked on <build item>. Rerun this strategy once it lands.
+
+(Or "None — every learning need has an adequate instrument and oracle.")
 
 ## Update protocol
 

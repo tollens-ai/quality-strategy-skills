@@ -145,4 +145,8 @@ Items here address what we need to learn about our own cost structure to allocat
 **Open questions from this sub-step:** <bullet list, or "none">
 ```
 
-Summarise back: tier count, total item count, calibration count. Then: *"Allocation comes next — that's the two-voice exchange between you and me about who does what. Ready, or want a break first? Note: 3 → 4 is tighter coupled, so if you break here, plan to re-orient from this list on resume."*
+Summarise back: tier count, total item count, calibration count.
+
+Then, before allocation, run the **tooling & oracle adequacy** check: invoke `/tooling-adequacy` on this learning-needs list. For each learning need it asks whether you have an adequate *instrument* (to exercise and observe it) and an adequate *oracle* (to judge whether the result is correct) — and where either is missing it names a build item, including simulated/reference oracles worth constructing rather than declaring something untestable. Its build items feed sub-step 5's gating. Don't skip this: a learning need whose answer you couldn't actually judge isn't a learning need yet.
+
+Then: *"Tooling and oracle check done. Allocation comes next — the two-voice exchange about who does what. Ready, or want a break first? Note: 3 → 4 is tighter coupled, so if you break here, plan to re-orient from this list on resume."*
