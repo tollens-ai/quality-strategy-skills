@@ -142,6 +142,10 @@ The digest at `quality/pre-read.md`. **No section is appended to `quality/strate
 
 After the digest is in place, summarise back to the user in 5–7 lines: *"The pre-read found X, Y, Z in the docs; the code looks like A, B, C; the design suggests D, E, F may matter; and there are some discrepancies between docs and code, namely G and H. The few things I most want to confirm with you are P and Q."*
 
-Then **run the substantive checkpoint** (see SKILL.md → Substantive checkpoint between sub-steps). Even at this early stage, the user may have a smell about whether the digest captured the right things. Don't accept a quick "looks fine" — actively invite vague unease.
+Then run a **correctness check** — *not* the substantive checkpoint (that runs at step boundaries, not here). The pre-read is a *what-is* snapshot of hypotheses; at this stage you only want to catch **factual errors**, not engage with implications, priorities, or "does this feel right":
 
-Only after explicit, considered confirmation, ask: *"Ready to move into Step 1 (Context)?"* Do not proceed to sub-step 1.1 without that confirmation.
+> *"Skim this for anything factually wrong — a misread tech stack, a wrong test count, a component I mislabelled, a discrepancy I got backwards. I'm not asking yet whether it captures the right priorities — that's what the interview is for. Just: is anything here simply incorrect?"*
+
+Correct any factual errors the user flags — re-dispatch the relevant subagent if a digest section is materially wrong. Do **not** pull the user into implications or vague unease here; that engagement belongs at the Step 1+ step boundaries, where the substantive checkpoint runs on a complete chunk of strategy.
+
+Then ask: *"Ready to move into Step 1 (Context)?"* and proceed to sub-step 1.1.
