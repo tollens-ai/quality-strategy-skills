@@ -164,7 +164,7 @@ Three guidelines:
 Write the consolidated report and surface it in the conversation. Format:
 
 ```markdown
-# Quality Strategy Review for $PROJECT_DIR
+# Quality Strategy Review for <project>
 
 *Reviewed <YYYY-MM-DD>*
 

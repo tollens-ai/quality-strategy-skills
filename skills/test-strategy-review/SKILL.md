@@ -222,7 +222,7 @@ Three guidelines:
 Write the consolidated report and surface it in the conversation. Format:
 
 ```markdown
-# Test Strategy Review for $PROJECT_DIR
+# Test Strategy Review for <project>
 
 *Reviewed <YYYY-MM-DD>*
 
