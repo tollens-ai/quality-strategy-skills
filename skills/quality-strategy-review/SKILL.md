@@ -14,9 +14,18 @@ The skill uses an **expansion-and-collapse** pattern:
 
 This is review by brainstorm-then-curate, not by single-pass judgement. Single-pass review tends to either miss things or over-flag trivia; the two-stage structure avoids both failure modes.
 
+## Resolving file paths — do this first
+
+This skill is part of the `quality-strategy` plugin. Before anything else, resolve two absolute paths and use them throughout:
+
+- **PLUGIN_ROOT** — the plugin's install directory: `${CLAUDE_PLUGIN_ROOT}` (Claude Code expands this to an absolute path when it loads this file; read it off and note it down). The grounding and framework files this skill reads live under it.
+- **PROJECT_DIR** — the absolute path of the project whose strategy you're reviewing (normally the current working directory; confirm with the user if it's ambiguous). The strategy docs live under `$PROJECT_DIR/quality/`.
+
+File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **Substitute the resolved absolute paths before you act on them** — both when you Read a file yourself and when you put a path into a subagent brief. The Read tool does no variable expansion and resolves relative paths against the current working directory, not this skill's directory; a dispatched subagent inherits none of your context. So an unsubstituted placeholder or a bare relative path will fail — always pass fully-resolved absolute paths.
+
 ## Before you start
 
-Read `PHILOSOPHY.md` at the repo root. The disciplines and the framework grounding are the foundation of the review.
+Read `$PLUGIN_ROOT/PHILOSOPHY.md`. The disciplines and the framework grounding are the foundation of the review.
 
 ## What you need
 
@@ -44,9 +53,9 @@ Use the `Agent` tool with three calls in a single message.
 >
 > **Meta-flag.** If you find an oracle check failing, that is also evidence the per-sub-step DONE checklist for the relevant sub-step was not actually enforced — the agent ticked a box without doing the verification. When you flag a failure, also note in your explanation: *"this should have been caught in sub-step X.Y's DONE checklist, but wasn't."* That meta-information is useful to the user.
 >
-> First, read `<repo>/PHILOSOPHY.md` and `<repo>/skills/quality-strategy/SKILL.md` to ground yourself.
+> First, read `$PLUGIN_ROOT/PHILOSOPHY.md` and `$PLUGIN_ROOT/skills/quality-strategy/SKILL.md` to ground yourself.
 >
-> Then read `<project>/quality/strategy.md`.
+> Then read `$PROJECT_DIR/quality/strategy.md`.
 >
 > Run the following oracle checks. For each, classify as **PASS / FLAG / FAIL** and write one line of explanation. For FLAGs and FAILs, also include a one-line "what to fix" suggestion plus the meta-note about which sub-step's DONE should have caught this.
 >
@@ -74,9 +83,9 @@ Use the `Agent` tool with three calls in a single message.
 
 > You are subagent B, applying the seven indicators of a good quality strategy with creative depth. Your output will be filtered by the main agent — don't be polite. If a section feels weak, say why. If something is off but you can't fully articulate why, say that too. The main agent has a second pass to filter out anything spurious.
 >
-> First, read `<repo>/PHILOSOPHY.md` and `<repo>/skills/quality-strategy/SKILL.md` to ground yourself.
+> First, read `$PLUGIN_ROOT/PHILOSOPHY.md` and `$PLUGIN_ROOT/skills/quality-strategy/SKILL.md` to ground yourself.
 >
-> Then read `<project>/quality/strategy.md` end-to-end.
+> Then read `$PROJECT_DIR/quality/strategy.md` end-to-end.
 >
 > Apply the seven indicators of a good quality strategy. For each, decide **STRONG / MEDIUM / WEAK** and write 2–4 sentences explaining your judgement. Quote specific sentences from the strategy that exemplify strength or weakness — concrete is better than abstract.
 >
@@ -98,9 +107,9 @@ Use the `Agent` tool with three calls in a single message.
 >
 > Your output will be filtered by the main agent. Be aggressive about flagging misalignments — false negatives are worse than false positives.
 >
-> First, read `<repo>/PHILOSOPHY.md` and `<repo>/skills/quality-strategy/SKILL.md` to ground yourself.
+> First, read `$PLUGIN_ROOT/PHILOSOPHY.md` and `$PLUGIN_ROOT/skills/quality-strategy/SKILL.md` to ground yourself.
 >
-> Then read `<project>/quality/strategy.md` and (if it exists) `<project>/quality/pre-read.md`.
+> Then read `$PROJECT_DIR/quality/strategy.md` and (if it exists) `$PROJECT_DIR/quality/pre-read.md`.
 >
 > Check the following end-to-end consistencies:
 >
@@ -155,7 +164,7 @@ Three guidelines:
 Write the consolidated report and surface it in the conversation. Format:
 
 ```markdown
-# Quality Strategy Review for <project>
+# Quality Strategy Review for $PROJECT_DIR
 
 *Reviewed <YYYY-MM-DD>*
 

@@ -35,12 +35,16 @@ Planned (not yet implemented):
 
 ## Install
 
-```bash
-git clone https://github.com/tollens-ai/quality-strategy-skills
-cp -r quality-strategy-skills/skills/* ~/.claude/skills/
+This is a Claude Code plugin. Add the marketplace, then install:
+
+```
+/plugin marketplace add tollens-ai/quality-strategy-skills
+/plugin install quality-strategy@tollens
 ```
 
-Then in any project: `/quality-strategy` to start. Output goes to `quality/strategy.md` at the project root.
+Then in any project, start with `/quality-strategy`. Output goes to `quality/strategy.md` at the project root.
+
+Skills are also available namespaced (`/quality-strategy:test-strategy`, `/quality-strategy:quality-strategy-review`) — useful if a bare name ever collides with another plugin.
 
 ## What the skills will and won't do
 

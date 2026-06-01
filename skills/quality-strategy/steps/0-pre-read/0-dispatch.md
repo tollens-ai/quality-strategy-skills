@@ -22,9 +22,9 @@ What the project **claims** to be.
 
 > You are subagent A in a three-subagent pre-read for `/quality-strategy`. Your job is to digest what the project's documentation claims, so the downstream interview has a starting position for what the project says it is.
 >
-> First, read `<repo>/PHILOSOPHY.md` and `<repo>/skills/quality-strategy/SKILL.md` to ground yourself in what the strategy is doing.
+> First, read `$PLUGIN_ROOT/PHILOSOPHY.md` and `$PLUGIN_ROOT/skills/quality-strategy/SKILL.md` to ground yourself in what the strategy is doing.
 >
-> Then digest the project at `<project-path>`. Read README, top-level markdown, `docs/`, `CONTRIBUTING.md`, package files (`package.json`, `Cargo.toml`, `pyproject.toml`, etc.), and recent commit messages (~30).
+> Then digest the project at `$PROJECT_DIR`. Read README, top-level markdown, `docs/`, `CONTRIBUTING.md`, package files (`package.json`, `Cargo.toml`, `pyproject.toml`, etc.), and recent commit messages (~30).
 >
 > Surface, as **hypotheses** (not facts):
 > - Stated product purpose and scope.
@@ -44,9 +44,9 @@ What's mechanically there.
 
 > You are subagent B in a three-subagent pre-read for `/quality-strategy`. Your job is the mechanical structural map of the project — what files and modules exist, how they're organised, what infrastructure is in place. Subagent A is producing the docs digest separately; you are producing the structural one.
 >
-> First, read `<repo>/PHILOSOPHY.md` and `<repo>/skills/quality-strategy/SKILL.md` to ground yourself.
+> First, read `$PLUGIN_ROOT/PHILOSOPHY.md` and `$PLUGIN_ROOT/skills/quality-strategy/SKILL.md` to ground yourself.
 >
-> Then map the project at `<project-path>`:
+> Then map the project at `$PROJECT_DIR`:
 > - Module / package / directory structure with sizes (LOC, file counts).
 > - Languages and frameworks actually in use (concrete versions from lockfiles or imports).
 > - Test infrastructure: test count, framework, types of tests (unit/integration/e2e), location.
@@ -69,7 +69,7 @@ What shape the system has, and what dimensions that shape implies will matter do
 >
 > The pre-read is a **what-is** snapshot — describing the project as it actually is, not as anyone wants it to be.
 >
-> First, read `<repo>/PHILOSOPHY.md` and `<repo>/skills/quality-strategy/SKILL.md` to ground yourself.
+> First, read `$PLUGIN_ROOT/PHILOSOPHY.md` and `$PLUGIN_ROOT/skills/quality-strategy/SKILL.md` to ground yourself.
 >
 > Then read enough of the project to form architectural hypotheses. You don't need to understand every line — read for shape: layering, dependency direction, key abstractions, error-handling patterns, where the "interesting" or "load-bearing" code lives, which parts look mature vs scaffolded, which parts look unusually risky or unusually careful.
 >

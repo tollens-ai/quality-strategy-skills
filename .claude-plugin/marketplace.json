@@ -1,0 +1,11 @@
+{
+  "name": "tollens",
+  "owner": { "name": "Yanqing Cheng" },
+  "plugins": [
+    {
+      "name": "quality-strategy",
+      "source": ".",
+      "description": "Quality-strategy and test-strategy skills, grounded in Edmund Pringle's quality framework."
+    }
+  ]
+}

@@ -9,9 +9,18 @@ This skill walks a structured interview to produce `quality/strategy.md` — a b
 
 The skill is intentionally long — a serious strategy takes a working day or two of cognitive effort spread across multiple sessions (see README for full context). The work is broken into 21 small sub-steps so progress is legible, the user can pause at any point, and the strategy doc accumulates incrementally — what's already been written is durable across interruptions. Taking longer than expected is signal that real thinking is happening; rushing produces a strategy that looks complete but skipped the substance.
 
+## Resolving file paths — do this first
+
+This skill is part of the `quality-strategy` plugin. Before anything else, resolve two absolute paths and use them throughout:
+
+- **PLUGIN_ROOT** — the plugin's install directory: `${CLAUDE_PLUGIN_ROOT}` (Claude Code expands this to an absolute path when it loads this file; read it off and note it down). Every file this skill references — `PHILOSOPHY.md`, the sub-step files under `skills/quality-strategy/steps/`, etc. — lives under it.
+- **PROJECT_DIR** — the absolute path of the project you're building the strategy for (normally the current working directory; confirm with the user if it's ambiguous).
+
+File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **Substitute the resolved absolute paths before you act on them** — both when you Read a file yourself (including the sub-step files) and when you put a path into a subagent brief. The Read tool does no variable expansion and resolves relative paths against the current working directory, not this skill's directory; a dispatched subagent inherits none of your context. So an unsubstituted placeholder or a bare relative path will fail — always pass fully-resolved absolute paths.
+
 ## Before you start
 
-Read `PHILOSOPHY.md` at the repo root if you haven't already. The disciplines that recur in every step — interview don't infer; ask rather than guess; record assumptions; understand the why; make confidence visible; push back on vagueness; make non-goals explicit; stay sequential — are non-negotiable and applied throughout.
+Read `$PLUGIN_ROOT/PHILOSOPHY.md` if you haven't already. The disciplines that recur in every step — interview don't infer; ask rather than guess; record assumptions; understand the why; make confidence visible; push back on vagueness; make non-goals explicit; stay sequential — are non-negotiable and applied throughout.
 
 ## Scope of this skill — first release only
 

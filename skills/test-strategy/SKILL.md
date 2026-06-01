@@ -9,13 +9,22 @@ This skill produces `quality/test-strategy.md` — an engineering-level document
 
 The skill is short by design. /quality-strategy is the load-bearing piece — it produces the stakeholder analysis, dimensions, and risk map. /test-strategy transforms that into a plan of investigation. Most of the thinking is already in the strategy; the skill brings the right framings to the transformation.
 
+## Resolving file paths — do this first
+
+This skill is part of the `quality-strategy` plugin. Before anything else, resolve two absolute paths and use them throughout:
+
+- **PLUGIN_ROOT** — the plugin's install directory: `${CLAUDE_PLUGIN_ROOT}` (Claude Code expands this to an absolute path when it loads this file; read it off and note it down). Every file this skill references — `PHILOSOPHY.md`, `skills/test-strategy/FRAMINGS.md`, `skills/test-strategy/INDICATORS.md`, and the sub-step files under `skills/test-strategy/steps/` — lives under it.
+- **PROJECT_DIR** — the absolute path of the project you're building the test strategy for (normally the current working directory; confirm with the user if it's ambiguous).
+
+File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **Substitute the resolved absolute paths before you act on them** — both when you Read a file yourself (including the sub-step files) and when you put a path into a subagent brief. The Read tool does no variable expansion and resolves relative paths against the current working directory, not this skill's directory; a dispatched subagent inherits none of your context. So an unsubstituted placeholder or a bare relative path will fail — always pass fully-resolved absolute paths.
+
 ## Before you start
 
 Two prerequisites:
 
 1. **`quality/strategy.md` must exist** at the project root, completed at least through Part 6 (Risk Map). If it does not, stop and direct the user to `/quality-strategy` first. The test strategy cannot be derived from nothing — without a risk map, you'd be guessing where to invest effort, which is the opposite of what this skill is for.
 
-2. **Read `PHILOSOPHY.md`, `FRAMINGS.md`, and `INDICATORS.md`.** PHILOSOPHY.md grounds the framework. FRAMINGS.md captures ten framings that counter agent defaults — without these, /test-strategy will drift toward producing a test plan rather than a test strategy. INDICATORS.md captures the five outcome-oriented indicators (Direction / Priority / Sufficiency / Feasibility / Honesty) that the produced strategy will be reviewed against; knowing these up front shapes the work. None of these are optional.
+2. **Read `$PLUGIN_ROOT/PHILOSOPHY.md`, `$PLUGIN_ROOT/skills/test-strategy/FRAMINGS.md`, and `$PLUGIN_ROOT/skills/test-strategy/INDICATORS.md`.** PHILOSOPHY.md grounds the framework. FRAMINGS.md captures ten framings that counter agent defaults — without these, /test-strategy will drift toward producing a test plan rather than a test strategy. INDICATORS.md captures the five outcome-oriented indicators (Direction / Priority / Sufficiency / Feasibility / Honesty) that the produced strategy will be reviewed against; knowing these up front shapes the work. None of these are optional.
 
 ## How this skill is structured
 
