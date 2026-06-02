@@ -71,8 +71,9 @@ What you must not do:
 - [ ] Any deferred items are recorded as `OPEN QUESTION:`.
 - [ ] Pre-read sources are cited in the section's evidence field, naming actual files referenced (not blank, not placeholder).
 - [ ] The user has run the **step-boundary substantive checkpoint** (see SKILL.md), evaluating the whole step's output (not just this final sub-step), including any rethinks of earlier steps. Explicit, considered confirmation — not silence, not a non-committal response.
+- [ ] After confirmation, `/operational-distillation` has been invoked and the TL;DR + triage rubric sit at the top of the strategy, with its scratch file at `quality/.scratch/7.3-operational-distillation.md`.
 
-If any check fails, return to the questioning. After this sub-step passes, the strategy is feature-complete and goes to `/quality-strategy-review`.
+If any check fails, return to the questioning. After this sub-step passes (and the strategy is distilled), it is feature-complete and goes to `/quality-strategy-review`.
 
 ## Output
 
@@ -108,6 +109,14 @@ Append to `quality/strategy.md`, replacing or extending the classified list from
 **Open questions from this sub-step:** <bullet list, or "none">
 ```
 
-Once written, summarise the phased plan back to the user in 5–7 lines, then **run the substantive checkpoint** (see SKILL.md → Substantive checkpoint between sub-steps): this is the last write-time chance to catch a smell before the strategy is declared content-complete and goes to the review. Actively invite vague unease, anything-feels-off, regrets-foreseen-from-six-months-ahead. Only after explicit, considered confirmation, tell the user:
+Once written, summarise the phased plan back to the user in 5–7 lines, then **run the substantive checkpoint** (see SKILL.md → Substantive checkpoint between sub-steps): this is the last write-time chance to catch a smell before the strategy is declared content-complete and goes to the review. Actively invite vague unease, anything-feels-off, regrets-foreseen-from-six-months-ahead. Only after explicit, considered confirmation, the strategy is content-complete.
 
-> The strategy is content-complete. The next step is `/quality-strategy-review`, which runs mechanical checks (as a backstop) and applies the seven indicators of a good strategy with creative depth (the genuinely end-to-end review work). Want to run the review now, or take a break and come back?
+### Then distill, then review
+
+Two closing moves (see SKILL.md → "Final step: distill, then review"):
+
+1. **Distill.** Invoke `/operational-distillation` on the completed strategy. It reads the whole doc and inserts an Operational TL;DR (6–10 lines) + a one-page triage rubric at the top (above the `## Strategy job` paragraph), so a returning reader re-orients fast. It writes its scratch file at `quality/.scratch/7.3-operational-distillation.md`. The distillation is a faithful view of the body — it adds nothing the body doesn't already say.
+
+2. **Review.** Then tell the user:
+
+   > The strategy is content-complete and distilled. The next step is `/quality-strategy-review`, which first runs a contextual-fit gate (adapting severity to the strategy's job), then runs mechanical checks as a backstop and applies the seven indicators with creative depth. Want to run the review now, or take a break and come back?

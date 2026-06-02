@@ -26,15 +26,15 @@ Available now:
 | `/quality-strategy-review` | Meta-audit. Applies seven indicators of a good quality strategy and surfaces failure modes. Used as the final step of `/quality-strategy` and standalone on existing strategies. |
 | `/test-strategy` | Produce the engineering-level companion that operationalises the quality strategy — what to investigate, in what order, and how to split human vs agent effort. |
 | `/test-strategy-review` | Meta-audit of a test strategy: would executing it move the quality strategy in the right direction, with the right priority? |
-| `/tooling-adequacy` | The explicit "how do we know?" check. Audits whether each learning need has an adequate *instrument* (to exercise/observe) and *oracle* (to judge), including cheap simulated/reference oracles worth building. |
+| `/tooling-adequacy` | The explicit "how do we know?" check for the *test* strategy. Audits whether each learning need has an adequate *instrument* (to exercise/observe) and *oracle* (to judge), including cheap simulated/reference oracles worth building. |
+| `/oracle-adequacy` | The "how do we know?" check for the *quality* strategy — audits the oracles behind its actual-state assessments. Invoked during the risk-map pass, or standalone. Shares its oracle taxonomy with `/tooling-adequacy`. |
+| `/contradiction-check` | Cross-part contradiction detection for a strategy doc. Runs at `/quality-strategy` step boundaries, or standalone. Finds internal inconsistencies (not quality weaknesses). |
+| `/operational-distillation` | TL;DR + triage rubric at the top of a strategy, so it's usable at a glance. Runs at the end of `/quality-strategy`, or standalone. |
 
 Planned (not yet implemented):
 
 | Skill | Purpose |
 |---|---|
-| `/oracle-adequacy` | The "how do we know?" check for the quality strategy — audit the oracles behind its actual-state assessments. |
-| `/contradiction-check` | Cross-part contradiction detection for a strategy doc. |
-| `/operational-distillation` | TL;DR + triage rubric at the top of a strategy, so it's usable at a glance. |
 | `/priority-analysis` | Optional multi-stakeholder help prioritising the plan of work. |
 | `/feedback-synthesis` | Curate `.skill-feedback.md` notes into a maintainer-friendly summary. |
 | `/pre-read` | Standalone project digest. |

@@ -25,6 +25,18 @@ By the end of this sub-step the strategy doc must capture, **for each H/M dimens
 3. **Evidence basis** — what is the actual based on? Pre-read observations? A specific test? Stakeholder feedback? Or nothing — "no investigation yet" is a valid (and very common) answer in first-pass strategies.
 4. **What would resolve an Unknown** — for each Unknown, a one-line note on the type of activity that would establish a level. Pick from: targeted testing, asking specific stakeholders, code/design review of specific area, building observability/instrumentation, building test infrastructure or testability. Whichever is appropriate. This note seeds Step 7's plan of work.
 
+## Q2 — interrogate the oracles (invoke `/oracle-adequacy`)
+
+This sub-step is where the strategy answers **Q3 — "is what we have good?"** And it can only answer that honestly if **Q2 — "how do we know?"** holds: every actual you record rests on an oracle (something that judges whether an observation means the dimension is at the claimed level), and that oracle has to be adequate or the actual is built on sand.
+
+After you have a first pass of proposed actuals (or Unknowns) for the H/M dimensions, **invoke `/oracle-adequacy`** on them. It assesses, per dimension, whether the *instrument* (to observe the state) and the *oracle* (to judge the level) are adequate, and returns a verdict per dimension:
+
+- **Trustworthy** — keep the actual and its confidence.
+- **Over-confident** — a non-Unknown actual whose oracle is Inadequate/Missing. Downgrade its confidence (often to Unknown) unless you build the oracle. This catches the "comfortable Medium with no real basis" failure.
+- **Gated** — the actual is Unknown and resolving it is blocked on an oracle that doesn't exist yet. `/oracle-adequacy` names the **oracle-build item** (state a property, write a simulated/reference oracle, define the SLO + measurement). Record that item against the dimension; it seeds Step 7's plan of work, and 6.3 marks the dimension as gated rather than papering over it.
+
+Fold the verdicts back into the actuals below. The dispatch writes its scratch file at `quality/.scratch/6.2-oracle-adequacy.md` (see SKILL.md → "Sealed-context dispatch and scratch files"). Don't let "no oracle" silently become a permanent Unknown with nothing to do — under agent costs an oracle is usually cheap to construct, and naming that construction is often the highest-value work this strategy produces.
+
 ## How to ask
 
 For each H/M dimension, ask in turn:
@@ -61,6 +73,7 @@ What you must not do:
 - [ ] Every H/M dimension has either a qualitative actual level or an explicit "Unknown."
 - [ ] Every actual has a confidence rating (H/M/L, or "—" for Unknown) and an evidence basis (or "no investigation yet").
 - [ ] Every Unknown has a one-line note on what would resolve it (test / ask / review / instrument / build infrastructure).
+- [ ] `/oracle-adequacy` has been invoked on the proposed actuals; each dimension has a verdict (Trustworthy / Over-confident / Gated), Over-confident actuals have had their confidence downgraded or an oracle-build item named, and Gated dimensions carry their oracle-build item. Its scratch file exists at `quality/.scratch/6.2-oracle-adequacy.md`.
 - [ ] Confidence ratings use only H/M/L — no percentages.
 - [ ] Any deferred items are recorded as `OPEN QUESTION:`.
 - [ ] Pre-read sources are cited in the section's evidence field, naming actual files referenced (not blank, not placeholder).
@@ -80,18 +93,22 @@ Append to `quality/strategy.md` under Part 6:
 - **Actual:** <qualitative dimension-specific description, OR "Unknown">
 - **Confidence in actual:** <H/M/L, or "—" for Unknown>
 - **Evidence:** <what this is based on, or "no investigation yet">
-- **To resolve (if Unknown):** <one line — test what / ask whom / review what / instrument / build test infrastructure>
+- **Oracle verdict:** <Trustworthy / Over-confident / Gated, from /oracle-adequacy>
+- **To resolve (if Unknown / Gated):** <one line — test what / ask whom / review what / instrument; or the oracle-build item: state which property, write which reference oracle, define which SLO + measurement>
 
 #### <Next dimension>
 
 - **Actual:** <…>
 - **Confidence in actual:** <…>
 - **Evidence:** <…>
-- **To resolve (if Unknown):** <…>
+- **Oracle verdict:** <…>
+- **To resolve (if Unknown / Gated):** <…>
 
 … (repeat per H/M dimension)
 
 **Sources consulted from pre-read:** <bullet list>
+
+**Subagent dispatched:** `/oracle-adequacy` for the Q2 oracle check (scratch: `quality/.scratch/6.2-oracle-adequacy.md`).
 
 **Assumptions made:** <bullet list, or "none">
 

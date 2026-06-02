@@ -22,6 +22,34 @@ File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **
 
 Read `$PLUGIN_ROOT/PHILOSOPHY.md` if you haven't already. The disciplines that recur in every step — interview don't infer; ask rather than guess; record assumptions; understand the why; make confidence visible; push back on vagueness; make non-goals explicit; stay sequential — are non-negotiable and applied throughout.
 
+## The four-question frame and the strategy's job
+
+A quality strategy answers four questions, in order:
+
+1. **What does good look like?** — stakeholder bars, dimensions, required levels (Steps 1–6.1).
+2. **How do we know if what we have is good?** — the oracles and instruments by which we'd judge the actual state. This is its own question, not a free rider on Q3.
+3. **Is what we have good?** — the actual-state assessment, using the oracles from Q2 (Steps 6.2–6.3).
+4. **How do we make it good?** — the plan of work to close gaps (Step 7).
+
+**Q2 is explicit on purpose.** The reliable failure mode is to collapse Q2 into Q3 — to assert an actual level by deferring to whatever signal happens to exist, never asking whether that signal can actually judge the dimension. So during the actual-state pass (sub-step 6.2) this skill invokes **`/oracle-adequacy`**, which interrogates, per dimension, whether the oracle behind its claimed actual is adequate — and turns "no oracle, so it's just Unknown" into a named oracle-build item that seeds the plan of work.
+
+**The strategy's job.** Before the analysis, Step 1 (sub-step 1.1) asks what this strategy is *for, right now*, and records it as a `## Strategy job` paragraph at the top of the doc. The four jobs:
+
+- **Durable production strategy** — active product/release; ongoing quality management; full machinery applies.
+- **Pre-implementation strategy** — actuals are mostly unknown; the job is to focus the build and name what evidence the first implementation must produce.
+- **Agentic one-shot experiment** — the primary question is whether the docs can steer an agent to a correct, usable artifact with minimal human steering.
+- **Lightweight slice / prototype** — many production dimensions should be explicitly **None**, not treated as gaps.
+
+The same framework and the same rigour apply to all four; what differs is the right *output* and the right *severity of review*. `/quality-strategy-review` reads this paragraph first (its contextual-fit gate) and adapts what counts as a blocker accordingly. Project *shape* (solo / team / org; shipped / not-yet / dormant; agent-driven or not) is a separate axis that shapes how questions are *phrased*, not how deep the analysis goes — full project-shape branching is a later phase, but capture shape in Step 1 where it helps phrasing.
+
+## Sealed-context dispatch and scratch files
+
+Wherever this skill does substantive analytical work via a subagent — the pre-read (sub-step 0), the dimension scout (5.1), the Q2 oracle check (`/oracle-adequacy` at 6.2), the boundary contradiction check (`/contradiction-check`), and the distillation (`/operational-distillation` at 7.3) — the dispatch is **sealed-context**: the subagent sees only what it needs for its piece, not the parent's DONE criteria, not the rubric it will be judged against, not the destination doc's success conditions. The orchestrator's role is **dispatch / collect / reconcile / present**, not to do the analysis itself with the answer key in view. (This is the central v2 principle; full decomposition of the remaining sub-steps into sealed dispatches is tracked as later-phase work — see OPEN-QUESTIONS.)
+
+**Every such dispatch writes a scratch file** at `$PROJECT_DIR/quality/.scratch/<sub-step>-<purpose>.md` recording the real intermediate work it did (e.g. `0-pre-read-*.md`, `5.1-dimension-scout.md`, `6.2-oracle-adequacy.md`, `<boundary>-contradiction-check.md`, `7.3-operational-distillation.md`). This converts "did the orchestrator actually do the work?" from invisible to auditable: `/quality-strategy-review` mechanically checks that every claimed dispatch has its scratch file. A missing scratch file is hard evidence the dispatch didn't happen. `quality/.scratch/` is working state, not part of the strategy — do not treat it as authoritative output, and don't leak its contents into `quality/strategy.md`.
+
+**Process-note leak prevention.** Orchestrator meta-observations about *the skill itself* (an awkward step, a suspected bug, phrasing that didn't land) go to `$PROJECT_DIR/.skill-feedback.md` only — never into `quality/strategy.md`. The strategy doc reads as an authored artifact, not a transcript of the skill running.
+
 ## Scope of this skill — first release only
 
 The depth analysis in this skill (stakeholders, three-lens, non-goals, dimensions, risk map, plan of work) focuses on **one release at a time** — typically the next release the team is about to ship. Future releases are noted briefly during sub-step 2.1 (Roadmap) so the strategy isn't blind to what's coming, but the analysis depth is for the immediate release.
@@ -51,10 +79,12 @@ The work is divided into 7 steps, each with one or more sub-steps. Each sub-step
 | 5.5 Sanity checks | `steps/5-dimensions/5-5-checks.md` | Distribution, stakeholder coverage, tensions, non-goal alignment |
 | 6.1 Required levels | `steps/6-risk-map/6-1-required.md` | What level is needed for each H/M dimension |
 | 6.2 Actual levels | `steps/6-risk-map/6-2-actual.md` | Where we are on each H/M dimension |
+| 6.2 — Oracle adequacy (Q2) | invoke `/oracle-adequacy` (separate skill) | Per dimension: is the *oracle* that judges its actual level adequate? Produces oracle-build items that seed Step 7 |
 | 6.3 Gap and confidence | `steps/6-risk-map/6-3-gap-and-confidence.md` | The risk map combining required + actual + confidence on both sides |
 | 7.1 Derive actions | `steps/7-plan-of-work/7-1-derive.md` | What needs doing, drawn from the risk map |
 | 7.2 Classify | `steps/7-plan-of-work/7-2-classify.md` | Each action as testing / stakeholder / fixing |
 | 7.3 Sequence | `steps/7-plan-of-work/7-3-sequence.md` | Phasing and dependencies |
+| 7.3 — Operational distillation | invoke `/operational-distillation` (separate skill) | TL;DR + triage rubric placed at the top of the strategy |
 
 ## Execution rules — non-negotiable
 
@@ -86,7 +116,9 @@ This is the single most important user-facing pattern in the skill. The strategy
 
 ### The pattern at each step boundary
 
-1. Summarise the *whole step's* output back to the user in 5–8 lines, hitting the consequential decisions across all sub-steps in the step. Not a recap of process — a recap of decisions.
+0. **Run the contradiction check first (sealed dispatch).** Before summarising, dispatch **`/contradiction-check`** as a sealed-context subagent on the doc *as written so far*. It mechanically cross-references the Parts for internal contradictions — a Part-3 dealbreaker a Part-4 non-goal excludes, an H/M dimension with no risk-map row, a high-confidence actual whose evidence is "none yet". This is a *different* failure mode from the substantive checkpoint below: the checkpoint catches "this feels wrong to me" (human, by feel); the contradiction check catches "Part X denies what Part Y asserts" (mechanical, by cross-reference). Fold any contradictions it returns into the summary so the user sees them at the checkpoint. The dispatch writes its scratch file (see "Sealed-context dispatch and scratch files"). A clean result is a real result — say so and move on.
+
+1. Summarise the *whole step's* output back to the user in 5–8 lines, hitting the consequential decisions across all sub-steps in the step — plus any contradictions the check surfaced. Not a recap of process — a recap of decisions.
 
 2. Run the substantive checkpoint:
 
@@ -178,9 +210,13 @@ If `quality/strategy.md` already exists at full length (i.e. all sub-steps were 
 - For (c), proceed through all sub-steps but reference the existing content as starting hypothesis rather than starting from scratch.
 - For (d) — **new-release mode** — archive the current strategy first, then walk all sub-steps. Sub-steps that change less between releases (1.1 Purpose, 1.2 Team, 1.3 Workflows, 1.4 Release workflow, 1.5 Budget, 2.1 Roadmap) should pre-load the archived prior version's section as starting hypothesis and ask "what's changed?". Sub-steps that change more (3.1, 3.2, 4.1, 5.x, 6.x, 7.x) start more or less from scratch because the release context is fundamentally different.
 
-## Final step: review
+## Final step: distill, then review
 
-After sub-step 7.3 is complete, invoke `/quality-strategy-review` on the produced doc. The review skill is the source of truth for "is this strategy any good" — it applies the seven indicators of a good strategy and runs mechanical oracle checks (missing non-goals; all-High dimension ratings; percentage confidences; missing three-lens entries; etc.).
+After sub-step 7.3 is complete and the content is confirmed, two closing moves:
+
+1. **Distill.** Invoke `/operational-distillation` on the produced doc. It reads the whole strategy and inserts an Operational TL;DR (6–10 lines) plus a one-page triage rubric at the top, so a returning reader re-orients in seconds. The distillation is a *view* of the body, not a second source of truth — if they disagree, the body wins. (Sub-step 7.3 prompts this.)
+
+2. **Review.** Invoke `/quality-strategy-review` on the produced doc. The review skill is the source of truth for "is this strategy any good" — it first runs a **contextual-fit gate** (reading the `## Strategy job` paragraph and adapting severity to the strategy's job), then applies the seven indicators and runs mechanical oracle checks (missing non-goals; all-High dimension ratings; percentage confidences; missing three-lens entries; missing scratch files for claimed dispatches; etc.).
 
 If the review surfaces failures, return to the relevant sub-step(s) and re-do. The strategy is not done until the review passes.
 
@@ -196,5 +232,6 @@ Pause the skill and surface a question (rather than push through) when:
 
 ## Output
 
-- `quality/strategy.md` at the project root — the strategy itself. Visible, top-level, meant to be read.
+- `quality/strategy.md` at the project root — the strategy itself. Visible, top-level, meant to be read. Opens with the Operational TL;DR + triage rubric (from `/operational-distillation`) and the `## Strategy job` paragraph.
 - `quality/pre-read.md` — the project digest produced by sub-step 0. Working artefact; informs but does not become part of the strategy.
+- `quality/.scratch/<sub-step>-<purpose>.md` — sealed-dispatch scratch files (one per subagent dispatch). Working state, audited by `/quality-strategy-review`; not part of the strategy.

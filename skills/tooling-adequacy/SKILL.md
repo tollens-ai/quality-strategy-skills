@@ -87,11 +87,11 @@ A learning need is **answerable** only if both instrument and oracle are Adequat
 - [ ] A build item is named for every Inadequate/Missing axis (instrument *and* oracle), each tied to the learning need(s) it unblocks.
 - [ ] Checking-vs-investigation and automation-vs-judgement mismatches are flagged.
 - [ ] No source code was read.
-- [ ] (When run from `/test-strategy`) the build items are returned to the orchestrator so the closing step can gate on them.
+- [ ] (When run from `/test-strategy`) the build items are returned to the orchestrator so the closing step can gate on them, and the assessment is written to `$PROJECT_DIR/quality/.scratch/3.5-tooling-adequacy.md`.
 
 ## Output
 
-When run from `/test-strategy`, return the assessment to the orchestrator. Standalone, surface it in the conversation and offer to write it to `$PROJECT_DIR/quality/tooling-adequacy-<YYYY-MM-DD>.md`. Shape:
+When run from `/test-strategy`, return the assessment to the orchestrator **and** write it to `$PROJECT_DIR/quality/.scratch/3.5-tooling-adequacy.md` (the sealed-dispatch scratch file `/test-strategy-review` audits — hard evidence this Q2 check actually ran). Standalone, surface it in the conversation and offer to write it to `$PROJECT_DIR/quality/tooling-adequacy-<YYYY-MM-DD>.md`. Shape:
 
 ```markdown
 # Tooling & oracle adequacy

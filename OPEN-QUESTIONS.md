@@ -538,4 +538,70 @@ These are the design decisions worked out across the May–June 2026 design sess
 
 ---
 
+# Phase 2 implementation notes (architectural decomposition + contextual-fit gate)
+
+These record the calls made while shipping Phase 2 (the standalone-skill extractions, the contextual-fit gate, and the scratch-file auditability groundwork). They supplement the pre-implementation entries above with what was actually built and where it diverged or stopped short.
+
+---
+
+## /oracle-adequacy built; oracle taxonomy shared with /tooling-adequacy by pointer + inline gist (not yet a factored shared file)
+
+**What we did.** Built `/oracle-adequacy` as a standalone skill, modelled on `/tooling-adequacy` but with the unit of analysis being a *dimension's actual-state claim* (in `/quality-strategy`'s risk-map pass) rather than a *learning need*. It reuses the same oracle taxonomy (Specified / Property-or-metamorphic / Differential-or-simulated / Golden-master / Human-or-agent-judge) and the same "kill the old-world reflex" move. Rather than copy the full taxonomy or factor it into a shared file, `/oracle-adequacy` points at `skills/tooling-adequacy/SKILL.md` step 3 as the canonical treatment and restates one-line gists inline (the "name the framework concept inline with a gist" pattern already endorsed in the duplication-rule entry). Wired into `/quality-strategy` sub-step 6.2.
+
+**Why.** Splitting "tooling" and "oracle" for the same context fragments one question (that's why `/tooling-adequacy` keeps both); but `/oracle-adequacy` and `/tooling-adequacy` serve *different* parents and *different* units (actual-state claim vs learning need), so two skills is right. The shared piece is only the oracle *kinds*. A pointer-plus-gist avoids a second full copy that would drift, without the churn/coupling of introducing a new shared grounding file mid-Phase-2.
+
+**What would change our mind.** If the two skills' oracle sections drift apart despite the pointer (the gist in one updated, the canonical not), or if a third consumer of the taxonomy appears — either would justify factoring a single `oracle-kinds.md` grounding file both skills read. The current cross-reference also creates a mild coupling (a `/quality-strategy` skill depending on a `/test-strategy` skill's file); if that proves awkward, the factor-out resolves it too.
+
+**How we'd know.** On the next edit to either oracle section, check whether both stayed in sync. Track whether users invoking `/oracle-adequacy` standalone are confused by the pointer into `/tooling-adequacy`.
+
+---
+
+## Contextual-fit gate adapts severity, not which indicators apply (OQ2 resolved: lean (b))
+
+**What we did.** `/quality-strategy-review` now runs a **Pass 0 contextual-fit gate** before the three subagents: it reads the `## Strategy job` paragraph (or infers + flags it if missing), classifies the job (durable production / pre-implementation / agentic one-shot / lightweight slice), and sets a severity lens. The seven indicators and all oracle checks run **universally**; what adapts is the blocker-vs-deferral threshold. Findings are sorted into three buckets — current blockers / now-refinements / later-lifecycle deferrals — and the report gained a "Strategy job & contextual fit" header and a "Deferrals" section. The job classification is threaded into all three subagent briefs so they judge against the job. For the agentic-one-shot job specifically, absence of one-shot success/failure criteria, final-report evidence requirements, agent-failure-mode decision rules, and scope-control Nones is itself blocking.
+
+**Why.** This is design OQ2. The anti-clickbait feedback showed the review mis-applying the production-grade scale to a pre-implementation one-shot. The cleanest fix keeps the indicators stable (so the review stays teachable and consistent) and moves only the severity threshold — a missing section blocks only if its absence stops the strategy doing *its* job. Switching indicators on/off per job would make reviews incomparable and invite gaming.
+
+**What would change our mind.** If severity-only adaptation proves too blunt — e.g. an indicator that is genuinely meaningless for a one-shot still fires noise that the severity lens can't silence — we'd revisit (a)/(c): suppressing specific indicators per job. If the four job categories don't cover real strategies (a fifth recurs), the classifier needs extending.
+
+**How we'd know.** Run the review on strategies of each job type. Check: did any indicator fire a finding that was pure noise for that job (suggesting it should be suppressed, not just down-graded)? Did the blocker/deferral split match what the user thought was actually load-bearing?
+
+---
+
+## Scratch-file audit shipped; producer-side convention introduced ahead of full decomposition
+
+**What we did.** Established the **sealed-context dispatch + scratch-file convention** in `/quality-strategy` SKILL.md: every subagent dispatch writes `quality/.scratch/<sub-step>-<purpose>.md` recording its real intermediate work. Applied it to the dispatches that exist today — pre-read (0), dimension scout (5.1), `/oracle-adequacy` (6.2), `/contradiction-check` (boundaries), `/operational-distillation` (7.3) — and on the test side to `/tooling-adequacy` (3.5). Both review skills gained a scratch-file audit check (a claimed dispatch with no scratch file = FAIL/fabrication signal; a stub = FLAG/audit theatre). Added a process-note-leak check to `/quality-strategy-review` too.
+
+**Why.** The scratch-file audit (a Phase 2 bullet) is only coherent if the producer side actually writes scratch files, so the writing convention had to land with it. This is also the auditability groundwork the full sealed-context decomposition will build on. Introducing it now, on the dispatches that already exist, gets the integrity benefit immediately and de-risks the larger decomposition.
+
+**What would change our mind.** If orchestrators write empty/stub scratch files to pass the audit (audit theatre) — then the check needs to inspect content, not just existence. If `.scratch/` confuses users about what's authoritative.
+
+**How we'd know.** Spot-check scratch files on real runs against the strategy content — real intermediate work, or stubs? Count fabrication catches.
+
+---
+
+## Full sealed-context decomposition of /quality-strategy deferred to a later phase (Phase 2 stopped at a coherent slice)
+
+**What we did.** Phase 2 shipped the standalone-skill extractions (`/oracle-adequacy`, `/contradiction-check`, `/operational-distillation`), the contextual-fit gate + strategy-job question, and the scratch-file auditability convention — but **not** the full decomposition of all 21 `/quality-strategy` sub-steps into sealed-context subagent dispatches. The orchestrator still performs the per-sub-step interview and analysis itself for the dispatches not yet extracted (e.g. dimension rating in 5.4, the per-sub-step writing). The central v2 principle (§2.1) is stated in SKILL.md and applied to every dispatch that exists, but the remaining analytical sub-steps are not yet sealed.
+
+**Why.** Design sized Phase 2 at 3–5 days and named decomposition the largest single piece. Half-doing the 21-sub-step decomposition in one overnight run risked leaving `/quality-strategy` internally incoherent (some sub-steps sealed, some not, inconsistent scratch conventions) — worse than a clean, smaller slice. The extractions + gate + auditability convention are a complete, shippable, self-consistent unit and lay the groundwork (scratch convention, sealed-dispatch language) the remaining decomposition will reuse.
+
+**What would change our mind.** Nothing about the call; this is a deliberate scope boundary, not an uncertain design choice. The open *work* is: decompose the remaining substantive sub-steps (dimension rating especially — it's where v1 drifted to middle ratings) into sealed dispatches that each write a scratch file, and have the orchestrator only dispatch/collect/reconcile/present. Mechanical anchors at dimension-rating (Phase 4) and per-stakeholder + merge (Phase 3) interact with this and may be done together.
+
+**How we'd know it's needed.** The fabricated-dispatch and middle-rating-under-uncertainty patterns from the four v1 runs will still appear in the un-decomposed sub-steps until they're sealed; the scratch-file audit will show "no dispatch claimed" for those steps because they're still orchestrator-inline.
+
+---
+
+## /contradiction-check navigates by Part headings until sentinels land (Phase 5 dependency)
+
+**What we did.** `/contradiction-check` locates Part boundaries by their `## Part N:` headings. The design's sentinel markers (`<!-- end-of-sub-step-X -->`, `<!-- end-of-strategy -->`) are Phase 5 work and not yet present; the skill carries a forward note to switch to sentinels for deterministic navigation once they land.
+
+**Why.** Headings are stable and present today; sentinels are a later-phase robustness improvement, not a blocker for a working contradiction check. Keeping the dependency explicit (in the skill and here) prevents the two phases drifting apart.
+
+**What would change our mind.** If heading-based navigation proves unreliable on real docs (duplicate or reworded headings) before Phase 5 lands, sentinels get pulled earlier.
+
+**How we'd know.** Watch whether `/contradiction-check` mis-locates Part boundaries on real strategies during the gap before Phase 5.
+
+---
+
 *Add new items to this file when we make calls under uncertainty. Revisit after each real-world run.*
