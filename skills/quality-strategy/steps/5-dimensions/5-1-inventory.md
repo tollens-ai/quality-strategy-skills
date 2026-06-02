@@ -30,9 +30,9 @@ Use the `Agent` tool with `subagent_type: general-purpose`. The brief:
 
 > You are extending a quality-strategy dimension inventory by walking a reference list of quality -ilities and checking each one against the project context. The main agent has already produced a bottom-up dimension list from stakeholder concerns and design observations; your job is the top-down pass to spot dimensions the bottom-up missed.
 >
-> First, read `<repo>/PHILOSOPHY.md` and `<repo>/skills/quality-strategy/SKILL.md` to ground yourself in the framework.
+> First, read `$PLUGIN_ROOT/PHILOSOPHY.md` and `$PLUGIN_ROOT/skills/quality-strategy/SKILL.md` to ground yourself in the framework.
 >
-> Then read `<project>/quality/strategy.md` (Parts 1–4) and `<project>/quality/pre-read.md` for full context on the project — what it is, who matters, what's been excluded, what the design looks like.
+> Then read `$PROJECT_DIR/quality/strategy.md` (Parts 1–4) and `$PROJECT_DIR/quality/pre-read.md` for full context on the project — what it is, who matters, what's been excluded, what the design looks like.
 >
 > Walk this reference list of quality -ilities. For each, decide whether it might matter for the **first release** of this project:
 >

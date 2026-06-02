@@ -14,13 +14,22 @@ The skill uses an **expansion-and-collapse** pattern, lighter than `/quality-str
 - **Expansion.** Two subagents run in parallel. Subagent A walks forward execution as the primary review lens. Subagent B runs mechanical oracle checks as a backstop. Both are briefed to be aggressive — false negatives are worse than false positives.
 - **Collapse.** The main agent reads both subagent outputs, drops spurious findings, looks for compounding patterns, distinguishes blockers from flags, and produces a consolidated report.
 
+## Resolving file paths — do this first
+
+This skill is part of the `quality-strategy` plugin. Before anything else, resolve two absolute paths and use them throughout:
+
+- **PLUGIN_ROOT** — the plugin's install directory: `${CLAUDE_PLUGIN_ROOT}` (Claude Code expands this to an absolute path when it loads this file; read it off and note it down). The grounding and framework files this skill reads live under it.
+- **PROJECT_DIR** — the absolute path of the project whose test strategy you're reviewing (normally the current working directory; confirm with the user if it's ambiguous). The strategy docs live under `$PROJECT_DIR/quality/`.
+
+File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **Substitute the resolved absolute paths before you act on them** — both when you Read a file yourself and when you put a path into a subagent brief. The Read tool does no variable expansion and resolves relative paths against the current working directory, not this skill's directory; a dispatched subagent inherits none of your context. So an unsubstituted placeholder or a bare relative path will fail — always pass fully-resolved absolute paths.
+
 ## Before you start
 
-Read the following at the repo root:
+Read the following (all under `$PLUGIN_ROOT`):
 
-- `PHILOSOPHY.md` — the framework grounding.
-- `skills/test-strategy/FRAMINGS.md` — the ten anti-default framings that shape what a good test strategy looks like.
-- `skills/test-strategy/INDICATORS.md` — the five outcome-oriented indicators (Direction / Priority / Sufficiency / Feasibility / Honesty) plus the mechanical oracle list.
+- `$PLUGIN_ROOT/PHILOSOPHY.md` — the framework grounding.
+- `$PLUGIN_ROOT/skills/test-strategy/FRAMINGS.md` — the ten anti-default framings that shape what a good test strategy looks like.
+- `$PLUGIN_ROOT/skills/test-strategy/INDICATORS.md` — the five outcome-oriented indicators (Direction / Priority / Sufficiency / Feasibility / Honesty) plus the mechanical oracle list.
 
 ## What you need
 
@@ -56,15 +65,15 @@ Use the `Agent` tool with two calls in a single message.
 > Be aggressive. False negatives are worse than false positives — the main agent will filter your output. If you can imagine a way execution would stall, produce wrong information, or finish without moving the strategy, surface it.
 >
 > First, read these files:
-> - `<repo>/PHILOSOPHY.md`
-> - `<repo>/skills/test-strategy/FRAMINGS.md`
-> - `<repo>/skills/test-strategy/INDICATORS.md`
-> - `<repo>/skills/test-strategy/SKILL.md`
+> - `$PLUGIN_ROOT/PHILOSOPHY.md`
+> - `$PLUGIN_ROOT/skills/test-strategy/FRAMINGS.md`
+> - `$PLUGIN_ROOT/skills/test-strategy/INDICATORS.md`
+> - `$PLUGIN_ROOT/skills/test-strategy/SKILL.md`
 >
 > Then read both docs:
-> - `<project>/quality/strategy.md`
-> - `<project>/quality/test-strategy.md`
-> - `<project>/quality/test-pre-read.md` (if it exists)
+> - `$PROJECT_DIR/quality/strategy.md`
+> - `$PROJECT_DIR/quality/test-strategy.md`
+> - `$PROJECT_DIR/quality/test-pre-read.md` (if it exists)
 >
 > ### The simulation
 >
@@ -144,14 +153,14 @@ Use the `Agent` tool with two calls in a single message.
 > **Meta-flag.** If you find an oracle check failing, that's also evidence the per-sub-step DONE checklist for the relevant sub-step was not enforced. When you flag a failure, note: *"this should have been caught in sub-step N's DONE, but wasn't."*
 >
 > First, read these files:
-> - `<repo>/PHILOSOPHY.md`
-> - `<repo>/skills/test-strategy/INDICATORS.md`
-> - `<repo>/skills/test-strategy/SKILL.md`
+> - `$PLUGIN_ROOT/PHILOSOPHY.md`
+> - `$PLUGIN_ROOT/skills/test-strategy/INDICATORS.md`
+> - `$PLUGIN_ROOT/skills/test-strategy/SKILL.md`
 >
 > Then read:
-> - `<project>/quality/strategy.md`
-> - `<project>/quality/test-strategy.md`
-> - `<project>/quality/test-pre-read.md` (if it exists)
+> - `$PROJECT_DIR/quality/strategy.md`
+> - `$PROJECT_DIR/quality/test-strategy.md`
+> - `$PROJECT_DIR/quality/test-pre-read.md` (if it exists)
 >
 > Run the twelve oracle checks defined in INDICATORS.md (the "Mechanical oracle checks" section). For each, classify as **PASS / FLAG / FAIL** and write one line of explanation. For FLAGs and FAILs, include a one-line "what to fix" plus the meta-note about which sub-step's DONE should have caught this.
 >

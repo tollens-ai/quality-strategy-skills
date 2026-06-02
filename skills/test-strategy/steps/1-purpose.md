@@ -22,6 +22,10 @@ By the end of this sub-step the strategy doc captures:
 
 3. **The relationship to the quality strategy** — one sentence stating that this doc operationalises `quality/strategy.md` and feeds back into it via the update protocol.
 
+4. **Where this sits in the four-question frame** — orient the reader with the four quality questions: (1) what does good look like? (2) how do we know if what we have is good? (3) is what we have good? (4) how do we make it good? The *quality* strategy answers Q1; this *test* strategy is how the team answers Q3 — but only honestly once **Q2** is settled, which is why the tooling & oracle adequacy check (sub-step 3.5, `/tooling-adequacy`) is part of the flow. One or two sentences, not a lecture.
+
+5. **What this strategy is for, right now (its job)** — one line naming the job: steering a durable production effort, a pre-implementation build, a one-shot agentic attempt, or a deliberately thin slice. This shapes how much investigation is warranted (a thin slice legitimately has fewer, lighter learning needs). Lightweight here — just ask *"what is this test strategy mainly for right now?"* and record the answer; the fuller treatment lives in the quality strategy.
+
 ## How to ask
 
 This sub-step is mostly drafted-and-confirmed rather than interviewed. Draft the purpose section based on the pre-read, then read it back and ask the user *"does this name what we're trying to accomplish in your language?"*
@@ -60,6 +64,8 @@ You don't need to use these exact words, but the produced section should not rea
 - [ ] The purpose section exists in `quality/test-strategy.md`, 4-8 lines, written in the team's voice.
 - [ ] The investigation-not-checking framing is present (not necessarily verbatim, but the section reads as "find out what's true," not "verify the spec").
 - [ ] The relationship to the quality strategy is stated in one sentence.
+- [ ] The four-question frame is present (the section locates the test strategy as answering Q3, with Q2 checked via `/tooling-adequacy`).
+- [ ] A one-line **Strategy job** is recorded (durable / pre-implementation / one-shot / thin slice).
 - [ ] Anti-list is present: at minimum two items the strategy is *not*.
 - [ ] Pre-read sources cited in the section's evidence field, naming actual files (not blank, not placeholder).
 - [ ] User has confirmed the section reads in their voice.
@@ -80,6 +86,10 @@ Append to `quality/test-strategy.md`. If the file does not exist, create it with
 ## Purpose
 
 <one to three sentences naming what this strategy is for, written in the team's voice. Investigation-not-checking framing must be present.>
+
+**Strategy job (right now).** <one line: durable production / pre-implementation / one-shot agentic / thin slice — and what that means for how much we investigate.>
+
+**Where this sits.** This test strategy answers *"is what we have actually good?"* (Q3 of the four quality questions); the quality strategy answered *"what does good look like?"* (Q1). Before any finding is trusted, Q2 — *"how do we know?"* — is checked via `/tooling-adequacy` (sub-step 3.5).
 
 **This strategy is not:**
 - A test plan (a list of cases to run).

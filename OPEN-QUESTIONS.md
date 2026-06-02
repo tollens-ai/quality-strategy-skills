@@ -278,4 +278,264 @@ These are calls made during design discussion before the skill is built. They'll
 
 ---
 
+# v2 design decisions (pre-implementation)
+
+These are the design decisions worked out across the May–June 2026 design sessions (full reasoning in `design/v2-design-and-plan.md`). They're recorded here so the calls — and their falsification conditions — are visible as v2 ships. Most are locked; OQ1–OQ6 in the design doc track the genuinely-open sub-questions, referenced inline below. As each ships and gets real-world tested, it graduates into the post-implementation register at the top of this file.
+
+---
+
+## Modularity reframe — sealed-context subagent dispatches
+
+**What we did.** Decompose the orchestrator's analytical work into sealed-context subagent dispatches. Each subagent sees only what it needs for its piece — not the parent's DONE criteria, not the assessment rubric, not the destination doc, not other subagents' work. The orchestrator's role becomes dispatch / collect / reconcile / present, not analysis. Applies wherever the orchestrator does substantive analysis (dimension rating, evidence audit, contradiction check, etc.).
+
+**Why.** v1's central failure: the orchestrator had the whole context loaded — DONE checklist, the strategy doc, what the next sub-step expected — and that visible destination was the temptation. It produced docs that looked complete while the underlying work (evidence-gathering, real rating) was skipped or confabulated. Removing the destination from the worker's view removes the shortcut. This is *the* governing principle of v2.
+
+**What would change our mind.** If sealed dispatches produce worse analysis because the subagent lacked context it genuinely needed (over-sealing). If dispatch overhead (latency, reconciliation cost) outweighs the integrity gain. If orchestrators confabulate the *reconciliation* step instead — just moving the shortcut up a level.
+
+**How we'd know.** Compare v2 strategies against the four v1 test runs: did the fabricated-dispatch and middle-rating-under-uncertainty patterns actually drop? The scratch-file audit (below) makes the work auditable — check whether dispatched work is real.
+
+---
+
+## Process-note leak prevention
+
+**What we did.** Orchestrator meta-observations about the skill itself (awkward phrasing, a step that didn't fit, a suspected bug) go to `.skill-feedback.md` only — never into the strategy doc. SKILL.md states the rule.
+
+**Why.** v1 runs leaked process commentary into the strategy output, making the doc read as a transcript of the skill running rather than a clean artifact for the team. The strategy should read as if authored, not narrated.
+
+**What would change our mind.** If real strategies still leak meta despite the rule (agents ignore the instruction), suggesting it needs a mechanical catch rather than an honour-system instruction. If separating meta loses in-context signal the user actually wanted in the doc.
+
+**How we'd know.** Audit produced docs for first-person-about-the-skill sentences. If they persist, the instruction isn't enough and a review-side catch is needed.
+
+---
+
+## Sentinel markers at sub-step output boundaries
+
+**What we did.** Every sub-step appends an HTML-comment sentinel at the end of its output (e.g. `<!-- end-of-sub-step-5.4 -->`); the strategy ends with `<!-- end-of-strategy -->`.
+
+**Why.** Two jobs: (a) Edit-tool anchor uniqueness — sub-steps append to a growing doc, and unique end-markers give a reliable insertion point instead of fragile heading matches; (b) mechanical navigability — review skills and the contradiction-check can locate Part boundaries deterministically.
+
+**What would change our mind.** If some renderers surface the comments to users. If a simpler convention (stable, unique headings) proves sufficient for the review skills, making the markers redundant.
+
+**How we'd know.** Check whether the review/contradiction skills actually use the sentinels to navigate, and whether any user reports stray comments in their rendered doc.
+
+---
+
+## Scratch-file audit in reviews
+
+**What we did.** Every claimed subagent dispatch writes a scratch file at `quality/.scratch/<sub-step>-<purpose>.md`. `/quality-strategy-review` and `/test-strategy-review` mechanically check that each claimed dispatch has its scratch file.
+
+**Why.** Converts "did the orchestrator actually do the work?" from invisible to auditable. Directly targets v1's fabricated-dispatch failure — a missing scratch file is hard evidence the dispatch didn't happen.
+
+**What would change our mind.** If orchestrators learn to write empty or fake scratch files to satisfy the check (audit theatre). If `.scratch/` creates confusion about what's authoritative (it's working state, not the strategy).
+
+**How we'd know.** Spot-check scratch files against the strategy content — do they contain real intermediate work, or stubs written to pass the audit?
+
+---
+
+## Silent-drop catch at dimension-inventory consolidation
+
+**What we did.** `/dimension-inventory` consolidation explicitly walks each stakeholder's three-lens entries and confirms every named concern maps to a dimension. A dropped concern is caught at consolidation, not three sub-steps later.
+
+**Why.** v1 lost stakeholder concerns silently during the bottom-up → top-down → reconcile merge; they surfaced (if at all) only in late review. Catching at the moment of consolidation is cheap; catching in review is expensive rework.
+
+**What would change our mind.** If the walk is too mechanical and forces spurious dimensions for concerns that legitimately don't map to one. If drops still happen downstream despite the catch.
+
+**How we'd know.** Audit: does every Part-3 concern trace to a Part-5 dimension in produced strategies? Count drops caught at consolidation vs surfaced in review.
+
+---
+
+## Path resolution + self-contained skill directories
+
+*(Provisional — being confirmed by the skill-file-resolution experiment run this session; finalise once `/tmp/skill-exp/skill-file-resolution-findings.md` lands.)*
+
+**What we did.** Established that there is no `$SKILL_DIR` runtime variable; the design doc's "resolve `$SKILL_DIR`/`$PROJECT_DIR`" is implemented as: the orchestrator resolves its own absolute skill-directory path and the project path once at start, then substitutes the literal absolute paths into every subagent brief before dispatch (a sealed subagent can't expand a token it's handed). Each skill directory is made self-contained — the grounding files it references (`PHILOSOPHY.md`; plus `FRAMINGS.md`/`INDICATORS.md` for the test skills) travel inside the skill dir, because only `skills/*` is copied on install and a repo-root file never reaches `~/.claude/skills/`.
+
+**Why.** v1 briefs referenced `<repo>/PHILOSOPHY.md`; `<repo>` never resolved when installed at `~/.claude/skills/`, and PHILOSOPHY.md wasn't even present there. Two failure modes compounded: an unresolved token *and* an absent file.
+
+**What would change our mind.** The running experiment may show (a) the orchestrator can't reliably determine its own absolute path — which would undermine substitution and force a different mechanism; or (b) the Claude Code plugin model reliably lets multiple skills share one plugin-root grounding file after a real install — which would replace per-skill duplication with a single shared copy (ship-the-pack-as-a-plugin).
+
+**How we'd know.** The experiment's findings file answers both directly (Q1 and Q4/Q5). After that, a real `cp`-install run of `/test-strategy` on a workshop repo confirms briefs resolve and grounding is found.
+
+---
+
+## Per-stakeholder analysis with an explicit merge step
+
+**What we did.** Dimension rating, required/actual levels, and risk run per-stakeholder first; an explicit merge step then reconciles into one merged strategy. The merge is dialogue, not max-aggregation: convergence → high-confidence aggregate; divergence → surfaced to the user (*"Stakeholder A: H Dealbreaker; Stakeholder B: None — you have one team, what does it commit to?"*).
+
+**Why.** v1 merged across stakeholders too early, producing a single team-voice that hid genuine disagreement. The contested judgement is exactly where user input is most valuable, so it should be explicit, not pre-collapsed.
+
+**What would change our mind.** If stakeholders converge nearly everywhere so the per-stakeholder pass is mostly redundant overhead. If the divergence dialogue is too heavy on real projects (design OQ1: 5 stakeholders × 30 dims could be 30 dialogue points; may need thematic batching).
+
+**How we'd know.** Count divergence points per real run and how often the merge dialogue changed an outcome. If divergence is rare and dialogue rarely changes anything, simplify back toward early merge.
+
+---
+
+## Mechanical anchors at dimension rating; no L at this step
+
+**What we did.** Replace fuzzy ordinal judgement with mechanical anchors, per stakeholder: **H** iff ≥1 stakeholder has this dimension's failure mode as a Dealbreaker (any lens); **M** iff any other bar (Good Enough/Delight) references it and no Dealbreaker; **None** iff no bar at any lens references it. **No L** at rating — "aware but not investing" is a plan-of-work (7.x) decision, not a rating. Rating yields a short pointer rationale (*"H because Family Dealbreaker on data loss, Part 3.2 row 4"*), not a paragraph.
+
+**Why.** v1 drifted to middle ratings under uncertainty and produced three recurring pathologies (state-vs-priority conflation, all-or-no Highs, no Nones). Anchoring rating to stakeholder bars makes it mechanical and auditable. The anchor captures *impact size*; likelihood lives downstream in the risk map, so risk = impact × likelihood emerges from the combination rather than a pre-collapsed single score. Dropping L kills the state-vs-priority drift at its source.
+
+**What would change our mind.** If real projects have dimensions that genuinely need an "aware, not investing now" rating at this step, and pushing it to 7.x loses it. If the Dealbreaker→H rule over-produces Highs on projects with many dealbreakers.
+
+**How we'd know.** Audit rating distributions, and whether 7.x actually captures the de-prioritised-but-known dimensions that L used to hold.
+
+---
+
+## Plan of work is classified-but-unordered
+
+**What we did.** The plan-of-work output is an action list classified by Pringle work-type (testing/stakeholder/fixing), who-drives (human/agent/hybrid/passive), and dependencies (what blocks / what unblocks) — but with **no priority order**. The user prioritises with their own context. `/priority-analysis` exists as an optional standalone for those who want structured help.
+
+**Why.** v1's phased plan looked complete but wasn't operationally useful, and prioritising for the user overstepped — the user has context the skill doesn't (politics, energy, org reasons). A clean classified list is more honest and forecloses an over-engineering temptation (a multi-subagent prioritisation expansion-collapse at this layer).
+
+**What would change our mind.** If users consistently want a default ordering and find the unordered list unhelpful. If the who-drives / dependency tags don't actually change how users sequence.
+
+**How we'd know.** Do users ask for ordering, or prioritise fine from the classified list? Is `/priority-analysis` invoked often (signal the core flow under-serves) or rarely?
+
+---
+
+## Four-question frame; Q2 made explicit
+
+**What we did.** Frame quality strategy as four questions — (1) What is good? (2) How do we know if what we have is good? (3) Is what we have good? (4) How do we make it good? — with **Q2 given its own slot**. `/oracle-adequacy` (for `/quality-strategy`'s actual-state assessment) and `/tooling-adequacy` (for `/test-strategy`'s investigation methods) are the standalone skills that address Q2.
+
+**Why.** Ed's framework collapses Q2 into Q3. In the new world that's dangerous: agents reliably defer to whatever tooling/oracles exist rather than challenge adequacy, so strategies get built on un-interrogated measurement and nobody notices. Making Q2 explicit forces the "is our way of knowing actually adequate?" check.
+
+**What would change our mind.** If Q2 work is almost always trivially "tooling is fine," so the separate slot is ceremony. If users find the four-question framing more confusing than clarifying.
+
+**How we'd know.** On real runs, does Q2 ever flip a dimension to gated/blocked because the oracle was inadequate? If it never bites, it's not earning its slot.
+
+---
+
+## Strategy-job dimension
+
+**What we did.** Each strategy states its job *right now* — durable production / pre-implementation / agentic one-shot / lightweight slice — in a "Strategy job" paragraph at the top. `/quality-strategy` Step 1 asks it; `/quality-strategy-review` adds a contextual-fit gate (Pass 0) that classifies the job and adapts severity (a missing production-observability section is a blocker for a durable strategy, deliberate scope control for a one-shot).
+
+**Why.** The anti-clickbait run (`feedback/2026-05-23-*.md`) showed the review mechanically applying the full production-grade scale to a pre-implementation one-shot — the wrong emphasis. Same framework, different right-output and right-severity per job. Over-enforcing turns quality strategy into ceremony; the framework's spirit is contextual quality.
+
+**What would change our mind.** If the four job categories don't cover real projects (a fifth keeps appearing), or classification is ambiguous so people can't pick. Design OQ2: whether job affects which indicators apply, their severities, or both — current lean is severities only.
+
+**How we'd know.** Classify each real run; check whether the job label actually changed the review's blocker/flag calls in a way that matched user intent.
+
+---
+
+## Project-shape dimension (orthogonal to strategy job)
+
+**What we did.** Capture project shape at Step 1 — solo / small-team / org; released-regularly / continuous-deploy / not-yet-shipped / returning-from-dormant; agent-driven-build / agent-driven-runtime / no-agents — and let it shape how questions are *phrased* and what defaults make sense. Strip enterprise-specific phrasings ("investor patience", "monthly burn", "release cadence") from sub-step files. **Same rigour applied regardless**; depth-of-quality-*work* is project-dependent, quality-first *thinking* is universal.
+
+**Why.** v1 assumed a multi-person-team / scheduled-release / production-product mental model; solo, hobby, agent-driven, dormant and pre-implementation projects all needed orchestrator translation with variable success. Shape is about phrasing and defaults, not lowering the bar — it's legitimate for rigorous analysis to conclude "thin MVP, lots of Nones, correct."
+
+**What would change our mind.** If shape ends up changing analysis *depth* (not just phrasing) in practice. If the enumerated shapes miss common cases. If stripping enterprise phrasing loses useful prompts for the projects that genuinely are enterprise.
+
+**How we'd know.** Run across the shape spectrum (solo hobby → agent-driven → team). Does phrasing adapt without the analysis getting thinner where it shouldn't?
+
+---
+
+## Honest-about-unknowns gating
+
+**What we did.** When `/test-strategy` detects that `/quality-strategy` left tooling/oracle-build items unresolved, it neither refuses, nor warns-and-proceeds, nor writes a separate gating file. It marks the affected section visibly as *blocked* (*"Section X is gated on the oracle for Y being built; rerun after that lands"*), keeping it in the doc as visible content.
+
+**Why.** Refusing is unhelpful; silently proceeding builds on sand; a separate gating file gets lost. Marking-as-blocked keeps the gap visible and assumes user competence. The strategy is honest about its own limits.
+
+**What would change our mind.** If "blocked" sections get ignored and never resolved (so the honesty doesn't drive action), or if users find the markers alarming/confusing rather than clarifying.
+
+**How we'd know.** Track whether blocked sections actually get unblocked on a later run, or just sit. If they sit, the gating needs more teeth.
+
+---
+
+## Named top-level sub-skills require a real standalone use case
+
+**What we did.** A piece of work becomes a top-level discoverable skill only if it is distinct, nameable, extractable, **and** has a real standalone use (someone would invoke it without a full strategy run). Passing: `/oracle-adequacy`, `/tooling-adequacy`, `/operational-distillation`, `/contradiction-check`, `/priority-analysis`, `/feedback-synthesis`, `/pre-read`. Not passing — stay as internal sealed dispatches: stakeholder analysis, dimension inventory/rating, risk map, plan of work, project context, non-goals.
+
+**Why.** Decomposition isn't intrinsically good — it carries discoverability and maintenance cost. The standalone-use test is the discipline that stops over-fragmenting the skill surface while still getting the modularity (sealed-dispatch) benefit internally.
+
+**What would change our mind.** If a "not-passing" internal dispatch turns out to be invoked standalone a lot (promote it), or a promoted skill is never run standalone (demote it to internal).
+
+**How we'd know.** Track standalone invocation counts per extracted skill over time.
+
+---
+
+## /oracle-adequacy and /tooling-adequacy as the Q2 skills
+
+**What we did.** Two standalone top-level skills implement Q2: `/oracle-adequacy` interrogates whether the oracles used for `/quality-strategy`'s actual-state assessment are adequate; `/tooling-adequacy` interrogates whether the investigation methods/tooling for `/test-strategy` are adequate. `/quality-strategy` invokes the former during risk-map actual assessment; `/test-strategy` invokes the latter after learning-needs.
+
+**Why.** See the four-question entry — Q2 needs an explicit owner or it collapses into Q3. Splitting into two matches the two parents (oracles for quality assessment vs tooling for test investigation) and gives each a real standalone use (audit oracles/tooling for an existing codebase).
+
+**What would change our mind.** If the two overlap so heavily they should be one skill, or if Q2 is better handled inline in each parent than as a separate invocation.
+
+**How we'd know.** Do the two produce distinct kinds of findings? Is either run standalone? Does invoking them mid-flow feel like a detour or a genuine gate?
+
+---
+
+## /operational-distillation
+
+**What we did.** A standalone skill (also run at the end of `/quality-strategy`'s plan-of-work) that produces a TL;DR (6–10 lines) + a one-page triage rubric + an optional operator cheat sheet at the top of the strategy.
+
+**Why.** v1 docs were optimised for production-time, not consumption-time — a reader returning had to skim hundreds of lines to re-orient. Distillation turns complete-and-dense into complete-and-operational, serving the "quick re-orientation" and "decision support at the edges" indicators directly.
+
+**What would change our mind.** If the TL;DR drifts from the body and becomes a stale second source of truth. If users ignore it and read the body anyway. Design OQ3: should distillation also run after each major Part as a rolling at-a-glance, not just at the end?
+
+**How we'd know.** Do returning users triage from the TL;DR/rubric, or skip to the body? Does the distillation stay in sync across revisions?
+
+---
+
+## /contradiction-check at step boundaries + standalone
+
+**What we did.** A sealed-dispatch contradiction check runs at each step boundary (before the substantive checkpoint) to catch cross-Part contradictions; it is also a standalone skill for auditing any strategy doc.
+
+**Why.** The substantive checkpoint catches user-feeling-wrong; it misses mechanical doc-internal contradictions (a Part-3 dealbreaker that contradicts a Part-4 non-goal). Different failure modes need different catches. Running at boundaries keeps it cheap and incremental.
+
+**What would change our mind.** If the per-boundary check is noisy (flags non-contradictions) or redundant with the review skill's consistency pass. If contradictions are rare enough that an end-only check suffices.
+
+**How we'd know.** Count real contradictions caught at boundaries vs at final review. If boundaries rarely catch anything, move it to end-only.
+
+---
+
+## /priority-analysis as optional standalone, not core flow
+
+**What we did.** `/priority-analysis` is an optional standalone for structured priority help (per-stakeholder prioritisation lenses, surfacing convergences/divergences). It is deliberately **not** in the core `/quality-strategy` flow, which ends with an unordered classified plan.
+
+**Why.** Follows from "plan of work is classified-but-unordered" — prioritising is the user's call, but some users want help, so the capability exists without forcing it on everyone. Keeping it out of core avoids baking a heavy prioritisation expansion into every run.
+
+**What would change our mind.** If most users want prioritisation help (then it belongs in core, perhaps as an offered step). If nobody discovers it — design OQ4: should `/plan-of-work` mention it at the end?
+
+**How we'd know.** Invocation rate, and whether users who skip it end up mis-prioritising.
+
+---
+
+## /feedback-synthesis as a standalone post-run skill
+
+**What we did.** A standalone skill that curates the run's `.skill-feedback.md` into a design-organised summary for the skill maintainer. Design OQ5: output to the user, to a maintainer file, or both — current lean is both (a short version to the user, a fuller one to `feedback/<date>-<slug>.md`).
+
+**Why.** The skill pack improves from real-run feedback, but raw `.skill-feedback.md` files are unstructured. A synthesis step makes the maintainer signal usable — and closes the very loop that produced this v2 batch.
+
+**What would change our mind.** If synthesis adds little over reading the raw feedback, or if it's never run because feedback is sporadic.
+
+**How we'd know.** Does synthesised feedback drive skill changes more efficiently than raw files did?
+
+---
+
+## Backwards compatibility is not a concern
+
+**What we did.** v2 is allowed to be a clean break from v1. No migration path is provided for v1-produced strategies. Design OQ6: existing workshop-run strategies were learning runs — let them sit; v2 produces fresh strategies for new projects.
+
+**Why.** v1 was fresh — only Qing has used it, and the workshop runs were learning exercises, not durable artifacts a team depends on. Carrying compatibility constraints would tax the redesign for no real beneficiary.
+
+**What would change our mind.** If a v1 strategy turns out to be in active use and worth migrating, or if external users adopted v1 before v2 ships (breaks the "only Qing" assumption).
+
+**How we'd know.** Check whether any v1 strategy is being actively maintained or depended on before deleting or breaking anything.
+
+---
+
+## Oracles folded into /tooling-adequacy (vs the planned /oracle-adequacy)
+
+**What we did.** Made oracle adequacy a first-class axis *inside* `/tooling-adequacy` (the Q2 skill for `/test-strategy`): each learning need is assessed for both an adequate instrument (exercise/observe) and an adequate oracle (judge correctness), including constructing simulated/reference oracles. The design doc separately plans `/oracle-adequacy` as the Q2 skill for `/quality-strategy`'s actual-state assessment (Phase 2).
+
+**Why.** For testing you cannot judge tooling adequacy without judging oracle adequacy — a perfect instrument with no oracle answers nothing. Splitting "tooling" and "oracle" into separate skills for the *same* (test) context would fragment one question. Keeping them together also lets the skill kill the old-world "no oracle ⇒ untestable" reflex (FRAMINGS #5) by proposing cheap simulated/reference oracles.
+
+**What would change our mind.** If `/oracle-adequacy` (Phase 2) and `/tooling-adequacy` end up duplicating so much oracle-assessment logic that a single shared skill (parameterised by context) is cleaner. If the name `tooling-adequacy` misleads users into thinking it ignores oracles — a rename might be warranted.
+
+**How we'd know.** When Phase 2 builds `/oracle-adequacy`, check how much of `/tooling-adequacy`'s oracle core it reuses; if near-total, factor a shared core or merge. Watch standalone invocations — do users reach for `/tooling-adequacy` expecting oracle help, or are they surprised it covers oracles?
+
+---
+
 *Add new items to this file when we make calls under uncertainty. Revisit after each real-world run.*

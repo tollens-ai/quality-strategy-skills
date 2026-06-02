@@ -24,23 +24,33 @@ Available now:
 |---|---|
 | `/quality-strategy` | Walk a 7-step interview to produce `quality/strategy.md`. Use when starting a project, planning a major release, or when "quality" is being talked about vaguely. |
 | `/quality-strategy-review` | Meta-audit. Applies seven indicators of a good quality strategy and surfaces failure modes. Used as the final step of `/quality-strategy` and standalone on existing strategies. |
+| `/test-strategy` | Produce the engineering-level companion that operationalises the quality strategy — what to investigate, in what order, and how to split human vs agent effort. |
+| `/test-strategy-review` | Meta-audit of a test strategy: would executing it move the quality strategy in the right direction, with the right priority? |
+| `/tooling-adequacy` | The explicit "how do we know?" check. Audits whether each learning need has an adequate *instrument* (to exercise/observe) and *oracle* (to judge), including cheap simulated/reference oracles worth building. |
 
 Planned (not yet implemented):
 
 | Skill | Purpose |
 |---|---|
-| `/test-strategy` | Produce the engineering-level companion document that operationalises the quality strategy. |
-| `/quality-check` | On-the-fly decision support. "This bug arrived — what does the strategy say?" |
-| `/risk-map-update` | Short pass to walk the risk map and re-rate after testing or stakeholder conversations. |
+| `/oracle-adequacy` | The "how do we know?" check for the quality strategy — audit the oracles behind its actual-state assessments. |
+| `/contradiction-check` | Cross-part contradiction detection for a strategy doc. |
+| `/operational-distillation` | TL;DR + triage rubric at the top of a strategy, so it's usable at a glance. |
+| `/priority-analysis` | Optional multi-stakeholder help prioritising the plan of work. |
+| `/feedback-synthesis` | Curate `.skill-feedback.md` notes into a maintainer-friendly summary. |
+| `/pre-read` | Standalone project digest. |
 
 ## Install
 
-```bash
-git clone https://github.com/tollens-ai/quality-strategy-skills
-cp -r quality-strategy-skills/skills/* ~/.claude/skills/
+This is a Claude Code plugin. Add the marketplace, then install:
+
+```
+/plugin marketplace add tollens-ai/quality-strategy-skills
+/plugin install quality-strategy@tollens
 ```
 
-Then in any project: `/quality-strategy` to start. Output goes to `quality/strategy.md` at the project root.
+Then in any project, start with `/quality-strategy`. Output goes to `quality/strategy.md` at the project root.
+
+Skills are also available namespaced (`/quality-strategy:test-strategy`, `/quality-strategy:quality-strategy-review`) — useful if a bare name ever collides with another plugin.
 
 ## What the skills will and won't do
 

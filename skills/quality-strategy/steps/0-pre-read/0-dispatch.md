@@ -22,9 +22,9 @@ What the project **claims** to be.
 
 > You are subagent A in a three-subagent pre-read for `/quality-strategy`. Your job is to digest what the project's documentation claims, so the downstream interview has a starting position for what the project says it is.
 >
-> First, read `<repo>/PHILOSOPHY.md` and `<repo>/skills/quality-strategy/SKILL.md` to ground yourself in what the strategy is doing.
+> First, read `$PLUGIN_ROOT/PHILOSOPHY.md` and `$PLUGIN_ROOT/skills/quality-strategy/SKILL.md` to ground yourself in what the strategy is doing.
 >
-> Then digest the project at `<project-path>`. Read README, top-level markdown, `docs/`, `CONTRIBUTING.md`, package files (`package.json`, `Cargo.toml`, `pyproject.toml`, etc.), and recent commit messages (~30).
+> Then digest the project at `$PROJECT_DIR`. Read README, top-level markdown, `docs/`, `CONTRIBUTING.md`, package files (`package.json`, `Cargo.toml`, `pyproject.toml`, etc.), and recent commit messages (~30).
 >
 > Surface, as **hypotheses** (not facts):
 > - Stated product purpose and scope.
@@ -44,9 +44,9 @@ What's mechanically there.
 
 > You are subagent B in a three-subagent pre-read for `/quality-strategy`. Your job is the mechanical structural map of the project — what files and modules exist, how they're organised, what infrastructure is in place. Subagent A is producing the docs digest separately; you are producing the structural one.
 >
-> First, read `<repo>/PHILOSOPHY.md` and `<repo>/skills/quality-strategy/SKILL.md` to ground yourself.
+> First, read `$PLUGIN_ROOT/PHILOSOPHY.md` and `$PLUGIN_ROOT/skills/quality-strategy/SKILL.md` to ground yourself.
 >
-> Then map the project at `<project-path>`:
+> Then map the project at `$PROJECT_DIR`:
 > - Module / package / directory structure with sizes (LOC, file counts).
 > - Languages and frameworks actually in use (concrete versions from lockfiles or imports).
 > - Test infrastructure: test count, framework, types of tests (unit/integration/e2e), location.
@@ -69,7 +69,7 @@ What shape the system has, and what dimensions that shape implies will matter do
 >
 > The pre-read is a **what-is** snapshot — describing the project as it actually is, not as anyone wants it to be.
 >
-> First, read `<repo>/PHILOSOPHY.md` and `<repo>/skills/quality-strategy/SKILL.md` to ground yourself.
+> First, read `$PLUGIN_ROOT/PHILOSOPHY.md` and `$PLUGIN_ROOT/skills/quality-strategy/SKILL.md` to ground yourself.
 >
 > Then read enough of the project to form architectural hypotheses. You don't need to understand every line — read for shape: layering, dependency direction, key abstractions, error-handling patterns, where the "interesting" or "load-bearing" code lives, which parts look mature vs scaffolded, which parts look unusually risky or unusually careful.
 >
@@ -142,6 +142,10 @@ The digest at `quality/pre-read.md`. **No section is appended to `quality/strate
 
 After the digest is in place, summarise back to the user in 5–7 lines: *"The pre-read found X, Y, Z in the docs; the code looks like A, B, C; the design suggests D, E, F may matter; and there are some discrepancies between docs and code, namely G and H. The few things I most want to confirm with you are P and Q."*
 
-Then **run the substantive checkpoint** (see SKILL.md → Substantive checkpoint between sub-steps). Even at this early stage, the user may have a smell about whether the digest captured the right things. Don't accept a quick "looks fine" — actively invite vague unease.
+Then run a **correctness check** — *not* the substantive checkpoint (that runs at step boundaries, not here). The pre-read is a *what-is* snapshot of hypotheses; at this stage you only want to catch **factual errors**, not engage with implications, priorities, or "does this feel right":
 
-Only after explicit, considered confirmation, ask: *"Ready to move into Step 1 (Context)?"* Do not proceed to sub-step 1.1 without that confirmation.
+> *"Skim this for anything factually wrong — a misread tech stack, a wrong test count, a component I mislabelled, a discrepancy I got backwards. I'm not asking yet whether it captures the right priorities — that's what the interview is for. Just: is anything here simply incorrect?"*
+
+Correct any factual errors the user flags — re-dispatch the relevant subagent if a digest section is materially wrong. Do **not** pull the user into implications or vague unease here; that engagement belongs at the Step 1+ step boundaries, where the substantive checkpoint runs on a complete chunk of strategy.
+
+Then ask: *"Ready to move into Step 1 (Context)?"* and proceed to sub-step 1.1.

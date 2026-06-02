@@ -103,4 +103,8 @@ For each H or M dimension:
 - <prior decisions, abandoned approaches, anything that wouldn't be visible from the repo>
 ```
 
-After writing, summarise back to the user in 3-4 lines (what's there, what's notably absent, anything surprising) and ask: *"Ready to move to sub-step 1 (Purpose)?"*
+After writing, summarise back to the user in 3-4 lines (what's there, what's notably absent, anything surprising). Then run a **correctness check** — at this stage you only want factual errors, not implications or priorities:
+
+> *"Skim this for anything factually wrong — a risk-map row I summarised incorrectly, test infrastructure I misread or missed, a non-goal I copied wrong. I'm not asking whether the priorities are right yet — just whether anything here is simply inaccurate."*
+
+Fix any factual errors (re-read the relevant strategy section if a risk-map summary is off). Then ask: *"Ready to move to sub-step 1 (Purpose)?"*

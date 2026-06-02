@@ -9,13 +9,22 @@ This skill produces `quality/test-strategy.md` — an engineering-level document
 
 The skill is short by design. /quality-strategy is the load-bearing piece — it produces the stakeholder analysis, dimensions, and risk map. /test-strategy transforms that into a plan of investigation. Most of the thinking is already in the strategy; the skill brings the right framings to the transformation.
 
+## Resolving file paths — do this first
+
+This skill is part of the `quality-strategy` plugin. Before anything else, resolve two absolute paths and use them throughout:
+
+- **PLUGIN_ROOT** — the plugin's install directory: `${CLAUDE_PLUGIN_ROOT}` (Claude Code expands this to an absolute path when it loads this file; read it off and note it down). Every file this skill references — `PHILOSOPHY.md`, `skills/test-strategy/FRAMINGS.md`, `skills/test-strategy/INDICATORS.md`, and the sub-step files under `skills/test-strategy/steps/` — lives under it.
+- **PROJECT_DIR** — the absolute path of the project you're building the test strategy for (normally the current working directory; confirm with the user if it's ambiguous).
+
+File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **Substitute the resolved absolute paths before you act on them** — both when you Read a file yourself (including the sub-step files) and when you put a path into a subagent brief. The Read tool does no variable expansion and resolves relative paths against the current working directory, not this skill's directory; a dispatched subagent inherits none of your context. So an unsubstituted placeholder or a bare relative path will fail — always pass fully-resolved absolute paths.
+
 ## Before you start
 
 Two prerequisites:
 
 1. **`quality/strategy.md` must exist** at the project root, completed at least through Part 6 (Risk Map). If it does not, stop and direct the user to `/quality-strategy` first. The test strategy cannot be derived from nothing — without a risk map, you'd be guessing where to invest effort, which is the opposite of what this skill is for.
 
-2. **Read `PHILOSOPHY.md`, `FRAMINGS.md`, and `INDICATORS.md`.** PHILOSOPHY.md grounds the framework. FRAMINGS.md captures ten framings that counter agent defaults — without these, /test-strategy will drift toward producing a test plan rather than a test strategy. INDICATORS.md captures the five outcome-oriented indicators (Direction / Priority / Sufficiency / Feasibility / Honesty) that the produced strategy will be reviewed against; knowing these up front shapes the work. None of these are optional.
+2. **Read `$PLUGIN_ROOT/PHILOSOPHY.md`, `$PLUGIN_ROOT/skills/test-strategy/FRAMINGS.md`, and `$PLUGIN_ROOT/skills/test-strategy/INDICATORS.md`.** PHILOSOPHY.md grounds the framework. FRAMINGS.md captures ten framings that counter agent defaults — without these, /test-strategy will drift toward producing a test plan rather than a test strategy. INDICATORS.md captures the five outcome-oriented indicators (Direction / Priority / Sufficiency / Feasibility / Honesty) that the produced strategy will be reviewed against; knowing these up front shapes the work. None of these are optional.
 
 ## How this skill is structured
 
@@ -27,6 +36,7 @@ Six sub-steps, each in its own file under `steps/`. Run them strictly in order.
 | 1 — Purpose | `steps/1-purpose.md` | The opening section of the test strategy — what we're investigating and why |
 | 2 — Principles | `steps/2-principles.md` | Six governing principles, stated and confirmed (or deliberately tweaked) |
 | 3 — Learning needs | `steps/3-learning-needs.md` | Impact-tiered list of information needs, each with question + methods + exit criterion |
+| 3.5 — Tooling & oracle adequacy | invoke `/tooling-adequacy` (separate skill) | Per learning need: is the *instrument* (exercise/observe) and the *oracle* (judge correctness) adequate? Produces build items that gate sub-step 5 |
 | 4 — Allocation | `steps/4-allocation.md` | Hypothesis allocation table with confidence column; two-voice exchange between agent and user |
 | 5 — Closing | `steps/5-closing.md` | What we're not testing + update protocol (including allocation re-rating) |
 
@@ -37,6 +47,12 @@ Six sub-steps, each in its own file under `steps/`. Run them strictly in order.
 3. **At the end of each sub-step**, run its DONE checklist. If a check fails, return to the work; do not proceed.
 4. **Write output incrementally** to `quality/test-strategy.md`. If a session is interrupted, what's already written is durable.
 5. **At the end of sub-step 5**, summarise the whole produced doc back to the user and check for unease before declaring complete. Same substantive-checkpoint pattern as /quality-strategy, but only at the very end — sub-step boundaries get light wrap-ups.
+
+## The four-question frame, and where Q2 runs
+
+This skill works through the four quality questions (introduced in sub-step 1). It is how the team answers **"is what we have actually good?"** (Q3) — by planning the investigation. Doing that honestly requires **Q2 — "how do we know?"** to be settled first: the instruments and oracles that produce a finding must themselves be adequate, or the finding is built on sand.
+
+So after sub-step 3 (learning needs) and before sub-step 4 (allocation), **invoke `/tooling-adequacy`** on the learning-needs list. It assesses, per learning need, whether the *instrument* (to exercise/observe) and the *oracle* (to judge correctness) are adequate, and returns any **build items** — instrument or oracle gaps, including simulated/reference oracles worth constructing. Carry those build items forward to sub-step 5, which marks the affected learning needs as blocked-on-tooling rather than papering over them.
 
 ## Pause and resume
 
