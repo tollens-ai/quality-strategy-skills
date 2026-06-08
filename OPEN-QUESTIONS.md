@@ -602,4 +602,22 @@ These record the calls made while shipping Phase 2 (the standalone-skill extract
 
 ---
 
+# Phase 3/4 implementation notes (qss-v3-overnight run)
+
+These record what the overnight run actually landed for the per-stakeholder + mechanical-anchor redesign, and where it deliberately stopped short.
+
+---
+
+## R1 decomposition: dimension-rating sealed + mechanical anchors landed; per-stakeholder risk-map deferred
+
+**What we did.** Landed Phase 4 — the mechanical anchors at sub-step 5.4: **H** iff the dimension's failure mode is a Dealbreaker for ≥1 stakeholder; **M** iff a non-Dealbreaker Good Enough/Delight bar references it (and no Dealbreaker does); **None** iff no bar at any lens references it; deliberately **no L** at this step. And landed the Phase-3 merge step: per-stakeholder rating runs in a **sealed-context subagent** that writes `quality/.scratch/5.4-dimension-rating.md`; the orchestrator dispatches / collects / merges / presents and does not grade; divergence between stakeholders is surfaced to the user as a one-team commitment decision (*"Stakeholder A: H Dealbreaker; Stakeholder B: None — you have one team, what does it commit to?"*) and the resolution is recorded. We propagated the no-L ripple across the rest of the skill: 5.5 (distribution check reframed for H/M/None), SKILL.md (the sub-step table and the sealed-dispatch / scratch-file list now include 5.4), Step 7 (the former-L "aware-but-not-investing" items are recorded as plan-of-work decisions, not ratings), and `/quality-strategy-review` (distribution check re-scoped to the H/M/None rating axis, the H-requires-Dealbreaker rule tightened, and `5.4-dimension-rating.md` added to the required scratch-file audit). **Deferred:** the full per-stakeholder decomposition of the **risk map** (sub-steps 6.1/6.2/6.3) — required level, actual level, and gap are still assessed at the merged-dimension level, not per-stakeholder-then-merged.
+
+**Why.** 5.4 is the exact place v1 drifted to middle ratings (the REVIEW-REPORT R1 finding named it), so it was the highest-value, most self-contained piece to seal first. The risk map operates coherently on the merged H/M/None ratings exactly as it did before, so doing 5.4 alone leaves the skill internally consistent rather than half-converted. Decomposing the risk map per-stakeholder hastily overnight risked an incoherent half-sealed skill — the design sized that work as multi-day — and honesty about a clean boundary beats a broken skill.
+
+**What would change our mind.** If real runs show the merged-level risk map hides the same cross-stakeholder divergence at the required/actual stage that the 5.4 merge now surfaces at the impact stage — i.e. the divergence that matters most reappears in 6.x and is lost to early merging there too.
+
+**How we'd know.** On real runs, count how often a single merged required/actual level in Part 6 papers over a genuine stakeholder disagreement the user would have decided differently had it been surfaced — as 5.4 now surfaces it for impact. If that's common, the risk map needs the same per-stakeholder-then-merge treatment.
+
+---
+
 *Add new items to this file when we make calls under uncertainty. Revisit after each real-world run.*
