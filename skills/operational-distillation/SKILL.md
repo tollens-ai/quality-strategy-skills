@@ -32,7 +32,8 @@ File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **
 ## What you need
 
 - **Grounding.** Read `$PLUGIN_ROOT/PHILOSOPHY.md` — in particular the indicators this skill serves: *quick re-orientation* and *decision support at the edges*.
-- **The strategy.** Read `$PROJECT_DIR/quality/strategy.md` end-to-end. You cannot distill what you haven't read; a TL;DR written from the headings alone will be wrong.
+- **The strategy.** Read the target doc end-to-end. You cannot distill what you haven't read; a TL;DR written from the headings alone will be wrong.
+- **Which doc.** By default this skill distills `$PROJECT_DIR/quality/strategy.md` (the quality strategy). When pointed at `$PROJECT_DIR/quality/test-strategy.md` — or when the user or orchestrator names it — distill that doc instead, and adapt the extraction and insertion accordingly (see the test-strategy variant in step 1 and the doc-agnostic Output template). If which doc to distill is ambiguous, ask.
 
 ## The work, in order
 
@@ -45,6 +46,16 @@ From the full doc, pull only what a returning reader most needs:
 - **Where we actually are** — the hottest risk-map rows: largest gaps in highest-impact dimensions, and the most consequential Unknowns (Part 6).
 - **First moves** — the plan's earliest / blocking actions (Part 7, Phase 0–1).
 - **What's deliberately out** — the one or two non-goals most likely to be mistaken for gaps (Part 4).
+
+**Test-strategy variant.** When the target is `quality/test-strategy.md`, the doc has a different shape (purpose / principles / impact-tiered learning needs / allocation / closing), so pull instead:
+
+- **Purpose** — what this strategy investigates and which quality strategy it operationalises.
+- **Tier-1 learning needs** — the highest-impact information needs and the questions they answer.
+- **Allocation hot spots** — the rows where effort concentrates, plus any low-confidence or "try-and-see" rows the reader should treat as provisional.
+- **Gated / blocked sections** — any learning needs marked blocked-on-tooling.
+- **Key non-targets** — the one or two things deliberately not being tested, most likely to be mistaken for gaps.
+
+The quality-strategy extraction above is the default; use this variant only when distilling a test strategy.
 
 ### 2. Write the Operational TL;DR (6–10 lines)
 
@@ -59,6 +70,8 @@ A reader hits a new thing — a bug report, a feature ask, a complaint, an odd r
 - **Route** — testing question → `/test-strategy` learning need; stakeholder question → confirm the bar; fixing → the plan of work.
 - **When in doubt** — the one or two questions that resolve most ambiguity for *this* project.
 
+For a test strategy, the rubric maps a new finding to a **learning need / tier** (rather than a quality dimension): which learning need does it bear on, is that Tier 1, and does it change the allocation or exit criteria?
+
 Keep it to a page. It's a rubric, not a runbook.
 
 ### 4. (Optional) operator cheat sheet
@@ -67,7 +80,7 @@ Only if the project has recurring operational decisions or commands worth a quic
 
 ### 5. Place it at the top and check it against the body
 
-Insert the distillation immediately after the title and `Last updated` line, above the `## Strategy job` paragraph and Part 1. Then re-read it against the body: every claim in the TL;DR and rubric must be supported by the body, and nothing load-bearing in the body (a Dealbreaker, the hottest risk) should be absent from the TL;DR. The distillation is a faithful view — if it and the body disagree, the body wins and the distillation is wrong.
+Insert the distillation immediately after the title / `Last updated` line, above the first substantive section — the `## Strategy job` paragraph and Part 1 for a quality strategy, or the equivalent top section (purpose) for a test strategy. Then re-read it against the body: every claim in the TL;DR and rubric must be supported by the body, and nothing load-bearing in the body (a Dealbreaker, the hottest risk) should be absent from the TL;DR. The distillation is a faithful view — if it and the body disagree, the body wins and the distillation is wrong.
 
 ## Push back when
 
@@ -82,15 +95,15 @@ Insert the distillation immediately after the title and `Last updated` line, abo
 - [ ] A one-page triage rubric is present and usable to triage a new finding without escalation.
 - [ ] The operator cheat sheet is either present with real content or deliberately omitted.
 - [ ] Every distillation claim is supported by the body, and no load-bearing body item is missing from the TL;DR.
-- [ ] The distillation is placed above `## Strategy job` and Part 1, not buried.
-- [ ] (When run from `/quality-strategy`) a scratch file is written recording what was extracted (see Output).
+- [ ] The distillation is placed above the first substantive section (`## Strategy job` and Part 1 for a quality strategy, or the top section for a test strategy), not buried.
+- [ ] (When run from `/quality-strategy` against the quality strategy) a scratch file is written recording what was extracted (see Output). A standalone test-strategy run needs no scratch file.
 
 ## Output
 
-The TL;DR + triage rubric (+ optional cheat sheet) inserted at the top of `$PROJECT_DIR/quality/strategy.md`:
+The TL;DR + triage rubric (+ optional cheat sheet) inserted at the top of the target doc (`$PROJECT_DIR/quality/strategy.md` by default, or `$PROJECT_DIR/quality/test-strategy.md` when distilling a test strategy):
 
 ```markdown
-# Quality Strategy: <project name>
+# <Quality | Test> Strategy: <project name>
 
 *Last updated: <YYYY-MM-DD>*
 
@@ -118,14 +131,13 @@ The TL;DR + triage rubric (+ optional cheat sheet) inserted at the top of `$PROJ
 
 <recurring decisions / commands / if-X-then-Y, or omitted>
 
-## Strategy job
+<!-- first substantive section of the existing doc, unchanged -->
+## Strategy job   <!-- quality strategy; for a test strategy this is the Purpose section instead -->
 
-<existing paragraph>
-
-## Part 1: Context
+<existing top section>
 …
 ```
 
-When run from `/quality-strategy`, also write a scratch file at `$PROJECT_DIR/quality/.scratch/7.3-operational-distillation.md` recording which Parts the distillation drew from (the sealed-dispatch scratch file the review skill audits — see `/quality-strategy` SKILL.md, "Sealed-context dispatch and scratch files").
+The insertion anchor is generic: place the distillation immediately after the title / `Last updated` line, above the first substantive section — the `## Strategy job` paragraph (then Part 1) for a quality strategy, or the equivalent top section (purpose) for a test strategy.
 
-Standalone, insert the distillation into the doc as above and confirm to the user what was added.
+When run from `/quality-strategy` against the quality strategy, also write a scratch file at `$PROJECT_DIR/quality/.scratch/7.3-operational-distillation.md` recording which Parts the distillation drew from (the sealed-dispatch scratch file the review skill audits — see `/quality-strategy` SKILL.md, "Sealed-context dispatch and scratch files"). A standalone run — whether against the quality or the test strategy — needs no orchestrator scratch file: insert the distillation into the doc as above and confirm to the user what was added.
