@@ -16,11 +16,12 @@ Read all of Part 5 (5.3's final inventory + 5.4's ratings) from `quality/strateg
 
 ### Check 1 — Distribution
 
-Count the ratings by category. Push back on:
+Count the ratings by category (H / M / None). Push back on:
 
-- **More than 50% rated High.** *"X of Y dimensions are High. That's a lot — is everything actually critical, or should some be Medium? A rating distribution where most things are High loses information."*
-- **No None ratings at all in an early-stage project.** *"None is an explicit decision; in an alpha or early release there are usually things actively excluded. Are we sure nothing is None?"*
-- **No L ratings either.** Often a sign that the user is rating from "what would be nice" rather than "what we'll invest in."
+- **More than 50% rated High.** *"X of Y dimensions are High — meaning more than half have a stakeholder Dealbreaker behind them. Is everything truly a dealbreaker, or do some only have a Good Enough / Delight bar (Medium)? A distribution where most things are High loses information."*
+- **No None ratings at all in an early-stage project.** *"None is an explicit decision; in an alpha or early release there are usually things actively excluded. Are we sure no dimension is unreferenced by any stakeholder bar?"*
+
+Because 5.4's **H** now requires a real Dealbreaker bar, rating inflation is structurally limited — you can't push something to High without a stakeholder who demands it. Note too that "aware of it but not investing right now" is **not** a rating here (there is no L): it's a Step 7 plan-of-work decision. Its absence from the ratings is expected, not a gap — don't flag it.
 
 ### Check 2 — Stakeholder coverage
 
@@ -50,8 +51,8 @@ Walk Part 4's non-goals. For each:
 
 Walk Part 5's ratings:
 
-- Every H rating should have a named stakeholder bar in its rationale.
-- Every None rating should have explicit reasoning (not "we forgot about it").
+- Every H rating should cite a named stakeholder **Dealbreaker** bar in its rationale.
+- Every None rating means **no stakeholder bar at any lens references the dimension** — that confirmation *is* the reasoning. Check it's a confirmed None, not a "we forgot about it" gap.
 
 Surface any missing.
 
@@ -84,7 +85,7 @@ What you must not do:
 - [ ] Stakeholder coverage check has been run; each first-release stakeholder has at least one H or M dimension touching their bars (or a coverage gap is flagged as `OPEN QUESTION`).
 - [ ] Cross-stakeholder tensions have been flagged where they exist.
 - [ ] Non-goal alignment has been verified; any mismatches surfaced and resolved.
-- [ ] Every H rating has a named stakeholder bar; every None rating has explicit reasoning.
+- [ ] Every H rating cites a named stakeholder Dealbreaker bar; every None rating is a confirmed "no stakeholder bar references it" (not a forgotten gap).
 - [ ] Any deferred items are recorded as `OPEN QUESTION:`.
 - [ ] The user has run the **step-boundary substantive checkpoint** (see SKILL.md), evaluating the whole step's output (not just this final sub-step), including any rethinks of earlier steps. Explicit, considered confirmation — not silence, not a non-committal response.
 
