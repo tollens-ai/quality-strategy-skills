@@ -23,7 +23,7 @@ This section makes the testing scope explicit by saying what's *out*. Three sour
 
 1. **Inherited from quality strategy non-goals.** If the strategy says feature X is a non-goal for this release, we don't test feature X. Pull these in verbatim with a back-reference to Part 4.
 
-2. **Dimensions rated None or Low.** Quality dimensions the strategy decided don't matter at this level — we don't invest test effort here either. Reference the dimension rating, not just the dimension name.
+2. **Dimensions rated None, or deprioritised as "aware, not investing this release."** Quality dimensions the strategy decided don't matter at this level, or consciously deferred in its plan of work — we don't invest test effort here either. Reference the dimension rating (or the deferral note), not just the dimension name.
 
 3. **Surfaced during learning-needs derivation.** Things that came up in sub-step 3 as "we considered investigating this but it's not in scope because..." Capture explicitly so it's recorded for future reviewers.
 
@@ -92,7 +92,7 @@ The pattern (mirrored from /quality-strategy SKILL.md):
 
 ## Push back when
 
-- The user wants to merge "what we're not testing" into the quality strategy's non-goals section. *"There's overlap, but the test strategy's not-testing list is broader — it includes dimensions rated Low and items surfaced during learning-needs derivation. Worth keeping here even if it cross-references Part 4."*
+- The user wants to merge "what we're not testing" into the quality strategy's non-goals section. *"There's overlap, but the test strategy's not-testing list is broader — it includes dimensions the quality strategy deprioritised — rated None or marked aware-not-investing — and items surfaced during learning-needs derivation. Worth keeping here even if it cross-references Part 4."*
 - The user wants to drop the update protocol because "we'll just update it as needed." *"In practice, ad-hoc updates don't happen — the strategy goes stale. The protocol's job is to name specific triggers. Even rough is better than absent."*
 - The user wants to add a coverage target. *"That's a proxy. What quality concern is the coverage standing in for? Let's name that directly."* See FRAMINGS.md #8.
 - The user accepts the substantive checkpoint with "looks good." Run the smell-detection follow-up: *"What's making it 'looks good' rather than 'yes'? Even a vague feeling is worth a minute."*

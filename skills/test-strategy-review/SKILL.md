@@ -105,7 +105,7 @@ Use the `Agent` tool with two calls in a single message.
 >
 > While walking, also check: does the test strategy contradict the quality strategy anywhere? Examples:
 > - Test strategy plans investigation in an area the strategy's Part 4 says is a non-goal.
-> - Test strategy treats a dimension as priority that the strategy rated Low or None.
+> - Test strategy treats a dimension as priority that the strategy rated None, deferred as "aware, not investing this release", or listed as a non-goal.
 > - Allocation honours principle 6 (automate repeatable, humanise judgmental) — judgement-heavy items don't go to agents alone, repeatable mechanical items don't go to humans alone.
 > - Calibration triggers in update protocol match calibration items in allocation.
 > - Voice consistent across sections (sign of a strategy not rushed).

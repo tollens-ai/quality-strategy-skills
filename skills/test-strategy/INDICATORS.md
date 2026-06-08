@@ -14,7 +14,7 @@ Every learning need traces to closing a gap, resolving an unknown, or validating
 
 **Failure modes:**
 - Learning needs that don't trace to the risk map. Drift toward "what we thought worth testing" rather than "what the strategy says matters."
-- Investigation aimed at things rated None or Low, or at items in the non-goals.
+- Investigation aimed at things rated None (or deprioritised in the plan of work as "aware, not investing this release"), or at items in the non-goals.
 - Learning needs whose answer wouldn't update the risk map — purely informational with no decision attached.
 
 ---
