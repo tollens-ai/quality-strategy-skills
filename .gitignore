@@ -4,3 +4,7 @@
 *~
 .vscode/
 .idea/
+
+# Host-side run orchestration artifacts (ephemeral; not part of the skill pack)
+.spike-callbacks/
+qss-v2-phase2-completion-callback
