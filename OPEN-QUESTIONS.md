@@ -344,17 +344,15 @@ These are the design decisions worked out across the May–June 2026 design sess
 
 ---
 
-## Path resolution + self-contained skill directories
+## Path resolution + plugin-root grounding
 
-*(Provisional — being confirmed by the skill-file-resolution experiment run this session; finalise once `/tmp/skill-exp/skill-file-resolution-findings.md` lands.)*
+**What we did.** Ship the whole pack as a single Claude Code plugin (`.claude-plugin/plugin.json` names it `quality-strategy`; `.claude-plugin/marketplace.json` lists it with `source: "."`, so the entire repo is the plugin, not the `skills/*` subtree alone). Inside SKILL.md bodies, `${CLAUDE_PLUGIN_ROOT}` expands to the plugin root — i.e. the repo root — so a skill reads shared grounding via `$PLUGIN_ROOT/PHILOSOPHY.md` (one repo-root copy, not duplicated into each skill dir) and cross-skill files via `$PLUGIN_ROOT/skills/<skill>/...` (`FRAMINGS.md`/`INDICATORS.md` live once inside `skills/test-strategy/` and are shared by pointer — the review skills and `/oracle-adequacy` point at them). There is still no `$SKILL_DIR` runtime variable: the design doc's "resolve `$SKILL_DIR`/`$PROJECT_DIR`" is implemented as the orchestrator resolving its own absolute plugin-root path (off `${CLAUDE_PLUGIN_ROOT}`) and the project path once at start, then substituting the literal absolute paths into every subagent brief before dispatch (a sealed subagent can't expand a token it's handed). This resolved to option (b) the earlier text anticipated — a single shared plugin-root grounding copy — rather than per-skill duplication.
 
-**What we did.** Established that there is no `$SKILL_DIR` runtime variable; the design doc's "resolve `$SKILL_DIR`/`$PROJECT_DIR`" is implemented as: the orchestrator resolves its own absolute skill-directory path and the project path once at start, then substitutes the literal absolute paths into every subagent brief before dispatch (a sealed subagent can't expand a token it's handed). Each skill directory is made self-contained — the grounding files it references (`PHILOSOPHY.md`; plus `FRAMINGS.md`/`INDICATORS.md` for the test skills) travel inside the skill dir, because only `skills/*` is copied on install and a repo-root file never reaches `~/.claude/skills/`.
+**Why.** v1 briefs referenced `<repo>/PHILOSOPHY.md`; `<repo>` never resolved when installed at `~/.claude/skills/`, and PHILOSOPHY.md wasn't even present there. Two failure modes compounded: an unresolved token *and* an absent file. Shipping the repo as one plugin fixes both — `${CLAUDE_PLUGIN_ROOT}` is expanded by Claude Code at load time to a real absolute path, and the grounding files travel with the plugin at known relative locations under that root, so one canonical copy serves every skill.
 
-**Why.** v1 briefs referenced `<repo>/PHILOSOPHY.md`; `<repo>` never resolved when installed at `~/.claude/skills/`, and PHILOSOPHY.md wasn't even present there. Two failure modes compounded: an unresolved token *and* an absent file.
+**What would change our mind.** If a real install fails to expand `${CLAUDE_PLUGIN_ROOT}` in some SKILL.md bodies (so the orchestrator can't read off a usable plugin-root path and substitution breaks). If the shared-grounding-by-pointer model breaks because an install copies only part of the repo (e.g. just `skills/*`), leaving `$PLUGIN_ROOT/PHILOSOPHY.md` or a cross-skill `$PLUGIN_ROOT/skills/<skill>/...` target absent — which would push back toward per-skill duplication.
 
-**What would change our mind.** The running experiment may show (a) the orchestrator can't reliably determine its own absolute path — which would undermine substitution and force a different mechanism; or (b) the Claude Code plugin model reliably lets multiple skills share one plugin-root grounding file after a real install — which would replace per-skill duplication with a single shared copy (ship-the-pack-as-a-plugin).
-
-**How we'd know.** The experiment's findings file answers both directly (Q1 and Q4/Q5). After that, a real `cp`-install run of `/test-strategy` on a workshop repo confirms briefs resolve and grounding is found.
+**How we'd know.** A real plugin install + run of `/quality-strategy` and `/test-strategy` on a workshop repo: confirm `${CLAUDE_PLUGIN_ROOT}` expands, briefs resolve to absolute paths, and every `$PLUGIN_ROOT/...` grounding and cross-skill target is found at its expected location.
 
 ---
 
