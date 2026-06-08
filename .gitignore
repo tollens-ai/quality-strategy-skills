@@ -8,3 +8,6 @@
 # Host-side run orchestration artifacts (ephemeral; not part of the skill pack)
 .spike-callbacks/
 qss-v2-phase2-completion-callback
+
+# Harness scheduler lock (ephemeral)
+.claude/scheduled_tasks.lock
