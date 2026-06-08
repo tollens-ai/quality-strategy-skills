@@ -90,14 +90,14 @@ Use the `Agent` tool with three calls in a single message.
 >
 > 1. **Non-goals not empty.** Part 4 has at least 3 non-goals, each with a reason.
 > 2. **No percentages in confidence ratings.** Grep for "%" in confidence contexts (Parts 5 and 6). Confidences should be H/M/L only.
-> 3. **H ratings grounded.** Every H rating in Part 5 has a rationale that names a stakeholder bar from Part 3 or a release purpose from Part 2.
+> 3. **Ratings grounded in the anchor.** Ratings use the H/M/None model. Every H rating's rationale names a stakeholder **Dealbreaker** bar from Part 3; every M rating's rationale names a non-Dealbreaker bar (Good Enough or Delight). A rating that doesn't cite the bar the anchor rests on is a FAIL.
 > 4. **None ratings reasoned.** Every None rating in Part 5 has explicit reasoning, not blank.
 > 5. **Three lenses populated.** Every stakeholder in Part 3 has Delight, Good Enough, and Dealbreaker captured for the first release.
 > 6. **Risk map covers all H/M dimensions.** Every dimension rated H or M in Part 5 has a row in Part 6.
 > 7. **Risk map confidence on both sides.** Every Part 6 row has confidence-in-required and confidence-in-actual (or "—" for Unknown).
 > 8. **Confidence vocabulary correct.** All confidences are H/M/L (or "—" for Unknown actuals).
 > 9. **Unknowns have resolution notes.** Every Unknown actual in Part 6 has a "to resolve" note (test / ask / review / instrument / build).
-> 10. **Distribution sanity.** Flag if more than 50% of dimensions are H, or if 100% are H/M with zero L/None entries. (Aligned with sub-step 5.5's threshold.)
+> 10. **Distribution sanity.** Ratings use the H/M/None model (no L). Flag if more than 50% of dimensions are H, or if there are zero None entries where some are expected. (Aligned with sub-step 5.5's threshold.)
 > 11. **Actions classified.** Every Part 7 action is classified as testing / stakeholder / fixing.
 > 12. **Plan has phases.** Plan of work in Part 7 has distinct phases; Phase 0 (blockers) is either populated or explicitly empty with reasoning.
 > 13. **Pre-read sources cited.** Sub-step output sections cite pre-read sources where the agent did pre-read work.
@@ -113,6 +113,7 @@ Use the `Agent` tool with three calls in a single message.
 >
 > - **Pre-read** — if `$PROJECT_DIR/quality/pre-read.md` exists, expect `0-pre-read-*.md` (e.g. `0-pre-read-docs.md`, `0-pre-read-code.md`, `0-pre-read-design.md`).
 > - **Dimension scout** — if Part 5 is present, expect `5.1-dimension-scout.md`.
+> - **Dimension rating** — if Part 5 dimension ratings are present, expect `5.4-dimension-rating.md`. A missing `5.4-dimension-rating.md` when Part 5 ratings exist is a **FAIL** — the rating dispatch was silently skipped or fabricated.
 > - **Oracle adequacy (Q2)** — if Part 6's actual-state assessment is present, expect `6.2-oracle-adequacy.md`.
 > - **Step-boundary contradiction checks** — for EACH completed step boundary the doc has reached, expect a `<boundary>-contradiction-check.md`. The boundaries are 1.5, 2.1, 3.2, 4.1, 5.5, 6.3, 7.3 — i.e. for each Part present in the doc, the corresponding boundary check should have run (Part 1 → 1.5, Part 2 → 2.1, Part 3 → 3.2, Part 4 → 4.1, Part 5 → 5.5, Part 6 → 6.3, Part 7 → 7.3). A missing boundary contradiction-check scratch file for a Part that IS present is a **FAIL** — a required dispatch was silently skipped — regardless of whether the strategy claims it.
 > - **Distillation** — if the Operational TL;DR / triage rubric is present at the top of the doc, expect `7.3-operational-distillation.md`.
@@ -164,7 +165,7 @@ Use the `Agent` tool with three calls in a single message.
 > - **Release purpose ↔ rating distribution.** Does the rating distribution actually reflect what the release is for? An alpha release for "test the core technique" should have very different ratings from a GA release. If the release purpose says "test the technique" but accessibility is rated High, something is off.
 > - **Internal contradictions across the doc.** Anywhere in the strategy where two claims appear to contradict each other, or where one part assumes something another part denies. Examples: a stakeholder dealbreaker in Part 3 that contradicts a non-goal in Part 4; a workflow described in Part 1 that the plan of work in Part 7 implicitly assumes is different.
 > - **Coherence across releases.** If sub-steps mention future releases (Part 2's roadmap, future-release stakeholder notes in 3.1), do those mentions hang together — or do different parts assume different futures?
-> - **Voice and confidence consistency.** Are confidence levels expressed consistently across the doc, or does Part 5 use H/M/L while Part 6 quietly uses different vocabulary? Does the doc speak with a coherent voice, or do the writing patterns shift in ways that suggest the strategy was rushed in some sections?
+> - **Voice and confidence consistency.** Two separate axes must each stay internally consistent: **confidence** is H/M/L across Parts 5 and 6, and dimension **ratings** are H/M/None (no L). Are confidence levels expressed consistently across the doc, or does one Part quietly use different confidence vocabulary than another? Does the doc speak with a coherent voice, or do the writing patterns shift in ways that suggest the strategy was rushed in some sections?
 >
 > If you spot something the per-sub-step DONE checklists *should* have caught (e.g. a Part 5 H rating with no stakeholder bar in its rationale), flag it as a "backstop catch" — it indicates the writing process didn't enforce its own gates, which is itself useful information.
 >
