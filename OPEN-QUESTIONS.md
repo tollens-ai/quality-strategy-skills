@@ -678,4 +678,22 @@ Findings from the 10-persona conversational test (`runs/qss-v3-overnight/`) that
 
 ---
 
+# Stage 4 — ship-prep decisions (qss-v3-shipprep)
+
+Calls made while preparing the pack for public alpha. Full reasoning in `runs/qss-v3-shipprep/`.
+
+---
+
+## Leak-cleanup is a review-time job, not a producer prohibition (A1 rework)
+
+**What we did.** The first cut of the leak fix (a `d58caa1` SKILL.md block) loaded the *producing* pass with a list of don'ts — "do not narrate dispatches / turn refs / scratch in either channel." We reverted that approach. The producing pass is now told only to write the finding, not narrate the machinery; the actual stripping of any leaked dispatch/scratch narration, append bookkeeping, turn-lineage refs, and inferred-as-scanned lines happens **at review time** on text already written. Three review surfaces share it: a light scan at intermediate sub-step wrap-ups, a thorough scan of the just-written Part at each step boundary (pattern item 0b), and the final `/quality-strategy-review` check 21 as the whole-doc backstop. The template-line removal (A1b, `499f394`) and the strengthened review check 21 (A1c, `99fed70`) are kept — neither is a producer prohibition.
+
+**Why.** Per the adjudication: giving the producing agent a prohibition list is stressful and likely degrades the real analytical work ("two more non-task things to worry about"), and it didn't reliably catch the leak anyway (the original leak was found by the critic, not the skill's self-review). Cleaning at review — where the doc is being read back Part-by-Part and then whole — is both lighter on the producer and more thorough, and it matches how the skill already works (it reviews each subsection at its boundary as well as the whole doc at the end).
+
+**What would change our mind.** If review-time cleanup misses leaks that a producer-side rule would have caught — i.e. the orchestrator strips its *own* narration unreliably at the boundary, so leaks survive to the final review or past it. Or if the step-boundary scan adds enough overhead that boundaries start getting skipped.
+
+**How we'd know.** On real runs, grep produced `strategy.md` files for the leak patterns (dispatch/scratch narration, `turn-NN`, "scratch would be") after the strategy is declared done. If they persist, the review-time-only model is too weak and a light producer-side nudge (not a prohibition list) may be needed after all. The qss-v3-shipprep V2 validation run is the first such check.
+
+---
+
 *Add new items to this file when we make calls under uncertainty. Revisit after each real-world run.*

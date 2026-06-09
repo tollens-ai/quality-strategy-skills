@@ -50,13 +50,7 @@ Wherever this skill does substantive analytical work via a subagent — the pre-
 
 **Process-note leak prevention.** Orchestrator meta-observations about *the skill itself* (an awkward step, a suspected bug, phrasing that didn't land) go to `$PROJECT_DIR/.skill-feedback.md` only — never into `quality/strategy.md`. The strategy doc reads as an authored artifact, not a transcript of the skill running.
 
-The same discipline applies to the *machinery* of running the skill, and it applies to **both** channels — the user-facing conversation and `quality/strategy.md`. None of the following may leak into either:
-
-- **Dispatch / scratch narration** — e.g. `[ran <dispatch> inline]`, "Subagent dispatched: …", "scratch would be `quality/.scratch/…`". The user is shown the *finding or question*, not the mechanism that produced it.
-- **Append / orchestration bookkeeping** — e.g. "I'll hold off appending Part 4 until the user confirms". Do the bookkeeping silently; don't narrate it.
-- **Sub-step / turn lineage references** — e.g. "corrected, turn-23", "split out at 5.2", "the turn-22 binding test". The strategy carries no provenance, lineage, or turn refs; it reads as authored strategy content.
-
-These are *presentation* rules. They do not change what work is done or which scratch files get written — every sealed dispatch still runs and still writes its scratch file, and `/quality-strategy-review`'s scratch-file audit still reads those files on disk. What changes is only what the user sees and what lands in the doc: the user-facing turns show the finding or question, not the machinery, and `quality/strategy.md` contains only authored strategy content.
+The *machinery* of running the skill — dispatch/scratch narration ("Subagent dispatched: …", "[ran 5.4 inline]", "scratch would be `quality/.scratch/…`"), append bookkeeping, sub-step/turn lineage refs ("corrected, turn-23", "split out at 5.2") — likewise has no place in `quality/strategy.md`. **This is cleaned up at review time, not by loading the writing pass with a list of don'ts.** Write the finding or the question; the step-boundary review and the final `/quality-strategy-review` strip any machinery that slipped through (see "Presentation cleanup at review points" below). The reasoning: a producing pass already carrying the real analytical work shouldn't also be juggling a prohibition list — that taxes the work without reliably catching the leak. Catching it where the doc is reviewed is both lighter on the producer and more thorough.
 
 ## Scope of this skill — first release only
 
@@ -126,6 +120,8 @@ This is the single most important user-facing pattern in the skill. The strategy
 
 0. **Run the contradiction check first (sealed dispatch).** Before summarising, dispatch **`/contradiction-check`** as a sealed-context subagent on the doc *as written so far*. It mechanically cross-references the Parts for internal contradictions — a Part-3 dealbreaker a Part-4 non-goal excludes, an H/M dimension with no risk-map row, a high-confidence actual whose evidence is "none yet". This is a *different* failure mode from the substantive checkpoint below: the checkpoint catches "this feels wrong to me" (human, by feel); the contradiction check catches "Part X denies what Part Y asserts" (mechanical, by cross-reference). Fold any contradictions it returns into the summary so the user sees them at the checkpoint. The dispatch writes its scratch file (see "Sealed-context dispatch and scratch files"). A clean result is a real result — say so and move on.
 
+0b. **Strip presentation leakage from this step's Part(s).** Re-read the section(s) this step just appended to `quality/strategy.md` and remove machinery that isn't strategy — see "Presentation cleanup at review points" below for the patterns. This is review-time cleanup of the freshly-written Part, the per-subsection counterpart to the final whole-doc review.
+
 1. Summarise the *whole step's* output back to the user in 5–8 lines, hitting the consequential decisions across all sub-steps in the step — plus any contradictions the check surfaced. Not a recap of process — a recap of decisions.
 
 2. Run the substantive checkpoint:
@@ -153,6 +149,25 @@ This is the single most important user-facing pattern in the skill. The strategy
 ### Per-sub-step (intermediate) wrap-up
 
 At the end of intermediate sub-steps (1.1–1.4, 3.1, 5.1–5.4, 6.1–6.2, 7.1–7.2), do a **light wrap-up only**: summarise back in 2–4 lines, ask *"Any quick concerns, or ready to continue?"* — get a yes, move on. Save the deep engagement for the step boundary. The user can't really evaluate intermediate sub-steps in isolation anyway — full evaluation needs the whole step in view.
+
+While you're here, give the sub-section you just appended a quick presentation-leakage scan (see below) — it's cheaper to strip a stray "scratch would be…" line now than to find a Part full of them at the step boundary. Keep this light; the thorough pass is the step-boundary one.
+
+## Presentation cleanup at review points
+
+The strategy doc should read as an authored artifact — the *findings and decisions*, not a transcript of the skill's machinery producing them. Rather than burden the writing pass with a prohibition list (which taxes the real analytical work and still misses leaks), the cleanup happens **at review time**, on text already written, where it's both lighter and more reliable. Three review surfaces share the job:
+
+- **Intermediate sub-step wrap-ups** — a light scan of the one sub-section just written.
+- **Step boundaries** — a thorough scan of the whole Part this step produced (item 0b in the pattern above), before you summarise it back.
+- **The final `/quality-strategy-review`** — its check 21 is the whole-doc backstop for anything the per-Part passes missed.
+
+At each, re-read the target text and strip these machinery patterns — keep the finding, drop the narration:
+
+- **Dispatch / scratch narration** — "Subagent dispatched: …", "[ran 5.4 dimension-rating inline]", "scratch would be `quality/.scratch/…`". The reader sees the dimension rating, not that a subagent produced it.
+- **Append / orchestration bookkeeping** — "I'll hold off appending Part 4 until the user confirms", "now writing this to the doc". Do it silently.
+- **Sub-step / turn lineage references** — "corrected, turn-23", "split out at 5.2", "(pulled out of non-goals at turn 16)", "the turn-22 binding test". The strategy carries no turn refs or provenance; it reads as settled content.
+- **Inferred-as-scanned pre-read lines** — a "no audited gem detected" / "no `.github/workflows` found" written as if a scan ran when no code was actually read. Rephrase to the honest form the pre-read uses ("not yet established — confirm in interview") or cite the interview honestly. (This is the review-side companion to sub-step 0's honest-degradation rule.)
+
+This is *presentation* cleanup only. It changes nothing about what work runs or which scratch files get written — every sealed dispatch still executes and still writes its scratch file, which `/quality-strategy-review`'s scratch-file audit reads on disk. What changes is only what lands in the doc.
 
 ## Initial pre-read
 
