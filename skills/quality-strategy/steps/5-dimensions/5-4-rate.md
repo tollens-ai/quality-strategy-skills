@@ -141,8 +141,6 @@ Merged ratings, grouped by rating for readability. Impact size only — likeliho
 
 **Distribution:** <count by rating, e.g. "6 H, 9 M, 4 None">
 
-**Subagent dispatched:** dimension-rating (per-stakeholder mechanical anchor); scratch: `quality/.scratch/5.4-dimension-rating.md`.
-
 **Sources consulted from pre-read:** <bullet list>
 
 **Assumptions made:** <bullet list, or "none">
