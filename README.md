@@ -119,7 +119,7 @@ Expect to spread it across **several sessions** of 60–90 minutes each, with `/
 
 ## Credits
 
-The quality framework is by **Edmund Pringle**. His blog series at [epkconsulting.substack.com](https://epkconsulting.substack.com/) is the single best read on the subject. The framework draws on the context-driven testing tradition (Bach, Bolton, Weinberg).
+The quality framework is by **Edmund Pringle**, distilled into an open-source **[quality brain](https://github.com/tollens-ai/quality-assistant-prototype-03/tree/main/quality-brain)** — quality attributes, heuristics, and stakeholder models — that this pack draws on directly. His blog series at [epkconsulting.substack.com](https://epkconsulting.substack.com/) is the best narrative read on the subject. The framework draws on the context-driven testing tradition (Bach, Bolton, Weinberg).
 
 Skills implementation by **Yanqing Cheng**. Built with Claude Code.
 
