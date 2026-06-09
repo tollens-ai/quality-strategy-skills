@@ -732,4 +732,18 @@ Calls made while preparing the pack for public alpha. Full reasoning in `runs/qs
 
 ---
 
+## Tracked-not-built this pass: D3 (research priority), D1 (reframed), R1 (definite TODO)
+
+**What we did.** Re-prioritised three deferred items per the adjudication, and tracked them in the README roadmap — but did **not** build any of them this pass (out of scope per the ship-prep brief).
+
+- **D3 — quality dimensions for new-world (AI / non-deterministic / agentic) products. Upgraded from minor defer to the #1 research priority.** The "ilities" list has nothing for products whose correctness is a metric distribution with a tolerance rather than a green test, no mechanism for non-stationary quality that drifts, and a code-shaped pre-read blind to feature stores / eval harnesses / drift monitors. Many users build exactly these products. **Documented as a named known gap** in the README ("Known limitations") and as the top roadmap item. The research itself (go back to the research stage / the original wiki: "what quality dimensions exist now for new-world products?") is explicitly future work and was **not** done this pass. The time-awareness/drift gap is real beyond ML — any strategy is a point-in-time snapshot while PHILOSOPHY promises context-shift planning the skill doesn't yet operationalise. See the Stage-3 entry "Non-deterministic / ML systems + time-awareness" above for the fuller analysis.
+- **D1 — cadence / lean mode. Reframed, still deferred, still not built.** The adjudication challenged the premise: a persona "running out of turns" was a too-low eval turn cap, not the skill being too long (a too-low cap can manufacture a false "too long" finding). The real open question is whether the 21 sub-steps surface dimensions that *genuinely matter* or some are spurious "ilities" — if all matter, the answer is a lighter *way to view* the detail, not "do less." We probe this only as an observation in the validation runs (the critic's spurious-vs-load-bearing-dimension note); we do **not** design a lean mode. Tracked in the README roadmap. The risk to hold against: a velocity/lean mode that quietly lowers the bar rather than the ceremony.
+- **R1 — per-stakeholder risk-map (6.x) decomposition. Promoted from vague deferral to a definite TODO.** Adjudication: "We totally need to do this. Doesn't matter when, as long as we track it." The dimension-rating step (5.4) already runs per-stakeholder and surfaces divergence; the risk map (6.1/6.2/6.3) still operates at the merged-dimension level. Bringing the same per-stakeholder-then-merge treatment to the risk map is now a tracked definite to-do (named in the README roadmap), sequenced after the cadence work because they interact. See the Phase-3/4 entry "R1 decomposition" above for the boundary that was landed vs deferred.
+
+**Why not built this pass.** The ship-prep brief scoped this pass to landing the adjudicated edits + public-readiness + validation, and explicitly excluded the D3 research, the D1 lean-mode design, and the R1 decomposition (each is multi-day design work with its own testing). Honesty over completeness: they're named as gaps/roadmap, not quietly shipped half-done.
+
+**How we'd know it's time.** D3: a real ML/non-deterministic project where quality genuinely won't map to a point-in-time dimension+level. D1: validation/real runs showing surfaced dimensions are reliably load-bearing (→ build a lighter view) or some are spurious (→ prune them). R1: real runs where a single merged required/actual level papers over a stakeholder disagreement the user would have decided differently — as 5.4 now surfaces for impact.
+
+---
+
 *Add new items to this file when we make calls under uncertainty. Revisit after each real-world run.*
