@@ -22,7 +22,9 @@ By the end of this sub-step the strategy doc must capture:
 
 ## How to ask
 
-Surface what the pre-read suggested first: *"From the docs the audience looks like X — is that close to right for the alpha?"*
+The prompts below are examples of *intent*, not lines to recite — say them in your own words, fitted to the user (see SKILL.md → "Phrasing — adapt, don't recite"). What's fixed is what each question has to surface; the wording is yours.
+
+Surface what the pre-read suggested first — e.g. *"From the docs the audience looks like X — is that close to right for the alpha?"*
 
 For the first release:
 

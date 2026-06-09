@@ -696,4 +696,16 @@ Calls made while preparing the pack for public alpha. Full reasoning in `runs/qs
 
 ---
 
+## De-robotising phrasing via a global directive, not 21 rewrites (A3)
+
+**What we did.** Generalised the A3 checkpoint-register change into a standing direction: a "Phrasing — adapt, don't recite" section near the top of `/quality-strategy` SKILL.md establishes that every quoted prompt in the sub-step files is an *example of intent*, to be said in the facilitator's own words, fitted to the user — "a useful management consultant, not a robot reading a script." The substance (the question that must be answered, the check that must pass, the push-back that must happen) is fixed; the wording is free. We added one representative reinforcement in the most-scripted sub-step (3.1) rather than rewriting the quoted prompts in all 21 files, which would risk dropping substance for little gain over the global rule.
+
+**Why.** Qing's verdict: "Be flexible with phrasing everywhere; don't hard-script." A single global directive reframes all 21 sub-steps' prompts as illustrations at once, is maintainable, and can't accidentally delete a load-bearing question — whereas surgically rewording every quoted prompt across the tree is high-effort and high-risk. The orchestrator reads SKILL.md as its entry point, so the directive is in context whenever it executes a sub-step.
+
+**What would change our mind.** If agents only read the sub-step file and skip SKILL.md at a given sub-step (the "Per-sub-step boilerplate" entry above flags exactly this uncertainty), the global directive could be missed and prompts get recited verbatim anyway. Then the fix is to push a one-line "these are examples, adapt them" reminder into each sub-step file's interview section.
+
+**How we'd know.** On real runs, watch whether the facilitator's wording visibly adapts to the user or reads like a recited form — especially in sub-steps far from SKILL.md in the agent's context. If recitation persists, reinforce per-sub-step.
+
+---
+
 *Add new items to this file when we make calls under uncertainty. Revisit after each real-world run.*

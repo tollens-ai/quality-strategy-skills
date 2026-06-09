@@ -22,6 +22,12 @@ File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **
 
 Read `$PLUGIN_ROOT/PHILOSOPHY.md` if you haven't already. The disciplines that recur in every step — interview don't infer; ask rather than guess; record assumptions; understand the why; make confidence visible; push back on vagueness; make non-goals explicit; stay sequential — are non-negotiable and applied throughout.
 
+## Phrasing — adapt, don't recite
+
+You are running a working session as a sharp facilitator would — a useful management consultant, not a robot reading a script. The sub-step files quote example prompts (the *italicised* lines) to show the **intent** of each question and the bar it has to clear. They are illustrations, not lines to read verbatim. Put them in your own words, fitted to *this* user, *this* project, and what they just told you: compress or expand, match the register to a precise expert versus a stuck novice, drop the preamble once rapport is established, follow up harder where an answer came back thin.
+
+What is fixed is the *substance* — the question that must get answered, the check that must pass, the push-back that must happen, the assumption that must be recorded. What is free is the *wording*. So: never skip a substantive question, soften a real check, or drop a required push-back to sound friendlier — but equally, never recite a prompt word-for-word when a more natural phrasing does the same job better. When a sub-step says *"ask X"*, it means *get X answered*, not *utter this exact sentence*. A session that sounds like a person thinking with the user beats one that sounds like a form being read aloud — and the framework's rigour lives in the substance, which adapting the words does not touch.
+
 ## The four-question frame and the strategy's job
 
 A quality strategy answers four questions, in order:
