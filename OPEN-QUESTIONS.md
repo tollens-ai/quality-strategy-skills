@@ -620,4 +620,62 @@ These record what the overnight run actually landed for the per-stakeholder + me
 
 ---
 
+# Stage 3 — deferrals from the qss-v3-overnight persona test
+
+Findings from the 10-persona conversational test (`runs/qss-v3-overnight/`) that we decided **not** to act on now — either too large/design-sensitive for this run, or genuinely uncertain. Recorded with the standard structure so the calls are visible. The full reasoning, the APPLY-NOW decisions, and what we explicitly rejected are in `runs/qss-v3-overnight/DECISION-SUMMARY.md`.
+
+---
+
+## Cadence / "velocity" + "lean" mode (the headline finding — deferred, not rejected)
+
+**What we did.** Deferred. 8–9 of 10 personas found the per-sub-step ritual + boundary checkpoints heavier than their job needed (the expert resented the turn count; the new lead *ran out of turns before reaching the plan of work she most needed*; the portfolio/fixed-bid jobs wanted far less ceremony). The ask is consistent: a way to **compress cadence and document volume without lowering analytical rigor** — e.g. an expert/velocity mode that batches sub-steps when the user front-runs answers, and a lean mode for small/portfolio/fixed-bid jobs, plus time-boxing so Step 7 (plan of work) is always reached. We applied only the small, safe slices now (suppressing scaffolding narration; a precise-user checkpoint register) and deferred the mode itself.
+
+**Why.** This is the most-supported finding *and* the most design-sensitive: it sits in direct tension with the deliberate "same rigour regardless of job" stance (project-shape changes phrasing, not depth). Done badly it becomes the corner-cutting the framework is built to resist — and several critics explicitly credited the skill for *holding its ground* on rigor. Designing "compress ceremony but not rigor" well (trigger conditions, what batches safely, how the step-boundary checkpoint survives, how Step 7 is guaranteed) is a multi-step design effort with its own testing, not an overnight edit. Out of scope for this run per the brief ("do not start work beyond these three stages; resist bloating").
+
+**What would change our mind.** It already has, on priority: this should be the next design focus. The open question is *how*, not *whether*. The risk to watch: a velocity/lean mode that quietly lowers the bar rather than the ceremony.
+
+**How we'd know.** Prototype a cadence-adaptive variant; on real runs, check whether it reaches Step 7 faster while producing a strategy a `/quality-strategy-review` still passes at full rigor, and whether expert users stop resenting the turn count.
+
+---
+
+## Audience-facing one-page deliverable (vs. author-facing artifact)
+
+**What we did.** Deferred. 6 personas (EM, OSS, QA-lead, agency, bootcamp, platform) said the produced doc is written for its author/auditor, not the named audience (40 engineers / 20 contributors / a busy PM / a non-technical client). They want a distinct distributable one-pager beyond the TL;DR, and P6 specifically lost the **degrade-to-one-move fallback** she asked for between collection and the final TL;DR.
+
+**Why.** This is an output-shape redesign of `/operational-distillation` (and possibly a second emitted artifact), interacting with the cadence work above. Too large to do safely overnight without risking the distillation's "view-not-second-source-of-truth" property. One concrete sub-piece is small and worth doing in a focused pass: *make the degrade-to-one-move fallback a required distillation element whenever the strategy job is funding/communication-constrained* (the skill collected the requirement and dropped it).
+
+**What would change our mind / How we'd know.** If returning readers consistently bounce off the body and only ever read the TL;DR, the one-pager should become a first-class output. Track whether the TL;DR alone is enough to triage, or whether people need the distributable spine.
+
+---
+
+## Non-deterministic / ML systems + time-awareness (drift)
+
+**What we did.** Deferred. The ML/data-engineer persona (fit 2, the lone would-not-recommend) surfaced that the framework has no worked example for **metric-distribution "correctness"** as a quality dimension (a tolerance + confidence, not a green test), no mechanism for **non-stationary** quality that drifts weekly despite PHILOSOPHY's "plan for context shifts," and a **code-shaped pre-read** blind to feature stores / eval harnesses / drift monitors. (Caveat: this cell is partly a harness artifact — the simulated project had "no stakeholder to interview," so the run stalled at Step 0.)
+
+**Why.** Genuine gaps, but each is real design work (a worked non-deterministic-oracle example; a stationary-vs-drifting prompt + re-evaluation cadence/owner; broadening the pre-read's notion of "what holds this system's quality"). n=1 in this test and entangled with a harness limitation, so not overnight-actionable — but the **time-awareness gap is real beyond ML** (any strategy is a snapshot; PHILOSOPHY promises context-shift planning the skill doesn't yet operationalise).
+
+**What would change our mind / How we'd know.** Run the skill on a real recsys/ML project (with a real owner answering). If quality genuinely won't map to a point-in-time dimension+level, add the drift/time-awareness mechanism and the data/ML pre-read.
+
+---
+
+## Full no-repo mode for the review + solo-owner vs fabricated-stakeholder
+
+**What we did.** Applied the producer-side honesty fix now (pre-read declares itself interview-derived and tags inferred-vs-scanned sources — see DECISION-SUMMARY). Deferred the review-side piece: in the test, the closing `/quality-strategy-review` *green-checked phantom scratch files* ("all 13 required dispatch files present") in sessions with no repo. Also deferred a related conceptual fix the ML persona raised: the "no stakeholder → refuse" path conflates a *fabricated* persona (rightly refuse) with a *real solo owner answering for themselves* (should proceed, recording assumptions).
+
+**Why.** The R8 scratch-audit already FAILs on missing required scratch files; making the review correctly handle a genuine no-repo run (vs treating absence as fabrication, or vice versa) needs careful interaction with R8 and the pre-read honesty change, and the solo-owner distinction touches the escalation logic — both want their own focused pass rather than an overnight bolt-on.
+
+**What would change our mind / How we'd know.** Run the review on a real no-repo / pre-implementation strategy and on a real solo-owner project; check it neither fabricates a pass nor wrongly refuses.
+
+---
+
+## Client two-artifact split (frank-internal vs client-showable)
+
+**What we did.** Deferred (n=1, the agency contractor). He needed the output to split cleanly into a client-showable spine and a frank internal layer (the single file literally contained his pain-threshold line), via two artifacts or mechanical tagging/export.
+
+**Why.** A real, specific need but a single-persona, niche output-shaping feature; lower weight than the cross-cutting items above, and it overlaps the audience-one-pager work. Resist bloating the core flow for one use case.
+
+**What would change our mind / How we'd know.** If contractor/agency use turns out common (client deliverable is a stated use case), build the spine/frank split — likely as an option on `/operational-distillation`.
+
+---
+
 *Add new items to this file when we make calls under uncertainty. Revisit after each real-world run.*
