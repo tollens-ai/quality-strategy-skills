@@ -74,7 +74,7 @@ Each entry: what we did, why we did it, what would change our mind, and how we'd
 
 **What would change our mind.** If real strategies end up with no record of the actual debates the team is having about a stakeholder. Or if Ed's evidence elsewhere shows Discussed is genuinely first-class.
 
-**How we'd know.** Compare real strategies to the Tollens alpha doc structure — are the "live debates" being captured equivalently, or are they getting lost?
+**How we'd know.** Compare real strategies to an early real-project strategy's structure — are the "live debates" being captured equivalently, or are they getting lost?
 
 ---
 
@@ -86,7 +86,7 @@ Each entry: what we did, why we did it, what would change our mind, and how we'd
 
 **What would change our mind.** If running this on multiple consecutive releases shows that revision mode produces strategies that don't hang together across releases — e.g. earlier-release decisions box in later releases in ways nobody anticipated.
 
-**How we'd know.** Run on Tollens alpha now, beta when ready, GA later. See if the across-release coherence holds.
+**How we'd know.** Run on a real project's alpha now, beta when ready, GA later. See if the across-release coherence holds.
 
 ---
 
@@ -146,7 +146,7 @@ These are calls made during design discussion before the skill is built. They'll
 
 **What we did.** /test-strategy doesn't fix the tier count of the learning-needs list. It prescribes the pattern (impact-ordered tiers, each item = question + methods + exit criterion, optional reference to risk-map row) and lets the count fall out of the project's risk map.
 
-**Why.** Appendix B's four tiers (Existential / Dealbreaker / Quality-of-experience / Team confidence) emerged from the shape of Tollens' risk map, not from a framework rule. Other projects might naturally tier into 3 or 5. The load-bearing thing is the per-item format and the impact ordering, not the count.
+**Why.** Appendix B's four tiers (Existential / Dealbreaker / Quality-of-experience / Team confidence) emerged from the shape of one real project's risk map, not from a framework rule. Other projects might naturally tier into 3 or 5. The load-bearing thing is the per-item format and the impact ordering, not the count.
 
 **What would change our mind.** If real strategies converge on the same tier count anyway (in which case prescribing it would save time). Or if the lack of prescribed count produces inconsistent strategies that are hard to compare across projects.
 
@@ -280,7 +280,7 @@ These are calls made during design discussion before the skill is built. They'll
 
 # v2 design decisions (pre-implementation)
 
-These are the design decisions worked out across the May–June 2026 design sessions (full reasoning in `design/v2-design-and-plan.md`). They're recorded here so the calls — and their falsification conditions — are visible as v2 ships. Most are locked; OQ1–OQ6 in the design doc track the genuinely-open sub-questions, referenced inline below. As each ships and gets real-world tested, it graduates into the post-implementation register at the top of this file.
+These are the design decisions worked out across the May–June 2026 design sessions. They're recorded here so the calls — and their falsification conditions — are visible as v2 ships. Most are locked; the genuinely-open sub-questions are referenced inline below. As each ships and gets real-world tested, it graduates into the post-implementation register at the top of this file.
 
 ---
 
@@ -516,9 +516,9 @@ These are the design decisions worked out across the May–June 2026 design sess
 
 **What we did.** v2 is allowed to be a clean break from v1. No migration path is provided for v1-produced strategies. Design OQ6: existing workshop-run strategies were learning runs — let them sit; v2 produces fresh strategies for new projects.
 
-**Why.** v1 was fresh — only Qing has used it, and the workshop runs were learning exercises, not durable artifacts a team depends on. Carrying compatibility constraints would tax the redesign for no real beneficiary.
+**Why.** v1 was fresh — only the maintainer has used it, and the workshop runs were learning exercises, not durable artifacts a team depends on. Carrying compatibility constraints would tax the redesign for no real beneficiary.
 
-**What would change our mind.** If a v1 strategy turns out to be in active use and worth migrating, or if external users adopted v1 before v2 ships (breaks the "only Qing" assumption).
+**What would change our mind.** If a v1 strategy turns out to be in active use and worth migrating, or if external users adopted v1 before v2 ships (breaks the "only the maintainer has used it" assumption).
 
 **How we'd know.** Check whether any v1 strategy is being actively maintained or depended on before deleting or breaking anything.
 
@@ -612,7 +612,7 @@ These record what the overnight run actually landed for the per-stakeholder + me
 
 **What we did.** Landed Phase 4 — the mechanical anchors at sub-step 5.4: **H** iff the dimension's failure mode is a Dealbreaker for ≥1 stakeholder; **M** iff a non-Dealbreaker Good Enough/Delight bar references it (and no Dealbreaker does); **None** iff no bar at any lens references it; deliberately **no L** at this step. And landed the Phase-3 merge step: per-stakeholder rating runs in a **sealed-context subagent** that writes `quality/.scratch/5.4-dimension-rating.md`; the orchestrator dispatches / collects / merges / presents and does not grade; divergence between stakeholders is surfaced to the user as a one-team commitment decision (*"Stakeholder A: H Dealbreaker; Stakeholder B: None — you have one team, what does it commit to?"*) and the resolution is recorded. We propagated the no-L ripple across the rest of the skill: 5.5 (distribution check reframed for H/M/None), SKILL.md (the sub-step table and the sealed-dispatch / scratch-file list now include 5.4), Step 7 (the former-L "aware-but-not-investing" items are recorded as plan-of-work decisions, not ratings), and `/quality-strategy-review` (distribution check re-scoped to the H/M/None rating axis, the H-requires-Dealbreaker rule tightened, and `5.4-dimension-rating.md` added to the required scratch-file audit). **Deferred:** the full per-stakeholder decomposition of the **risk map** (sub-steps 6.1/6.2/6.3) — required level, actual level, and gap are still assessed at the merged-dimension level, not per-stakeholder-then-merged.
 
-**Why.** 5.4 is the exact place v1 drifted to middle ratings (the REVIEW-REPORT R1 finding named it), so it was the highest-value, most self-contained piece to seal first. The risk map operates coherently on the merged H/M/None ratings exactly as it did before, so doing 5.4 alone leaves the skill internally consistent rather than half-converted. Decomposing the risk map per-stakeholder hastily overnight risked an incoherent half-sealed skill — the design sized that work as multi-day — and honesty about a clean boundary beats a broken skill.
+**Why.** 5.4 is the exact place v1 drifted to middle ratings (the v1 review finding named it), so it was the highest-value, most self-contained piece to seal first. The risk map operates coherently on the merged H/M/None ratings exactly as it did before, so doing 5.4 alone leaves the skill internally consistent rather than half-converted. Decomposing the risk map per-stakeholder hastily overnight risked an incoherent half-sealed skill — the design sized that work as multi-day — and honesty about a clean boundary beats a broken skill.
 
 **What would change our mind.** If real runs show the merged-level risk map hides the same cross-stakeholder divergence at the required/actual stage that the 5.4 merge now surfaces at the impact stage — i.e. the divergence that matters most reappears in 6.x and is lost to early merging there too.
 
@@ -622,7 +622,7 @@ These record what the overnight run actually landed for the per-stakeholder + me
 
 # Stage 3 — deferrals from the qss-v3-overnight persona test
 
-Findings from the 10-persona conversational test (`runs/qss-v3-overnight/`) that we decided **not** to act on now — either too large/design-sensitive for this run, or genuinely uncertain. Recorded with the standard structure so the calls are visible. The full reasoning, the APPLY-NOW decisions, and what we explicitly rejected are in `runs/qss-v3-overnight/DECISION-SUMMARY.md`.
+Findings from a 10-persona conversational test of `/quality-strategy` that we decided **not** to act on now — either too large/design-sensitive for that run, or genuinely uncertain. Recorded with the standard structure so the calls are visible. (The test itself — transcripts and per-persona critiques — was an internal evaluation run; the durable decisions it produced live here in this register.)
 
 ---
 
@@ -660,7 +660,7 @@ Findings from the 10-persona conversational test (`runs/qss-v3-overnight/`) that
 
 ## Full no-repo mode for the review + solo-owner vs fabricated-stakeholder
 
-**What we did.** Applied the producer-side honesty fix now (pre-read declares itself interview-derived and tags inferred-vs-scanned sources — see DECISION-SUMMARY). Deferred the review-side piece: in the test, the closing `/quality-strategy-review` *green-checked phantom scratch files* ("all 13 required dispatch files present") in sessions with no repo. Also deferred a related conceptual fix the ML persona raised: the "no stakeholder → refuse" path conflates a *fabricated* persona (rightly refuse) with a *real solo owner answering for themselves* (should proceed, recording assumptions).
+**What we did.** Applied the producer-side honesty fix now (pre-read declares itself interview-derived and tags inferred-vs-scanned sources). Deferred the review-side piece: in the test, the closing `/quality-strategy-review` *green-checked phantom scratch files* ("all 13 required dispatch files present") in sessions with no repo. Also deferred a related conceptual fix the ML persona raised: the "no stakeholder → refuse" path conflates a *fabricated* persona (rightly refuse) with a *real solo owner answering for themselves* (should proceed, recording assumptions).
 
 **Why.** The R8 scratch-audit already FAILs on missing required scratch files; making the review correctly handle a genuine no-repo run (vs treating absence as fabrication, or vice versa) needs careful interaction with R8 and the pre-read honesty change, and the solo-owner distinction touches the escalation logic — both want their own focused pass rather than an overnight bolt-on.
 
@@ -700,7 +700,7 @@ Calls made while preparing the pack for public alpha. Full reasoning in `runs/qs
 
 **What we did.** Generalised the A3 checkpoint-register change into a standing direction: a "Phrasing — adapt, don't recite" section near the top of `/quality-strategy` SKILL.md establishes that every quoted prompt in the sub-step files is an *example of intent*, to be said in the facilitator's own words, fitted to the user — "a useful management consultant, not a robot reading a script." The substance (the question that must be answered, the check that must pass, the push-back that must happen) is fixed; the wording is free. We added one representative reinforcement in the most-scripted sub-step (3.1) rather than rewriting the quoted prompts in all 21 files, which would risk dropping substance for little gain over the global rule.
 
-**Why.** Qing's verdict: "Be flexible with phrasing everywhere; don't hard-script." A single global directive reframes all 21 sub-steps' prompts as illustrations at once, is maintainable, and can't accidentally delete a load-bearing question — whereas surgically rewording every quoted prompt across the tree is high-effort and high-risk. The orchestrator reads SKILL.md as its entry point, so the directive is in context whenever it executes a sub-step.
+**Why.** The project owner's verdict: "Be flexible with phrasing everywhere; don't hard-script." A single global directive reframes all 21 sub-steps' prompts as illustrations at once, is maintainable, and can't accidentally delete a load-bearing question — whereas surgically rewording every quoted prompt across the tree is high-effort and high-risk. The orchestrator reads SKILL.md as its entry point, so the directive is in context whenever it executes a sub-step.
 
 **What would change our mind.** If agents only read the sub-step file and skip SKILL.md at a given sub-step (the "Per-sub-step boilerplate" entry above flags exactly this uncertainty), the global directive could be missed and prompts get recited verbatim anyway. Then the fix is to push a one-line "these are examples, adapt them" reminder into each sub-step file's interview section.
 
