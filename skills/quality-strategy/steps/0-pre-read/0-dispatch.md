@@ -16,6 +16,14 @@ Dispatch **three subagents in parallel** — use the `Agent` tool with three cal
 
 When all three return, reconcile their outputs into a single `quality/pre-read.md` file with a synthesis at the top, a discrepancies section, and the three digests as sections below.
 
+### Honest degradation when there's little or no code to read
+
+A pre-read often runs against a project that has **no readable codebase yet** — a pre-implementation strategy job, a private/unavailable repo, or no filesystem access. This is normal, not a failure. When a subagent cannot actually scan an area, it must degrade honestly rather than fabricate scan-shaped findings:
+
+- **Say it's limited.** State plainly — in the subagent's scratch output and carried through into `quality/pre-read.md` — that the pre-read was LIMITED / interview-derived for that area: "no codebase to scan yet — this picture is to be confirmed in interview," not a result dressed up as a scan.
+- **Don't phrase absence as a scan result.** Write "not yet established — confirm in interview" rather than "no `.github/workflows` detected" or "no audited dependency detected." An absence you inferred because you couldn't look is not an observed absence.
+- **Tag every cited source SCANNED vs INFERRED.** Where the digest cites a source, distinguish SCANNED (you actually read a file or command output) from INFERRED (drawn from the project description or interview). Tag inferred items "inferred, not scanned" so an inferred fact can never later be cited as observed.
+
 ### Subagent A — Docs and metadata
 
 What the project **claims** to be.
@@ -123,6 +131,8 @@ Then write `quality/pre-read.md` with this structure:
 ```
 
 Order within the file is **most-actionable first**: the synthesis and discrepancies, then the interpretive layer (design hypotheses), then the mechanical maps. Downstream sub-steps load only the sections they need.
+
+If any area was scanned only thinly or not at all (no/little code, no repo access), carry the honest-degradation framing through into `quality/pre-read.md`: say in the summary that the picture for that area is interview-derived and to be confirmed, keep absence-claims phrased as "not yet established — confirm in interview" (never as scan results), and preserve the SCANNED vs INFERRED tags so a downstream sub-step never mistakes an inferred absence for an observed one.
 
 ## Push back when
 
