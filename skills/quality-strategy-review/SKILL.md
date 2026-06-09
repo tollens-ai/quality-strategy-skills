@@ -47,7 +47,7 @@ If `quality/pre-read.md` exists, read its summary and discrepancies sections.
 
 **Read the `## Strategy job` paragraph** at the top of the doc. If it's present, take its job classification. If it's **missing**, that's itself a finding (the producer skill should have written it) — infer the job from the content (no code yet + mostly-Unknown actuals ⇒ pre-implementation; "one-shot" / "agentic implementation attempt" language ⇒ agentic one-shot; thin slice with many deliberate Nones ⇒ lightweight slice; otherwise durable production) and flag the missing paragraph.
 
-Classify on these axes (from `feedback/2026-05-23-contextual-fit-for-preimplementation-one-shot-projects.md`):
+Classify on these axes:
 
 - **Lifecycle stage** — pre-implementation / implementation / alpha / beta / production / maintenance.
 - **Intended use** — one-shot brief / release alignment / test planning / stakeholder alignment / operational dashboard.
