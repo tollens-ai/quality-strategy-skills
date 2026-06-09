@@ -2,7 +2,7 @@
 
 A set of Claude Code skills for producing and using a software *quality strategy* — a business-level document that says who matters for your project, what they value, where you're exposed, and what to do about it. Plus the engineering-level *test strategy* that operationalises it.
 
-The thinking is grounded in **Edmund Pringle's quality framework**: quality is value to someone who matters; testing is investigation to find out what's actually true; risk is danger to quality; the job is to maximise quality improvement for the time invested.
+The thinking is grounded in [**Edmund Pringle's quality framework**](https://github.com/tollens-ai/quality-assistant-prototype-03/tree/main/quality-brain): quality is value to someone who matters; testing is investigation to find out what's actually true; risk is danger to quality; the job is to maximise quality improvement for the time invested.
 
 > **Status: alpha.** This pack is being shared with a first wave of testers. The skills are working and have been exercised across a wide range of simulated users, but they have had limited real-world mileage. Expect rough edges, tell us where it misfires, and read [Known limitations](#known-limitations) before you start — there are gaps we already know about and are not hiding.
 
