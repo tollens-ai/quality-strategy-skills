@@ -128,8 +128,6 @@ This inventory is **raw** — sub-step 5.2 will unpack composite dimensions; sub
 
 **Sources consulted from pre-read:** <bullet list>
 
-**Subagent dispatched:** dimension-scout for top-down reference-list pass (scratch: `quality/.scratch/5.1-dimension-scout.md`).
-
 **Assumptions made:** <bullet list, or "none">
 
 **Open questions from this sub-step:** <bullet list, or "none">

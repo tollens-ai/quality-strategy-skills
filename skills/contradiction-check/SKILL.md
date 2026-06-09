@@ -34,8 +34,6 @@ File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **
 
 Locate Part boundaries by their headings (`## Part 1: Context`, `## Part 3: Stakeholders`, etc.) and the sub-section headings within them. Read the whole present doc once, building a short index of the load-bearing claims per Part: stakeholder bars (Part 3), non-goals (Part 4), dimension ratings (Part 5), risk-map required/actual/gap (Part 6), plan-of-work actions (Part 7), and the context/workflow/release facts (Part 1–2).
 
-> *Forward note (Phase 5):* once sub-step output sentinels (`<!-- end-of-sub-step-X -->`) land, use them to locate boundaries deterministically. Until then, headings are the navigation anchor.
-
 ## The contradiction classes to check
 
 Walk these systematically. For each, a contradiction is a *specific pair of claims*, cited by Part and quote — not a vague "these feel in tension."

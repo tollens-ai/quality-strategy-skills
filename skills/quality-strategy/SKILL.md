@@ -22,6 +22,12 @@ File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **
 
 Read `$PLUGIN_ROOT/PHILOSOPHY.md` if you haven't already. The disciplines that recur in every step — interview don't infer; ask rather than guess; record assumptions; understand the why; make confidence visible; push back on vagueness; make non-goals explicit; stay sequential — are non-negotiable and applied throughout.
 
+## Phrasing — adapt, don't recite
+
+You are running a working session as a sharp facilitator would — a useful management consultant, not a robot reading a script. The sub-step files quote example prompts (the *italicised* lines) to show the **intent** of each question and the bar it has to clear. They are illustrations, not lines to read verbatim. Put them in your own words, fitted to *this* user, *this* project, and what they just told you: compress or expand, match the register to a precise expert versus a stuck novice, drop the preamble once rapport is established, follow up harder where an answer came back thin.
+
+What is fixed is the *substance* — the question that must get answered, the check that must pass, the push-back that must happen, the assumption that must be recorded. What is free is the *wording*. So: never skip a substantive question, soften a real check, or drop a required push-back to sound friendlier — but equally, never recite a prompt word-for-word when a more natural phrasing does the same job better. When a sub-step says *"ask X"*, it means *get X answered*, not *utter this exact sentence*. A session that sounds like a person thinking with the user beats one that sounds like a form being read aloud — and the framework's rigour lives in the substance, which adapting the words does not touch.
+
 ## The four-question frame and the strategy's job
 
 A quality strategy answers four questions, in order:
@@ -42,13 +48,17 @@ A quality strategy answers four questions, in order:
 
 The same framework and the same rigour apply to all four; what differs is the right *output* and the right *severity of review*. `/quality-strategy-review` reads this paragraph first (its contextual-fit gate) and adapts what counts as a blocker accordingly. Project *shape* (solo / team / org; shipped / not-yet / dormant; agent-driven or not) is a separate axis that shapes how questions are *phrased*, not how deep the analysis goes — full project-shape branching is a later phase, but capture shape in Step 1 where it helps phrasing.
 
+**Running without a repo is first-class.** Two of the four jobs — pre-implementation and agentic one-shot — are *normally* run with little or no code to hand, and even a durable-production strategy can be built by a founder or lead who has the project in their head but no repo open. This is a supported, sensible way to use the skill, not a degraded fallback: a quality strategy is most valuable *before* the build, when it can still steer it. When there's no codebase to scan, the pre-read degrades honestly (it says so, and tags what it inferred vs scanned — see sub-step 0), the interview carries the load it always carries, and the closing review judges the strategy against its no-repo job rather than docking it for unknown actuals. Don't apologise for the absence of a repo or treat it as a problem to route around — interview the user as the authority on their own project, record assumptions, and produce the strategy. The only thing a missing repo costs is the pre-read's scan-derived hypotheses; everything load-bearing was always going to be asked, not read.
+
 ## Sealed-context dispatch and scratch files
 
-Wherever this skill does substantive analytical work via a subagent — the pre-read (sub-step 0), the dimension scout (5.1), the Q2 oracle check (`/oracle-adequacy` at 6.2), the boundary contradiction check (`/contradiction-check`), and the distillation (`/operational-distillation` at 7.3) — the dispatch is **sealed-context**: the subagent sees only what it needs for its piece, not the parent's DONE criteria, not the rubric it will be judged against, not the destination doc's success conditions. The orchestrator's role is **dispatch / collect / reconcile / present**, not to do the analysis itself with the answer key in view. (This is the central v2 principle; full decomposition of the remaining sub-steps into sealed dispatches is tracked as later-phase work — see OPEN-QUESTIONS.)
+Wherever this skill does substantive analytical work via a subagent — the pre-read (sub-step 0), the dimension scout (5.1), the dimension rating (5.4), the Q2 oracle check (`/oracle-adequacy` at 6.2), the boundary contradiction check (`/contradiction-check`), and the distillation (`/operational-distillation` at 7.3) — the dispatch is **sealed-context**: the subagent sees only what it needs for its piece, not the parent's DONE criteria, not the rubric it will be judged against, not the destination doc's success conditions. The orchestrator's role is **dispatch / collect / reconcile / present**, not to do the analysis itself with the answer key in view. (This is the central anti-shortcut principle of the pack; full decomposition of the remaining sub-steps into sealed dispatches is tracked as later work — see OPEN-QUESTIONS.)
 
-**Every such dispatch writes a scratch file** at `$PROJECT_DIR/quality/.scratch/<sub-step>-<purpose>.md` recording the real intermediate work it did (e.g. `0-pre-read-*.md`, `5.1-dimension-scout.md`, `6.2-oracle-adequacy.md`, `<boundary>-contradiction-check.md`, `7.3-operational-distillation.md`). This converts "did the orchestrator actually do the work?" from invisible to auditable: `/quality-strategy-review` mechanically checks that every claimed dispatch has its scratch file. A missing scratch file is hard evidence the dispatch didn't happen. `quality/.scratch/` is working state, not part of the strategy — do not treat it as authoritative output, and don't leak its contents into `quality/strategy.md`.
+**Every such dispatch writes a scratch file** at `$PROJECT_DIR/quality/.scratch/<sub-step>-<purpose>.md` recording the real intermediate work it did (e.g. `0-pre-read-*.md`, `5.1-dimension-scout.md`, `5.4-dimension-rating.md`, `6.2-oracle-adequacy.md`, `<boundary>-contradiction-check.md`, `7.3-operational-distillation.md`). This converts "did the orchestrator actually do the work?" from invisible to auditable: `/quality-strategy-review` mechanically checks that every claimed dispatch has its scratch file. A missing scratch file is hard evidence the dispatch didn't happen. `quality/.scratch/` is working state, not part of the strategy — do not treat it as authoritative output, and don't leak its contents into `quality/strategy.md`.
 
 **Process-note leak prevention.** Orchestrator meta-observations about *the skill itself* (an awkward step, a suspected bug, phrasing that didn't land) go to `$PROJECT_DIR/.skill-feedback.md` only — never into `quality/strategy.md`. The strategy doc reads as an authored artifact, not a transcript of the skill running.
+
+The *machinery* of running the skill — dispatch/scratch narration ("Subagent dispatched: …", "[ran 5.4 inline]", "scratch would be `quality/.scratch/…`"), append bookkeeping, sub-step/turn lineage refs ("corrected, turn-23", "split out at 5.2") — likewise has no place in `quality/strategy.md`. **This is cleaned up at review time, not by loading the writing pass with a list of don'ts.** Write the finding or the question; the step-boundary review and the final `/quality-strategy-review` strip any machinery that slipped through (see "Presentation cleanup at review points" below). The reasoning: a producing pass already carrying the real analytical work shouldn't also be juggling a prohibition list — that taxes the work without reliably catching the leak. Catching it where the doc is reviewed is both lighter on the producer and more thorough.
 
 ## Scope of this skill — first release only
 
@@ -75,7 +85,7 @@ The work is divided into 7 steps, each with one or more sub-steps. Each sub-step
 | 5.1 Dimension inventory (raw) | `steps/5-dimensions/5-1-inventory.md` | Bottom-up + top-down (subagent) + reconcile → raw consolidated inventory |
 | 5.2 Unpack pass | `steps/5-dimensions/5-2-unpack.md` | Split composite dimensions into sub-dimensions where priorities differ |
 | 5.3 Old/new-world pass | `steps/5-dimensions/5-3-old-new-world.md` | Split trap dimensions where the audience (human vs agent) changes the rating |
-| 5.4 Rate dimensions | `steps/5-dimensions/5-4-rate.md` | H/M/L/None per dimension with rationale |
+| 5.4 Rate dimensions | `steps/5-dimensions/5-4-rate.md` | Mechanical-anchor impact rating (H/M/None) per dimension — per-stakeholder via a sealed dispatch, then merged; no L (L-style aware-but-not-investing is a Step 7 decision) |
 | 5.5 Sanity checks | `steps/5-dimensions/5-5-checks.md` | Distribution, stakeholder coverage, tensions, non-goal alignment |
 | 6.1 Required levels | `steps/6-risk-map/6-1-required.md` | What level is needed for each H/M dimension |
 | 6.2 Actual levels | `steps/6-risk-map/6-2-actual.md` | Where we are on each H/M dimension |
@@ -118,11 +128,15 @@ This is the single most important user-facing pattern in the skill. The strategy
 
 0. **Run the contradiction check first (sealed dispatch).** Before summarising, dispatch **`/contradiction-check`** as a sealed-context subagent on the doc *as written so far*. It mechanically cross-references the Parts for internal contradictions — a Part-3 dealbreaker a Part-4 non-goal excludes, an H/M dimension with no risk-map row, a high-confidence actual whose evidence is "none yet". This is a *different* failure mode from the substantive checkpoint below: the checkpoint catches "this feels wrong to me" (human, by feel); the contradiction check catches "Part X denies what Part Y asserts" (mechanical, by cross-reference). Fold any contradictions it returns into the summary so the user sees them at the checkpoint. The dispatch writes its scratch file (see "Sealed-context dispatch and scratch files"). A clean result is a real result — say so and move on.
 
+0b. **Silently strip presentation leakage from this step's Part(s).** Re-read the section(s) this step just appended to `quality/strategy.md` and quietly remove machinery that isn't strategy — see "Presentation cleanup at review points" below for the patterns. Do this without narrating it; the cleanup never appears in what you say to the user. This is review-time cleanup of the freshly-written Part, the per-subsection counterpart to the final whole-doc review.
+
 1. Summarise the *whole step's* output back to the user in 5–8 lines, hitting the consequential decisions across all sub-steps in the step — plus any contradictions the check surfaced. Not a recap of process — a recap of decisions.
 
 2. Run the substantive checkpoint:
 
    > *"Take a real moment to read this back. We've completed [Step name]. Is anything off — even if you can't articulate why? Anything that gives you a weird feeling? Anything in earlier steps that, in light of this work, you now think is wrong? Even vague unease is worth surfacing. Catching it now is cheap; catching it later costs hours of rework."*
+
+   **Adapt the register to the user.** When the user has been giving precise, articulate, complete answers — an expert who knows their domain — the open "any vague unease even if you can't name it?" prompt reads as a tic. Prefer the *targeted* form as the default: name the one place you most expect to be wrong and why, and ask them to test it — e.g. *"Here's the one place I'd bet this is most likely wrong, and why: <…> — does that hold?"* Reserve the open-unease phrasing above for users who are visibly uncertain or inarticulate. This is a change of phrasing only — the checkpoint itself still runs at every step boundary and still does the same work.
 
 3. **Wait for the user's response.** Treat any of the following as signals to dig in, *not* as confirmation:
    - "I think so."
@@ -143,6 +157,27 @@ This is the single most important user-facing pattern in the skill. The strategy
 ### Per-sub-step (intermediate) wrap-up
 
 At the end of intermediate sub-steps (1.1–1.4, 3.1, 5.1–5.4, 6.1–6.2, 7.1–7.2), do a **light wrap-up only**: summarise back in 2–4 lines, ask *"Any quick concerns, or ready to continue?"* — get a yes, move on. Save the deep engagement for the step boundary. The user can't really evaluate intermediate sub-steps in isolation anyway — full evaluation needs the whole step in view.
+
+While you're here, give the sub-section you just appended a quick, silent presentation-leakage scan (see below) — it's cheaper to strip a stray "scratch would be…" line now than to find a Part full of them at the step boundary. Keep this light and unannounced; the thorough pass is the step-boundary one.
+
+## Presentation cleanup at review points
+
+The strategy doc should read as an authored artifact — the *findings and decisions*, not a transcript of the skill's machinery producing them. Rather than burden the writing pass with a prohibition list (which taxes the real analytical work and still misses leaks), the cleanup happens **at review time**, on text already written, where it's both lighter and more reliable. Three review surfaces share the job:
+
+- **Intermediate sub-step wrap-ups** — a light scan of the one sub-section just written.
+- **Step boundaries** — a thorough scan of the whole Part this step produced (item 0b in the pattern above), before you summarise it back.
+- **The final `/quality-strategy-review`** — its check 21 is the whole-doc backstop for anything the per-Part passes missed.
+
+**Do all of this silently — narrating the cleanup is itself a leak.** The scan is internal hygiene: never announce you ran a presentation pass, never tell the user the doc is "clean of machinery / no turn refs / no inferred-as-scanned", never report the result of the scan. The user hears *findings and questions*; the cleanup is invisible. (In testing, the single worst offender was the orchestrator narrating *"presentation-cleanup pass… clean"* every step boundary — ironically leaking the machinery while claiming to remove it.) The same "findings, not plumbing" discipline applies to your **own user-facing turns**: talk to the user about the strategy, not about dispatches, scratch files, sealed passes, or which sub-step produced what. This is one light principle — *speak findings, not machinery, and do the cleanup without mentioning it* — not a content-prohibition list.
+
+At each scan, re-read the target text and strip these machinery patterns — keep the finding, drop the narration:
+
+- **Dispatch / scratch / sealed-pass narration** — "Subagent dispatched: …", "[ran 5.4 dimension-rating inline]", "scratch would be `quality/.scratch/…`", **and the sealed-context merge vocabulary**: "sealed pass landed M", "surfaced to the user", "merged to H because…", "the sealed dispatch returned…". Keep the *decision* (the rating, the merge outcome and its reason); drop the *mechanism* that produced it. E.g. rewrite "Bundle footprint — sealed pass landed None, surfaced to the user, merged to H" as "Bundle footprint — rated H: no stakeholder bar referenced it directly, but the maintainer added a promotability bar that makes it a dealbreaker."
+- **Append / orchestration bookkeeping** — "I'll hold off appending Part 4 until the user confirms", "now writing this to the doc". Do it silently.
+- **Sub-step / turn lineage references** — both *turn* refs ("corrected, turn-23", "the turn-22 binding test") and *sub-step-number* refs ("split out at 5.2", "Action 6 from 7.1", "folded in from 7.1", "(pulled out of non-goals at turn 16)"). The reader of the final doc has no "turn 23" and no "7.1"; the strategy carries no provenance or lineage — it reads as settled content. (Cross-references to the doc's own *Parts* — "see Part 6" — are fine; references to the *process* that built it are not.)
+- **Inferred-as-scanned pre-read lines** — a "no audited gem detected" / "no `.github/workflows` found" written as if a scan ran when no code was actually read. Rephrase to the honest form the pre-read uses ("not yet established — confirm in interview") or cite the interview honestly. (This is the review-side companion to sub-step 0's honest-degradation rule.)
+
+This is *presentation* cleanup only. It changes nothing about what work runs or which scratch files get written — every sealed dispatch still executes and still writes its scratch file, which `/quality-strategy-review`'s scratch-file audit reads on disk. What changes is only what lands in the doc and what you say to the user.
 
 ## Initial pre-read
 
@@ -220,11 +255,28 @@ After sub-step 7.3 is complete and the content is confirmed, two closing moves:
 
 If the review surfaces failures, return to the relevant sub-step(s) and re-do. The strategy is not done until the review passes.
 
+Once it passes, point the user to **`/test-strategy`** as the explicit next step — the engineering-level companion that operationalises this strategy, defining what to investigate, in what order, and how human and agent effort should be allocated. The risk map and plan of work you just produced are its direct inputs. Name it and offer it so the user knows where to go next.
+
+## When the user is genuinely stuck — offer a labelled strawman
+
+Sometimes a user has no answer not because they're dodging the work but because they genuinely don't know yet — they can't name a stakeholder, can't put words to what "good" means, can't say what they'd de-prioritise. A blank page is paralysing; a wrong starting guess is not. People recognise what's wrong far more easily than they generate from nothing, so bouncing off a flawed suggestion often unlocks the real answer.
+
+So when a user is genuinely **stuck** (not evasive — stuck), you may offer a **clearly-labelled strawman**: a concrete starting guess for them to react to, with a strong, explicit warning to scrutinise it rather than accept it.
+
+- **Label it, loudly, every time.** *"Here's a starting guess — I'm partly inventing this to give you something to push against. Treat it as probably wrong and tear into it; don't just nod because it sounds plausible."* The user must always know it's a strawman and never mistake it for something the skill established.
+- **Make it reactable.** A strawman only works if it's specific enough to disagree with: a named candidate stakeholder with a guessed bar, a concrete dimension with a guessed rating — not a vague menu of options.
+- **Then interview as normal.** The strawman is a *prompt*, not an answer. What the user keeps, changes, or throws out becomes the real input, recorded as theirs. What they don't actively confirm does **not** silently survive into the strategy as fact — an un-reacted-to strawman is discarded, not banked.
+
+**What this is — and isn't.** This is a facilitation aid for a stuck user, not a shortcut:
+
+- **Never present fabricated content as established fact.** A strawman is labelled as a guess at the moment you offer it. An unlabelled invention asserted as a finding is exactly the failure this framework exists to prevent (PHILOSOPHY → *interview don't infer*, *record assumptions*). The line is bright: *"here's a guess, scrutinise it hard"* is good facilitation; *"your stakeholders value X"* (invented, unlabelled, presented as fact) is banned.
+- **It does not soften the substantive refusals.** A strawman helps a user who's stuck; it does not let anyone skip the work the framework correctly insists on. Still refuse, as before: skipping non-goals, skipping the 5.2 unpack or 5.3 old/new-world passes, "just give me ratings", lowering rigour because the job feels small. Offering a strawman to an *unstuck* user who simply wants to move faster isn't facilitation — it's the corner-cutting the framework deliberately holds the line against. Use it for the blank page, not the impatient one.
+
 ## Escalation points — stop and ask the user
 
 Pause the skill and surface a question (rather than push through) when:
 
-- The user cannot identify any clear stakeholders. Strategy is impossible without this.
+- The user cannot identify any **real** stakeholder whose perspective counts — there is genuinely no one this is for. Strategy is impossible without that. But separate two cases that look alike: **(a)** a user who would have you *invent a stakeholder from nothing* — fabricate a persona and its bars → refuse; that's the fabrication the framework exists to prevent. **(b)** A **real solo owner answering for themselves** — they are the user, the buyer, and the operator → that is a valid stakeholder; proceed, interview them in that capacity, and record that they're answering for themselves. *"I'm the only one who matters right now"* is a real answer; *"let's make up who might matter"* is not. (A user who is real but simply stuck for words is different again — help them with a labelled strawman, see "When the user is genuinely stuck" above, rather than refusing or silently inferring.)
 - The user gives contradictory answers across sub-steps. Surface the contradiction; do not paper over it.
 - The budget or timeline does not match the ambition. Make the mismatch explicit; let the user decide.
 - "Everything is critical" — the user resists naming non-goals. Push: *"What would you cut if you had half the time?"*

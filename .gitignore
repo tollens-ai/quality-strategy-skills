@@ -4,3 +4,12 @@
 *~
 .vscode/
 .idea/
+
+# Host-side run orchestration artifacts (ephemeral; not part of the skill pack)
+.spike-callbacks/
+qss-v2-phase2-completion-callback
+
+# Claude Code runtime/host state (handoffs, worktrees, scheduler lock, scratch).
+# This is the agent harness's working dir, not part of the published plugin —
+# the plugin manifest lives in .claude-plugin/, which is NOT ignored.
+.claude/

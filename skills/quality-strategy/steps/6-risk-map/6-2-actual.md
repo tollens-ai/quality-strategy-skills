@@ -108,8 +108,6 @@ Append to `quality/strategy.md` under Part 6:
 
 **Sources consulted from pre-read:** <bullet list>
 
-**Subagent dispatched:** `/oracle-adequacy` for the Q2 oracle check (scratch: `quality/.scratch/6.2-oracle-adequacy.md`).
-
 **Assumptions made:** <bullet list, or "none">
 
 **Open questions from this sub-step:** <bullet list, or "none">

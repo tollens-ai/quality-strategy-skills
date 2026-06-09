@@ -105,7 +105,7 @@ Use the `Agent` tool with two calls in a single message.
 >
 > While walking, also check: does the test strategy contradict the quality strategy anywhere? Examples:
 > - Test strategy plans investigation in an area the strategy's Part 4 says is a non-goal.
-> - Test strategy treats a dimension as priority that the strategy rated Low or None.
+> - Test strategy treats a dimension as priority that the strategy rated None, deferred as "aware, not investing this release", or listed as a non-goal.
 > - Allocation honours principle 6 (automate repeatable, humanise judgmental) — judgement-heavy items don't go to agents alone, repeatable mechanical items don't go to humans alone.
 > - Calibration triggers in update protocol match calibration items in allocation.
 > - Voice consistent across sections (sign of a strategy not rushed).
@@ -178,7 +178,7 @@ Use the `Agent` tool with two calls in a single message.
 > 10. Independence preserved (no source code files in pre-read).
 > 11. Calibration ↔ update protocol alignment.
 > 12. Open questions consolidated.
-> 13. **Scratch-file audit.** The Q2 tooling-and-oracle check is a sealed-context dispatch (`/tooling-adequacy`, invoked after learning needs). If the test strategy claims that check ran — or simply has learning needs whose oracle adequacy was assessed — verify its scratch file exists at `$PROJECT_DIR/quality/.scratch/3.5-tooling-adequacy.md`. A claimed-but-missing scratch file is a FAIL: hard evidence the Q2 dispatch was fabricated rather than run. An empty/stub scratch file is a FLAG (audit theatre).
+> 13. **Scratch-file audit.** The Q2 tooling-and-oracle check is a sealed-context dispatch (`/tooling-adequacy`, invoked after learning needs). **Audit the required dispatch, not merely a claimed one** — derive the requirement from the strategy's *structure*, not from whether the doc narrates the check: if the test strategy HAS learning needs, the Q2 `/tooling-adequacy` dispatch was REQUIRED, so verify its scratch file exists at `$PROJECT_DIR/quality/.scratch/3.5-tooling-adequacy.md`. A missing scratch file is a FAIL whether or not the doc claims the check ran — hard evidence the Q2 dispatch was fabricated or silently skipped. An empty/stub scratch file is a FLAG (audit theatre). (The test strategy is a single linear flow with no step-boundary contradiction dispatches, so there is no boundary-check requirement to audit here.)
 >
 > **Severity:** FAIL on checks 1–3 and 13 is a blocker. The rest are flags.
 >
@@ -206,7 +206,7 @@ Three guidelines:
 
 **Blockers** (must fix before declaring strategy done):
 
-- Oracle FAIL on checks 1–3 (five-field learning needs / risk-map coverage / Dealbreaker prioritisation) or check 13 (missing scratch file for the claimed Q2 dispatch — a fabrication signal).
+- Oracle FAIL on checks 1–3 (five-field learning needs / risk-map coverage / Dealbreaker prioritisation) or check 13 (missing scratch file for the required Q2 dispatch when the strategy has learning needs — a fabrication or silent-skip signal, whether or not the doc claims the check ran).
 - Forward simulation reveals execution would *not* meaningfully advance the strategy.
 - Hard contradiction between test strategy and quality strategy (e.g. Tier-1 investigation of something the strategy says is a non-goal).
 - Any indicator rated WEAK with concrete evidence the team would not be able to act on the strategy as written.

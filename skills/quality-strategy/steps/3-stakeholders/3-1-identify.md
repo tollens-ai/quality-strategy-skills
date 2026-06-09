@@ -4,7 +4,7 @@
 
 Identify who matters for the **first release** — the specific people, roles, and agents whose perspective on quality counts. Stakeholders drive everything that follows: dimensions are rated against what they value; risk is assessed relative to their needs; the plan of work serves their priorities.
 
-For v1 of this skill, the depth analysis is for the first release only (see SKILL.md → "Scope of this skill"). Stakeholders for future releases are noted briefly so the strategy isn't blind to what's coming, but the three-lens depth analysis happens only for the immediate release.
+This skill's depth analysis is for the first release only (see SKILL.md → "Scope of this skill"). Stakeholders for future releases are noted briefly so the strategy isn't blind to what's coming, but the three-lens depth analysis happens only for the immediate release.
 
 ## What you need from the previous sub-step
 
@@ -22,7 +22,9 @@ By the end of this sub-step the strategy doc must capture:
 
 ## How to ask
 
-Surface what the pre-read suggested first: *"From the docs the audience looks like X — is that close to right for the alpha?"*
+The prompts below are examples of *intent*, not lines to recite — say them in your own words, fitted to the user (see SKILL.md → "Phrasing — adapt, don't recite"). What's fixed is what each question has to surface; the wording is yours.
+
+Surface what the pre-read suggested first — e.g. *"From the docs the audience looks like X — is that close to right for the alpha?"*
 
 For the first release:
 

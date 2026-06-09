@@ -20,7 +20,7 @@ If you find yourself unable to make sense of the strategy without code grounding
 ## What to read
 
 1. **`quality/strategy.md`** — focus on:
-   - **Part 5 (Quality Dimensions)** — what dimensions matter, with H/M/L/None ratings.
+   - **Part 5 (Quality Dimensions)** — what dimensions matter, with H/M/None ratings.
    - **Part 6 (Risk Map)** — required vs actual levels, confidence on both, per dimension. This is the most important input to the whole skill.
    - **Part 7 (Plan of Work)** — what actions the strategy already proposes. Some will be testing; some will be fixing; some stakeholder. The test strategy operationalises the testing actions and may surface new ones.
    - **Part 3 (Stakeholders)** — three-lens analysis, especially Dealbreaker entries. Tier-1 learning needs often come from here.

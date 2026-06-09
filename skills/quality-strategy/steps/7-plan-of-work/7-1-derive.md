@@ -17,7 +17,8 @@ By the end of this sub-step the strategy doc must capture, for the first release
 1. **An enumerated list of actions** — one per row of the risk map that has a non-zero gap, plus actions to resolve high-impact unknowns (low-confidence rows).
 2. **For each action:** what it is, what gap or unknown it addresses, and which dimension(s) it touches.
 3. **Actions for resolving unknowns first** — for every **Unknown actual** and every **Low-confidence required or actual** on a high-impact dimension, an action that resolves the gap (testing/asking for Unknowns; either testing or fixing for Lows depending on whether the gap or the assessment is the issue).
-4. **Don't classify yet** — that's sub-step 7.2. Just enumerate.
+4. **"Aware, not investing this release" notes** — for any H/M-impact dimension the team is consciously aware of but deliberately *not* investing in this release, a no-action-with-reason entry recording that decision. This is the role the old `L` rating used to play (5.4 no longer rates L): the deferral is a plan-of-work decision, made here with the impact in full view. Record it the same way as a non-goal-confirming note (see "How to ask"). Distinguish it from a **None** (no stakeholder bar references the dimension) and from a **non-goal** (deliberately excluded): this is a dimension that matters, consciously deferred.
+5. **Don't classify yet** — that's sub-step 7.2. Just enumerate.
 
 ## How to ask
 
@@ -53,6 +54,7 @@ What you must not do:
 ## This sub-step is DONE when
 
 - [ ] Every non-zero-gap row in the risk map either has an action OR has been actively confirmed as acceptable as-is.
+- [ ] Any H/M-impact dimension the team is aware of but deliberately not investing in this release is recorded as an "aware, not investing this release" note (no-action-with-reason) — not silently dropped, and not confused with a None or a non-goal.
 - [ ] Every **Unknown actual** and every **Low-confidence row** on a high-impact dimension has at least one action — and the action type matches (testing/asking for Unknowns; testing or fixing for Lows depending on whether the assessment or the gap is the problem).
 - [ ] Each action is specific enough to act on (who could do it, what done looks like).
 - [ ] Each action notes which gap or unknown it addresses.

@@ -74,7 +74,7 @@ Each entry: what we did, why we did it, what would change our mind, and how we'd
 
 **What would change our mind.** If real strategies end up with no record of the actual debates the team is having about a stakeholder. Or if Ed's evidence elsewhere shows Discussed is genuinely first-class.
 
-**How we'd know.** Compare real strategies to the Tollens alpha doc structure — are the "live debates" being captured equivalently, or are they getting lost?
+**How we'd know.** Compare real strategies to an early real-project strategy's structure — are the "live debates" being captured equivalently, or are they getting lost?
 
 ---
 
@@ -86,7 +86,7 @@ Each entry: what we did, why we did it, what would change our mind, and how we'd
 
 **What would change our mind.** If running this on multiple consecutive releases shows that revision mode produces strategies that don't hang together across releases — e.g. earlier-release decisions box in later releases in ways nobody anticipated.
 
-**How we'd know.** Run on Tollens alpha now, beta when ready, GA later. See if the across-release coherence holds.
+**How we'd know.** Run on a real project's alpha now, beta when ready, GA later. See if the across-release coherence holds.
 
 ---
 
@@ -146,7 +146,7 @@ These are calls made during design discussion before the skill is built. They'll
 
 **What we did.** /test-strategy doesn't fix the tier count of the learning-needs list. It prescribes the pattern (impact-ordered tiers, each item = question + methods + exit criterion, optional reference to risk-map row) and lets the count fall out of the project's risk map.
 
-**Why.** Appendix B's four tiers (Existential / Dealbreaker / Quality-of-experience / Team confidence) emerged from the shape of Tollens' risk map, not from a framework rule. Other projects might naturally tier into 3 or 5. The load-bearing thing is the per-item format and the impact ordering, not the count.
+**Why.** Appendix B's four tiers (Existential / Dealbreaker / Quality-of-experience / Team confidence) emerged from the shape of one real project's risk map, not from a framework rule. Other projects might naturally tier into 3 or 5. The load-bearing thing is the per-item format and the impact ordering, not the count.
 
 **What would change our mind.** If real strategies converge on the same tier count anyway (in which case prescribing it would save time). Or if the lack of prescribed count produces inconsistent strategies that are hard to compare across projects.
 
@@ -280,7 +280,7 @@ These are calls made during design discussion before the skill is built. They'll
 
 # v2 design decisions (pre-implementation)
 
-These are the design decisions worked out across the May–June 2026 design sessions (full reasoning in `design/v2-design-and-plan.md`). They're recorded here so the calls — and their falsification conditions — are visible as v2 ships. Most are locked; OQ1–OQ6 in the design doc track the genuinely-open sub-questions, referenced inline below. As each ships and gets real-world tested, it graduates into the post-implementation register at the top of this file.
+These are the design decisions worked out across the May–June 2026 design sessions. They're recorded here so the calls — and their falsification conditions — are visible as v2 ships. Most are locked; the genuinely-open sub-questions are referenced inline below. As each ships and gets real-world tested, it graduates into the post-implementation register at the top of this file.
 
 ---
 
@@ -344,17 +344,15 @@ These are the design decisions worked out across the May–June 2026 design sess
 
 ---
 
-## Path resolution + self-contained skill directories
+## Path resolution + plugin-root grounding
 
-*(Provisional — being confirmed by the skill-file-resolution experiment run this session; finalise once `/tmp/skill-exp/skill-file-resolution-findings.md` lands.)*
+**What we did.** Ship the whole pack as a single Claude Code plugin (`.claude-plugin/plugin.json` names it `quality-strategy`; `.claude-plugin/marketplace.json` lists it with `source: "."`, so the entire repo is the plugin, not the `skills/*` subtree alone). Inside SKILL.md bodies, `${CLAUDE_PLUGIN_ROOT}` expands to the plugin root — i.e. the repo root — so a skill reads shared grounding via `$PLUGIN_ROOT/PHILOSOPHY.md` (one repo-root copy, not duplicated into each skill dir) and cross-skill files via `$PLUGIN_ROOT/skills/<skill>/...` (`FRAMINGS.md`/`INDICATORS.md` live once inside `skills/test-strategy/` and are shared by pointer — the review skills and `/oracle-adequacy` point at them). There is still no `$SKILL_DIR` runtime variable: the design doc's "resolve `$SKILL_DIR`/`$PROJECT_DIR`" is implemented as the orchestrator resolving its own absolute plugin-root path (off `${CLAUDE_PLUGIN_ROOT}`) and the project path once at start, then substituting the literal absolute paths into every subagent brief before dispatch (a sealed subagent can't expand a token it's handed). This resolved to option (b) the earlier text anticipated — a single shared plugin-root grounding copy — rather than per-skill duplication.
 
-**What we did.** Established that there is no `$SKILL_DIR` runtime variable; the design doc's "resolve `$SKILL_DIR`/`$PROJECT_DIR`" is implemented as: the orchestrator resolves its own absolute skill-directory path and the project path once at start, then substitutes the literal absolute paths into every subagent brief before dispatch (a sealed subagent can't expand a token it's handed). Each skill directory is made self-contained — the grounding files it references (`PHILOSOPHY.md`; plus `FRAMINGS.md`/`INDICATORS.md` for the test skills) travel inside the skill dir, because only `skills/*` is copied on install and a repo-root file never reaches `~/.claude/skills/`.
+**Why.** v1 briefs referenced `<repo>/PHILOSOPHY.md`; `<repo>` never resolved when installed at `~/.claude/skills/`, and PHILOSOPHY.md wasn't even present there. Two failure modes compounded: an unresolved token *and* an absent file. Shipping the repo as one plugin fixes both — `${CLAUDE_PLUGIN_ROOT}` is expanded by Claude Code at load time to a real absolute path, and the grounding files travel with the plugin at known relative locations under that root, so one canonical copy serves every skill.
 
-**Why.** v1 briefs referenced `<repo>/PHILOSOPHY.md`; `<repo>` never resolved when installed at `~/.claude/skills/`, and PHILOSOPHY.md wasn't even present there. Two failure modes compounded: an unresolved token *and* an absent file.
+**What would change our mind.** If a real install fails to expand `${CLAUDE_PLUGIN_ROOT}` in some SKILL.md bodies (so the orchestrator can't read off a usable plugin-root path and substitution breaks). If the shared-grounding-by-pointer model breaks because an install copies only part of the repo (e.g. just `skills/*`), leaving `$PLUGIN_ROOT/PHILOSOPHY.md` or a cross-skill `$PLUGIN_ROOT/skills/<skill>/...` target absent — which would push back toward per-skill duplication.
 
-**What would change our mind.** The running experiment may show (a) the orchestrator can't reliably determine its own absolute path — which would undermine substitution and force a different mechanism; or (b) the Claude Code plugin model reliably lets multiple skills share one plugin-root grounding file after a real install — which would replace per-skill duplication with a single shared copy (ship-the-pack-as-a-plugin).
-
-**How we'd know.** The experiment's findings file answers both directly (Q1 and Q4/Q5). After that, a real `cp`-install run of `/test-strategy` on a workshop repo confirms briefs resolve and grounding is found.
+**How we'd know.** A real plugin install + run of `/quality-strategy` and `/test-strategy` on a workshop repo: confirm `${CLAUDE_PLUGIN_ROOT}` expands, briefs resolve to absolute paths, and every `$PLUGIN_ROOT/...` grounding and cross-skill target is found at its expected location.
 
 ---
 
@@ -518,9 +516,9 @@ These are the design decisions worked out across the May–June 2026 design sess
 
 **What we did.** v2 is allowed to be a clean break from v1. No migration path is provided for v1-produced strategies. Design OQ6: existing workshop-run strategies were learning runs — let them sit; v2 produces fresh strategies for new projects.
 
-**Why.** v1 was fresh — only Qing has used it, and the workshop runs were learning exercises, not durable artifacts a team depends on. Carrying compatibility constraints would tax the redesign for no real beneficiary.
+**Why.** v1 was fresh — only the maintainer has used it, and the workshop runs were learning exercises, not durable artifacts a team depends on. Carrying compatibility constraints would tax the redesign for no real beneficiary.
 
-**What would change our mind.** If a v1 strategy turns out to be in active use and worth migrating, or if external users adopted v1 before v2 ships (breaks the "only Qing" assumption).
+**What would change our mind.** If a v1 strategy turns out to be in active use and worth migrating, or if external users adopted v1 before v2 ships (breaks the "only the maintainer has used it" assumption).
 
 **How we'd know.** Check whether any v1 strategy is being actively maintained or depended on before deleting or breaking anything.
 
@@ -601,6 +599,150 @@ These record the calls made while shipping Phase 2 (the standalone-skill extract
 **What would change our mind.** If heading-based navigation proves unreliable on real docs (duplicate or reworded headings) before Phase 5 lands, sentinels get pulled earlier.
 
 **How we'd know.** Watch whether `/contradiction-check` mis-locates Part boundaries on real strategies during the gap before Phase 5.
+
+---
+
+# Phase 3/4 implementation notes (qss-v3-overnight run)
+
+These record what the overnight run actually landed for the per-stakeholder + mechanical-anchor redesign, and where it deliberately stopped short.
+
+---
+
+## R1 decomposition: dimension-rating sealed + mechanical anchors landed; per-stakeholder risk-map deferred
+
+**What we did.** Landed Phase 4 — the mechanical anchors at sub-step 5.4: **H** iff the dimension's failure mode is a Dealbreaker for ≥1 stakeholder; **M** iff a non-Dealbreaker Good Enough/Delight bar references it (and no Dealbreaker does); **None** iff no bar at any lens references it; deliberately **no L** at this step. And landed the Phase-3 merge step: per-stakeholder rating runs in a **sealed-context subagent** that writes `quality/.scratch/5.4-dimension-rating.md`; the orchestrator dispatches / collects / merges / presents and does not grade; divergence between stakeholders is surfaced to the user as a one-team commitment decision (*"Stakeholder A: H Dealbreaker; Stakeholder B: None — you have one team, what does it commit to?"*) and the resolution is recorded. We propagated the no-L ripple across the rest of the skill: 5.5 (distribution check reframed for H/M/None), SKILL.md (the sub-step table and the sealed-dispatch / scratch-file list now include 5.4), Step 7 (the former-L "aware-but-not-investing" items are recorded as plan-of-work decisions, not ratings), and `/quality-strategy-review` (distribution check re-scoped to the H/M/None rating axis, the H-requires-Dealbreaker rule tightened, and `5.4-dimension-rating.md` added to the required scratch-file audit). **Deferred:** the full per-stakeholder decomposition of the **risk map** (sub-steps 6.1/6.2/6.3) — required level, actual level, and gap are still assessed at the merged-dimension level, not per-stakeholder-then-merged.
+
+**Why.** 5.4 is the exact place v1 drifted to middle ratings (the v1 review finding named it), so it was the highest-value, most self-contained piece to seal first. The risk map operates coherently on the merged H/M/None ratings exactly as it did before, so doing 5.4 alone leaves the skill internally consistent rather than half-converted. Decomposing the risk map per-stakeholder hastily overnight risked an incoherent half-sealed skill — the design sized that work as multi-day — and honesty about a clean boundary beats a broken skill.
+
+**What would change our mind.** If real runs show the merged-level risk map hides the same cross-stakeholder divergence at the required/actual stage that the 5.4 merge now surfaces at the impact stage — i.e. the divergence that matters most reappears in 6.x and is lost to early merging there too.
+
+**How we'd know.** On real runs, count how often a single merged required/actual level in Part 6 papers over a genuine stakeholder disagreement the user would have decided differently had it been surfaced — as 5.4 now surfaces it for impact. If that's common, the risk map needs the same per-stakeholder-then-merge treatment.
+
+---
+
+# Stage 3 — deferrals from the qss-v3-overnight persona test
+
+Findings from a 10-persona conversational test of `/quality-strategy` that we decided **not** to act on now — either too large/design-sensitive for that run, or genuinely uncertain. Recorded with the standard structure so the calls are visible. (The test itself — transcripts and per-persona critiques — was an internal evaluation run; the durable decisions it produced live here in this register.)
+
+---
+
+## Cadence / "velocity" + "lean" mode (the headline finding — deferred, not rejected)
+
+**What we did.** Deferred. 8–9 of 10 personas found the per-sub-step ritual + boundary checkpoints heavier than their job needed (the expert resented the turn count; the new lead *ran out of turns before reaching the plan of work she most needed*; the portfolio/fixed-bid jobs wanted far less ceremony). The ask is consistent: a way to **compress cadence and document volume without lowering analytical rigor** — e.g. an expert/velocity mode that batches sub-steps when the user front-runs answers, and a lean mode for small/portfolio/fixed-bid jobs, plus time-boxing so Step 7 (plan of work) is always reached. We applied only the small, safe slices now (suppressing scaffolding narration; a precise-user checkpoint register) and deferred the mode itself.
+
+**Why.** This is the most-supported finding *and* the most design-sensitive: it sits in direct tension with the deliberate "same rigour regardless of job" stance (project-shape changes phrasing, not depth). Done badly it becomes the corner-cutting the framework is built to resist — and several critics explicitly credited the skill for *holding its ground* on rigor. Designing "compress ceremony but not rigor" well (trigger conditions, what batches safely, how the step-boundary checkpoint survives, how Step 7 is guaranteed) is a multi-step design effort with its own testing, not an overnight edit. Out of scope for this run per the brief ("do not start work beyond these three stages; resist bloating").
+
+**What would change our mind.** It already has, on priority: this should be the next design focus. The open question is *how*, not *whether*. The risk to watch: a velocity/lean mode that quietly lowers the bar rather than the ceremony.
+
+**How we'd know.** Prototype a cadence-adaptive variant; on real runs, check whether it reaches Step 7 faster while producing a strategy a `/quality-strategy-review` still passes at full rigor, and whether expert users stop resenting the turn count.
+
+---
+
+## Audience-facing one-page deliverable (vs. author-facing artifact)
+
+**What we did.** Deferred. 6 personas (EM, OSS, QA-lead, agency, bootcamp, platform) said the produced doc is written for its author/auditor, not the named audience (40 engineers / 20 contributors / a busy PM / a non-technical client). They want a distinct distributable one-pager beyond the TL;DR, and P6 specifically lost the **degrade-to-one-move fallback** she asked for between collection and the final TL;DR.
+
+**Why.** This is an output-shape redesign of `/operational-distillation` (and possibly a second emitted artifact), interacting with the cadence work above. Too large to do safely overnight without risking the distillation's "view-not-second-source-of-truth" property. One concrete sub-piece is small and worth doing in a focused pass: *make the degrade-to-one-move fallback a required distillation element whenever the strategy job is funding/communication-constrained* (the skill collected the requirement and dropped it).
+
+**What would change our mind / How we'd know.** If returning readers consistently bounce off the body and only ever read the TL;DR, the one-pager should become a first-class output. Track whether the TL;DR alone is enough to triage, or whether people need the distributable spine.
+
+---
+
+## Non-deterministic / ML systems + time-awareness (drift)
+
+**What we did.** Deferred. The ML/data-engineer persona (fit 2, the lone would-not-recommend) surfaced that the framework has no worked example for **metric-distribution "correctness"** as a quality dimension (a tolerance + confidence, not a green test), no mechanism for **non-stationary** quality that drifts weekly despite PHILOSOPHY's "plan for context shifts," and a **code-shaped pre-read** blind to feature stores / eval harnesses / drift monitors. (Caveat: this cell is partly a harness artifact — the simulated project had "no stakeholder to interview," so the run stalled at Step 0.)
+
+**Why.** Genuine gaps, but each is real design work (a worked non-deterministic-oracle example; a stationary-vs-drifting prompt + re-evaluation cadence/owner; broadening the pre-read's notion of "what holds this system's quality"). n=1 in this test and entangled with a harness limitation, so not overnight-actionable — but the **time-awareness gap is real beyond ML** (any strategy is a snapshot; PHILOSOPHY promises context-shift planning the skill doesn't yet operationalise).
+
+**What would change our mind / How we'd know.** Run the skill on a real recsys/ML project (with a real owner answering). If quality genuinely won't map to a point-in-time dimension+level, add the drift/time-awareness mechanism and the data/ML pre-read.
+
+---
+
+## Full no-repo mode for the review + solo-owner vs fabricated-stakeholder
+
+**What we did.** Applied the producer-side honesty fix now (pre-read declares itself interview-derived and tags inferred-vs-scanned sources). Deferred the review-side piece: in the test, the closing `/quality-strategy-review` *green-checked phantom scratch files* ("all 13 required dispatch files present") in sessions with no repo. Also deferred a related conceptual fix the ML persona raised: the "no stakeholder → refuse" path conflates a *fabricated* persona (rightly refuse) with a *real solo owner answering for themselves* (should proceed, recording assumptions).
+
+**Why.** The R8 scratch-audit already FAILs on missing required scratch files; making the review correctly handle a genuine no-repo run (vs treating absence as fabrication, or vice versa) needs careful interaction with R8 and the pre-read honesty change, and the solo-owner distinction touches the escalation logic — both want their own focused pass rather than an overnight bolt-on.
+
+**What would change our mind / How we'd know.** Run the review on a real no-repo / pre-implementation strategy and on a real solo-owner project; check it neither fabricates a pass nor wrongly refuses.
+
+---
+
+## Client two-artifact split (frank-internal vs client-showable)
+
+**What we did.** Deferred (n=1, the agency contractor). He needed the output to split cleanly into a client-showable spine and a frank internal layer (the single file literally contained his pain-threshold line), via two artifacts or mechanical tagging/export.
+
+**Why.** A real, specific need but a single-persona, niche output-shaping feature; lower weight than the cross-cutting items above, and it overlaps the audience-one-pager work. Resist bloating the core flow for one use case.
+
+**What would change our mind / How we'd know.** If contractor/agency use turns out common (client deliverable is a stated use case), build the spine/frank split — likely as an option on `/operational-distillation`.
+
+---
+
+# Stage 4 — ship-prep decisions (qss-v3-shipprep)
+
+Calls made while preparing the pack for public alpha. Full reasoning in `runs/qss-v3-shipprep/`.
+
+---
+
+## Leak-cleanup is a review-time job, not a producer prohibition (A1 rework)
+
+**What we did.** The first cut of the leak fix (a `d58caa1` SKILL.md block) loaded the *producing* pass with a list of don'ts — "do not narrate dispatches / turn refs / scratch in either channel." We reverted that approach. The producing pass is now told only to write the finding, not narrate the machinery; the actual stripping of any leaked dispatch/scratch narration, append bookkeeping, turn-lineage refs, and inferred-as-scanned lines happens **at review time** on text already written. Three review surfaces share it: a light scan at intermediate sub-step wrap-ups, a thorough scan of the just-written Part at each step boundary (pattern item 0b), and the final `/quality-strategy-review` check 21 as the whole-doc backstop. The template-line removal (A1b, `499f394`) and the strengthened review check 21 (A1c, `99fed70`) are kept — neither is a producer prohibition.
+
+**Why.** Per the adjudication: giving the producing agent a prohibition list is stressful and likely degrades the real analytical work ("two more non-task things to worry about"), and it didn't reliably catch the leak anyway (the original leak was found by the critic, not the skill's self-review). Cleaning at review — where the doc is being read back Part-by-Part and then whole — is both lighter on the producer and more thorough, and it matches how the skill already works (it reviews each subsection at its boundary as well as the whole doc at the end).
+
+**What would change our mind.** If review-time cleanup misses leaks that a producer-side rule would have caught — i.e. the orchestrator strips its *own* narration unreliably at the boundary, so leaks survive to the final review or past it. Or if the step-boundary scan adds enough overhead that boundaries start getting skipped.
+
+**How we'd know.** On real runs, grep produced `strategy.md` files for the leak patterns (dispatch/scratch narration, `turn-NN`, "scratch would be") after the strategy is declared done. If they persist, the review-time-only model is too weak and a light producer-side nudge (not a prohibition list) may be needed after all. The qss-v3-shipprep V2 validation run is the first such check.
+
+---
+
+## De-robotising phrasing via a global directive, not 21 rewrites (A3)
+
+**What we did.** Generalised the A3 checkpoint-register change into a standing direction: a "Phrasing — adapt, don't recite" section near the top of `/quality-strategy` SKILL.md establishes that every quoted prompt in the sub-step files is an *example of intent*, to be said in the facilitator's own words, fitted to the user — "a useful management consultant, not a robot reading a script." The substance (the question that must be answered, the check that must pass, the push-back that must happen) is fixed; the wording is free. We added one representative reinforcement in the most-scripted sub-step (3.1) rather than rewriting the quoted prompts in all 21 files, which would risk dropping substance for little gain over the global rule.
+
+**Why.** The project owner's verdict: "Be flexible with phrasing everywhere; don't hard-script." A single global directive reframes all 21 sub-steps' prompts as illustrations at once, is maintainable, and can't accidentally delete a load-bearing question — whereas surgically rewording every quoted prompt across the tree is high-effort and high-risk. The orchestrator reads SKILL.md as its entry point, so the directive is in context whenever it executes a sub-step.
+
+**What would change our mind.** If agents only read the sub-step file and skip SKILL.md at a given sub-step (the "Per-sub-step boilerplate" entry above flags exactly this uncertainty), the global directive could be missed and prompts get recited verbatim anyway. Then the fix is to push a one-line "these are examples, adapt them" reminder into each sub-step file's interview section.
+
+**How we'd know.** On real runs, watch whether the facilitator's wording visibly adapts to the user or reads like a recited form — especially in sub-steps far from SKILL.md in the agent's context. If recitation persists, reinforce per-sub-step.
+
+---
+
+## Labelled-strawman affordance for genuinely-stuck users (R-skip)
+
+**What we did.** Added a "When the user is genuinely stuck — offer a labelled strawman" section to `/quality-strategy` SKILL.md. When a user genuinely can't generate an answer (not when they're dodging the work), the skill may offer a concrete, *loudly-labelled* starting guess to react to — "probably wrong, tear into it" — then interview as normal; an un-reacted-to strawman is discarded, never banked as fact. Kept two bright lines: never present fabricated content as established fact (a strawman is labelled as a guess every time), and it never softens the framework's substantive refusals (non-goals, 5.2/5.3, "just give me ratings", lowering rigour for small jobs). Explicitly scoped to the blank-page user, not the impatient one.
+
+**Why.** Adjudication OVERRODE (partial) the blanket "don't invent" stance: when users have no idea, bouncing off a wrong suggestion beats inventing from nothing, and people critique far better than they generate. The risk is obvious — a strawman that quietly becomes "fact", or that's used to cut corners — so the affordance is fenced by the labelling rule and the explicit "does not soften refusals" clause.
+
+**What would change our mind.** If, in real runs, strawmen leak into strategies as unlabelled fact (the user reacts weakly and the guess survives), or if the skill starts offering strawmen to unstuck users as a speed move — either would mean the fence isn't holding and the affordance needs tightening or removal.
+
+**How we'd know.** Audit produced strategies for content that traces to a strawman the user never actively confirmed; watch whether the strawman fires for stuck users (good) or impatient ones (bad). The qss-v3-shipprep V1 validation run (a deliberately stuck/lightweight user) is the first probe.
+
+---
+
+## Phantom-scratch fix + solo-owner-vs-fabricated-stakeholder (D4)
+
+**What we did.** Two fixes the qss-v3-overnight test surfaced. (1) **Phantom-scratch:** the closing `/quality-strategy-review` once green-checked "all 13 required dispatch files present" in a no-repo session where none were on disk. Check 20 now requires the auditor to verify on disk (actually list `quality/.scratch/` and read the files), forbids reporting a file present from the doc's narration alone, and reports **INCONCLUSIVE** (never PASS) when it can't access the directory — with the collapse step told to surface INCONCLUSIVE as "audit could not be run", never as a clean pass. It also states no-repo sessions still write scratch files (the pre-read writes its LIMITED/interview-derived note rather than skipping the file), so absence is still a real FAIL. (2) **Solo owner vs fabricated stakeholder:** the "no stakeholder → refuse" escalation now distinguishes a user who'd have us invent a persona from nothing (refuse) from a real solo owner answering for themselves (proceed, record they're answering in that capacity), and cross-references the labelled-strawman path for the real-but-stuck case.
+
+**Why.** The phantom green-check is a real correctness bug — a review that fabricates a pass is worse than no review. Verifying on disk and degrading to INCONCLUSIVE rather than PASS closes it. The solo-owner distinction fixes an over-broad refusal: a one-person project has a real stakeholder (the owner), and refusing to proceed there conflates "fabricate a stakeholder" (bad) with "the stakeholder is one real person" (fine). Connects to A2 (no-repo first-class).
+
+**What would change our mind.** If real runs show the on-disk audit still passing on fabricated/stub files (then check content harder), or the INCONCLUSIVE path firing so often on legitimate runs that it becomes noise. If the solo-owner branch is read as a licence to skip stakeholder analysis entirely (then tighten what "answering for themselves" must still produce).
+
+**How we'd know.** Run the review on a real no-repo / pre-implementation strategy and on a real solo-owner project: confirm it neither fabricates a pass nor wrongly refuses, and that a genuine missing-scratch case still FAILs. The qss-v3-shipprep V1 (no-repo) validation is the first probe of the closing review's honesty.
+
+---
+
+## Tracked-not-built this pass: D3 (research priority), D1 (reframed), R1 (definite TODO)
+
+**What we did.** Re-prioritised three deferred items per the adjudication, and tracked them in the README roadmap — but did **not** build any of them this pass (out of scope per the ship-prep brief).
+
+- **D3 — quality dimensions for new-world (AI / non-deterministic / agentic) products. Upgraded from minor defer to the #1 research priority.** The "ilities" list has nothing for products whose correctness is a metric distribution with a tolerance rather than a green test, no mechanism for non-stationary quality that drifts, and a code-shaped pre-read blind to feature stores / eval harnesses / drift monitors. Many users build exactly these products. **Documented as a named known gap** in the README ("Known limitations") and as the top roadmap item. The research itself (go back to the research stage / the original wiki: "what quality dimensions exist now for new-world products?") is explicitly future work and was **not** done this pass. The time-awareness/drift gap is real beyond ML — any strategy is a point-in-time snapshot while PHILOSOPHY promises context-shift planning the skill doesn't yet operationalise. See the Stage-3 entry "Non-deterministic / ML systems + time-awareness" above for the fuller analysis.
+- **D1 — cadence / lean mode. Reframed, still deferred, still not built.** The adjudication challenged the premise: a persona "running out of turns" was a too-low eval turn cap, not the skill being too long (a too-low cap can manufacture a false "too long" finding). The real open question is whether the 21 sub-steps surface dimensions that *genuinely matter* or some are spurious "ilities" — if all matter, the answer is a lighter *way to view* the detail, not "do less." We probe this only as an observation in the validation runs (the critic's spurious-vs-load-bearing-dimension note); we do **not** design a lean mode. Tracked in the README roadmap. The risk to hold against: a velocity/lean mode that quietly lowers the bar rather than the ceremony.
+- **R1 — per-stakeholder risk-map (6.x) decomposition. Promoted from vague deferral to a definite TODO.** Adjudication: "We totally need to do this. Doesn't matter when, as long as we track it." The dimension-rating step (5.4) already runs per-stakeholder and surfaces divergence; the risk map (6.1/6.2/6.3) still operates at the merged-dimension level. Bringing the same per-stakeholder-then-merge treatment to the risk map is now a tracked definite to-do (named in the README roadmap), sequenced after the cadence work because they interact. See the Phase-3/4 entry "R1 decomposition" above for the boundary that was landed vs deferred.
+
+**Why not built this pass.** The ship-prep brief scoped this pass to landing the adjudicated edits + public-readiness + validation, and explicitly excluded the D3 research, the D1 lean-mode design, and the R1 decomposition (each is multi-day design work with its own testing). Honesty over completeness: they're named as gaps/roadmap, not quietly shipped half-done.
+
+**How we'd know it's time.** D3: a real ML/non-deterministic project where quality genuinely won't map to a point-in-time dimension+level. D1: validation/real runs showing surfaced dimensions are reliably load-bearing (→ build a lighter view) or some are spurious (→ prune them). R1: real runs where a single merged required/actual level papers over a stakeholder disagreement the user would have decided differently — as 5.4 now surfaces for impact.
 
 ---
 

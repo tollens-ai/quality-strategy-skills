@@ -4,6 +4,8 @@ A set of Claude Code skills for producing and using a software *quality strategy
 
 The thinking is grounded in **Edmund Pringle's quality framework**: quality is value to someone who matters; testing is investigation to find out what's actually true; risk is danger to quality; the job is to maximise quality improvement for the time invested.
 
+> **Status: alpha.** This pack is being shared with a first wave of testers. The skills are working and have been exercised across a wide range of simulated users, but they have had limited real-world mileage. Expect rough edges, tell us where it misfires, and read [Known limitations](#known-limitations) before you start — there are gaps we already know about and are not hiding.
+
 ## Why this exists
 
 Most teams don't have a quality strategy. The teams that do mostly have a test plan misnamed. We think a real quality strategy is load-bearing infrastructure for software in the age of AI agents — when most code is being written by agents who don't know what quality means for *your* project, an explicit strategy is what stops them shipping confidently in the wrong direction.
@@ -15,6 +17,7 @@ Writing a quality strategy is just the start. Delivering the right quality for y
 - Solo developers and small teams who want a quality strategy but don't want to read a textbook to make one.
 - Anyone running AI agents who needs the agents to make quality calls without escalating every decision.
 - Engineering leaders who want a structured framework for what "good" looks like.
+- People at the **idea stage** — you do not need a repo. Running this before you write code is a first-class use (see [no-repo](#running-without-a-repo)).
 
 ## The skills
 
@@ -26,6 +29,7 @@ Available now:
 | `/quality-strategy-review` | Meta-audit. Applies seven indicators of a good quality strategy and surfaces failure modes. Used as the final step of `/quality-strategy` and standalone on existing strategies. |
 | `/test-strategy` | Produce the engineering-level companion that operationalises the quality strategy — what to investigate, in what order, and how to split human vs agent effort. |
 | `/test-strategy-review` | Meta-audit of a test strategy: would executing it move the quality strategy in the right direction, with the right priority? |
+| `/strategy-variants` | Post-processing. From a finished, reviewed `quality/strategy.md`, derive audience-facing variants without touching the original: a distributable one-pager and a client-safe ("polite") version. Omits and re-pitches; never asserts quality the strategy doesn't support. |
 | `/tooling-adequacy` | The explicit "how do we know?" check for the *test* strategy. Audits whether each learning need has an adequate *instrument* (to exercise/observe) and *oracle* (to judge), including cheap simulated/reference oracles worth building. |
 | `/oracle-adequacy` | The "how do we know?" check for the *quality* strategy — audits the oracles behind its actual-state assessments. Invoked during the risk-map pass, or standalone. Shares its oracle taxonomy with `/tooling-adequacy`. |
 | `/contradiction-check` | Cross-part contradiction detection for a strategy doc. Runs at `/quality-strategy` step boundaries, or standalone. Finds internal inconsistencies (not quality weaknesses). |
@@ -52,13 +56,47 @@ Then in any project, start with `/quality-strategy`. Output goes to `quality/str
 
 Skills are also available namespaced (`/quality-strategy:test-strategy`, `/quality-strategy:quality-strategy-review`) — useful if a bare name ever collides with another plugin.
 
+## Quickstart — the typical flow
+
+1. **`/quality-strategy`** — the main event. A structured interview produces `quality/strategy.md`. It ends by running `/operational-distillation` (a TL;DR + triage rubric at the top) and `/quality-strategy-review` (the audit), and then points you at `/test-strategy`.
+2. **`/test-strategy`** — turns the strategy into an engineering plan: what to investigate, in what order, and how to split human vs agent effort. Ends with `/test-strategy-review`.
+3. **`/strategy-variants`** (optional) — when you need something to circulate to the team or show a client, derive a one-pager or a client-safe version from the finished strategy.
+
+You can also run any of the review/check skills (`/quality-strategy-review`, `/contradiction-check`, `/oracle-adequacy`, `/operational-distillation`) standalone against an existing strategy doc.
+
 ## What the skills will and won't do
 
-**They interview you.** They do not infer your quality strategy from your code. The most important inputs — who matters, what they value, what's a non-goal, where you'll accept risk — cannot be guessed from a repo and would be guessed wrongly. The skills pre-read README, docs, and recent commits to bring informed questions to the conversation, but everything load-bearing is asked, not assumed.
+**They interview you.** They do not infer your quality strategy from your code. The most important inputs — who matters, what they value, what's a non-goal, where you'll accept risk — cannot be guessed from a repo and would be guessed wrongly. The skills pre-read README, docs, and recent commits (when a repo exists) to bring informed questions to the conversation, but everything load-bearing is asked, not assumed.
 
 **They are facilitators, not authors.** The skills walk a structured process and push back when something is missing or vague. They don't replace your judgment.
 
 **They produce a living document.** `quality/strategy.md` is meant to be read, updated, and used at decision points — not written once and filed.
+
+**They hold the bar.** The skills will not skip your non-goals, collapse the dimension passes, or lower rigour because a job feels small — that refusal is the point. They *will* adapt how questions are phrased to you, and (when you're genuinely stuck) offer a clearly-labelled starting guess for you to push against. They will not present a guess as established fact.
+
+### Running without a repo
+
+You do not need a codebase to run `/quality-strategy`. Running it at the idea stage — before any code exists — is a first-class, supported use: a quality strategy is most valuable *before* the build, when it can still steer it. With no repo, the pre-read degrades honestly (it says it's interview-derived rather than dressing up guesses as scan results), and the interview carries the load it always carries. The only thing a missing repo costs is the pre-read's scan-derived hypotheses; everything load-bearing was always going to be asked, not read.
+
+## Known limitations
+
+This is an alpha. Be aware of these before you rely on it:
+
+- **No dedicated quality dimensions yet for AI / non-deterministic / agentic products.** The dimension framework is strong for conventional software, but it does **not** yet have worked dimensions for systems whose "correctness" is a *metric distribution with a tolerance* rather than a green/red test, nor a built-in mechanism for **non-stationary** quality that drifts over time (model/data drift, prompt-sensitivity, eval-harness adequacy). If you're building an ML pipeline, a recommender, an LLM app, or another non-deterministic/agentic product, the skill will still help with stakeholders, non-goals, risk, and plan-of-work, but you will have to hand-craft the "what does good look like and how would we know" part for the non-deterministic core. Closing this gap is our top research item (see [Roadmap](#roadmap--future-work)).
+- **No-repo caveats.** Running without a repo is supported, but the pre-read can only surface what you tell it — it can't catch a contradiction between your stated intent and code that doesn't exist yet. Treat a no-repo strategy as a pre-implementation plan to revisit once there's something to scan.
+- **Validated mostly in simulation so far.** The skills have been stress-tested against many simulated users and reviewed adversarially, but real-world mileage is still limited. Some calls are explicitly provisional — see `OPEN-QUESTIONS.md`, which records design decisions made under uncertainty along with what would change our minds.
+- **Cadence is one-size.** Every run applies the same thorough cadence regardless of project size. That's deliberate (we'd rather not lower the bar by accident), but an expert on a small job may find the ceremony heavier than they'd like. A "lean/velocity" view of the same rigour is on the roadmap, not yet built.
+- **Internal decomposition is partial.** The skill's sealed-context dispatch + scratch-file auditability is in place for the analytical steps that have been decomposed (pre-read, dimension scout, dimension rating, oracle adequacy, contradiction checks, distillation); the remaining sub-steps are still run inline by the orchestrator. This is tracked, not hidden (`OPEN-QUESTIONS.md`).
+- **Single-release depth.** The deep analysis is for one release at a time; future releases get light notes and a re-run in revision mode when their context is real.
+
+## Roadmap — future work
+
+In rough priority order. These are tracked in `OPEN-QUESTIONS.md` with the reasoning and falsification conditions for each.
+
+- **Quality dimensions for new-world (AI / non-deterministic / agentic) products** *(research, top priority)* — go back to the research stage and work out what quality dimensions exist for products whose quality is non-deterministic and drifts: metric-distribution "correctness", drift/time-awareness, eval-oracle adequacy, training/serving skew. Many users build exactly these products; the framework needs first-class dimensions for them, not a conventional-software workaround.
+- **Cadence / "lean-mode" investigation** — the open question is whether the 21 sub-steps surface dimensions that genuinely matter for every project or some are spurious for smaller ones. The answer decides whether "lean mode" means a lighter *view* of the same rigour, or nothing at all. We are probing this in validation runs before designing anything — we will not ship a mode that quietly lowers the bar.
+- **Per-stakeholder risk-map decomposition** — the dimension-rating step already runs per-stakeholder and surfaces cross-stakeholder divergence; the risk map (required/actual/gap, sub-steps 6.x) does not yet. Bringing the same per-stakeholder-then-merge treatment to the risk map is a definite to-do (it interacts with the cadence work, so it's sequenced after it).
+- **`/strategy-variants` field-hardening** — the one-pager / client-safe transformation shipped in this alpha; real client/team use will tell us whether the omit-never-lie discipline holds and whether a sharper "degrade to one move when funding-constrained" element is needed.
 
 ## How long does it take?
 
@@ -69,8 +107,9 @@ Expect to spread it across **several sessions** of 60–90 minutes each, with `/
 ## What's where
 
 - `PHILOSOPHY.md` — the spine. Read this if you want to understand why the skills do what they do.
-- `OPEN-QUESTIONS.md` — design decisions made under uncertainty, places we're not sure we got it right, things to test in real-world running.
+- `OPEN-QUESTIONS.md` — design decisions made under uncertainty, places we're not sure we got it right, things to test in real-world running. The durable record of *why* the skills are shaped as they are.
 - `skills/` — the skills themselves. Each is a directory with a `SKILL.md` orchestrator and, where the work warrants it, a `steps/` directory with one file per phase.
+- `feedback/` — a dated note from a real run that shaped the design. It is load-bearing: `/quality-strategy-review`'s contextual-fit gate draws its job-classification axes from `feedback/2026-05-23-contextual-fit-for-preimplementation-one-shot-projects.md`.
 
 ## Credits
 
