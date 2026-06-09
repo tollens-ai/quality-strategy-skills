@@ -50,6 +50,14 @@ Wherever this skill does substantive analytical work via a subagent — the pre-
 
 **Process-note leak prevention.** Orchestrator meta-observations about *the skill itself* (an awkward step, a suspected bug, phrasing that didn't land) go to `$PROJECT_DIR/.skill-feedback.md` only — never into `quality/strategy.md`. The strategy doc reads as an authored artifact, not a transcript of the skill running.
 
+The same discipline applies to the *machinery* of running the skill, and it applies to **both** channels — the user-facing conversation and `quality/strategy.md`. None of the following may leak into either:
+
+- **Dispatch / scratch narration** — e.g. `[ran <dispatch> inline]`, "Subagent dispatched: …", "scratch would be `quality/.scratch/…`". The user is shown the *finding or question*, not the mechanism that produced it.
+- **Append / orchestration bookkeeping** — e.g. "I'll hold off appending Part 4 until the user confirms". Do the bookkeeping silently; don't narrate it.
+- **Sub-step / turn lineage references** — e.g. "corrected, turn-23", "split out at 5.2", "the turn-22 binding test". The strategy carries no provenance, lineage, or turn refs; it reads as authored strategy content.
+
+These are *presentation* rules. They do not change what work is done or which scratch files get written — every sealed dispatch still runs and still writes its scratch file, and `/quality-strategy-review`'s scratch-file audit still reads those files on disk. What changes is only what the user sees and what lands in the doc: the user-facing turns show the finding or question, not the machinery, and `quality/strategy.md` contains only authored strategy content.
+
 ## Scope of this skill — first release only
 
 The depth analysis in this skill (stakeholders, three-lens, non-goals, dimensions, risk map, plan of work) focuses on **one release at a time** — typically the next release the team is about to ship. Future releases are noted briefly during sub-step 2.1 (Roadmap) so the strategy isn't blind to what's coming, but the analysis depth is for the immediate release.
@@ -123,6 +131,8 @@ This is the single most important user-facing pattern in the skill. The strategy
 2. Run the substantive checkpoint:
 
    > *"Take a real moment to read this back. We've completed [Step name]. Is anything off — even if you can't articulate why? Anything that gives you a weird feeling? Anything in earlier steps that, in light of this work, you now think is wrong? Even vague unease is worth surfacing. Catching it now is cheap; catching it later costs hours of rework."*
+
+   **Adapt the register to the user.** When the user has been giving precise, articulate, complete answers — an expert who knows their domain — the open "any vague unease even if you can't name it?" prompt reads as a tic. Prefer the *targeted* form as the default: name the one place you most expect to be wrong and why, and ask them to test it — e.g. *"Here's the one place I'd bet this is most likely wrong, and why: <…> — does that hold?"* Reserve the open-unease phrasing above for users who are visibly uncertain or inarticulate. This is a change of phrasing only — the checkpoint itself still runs at every step boundary and still does the same work.
 
 3. **Wait for the user's response.** Treat any of the following as signals to dig in, *not* as confirmation:
    - "I think so."
@@ -219,6 +229,8 @@ After sub-step 7.3 is complete and the content is confirmed, two closing moves:
 2. **Review.** Invoke `/quality-strategy-review` on the produced doc. The review skill is the source of truth for "is this strategy any good" — it first runs a **contextual-fit gate** (reading the `## Strategy job` paragraph and adapting severity to the strategy's job), then applies the seven indicators and runs mechanical oracle checks (missing non-goals; all-High dimension ratings; percentage confidences; missing three-lens entries; missing scratch files for claimed dispatches; etc.).
 
 If the review surfaces failures, return to the relevant sub-step(s) and re-do. The strategy is not done until the review passes.
+
+Once it passes, point the user to **`/test-strategy`** as the explicit next step — the engineering-level companion that operationalises this strategy, defining what to investigate, in what order, and how human and agent effort should be allocated. The risk map and plan of work you just produced are its direct inputs. Name it and offer it so the user knows where to go next.
 
 ## Escalation points — stop and ask the user
 
