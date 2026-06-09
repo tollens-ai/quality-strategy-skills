@@ -274,7 +274,7 @@ So when a user is genuinely **stuck** (not evasive — stuck), you may offer a *
 
 Pause the skill and surface a question (rather than push through) when:
 
-- The user cannot identify any clear stakeholders. Strategy is impossible without this.
+- The user cannot identify any **real** stakeholder whose perspective counts — there is genuinely no one this is for. Strategy is impossible without that. But separate two cases that look alike: **(a)** a user who would have you *invent a stakeholder from nothing* — fabricate a persona and its bars → refuse; that's the fabrication the framework exists to prevent. **(b)** A **real solo owner answering for themselves** — they are the user, the buyer, and the operator → that is a valid stakeholder; proceed, interview them in that capacity, and record that they're answering for themselves. *"I'm the only one who matters right now"* is a real answer; *"let's make up who might matter"* is not. (A user who is real but simply stuck for words is different again — help them with a labelled strawman, see "When the user is genuinely stuck" above, rather than refusing or silently inferring.)
 - The user gives contradictory answers across sub-steps. Surface the contradiction; do not paper over it.
 - The budget or timeline does not match the ambition. Make the mismatch explicit; let the user decide.
 - "Everything is critical" — the user resists naming non-goals. Push: *"What would you cut if you had half the time?"*

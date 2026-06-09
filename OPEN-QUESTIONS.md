@@ -720,4 +720,16 @@ Calls made while preparing the pack for public alpha. Full reasoning in `runs/qs
 
 ---
 
+## Phantom-scratch fix + solo-owner-vs-fabricated-stakeholder (D4)
+
+**What we did.** Two fixes the qss-v3-overnight test surfaced. (1) **Phantom-scratch:** the closing `/quality-strategy-review` once green-checked "all 13 required dispatch files present" in a no-repo session where none were on disk. Check 20 now requires the auditor to verify on disk (actually list `quality/.scratch/` and read the files), forbids reporting a file present from the doc's narration alone, and reports **INCONCLUSIVE** (never PASS) when it can't access the directory — with the collapse step told to surface INCONCLUSIVE as "audit could not be run", never as a clean pass. It also states no-repo sessions still write scratch files (the pre-read writes its LIMITED/interview-derived note rather than skipping the file), so absence is still a real FAIL. (2) **Solo owner vs fabricated stakeholder:** the "no stakeholder → refuse" escalation now distinguishes a user who'd have us invent a persona from nothing (refuse) from a real solo owner answering for themselves (proceed, record they're answering in that capacity), and cross-references the labelled-strawman path for the real-but-stuck case.
+
+**Why.** The phantom green-check is a real correctness bug — a review that fabricates a pass is worse than no review. Verifying on disk and degrading to INCONCLUSIVE rather than PASS closes it. The solo-owner distinction fixes an over-broad refusal: a one-person project has a real stakeholder (the owner), and refusing to proceed there conflates "fabricate a stakeholder" (bad) with "the stakeholder is one real person" (fine). Connects to A2 (no-repo first-class).
+
+**What would change our mind.** If real runs show the on-disk audit still passing on fabricated/stub files (then check content harder), or the INCONCLUSIVE path firing so often on legitimate runs that it becomes noise. If the solo-owner branch is read as a licence to skip stakeholder analysis entirely (then tighten what "answering for themselves" must still produce).
+
+**How we'd know.** Run the review on a real no-repo / pre-implementation strategy and on a real solo-owner project: confirm it neither fabricates a pass nor wrongly refuses, and that a genuine missing-scratch case still FAILs. The qss-v3-shipprep V1 (no-repo) validation is the first probe of the closing review's honesty.
+
+---
+
 *Add new items to this file when we make calls under uncertainty. Revisit after each real-world run.*
