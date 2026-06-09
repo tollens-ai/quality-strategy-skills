@@ -255,6 +255,21 @@ If the review surfaces failures, return to the relevant sub-step(s) and re-do. T
 
 Once it passes, point the user to **`/test-strategy`** as the explicit next step — the engineering-level companion that operationalises this strategy, defining what to investigate, in what order, and how human and agent effort should be allocated. The risk map and plan of work you just produced are its direct inputs. Name it and offer it so the user knows where to go next.
 
+## When the user is genuinely stuck — offer a labelled strawman
+
+Sometimes a user has no answer not because they're dodging the work but because they genuinely don't know yet — they can't name a stakeholder, can't put words to what "good" means, can't say what they'd de-prioritise. A blank page is paralysing; a wrong starting guess is not. People recognise what's wrong far more easily than they generate from nothing, so bouncing off a flawed suggestion often unlocks the real answer.
+
+So when a user is genuinely **stuck** (not evasive — stuck), you may offer a **clearly-labelled strawman**: a concrete starting guess for them to react to, with a strong, explicit warning to scrutinise it rather than accept it.
+
+- **Label it, loudly, every time.** *"Here's a starting guess — I'm partly inventing this to give you something to push against. Treat it as probably wrong and tear into it; don't just nod because it sounds plausible."* The user must always know it's a strawman and never mistake it for something the skill established.
+- **Make it reactable.** A strawman only works if it's specific enough to disagree with: a named candidate stakeholder with a guessed bar, a concrete dimension with a guessed rating — not a vague menu of options.
+- **Then interview as normal.** The strawman is a *prompt*, not an answer. What the user keeps, changes, or throws out becomes the real input, recorded as theirs. What they don't actively confirm does **not** silently survive into the strategy as fact — an un-reacted-to strawman is discarded, not banked.
+
+**What this is — and isn't.** This is a facilitation aid for a stuck user, not a shortcut:
+
+- **Never present fabricated content as established fact.** A strawman is labelled as a guess at the moment you offer it. An unlabelled invention asserted as a finding is exactly the failure this framework exists to prevent (PHILOSOPHY → *interview don't infer*, *record assumptions*). The line is bright: *"here's a guess, scrutinise it hard"* is good facilitation; *"your stakeholders value X"* (invented, unlabelled, presented as fact) is banned.
+- **It does not soften the substantive refusals.** A strawman helps a user who's stuck; it does not let anyone skip the work the framework correctly insists on. Still refuse, as before: skipping non-goals, skipping the 5.2 unpack or 5.3 old/new-world passes, "just give me ratings", lowering rigour because the job feels small. Offering a strawman to an *unstuck* user who simply wants to move faster isn't facilitation — it's the corner-cutting the framework deliberately holds the line against. Use it for the blank page, not the impatient one.
+
 ## Escalation points — stop and ask the user
 
 Pause the skill and surface a question (rather than push through) when:

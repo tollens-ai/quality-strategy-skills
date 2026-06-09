@@ -708,4 +708,16 @@ Calls made while preparing the pack for public alpha. Full reasoning in `runs/qs
 
 ---
 
+## Labelled-strawman affordance for genuinely-stuck users (R-skip)
+
+**What we did.** Added a "When the user is genuinely stuck — offer a labelled strawman" section to `/quality-strategy` SKILL.md. When a user genuinely can't generate an answer (not when they're dodging the work), the skill may offer a concrete, *loudly-labelled* starting guess to react to — "probably wrong, tear into it" — then interview as normal; an un-reacted-to strawman is discarded, never banked as fact. Kept two bright lines: never present fabricated content as established fact (a strawman is labelled as a guess every time), and it never softens the framework's substantive refusals (non-goals, 5.2/5.3, "just give me ratings", lowering rigour for small jobs). Explicitly scoped to the blank-page user, not the impatient one.
+
+**Why.** Adjudication OVERRODE (partial) the blanket "don't invent" stance: when users have no idea, bouncing off a wrong suggestion beats inventing from nothing, and people critique far better than they generate. The risk is obvious — a strawman that quietly becomes "fact", or that's used to cut corners — so the affordance is fenced by the labelling rule and the explicit "does not soften refusals" clause.
+
+**What would change our mind.** If, in real runs, strawmen leak into strategies as unlabelled fact (the user reacts weakly and the guess survives), or if the skill starts offering strawmen to unstuck users as a speed move — either would mean the fence isn't holding and the affordance needs tightening or removal.
+
+**How we'd know.** Audit produced strategies for content that traces to a strawman the user never actively confirmed; watch whether the strawman fires for stuck users (good) or impatient ones (bad). The qss-v3-shipprep V1 validation run (a deliberately stuck/lightweight user) is the first probe.
+
+---
+
 *Add new items to this file when we make calls under uncertainty. Revisit after each real-world run.*
