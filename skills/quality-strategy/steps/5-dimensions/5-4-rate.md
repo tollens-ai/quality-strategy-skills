@@ -30,7 +30,7 @@ The flow is **a long stretch of sealed subagent work, then a short user dialogue
 
 ### 1. Dispatch the sealed-context rating subagent
 
-The mechanical-anchor work runs in a **sealed-context** subagent that sees only what it needs: the final dimension inventory from 5.3 and the Part 3 stakeholder three-lens bars. It must **not** see this file's DONE checklist, any desired or target distribution, or the destination doc's success conditions — that visible destination is exactly what tempted v1 to drift toward middle ratings.
+The mechanical-anchor work runs in a **sealed-context** subagent that sees only what it needs: the final dimension inventory from 5.3 and the Part 3 stakeholder three-lens bars. It must **not** see this file's DONE checklist, any desired or target distribution, or the destination doc's success conditions — that visible destination is exactly what tempts an orchestrator to drift toward middle ratings.
 
 Use the `Agent` tool with `subagent_type: general-purpose`. The brief:
 

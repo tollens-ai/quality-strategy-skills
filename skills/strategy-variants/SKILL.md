@@ -58,7 +58,7 @@ A variant is *for someone*. Pin down who (an engineer who'll build against it? a
 - **Where the real risk is** — the hottest risk-map rows that this reader needs to know about (Part 6), at the candor level appropriate to them (see step 3 for the client case).
 - **What happens next** — the first moves from the plan of work that involve or affect this reader (Part 7).
 
-### 2. Distributable one-pager (D2), if requested
+### 2. Distributable one-pager, if requested
 
 Write a single page, audience-facing, in the reader's language. It is **not** the operational TL;DR (that's an author/operator triage aid placed *inside* the strategy by `/operational-distillation`); this is a standalone document someone reads *instead of* the strategy. Cover, plainly:
 
@@ -70,7 +70,7 @@ Write a single page, audience-facing, in the reader's language. It is **not** th
 
 Keep it to a page. Plain sentences over tables where it helps the reader. Cite nothing internal-only.
 
-### 3. Client-safe variant (D5), if requested
+### 3. Client-safe variant, if requested
 
 Same backbone, re-pitched for an external reader, applying the omit-never-lie rule:
 

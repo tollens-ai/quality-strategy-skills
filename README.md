@@ -109,6 +109,7 @@ Expect to spread it across **several sessions** of 60–90 minutes each, with `/
 - `PHILOSOPHY.md` — the spine. Read this if you want to understand why the skills do what they do.
 - `OPEN-QUESTIONS.md` — design decisions made under uncertainty, places we're not sure we got it right, things to test in real-world running. The durable record of *why* the skills are shaped as they are.
 - `skills/` — the skills themselves. Each is a directory with a `SKILL.md` orchestrator and, where the work warrants it, a `steps/` directory with one file per phase.
+- `feedback/` — a dated note from a real run that shaped the design. It is load-bearing: `/quality-strategy-review`'s contextual-fit gate draws its job-classification axes from `feedback/2026-05-23-contextual-fit-for-preimplementation-one-shot-projects.md`.
 
 ## Credits
 
