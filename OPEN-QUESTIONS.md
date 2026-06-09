@@ -408,7 +408,7 @@ These are the design decisions worked out across the May–June 2026 design sess
 
 **What we did.** Each strategy states its job *right now* — durable production / pre-implementation / agentic one-shot / lightweight slice — in a "Strategy job" paragraph at the top. `/quality-strategy` Step 1 asks it; `/quality-strategy-review` adds a contextual-fit gate (Pass 0) that classifies the job and adapts severity (a missing production-observability section is a blocker for a durable strategy, deliberate scope control for a one-shot).
 
-**Why.** The anti-clickbait run (`feedback/2026-05-23-*.md`) showed the review mechanically applying the full production-grade scale to a pre-implementation one-shot — the wrong emphasis. Same framework, different right-output and right-severity per job. Over-enforcing turns quality strategy into ceremony; the framework's spirit is contextual quality.
+**Why.** The anti-clickbait run showed the review mechanically applying the full production-grade scale to a pre-implementation one-shot — the wrong emphasis. Same framework, different right-output and right-severity per job. Over-enforcing turns quality strategy into ceremony; the framework's spirit is contextual quality.
 
 **What would change our mind.** If the four job categories don't cover real projects (a fifth keeps appearing), or classification is ambiguous so people can't pick. Design OQ2: whether job affects which indicators apply, their severities, or both — current lean is severities only.
 
@@ -502,7 +502,7 @@ These are the design decisions worked out across the May–June 2026 design sess
 
 ## /feedback-synthesis as a standalone post-run skill
 
-**What we did.** A standalone skill that curates the run's `.skill-feedback.md` into a design-organised summary for the skill maintainer. Design OQ5: output to the user, to a maintainer file, or both — current lean is both (a short version to the user, a fuller one to `feedback/<date>-<slug>.md`).
+**What we did.** A standalone skill that curates the run's `.skill-feedback.md` into a design-organised summary for the skill maintainer. Design OQ5: output to the user, to a maintainer file, or both — current lean is both (a short version to the user, a fuller one for the maintainer).
 
 **Why.** The skill pack improves from real-run feedback, but raw `.skill-feedback.md` files are unstructured. A synthesis step makes the maintainer signal usable — and closes the very loop that produced this v2 batch.
 
@@ -680,7 +680,7 @@ Findings from a 10-persona conversational test of `/quality-strategy` that we de
 
 # Stage 4 — ship-prep decisions (qss-v3-shipprep)
 
-Calls made while preparing the pack for public alpha. Full reasoning in `runs/qss-v3-shipprep/`.
+Calls made while preparing the pack for public alpha.
 
 ---
 
