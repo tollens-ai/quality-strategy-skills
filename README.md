@@ -55,13 +55,35 @@ Ten skills ship in the pack, but you only ever *start* four of them. The pack is
 
 The shape follows the four questions the pack is built on — *what does good look like? how do we know? is it good? how do we make it good?* — and one deliberate design rule: the strategy's plan of work (Part 7) is a **sketch** — optional, and skippable outright in favour of the follow-ons — and the follow-ons elaborate it. `/test-strategy` takes the testing work and turns it into an investigation plan. `/tooling-strategy` takes everything the other two docs *couldn't* answer — Unknowns, dimensions gated on missing oracles, learning needs blocked on missing instruments — and turns it into a prioritised build plan. `/strategy-variants` takes the finished strategy and reshapes it for an audience.
 
+### Which order? Let the risk map decide
+
+The follow-ons are a flow, not a fixed sequence. The principle: **you can only investigate what you can judge** — so the state of your risk map decides whether the build plan or the investigation plan comes first, and the adequacy checks are the fork points.
+
+```mermaid
+flowchart TD
+    QS["<b>/quality-strategy</b><br/>the interview → quality/strategy.md"]
+    TS["<b>/test-strategy</b><br/>the investigation plan → quality/test-strategy.md"]
+    TOOL["<b>/tooling-strategy</b><br/>the oracle/instrument build plan → quality/tooling-strategy.md"]
+    SV["<b>/strategy-variants</b><br/>audience-facing variants"]
+    BUILD["build the oracles & instruments"]
+
+    QS -->|"risk map mostly answerable"| TS
+    QS -->|"risk map dominated by Unknowns<br/>and oracle gaps"| TOOL
+    TS -->|"its tooling check surfaces blocked<br/>learning needs — the sharpened demand"| TOOL
+    TOOL --> BUILD
+    BUILD -.->|"Unknowns become knowable —<br/>update the risk map,<br/>unblock the learning needs"| QS
+    QS -->|"need something to circulate"| SV
+```
+
+A project that's mostly measurable goes interview → investigation plan, with the build plan mopping up the gaps afterwards. A project that's mostly *blind* — lots of "we genuinely can't tell" in the risk map — goes interview → build plan first, because an investigation plan written against unjudgeable dimensions is mostly "blocked". The skills recommend the branch themselves at each hand-off; you can always overrule.
+
 ### Skills you run directly
 
 | Skill | Purpose |
 |---|---|
 | `/quality-strategy` | Walk a 7-step interview to produce `quality/strategy.md`. Use when starting a project, planning a major release, or when "quality" is being talked about vaguely. |
 | `/test-strategy` | Produce the engineering-level companion that operationalises the quality strategy — what to investigate, in what order, and how to split human vs agent effort. |
-| `/tooling-strategy` | The strategy for "how do we know?". Gathers everything the quality and test strategies couldn't answer — Unknown/Gated/over-confident actuals, learning needs blocked on missing instruments or oracles — into one prioritised oracle/instrument build plan. Run after `/quality-strategy`; bites best once `/test-strategy` has run too. |
+| `/tooling-strategy` | The strategy for "how do we know?". Gathers everything the quality and test strategies couldn't answer — Unknown/Gated/over-confident actuals, learning needs blocked on missing instruments or oracles — into one prioritised oracle/instrument build plan. Run it as soon as unanswerables exist: directly after `/quality-strategy` when the risk map is mostly blind, after `/test-strategy` when it's mostly answerable. The most re-runnable of the three. |
 | `/strategy-variants` | Post-processing. From a finished, reviewed `quality/strategy.md`, derive audience-facing variants without touching the original: a distributable one-pager and a client-safe ("polite") version. Omits and re-pitches; never asserts quality the strategy doesn't support. |
 
 ### Sub-skills (invoked for you; each also runs standalone)
@@ -101,7 +123,7 @@ Skills are also available namespaced (`/quality-strategy:test-strategy`, `/quali
 
 1. **`/quality-strategy`** — the main event. A structured interview produces `quality/strategy.md`. It ends by running `/operational-distillation` (a TL;DR + triage rubric at the top) and `/quality-strategy-review` (the audit), and then points you at the follow-ons.
 2. **`/test-strategy`** — turns the strategy into an engineering plan: what to investigate, in what order, and how to split human vs agent effort. Ends with `/test-strategy-review`.
-3. **`/tooling-strategy`** (when the docs surfaced things you can't measure or judge yet — common, and a finding rather than a failure) — turns those gaps into a prioritised oracle/instrument build plan.
+3. **`/tooling-strategy`** (when the docs surfaced things you can't measure or judge yet — common, and a finding rather than a failure) — turns those gaps into a prioritised oracle/instrument build plan. Steps 2 and 3 swap when the risk map comes out mostly blind — see [Which order?](#which-order-let-the-risk-map-decide).
 4. **`/strategy-variants`** (optional) — when you need something to circulate to the team or show a client, derive a one-pager or a client-safe version from the finished strategy.
 
 You can also run any of the review/check skills (`/quality-strategy-review`, `/contradiction-check`, `/oracle-adequacy`, `/tooling-adequacy`, `/operational-distillation`) standalone against an existing strategy doc.

@@ -26,10 +26,9 @@ File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **
 
 ## When to use
 
-- **After `/quality-strategy`** — the minimum input is a `quality/strategy.md` whose risk map (Part 6) carries oracle verdicts and oracle-build items. Ideally `/test-strategy` has also run, so the test side's blocked learning needs are on the table too.
-- **When Unknowns are piling up** — a risk map dominated by Unknown/Gated actuals on dimensions that matter is exactly the condition this skill exists to convert into a build plan.
+- **After `/quality-strategy` — before *or* after `/test-strategy`.** This skill has two natural entry points, and the risk map decides which (Q2 before Q3: you can only investigate what you can judge). When the risk map came out **dominated by Unknowns and Gated dimensions**, run this skill *immediately* — plan the builds that make the project knowable before planning the investigation; a test strategy written against unjudgeable dimensions is mostly "blocked". When the risk map is **mostly answerable**, let `/test-strategy` run first and sharpen the demand (its `/tooling-adequacy` check surfaces blocked learning needs), then run this skill on the combined pile.
 - **When deciding what test or measurement infrastructure to build next** — this skill's output *is* that decision, made with the full demand visible instead of ad hoc.
-- **Re-run** when build items land (they change what's answerable — see Update protocol in the output) or when either parent strategy is revised.
+- **Re-run freely.** This is the most re-runnable of the three strategies: re-run when build items land (they change what's answerable — see Update protocol in the output), when `/test-strategy` adds the test-side demand, or when either parent strategy is revised.
 
 ## What you need
 

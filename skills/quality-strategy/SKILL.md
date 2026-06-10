@@ -287,7 +287,12 @@ After sub-step 7.3 is complete and the content is confirmed — or, if the user 
 
 If the review surfaces failures, return to the relevant sub-step(s) and re-do. The strategy is not done until the review passes.
 
-Once it passes, point the user at the follow-on skills so they know where to go next (see "The plan of work is a sketch" above). The default next step is **`/test-strategy`** — the engineering-level companion that operationalises this strategy, defining what to investigate, in what order, and how human and agent effort should be allocated; the risk map and plan of work you just produced are its direct inputs. When the risk map came out carrying Gated dimensions, Unknowns, or oracle-build items — common, and a finding rather than a failure — also name **`/tooling-strategy`**, which gathers those into a prioritised oracle/instrument build plan (it bites best after `/test-strategy` has run too, so both sides of the demand are on the table). Name the relevant skills and offer them; don't leave the user at a finished strategy with no onward path.
+Once it passes, point the user at the follow-on skills so they know where to go next (see "The plan of work is a sketch" above) — and recommend an **order** based on what the risk map just showed. The principle is **Q2 before Q3: you can only investigate what you can judge.**
+
+- **Risk map dominated by Unknowns, Gated dimensions, and oracle-build items** → recommend **`/tooling-strategy`** first: plan the oracle/instrument builds that make the project knowable, then run `/test-strategy` once (or as) the means of knowing exist. Planning a full investigation against dimensions nothing can currently judge produces a strategy that is mostly "blocked".
+- **Risk map mostly answerable** — oracles largely adequate, a manageable set of build items → recommend **`/test-strategy`** first: its learning needs will sharpen the tooling demand (its own Q2 check, `/tooling-adequacy`, surfaces what's blocked), and `/tooling-strategy` then plans the combined build.
+
+Either way, name both skills, say which order you recommend and why, and don't leave the user at a finished strategy with no onward path. `/test-strategy` is the engineering-level companion that operationalises this strategy — what to investigate, in what order, with what human/agent split; the risk map and plan of work you just produced are its direct inputs.
 
 ## When the user is genuinely stuck — offer a labelled strawman
 
