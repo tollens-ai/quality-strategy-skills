@@ -49,6 +49,16 @@ For each candidate learning need:
 - Does the question include human-judgment dimensions (smell — the gut sense that something's off — trust, "does it feel right")? Mark those — they constrain allocation in sub-step 4. See FRAMINGS.md #9.
 - Does this include something we'd previously have said "not worth testing"? See FRAMINGS.md #5. Surface explicitly: *"Under human costs, would you have skipped this? Is it cheaper now with agents?"* If yes, it stays in.
 
+**Pass 3: The standing candidate — fresh-eyes defect recon.**
+
+Always put one candidate on the table regardless of what the risk map says: *"What defects exist in the code right now that nobody has named?"* Unknown-risk by definition, and cheap to pursue with agents.
+
+- **Methods:** several *independent* agent passes over the actual source, each with a different lens (security, data integrity, silent failure, cross-feature interaction), run by agents who have **not** read the quality strategy or this document. That blindness is the point — it's the independence-of-perspective principle (FRAMINGS.md #3) applied to agents: a fresh-eyes agent samples the defect pool differently from one anchored on the risk map, and observed runs show strategy-anchored agents reliably plan *around* defects rather than finding them, while each independent blind pass surfaces different criticals (no single pass finds them all).
+- **Exit criterion:** passes stop surfacing new criticals (loop-until-dry), not a fixed pass count.
+- Findings feed the risk map's actual/confidence columns; confirmed defects become known-risk fixes in the plan of work, not learning needs.
+
+The user can drop it with a stated reason (e.g. just done recently, code is trivially small) — but the default is in.
+
 ## Tiering
 
 After candidate learning needs are listed:
@@ -97,6 +107,7 @@ This is the place to apply principle 5 (don't import old-world costs) explicitly
 - [ ] Items within each tier are ordered by cheapest-resolution-first.
 - [ ] At least one calibration item is included if the project has unknowns about human-vs-agent costs (most do; if not, the user has explicitly said why not).
 - [ ] Old-world-costs check has been done (FRAMINGS.md #5) — user was prompted at least once on whether previously-skipped items are now cheap.
+- [ ] The fresh-eyes defect-recon candidate (Pass 3) is in the tier list, or the user's reason for dropping it is recorded.
 - [ ] Pre-read sources cited.
 
 If any check fails, return to the work. Do not proceed to sub-step 4.
