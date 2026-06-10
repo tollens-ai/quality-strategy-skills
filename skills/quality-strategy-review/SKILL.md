@@ -109,7 +109,7 @@ Use the `Agent` tool with three calls in a single message.
 > 19. **None ratings have a contextual reason.** Every dimension rated None carries a reason tied to the strategy's job/context (e.g. "out of scope for this lightweight slice"), not a blank. (Overlaps check 4; here specifically the *contextual* justification.)
 > 20. **Scratch-file audit.** Every sealed-context subagent dispatch that the strategy's *structure* says was REQUIRED has its scratch file under `$PROJECT_DIR/quality/.scratch/`. **Audit required dispatches, not merely claimed ones.** The principle: derive the set of dispatches that *should* have run from which Parts and step boundaries are present in the doc, independent of whether the doc narrates the dispatch — a required dispatch that was silently skipped must not evade detection by simply never being mentioned. (A step-boundary `/contradiction-check` is the classic loophole: skip it and there's no claim in the doc *and* no scratch file, so an audit that only checks "what the strategy claims it ran" never flags it.)
 >
-> Derive the REQUIRED set from doc structure:
+> Derive the REQUIRED set from doc structure. (This list mirrors the dispatch set in `/quality-strategy` SKILL.md "Sealed-context dispatch and scratch files" — keep the two in sync when dispatches are added or renamed.)
 >
 > - **Pre-read** — if `$PROJECT_DIR/quality/pre-read.md` exists, expect `0-pre-read-*.md` (e.g. `0-pre-read-docs.md`, `0-pre-read-code.md`, `0-pre-read-design.md`).
 > - **Dimension scout** — if Part 5 is present, expect `5.1-dimension-scout.md`.
