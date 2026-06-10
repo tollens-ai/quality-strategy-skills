@@ -25,19 +25,53 @@ Producing a quality strategy — who matters, what they value, where you're expo
 - Engineering leaders who want a structured framework for what "good" looks like.
 - People at the **idea stage** — you do not need a repo. Running this before you write code is a first-class use (see [no-repo](#running-without-a-repo)).
 
-## The skills
+## The skills — and how they fit together
 
-Available now:
+Ten skills ship in the pack, but you only ever *start* four of them. The pack is a tree: one main interview, three follow-ons that each elaborate a slice of its output, and a set of sub-skills the strategies invoke for you as they run (each also works standalone when you want one check on its own).
+
+```
+/quality-strategy ················ START HERE — the interview → quality/strategy.md
+│
+│  invokes for you as it runs:
+│    /oracle-adequacy ············ "how do we know?" audit — can the risk map's
+│    │                              where-we-are claims actually be trusted?
+│    /contradiction-check ········ internal-consistency check at every step boundary
+│    /operational-distillation ··· TL;DR + triage rubric at the top of the finished doc
+│    /quality-strategy-review ···· the closing audit
+│
+├─▶ /test-strategy ··············· follow-on: the investigation plan
+│   │                              → quality/test-strategy.md
+│   │  invokes for you:
+│   │    /tooling-adequacy ······· "how do we know?" audit — can each learning
+│   │                              need actually be answered?
+│   └──  /test-strategy-review ··· the closing audit
+│
+├─▶ /tooling-strategy ············ follow-on: the oracle/instrument build plan
+│                                  → quality/tooling-strategy.md
+│
+└─▶ /strategy-variants ··········· follow-on: audience-facing variants
+                                   (one-pager, client-safe version)
+```
+
+The shape follows the four questions the pack is built on — *what does good look like? how do we know? is it good? how do we make it good?* — and one deliberate design rule: the strategy's plan of work (Part 7) is a **sketch**, and the follow-ons elaborate it. `/test-strategy` takes the testing work and turns it into an investigation plan. `/tooling-strategy` takes everything the other two docs *couldn't* answer — Unknowns, dimensions gated on missing oracles, learning needs blocked on missing instruments — and turns it into a prioritised build plan. `/strategy-variants` takes the finished strategy and reshapes it for an audience.
+
+### Skills you run directly
 
 | Skill | Purpose |
 |---|---|
 | `/quality-strategy` | Walk a 7-step interview to produce `quality/strategy.md`. Use when starting a project, planning a major release, or when "quality" is being talked about vaguely. |
-| `/quality-strategy-review` | Meta-audit. Applies seven indicators of a good quality strategy — org-wide clarity, instrumentation from the start, a legible work plan, precision over comfort, decision support at the edges, quick re-orientation, and explicit non-goals — and surfaces failure modes. Used as the final step of `/quality-strategy` and standalone on existing strategies. |
 | `/test-strategy` | Produce the engineering-level companion that operationalises the quality strategy — what to investigate, in what order, and how to split human vs agent effort. |
-| `/test-strategy-review` | Meta-audit of a test strategy: would executing it move the quality strategy in the right direction, with the right priority? |
+| `/tooling-strategy` | The strategy for "how do we know?". Gathers everything the quality and test strategies couldn't answer — Unknown/Gated/over-confident actuals, learning needs blocked on missing instruments or oracles — into one prioritised oracle/instrument build plan. Run after `/quality-strategy`; bites best once `/test-strategy` has run too. |
 | `/strategy-variants` | Post-processing. From a finished, reviewed `quality/strategy.md`, derive audience-facing variants without touching the original: a distributable one-pager and a client-safe ("polite") version. Omits and re-pitches; never asserts quality the strategy doesn't support. |
-| `/tooling-adequacy` | The explicit "how do we know?" check for the *test* strategy. Audits whether each learning need has an adequate *instrument* (to exercise/observe) and *oracle* (to judge), including cheap simulated/reference oracles worth building. |
+
+### Sub-skills (invoked for you; each also runs standalone)
+
+| Skill | Purpose |
+|---|---|
+| `/quality-strategy-review` | Meta-audit. Applies seven indicators of a good quality strategy — org-wide clarity, instrumentation from the start, a legible work plan, precision over comfort, decision support at the edges, quick re-orientation, and explicit non-goals — and surfaces failure modes. Final step of `/quality-strategy`; also standalone on existing strategies. |
+| `/test-strategy-review` | Meta-audit of a test strategy: would executing it move the quality strategy in the right direction, with the right priority? |
 | `/oracle-adequacy` | The "how do we know?" check for the *quality* strategy — audits the oracles behind its actual-state assessments. Invoked during the risk-map pass, or standalone. Shares its oracle taxonomy with `/tooling-adequacy`. |
+| `/tooling-adequacy` | The "how do we know?" check for the *test* strategy. Audits whether each learning need has an adequate *instrument* (to exercise/observe) and *oracle* (to judge), including cheap simulated/reference oracles worth building. |
 | `/contradiction-check` | Cross-part contradiction detection for a strategy doc. Runs at `/quality-strategy` step boundaries, or standalone. Finds internal inconsistencies (not quality weaknesses). |
 | `/operational-distillation` | TL;DR + triage rubric at the top of a strategy, so it's usable at a glance. Runs at the end of `/quality-strategy`, or standalone. |
 
@@ -45,6 +79,7 @@ Planned (not yet implemented):
 
 | Skill | Purpose |
 |---|---|
+| `/tooling-strategy-review` | Meta-audit of a tooling strategy, completing the strategy/review pairing the other two strategies have. |
 | `/priority-analysis` | Optional multi-stakeholder help prioritising the plan of work. |
 | `/feedback-synthesis` | Curate the notes the skills jot down about their own rough edges as you run (a `.skill-feedback.md` file at the project root) into a maintainer-friendly summary. |
 | `/pre-read` | Standalone project digest. |
@@ -64,11 +99,12 @@ Skills are also available namespaced (`/quality-strategy:test-strategy`, `/quali
 
 ## Quickstart — the typical flow
 
-1. **`/quality-strategy`** — the main event. A structured interview produces `quality/strategy.md`. It ends by running `/operational-distillation` (a TL;DR + triage rubric at the top) and `/quality-strategy-review` (the audit), and then points you at `/test-strategy`.
+1. **`/quality-strategy`** — the main event. A structured interview produces `quality/strategy.md`. It ends by running `/operational-distillation` (a TL;DR + triage rubric at the top) and `/quality-strategy-review` (the audit), and then points you at the follow-ons.
 2. **`/test-strategy`** — turns the strategy into an engineering plan: what to investigate, in what order, and how to split human vs agent effort. Ends with `/test-strategy-review`.
-3. **`/strategy-variants`** (optional) — when you need something to circulate to the team or show a client, derive a one-pager or a client-safe version from the finished strategy.
+3. **`/tooling-strategy`** (when the docs surfaced things you can't measure or judge yet — common, and a finding rather than a failure) — turns those gaps into a prioritised oracle/instrument build plan.
+4. **`/strategy-variants`** (optional) — when you need something to circulate to the team or show a client, derive a one-pager or a client-safe version from the finished strategy.
 
-You can also run any of the review/check skills (`/quality-strategy-review`, `/contradiction-check`, `/oracle-adequacy`, `/operational-distillation`) standalone against an existing strategy doc.
+You can also run any of the review/check skills (`/quality-strategy-review`, `/contradiction-check`, `/oracle-adequacy`, `/tooling-adequacy`, `/operational-distillation`) standalone against an existing strategy doc.
 
 ## What the skills will and won't do
 
@@ -91,6 +127,7 @@ This is an alpha. Be aware of these before you rely on it:
 - **No dedicated quality dimensions yet for AI / non-deterministic / agentic products.** The dimension framework is strong for conventional software, but it does **not** yet have worked dimensions for systems whose "correctness" is a *metric distribution with a tolerance* rather than a green/red test, nor a built-in mechanism for **non-stationary** quality that drifts over time (model/data drift, prompt-sensitivity, eval-harness adequacy). If you're building an ML pipeline, a recommender, an LLM app, or another non-deterministic/agentic product, the skill will still help with stakeholders, non-goals, risk, and plan-of-work, but you will have to hand-craft the "what does good look like and how would we know" part for the non-deterministic core. Closing this gap is our top research item (see [Roadmap](#roadmap--future-work)).
 - **No-repo caveats.** Running without a repo is supported, but the pre-read can only surface what you tell it — it can't catch a contradiction between your stated intent and code that doesn't exist yet. Treat a no-repo strategy as a pre-implementation plan to revisit once there's something to scan.
 - **Validated mostly in simulation so far.** The skills have been stress-tested against many simulated users and reviewed adversarially, but real-world mileage is still limited. Some calls are explicitly provisional — see `OPEN-QUESTIONS.md`, which records design decisions made under uncertainty along with what would change our minds.
+- **`/tooling-strategy` is the newest skill** and has the least mileage in the pack. Its inputs and outputs are stable (it consumes the build items the two adequacy audits already produce), but expect rougher edges there than in `/quality-strategy`.
 - **Cadence is one-size.** Every run applies the same thorough cadence regardless of project size. That's deliberate (we'd rather not lower the bar by accident), but an expert on a small job may find the ceremony heavier than they'd like. A "lean/velocity" view of the same rigour is on the roadmap, not yet built.
 - **Internal decomposition is partial.** The skill's sealed-context dispatch + scratch-file auditability is in place for the analytical steps that have been decomposed (pre-read, dimension scout, dimension rating, oracle adequacy, contradiction checks, distillation); the remaining sub-steps are still run inline by the orchestrator. This is tracked, not hidden (`OPEN-QUESTIONS.md`).
 - **Single-release depth.** The deep analysis is for one release at a time; future releases get light notes and a re-run in revision mode when their context is real.
