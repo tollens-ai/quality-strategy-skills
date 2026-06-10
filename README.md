@@ -20,6 +20,8 @@ Producing a quality strategy — who matters, what they value, where you're expo
 
 Know what you're getting, though: these are **standalone skills, not an end-to-end workflow**. They produce and audit the strategy documents; fitting those into your team's day-to-day process is on you. The full Tollens product — in development — is the end-to-end version: agents supporting every step of the quality-management process, with feedback loops, evidence and reporting, and an overall release-confidence assessment, rather than a set of skills you wire up yourself.
 
+Put simply: **this pack is the map with the you-are-here arrow. Tollens is the satnav** — turn-by-turn for the whole journey, recalculating when you drift, with an ETA you can trust.
+
 ## Who it's for
 
 - Solo developers and small teams who want a quality strategy but don't want to read a textbook to make one.
