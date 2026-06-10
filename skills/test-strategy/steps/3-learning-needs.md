@@ -151,4 +151,9 @@ Then, before allocation, run the **tooling & oracle adequacy** check: invoke `/t
 
 **The check's result is a fork in the road.** A handful of blocked items among answerable tiers is the normal case: carry them forward, allocate around them, and sub-step 5's blocked-on-tooling section records them (with `/tooling-strategy` as the onward pointer). But if the build items **dominate the top tier** — the highest-impact learning needs are mostly unanswerable — surface a real choice before allocation: *"Most of what matters most can't be answered with what exists today. We can finish this strategy with those needs marked blocked and allocate around them, or pause here and run `/tooling-strategy` to plan the builds first — then finish allocation knowing what's coming and when. Which?"* Pausing is not a failure of the test strategy; it's the Q2-before-Q3 principle applied honestly.
 
+**Which side to recommend** (the choice stays the user's — but recommend with reasons, not by reflex):
+
+- **Recommend continuing** when the build demand is already crisp (the items are named and recognisable) and the remaining sub-steps are cheap under the deferred-allocation rules — blocked needs take `blocked — allocation deferred` rows, so finishing costs little, and `/tooling-strategy` gains a *complete* test strategy as input.
+- **Recommend pausing** when allocation genuinely depends on what the build plan will decide — the answerable remainder is too thin to be worth a two-voice exchange yet, sourcing decisions (build vs adopt vs extend) would change the methods themselves, or the user needs the build sequencing to commit to anything.
+
 Then (when continuing): *"Tooling and oracle check done. Allocation comes next — the two-voice exchange about who does what. Ready, or want a break first? Note: 3 → 4 is tighter coupled, so if you break here, plan to re-orient from this list on resume."*
