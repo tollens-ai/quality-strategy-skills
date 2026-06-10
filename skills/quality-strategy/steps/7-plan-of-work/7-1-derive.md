@@ -42,6 +42,7 @@ What you must not do:
 
 - Classify actions as testing / stakeholder / fixing yet. That's 7.2.
 - Sequence actions yet. That's 7.3.
+- Elaborate an action into a mini-plan. One or two lines per action — the plan of work is a strategy-level sketch, and the follow-on skills own the depth (`/test-strategy` for testing work, `/tooling-strategy` for oracle/instrument builds; see SKILL.md → "The plan of work is a sketch").
 - Skip Unknown actuals or Low-confidence rows on high-impact dimensions. They generate the most valuable actions in early-stage projects — testing/asking work for Unknowns, fixing or testing work for Lows depending on the gap.
 - Propose an action for every dimension regardless of gap. None-rated and small-gap dimensions don't need actions.
 

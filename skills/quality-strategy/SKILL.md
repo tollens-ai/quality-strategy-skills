@@ -66,6 +66,16 @@ The depth analysis in this skill (stakeholders, three-lens, non-goals, dimension
 
 This is deliberate: the context of a release shapes the strategy heavily, and pre-running the deep analysis for releases that haven't yet had their context resolved produces speculation, not strategy. When the team is ready to start a future release, re-invoke the skill in new-release mode (see Revision mode below) to produce a fresh strategy for it. Some sections (team, workflows, roadmap) carry over with incremental updates; others (stakeholders, dimensions, risk map, plan of work) are largely rewritten because the release context has changed.
 
+## The plan of work is a sketch — follow-on skills elaborate it
+
+Part 7 (Step 7) enumerates, classifies, and sequences the work at *strategy* level — enough to see the shape of what's needed, the priorities, and the first moves. It is deliberately **not** an elaborated work plan, and you should not let it become one. Elaboration belongs to the follow-on skills, each of which takes a slice of Part 7 and turns it into a first-class plan of its own:
+
+- **Testing work** → `/test-strategy` — what to investigate, in what order, how to split human and agent effort (`quality/test-strategy.md`).
+- **Oracle/instrument build items** → `/tooling-strategy` — the prioritised build plan that turns the risk map's Unknowns and Gated dimensions into knowables (`quality/tooling-strategy.md`).
+- **Communicating the strategy** → `/strategy-variants` — audience-facing variants of the finished doc.
+
+Stakeholder work and fixing work have no follow-on skill yet; they stay at sketch level in Part 7 like everything else. Keep Part 7 entries to one or two lines each, resist expanding any of them into a mini-plan in place, and point at the relevant follow-on instead — a Part 7 that duplicates `test-strategy.md`'s depth goes stale the moment the follow-on runs.
+
 ## How this skill is structured
 
 The work is divided into 7 numbered steps, each with one or more sub-steps — 21 sub-steps in total, including the pre-read (sub-step 0) that runs before Step 1. Each sub-step lives in its own file under `steps/`. The full sequence:
@@ -259,7 +269,7 @@ After sub-step 7.3 is complete and the content is confirmed, two closing moves:
 
 If the review surfaces failures, return to the relevant sub-step(s) and re-do. The strategy is not done until the review passes.
 
-Once it passes, point the user to **`/test-strategy`** as the explicit next step — the engineering-level companion that operationalises this strategy, defining what to investigate, in what order, and how human and agent effort should be allocated. The risk map and plan of work you just produced are its direct inputs. Name it and offer it so the user knows where to go next.
+Once it passes, point the user at the follow-on skills so they know where to go next (see "The plan of work is a sketch" above). The default next step is **`/test-strategy`** — the engineering-level companion that operationalises this strategy, defining what to investigate, in what order, and how human and agent effort should be allocated; the risk map and plan of work you just produced are its direct inputs. When the risk map came out carrying Gated dimensions, Unknowns, or oracle-build items — common, and a finding rather than a failure — also name **`/tooling-strategy`**, which gathers those into a prioritised oracle/instrument build plan (it bites best after `/test-strategy` has run too, so both sides of the demand are on the table). Name the relevant skills and offer them; don't leave the user at a finished strategy with no onward path.
 
 ## When the user is genuinely stuck — offer a labelled strawman
 

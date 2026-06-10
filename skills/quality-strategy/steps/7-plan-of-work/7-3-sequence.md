@@ -68,6 +68,7 @@ What you must not do:
 - [ ] Sequencing follows the principles: unknowns before fixes; blockers before everything; multi-resolving work grouped; None items excluded.
 - [ ] Internal testing / first-party use is present as a phase, or its absence is actively justified.
 - [ ] What's not in the plan is documented (deferred items, exclusions with reasoning).
+- [ ] Actions are at sketch depth (one or two lines each), and the "How this plan gets elaborated" pointer names the follow-on skills this plan actually feeds.
 - [ ] Any deferred items are recorded as `OPEN QUESTION:`.
 - [ ] Pre-read sources are cited in the section's evidence field — naming actual files referenced, or, for an interview-derived / no-repo pre-read, citing the interview honestly (never blank, never a placeholder).
 - [ ] The step-boundary `/contradiction-check` was dispatched on the doc so far (it is the first move of the checkpoint, per SKILL.md) and its scratch file exists at `quality/.scratch/7.3-contradiction-check.md`.
@@ -102,6 +103,10 @@ Append to `quality/strategy.md`, replacing or extending the classified list from
 ### What's not in this plan
 
 <actions deliberately deferred or excluded, with reasoning>
+
+### How this plan gets elaborated
+
+This Part is the strategy-level sketch. <One or two lines pointing onward: testing work is elaborated by `/test-strategy` into `quality/test-strategy.md`; oracle/instrument build items by `/tooling-strategy` into `quality/tooling-strategy.md`. Name only the follow-ons this plan actually feeds — if there are no build items, don't advertise `/tooling-strategy`.>
 
 **Sources consulted from pre-read:** <bullet list>
 
