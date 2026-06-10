@@ -87,6 +87,7 @@ What you must not do:
 - [ ] Non-goal alignment has been verified; any mismatches surfaced and resolved.
 - [ ] Every H rating cites a named stakeholder Dealbreaker bar; every None rating is a confirmed "no stakeholder bar references it" (not a forgotten gap).
 - [ ] Any deferred items are recorded as `OPEN QUESTION:`.
+- [ ] The step-boundary `/contradiction-check` was dispatched on the doc so far (it is the first move of the checkpoint, per SKILL.md) and its scratch file exists at `quality/.scratch/5.5-contradiction-check.md`.
 - [ ] The user has run the **step-boundary substantive checkpoint** (see SKILL.md), evaluating the whole step's output (not just this final sub-step), including any rethinks of earlier steps. Explicit, considered confirmation — not silence, not a non-committal response.
 
 If any check fails, return to the questioning. Do not move to Step 6.
