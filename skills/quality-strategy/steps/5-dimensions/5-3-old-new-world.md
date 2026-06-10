@@ -4,7 +4,7 @@
 
 For each dimension in the post-unpack inventory from 5.2, decide whether the dimension means the same thing for agent stakeholders as it does for human ones — or whether the meaning shifts. Where it shifts meaningfully and the stakeholder mix includes both, split the dimension into audience-specific versions.
 
-A dimension that hasn't had old/new-world checked when it should have been will produce a misleading rating in 5.4 — because what's High for an agent may be Low for a human (and vice versa), and a single rating obscures that.
+Skip this check where it was needed and the 5.4 rating will mislead: what's High for an agent may be Low for a human (and vice versa), and a single rating hides that.
 
 ## What you need from the previous sub-step
 
@@ -12,7 +12,7 @@ Read the post-unpack inventory from sub-step 5.2's output in `quality/strategy.m
 
 This skill takes the new-world stance (see PHILOSOPHY): agent stakeholders are the default. Sub-step 3.1 should have surfaced them unless the user gave a specific concrete reason. **Run the audience question on trap dimensions regardless of what 3.1 recorded** — because:
 
-- Future-release agent stakeholders may matter (the strategy is for one release, but the architecture persists).
+- Future-release agent stakeholders may matter (the strategy covers one release, but the architecture outlives it).
 - Maintenance agents working in the codebase are stakeholders for maintainability / diagnosability / readability dimensions even if they're not product stakeholders.
 - "No agents now" rarely means "no agents ever."
 
@@ -35,7 +35,7 @@ The trap dimensions, where old/new-world reframing changes the rating most often
 - **Ramp-up-ability** — humans onboarding to a codebase vs agents orienting to a task in it.
 - **Observability** — what a human watching dashboards needs vs what an agent processing logs needs.
 
-These are the labels almost always worth checking. Other dimensions may also have audience-shift behaviour; the list above is not exhaustive. If a dimension's natural language ("usability," "ramp-up") makes you think of a specific human audience, that's a hint to check whether agents have a different version.
+These are the labels almost always worth checking. Other dimensions may also shift by audience; the list above is not exhaustive. If a dimension's name ("usability," "ramp-up") makes you picture a specific human audience, that's a hint to check whether agents have a different version.
 
 ## How to ask
 
@@ -55,7 +55,7 @@ You have explicit permission and encouragement to:
 
 - Skip the audience question for dimensions where audience clearly doesn't matter. Don't ceremony-grind.
 - Surface tensions where one audience's needs trade off against the other (e.g. terse error messages are good for agents but poor for humans).
-- Note when there are no agent stakeholders, the sub-step is mostly a confirmation-walk — but still walk it, the act of confirming matters.
+- Note that when there are no agent stakeholders, this sub-step is mostly a walk of confirmations — still walk it; the act of confirming matters.
 
 What you must not do:
 

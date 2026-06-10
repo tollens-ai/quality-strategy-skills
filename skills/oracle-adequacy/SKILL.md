@@ -5,9 +5,9 @@ description: Audit whether a quality strategy's actual-state assessment can be t
 
 # Oracle Adequacy
 
-This skill answers the second of the four quality questions — **"How do we know if what we have is good?"** — for the *actual-state assessment* of a quality strategy. It interrogates whether the means by which a strategy decides "this dimension is actually at level X" can be trusted.
+This skill answers the second of the four quality questions — **"How do we know if what we have is good?"** — for the *actual-state assessment* of a quality strategy. It checks whether you can trust how the strategy decided "this dimension is actually at level X".
 
-It is the `/quality-strategy` counterpart to `/tooling-adequacy` (which does the same job for `/test-strategy`'s learning needs). The two share one oracle core; the difference is the unit of analysis. `/tooling-adequacy` assesses a *learning need*; `/oracle-adequacy` assesses a *dimension's actual-state claim* — the entries Part 6 (Risk Map) records as the project's current level on each H/M dimension.
+It is the `/quality-strategy` counterpart to `/tooling-adequacy` (which does the same job for `/test-strategy`'s learning needs). The two share one oracle core; they differ in what they assess. `/tooling-adequacy` assesses a *learning need* (a question the strategy wants testing to answer); `/oracle-adequacy` assesses a *dimension's actual-state claim* — the entries Part 6 (Risk Map) records as the project's current level on each H/M dimension.
 
 Judging where a project actually stands on a dimension takes **two distinct capabilities**, and both can fail independently:
 
@@ -16,7 +16,7 @@ Judging where a project actually stands on a dimension takes **two distinct capa
 
 An actual-state claim is only trustworthy if **both** are adequate. A perfect instrument with no oracle means you can see plenty and still not know if "plenty" is good enough; a perfect oracle with no instrument means you know what "good" looks like but have nothing observed to compare it to.
 
-This skill exists because of two reliable agent failure modes. **(1)** When "how do we know?" is collapsed into "is it good?", agents claim an actual level (often a comfortable Medium) by deferring to whatever signal happens to exist, never asking whether that signal can actually judge *this* dimension — so the risk map records confidence the evidence doesn't support. **(2)** When there's no obvious oracle, agents mark the dimension Unknown and move on as if Unknown were a dead end — when in the agent era an oracle is usually cheap to construct, which would turn the Unknown into a knowable actual.
+This skill exists because of two reliable agent failure modes. **(1)** When "how do we know?" is collapsed into "is it good?", agents claim an actual level (often a comfortable Medium) by deferring to whatever signal happens to exist, never asking whether that signal can actually judge *this* dimension — so the risk map records confidence the evidence doesn't support. **(2)** When there's no obvious oracle, agents mark the dimension Unknown and move on as if Unknown were a dead end. But an oracle is usually cheap to build now, and building one turns the Unknown into a knowable actual.
 
 ## Resolving file paths — do this first
 
@@ -60,25 +60,25 @@ For dimensions marked **Unknown** in 6.2, the instrument and oracle are what *wo
 
 ### 3. Assess the oracle — Adequate / Inadequate / Missing — and don't accept "there's no oracle, so it's Unknown"
 
-Classify the oracle on the same scale. The oracle is *whatever lets you decide an observation means the claimed level*. The kinds, cheapest-signal to richest (canonical treatment in `$PLUGIN_ROOT/skills/tooling-adequacy/SKILL.md` step 3):
+Classify the oracle on the same scale. The oracle is *whatever lets you decide an observation means the claimed level*. The kinds, from cheapest signal to richest (the canonical treatment is in `$PLUGIN_ROOT/skills/tooling-adequacy/SKILL.md` step 3):
 
 - **Specified** — a spec, contract, SLO, or known-correct target states the expected level (*"p99 < 200ms is the bar; we measured 180ms"*).
 - **Property / metamorphic** — invariants that must hold even when you don't know the exact value (*"no data-loss path exists"*; *"every error is either handled or surfaced, never swallowed"*).
-- **Differential / simulated** — an independent, deliberately-simple reference the real system is compared against; in the agent era an agent can often build one cheaply. Also: a prior version, or a competitor product, as the reference.
+- **Differential / simulated** — an independent, deliberately-simple reference you compare the real system against; an agent can often build one cheaply. Also: a prior version, or a competitor product, as the reference.
 - **Golden master / snapshot** — a captured known-good output or known-good behaviour, re-judged when it changes.
 - **Human or agent-judge** — for trust, feel, taste, and quality dimensions a person is the oracle; agents lack smells, so humans stay the oracle there. An agent-judge can scale fuzzy assessment where appropriate, but name it as the oracle and note its limits.
 
-**Kill the old-world reflex.** *"There's no oracle for this dimension, so its actual is just Unknown and there's nothing to do"* conflates two different things: an Unknown that is **gated on an oracle that doesn't exist yet** versus an Unknown that is **cheap to resolve once you decide how to judge it**. When the oracle is Missing or Inadequate, the default move is to **propose constructing one** — most often a property statement or a simulated/reference oracle — as an oracle-build item, not to leave the dimension permanently Unknown.
+**Kill the old-world reflex.** *"There's no oracle for this dimension, so its actual is just Unknown and there's nothing to do"* mixes up two different things: an Unknown that is **gated on an oracle that doesn't exist yet**, and an Unknown that is **cheap to resolve once you decide how to judge it**. When the oracle is Missing or Inadequate, the default move is to **propose building one** — most often a property statement or a simulated/reference oracle — as an oracle-build item, not to leave the dimension permanently Unknown.
 
 ### 4. Verdict and oracle-build items
 
 For each dimension, give a verdict:
 
 - **Trustworthy** — instrument and oracle both Adequate; the claimed actual and its confidence stand.
-- **Over-confident** — a non-Unknown actual is claimed, but the oracle behind it is Inadequate or Missing. The finding: the confidence in 6.2 is not supported; either downgrade it or build the oracle. An actual asserted on an inadequate oracle is exactly the "strategy built on sand" failure.
+- **Over-confident** — the claim names an actual level (not Unknown), but the oracle behind it is Inadequate or Missing. The finding: the evidence does not support the confidence in 6.2; either downgrade it or build the oracle. Claiming an actual on an inadequate oracle is exactly the "strategy built on sand" failure.
 - **Gated** — the actual is (or should be) Unknown, and resolving it is blocked on a Missing/Inadequate oracle. Name the **oracle-build item**: what oracle must be constructed, and which dimension(s) it unblocks. These seed Step 7's plan of work and are recorded against the dimension in 6.3.
 
-Oracle-build items (state the property set; write a reference/simulated oracle; capture the golden master; define the SLO and its measurement) are first-class outputs — they are often the highest-value work an early-stage strategy can name, because they convert permanently-Unknown dimensions into knowable ones.
+Oracle-build items (state the property set; write a reference/simulated oracle; capture the golden master; define the SLO and its measurement) are first-class outputs — often the highest-value work an early-stage strategy can name, because they turn permanently-Unknown dimensions into knowable ones.
 
 ### 5. Catch the mismatches
 
@@ -88,7 +88,7 @@ Oracle-build items (state the property set; write a reference/simulated oracle; 
 
 ## Push back when
 
-- Every oracle comes back "Adequate" with no per-dimension reason. That's the Q2-collapse failure mode — re-run, demanding a specific justification per dimension for *this* level claim.
+- Every oracle comes back "Adequate" with no per-dimension reason. That's the Q2-collapse failure mode — re-run, and demand a specific reason per dimension for *this* level claim.
 - A Missing oracle is treated as a permanent Unknown with no build item. Challenge it: *"under agent costs, could we state a property, or write a simple reference, that judges this dimension?"*
 - A non-Unknown actual rests on an oracle you can't name. *"What would have told us this is Medium rather than Low? If we can't say, the honest actual is Unknown."*
 - A trust/feel/quality dimension is handed a purely automated oracle. The human is the oracle; pretending a tool covers it is the inadequacy.

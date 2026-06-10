@@ -2,7 +2,7 @@
 
 ## Goal
 
-For each H/M dimension identified in Step 5, capture qualitatively what level the dimension needs to reach for the first release to succeed — and how confident we are that this is the right target. The required level is the *should-be* side of the gap; sub-step 6.2 captures the *what-is* side.
+For each H/M dimension from Step 5, describe what level it needs to reach for the first release to succeed — and say how confident we are that this is the right target. The required level is the *should-be* side of the gap; sub-step 6.2 captures the *what-is* side.
 
 ## What you need from the previous sub-step
 
@@ -12,7 +12,7 @@ Read Part 5 (Quality Dimensions) from `quality/strategy.md` for the H/M-rated di
 
 By the end of this sub-step the strategy doc must capture, **for each H/M dimension**:
 
-1. **Required level** — a qualitative, dimension-specific description of what level this dimension needs to reach for the first release to succeed. In concrete terms specific to the dimension; not a coarse common scale.
+1. **Required level** — a description, in words specific to this dimension, of what level it needs to reach for the first release to succeed. Concrete terms, not a generic shared scale.
 2. **Confidence in the required level** — H/M/L. How sure are we that this is the right target? Often Low, especially in early-stage projects where no stakeholder has actually confirmed the bar.
 3. **Grounded in** — which stakeholder dealbreakers and good-enoughs (from Part 3) and which release purpose (from Part 2) anchor this required level. Required levels with no grounding are floating.
 
@@ -24,7 +24,7 @@ For each H/M dimension, ask in turn:
 - *"How confident are we that's the right target? High, Medium, or Low?"*
 - *"What's it grounded in — which stakeholder bar, which release purpose?"*
 
-Use the three-lens material from Part 3 as your starting position. Often the required level is "the union of dealbreaker-avoidance plus good-enough across the stakeholders that matter for this dimension." Surface that synthesis to the user: *"From Part 3, [stakeholder]'s Good Enough was X and their Dealbreaker was Y. Required level for [dimension] looks like: [synthesis]. Does that capture the bar, or is it missing something?"*
+Use the three-lens material from Part 3 as your starting position. Often the required level comes down to: avoid every relevant stakeholder's dealbreakers, and meet their good-enoughs. Say that out loud to the user: *"From Part 3, [stakeholder]'s Good Enough was X and their Dealbreaker was Y. Required level for [dimension] looks like: [synthesis]. Does that capture the bar, or is it missing something?"*
 
 You have explicit permission and encouragement to:
 
@@ -35,7 +35,7 @@ You have explicit permission and encouragement to:
 
 What you must not do:
 
-- Use a coarse common scale (H/M/L for the level itself). Required levels are dimension-specific qualitative descriptions, not category labels.
+- Rate the level itself on a generic scale (H/M/L). Required levels are descriptions in the dimension's own terms, not category labels.
 - State a required level with no grounding. Anchor it to Part 3 or Part 2.
 - Use percentages anywhere. Confidence is High / Medium / Low only.
 - Skip dimensions because they're "obvious." Even obvious required levels benefit from being written down.
@@ -49,7 +49,7 @@ What you must not do:
 
 ## This sub-step is DONE when
 
-- [ ] Every H/M dimension from Part 5 has a row in Part 6 with a required level captured qualitatively, in dimension-specific concrete terms — verified by cross-referencing the H/M dimension list from sub-step 5.4; no orphans either way.
+- [ ] Every H/M dimension from Part 5 has a row in Part 6 with a required level described in the dimension's own concrete terms — checked against the H/M dimension list from sub-step 5.4: every dimension has a row, and every row has a dimension.
 - [ ] Every required level has confidence (H/M/L) and grounding (stakeholder bar(s) and release purpose).
 - [ ] Confidence ratings use only H/M/L — no percentages.
 - [ ] Tensions between stakeholder bars are surfaced where they exist.

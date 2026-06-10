@@ -5,14 +5,14 @@ description: Audit a quality strategy document. Applies seven indicators of a go
 
 # Quality Strategy Review
 
-This skill audits a quality strategy document. It is the source of truth for *"is this strategy any good?"* — invoked both as the final step of `/quality-strategy` and standalone on any existing `quality/strategy.md`.
+This skill audits a quality strategy document. It is the source of truth for *"is this strategy any good?"*. Run it as the final step of `/quality-strategy`, or on its own against any existing `quality/strategy.md`.
 
 The skill uses an **expansion-and-collapse** pattern:
 
-- **Expansion.** Three subagents run in parallel, each with a focused review lens. They are briefed to be aggressive — to flag liberally, to dig for specifics, to surface anything that feels off — knowing that the main agent will filter their output. False negatives are worse than false positives in review work.
-- **Collapse.** The main agent reads all three subagent outputs, drops spurious or trivial findings, looks for compounding patterns, distinguishes blockers from flags, and produces a consolidated report.
+- **Expansion.** Three subagents run in parallel, each with its own review lens. Their briefs tell them to be aggressive — flag freely, dig for specifics, raise anything that feels off — because the main agent will filter their output. In review work, missing a real issue is worse than raising a false alarm.
+- **Collapse.** The main agent reads all three outputs, drops false or trivial findings, looks for findings that share a root cause, separates blockers from flags, and writes one consolidated report.
 
-This is review by brainstorm-then-curate, not by single-pass judgement. Single-pass review tends to either miss things or over-flag trivia; the two-stage structure avoids both failure modes.
+This is brainstorm-then-curate, not one-pass judgement. One-pass review tends to miss things or drown the reader in trivia; two stages avoid both.
 
 ## Resolving file paths — do this first
 
@@ -21,7 +21,7 @@ This skill is part of the `quality-strategy` plugin. Before anything else, resol
 - **PLUGIN_ROOT** — the plugin's install directory: `${CLAUDE_PLUGIN_ROOT}` (Claude Code expands this to an absolute path when it loads this file; read it off and note it down). The grounding and framework files this skill reads live under it.
 - **PROJECT_DIR** — the absolute path of the project whose strategy you're reviewing (normally the current working directory; confirm with the user if it's ambiguous). The strategy docs live under `$PROJECT_DIR/quality/`.
 
-File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **Substitute the resolved absolute paths before you act on them** — both when you Read a file yourself and when you put a path into a subagent brief. The Read tool does no variable expansion and resolves relative paths against the current working directory, not this skill's directory; a dispatched subagent inherits none of your context. So an unsubstituted placeholder or a bare relative path will fail — always pass fully-resolved absolute paths.
+File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **Substitute the resolved absolute paths before you act on them** — both when you Read a file yourself and when you put a path into a subagent brief. The Read tool does not expand variables, and it resolves relative paths against the current working directory — not this skill's directory. A dispatched subagent starts with none of your context. So an unexpanded placeholder or a bare relative path will fail. Always pass full absolute paths.
 
 ## Before you start
 
@@ -43,9 +43,9 @@ If `quality/pre-read.md` exists, read its summary and discrepancies sections.
 
 ### 2. Contextual-fit gate (Pass 0)
 
-**Run this before the indicators, and carry its verdict into the collapse step.** A review that mechanically applies the full production-grade scale to a pre-implementation or deliberately-thin strategy gives the wrong answer — it treats deliberate scope control as weakness and turns quality strategy into ceremony. The framework's spirit is *contextual* quality. So first, identify what this strategy is *for*, then judge whether it's fit for that job.
+**Run this before the indicators, and carry its verdict into the collapse step.** If you hold a pre-implementation or deliberately thin strategy to the full production-grade scale, you get the wrong answer: deliberate scope control reads as weakness, and quality strategy turns into ceremony. The framework's spirit is *contextual* quality. So first work out what this strategy is *for*, then judge whether it's fit for that job.
 
-**Read the `## Strategy job` paragraph** at the top of the doc. If it's present, take its job classification. If it's **missing**, that's itself a finding (the producer skill should have written it) — infer the job from the content (no code yet + mostly-Unknown actuals ⇒ pre-implementation; "one-shot" / "agentic implementation attempt" language ⇒ agentic one-shot; thin slice with many deliberate Nones ⇒ lightweight slice; otherwise durable production) and flag the missing paragraph.
+**Read the `## Strategy job` paragraph** at the top of the doc. If it's present, take its job classification. If it's **missing**, that is itself a finding — the producer skill should have written it. Infer the job from the content (no code yet + mostly-Unknown actuals ⇒ pre-implementation; "one-shot" / "agentic implementation attempt" language ⇒ agentic one-shot; thin slice with many deliberate Nones ⇒ lightweight slice; otherwise durable production) and flag the missing paragraph.
 
 Classify on these axes:
 
@@ -57,14 +57,14 @@ Classify on these axes:
 
 This produces one of four **jobs**: durable production / pre-implementation / agentic one-shot / lightweight slice.
 
-**What the gate changes — and what it doesn't.** The seven indicators and the oracle checks apply *universally*; the gate does **not** switch indicators on or off. What it adapts is **severity** — the threshold at which a finding is a blocker versus a deferral. Specifically:
+**What the gate changes — and what it doesn't.** The seven indicators and the oracle checks apply to *every* job; the gate does **not** switch indicators on or off. What it adapts is **severity** — where the line sits between a blocker and a deferral. Specifically:
 
-- **Pre-implementation** — unknown actuals are *normal*, not a weakness. Don't score situational awareness harshly for unknown actuals. The question becomes: *does the strategy name what evidence the first implementation must produce?* A missing production-observability section is a deliberate deferral, not a blocker.
+- **Pre-implementation** — unknown actuals (the "where are we now" side of the risk map) are *normal*, not a weakness. Don't score situational awareness harshly for unknown actuals. The question becomes: *does the strategy name what evidence the first implementation must produce?* A missing production-observability section is a deliberate deferral, not a blocker.
 - **Agentic one-shot** — additionally check the strategy captures: one-shot success / partial-success / failure criteria; final-report evidence requirements (spec gaps, judgment calls, commands run, environment issues, human steering); predictable agent failure modes (scope substitution, fake tests, overbuilding integrations, skipping hard e2e, silent redesign) with decision rules; and explicit Nones to keep the implementation thin. *Absence of these is a blocker for this job*; absence of production machinery is not.
 - **Lightweight slice** — missing production observability, mature process, broad compatibility, and long-term reporting are **not** blockers *if* the strategy explicitly makes them non-goals. If they're silently absent (not declared Nones), that's a flag, not a blocker.
 - **Durable production** — full machinery enforced; the standard severity rules below apply unchanged.
 
-**The blocker rule the collapse step uses:** *a missing section is a blocker only if its absence prevents the strategy from doing its stated job in this context. If the missing section belongs to a later lifecycle stage, classify it as a deliberate deferral or a suggested future revision, not a current blocker.* And review findings must distinguish three buckets: **current blockers**, **useful pre-implementation/now refinements**, and **later-lifecycle deferrals**.
+**The blocker rule the collapse step uses:** *a missing section is a blocker only if its absence prevents the strategy from doing its stated job in this context. If the missing section belongs to a later lifecycle stage, classify it as a deliberate deferral or a suggested future revision, not a current blocker.* Every review finding goes in one of three buckets: **current blockers**, **useful pre-implementation/now refinements**, and **later-lifecycle deferrals**.
 
 Record the job classification and the resulting severity lens; pass them into the subagent briefs (so subagents judge against the right job) and apply them in the collapse step.
 
@@ -80,7 +80,7 @@ Use the `Agent` tool with three calls in a single message.
 >
 > Be aggressive about flagging — false negatives (missing real issues) are much worse than false positives (the main agent will filter what you flag).
 >
-> **Meta-flag.** If you find an oracle check failing, that is also evidence the per-sub-step DONE checklist for the relevant sub-step was not actually enforced — the agent ticked a box without doing the verification. When you flag a failure, also note in your explanation: *"this should have been caught in sub-step X.Y's DONE checklist, but wasn't."* That meta-information is useful to the user.
+> **Meta-flag.** A failing oracle check is also evidence that the relevant sub-step's DONE checklist was never really enforced — the agent ticked a box without doing the check. So when you flag a failure, add to your explanation: *"this should have been caught in sub-step X.Y's DONE checklist, but wasn't."* The user wants to know that.
 >
 > First, read `$PLUGIN_ROOT/PHILOSOPHY.md` and `$PLUGIN_ROOT/skills/quality-strategy/SKILL.md` to ground yourself.
 >
@@ -98,7 +98,7 @@ Use the `Agent` tool with three calls in a single message.
 > 8. **Confidence vocabulary correct.** All confidences are H/M/L (or "—" for Unknown actuals).
 > 9. **Unknowns have resolution notes.** Every Unknown actual in Part 6 has a "to resolve" note (test / ask / review / instrument / build).
 > 10. **Distribution sanity.** Ratings use the H/M/None model (no L). Flag if more than 50% of dimensions are H, or if there are zero None entries where some are expected. (Aligned with sub-step 5.5's threshold.)
-> 11. **Actions classified.** Every Part 7 action is classified as testing / stakeholder / fixing. If Part 7 is a **recorded deferral** — a short section explicitly deferring the plan of work to the follow-on skills and naming where each slice will live (`/test-strategy`, `/tooling-strategy`) — checks 11 and 12 PASS vacuously. A Part 7 that is missing, empty, or vague *without* that explicit deferral note is a FAIL as before.
+> 11. **Actions classified.** Every Part 7 action is classified as testing / stakeholder / fixing. If Part 7 is a **recorded deferral** — a short section explicitly deferring the plan of work to the follow-on skills and naming where each slice will live (`/test-strategy`, `/tooling-strategy`) — checks 11 and 12 PASS automatically. A Part 7 that is missing, empty, or vague *without* that explicit deferral note is a FAIL as before.
 > 12. **Plan has phases.** Plan of work in Part 7 has distinct phases; Phase 0 (blockers) is either populated or explicitly empty with reasoning. (Recorded deferral: see check 11.)
 > 13. **Pre-read sources cited.** Sub-step output sections cite pre-read sources where the agent did pre-read work.
 > 14. **Stakeholder coverage.** Every Part 3 stakeholder has at least one H or M dimension whose rationale connects to their bars.
@@ -107,7 +107,7 @@ Use the `Agent` tool with three calls in a single message.
 > 17. **Unpack evidence.** Where commonly-composite dimensions (performance, reliability, security, maintainability, usability, observability) are present, evidence of unpacking (sub-dimensions present) or a note that they were considered atomic for this project.
 > 18. **Strategy job stated.** There is a `## Strategy job` paragraph near the top naming the strategy's job (durable production / pre-implementation / agentic one-shot / lightweight slice, or the user's framing), what evidence it must produce, and what's deliberately out of scope. FAIL if absent **and** the job cannot be inferred from the content (a strategy produced by this skill must state it). FLAG if absent but the job is clearly inferable (e.g. an older or external doc being audited cold) — the fix is to add the paragraph, not to block.
 > 19. **None ratings have a contextual reason.** Every dimension rated None carries a reason tied to the strategy's job/context (e.g. "out of scope for this lightweight slice"), not a blank. (Overlaps check 4; here specifically the *contextual* justification.)
-> 20. **Scratch-file audit.** Every sealed-context subagent dispatch that the strategy's *structure* says was REQUIRED has its scratch file under `$PROJECT_DIR/quality/.scratch/`. **Audit required dispatches, not merely claimed ones.** The principle: derive the set of dispatches that *should* have run from which Parts and step boundaries are present in the doc, independent of whether the doc narrates the dispatch — a required dispatch that was silently skipped must not evade detection by simply never being mentioned. (A step-boundary `/contradiction-check` is the classic loophole: skip it and there's no claim in the doc *and* no scratch file, so an audit that only checks "what the strategy claims it ran" never flags it.)
+> 20. **Scratch-file audit.** Every sealed-context subagent dispatch (a subagent run in a fresh context, isolated from the main conversation) that the strategy's *structure* says was REQUIRED has its scratch file under `$PROJECT_DIR/quality/.scratch/`. **Audit required dispatches, not merely claimed ones.** Work out which dispatches *should* have run from which Parts and step boundaries the doc contains — not from what the doc says it ran. A dispatch that was silently skipped leaves no mention behind, so it must not escape detection just because the doc never names it. (A step-boundary `/contradiction-check` is the classic loophole: skip it and there's no claim in the doc *and* no scratch file, so an audit that only checks "what the strategy claims it ran" never flags it.)
 >
 > Derive the REQUIRED set from doc structure. (This list mirrors the dispatch set in `/quality-strategy` SKILL.md "Sealed-context dispatch and scratch files" — keep the two in sync when dispatches are added or renamed.)
 >
@@ -120,7 +120,7 @@ Use the `Agent` tool with three calls in a single message.
 >
 > A required dispatch (derived as above) with **no** scratch file is a FAIL — hard evidence the dispatch was fabricated or silently skipped rather than run. A scratch file that's empty or a stub is a FLAG (audit theatre). Also still FAIL any dispatch the strategy *explicitly claims* it ran that's missing its file, even if structure wouldn't otherwise have required it. List which scratch files are present, missing, or stub.
 >
-> **Verify on disk — never green-check from the doc's narration.** Actually list `$PROJECT_DIR/quality/.scratch/` and read the files to establish what is present; mark a required file PRESENT only if you have *seen it in that directory*. Do not report "all required dispatch files present" because the strategy *says* a dispatch ran — a file the doc claims but that is absent from the directory is a FAIL, not a pass. **If you cannot access the filesystem at all** (no Read/list access in this environment), report this check **INCONCLUSIVE** and say so plainly — never PASS it on faith. Note the distinction: *no filesystem access* → INCONCLUSIVE; *filesystem access but the `.scratch/` directory is absent or empty when required dispatches should have written to it* → **FAIL** (those required files are genuinely missing), not INCONCLUSIVE. An INCONCLUSIVE result is surfaced to the user as "the scratch-file audit could not be run", not as a clean pass. (This is the phantom-scratch fix: a no-repo test run once green-checked "all 13 required dispatch files present" when none were on disk — a green check must be backed by a real directory listing.)
+> **Verify on disk — never green-check from the doc's narration.** Actually list `$PROJECT_DIR/quality/.scratch/` and read the files to establish what is present; mark a required file PRESENT only if you have *seen it in that directory*. Do not report "all required dispatch files present" because the strategy *says* a dispatch ran — a file the doc claims but that is absent from the directory is a FAIL, not a pass. **If you cannot access the filesystem at all** (no Read/list access in this environment), report this check **INCONCLUSIVE** and say so plainly — never PASS it on faith. Note the distinction: *no filesystem access* → INCONCLUSIVE; *filesystem access but the `.scratch/` directory is absent or empty when required dispatches should have written to it* → **FAIL** (those required files are genuinely missing), not INCONCLUSIVE. Tell the user an INCONCLUSIVE result as "the scratch-file audit could not be run" — never present it as a clean pass. (This is the phantom-scratch fix: a no-repo test run once green-checked "all 13 required dispatch files present" when none were on disk — a green check must be backed by a real directory listing.)
 >
 > **No-repo / pre-implementation sessions still write scratch files.** Running with no codebase to scan is normal and first-class (see `/quality-strategy` SKILL.md → "Running without a repo is first-class"), but the dispatches that ran still write their scratch files — the pre-read writes its scratch documenting the LIMITED / interview-derived pre-read rather than skipping the file because there was nothing to scan. So "there was no repo" does **not** excuse a missing required scratch file: the file should exist, carrying the honest-degradation note instead of scan findings. Judge presence exactly the same way; only the file's *contents* differ.
 > 21. **No process-note leak.** The strategy doc contains no first-person-about-the-skill commentary (e.g. "this sub-step was awkward", "the skill asked me to…"). FLAG any that leaked in. Also FLAG, with the same severity, the further leak patterns the strategy body must be clean of: **(i) dispatch / scratch / sealed-pass narration** — e.g. "[ran <dispatch> inline]", "Subagent dispatched: …", "scratch would be `quality/.scratch/…`", **and the sealed-context merge vocabulary** "sealed pass landed M", "surfaced to the user", "merged to H because…", "the sealed dispatch returned…" (keep the *decision* — the rating and its reason — but the *mechanism* that produced it must be gone); **(ii) sub-step / turn lineage references** — both *turn* refs ("corrected, turn-23", "the turn-22 binding test") and *sub-step-number* refs ("split out at 5.2", "Action 6 from 7.1", "folded in from 7.1", "(Pulled out of non-goals at turn 16)") — the final doc has no "turn 23" and no "7.1"; cross-references to the doc's own *Parts* ("see Part 6") are fine, references to the *process* that built it are not; **(iii) inferred-as-scanned pre-read lines** — facts the body presents as if a scan was run when no code was actually read (e.g. "no X detected" with no corresponding scan); **(iv) provenance / source-column vocabulary** — in the dimension inventory's source/evidence column and in rating rationales, the *name of the internal pass* that surfaced or rated a dimension: "Subagent pass", "reference-list pass", "subagent C('s) …", "the per-stakeholder pass returned … merged to H", "the oracle-adequacy pass as direct inputs", a bare "`dimension-scout`" cited as a source (keep the real grounding — the stakeholder bar, the pre-read observation, the named file — drop the pass name); **(v) scratch-file path citations** — a `quality/.scratch/<…>.md` path listed as a "source consulted" or as what a rating "rests on" (cite the real underlying source or drop it; `.scratch/` is working state the reader does not have). These are process / provenance / lineage artifacts: they belong in scratch or `.skill-feedback.md`, never in `quality/strategy.md`. Stripping **all** of them is a required clean-up — a strategy peppered with turn-refs, sub-step-number refs, sealed-pass narration, provenance-column pass-names, or `.scratch/` citations should FLAG even when each instance is individually minor, and the producer must **remove** what this check surfaces before the strategy is declared done (this check is a strip, not just a note). Run this scan as an actual pass over the **whole** doc — **including any content inherited from a prior version in a revision or resumption run, which the per-Part boundary scans never saw** — before declaring the strategy done; do not assume it is clean.
@@ -131,13 +131,13 @@ Use the `Agent` tool with three calls in a single message.
 
 > You are subagent B, applying the seven indicators of a good quality strategy with creative depth. Your output will be filtered by the main agent — don't be polite. If a section feels weak, say why. If something is off but you can't fully articulate why, say that too. The main agent has a second pass to filter out anything spurious.
 >
-> **This strategy's job is: `<JOB — durable production / pre-implementation / agentic one-shot / lightweight slice, from Pass 0>`.** Apply all seven indicators regardless of job — but judge against the job, not against a production ideal. For a pre-implementation or lightweight-slice strategy, unknown actuals and deliberate Nones are *correct scope control*, not weaknesses; mark the indicator on whether the strategy does *its* job well. Do not score "situational awareness" or "instrumentation" harshly merely because actuals are unknown when there is no implementation yet.
+> **This strategy's job is: `<JOB — durable production / pre-implementation / agentic one-shot / lightweight slice, from Pass 0>`.** Apply all seven indicators regardless of job — but judge against the job, not against a production ideal. For a pre-implementation or lightweight-slice strategy, unknown actuals and deliberate Nones are *correct scope control*, not weaknesses; mark the indicator on whether the strategy does *its* job well. Do not score "situational awareness" or "instrumentation" harshly just because actuals are unknown when there is no implementation yet.
 >
 > First, read `$PLUGIN_ROOT/PHILOSOPHY.md` and `$PLUGIN_ROOT/skills/quality-strategy/SKILL.md` to ground yourself.
 >
 > Then read `$PROJECT_DIR/quality/strategy.md` end-to-end.
 >
-> Apply the seven indicators of a good quality strategy. For each, decide **STRONG / MEDIUM / WEAK** and write 2–4 sentences explaining your judgement. Quote specific sentences from the strategy that exemplify strength or weakness — concrete is better than abstract.
+> Apply the seven indicators of a good quality strategy. For each, decide **STRONG / MEDIUM / WEAK** and write 2–4 sentences explaining your judgement. Quote specific sentences from the strategy that show the strength or weakness — concrete is better than abstract.
 >
 > 1. **Org-wide clarity.** Could a new engineer or agent read this and quickly understand what's going on, what matters, what success looks like? Or is it dense, jargon-heavy, missing the through-line?
 > 2. **Instrumentation from the start.** Are quality proxies chosen, and is there evidence they'll be measurable from day one rather than retrofitted? Or has measurement been deferred?
@@ -169,7 +169,7 @@ Use the `Agent` tool with three calls in a single message.
 > - **Release purpose ↔ rating distribution.** Does the rating distribution actually reflect what the release is for? An alpha release for "test the core technique" should have very different ratings from a GA release. If the release purpose says "test the technique" but accessibility is rated High, something is off.
 > - **Internal contradictions across the doc.** Anywhere in the strategy where two claims appear to contradict each other, or where one part assumes something another part denies. Examples: a stakeholder dealbreaker in Part 3 that contradicts a non-goal in Part 4; a workflow described in Part 1 that the plan of work in Part 7 implicitly assumes is different.
 > - **Coherence across releases.** If sub-steps mention future releases (Part 2's roadmap, future-release stakeholder notes in 3.1), do those mentions hang together — or do different parts assume different futures?
-> - **Voice and confidence consistency.** Two separate axes must each stay internally consistent: **confidence** is H/M/L across Parts 5 and 6, and dimension **ratings** are H/M/None (no L). Are confidence levels expressed consistently across the doc, or does one Part quietly use different confidence vocabulary than another? Does the doc speak with a coherent voice, or do the writing patterns shift in ways that suggest the strategy was rushed in some sections?
+> - **Voice and confidence consistency.** Check two separate scales, each of which must stay consistent: **confidence** is H/M/L across Parts 5 and 6, and dimension **ratings** are H/M/None (no L). Does any Part quietly use different confidence vocabulary than the others? Does the doc read in one voice, or does the writing shift in ways that suggest some sections were rushed?
 >
 > If you spot something the per-sub-step DONE checklists *should* have caught (e.g. a Part 5 H rating with no stakeholder bar in its rationale), flag it as a "backstop catch" — it indicates the writing process didn't enforce its own gates, which is itself useful information.
 >
@@ -195,13 +195,13 @@ Three guidelines:
 
 #### Severity rules
 
-**Apply the contextual-fit gate (Pass 0) to severity.** The lists below are the *durable-production* defaults. For other jobs, adapt per the gate: *a missing section is a blocker only if its absence prevents the strategy from doing its stated job in this context.* A missing production-observability or mature-process section is a blocker for a durable strategy, a **deliberate deferral** (not a blocker) for a pre-implementation or lightweight-slice strategy that declares it a non-goal, and a **flag** if it's silently absent rather than declared. Sort every finding into one of three buckets: **current blocker**, **useful now/pre-implementation refinement**, or **later-lifecycle deferral**.
+**Apply the contextual-fit gate (Pass 0) to severity.** The lists below are the *durable-production* defaults. For other jobs, adapt per the gate: *a missing section is a blocker only if its absence prevents the strategy from doing its stated job in this context.* Example: a missing production-observability or mature-process section is a blocker for a durable strategy. For a pre-implementation or lightweight-slice strategy that declares it a non-goal, it's a **deliberate deferral**, not a blocker. If it's silently absent — not declared — it's a **flag**. Sort every finding into one of three buckets: **current blocker**, **useful now/pre-implementation refinement**, or **later-lifecycle deferral**.
 
 **Blockers** (must fix before declaring strategy done — durable-production defaults):
 
 - Part 4 (Non-goals) empty or fewer than 3 entries with reasons.
 - Part 6 (Risk Map) missing any H or M dimension from Part 5.
-- Any oracle FAIL in subagent A (includes a missing-and-uninferrable `## Strategy job` paragraph (check 18; a present-but-inferable absence is a flag) and a missing scratch file for a *required* dispatch (check 20) — hard evidence of a fabricated or silently-skipped dispatch. Note that check 20 derives "required" from doc structure, so a silently-skipped required dispatch — e.g. a step-boundary `/contradiction-check` for a Part that is present — is a blocker even though the strategy never claimed it ran).
+- Any oracle FAIL in subagent A. This includes a `## Strategy job` paragraph that is missing *and* can't be inferred (check 18; missing-but-inferable is only a flag), and a missing scratch file for a *required* dispatch (check 20) — hard evidence the dispatch was fabricated or silently skipped. Remember check 20 derives "required" from doc structure: a silently-skipped required dispatch — e.g. a step-boundary `/contradiction-check` for a Part that is present — is a blocker even though the strategy never claimed it ran.
 - Any hard contradiction surfaced by subagent C (e.g. a non-goal that contradicts an H rating; a Strategy-job out-of-scope item the body treats as in-scope).
 - Three lenses missing for any stakeholder.
 - **(Agentic one-shot job only)** missing one-shot success/partial/failure criteria, final-report evidence requirements, agent-failure-mode decision rules, or explicit scope-control Nones.
@@ -211,7 +211,7 @@ Three guidelines:
 - Distribution skewed (>60% H). *(For a durable strategy. For a lightweight slice, a low-H / many-None distribution is expected, not a flag.)*
 - Stakeholder coverage gap (a stakeholder with no H/M dimension touching their bars).
 - Subagent A FLAGs (borderline oracle results; stub scratch files; leaked process notes).
-- **Scratch-file audit INCONCLUSIVE** (check 20 could not be performed — no filesystem access or no `.scratch/` directory). Surface it explicitly as "the dispatch audit could not be run"; never silently record the audit as passed. It is not a blocker on its own, but a strategy whose dispatch evidence is unverifiable should be reported as such, not as clean.
+- **Scratch-file audit INCONCLUSIVE** (check 20 could not be performed — no filesystem access or no `.scratch/` directory). Say so explicitly as "the dispatch audit could not be run"; never silently record the audit as passed. It is not a blocker on its own, but if the dispatch evidence couldn't be checked, report that — don't report the strategy as clean.
 - Subagent B WEAK indicators (judged against the job, not a production ideal).
 - Subagent C consistency findings that aren't outright contradictions.
 - Production machinery silently absent (not declared a non-goal) in a non-durable strategy.
@@ -229,7 +229,7 @@ Write the consolidated report and surface it in the conversation. Format:
 
 ## Strategy job & contextual fit
 
-<1–2 sentences: what job this strategy is for (durable production / pre-implementation / agentic one-shot / lightweight slice — and whether the `## Strategy job` paragraph stated it or it was inferred), and the severity lens this review applied as a result. State explicitly if a normally-blocking gap was reclassified as a deliberate deferral because of the job.>
+<1–2 sentences: what job this strategy is for (durable production / pre-implementation / agentic one-shot / lightweight slice — and whether the `## Strategy job` paragraph stated it or it was inferred), and the severity lens this review applied as a result. Say outright if a gap that would normally block was reclassified as a deliberate deferral because of the job.>
 
 ## Headline
 
@@ -247,7 +247,7 @@ Write the consolidated report and surface it in the conversation. Format:
 
 ## Deferrals (correct for this job, not blockers)
 
-<Sections that would be blockers for a durable production strategy but are deliberate deferrals or out-of-scope for *this* strategy's job. Naming them shows the gate was applied deliberately, not that the review missed them.>
+<Sections that would be blockers for a durable production strategy but are deliberate deferrals or out of scope for *this* strategy's job. Naming them shows the review applied the gate on purpose — not that it missed them.>
 
 (Or "None — this is a durable production strategy; full machinery is expected." / "None noted.")
 
@@ -303,7 +303,7 @@ After the report, ask the user:
 
 If walkthrough: go through each blocker and flag in order. For each, dig in if needed, suggest concrete fixes, and capture the user's decision. The user resolves each.
 
-For blockers, the resolution should typically be re-running the relevant `/quality-strategy` sub-step in revision mode. Surface that as the suggested action.
+To fix a blocker, the usual move is to re-run the relevant `/quality-strategy` sub-step in revision mode. Suggest that as the action.
 
 ## Push back when
 
@@ -335,4 +335,4 @@ Then **recommend the next step — and let the risk map pick it.** The pack's fo
 
 Say which branch this strategy is on and why (cite the risk map you just reviewed — you have it in hand). Never present *quality strategy → test strategy* as "the designed sequence"; the designed sequence is this branch.
 
-If the strategy was reviewed in the context of running `/quality-strategy` itself, return control to the orchestrator with a status indicating pass or remaining work.
+If this review ran as part of `/quality-strategy` itself, return control to the orchestrator and report either pass or remaining work.

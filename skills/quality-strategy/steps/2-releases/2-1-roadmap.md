@@ -2,7 +2,7 @@
 
 ## Goal
 
-Establish the sequence of planned releases and what each release is *for*. Releases are the backbone of the rest of the strategy: stakeholders are mapped per release; dimensions are rated per release; the risk map and plan of work are organised against this roadmap.
+Pin down the order of planned releases and what each release is *for*. Releases are the backbone of the rest of the strategy: you map stakeholders per release, rate dimensions per release, and organise the risk map and plan of work against this roadmap.
 
 A "release" is any point at which the project delivers value to a set of stakeholders. It might be a chunky milestone (alpha, beta, GA), a sprint, or every merge to main if you're continuously deploying. The scale doesn't matter — what matters is that each release has a purpose, an audience, and a quality profile.
 
@@ -32,14 +32,14 @@ A good prompt: *"What's the next thing you're trying to ship? After that?"* — 
 You have explicit permission and encouragement to:
 
 - Push past "we'll see" answers — there's always *some* sequencing, even if loose.
-- Reframe sprints or continuous-delivery into release-equivalent groupings if useful ("the next four weeks of work serving the alpha audience" can be a single "release" for strategy purposes).
+- Treat sprints or continuous delivery as releases when that helps ("the next four weeks of work serving the alpha audience" can be a single "release" for strategy purposes).
 - Probe for the purpose of each release — *"What question does this release answer? What would tell you it succeeded?"*
 
 What you must not do:
 
 - Accept a feature list as a release definition. The purpose matters more than the features.
-- Skip the "what does success look like" question for any release. Without it, downstream sub-steps can't rate dimensions.
-- Treat the roadmap as immutable — note that it's a current best guess and will evolve.
+- Skip the "what does success look like" question for any release. Without it, later sub-steps can't rate dimensions.
+- Treat the roadmap as fixed — note that it's a best guess and will change.
 
 ## Push back when
 

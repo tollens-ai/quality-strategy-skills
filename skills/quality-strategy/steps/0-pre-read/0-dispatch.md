@@ -2,7 +2,7 @@
 
 ## Goal
 
-Produce a structured **what-is** snapshot of the project: a digest of the project as it actually is (not as anyone wants it to be), surfaced as hypotheses for downstream sub-steps to confirm or refute. The digest lives at `quality/pre-read.md` and lets the main agent ask informed questions in subsequent sub-steps without loading the whole project into its own context window.
+Produce a structured **what-is** snapshot of the project: a digest of the project as it actually is (not as anyone wants it to be), written as hypotheses for later sub-steps to confirm or refute. The digest lives at `quality/pre-read.md` and lets the main agent ask informed questions in later sub-steps without loading the whole project into its own context window.
 
 The pre-read describes **what-is**. The strategy doc that subsequent sub-steps produce describes **what-should-be**. The gap between them is what the strategy is for.
 
@@ -18,9 +18,9 @@ When all three return, reconcile their outputs into a single `quality/pre-read.m
 
 ### Honest degradation when there's little or no code to read
 
-A pre-read often runs against a project that has **no readable codebase yet** — a pre-implementation strategy job, a private/unavailable repo, or no filesystem access. This is normal, not a failure. When a subagent cannot actually scan an area, it must degrade honestly rather than fabricate scan-shaped findings:
+A pre-read often runs against a project that has **no readable codebase yet** — a pre-implementation strategy job, a private/unavailable repo, or no filesystem access. This is normal, not a failure. When a subagent can't actually scan an area, it must say so plainly rather than invent findings that look like scan results:
 
-- **Say it's limited.** State plainly — in the subagent's scratch output and carried through into `quality/pre-read.md` — that the pre-read was LIMITED / interview-derived for that area: "no codebase to scan yet — this picture is to be confirmed in interview," not a result dressed up as a scan.
+- **Say it's limited.** State plainly — in the subagent's scratch output, and again in `quality/pre-read.md` — that the pre-read was LIMITED / interview-derived for that area: "no codebase to scan yet — this picture is to be confirmed in interview," not a result dressed up as a scan.
 - **Don't phrase absence as a scan result.** Write "not yet established — confirm in interview" rather than "no `.github/workflows` detected" or "no audited dependency detected." An absence you inferred because you couldn't look is not an observed absence.
 - **Tag every cited source SCANNED vs INFERRED.** Where the digest cites a source, distinguish SCANNED (you actually read a file or command output) from INFERRED (drawn from the project description or interview). Tag inferred items "inferred, not scanned" so an inferred fact can never later be cited as observed.
 
@@ -28,7 +28,7 @@ A pre-read often runs against a project that has **no readable codebase yet** �
 
 What the project **claims** to be.
 
-> You are subagent A in a three-subagent pre-read for `/quality-strategy`. Your job is to digest what the project's documentation claims, so the downstream interview has a starting position for what the project says it is.
+> You are subagent A in a three-subagent pre-read for `/quality-strategy`. Your job is to digest what the project's documentation claims, so the interview that follows knows what the project says it is.
 >
 > First, read `$PLUGIN_ROOT/PHILOSOPHY.md` and `$PLUGIN_ROOT/skills/quality-strategy/SKILL.md` to ground yourself in what the strategy is doing.
 >
@@ -130,16 +130,16 @@ Then write `quality/pre-read.md` with this structure:
 <subagent A's output, lightly edited or in full>
 ```
 
-Order within the file is **most-actionable first**: the synthesis and discrepancies, then the interpretive layer (design hypotheses), then the mechanical maps. Downstream sub-steps load only the sections they need.
+Order within the file is **most-actionable first**: the synthesis and discrepancies, then the design hypotheses, then the mechanical maps. Later sub-steps load only the sections they need.
 
-If any area was scanned only thinly or not at all (no/little code, no repo access), carry the honest-degradation framing through into `quality/pre-read.md`: say in the summary that the picture for that area is interview-derived and to be confirmed, keep absence-claims phrased as "not yet established — confirm in interview" (never as scan results), and preserve the SCANNED vs INFERRED tags so a downstream sub-step never mistakes an inferred absence for an observed one.
+If any area was scanned only thinly or not at all (no/little code, no repo access), stay honest about that in `quality/pre-read.md` too: say in the summary that the picture for that area came from the interview and still needs confirming, phrase absences as "not yet established — confirm in interview" (never as scan results), and keep the SCANNED vs INFERRED tags so a later sub-step never mistakes an inferred absence for an observed one.
 
 ## Push back when
 
-- A subagent returns assertions instead of hypotheses. Re-dispatch with stronger emphasis on the hypothesis framing.
+- A subagent returns assertions instead of hypotheses. Re-dispatch, stressing the hypothesis framing harder.
 - A digest is empty for a clearly non-empty project. Investigate; the subagent may have misread the path.
 - A digest exceeds its length budget. Re-dispatch asking for compression.
-- Subagent C produced an -ility checklist instead of a design narrative. Re-dispatch with the example structure emphasised — design observations first, dimensions implied, never a checklist.
+- Subagent C produced an -ility checklist instead of a design narrative. Re-dispatch and point at the example structure — design observations first, dimensions implied, never a checklist.
 
 ## This sub-step is DONE when
 
@@ -155,10 +155,10 @@ The digest at `quality/pre-read.md`. **No section is appended to `quality/strate
 
 After the digest is in place, summarise back to the user in 5–7 lines: *"The pre-read found X, Y, Z in the docs; the code looks like A, B, C; the design suggests D, E, F may matter; and there are some discrepancies between docs and code, namely G and H. The few things I most want to confirm with you are P and Q."*
 
-Then run a **correctness check** — *not* the substantive checkpoint (that runs at step boundaries, not here). The pre-read is a *what-is* snapshot of hypotheses; at this stage you only want to catch **factual errors**, not engage with implications, priorities, or "does this feel right":
+Then run a **correctness check** — *not* the substantive checkpoint (that runs at step boundaries, not here). The pre-read is a *what-is* snapshot of hypotheses; at this stage you only want to catch **factual errors** — not discuss implications, priorities, or "does this feel right":
 
 > *"Skim this for anything factually wrong — a misread tech stack, a wrong test count, a component I mislabelled, a discrepancy I got backwards. I'm not asking yet whether it captures the right priorities — that's what the interview is for. Just: is anything here simply incorrect?"*
 
-Correct any factual errors the user flags — re-dispatch the relevant subagent if a digest section is materially wrong. Do **not** pull the user into implications or vague unease here; that engagement belongs at the Step 1+ step boundaries, where the substantive checkpoint runs on a complete chunk of strategy.
+Fix any factual errors the user flags — re-dispatch the relevant subagent if a digest section is wrong in a way that matters. Do **not** pull the user into implications or vague unease here; that conversation belongs at the Step 1+ step boundaries, where the substantive checkpoint runs on a complete chunk of strategy.
 
 Then ask: *"Ready to move into Step 1 (Context)?"* and proceed to sub-step 1.1.

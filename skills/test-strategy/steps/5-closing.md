@@ -23,7 +23,7 @@ This section makes the testing scope explicit by saying what's *out*. Three sour
 
 1. **Inherited from quality strategy non-goals.** If the strategy says feature X is a non-goal for this release, we don't test feature X. Pull these in verbatim with a back-reference to Part 4.
 
-2. **Dimensions rated None, or deprioritised as "aware, not investing this release."** Quality dimensions the strategy decided don't matter at this level, or consciously deferred in its plan of work — we don't invest test effort here either. Reference the dimension rating (or the deferral note), not just the dimension name.
+2. **Dimensions rated None, or deprioritised as "aware, not investing this release."** Quality dimensions the strategy decided don't matter at this level, or deliberately deferred in its plan of work — we don't spend test effort here either. Reference the dimension rating (or the deferral note), not just the dimension name.
 
 3. **Surfaced during learning-needs derivation.** Things that came up in sub-step 3 as "we considered investigating this but it's not in scope because..." Capture explicitly so it's recorded for future reviewers.
 
@@ -35,9 +35,9 @@ The `/tooling-adequacy` check (run after sub-step 3) may have found learning nee
 
 > *"The 'does sync survive flaky connectivity' investigation is **blocked** on building network-fault injection. We can't tell you what to test there until it exists. Rerun this strategy after it lands."*
 
-This is honesty about the strategy's own limits, not a refusal — the blocked area stays visible in the doc rather than being silently dropped or filled with investigation the tooling and oracles can't actually support. Distinguish it from *"what we're not testing"*: a non-target is a deliberate choice not to look; a blocked area is something we *do* want to know but can't yet. If `/tooling-adequacy` returned no build items, say so — every learning need has an adequate instrument and oracle.
+This is honesty about the strategy's own limits, not a refusal. The blocked area stays visible in the doc — it doesn't get silently dropped, or padded with investigation the tooling and oracles can't actually support. Distinguish it from *"what we're not testing"*: a non-target is a deliberate choice not to look; a blocked area is something we *do* want to know but can't yet. If `/tooling-adequacy` returned no build items, say so — every learning need has an adequate instrument and oracle.
 
-When the build-item list is non-trivial, point the user at **`/tooling-strategy`**: it gathers these items together with the quality strategy's oracle-build items (the risk map's Gated and Over-confident dimensions) into one prioritised build plan, instead of each side's gaps being tackled ad hoc.
+When the build-item list is non-trivial, point the user at **`/tooling-strategy`**: it gathers these items together with the quality strategy's oracle-build items (the risk map's Gated and Over-confident dimensions) into one prioritised build plan, so the two sets of gaps don't get tackled piecemeal.
 
 ### Update protocol
 
@@ -51,13 +51,13 @@ The update protocol is what stops the test strategy becoming frozen. Three stand
 
 4. **When a blocked learning need's build item lands** *(only when the blocked list is non-empty)*. The tooling build plan (`quality/tooling-strategy.md`, when it exists) names which learning needs each build unblocks; when one lands, unblock those needs — tier them for real and allocate them, via revision mode (c). This is what turns the blocked section's "rerun this strategy after it lands" from a hope into a protocol.
 
-The protocol section should be specific about *who* runs each update. If the team has a cadence (e.g. weekly review), name it. If not, the protocol becomes "after each Tier-N testing block, [responsible party] runs the update."
+Say *who* runs each update. If the team has a cadence (e.g. weekly review), name it. If not, the protocol becomes "after each Tier-N testing block, [responsible party] runs the update."
 
 ## Apply the framings
 
 **FRAMINGS.md #8 — proxies are not quality.** The closing section is the place to add a guard: *do not write proxy targets as goals.* If the team is tempted to add "achieve 80% coverage" or "fewer than 5 bugs in production" as goals, that's a proxy creep — surface it. Coverage is a proxy for thoroughness; thoroughness is a proxy for quality; the proxy of a proxy is not a goal.
 
-If the strategy doesn't currently include any proxy goals, no need to add the guard prophylactically. If proxies have been creeping in throughout the doc, this is the spot to call it out.
+If the strategy doesn't currently include any proxy goals, don't add the guard just in case. If proxies have been creeping in throughout the doc, this is the spot to call it out.
 
 ## Run the substantive checkpoint at the end
 
@@ -65,7 +65,7 @@ Once the closing section is written, run the substantive checkpoint on the **who
 
 The pattern (mirrored from /quality-strategy SKILL.md):
 
-1. Summarise the whole strategy back in 6-10 lines, hitting consequential decisions across all five sections (purpose, principles, learning needs by tier, allocation by confidence distribution, what's-not-tested + update protocol).
+1. Summarise the whole strategy back in 6-10 lines, covering the big decisions across all five sections (purpose, principles, learning needs by tier, allocation by confidence distribution, what's-not-tested + update protocol).
 
 2. Run the checkpoint:
 
@@ -83,7 +83,7 @@ The pattern (mirrored from /quality-strategy SKILL.md):
    - **Allocation over-confidence.** Re-run the two-voice exchange in sub-step 4 with explicit prompting on calibration items. See OPEN-QUESTIONS.md ("Allocation as hypothesis").
    - **Mis-tiered learning needs.** Often surfaces here because the allocation showed an item is much cheaper or much more expensive than tier 3 implied. Re-rank.
    - **Proxy creep.** Remove proxy goals; restate the actual quality concern they were standing in for.
-   - **Vague unease.** Investigate together. Either it resolves or it gets recorded as `OPEN QUESTION:` with explicit acknowledgement that we're shipping the strategy with that risk visible.
+   - **Vague unease.** Investigate together. Either it resolves, or record it as `OPEN QUESTION:` and say plainly that we're shipping the strategy with that risk visible.
 
 5. **Only declare complete after explicit, considered confirmation** — not silence, not "yes" with hesitation.
 
@@ -96,7 +96,7 @@ The pattern (mirrored from /quality-strategy SKILL.md):
 
 ## Push back when
 
-- The user wants to merge "what we're not testing" into the quality strategy's non-goals section. *"There's overlap, but the test strategy's not-testing list is broader — it includes dimensions the quality strategy deprioritised — rated None or marked aware-not-investing — and items surfaced during learning-needs derivation. Worth keeping here even if it cross-references Part 4."*
+- The user wants to merge "what we're not testing" into the quality strategy's non-goals section. *"There's overlap, but the test strategy's not-testing list is broader — it includes dimensions the quality strategy deprioritised (rated None, or marked aware-not-investing) and items that surfaced while deriving learning needs. Worth keeping here even if it cross-references Part 4."*
 - The user wants to drop the update protocol because "we'll just update it as needed." *"In practice, ad-hoc updates don't happen — the strategy goes stale. The protocol's job is to name specific triggers. Even rough is better than absent."*
 - The user wants to add a coverage target. *"That's a proxy. What quality concern is the coverage standing in for? Let's name that directly."* See FRAMINGS.md #8.
 - The user accepts the substantive checkpoint with "looks good." Run the smell-detection follow-up: *"What's making it 'looks good' rather than 'yes'? Even a vague feeling is worth a minute."*
@@ -108,7 +108,7 @@ The pattern (mirrored from /quality-strategy SKILL.md):
 - [ ] Blocked-on-tooling section reflects `/tooling-adequacy`'s build items (each blocked learning need named with its build item), or states none.
 - [ ] Update protocol section exists with three named triggers (after-tier, after-cycle, at-release) — plus the build-lands trigger when the blocked-on-tooling list is non-empty.
 - [ ] Calibration triggers from sub-step 4 are referenced in the after-cycle update.
-- [ ] Proxy guard applied if proxy creep was spotted; not added prophylactically if not.
+- [ ] Proxy guard applied if proxy creep was spotted; not added just-in-case if not.
 - [ ] Substantive checkpoint has been run on the whole strategy with a 6-10 line summary back to the user.
 - [ ] User has confirmed explicitly — no silence, no non-committal — or surfaced findings have been folded back into the relevant sub-step.
 - [ ] All `OPEN QUESTION:` items across all sub-steps are listed at the end of the strategy.

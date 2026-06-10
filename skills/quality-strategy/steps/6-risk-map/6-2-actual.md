@@ -4,7 +4,7 @@
 
 For each H/M dimension, capture where the project is *now* — qualitatively, in dimension-specific terms — and how confident that assessment is. Where the actual level isn't known, mark it explicitly as **Unknown**.
 
-Unknowns are not a failure. For first-pass strategies on real projects, **most actuals start as Unknown**, and resolving them is what most of Step 7's plan of work will be about. The activities that resolve Unknowns — asking specific questions, targeted reviewing, targeted testing, building new test capabilities or testability — are the highest-priority work in early-stage strategies.
+Unknowns are not a failure. For first-pass strategies on real projects, **most actuals start as Unknown**, and resolving them is what most of Step 7's plan of work will be about. The work that resolves Unknowns — asking specific questions, targeted review, targeted testing, building new test tools or testability — is the highest-priority work in early-stage strategies.
 
 ## What you need from the previous sub-step
 
@@ -27,15 +27,15 @@ By the end of this sub-step the strategy doc must capture, **for each H/M dimens
 
 ## Q2 — interrogate the oracles (invoke `/oracle-adequacy`)
 
-This sub-step is where the strategy answers **Q3 — "is what we have good?"** And it can only answer that honestly if **Q2 — "how do we know?"** holds: every actual you record rests on an oracle (something that judges whether an observation means the dimension is at the claimed level), and that oracle has to be adequate or the actual is built on sand.
+This sub-step is where the strategy answers **Q3 — "is what we have good?"** It can only answer that honestly if **Q2 — "how do we know?"** holds. Every actual you record rests on an oracle — something that judges whether what you observed really means the dimension is at the claimed level. If the oracle is weak, the actual is built on sand.
 
-After you have a first pass of proposed actuals (or Unknowns) for the H/M dimensions, **invoke `/oracle-adequacy`** on them. It assesses, per dimension, whether the *instrument* (to observe the state) and the *oracle* (to judge the level) are adequate, and returns a verdict per dimension:
+After you have a first pass of proposed actuals (or Unknowns) for the H/M dimensions, **invoke `/oracle-adequacy`** on them. For each dimension it checks whether the *instrument* (the way you observe the state) and the *oracle* (the way you judge the level) are good enough, and returns a verdict:
 
 - **Trustworthy** — keep the actual and its confidence.
 - **Over-confident** — a non-Unknown actual whose oracle is Inadequate/Missing. Downgrade its confidence (often to Unknown) unless you build the oracle. This catches the "comfortable Medium with no real basis" failure.
 - **Gated** — the actual is Unknown and resolving it is blocked on an oracle that doesn't exist yet. `/oracle-adequacy` names the **oracle-build item** (state a property, write a simulated/reference oracle, define the SLO + measurement). Record that item against the dimension; it seeds Step 7's plan of work, and 6.3 marks the dimension as gated rather than papering over it.
 
-Fold the verdicts back into the actuals below. The dispatch writes its scratch file at `quality/.scratch/6.2-oracle-adequacy.md` (see SKILL.md → "Sealed-context dispatch and scratch files"). Don't let "no oracle" silently become a permanent Unknown with nothing to do — under agent costs an oracle is usually cheap to construct, and naming that construction is often the highest-value work this strategy produces.
+Fold the verdicts back into the actuals below. The dispatch writes its scratch file at `quality/.scratch/6.2-oracle-adequacy.md` (see SKILL.md → "Sealed-context dispatch and scratch files"). Don't let "no oracle" quietly become a permanent Unknown with nothing to do. With agents doing the work, an oracle is usually cheap to build — and naming that build is often the most valuable thing this strategy produces.
 
 ## How to ask
 

@@ -2,9 +2,9 @@
 
 ## Goal
 
-Identify who matters for the **first release** — the specific people, roles, and agents whose perspective on quality counts. Stakeholders drive everything that follows: dimensions are rated against what they value; risk is assessed relative to their needs; the plan of work serves their priorities.
+Identify who matters for the **first release** — the specific people, roles, and agents whose perspective on quality counts. Stakeholders drive everything that follows: you rate dimensions against what they value, assess risk against their needs, and shape the plan of work around their priorities.
 
-This skill's depth analysis is for the first release only (see SKILL.md → "Scope of this skill"). Stakeholders for future releases are noted briefly so the strategy isn't blind to what's coming, but the three-lens depth analysis happens only for the immediate release.
+This skill's depth analysis is for the first release only (see SKILL.md → "Scope of this skill"). Note stakeholders for future releases briefly so the strategy isn't blind to what's coming, but run the three-lens depth analysis (Delight / Good Enough / Dealbreaker — sub-step 3.2) only for the first release.
 
 ## What you need from the previous sub-step
 
@@ -16,8 +16,8 @@ By the end of this sub-step the strategy doc must capture:
 
 1. **The stakeholders who matter for the first release** — not just job categories ("users") but specific groups ("vibecoders running side projects on Mac/Linux who write mostly AI-generated code").
 2. **For each stakeholder, the sub-group split** — has the user actively considered whether there are meaningfully different sub-groups under this label? "Considered, no meaningful split" is a valid answer; "didn't think about it" is not.
-3. **Agent stakeholders — mandatory by default.** This skill takes the new-world stance: agent stakeholders are the default, not the exception. Every project is assumed to have at least one agent stakeholder (agents using the product, agents working on the codebase, agents integrating with the API, or agents reading the docs) unless the user can articulate a specific reason why not. If they claim none, push back — see "Push back when" below.
-4. **Internal stakeholders** — the team itself, especially in early releases when external feedback loops aren't established yet.
+3. **Agent stakeholders — mandatory by default.** This skill takes the new-world stance: agent stakeholders are the default, not the exception. Assume every project has at least one agent stakeholder (agents using the product, agents working on the codebase, agents integrating with the API, or agents reading the docs) unless the user can give a specific reason why not. If they claim none, push back — see "Push back when" below.
+4. **Internal stakeholders** — the team itself, especially in early releases, before much outside feedback exists.
 5. **Future-release stakeholder notes** — one line per future release on the roadmap, naming who will likely matter then who doesn't yet (e.g. "Beta will add design partners and small enterprise pilots"). Just enough so the first-release strategy doesn't accidentally close off paths to future stakeholders. Don't run the depth analysis for them.
 
 ## How to ask
@@ -29,7 +29,7 @@ Surface what the pre-read suggested first — e.g. *"From the docs the audience 
 For the first release:
 
 - Ask cold: *"Who matters for this release? Don't filter — name everyone whose perspective counts, however indirectly."*
-- Apply the sub-group heuristic: for each stakeholder named, *"Are there meaningfully different sub-groups here who care about different things or whom you serve to different levels?"*
+- Apply the sub-group heuristic: for each stakeholder named, *"Are there meaningfully different sub-groups here — people who want different things, or who you'd serve to different standards?"*
 - Apply the agent-stakeholder check: *"Are any of these agents, not humans? Do you have agents using the product or working in the codebase?"*
 - Probe for internal stakeholders: *"What about the team itself? Different things matter when the team is the user."*
 

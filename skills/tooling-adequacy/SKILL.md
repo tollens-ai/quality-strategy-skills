@@ -5,7 +5,7 @@ description: Audit whether a test strategy's learning needs can actually be answ
 
 # Tooling Adequacy
 
-This skill answers the second of the four quality questions — **"How do we know if what we have is good?"** — for *testing*. It interrogates whether the means a test strategy depends on can actually answer its learning needs.
+This skill answers the second of the four quality questions — **"How do we know if what we have is good?"** — for *testing*. It checks whether the test strategy's tools and judging methods can actually answer its **learning needs** (the questions the strategy wants testing to answer).
 
 Answering a learning need takes **two distinct capabilities**, and both can fail independently:
 
@@ -14,7 +14,7 @@ Answering a learning need takes **two distinct capabilities**, and both can fail
 
 A learning need is only answerable if **both** are adequate. A perfect instrument with no oracle means you can run the thing a million times and still not know if it's right; a perfect oracle with no instrument means you know what "right" looks like but can't produce a result to check.
 
-This skill exists because of two reliable agent failure modes. **(1)** When "how do we know?" is collapsed into "is it good?", agents defer to whatever tooling already exists, assume it's adequate, and build findings on an instrument that was blind to the question. **(2)** When there's no obvious oracle, agents inherit the old-world reflex — *"no oracle, so this isn't really testable"* — and silently drop the learning need, when in the agent era an oracle is usually cheap to construct.
+This skill exists because of two reliable agent failure modes. **(1)** When agents collapse "how do we know?" into "is it good?", they defer to whatever tooling already exists, assume it's adequate, and build findings on an instrument that was blind to the question. **(2)** When there's no obvious oracle, agents fall back on the old-world reflex — *"no oracle, so this isn't really testable"* — and silently drop the learning need. But in the agent era an oracle is usually cheap to build.
 
 ## Resolving file paths — do this first
 
@@ -27,7 +27,7 @@ File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **
 
 ## When to use
 
-- **From `/test-strategy`** — invoked after learning needs are derived (sub-step 3) and before allocation (sub-step 4). Input: the learning-needs list with their proposed methods. Output: a tooling-and-oracle adequacy assessment plus a list of **build items** that `/test-strategy`'s closing step gates on.
+- **From `/test-strategy`** — invoked after learning needs are derived (sub-step 3) and before allocation (sub-step 4). Input: the learning-needs list with their proposed methods. Output: a tooling-and-oracle adequacy assessment plus a list of **build items** (things to build or acquire) that `/test-strategy`'s closing step gates on.
 - **Standalone** — to audit an existing codebase's test tooling and oracles against what the team wants to find out. Input: the questions the team wants answered (ask the user) plus the repo's test infrastructure.
 
 This skill judges adequacy and names the gaps; it does not plan the build. **`/tooling-strategy`** consumes its build items (together with `/oracle-adequacy`'s, from the quality side) and turns them into a prioritised build plan.
@@ -36,7 +36,7 @@ This skill judges adequacy and names the gaps; it does not plan the build. **`/t
 
 - **Grounding.** Read `$PLUGIN_ROOT/PHILOSOPHY.md` and `$PLUGIN_ROOT/skills/test-strategy/FRAMINGS.md`. Framings #1 (investigation, not checking), #4 (asking and testing are parallel), #5 (don't import old-world costs — central to the oracle reframe below), #6 (economics: checking is cheap, investigation is the bottleneck) and #9 (smells — humans are the oracle for some questions) are load-bearing here.
 - **The learning needs and their methods.** From `/test-strategy`: the Learning Needs section of `$PROJECT_DIR/quality/test-strategy.md`. Standalone: ask the user what they want to find out, and capture it as a short list of questions.
-- **The test infrastructure inventory.** From `$PROJECT_DIR/quality/test-pre-read.md` if it exists; otherwise a quick filesystem pass (test dirs, CI config, test commands, config files). **Do not read source code** — judge the means of finding out from the strategy, the infrastructure inventory, and conversation, to keep the independence of perspective testing relies on (FRAMINGS #3).
+- **The test infrastructure inventory.** From `$PROJECT_DIR/quality/test-pre-read.md` if it exists; otherwise a quick filesystem pass (test dirs, CI config, test commands, config files). **Do not read source code** — judge the means of finding out from the strategy, the infrastructure inventory, and conversation, to keep the independent perspective testing relies on (FRAMINGS #3).
 
 ## The work, in order
 
@@ -55,19 +55,19 @@ For each learning need (standalone: each thing the team wants to learn), state t
 
 ### 3. Assess the oracle — Adequate / Inadequate / Missing — and don't accept "there's no oracle"
 
-Classify the oracle on the same scale. The oracle is *whatever lets you decide a result is correct*; the kinds, cheapest-signal to richest:
+Classify the oracle on the same scale. The oracle is *whatever lets you decide a result is correct*. The kinds, from cheapest signal to richest:
 
 - **Specified** — a spec, contract, or known-correct value states the expected answer.
 - **Property / metamorphic** — invariants that must hold even when you don't know the exact answer (*"intervals never shrink on a correct recall"*; *"encode∘decode = identity"*; *"A→B→A round-trips"*).
-- **Differential / simulated** — an independent, deliberately-simple, obviously-correct (if slow) **reference implementation** that the real system is diffed against. In the agent era an agent can often write this cheaply — the classic *simulated oracle*. Also: a prior version, or a competitor, as the reference.
+- **Differential / simulated** — an independent, deliberately-simple, obviously-correct (if slow) **reference implementation** that you diff the real system against. An agent can often write one cheaply — the classic *simulated oracle*. Also: a prior version, or a competitor, as the reference.
 - **Golden master / snapshot** — a captured known-good output, re-judged whenever it changes.
 - **Human or agent-judge** — for trust, feel, and quality questions a person is the oracle; agents lack smells, so humans stay the oracle there (FRAMINGS #9). An agent-judge panel can scale fuzzy judgements where that's appropriate, but name it as the oracle and note its limits.
 
-**Kill the old-world reflex (FRAMINGS #5).** *"There's no oracle for this, so we can't test it"* was often true under human costs and is usually false now. When the oracle is Missing or Inadequate, the default move is to **propose constructing one** — most often a property or a simulated/reference oracle — as a build item, not to drop the learning need.
+**Kill the old-world reflex (FRAMINGS #5).** *"There's no oracle for this, so we can't test it"* was often true when building an oracle meant expensive human work; it's usually false now. When the oracle is Missing or Inadequate, the default move is to **propose building one** — most often a property or a simulated/reference oracle — as a build item, not to drop the learning need.
 
 ### 4. Verdict and build items
 
-A learning need is **answerable** only if both instrument and oracle are Adequate. For every Inadequate/Missing axis, name the **build item**: what must be built or acquired, and which learning need(s) it unblocks. Oracle-build items (write a reference implementation; define the properties; author the expected outputs) are first-class here alongside instrument-build items. These are what `/test-strategy`'s closing step marks as gating.
+A learning need is **answerable** only if both instrument and oracle are Adequate. For every instrument or oracle marked Inadequate or Missing, name the **build item**: what must be built or acquired, and which learning need(s) it unblocks. Oracle-build items (write a reference implementation; define the properties; write down the expected outputs) count just as much as instrument-build items. These are what `/test-strategy`'s closing step marks as gating.
 
 ### 5. Catch the mismatches (FRAMINGS #1, #6, #9)
 
@@ -76,7 +76,7 @@ A learning need is **answerable** only if both instrument and oracle are Adequat
 
 ## Push back when
 
-- Every instrument or oracle comes back "Adequate" with no reasons. That's the Q2-collapse failure mode — re-run, demanding a specific justification per item for *this* question.
+- Every instrument or oracle comes back "Adequate" with no reasons. That's the Q2-collapse failure mode — re-run, and demand a specific reason for each item against *this* question.
 - A Missing oracle is treated as "untestable." Challenge it: *"under agent costs, could we write a simple reference implementation, or state a property, that judges this?"* (FRAMINGS #5).
 - A trust/feel/quality learning need is handed a purely automated oracle (FRAMINGS #9). The human is the instrument and the oracle; pretending a tool covers it is the inadequacy.
 - The user wants to treat "we have a test suite / CI" as evidence of adequacy. Adequacy is per-question, not per-repo — a suite can be excellent for some learning needs and blind to others, and a green suite says nothing about questions it has no oracle for.

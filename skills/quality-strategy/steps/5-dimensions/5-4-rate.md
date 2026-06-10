@@ -4,13 +4,13 @@
 
 For each dimension in the final inventory from 5.3, rate its **impact for the first release** using mechanical anchors, **per stakeholder**, then **merge** to one rating per dimension. The vocabulary is **H / M / None** — there is deliberately **no L** at this step.
 
-The rating captures **impact size only** — *how much does failure on this dimension cost, for the stakeholders who care?* It does **not** capture likelihood, and it does **not** capture "how high does the actual quality need to be" (that's 6.1). Likelihood lives downstream in the risk map, so that risk = impact × likelihood emerges from the combination later — not from a pre-collapsed single 5.4 score.
+The rating captures **impact size only** — *how much does failure on this dimension cost, for the stakeholders who care?* It does **not** capture likelihood, and it does **not** capture "how high does the actual quality need to be" (that's 6.1). Likelihood lives downstream in the risk map: risk = impact × likelihood gets combined there, later — not collapsed into a single 5.4 score now.
 
-There is no L on purpose. "Aware of it but not investing right now" is a **plan-of-work decision (Step 7)**, not a rating. Dropping L here kills the state-vs-priority drift at its source: a dimension is rated by what stakeholders' bars say about its impact, and the decision to defer work on it is made separately, with that impact in full view.
+There is no L on purpose. "Aware of it but not investing right now" is a **plan-of-work decision (Step 7)**, not a rating. Dropping L kills the state-vs-priority drift at its source — ratings quietly sliding to match what the team plans to work on, rather than what failure costs. Rate each dimension by what the stakeholders' bars say its impact is; decide separately, in Step 7, whether to defer work on it — with that impact in full view.
 
 ## What you need from the previous sub-step
 
-Read sub-step 5.3's **final inventory** (post-unpack and post-old/new-world) from `quality/strategy.md`. Read Part 3 (Stakeholders) — specifically each stakeholder's three-lens bars (Delight / Good Enough / Dealbreaker), because the anchors are applied against those bars. Read Part 4 (Non-goals) — a non-goal expressed in dimension form is one where no stakeholder bar references it (None), or it was dropped from the inventory entirely.
+Read sub-step 5.3's **final inventory** (post-unpack and post-old/new-world) from `quality/strategy.md`. Read Part 3 (Stakeholders) — specifically each stakeholder's three-lens bars (Delight / Good Enough / Dealbreaker), because the anchors are applied against those bars. Read Part 4 (Non-goals) — in dimension terms, a non-goal is a dimension no stakeholder bar references (None), or one dropped from the inventory entirely.
 
 ## What to cover
 
@@ -18,19 +18,19 @@ By the end of this sub-step the strategy doc must capture, **for each dimension 
 
 **The mechanical anchors**, applied **per stakeholder** against that stakeholder's Part 3 three-lens bars:
 
-1. **H** — iff this dimension's failure mode is a **Dealbreaker** for at least one stakeholder, at any lens. Failure here costs a stakeholder something they will not accept.
-2. **M** — iff some bar (Good Enough or Delight) references the dimension and **no** stakeholder has it as a Dealbreaker. It matters and should be actively managed; failure is unwelcome but survivable.
-3. **None** — iff **no** stakeholder bar at any lens references the dimension. Explicitly not a concern for this release.
+1. **H** — if and only if this dimension's failure mode is a **Dealbreaker** for at least one stakeholder, at any lens. Failure here costs a stakeholder something they will not accept.
+2. **M** — if and only if some bar (Good Enough or Delight) references the dimension and **no** stakeholder has it as a Dealbreaker. It matters and should be actively managed; failure is unwelcome but survivable.
+3. **None** — if and only if **no** stakeholder bar at any lens references the dimension. Explicitly not a concern for this release.
 
 The rating yields a short **pointer** rationale, not a paragraph of judgement — e.g. *"H — Family Dealbreaker on data loss, Part 3.2"*. The pointer names the stakeholder and the specific bar (by lens: Delight / Good Enough / Dealbreaker); that's the whole rationale.
 
 ## How to ask
 
-The flow is **a long stretch of sealed subagent work, then a short user dialogue only where stakeholders diverge.** The orchestrator does **not** grade the dimensions itself.
+The flow is **a long stretch of sealed subagent work, then a short user dialogue only where stakeholders diverge.** The orchestrator (you, the main agent) does **not** grade the dimensions itself.
 
 ### 1. Dispatch the sealed-context rating subagent
 
-The mechanical-anchor work runs in a **sealed-context** subagent that sees only what it needs: the final dimension inventory from 5.3 and the Part 3 stakeholder three-lens bars. It must **not** see this file's DONE checklist, any desired or target distribution, or the destination doc's success conditions — that visible destination is exactly what tempts an orchestrator to drift toward middle ratings.
+The mechanical-anchor work runs in a **sealed-context** subagent that sees only what it needs: the final dimension inventory from 5.3 and the Part 3 stakeholder three-lens bars. It must **not** see this file's DONE checklist, any desired or target distribution, or the destination doc's success conditions — seeing the destination is exactly what tempts an orchestrator to drift toward middle ratings.
 
 Use the `Agent` tool with `subagent_type: general-purpose`. The brief:
 
@@ -56,7 +56,7 @@ Use the `Agent` tool with `subagent_type: general-purpose`. The brief:
 
 ### 2. Merge (orchestrator + user dialogue)
 
-When the subagent returns, reconcile **per dimension**. This is dialogue where stakeholders disagree — not max-aggregation theatre.
+When the subagent returns, merge **per dimension**. This is real dialogue where stakeholders disagree — not a mechanical take-the-max dressed up as discussion.
 
 - **Convergence** — all stakeholders agree, or the anchor clearly aggregates. Take the aggregate as a **high-confidence merged rating, silently**: any stakeholder Dealbreaker → **H**; else any other bar → **M**; else **None**.
 - **Divergence** — stakeholders genuinely disagree (e.g. Stakeholder A: H Dealbreaker; Stakeholder B: None). **Surface it to the user explicitly:**
@@ -65,7 +65,7 @@ When the subagent returns, reconcile **per dimension**. This is dialogue where s
 
   The user decides. Record the merged rating **plus a one-line note** of the divergence and the decision.
 
-The merge is dialogue precisely where stakeholders disagree; that contested judgement is where user input is most valuable. Don't manufacture dialogue where the anchor converges, and don't collapse a real divergence into a silent max.
+Talk exactly where stakeholders disagree — that contested call is where the user's input is worth most. Don't manufacture dialogue where the anchor converges, and don't collapse a real divergence into a silent max.
 
 ### 3. Backstop — light distribution glance
 

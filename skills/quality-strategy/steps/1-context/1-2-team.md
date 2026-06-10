@@ -38,7 +38,7 @@ What you must not do:
 - Roles are described in terms of seniority alone. *"What does this person actually do day-to-day?"*
 - The team is described as static when the pre-read shows recent contributor changes. *"Has the team changed recently?"*
 - Agents are present in the project but not mentioned in the team description. *"I see signs of AI agents in the project. Are they part of how this gets built? If so, what do they do?"*
-- "We're a small team" without naming people in a project that clearly has named contributors. Push for specificity.
+- "We're a small team" without naming people in a project that clearly has named contributors. Push for names.
 
 ## This sub-step is DONE when
 

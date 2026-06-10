@@ -2,7 +2,7 @@
 
 ## Goal
 
-Synthesise required levels (sub-step 6.1) and actual levels (sub-step 6.2) into the risk map proper: a heat-mapped view of where the project is exposed, with confidence ratings on both sides of every gap. This is the headline output of Step 6 and the direct input to Step 7 (Plan of Work).
+Combine the required levels (sub-step 6.1) and actual levels (sub-step 6.2) into the risk map itself: a heat-mapped view of where the project is exposed, with confidence ratings on both sides of every gap. This is the headline output of Step 6 and the direct input to Step 7 (Plan of Work).
 
 ## What you need from the previous sub-step
 
@@ -24,8 +24,8 @@ This sub-step is mostly synthesis, not interview. The agent does the work; the u
 Walk through each row systematically:
 
 - For each dimension, take the required and actual from 6.1 and 6.2.
-- Compute the gap qualitatively: matched / small gap / large gap / **Unknown** (when the actual is Unknown — the gap can't be measured).
-- Compute the impact: from the dimension's H/M rating and the rationale, how dangerous is this gap?
+- Work out the gap: matched / small gap / large gap / **Unknown** (when the actual is Unknown — the gap can't be measured).
+- Work out the impact: from the dimension's H/M rating and the rationale, how dangerous is this gap?
 - Mark the heat: hottest = large gap + high impact + low confidence on either side. **Unknowns on high-impact dimensions are also hot** — you don't know where you are, and it matters a lot. They typically generate the highest-priority items in Step 7.
 - Coldest = small gap + lower impact + high confidence on both sides.
 

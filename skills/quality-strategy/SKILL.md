@@ -5,9 +5,9 @@ description: Produce or revise a quality strategy for a project — a business-l
 
 # Quality Strategy
 
-This skill walks a structured interview to produce `quality/strategy.md` — a business-level document defining what success looks like for the project and how to get there. It is grounded in Edmund Pringle's quality framework.
+This skill runs a structured interview to produce `quality/strategy.md` — a business-level document defining what success looks like for the project and how to get there. It is grounded in Edmund Pringle's quality framework.
 
-The skill is intentionally long — a serious strategy takes a working day or two of cognitive effort spread across multiple sessions (see README for full context). The work is broken into 21 small sub-steps so progress is legible, the user can pause at any point, and the strategy doc accumulates incrementally — what's already been written is durable across interruptions. Taking longer than expected is signal that real thinking is happening; rushing produces a strategy that looks complete but skipped the substance.
+The skill is intentionally long — a serious strategy takes a working day or two of hard thinking spread across multiple sessions (see README for full context). The work is broken into 21 small sub-steps so progress is easy to see, the user can pause at any point, and the strategy doc builds up section by section — what's already written survives interruptions. Taking longer than expected is a sign that real thinking is happening; rushing produces a strategy that looks complete but skipped the substance.
 
 ## Resolving file paths — do this first
 
@@ -24,22 +24,22 @@ Read `$PLUGIN_ROOT/PHILOSOPHY.md` if you haven't already. The disciplines that r
 
 ## Phrasing — adapt, don't recite
 
-You are running a working session as a sharp facilitator would — a useful management consultant, not a robot reading a script. The sub-step files quote example prompts (the *italicised* lines) to show the **intent** of each question and the bar it has to clear. They are illustrations, not lines to read verbatim. Put them in your own words, fitted to *this* user, *this* project, and what they just told you: compress or expand, match the register to a precise expert versus a stuck novice, drop the preamble once rapport is established, follow up harder where an answer came back thin.
+You are running a working session as a sharp facilitator would — a useful management consultant, not a robot reading a script. The sub-step files quote example prompts (the *italicised* lines) to show the **intent** of each question and the bar it has to clear. They are illustrations, not lines to read verbatim. Put them in your own words, fitted to *this* user, *this* project, and what they just told you: compress or expand, match your tone to a precise expert versus a stuck novice, drop the preamble once rapport is established, follow up harder where an answer came back thin.
 
 What is fixed is the *substance* — the question that must get answered, the check that must pass, the push-back that must happen, the assumption that must be recorded. What is free is the *wording*. So: never skip a substantive question, soften a real check, or drop a required push-back to sound friendlier — but equally, never recite a prompt word-for-word when a more natural phrasing does the same job better. When a sub-step says *"ask X"*, it means *get X answered*, not *utter this exact sentence*. A session that sounds like a person thinking with the user beats one that sounds like a form being read aloud — and the framework's rigour lives in the substance, which adapting the words does not touch.
 
-Keep the register **plain** (PHILOSOPHY: *say it plainly*) — in what you say *and* in what you write to the doc. Framework terms get a one-clause gloss on first use; everything else is everyday English: short words, active verbs, concrete examples. You sound like a sharp consultant talking, not a standards document.
+Keep the language **plain** (PHILOSOPHY: *say it plainly*) — in what you say *and* in what you write to the doc. Framework terms get a one-clause gloss on first use; everything else is everyday English: short words, active verbs, concrete examples. You sound like a sharp consultant talking, not a standards document.
 
 ## The four-question frame and the strategy's job
 
 A quality strategy answers four questions, in order:
 
 1. **What does good look like?** — stakeholder bars, dimensions, required levels (Steps 1–6.1).
-2. **How do we know if what we have is good?** — the oracles and instruments by which we'd judge the actual state. This is its own question, not a free rider on Q3.
+2. **How do we know if what we have is good?** — the oracles (ways of judging) and instruments (tools that measure) we'd use to judge the actual state. This is its own question, not a free rider on Q3.
 3. **Is what we have good?** — the actual-state assessment, using the oracles from Q2 (Steps 6.2–6.3).
 4. **How do we make it good?** — the plan of work to close gaps (Step 7 — a sketch, and optional; see "The plan of work is a sketch" below).
 
-**Q2 is explicit on purpose.** The reliable failure mode is to collapse Q2 into Q3 — to assert an actual level by deferring to whatever signal happens to exist, never asking whether that signal can actually judge the dimension. So during the actual-state pass (sub-step 6.2) this skill invokes **`/oracle-adequacy`**, which interrogates, per dimension, whether the oracle behind its claimed actual is adequate — and turns "no oracle, so it's just Unknown" into a named oracle-build item that seeds the plan of work.
+**Q2 is explicit on purpose.** The common failure is to collapse Q2 into Q3 — to claim an actual level from whatever signal happens to exist, without ever asking whether that signal can judge the dimension. So during the actual-state pass (sub-step 6.2) this skill invokes **`/oracle-adequacy`**, which asks, for each dimension, whether the oracle behind its claimed actual is adequate — and turns "no oracle, so it's just Unknown" into a named oracle-build item that seeds the plan of work.
 
 **The strategy's job.** Before the analysis, Step 1 (sub-step 1.1) asks what this strategy is *for, right now*, and records it as a `## Strategy job` paragraph at the top of the doc. The four jobs:
 
@@ -50,7 +50,7 @@ A quality strategy answers four questions, in order:
 
 The same framework and the same rigour apply to all four; what differs is the right *output* and the right *severity of review*. `/quality-strategy-review` reads this paragraph first (its contextual-fit gate) and adapts what counts as a blocker accordingly. Project *shape* (solo / team / org; shipped / not-yet / dormant; agent-driven or not) is a separate axis that shapes how questions are *phrased*, not how deep the analysis goes — full project-shape branching is a later phase, but capture shape in Step 1 where it helps phrasing.
 
-**Running without a repo is first-class.** Two of the four jobs — pre-implementation and agentic one-shot — are *normally* run with little or no code to hand, and even a durable-production strategy can be built by a founder or lead who has the project in their head but no repo open. This is a supported, sensible way to use the skill, not a degraded fallback: a quality strategy is most valuable *before* the build, when it can still steer it. When there's no codebase to scan, the pre-read degrades honestly (it says so, and tags what it inferred vs scanned — see sub-step 0), the interview carries the load it always carries, and the closing review judges the strategy against its no-repo job rather than docking it for unknown actuals. Don't apologise for the absence of a repo or treat it as a problem to route around — interview the user as the authority on their own project, record assumptions, and produce the strategy. The only thing a missing repo costs is the pre-read's scan-derived hypotheses; everything load-bearing was always going to be asked, not read.
+**Running without a repo is first-class.** Two of the four jobs — pre-implementation and agentic one-shot — are *normally* run with little or no code to hand, and even a durable-production strategy can be built by a founder or lead who has the project in their head but no repo open. This is a supported, sensible way to use the skill, not a degraded fallback: a quality strategy is most valuable *before* the build, when it can still steer it. When there's no codebase to scan, the pre-read degrades honestly (it says so, and tags what it inferred vs scanned — see sub-step 0), the interview carries the load it always carries, and the closing review judges the strategy against its no-repo job rather than docking it for unknown actuals. Don't apologise for the missing repo or treat it as a problem to work around — interview the user as the authority on their own project, record assumptions, and produce the strategy. The only thing a missing repo costs is the pre-read's scan-derived hypotheses; everything load-bearing was always going to be asked, not read.
 
 ## Sealed-context dispatch and scratch files
 
@@ -60,17 +60,17 @@ Wherever this skill does substantive analytical work via a subagent — the pre-
 
 **Process-note leak prevention.** Orchestrator meta-observations about *the skill itself* (an awkward step, a suspected bug, phrasing that didn't land) go to `$PROJECT_DIR/.skill-feedback.md` only — never into `quality/strategy.md`. The strategy doc reads as an authored artifact, not a transcript of the skill running.
 
-The *machinery* of running the skill — dispatch/scratch narration ("Subagent dispatched: …", "[ran 5.4 inline]", "scratch would be `quality/.scratch/…`"), append bookkeeping, sub-step/turn lineage refs ("corrected, turn-23", "split out at 5.2") — likewise has no place in `quality/strategy.md`. **This is cleaned up at review time, not by loading the writing pass with a list of don'ts.** Write the finding or the question; the step-boundary review and the final `/quality-strategy-review` strip any machinery that slipped through (see "Presentation cleanup at review points" below). The reasoning: a producing pass already carrying the real analytical work shouldn't also be juggling a prohibition list — that taxes the work without reliably catching the leak. Catching it where the doc is reviewed is both lighter on the producer and more thorough.
+The *machinery* of running the skill — dispatch/scratch narration ("Subagent dispatched: …", "[ran 5.4 inline]", "scratch would be `quality/.scratch/…`"), append bookkeeping, sub-step/turn lineage refs ("corrected, turn-23", "split out at 5.2") — likewise has no place in `quality/strategy.md`. **This is cleaned up at review time, not by loading the writing pass with a list of don'ts.** Write the finding or the question; the step-boundary review and the final `/quality-strategy-review` strip any machinery that slipped through (see "Presentation cleanup at review points" below). The reasoning: a pass that's busy doing the real analysis shouldn't also juggle a list of don'ts — that taxes the work and still misses leaks. Catching them where the doc is reviewed is both lighter on the writer and more thorough.
 
 ## Scope of this skill — first release only
 
 The depth analysis in this skill (stakeholders, three-lens, non-goals, dimensions, risk map, plan of work) focuses on **one release at a time** — typically the next release the team is about to ship. Future releases are noted briefly during sub-step 2.1 (Roadmap) so the strategy isn't blind to what's coming, but the analysis depth is for the immediate release.
 
-This is deliberate: the context of a release shapes the strategy heavily, and pre-running the deep analysis for releases that haven't yet had their context resolved produces speculation, not strategy. When the team is ready to start a future release, re-invoke the skill in new-release mode (see Revision mode below) to produce a fresh strategy for it. Some sections (team, workflows, roadmap) carry over with incremental updates; others (stakeholders, dimensions, risk map, plan of work) are largely rewritten because the release context has changed.
+This is deliberate: a release's context shapes the strategy heavily, and deep analysis of a release whose context isn't settled yet produces speculation, not strategy. When the team is ready to start a future release, re-invoke the skill in new-release mode (see Revision mode below) to produce a fresh strategy for it. Some sections (team, workflows, roadmap) carry over with incremental updates; others (stakeholders, dimensions, risk map, plan of work) are largely rewritten because the release context has changed.
 
 ## The plan of work is a sketch — follow-on skills elaborate it
 
-Part 7 (Step 7) enumerates, classifies, and sequences the work at *strategy* level — enough to see the shape of what's needed, the priorities, and the first moves. It is deliberately **not** an elaborated work plan, and you should not let it become one. Elaboration belongs to the follow-on skills, each of which takes a slice of Part 7 and turns it into a first-class plan of its own:
+Part 7 (Step 7) lists, classifies, and sequences the work at *strategy* level — enough to see the shape of what's needed, the priorities, and the first moves. It is deliberately **not** a detailed work plan, and you should not let it become one. The detail belongs to the follow-on skills, each of which takes a slice of Part 7 and turns it into a first-class plan of its own:
 
 - **Testing work** → `/test-strategy` — what to investigate, in what order, how to split human and agent effort (`quality/test-strategy.md`).
 - **Oracle/instrument build items** → `/tooling-strategy` — the prioritised build plan that turns the risk map's Unknowns and Gated dimensions into knowables (`quality/tooling-strategy.md`).
@@ -78,7 +78,7 @@ Part 7 (Step 7) enumerates, classifies, and sequences the work at *strategy* lev
 
 Stakeholder work and fixing work have no follow-on skill yet; they stay at sketch level in Part 7 like everything else. Keep Part 7 entries to one or two lines each, resist expanding any of them into a mini-plan in place, and point at the relevant follow-on instead — a Part 7 that duplicates `test-strategy.md`'s depth goes stale the moment the follow-on runs.
 
-**Step 7 is optional — the whole sketch can be deferred.** At the Step 6 boundary, once the 6.3 substantive checkpoint has confirmed, offer the user the choice: walk Step 7 now, or skip it and defer the plan of work wholesale to the follow-on skills. Skipping is the right call when the team will run `/test-strategy` and `/tooling-strategy` immediately — a sketch written minutes before its own elaboration adds nothing. The skip is **recorded, never silent**: append a short Part 7 deferral note —
+**Step 7 is optional — the whole sketch can be deferred.** At the Step 6 boundary, once the user has confirmed at the 6.3 substantive checkpoint, offer the choice: walk Step 7 now, or skip it and defer the plan of work wholesale to the follow-on skills. Skipping is the right call when the team will run `/test-strategy` and `/tooling-strategy` immediately — a sketch written minutes before its own elaboration adds nothing. The skip is **recorded, never silent**: append a short Part 7 deferral note —
 
 ```markdown
 ## Part 7: Plan of Work
@@ -144,13 +144,13 @@ Sub-steps 7.1–7.3 are **optional** — the user may defer the plan of work who
 
 ## Substantive checkpoint at step boundaries
 
-This is the single most important user-facing pattern in the skill. The strategy is waterfall — mistakes caught early cost minutes; mistakes caught late cost hours of rework. We need a real engagement gate at each major step transition.
+This is the single most important user-facing pattern in the skill. The strategy is waterfall — mistakes caught early cost minutes; mistakes caught late cost hours of rework. So each step boundary needs a real gate where the user genuinely engages.
 
 **Where it runs.** At the end of each of the 7 steps — the close of sub-steps **1.5, 2.1, 3.2, 4.1, 5.5, 6.3, 7.3** — not at every sub-step. Per-sub-step transitions get a light wrap-up. The substantive checkpoint runs at step boundaries because that's when:
 
 - The user has a complete chunk of strategy to evaluate (a whole Part of the doc, not a fragment).
 - The user can read back the whole step and ask *"does this hang together?"* rather than evaluating a single piece in isolation. Smells about priorities or completeness usually only become visible when you can see the whole step at once — you can't tell if a stakeholder's three lenses are right by looking at one stakeholder; you tell by looking at all of them together.
-- Cross-step revisions become tractable. Doing later steps often surfaces things that change earlier steps' answers (e.g. while doing dimensions in Step 5, you realise a stakeholder's bar from Step 3 was wrong). The step-boundary checkpoint is when that gets acted on.
+- Cross-step revisions become practical. Doing later steps often surfaces things that change earlier steps' answers (e.g. while doing dimensions in Step 5, you realise a stakeholder's bar from Step 3 was wrong). The step-boundary checkpoint is when that gets acted on.
 
 ### The pattern at each step boundary
 
@@ -158,13 +158,13 @@ This is the single most important user-facing pattern in the skill. The strategy
 
 0b. **Silently strip presentation leakage from this step's Part(s).** Re-read the section(s) this step just appended to `quality/strategy.md` and quietly remove machinery that isn't strategy — see "Presentation cleanup at review points" below for the patterns. Do this without narrating it; the cleanup never appears in what you say to the user. This is review-time cleanup of the freshly-written Part, the per-subsection counterpart to the final whole-doc review.
 
-1. Summarise the *whole step's* output back to the user in 5–8 lines, hitting the consequential decisions across all sub-steps in the step — plus any contradictions the check surfaced. Not a recap of process — a recap of decisions.
+1. Summarise the *whole step's* output back to the user in 5–8 lines, covering the decisions that matter across all sub-steps in the step — plus any contradictions the check surfaced. Not a recap of process — a recap of decisions.
 
 2. Run the substantive checkpoint:
 
    > *"Take a real moment to read this back. We've completed [Step name]. Is anything off — even if you can't articulate why? Anything that gives you a weird feeling? Anything in earlier steps that, in light of this work, you now think is wrong? Even vague unease is worth surfacing. Catching it now is cheap; catching it later costs hours of rework."*
 
-   **Adapt the register to the user.** When the user has been giving precise, articulate, complete answers — an expert who knows their domain — the open "any vague unease even if you can't name it?" prompt reads as a tic. Prefer the *targeted* form as the default: name the one place you most expect to be wrong and why, and ask them to test it — e.g. *"Here's the one place I'd bet this is most likely wrong, and why: <…> — does that hold?"* Reserve the open-unease phrasing above for users who are visibly uncertain or inarticulate. This is a change of phrasing only — the checkpoint itself still runs at every step boundary and still does the same work.
+   **Adapt the tone to the user.** When the user has been giving precise, articulate, complete answers — an expert who knows their domain — the open "any vague unease even if you can't name it?" prompt reads as a tic. Prefer the *targeted* form as the default: name the one place you most expect to be wrong and why, and ask them to test it — e.g. *"Here's the one place I'd bet this is most likely wrong, and why: <…> — does that hold?"* Reserve the open-unease phrasing above for users who are visibly uncertain or inarticulate. This is a change of phrasing only — the checkpoint itself still runs at every step boundary and still does the same work.
 
 3. **Wait for the user's response.** Treat any of the following as signals to dig in, *not* as confirmation:
    - "I think so."
@@ -190,7 +190,7 @@ While you're here, give the sub-section you just appended a quick, silent presen
 
 ## Presentation cleanup at review points
 
-The strategy doc should read as an authored artifact — the *findings and decisions*, not a transcript of the skill's machinery producing them. Rather than burden the writing pass with a prohibition list (which taxes the real analytical work and still misses leaks), the cleanup happens **at review time**, on text already written, where it's both lighter and more reliable. Three review surfaces share the job:
+The strategy doc should read as an authored artifact — the *findings and decisions*, not a transcript of the skill's machinery producing them. Rather than load the writing pass with a list of don'ts (which taxes the real work and still misses leaks), the cleanup happens **at review time**, on text already written, where it's both lighter and more reliable. Three review points share the job:
 
 - **Intermediate sub-step wrap-ups** — a light scan of the one sub-section just written.
 - **Step boundaries** — a thorough scan of the whole Part this step produced (item 0b in the pattern above), before you summarise it back.
@@ -213,11 +213,11 @@ This is *presentation* cleanup only. It changes nothing about what work runs or 
 
 ## Initial pre-read
 
-Before reading sub-step 1.1, run sub-step 0 (`steps/0-pre-read/0-dispatch.md`). It dispatches a subagent that reads the project and produces a structured digest at `quality/pre-read.md`. Subsequent sub-steps reference the digest as starting hypothesis material so the main agent does not have to load the whole project into its own context window.
+Before reading sub-step 1.1, run sub-step 0 (`steps/0-pre-read/0-dispatch.md`). It dispatches a subagent that reads the project and produces a structured digest at `quality/pre-read.md`. Later sub-steps use the digest as starting hypotheses so the main agent does not have to load the whole project into its own context window.
 
 ## Pause and resume
 
-The work is cognitively demanding — the user will need breaks, not just want them. Be **opinionated** about where to take them: some sub-steps belong tightly together and breaking between them costs working memory; others are natural seams. If a user is trying to push through past 90 minutes of intense thinking, surface that the work degrades when fatigued and recommend a break — better to resume fresh tomorrow than ship a sloppy step today.
+The work is hard thinking — the user will need breaks, not just want them. Be **opinionated** about where to take them: some sub-steps belong tightly together and breaking between them costs working memory; others are natural seams. If a user is trying to push through past 90 minutes of intense thinking, tell them the work degrades when they're tired and recommend a break — better to resume fresh tomorrow than ship a sloppy step today.
 
 ### Stick-together sets — keep going, do not suggest `/clear`
 
@@ -294,7 +294,7 @@ Once it passes, point the user at the follow-on skills so they know where to go 
 - **Risk map dominated by Unknowns, Gated dimensions, and oracle-build items** → recommend **`/tooling-strategy`** first: plan the oracle/instrument builds that make the project knowable, then run `/test-strategy` once (or as) the means of knowing exist. Planning a full investigation against dimensions nothing can currently judge produces a strategy that is mostly "blocked".
 - **Risk map mostly answerable** — oracles largely adequate, a manageable set of build items → recommend **`/test-strategy`** first: its learning needs will sharpen the tooling demand (its own Q2 check, `/tooling-adequacy`, surfaces what's blocked), and `/tooling-strategy` then plans the combined build.
 
-Either way, name both skills, say which order you recommend and why, and don't leave the user at a finished strategy with no onward path. `/test-strategy` is the engineering-level companion that operationalises this strategy — what to investigate, in what order, with what human/agent split; the risk map and plan of work you just produced are its direct inputs.
+Either way, name both skills, say which order you recommend and why, and don't leave the user at a finished strategy with no onward path. `/test-strategy` is the engineering-level companion that turns this strategy into action — what to investigate, in what order, with what human/agent split; the risk map and plan of work you just produced are its direct inputs.
 
 ## When the user is genuinely stuck — offer a labelled strawman
 

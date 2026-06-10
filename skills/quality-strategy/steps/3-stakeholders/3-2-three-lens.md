@@ -2,7 +2,7 @@
 
 ## Goal
 
-For each stakeholder identified in sub-step 3.1, capture what quality means to them in three lenses: what would delight them, what's good enough for them in this release, and what would be a dealbreaker. This converts the abstract "they matter" into specific, actionable bars that the rest of the strategy can be tested against.
+For each stakeholder identified in sub-step 3.1, capture what quality means to them in three lenses: what would delight them, what's good enough for them in this release, and what would be a dealbreaker. This turns the vague "they matter" into specific bars you can test the rest of the strategy against.
 
 ## What you need from the previous sub-step
 
@@ -14,9 +14,9 @@ By the end of this sub-step the strategy doc must capture, **for each stakeholde
 
 1. **Delight** — what would exceed expectations? What would make this stakeholder feel "this is exactly what I needed"? The upper bound the project might reach for.
 2. **Good Enough** — what's the minimum for this release to succeed with this stakeholder? Not aspirational, not minimal — the threshold where they're satisfied enough that you've earned the right to keep going.
-3. **Dealbreaker** — what would cause active rejection? If this happened, the stakeholder would walk away regardless of everything else. Often more practical and mundane than expected — not "data breach" but "couldn't install it."
+3. **Dealbreaker** — what would make them reject it outright? If this happened, the stakeholder would walk away no matter what else is good. Often more practical and mundane than expected — not "data breach" but "couldn't install it."
 
-The three lenses are required for every stakeholder. If the user genuinely cannot articulate one after pushing, mark as `OPEN QUESTION:` and continue.
+The three lenses are required for every stakeholder. If the user genuinely can't give one after you push, mark it as `OPEN QUESTION:` and continue.
 
 ## How to ask
 
@@ -29,7 +29,7 @@ The user can batch-answer in one message; parse and capture all three.
 You have explicit permission and encouragement to:
 
 - **Prompt for more colour.** If an answer is one-word ("speed"), push: *"What does delight-level speed look like concretely? Two seconds? One? What's the experience when it's that fast?"*
-- **Dig into anything that surprises you** — a dealbreaker that's much smaller than expected, a delight that's vaguer than expected, a good-enough that's notably lower than the user's actual emotional response suggests.
+- **Dig into anything that surprises you** — a dealbreaker that's much smaller than expected, a delight that's vaguer than expected, a Good Enough that's noticeably lower than the user's actual emotional reaction suggests.
 - **Reframe** if your first prompt didn't land. For internal stakeholders especially, "delight" may need translating ("what would feel like a win for the dev team this release?").
 - **Use the pre-read.** If subagent C surfaced design observations that imply specific bars for a stakeholder ("error messages are inconsistent → diagnosability dealbreakers likely live here"), ground the question in that.
 

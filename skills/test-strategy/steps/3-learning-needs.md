@@ -4,7 +4,7 @@
 
 Produce the heart of the test strategy: an impact-ordered list of information needs, each phrased as a question, each grounded in the risk map. By the end of this sub-step the strategy doc has a Learning Needs section organised into impact tiers, where every entry has the same structure: question + methods + exit criterion + reference back to the risk map.
 
-This is the longest sub-step. It is also the one where /test-strategy adds the most value — taking the risk map and transforming it into investigation-shaped work.
+This is the longest sub-step. It's also where /test-strategy adds the most value — turning the risk map into investigation-shaped work.
 
 ## What you need from the previous sub-steps
 
@@ -29,7 +29,7 @@ The Learning Needs section must contain:
 
 ## How to derive
 
-Two passes, both single-pass (no subagent — see OPEN-QUESTIONS.md "Single-pass vs subagent for learning-needs derivation"; the derivation is a transformation, not exploration).
+Derive in two passes. Do both yourself in the main conversation — no subagent (see OPEN-QUESTIONS.md "Single-pass vs subagent for learning-needs derivation"); you're transforming existing material, not exploring.
 
 **Pass 1: One-to-one from the risk map.**
 
@@ -45,8 +45,8 @@ For each Dealbreaker entry in stakeholder three-lens analysis (Part 3): ensure t
 
 For each candidate learning need:
 
-- Is this *checking* (verify a known expected behaviour) or *investigating* (find out what's actually happening)? If checking, it's a smaller part — phrase the question accordingly: *"do these specific behaviours match spec?"* — but ensure the strategy isn't dominated by them. See FRAMINGS.md #1. If checking dominates, push back: investigation should be the larger share.
-- Does the question include human-judgment dimensions (smell, trust, "does it feel right")? Mark those — they constrain allocation in sub-step 4. See FRAMINGS.md #9.
+- Is this *checking* (verify a known expected behaviour) or *investigating* (find out what's actually happening)? If checking, it's a smaller part — phrase the question accordingly: *"do these specific behaviours match spec?"* — and make sure checking items don't dominate the strategy. See FRAMINGS.md #1. If checking dominates, push back: investigation should be the larger share.
+- Does the question include human-judgment dimensions (smell — the gut sense that something's off — trust, "does it feel right")? Mark those — they constrain allocation in sub-step 4. See FRAMINGS.md #9.
 - Does this include something we'd previously have said "not worth testing"? See FRAMINGS.md #5. Surface explicitly: *"Under human costs, would you have skipped this? Is it cheaper now with agents?"* If yes, it stays in.
 
 ## Tiering
@@ -55,7 +55,7 @@ After candidate learning needs are listed:
 
 1. Sort by impact. Tier 1 = existential. Tier 2 = dealbreakers (would kill the release if hit). Tier 3 = quality-of-experience (affects retention but not survival). Tier 4 (where applicable) = team confidence — things about the team's ability to iterate, not the product itself.
 
-2. Within each tier, order by cheapest resolution. The 10-minute test goes before the day-long test, even if both are in Tier 1 — a Tier-1 failure cuts off lower-tier work, so resolving the cheap Tier-1 unknowns first is highest expected value per hour.
+2. Within each tier, order by cheapest resolution. The 10-minute test goes before the day-long test, even if both are in Tier 1 — a Tier-1 failure cuts off lower-tier work, so resolving the cheap Tier-1 unknowns first gives the most value per hour.
 
 3. The tier count is the user's call. If only Tiers 1 and 2 emerge, that's fine. If five tiers fall out naturally, that's fine too. Default to 3-4.
 
@@ -77,7 +77,7 @@ This is the place to apply principle 5 (don't import old-world costs) explicitly
 
 - Skip the per-item structure. A tier-list of vague entries is a test plan, not a test strategy.
 - Phrase items as test cases. *"Run install on Ubuntu 22.04"* is a method, not a learning need. The learning need is *"Can the install work across the OSes our users have?"*
-- Include known-risk items as if they were learning needs. If the gap is "we know X is broken, we need to fix it," that's not a learning need — it's a fix. Surface the conflation if you spot it.
+- Include known-risk items as if they were learning needs. If the gap is "we know X is broken, we need to fix it," that's not a learning need — it's a fix. If you spot the two mixed together, say so.
 - Inflate the list. If only six learning needs fall out of a small project, six is right. Don't pad to look thorough.
 - Allow Tier 1 to be empty. If no unknowns are existential, either the risk map is wrong (push back to /quality-strategy) or the project genuinely has no existential unknowns at this stage (rare — surface as `OPEN QUESTION:` for sanity).
 
@@ -147,13 +147,13 @@ Items here address what we need to learn about our own cost structure to allocat
 
 Summarise back: tier count, total item count, calibration count.
 
-Then, before allocation, run the **tooling & oracle adequacy** check: invoke `/tooling-adequacy` on this learning-needs list. For each learning need it asks whether you have an adequate *instrument* (to exercise and observe it) and an adequate *oracle* (to judge whether the result is correct) — and where either is missing it names a build item, including simulated/reference oracles worth constructing rather than declaring something untestable. Its build items feed sub-step 5's gating. Don't skip this: a learning need whose answer you couldn't actually judge isn't a learning need yet.
+Then, before allocation, run the **tooling & oracle adequacy** check: invoke `/tooling-adequacy` on this learning-needs list. For each learning need it asks two things: do you have an adequate *instrument* (a way to exercise the thing and observe what happens) and an adequate *oracle* (a way to judge whether the result is correct)? Where either is missing, it names a build item — including simulated or reference oracles worth building rather than declaring something untestable. Its build items feed sub-step 5's gating. Don't skip this: a learning need whose answer you couldn't actually judge isn't a learning need yet.
 
-**The check's result is a fork in the road.** A handful of blocked items among answerable tiers is the normal case: carry them forward, allocate around them, and sub-step 5's blocked-on-tooling section records them (with `/tooling-strategy` as the onward pointer). But if the build items **dominate the top tier** — the highest-impact learning needs are mostly unanswerable — surface a real choice before allocation: *"Most of what matters most can't be answered with what exists today. We can finish this strategy with those needs marked blocked and allocate around them, or pause here and run `/tooling-strategy` to plan the builds first — then finish allocation knowing what's coming and when. Which?"* Pausing is not a failure of the test strategy; it's the Q2-before-Q3 principle applied honestly.
+**The check's result is a fork in the road.** A handful of blocked items among answerable tiers is the normal case: carry them forward, allocate around them, and sub-step 5's blocked-on-tooling section records them (pointing onward to `/tooling-strategy`). But if the build items **dominate the top tier** — the highest-impact learning needs are mostly unanswerable — surface a real choice before allocation: *"Most of what matters most can't be answered with what exists today. We can finish this strategy with those needs marked blocked and allocate around them, or pause here and run `/tooling-strategy` to plan the builds first — then finish allocation knowing what's coming and when. Which?"* Pausing is not a failure of the test strategy; it's the Q2-before-Q3 principle applied honestly.
 
 **Which side to recommend** (the choice stays the user's — but recommend with reasons, not by reflex):
 
-- **Recommend continuing** when the build demand is already crisp (the items are named and recognisable) and the remaining sub-steps are cheap under the deferred-allocation rules — blocked needs take `blocked — allocation deferred` rows, so finishing costs little, and `/tooling-strategy` gains a *complete* test strategy as input.
-- **Recommend pausing** when allocation genuinely depends on what the build plan will decide — the answerable remainder is too thin to be worth a two-voice exchange yet, sourcing decisions (build vs adopt vs extend) would change the methods themselves, or the user needs the build sequencing to commit to anything.
+- **Recommend continuing** when the build demand is already crisp (the items are named and recognisable) and the remaining sub-steps are cheap under the deferred-allocation rules — blocked needs get `blocked — allocation deferred` rows, so finishing costs little, and `/tooling-strategy` then gets a *complete* test strategy as input.
+- **Recommend pausing** when allocation genuinely depends on what the build plan will decide — too few answerable needs remain to be worth a two-voice exchange yet, sourcing decisions (build vs adopt vs extend) would change the methods themselves, or the user needs the build sequencing before they can commit to anything.
 
-Then (when continuing): *"Tooling and oracle check done. Allocation comes next — the two-voice exchange about who does what. Ready, or want a break first? Note: 3 → 4 is tighter coupled, so if you break here, plan to re-orient from this list on resume."*
+Then (when continuing): *"Tooling and oracle check done. Allocation comes next — the two-voice exchange about who does what. Ready, or want a break first? Note: sub-steps 3 and 4 are tightly coupled, so if you break here, plan to re-read this list when you come back."*

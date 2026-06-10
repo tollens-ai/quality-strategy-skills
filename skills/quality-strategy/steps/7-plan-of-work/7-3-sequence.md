@@ -115,7 +115,7 @@ This Part is the strategy-level sketch. <One or two lines pointing onward: testi
 **Open questions from this sub-step:** <bullet list, or "none">
 ```
 
-Once written, summarise the phased plan back to the user in 5–7 lines, then **run the substantive checkpoint** (see SKILL.md → Substantive checkpoint between sub-steps): this is the last write-time chance to catch a smell before the strategy is declared content-complete and goes to the review. Actively invite vague unease, anything-feels-off, regrets-foreseen-from-six-months-ahead. Only after explicit, considered confirmation, the strategy is content-complete.
+Once written, summarise the phased plan back to the user in 5–7 lines, then **run the substantive checkpoint** (see SKILL.md → Substantive checkpoint between sub-steps): this is the last chance to catch a smell while we're still writing, before the strategy is declared content-complete and goes to the review. Actively invite vague unease — anything that feels off, anything the user suspects they'd regret six months from now. Only after explicit, considered confirmation is the strategy content-complete.
 
 ### Then distill, then review
 

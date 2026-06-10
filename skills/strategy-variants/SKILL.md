@@ -5,22 +5,22 @@ description: Derive audience-facing variants from a finished quality strategy �
 
 # Strategy Variants
 
-`quality/strategy.md` is written to be *honest and complete* — for its author and auditor. That's the right shape for the working artifact, and the wrong shape for handing to the 40 engineers it talks about, the busy PM, the open-source contributors, or an external client. Those readers need a *view pitched at them*: shorter, in their language, and — for an external audience — without the frank internal candor (self-criticism, internal economics, politics, pain-thresholds) that makes the working doc useful but is inappropriate or unwise to show a client.
+`quality/strategy.md` is written to be *honest and complete* — for its author and auditor. That's the right shape for the working artifact, and the wrong shape for handing to the 40 engineers it talks about, the busy PM, the open-source contributors, or an external client. Those readers need a *view pitched at them*: shorter, in their language, and — for an external audience — without the frank internal candor (self-criticism, internal economics, politics, pain-thresholds). That candor makes the working doc useful, but showing it to a client would be unwise or inappropriate.
 
-This skill is a **post-processing transformation**. It runs *after* the honest strategy is finished and reviewed, and it never edits `quality/strategy.md` — it emits separate variant files so the honest internal strategy stays the single source of truth. It produces, on request, either or both:
+This skill is a **post-processing step**. It runs *after* the honest strategy is finished and reviewed, and it never edits `quality/strategy.md` — it writes separate variant files, so the honest internal strategy stays the single source of truth. It produces, on request, either or both:
 
 1. **A distributable one-pager (`quality/strategy-one-pager.md`)** — audience-facing, for the people the strategy names. What we're building, what "good" means *for you*, what we're deliberately not doing, and where the real risks are — in plain language, for someone who will not read the full strategy.
-2. **A client-safe variant (`quality/strategy-client.md`)** — for an external audience (client, customer, exec sponsor) where the working doc's frank internal layer must come out. Honesty about scope, commitments, and non-goals is preserved; internal self-criticism and internal-only economics/politics are removed or reframed — **omitted, never contradicted**.
+2. **A client-safe variant (`quality/strategy-client.md`)** — for an external audience (client, customer, exec sponsor) where the working doc's frank internal layer must come out. It keeps the honesty about scope, commitments, and non-goals; it removes or reframes internal self-criticism and internal-only economics and politics — **omitted, never contradicted**.
 
-The honest one-pager and the client-safe variant are different jobs: the one-pager *compresses for an insider audience*; the client variant *re-pitches for an outsider* and changes register. A project might want one, the other, or both.
+The honest one-pager and the client-safe variant are different jobs: the one-pager *compresses for an insider audience*; the client variant *re-pitches for an outsider* and changes tone. A project might want one, the other, or both.
 
 ## The load-bearing rule: a variant omits, it never lies
 
-This is the discipline that keeps the skill from becoming a spin machine. Both variants are **faithful views** of the reviewed strategy, exactly as `/operational-distillation`'s TL;DR is a faithful view of the body:
+This is the discipline that keeps the skill from becoming a spin machine. Both variants are **faithful views** of the reviewed strategy — the body, meaning the full internal doc — exactly as `/operational-distillation`'s TL;DR is a faithful view of it:
 
-- A variant may **omit** detail, **compress**, **reorder**, and **change register** (plainer words for engineers; a professional register for a client).
-- A variant may **never assert quality the body doesn't support**, never upgrade an actual-state assessment, never hide a gap or Dealbreaker that *affects the reader it's written for*, and never invent commitments the strategy didn't make.
-- The client-safe variant specifically: it removes *internal* candor (e.g. "observability is at the floor", "we're guessing here", a contractor's internal pain-threshold, internal cost economics, team politics) and reframes it professionally — but if a gap is something the **client themselves would be affected by or would reasonably need to know**, it must survive into the client variant, reframed honestly, not buried. "Don't show the client our internal worry" is fine; "don't tell the client about a risk that lands on them" is not. When those two collide, the second wins, and you say so to the user.
+- A variant may **omit** detail, **compress**, **reorder**, and **change tone** (plainer words for engineers; a professional tone for a client).
+- A variant may **never assert quality the body doesn't support**, never upgrade an actual-state assessment, never hide a gap or Dealbreaker (a must-never-fail bar) that *affects the reader it's written for*, and never invent commitments the strategy didn't make.
+- The client-safe variant specifically: it removes *internal* candor (e.g. "observability is at the floor", "we're guessing here", a contractor's internal pain-threshold, internal cost economics, team politics) and reframes it professionally. But if a gap is something the **client themselves would be affected by or would reasonably need to know**, it must survive into the client variant — reframed honestly, not buried. "Don't show the client our internal worry" is fine; "don't tell the client about a risk that lands on them" is not. When those two collide, the second wins, and you say so to the user.
 
 If you cannot produce a client-safe variant without either lying or exposing something that should stay internal, **stop and surface the tension to the user** rather than resolving it silently in either direction.
 
@@ -53,14 +53,14 @@ Do **not** run it on an unfinished or unreviewed strategy: a variant of a broken
 A variant is *for someone*. Pin down who (an engineer who'll build against it? a PM deciding scope? contributors? a paying client?) and what decision or understanding they need it for. Pull from the strategy the few things that reader most needs:
 
 - **What this is and why it matters to them** — purpose (Part 1) and the stakeholder(s) that *is* this reader, or that this reader cares about (Part 3).
-- **What "good" means, sharply** — the dimensions rated H and the Dealbreakers that bear on this reader (Parts 3, 5).
+- **What "good" means, sharply** — the dimensions rated H and the Dealbreakers that matter to this reader (Parts 3, 5).
 - **What's deliberately out** — the non-goals most likely to be mistaken for gaps (Part 4) — especially the ones this reader might otherwise expect.
 - **Where the real risk is** — the hottest risk-map rows that this reader needs to know about (Part 6), at the candor level appropriate to them (see step 3 for the client case).
-- **What happens next** — the first moves from the plan of work that involve or affect this reader (Part 7; if Part 7 is a recorded deferral to the follow-on skills, use the risk map's hottest items — and the follow-on strategy docs, where they exist — instead).
+- **What happens next** — the first moves from the plan of work that involve or affect this reader (Part 7; if Part 7 just records a deferral to the follow-on skills, use the risk map's hottest items instead, plus the follow-on strategy docs where they exist).
 
 ### 2. Distributable one-pager, if requested
 
-Write a single page, audience-facing, in the reader's language. It is **not** the operational TL;DR (that's an author/operator triage aid placed *inside* the strategy by `/operational-distillation`); this is a standalone document someone reads *instead of* the strategy. Cover, plainly:
+Write a single page, audience-facing, in the reader's language. It is **not** the operational TL;DR — that one is a triage aid for the author and operator, placed *inside* the strategy by `/operational-distillation`. This is a standalone document someone reads *instead of* the strategy. Cover, plainly:
 
 - **What we're building and who it's for.**
 - **What "good" means here** — the sharp bars, stated as commitments, not jargon ("checkout never double-charges", not "transactional-integrity is a Dealbreaker").
@@ -68,24 +68,24 @@ Write a single page, audience-facing, in the reader's language. It is **not** th
 - **Where we know we're exposed** — the honest top risks, at a level a peer/insider audience can act on.
 - **First moves** — what's happening next.
 
-Keep it to a page. Plain sentences over tables where it helps the reader. Cite nothing internal-only.
+Keep it to a page. Plain sentences over tables where it helps the reader. Include nothing internal-only.
 
 ### 3. Client-safe variant, if requested
 
 Same backbone, re-pitched for an external reader, applying the omit-never-lie rule:
 
 - **Strip internal candor.** Remove or reframe self-critical internal language ("at the floor", "we're guessing", "Unknown until we test"), internal cost economics, team/politics notes, and any internal pain-thresholds. "Observability is at the floor and nobody owns it" becomes, if the client needs to know it at all, "operational observability is an explicit area of investment for the next phase."
-- **Keep client-affecting honesty.** A gap, risk, or non-goal that *lands on the client* (something they'd experience, depend on, or reasonably need to know to make their own decisions) stays — reframed into a professional register, never deleted. Confidence the client needs (e.g. "this is not yet load-tested") is preserved honestly; spurious precision is still banned.
-- **Professional register.** Commitments stated as commitments; scope boundaries stated as deliberate decisions; risks stated as managed work, not confessions.
+- **Keep client-affecting honesty.** A gap, risk, or non-goal that *lands on the client* (something they'd experience, depend on, or reasonably need to know to make their own decisions) stays — reframed into a professional tone, never deleted. Keep, honestly, any confidence statement the client needs (e.g. "this is not yet load-tested"); fake precision is still banned.
+- **Professional tone.** State commitments as commitments, scope boundaries as deliberate decisions, and risks as managed work — not confessions.
 - **No upgrades.** Never present an actual-state level higher than the body supports. The client variant is allowed to be *quieter* about internal worry, never *louder* about quality than the truth.
 
 Where keeping client-affecting honesty and removing internal candor pull against each other, surface the specific line to the user and let them decide how to phrase it — don't silently pick.
 
 ### 4. Emit as separate files and check against the body
 
-Write each requested variant to its own file — `quality/strategy-one-pager.md` and/or `quality/strategy-client.md` — leaving `quality/strategy.md` untouched. If a variant file already exists from a prior run (e.g. after a strategy revision), refresh it in place from the current body rather than appending — like `/operational-distillation` refreshing a drifted distillation. Add a one-line header to each marking it a derived view (e.g. *"Audience view derived from quality/strategy.md on <YYYY-MM-DD>; the strategy is the source of truth."*).
+Write each requested variant to its own file — `quality/strategy-one-pager.md` and/or `quality/strategy-client.md` — leaving `quality/strategy.md` untouched. If a variant file already exists from a prior run (e.g. after a strategy revision), rewrite it in place from the current body rather than appending — the same way `/operational-distillation` refreshes a distillation that has drifted. Add a one-line header to each marking it a derived view (e.g. *"Audience view derived from quality/strategy.md on <YYYY-MM-DD>; the strategy is the source of truth."*).
 
-Then re-read each variant against the body: every claim supported by the strategy; nothing load-bearing for that reader missing; for the client variant specifically, confirm you have not (a) asserted any quality the body doesn't support, or (b) buried a client-affecting risk. If the body and a variant disagree, the body wins and the variant is wrong.
+Then re-read each variant against the body. Check that the strategy supports every claim, and that nothing this reader depends on is missing. For the client variant specifically, confirm you have not (a) asserted any quality the body doesn't support, or (b) buried a client-affecting risk. If the body and a variant disagree, the body wins and the variant is wrong.
 
 ## Push back when
 
@@ -99,7 +99,7 @@ Then re-read each variant against the body: every claim supported by the strateg
 - [ ] The reviewed `quality/strategy.md` has been read end-to-end (not just headings).
 - [ ] The target reader(s) and which variant(s) to produce were confirmed with the user.
 - [ ] Each requested variant is written to its own file (`quality/strategy-one-pager.md` and/or `quality/strategy-client.md`), with `quality/strategy.md` left unchanged.
-- [ ] Each variant is a faithful view: every claim supported by the body, nothing load-bearing for its reader missing.
+- [ ] Each variant is a faithful view: every claim supported by the body, nothing its reader depends on missing.
 - [ ] For the client variant: confirmed it asserts no quality the body doesn't support and buries no client-affecting risk; any internal-vs-client tensions were surfaced to the user, not resolved silently.
 - [ ] Each variant carries a header marking it a derived view of the strategy.
 

@@ -21,7 +21,7 @@ By the end of this sub-step the strategy doc must capture:
 
 Surface what the pre-read suggested first: *"From the commit history it looks like work mostly goes feature-branch → review → merge. Is that how it actually goes, or is there more to it?"*
 
-A good prompt for honesty: *"Walk me through the last piece of work that got merged. What actually happened, in order?"* Real workflow comes out of recent concrete examples better than from abstract description.
+A good prompt for honesty: *"Walk me through the last piece of work that got merged. What actually happened, in order?"* You'll learn the real workflow from a recent concrete example, not from an abstract description.
 
 You have explicit permission and encouragement to:
 
@@ -33,12 +33,12 @@ What you must not do:
 
 - Accept "we follow standard git flow" without unpacking what that means in practice for this team.
 - Skip the agent integration question if agents are part of the team.
-- Move on if pain points are denied without examination — every team has friction somewhere; if the user says there isn't any, push gently.
+- Take "we have no pain points" at face value — every team has friction somewhere; if the user says there isn't any, push gently.
 
 ## Push back when
 
 - The workflow is described in textbook terms ("we follow git-flow"). *"In practice, what does that look like for your last few merges?"*
-- Pain points are denied without thought. *"What's the most annoying part of how work currently flows?"*
+- The user says there are no pain points, without pausing to think. *"What's the most annoying part of how work currently flows?"*
 - Agent involvement is glossed over. *"At which points in this flow do the agents do work, and at which points do humans review?"*
 - Review is described abstractly. *"Who actually reviews what? How long does review usually take?"*
 

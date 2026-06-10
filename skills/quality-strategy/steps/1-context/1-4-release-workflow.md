@@ -39,7 +39,7 @@ What you must not do:
 
 ## Push back when
 
-- Release is described in branding terms ("CI/CD") rather than in process terms. *"What actually has to happen between merge and a user seeing the change?"*
+- The user answers with a label ("CI/CD") instead of the actual steps. *"What actually has to happen between merge and a user seeing the change?"*
 - Gates are denied. *"So a broken main goes straight to users? Or does something check first?"*
 - Internal testing is skipped. *"Does anyone use the merged code before users do?"*
 - The user says "we'll figure that out later." Note the gap explicitly as `OPEN QUESTION`; the strategy needs the gap visible in the doc.

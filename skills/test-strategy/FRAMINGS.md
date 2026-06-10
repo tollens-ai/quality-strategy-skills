@@ -1,6 +1,6 @@
 # Framings — what /test-strategy must hold against agent defaults
 
-A test strategy produced by an agent without explicit framing tends to drift toward a test plan: a list of cases, a coverage target, a sequence of build-then-verify. That isn't a test strategy. The framings below are non-negotiable defaults grounded in Edmund Pringle's quality framework, captured here so each sub-step can apply them without re-deriving from first principles.
+Left to its defaults, an agent drifts toward writing a test plan: a list of cases, a coverage target, a sequence of build-then-verify. That isn't a test strategy. The framings below are non-negotiable defaults grounded in Edmund Pringle's quality framework, written down here so each sub-step can apply them without working them out from scratch.
 
 When you see "see FRAMINGS.md #N" in a sub-step file, it means that framing is load-bearing for that step. Don't skip it.
 
@@ -33,7 +33,7 @@ Source: Ed's `quality-strategy/concept-testing-starts-at-the-start.md`.
 
 If you study the code before testing, you test against the builder's mental model. You verify that the code does what the code was written to do. You don't discover whether the code does what the *stakeholders* need.
 
-**The /test-strategy pre-read explicitly excludes source code.** Inputs are the quality strategy + an inventory of test infrastructure (test/, spec/, CI config, existing test docs). The agent runs the strategy from this independent footing, not from code-grounded assumptions.
+**The /test-strategy pre-read explicitly excludes source code.** Inputs are the quality strategy + an inventory of test infrastructure (test/, spec/, CI config, existing test docs). The agent works from this independent footing, not from assumptions picked up by reading the code.
 
 This applies to AI agents doing testing too: their fresh-eyes perspective is valuable for the same reason a human tester's independence is valuable. If it gets contaminated by reading source first, that perspective is gone and can't be recovered.
 
@@ -119,7 +119,7 @@ Source: Ed's `smells/Smells.md`.
 **Known risk** = we know enough to know quality is below where we want. The cost is fixing.
 **Unknown risk** = we don't know enough to assess quality. The cost is testing to find out.
 
-These get conflated. A strategy that says "test more" in response to known risk is wrong — known risk needs fixing, not investigating. A strategy that says "fix it" in response to unknown risk is wrong — you don't know what to fix yet.
+Teams often mix the two up. A strategy that says "test more" in response to known risk is wrong — known risk needs fixing, not investigating. A strategy that says "fix it" in response to unknown risk is wrong — you don't know what to fix yet.
 
 **The learning-needs derivation should split them.** Each tier item should be honest about which kind of risk it's addressing. Items addressing unknown risk produce information; items addressing known risk produce fixes (and may not belong in a test strategy at all — they belong in the quality strategy's plan of work).
 

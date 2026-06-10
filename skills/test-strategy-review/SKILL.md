@@ -5,14 +5,14 @@ description: Audit a test strategy document. Asks "will executing this strategy 
 
 # Test Strategy Review
 
-This skill audits a test strategy document. It is the source of truth for *"is this test strategy any good?"* — invoked both as the final step of `/test-strategy` and standalone on any existing `quality/test-strategy.md`.
+This skill audits a test strategy document. It is the source of truth for *"is this test strategy any good?"*. Run it as the final step of `/test-strategy`, or on its own against any existing `quality/test-strategy.md`.
 
 The fundamental question is **outcome-shaped, not structure-shaped**: *"if the team executes this strategy exactly as written, does the quality strategy end up in a better place?"*
 
-The skill uses an **expansion-and-collapse** pattern, lighter than `/quality-strategy-review`'s three-subagent version because the test strategy is much smaller in surface area:
+The skill works in two moves — **expand, then collapse**. It is a lighter version of `/quality-strategy-review`'s three-subagent pattern, because a test strategy is a much smaller document:
 
-- **Expansion.** Two subagents run in parallel. Subagent A walks forward execution as the primary review lens. Subagent B runs mechanical oracle checks as a backstop. Both are briefed to be aggressive — false negatives are worse than false positives.
-- **Collapse.** The main agent reads both subagent outputs, drops spurious findings, looks for compounding patterns, distinguishes blockers from flags, and produces a consolidated report.
+- **Expansion.** Two subagents run in parallel. Subagent A does the main review: a forward simulation — it walks through what would actually happen if the team executed the strategy as written. Subagent B runs mechanical oracle checks (pass/fail tests of the document's structure) as a backstop. Both are told to be aggressive — a missed problem (false negative) costs more than a false alarm (false positive).
+- **Collapse.** The main agent reads both outputs, drops findings that don't hold up, looks for findings that share a root cause, separates blockers (must fix) from flags (judgement calls), and writes one consolidated report.
 
 ## Resolving file paths — do this first
 
@@ -35,14 +35,14 @@ Read the following (all under `$PLUGIN_ROOT`):
 
 Two docs:
 
-- `quality/strategy.md` — the quality strategy. The test strategy is reviewed *against* it; without it, there's no spec to compare against.
+- `quality/strategy.md` — the quality strategy. You review the test strategy *against* it; without it there is nothing to compare to.
 - `quality/test-strategy.md` — the test strategy being reviewed.
 
 If either is missing, stop:
 - No strategy: *"There's no quality strategy to review the test strategy against. Run `/quality-strategy` first."*
 - No test strategy: *"There's no test strategy to review. Run `/test-strategy` first."*
 
-If `quality/test-pre-read.md` exists, read its inventory and discrepancies sections. Pre-read findings the test strategy didn't reflect are themselves review findings.
+If `quality/test-pre-read.md` exists, read its inventory and discrepancies sections. If the pre-read found something the test strategy ignored, that is itself a review finding.
 
 ## The work, in order
 
@@ -50,7 +50,7 @@ If `quality/test-pre-read.md` exists, read its inventory and discrepancies secti
 
 Read `quality/strategy.md` (especially Parts 3, 4, 5, 6, 7) and `quality/test-strategy.md` end-to-end.
 
-Note explicitly where the test strategy claims to address the strategy — every learning need's risk-map reference, every allocation row's reasoning, every "what we're not testing" entry's source reference. These traces are what the simulation subagent will walk.
+Note every place the test strategy claims to address the strategy: each learning need (a question the testing must answer) and its risk-map reference, each allocation row (who or what does each piece of work) and its reasoning, each "what we're not testing" entry and its source reference. The simulation subagent will walk these traces.
 
 ### 2. Dispatch two review subagents in parallel
 
@@ -62,7 +62,7 @@ Use the `Agent` tool with two calls in a single message.
 >
 > You walk forward through execution. You don't audit document shape; you predict what would happen.
 >
-> Be aggressive. False negatives are worse than false positives — the main agent will filter your output. If you can imagine a way execution would stall, produce wrong information, or finish without moving the strategy, surface it.
+> Be aggressive. A missed problem (false negative) is worse than a false alarm (false positive) — the main agent will filter your output. If you can imagine a way execution would stall, produce wrong information, or finish without moving the strategy, surface it.
 >
 > First, read these files:
 > - `$PLUGIN_ROOT/PHILOSOPHY.md`
@@ -81,7 +81,7 @@ Use the `Agent` tool with two calls in a single message.
 >
 > 1. **Tier 1.** What questions get answered? Apply the methods. What information would come back? After Tier 1 completes, what does the quality strategy's Part 6 (Risk Map) look like — which `?` entries become known, which confidences change? Does the team now have what it needs to make the next decision (Tier 2 vs pivot)?
 >
-> 2. **Tier 2.** Same walk. Does Tier 2's investigation depend on Tier 1's results? If so, does the strategy say so? If Tier 1's results would change Tier 2's plan, the strategy must accommodate that.
+> 2. **Tier 2.** Same walk. Does Tier 2's investigation depend on Tier 1's results? If so, does the strategy say so? If Tier 1's results would change Tier 2's plan, the strategy must leave room for that.
 >
 > 3. **Tier 3+.** Same walk. By the time this finishes, is the quality strategy meaningfully advanced? Are stakeholders' Dealbreakers either resolved or visibly progressed? Are H/M-rated dimensions either resolved or explicitly punted?
 >
@@ -148,7 +148,7 @@ Use the `Agent` tool with two calls in a single message.
 
 > You are subagent B, running mechanical oracle checks against a test strategy. **You are a backstop**, not the primary line of defence — the writing process should already have enforced these via per-sub-step DONE checklists. Your job is to verify nothing slipped through.
 >
-> Be aggressive. False negatives are worse than false positives — the main agent will filter your output.
+> Be aggressive. A missed problem (false negative) is worse than a false alarm (false positive) — the main agent will filter your output.
 >
 > **Meta-flag.** If you find an oracle check failing, that's also evidence the per-sub-step DONE checklist for the relevant sub-step was not enforced. When you flag a failure, note: *"this should have been caught in sub-step N's DONE, but wasn't."*
 >
@@ -292,11 +292,11 @@ After the report, ask the user:
 
 If walkthrough: go through each blocker and flag in order. For each, dig in if needed, suggest concrete fixes, and capture the user's decision.
 
-For blockers, the resolution is typically re-running the relevant `/test-strategy` sub-step in revision mode (b — revisit specific sub-steps).
+For blockers, the usual fix is to re-run the relevant `/test-strategy` sub-step in revision mode (b — revisit specific sub-steps).
 
 ## Push back when
 
-- The user wants to skip fixing a blocker. *"That blocker is one of the things that makes this strategy actually load-bearing. Skipping produces a strategy that looks complete but won't move the quality strategy when executed."*
+- The user wants to skip fixing a blocker. *"That blocker is one of the things that makes this strategy actually load-bearing. Skip it and you get a strategy that looks complete but won't move the quality strategy when the team executes it."*
 - The user dismisses all flags without examining them. *"There were N flags — let's at least walk through them before closing out."*
 - The user wants to mark a clearly-WEAK indicator as resolved without changes. *"What specifically is going to be different now that you've thought about it? Without a change to the doc, the next person reading it will hit the same problem."*
 - The user resists the forward-simulation framing ("can't really know what would happen"). *"The simulation isn't a prediction with confidence — it's a structured way to find places where execution would stall. Surfacing those places now is cheap; finding them mid-execution costs cycles."*
@@ -311,12 +311,12 @@ For blockers, the resolution is typically re-running the relevant `/test-strateg
 
 ## Output
 
-The consolidated review report is shared in the conversation. By default it's not written to a file. If the user wants it persisted, write to `quality/test-strategy-review-<YYYY-MM-DD>.md`.
+Share the consolidated review report in the conversation. By default, don't write it to a file. If the user wants it saved, write to `quality/test-strategy-review-<YYYY-MM-DD>.md`.
 
 If the strategy passes (no unresolved blockers, flags reviewed), confirm:
 
 > *"Test strategy review passed. The strategy is ready to execute. Start with Tier 1 — the cheapest unknown is [reference]. After Tier 1 completes, run `/test-strategy` revision mode (c) to update allocation and risk-map references."*
 
-If the strategy's blocked-on-tooling section is non-empty, also point at **`/tooling-strategy`** (run it now if it hasn't run yet; re-run it if it predates this test strategy, so the build plan absorbs the sharpened demand) — execution can start on the answerable tiers while the builds land.
+If the strategy's blocked-on-tooling section is non-empty, also point at **`/tooling-strategy`** (run it now if it hasn't run yet; re-run it if it ran before this test strategy, so the build plan picks up what the test strategy now asks for) — execution can start on the tiers that are already answerable while the builds land.
 
-If the review was invoked from `/test-strategy` itself, return control with a status indicating pass or remaining work.
+If `/test-strategy` itself invoked this review, hand control back with a clear status: passed, or what work remains.

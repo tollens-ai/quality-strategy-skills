@@ -5,9 +5,9 @@ description: Produce or revise a test strategy for a project — an engineering-
 
 # Test Strategy
 
-This skill produces `quality/test-strategy.md` — an engineering-level document that operationalises the quality strategy. The quality strategy says *what matters*; the test strategy says *how to find out where you actually are*, so the team can close the gap as efficiently as possible.
+This skill produces `quality/test-strategy.md` — the engineering companion to the quality strategy. The quality strategy says *what matters*; the test strategy says *how to find out where you actually are*, so the team can close the gap as efficiently as possible.
 
-The skill is short by design. /quality-strategy is the load-bearing piece — it produces the stakeholder analysis, dimensions, and risk map. /test-strategy transforms that into a plan of investigation. Most of the thinking is already in the strategy; the skill brings the right framings to the transformation.
+The skill is short by design. /quality-strategy does the heavy lifting — it produces the stakeholder analysis, dimensions, and risk map. /test-strategy turns that into a plan of investigation. Most of the thinking is already in the strategy; this skill's job is to bring the right framings to that step.
 
 ## Resolving file paths — do this first
 
@@ -16,15 +16,15 @@ This skill is part of the `quality-strategy` plugin. Before anything else, resol
 - **PLUGIN_ROOT** — the plugin's install directory: `${CLAUDE_PLUGIN_ROOT}` (Claude Code expands this to an absolute path when it loads this file; read it off and note it down). Every file this skill references — `PHILOSOPHY.md`, `skills/test-strategy/FRAMINGS.md`, `skills/test-strategy/INDICATORS.md`, and the sub-step files under `skills/test-strategy/steps/` — lives under it.
 - **PROJECT_DIR** — the absolute path of the project you're building the test strategy for (normally the current working directory; confirm with the user if it's ambiguous).
 
-File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **Substitute the resolved absolute paths before you act on them** — both when you Read a file yourself (including the sub-step files) and when you put a path into a subagent brief. The Read tool does no variable expansion and resolves relative paths against the current working directory, not this skill's directory; a dispatched subagent inherits none of your context. So an unsubstituted placeholder or a bare relative path will fail — always pass fully-resolved absolute paths.
+File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **Substitute the resolved absolute paths before you act on them** — both when you Read a file yourself (including the sub-step files) and when you put a path into a subagent brief. The Read tool does not expand variables, and it resolves relative paths against the current working directory, not this skill's directory. A dispatched subagent inherits none of your context. So an unsubstituted placeholder or a bare relative path will fail — always pass fully resolved absolute paths.
 
 ## Before you start
 
 Two prerequisites:
 
-1. **`quality/strategy.md` must exist** at the project root, completed at least through Part 6 (Risk Map). If it does not, stop and direct the user to `/quality-strategy` first. The test strategy cannot be derived from nothing — without a risk map, you'd be guessing where to invest effort, which is the opposite of what this skill is for.
+1. **`quality/strategy.md` must exist** at the project root, completed at least through Part 6 (Risk Map). If it does not, stop and direct the user to `/quality-strategy` first. You can't build a test strategy from nothing — without a risk map, you'd be guessing where to spend effort, which is the opposite of what this skill is for.
 
-2. **Read `$PLUGIN_ROOT/PHILOSOPHY.md`, `$PLUGIN_ROOT/skills/test-strategy/FRAMINGS.md`, and `$PLUGIN_ROOT/skills/test-strategy/INDICATORS.md`.** PHILOSOPHY.md grounds the framework. FRAMINGS.md captures ten framings that counter agent defaults — without these, /test-strategy will drift toward producing a test plan rather than a test strategy. INDICATORS.md captures the five outcome-oriented indicators (Direction / Priority / Sufficiency / Feasibility / Honesty) that the produced strategy will be reviewed against; knowing these up front shapes the work. None of these are optional.
+2. **Read `$PLUGIN_ROOT/PHILOSOPHY.md`, `$PLUGIN_ROOT/skills/test-strategy/FRAMINGS.md`, and `$PLUGIN_ROOT/skills/test-strategy/INDICATORS.md`.** PHILOSOPHY.md explains the thinking behind the framework. FRAMINGS.md holds ten framings that counter agent defaults — without them, /test-strategy will drift toward producing a test plan rather than a test strategy. INDICATORS.md lists the five indicators (Direction / Priority / Sufficiency / Feasibility / Honesty) the finished strategy will be reviewed against; knowing them up front shapes the work. None of these are optional.
 
 ## How this skill is structured
 
@@ -50,15 +50,15 @@ Six sub-steps, each in its own file under `steps/`. Run them strictly in order.
 
 ## The four-question frame, and where Q2 runs
 
-This skill works through the four quality questions (introduced in sub-step 1). It is how the team answers **"is what we have actually good?"** (Q3) — by planning the investigation. Doing that honestly requires **Q2 — "how do we know?"** to be settled first: the instruments and oracles that produce a finding must themselves be adequate, or the finding is built on sand.
+This skill works through the four quality questions (introduced in sub-step 1). It is how the team answers **"is what we have actually good?"** (Q3) — by planning the investigation. To do that honestly, you must settle **Q2 — "how do we know?"** first: the instrument (the thing that exercises and observes the product) and the oracle (the thing that judges whether output is correct) behind a finding must themselves be adequate, or the finding is built on sand.
 
-So after sub-step 3 (learning needs) and before sub-step 4 (allocation), **invoke `/tooling-adequacy`** on the learning-needs list. It assesses, per learning need, whether the *instrument* (to exercise/observe) and the *oracle* (to judge correctness) are adequate, and returns any **build items** — instrument or oracle gaps, including simulated/reference oracles worth constructing. Carry those build items forward to sub-step 5, which marks the affected learning needs as blocked-on-tooling rather than papering over them. If the build items dominate the top tier, sub-step 3's closing offers pausing for `/tooling-strategy` before allocation (see `steps/3-learning-needs.md`) — Q2 before Q3.
+So after sub-step 3 (learning needs) and before sub-step 4 (allocation), **invoke `/tooling-adequacy`** on the learning-needs list. For each learning need, it checks whether the *instrument* (to exercise/observe) and the *oracle* (to judge correctness) are adequate, and returns any **build items** — instrument or oracle gaps, including simulated/reference oracles worth building. Carry those build items forward to sub-step 5, which marks the affected learning needs as blocked-on-tooling rather than papering over them. If the build items dominate the top tier, sub-step 3's closing offers pausing for `/tooling-strategy` before allocation (see `steps/3-learning-needs.md`) — Q2 before Q3.
 
 This is a **sealed-context dispatch**: it writes its assessment to `quality/.scratch/3.5-tooling-adequacy.md` as hard evidence the Q2 check ran. `/test-strategy-review` audits for that scratch file — a claimed-but-missing dispatch is a fabrication signal. `quality/.scratch/` is working state, not part of the strategy.
 
 ## Pause and resume
 
-This skill is shorter and lighter cognitively than /quality-strategy — most of the heavy thinking lives in the strategy itself. Typically completable in **one or two focused sessions** rather than spread across days. There are no formal stick-together sets. The user can stop anywhere; the doc accumulates incrementally.
+This skill is shorter and lighter than /quality-strategy — most of the heavy thinking lives in the strategy itself. You can usually finish it in **one or two focused sessions** rather than spreading it across days. There are no formal stick-together sets. The user can stop anywhere; the doc builds up as you go.
 
 If the user asks to take a break, point at the natural seams:
 
@@ -66,7 +66,7 @@ If the user asks to take a break, point at the natural seams:
 - After sub-step 2 (purpose + principles set)
 - After sub-step 3 (learning needs derived)
 
-Sub-steps 3 → 4 are tighter coupled (allocation depends on the learning-needs list being fresh in working memory), so flag a break between them with: *"Allocation depends on the learning-needs list being fresh — want to push through to the end of sub-step 4, or break here and re-orient from the doc on resume?"*
+Sub-steps 3 → 4 are more tightly coupled (allocation depends on the learning-needs list being fresh in working memory), so flag a break between them with: *"Allocation depends on the learning-needs list being fresh — want to push through to the end of sub-step 4, or break here and re-orient from the doc on resume?"*
 
 On resumption, detect the state of `quality/test-strategy.md` and resume from the next sub-step.
 
@@ -84,12 +84,12 @@ For (c), the most common mode after the first cycle: skip to sub-step 4 (Allocat
 
 ## Honest about uncertainty
 
-This skill's output is a hypothesis, not a final answer. Two areas in particular are expected to be wrong on first pass and to refine over cycles:
+This skill's output is a hypothesis, not a final answer. Two areas in particular will probably be wrong on the first pass and will improve over cycles:
 
 - **Allocation.** Nobody — agents or humans — has calibrated intuition for the new cost economics. The first allocation table will have low-confidence rows that need real-world data to refine.
 - **Learning-needs prioritisation.** The risk map's confidence ratings are themselves uncertain. If a Tier-1 unknown turns out to be already-known after one quick test, the tiering was wrong. That's fine — that's what the update protocol is for.
 
-The skill makes this uncertainty load-bearing in the doc (confidence columns, "unknown — try and see" tags, explicit re-rating triggers) rather than papering over it.
+The doc shows this uncertainty openly (confidence columns, "unknown — try and see" tags, explicit re-rating triggers) rather than papering over it.
 
 ## Output
 
@@ -100,5 +100,5 @@ The skill makes this uncertainty load-bearing in the doc (confidence columns, "u
 
 - `quality/strategy.md` is missing or incomplete (no risk map). Stop. Direct to `/quality-strategy` first.
 - The user wants to skip sub-step 2 (Principles) because "they're obvious." Push back — the principles are load-bearing for sub-steps 3 and 4. They can be tweaked, not skipped.
-- The user defers all allocation decisions to the agent ("you decide"). Push back — the two-voice exchange in sub-step 4 needs the user's evidence and judgment, not just the agent's cost estimates. If the user genuinely has no view, surface that as itself a learning need: *"we don't have evidence about what's cheap for humans vs agents on this codebase — that's a calibration item."*
-- The user wants to merge the test strategy into `quality/strategy.md` as an appendix. Honour the request, but flag the trade-off: separability supports independent revision (allocation re-rating happens more often than full strategy revision).
+- The user defers all allocation decisions to the agent ("you decide"). Push back — the two-voice exchange in sub-step 4 needs the user's evidence and judgment, not just the agent's cost estimates. If the user genuinely has no view, record that as a learning need in its own right: *"we don't have evidence about what's cheap for humans vs agents on this codebase — that's a calibration item."*
+- The user wants to merge the test strategy into `quality/strategy.md` as an appendix. Honour the request, but flag the trade-off: a separate file is easier to revise on its own, and allocation re-rating happens far more often than full strategy revision.

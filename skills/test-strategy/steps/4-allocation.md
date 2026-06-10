@@ -4,7 +4,7 @@
 
 Decide who does what. Produce an allocation table that maps each learning need (and major method within it) to a responsible party — human, agent, or both — with a confidence column and explicit "unknown — try and see" tags where the team genuinely doesn't know yet.
 
-This sub-step is structurally different from the others. Most of the skill is the agent facilitating the user's thinking. Here, the agent is a **co-author with real input to give** — see OPEN-QUESTIONS.md ("Allocation as hypothesis, not confident table"). The agent has a perspective on its own cost structure, what it expects to do well, and where it expects to fail. The user has evidence, prior pain, and judgment about trust and smell. Both perspectives are needed.
+This sub-step works differently from the others. In most of the skill, the agent helps the user think. Here, the agent is a **co-author with real input to give** — see OPEN-QUESTIONS.md ("Allocation as hypothesis, not confident table"). The agent knows its own cost structure, what it expects to do well, and where it expects to fail. The user has evidence, prior pain, and judgment about trust and smell. Both perspectives are needed.
 
 ## What you need from the previous sub-steps
 
@@ -45,7 +45,7 @@ Listen for:
 
 - **Prior pain.** *"We tried agent install testing last year, the false-positive rate was 30%."* The agent's confidence drops; the row gets a calibration item or moves to human.
 - **Trust constraints.** *"I want a human reviewing anything that touches user data, even if you say you can do it."* Honour without arguing — non-economic reasons are valid.
-- **Smell territory.** *"I need to feel this myself, even if you produce a perfect report."* See FRAMINGS.md #9. If the user wants smell-presence, the row goes to human even if the agent claims capability.
+- **Smell territory.** *"I need to feel this myself, even if you produce a perfect report."* See FRAMINGS.md #9. If the user wants smell-presence, the row goes to human even if the agent says it could do the work.
 - **Capability evidence.** *"You're underselling — we've had agents do this exact thing on three other projects."* The agent's confidence goes up; the row stays agent.
 
 ### Turn 3: Reconcile
@@ -56,7 +56,7 @@ For each row, write down:
 - Confidence: high / medium / low / **unknown — try and see**.
 - One-line note explaining the allocation reasoning, especially where confidence is medium or below.
 
-Items tagged "unknown — try and see" become calibration triggers — they appear in sub-step 5's update protocol as items expected to be re-rated after the first cycle.
+Items tagged "unknown — try and see" become calibration triggers — rows we expect to re-rate once the first cycle gives real data. They appear in sub-step 5's update protocol.
 
 ## Apply the framings
 
@@ -64,7 +64,7 @@ While running the exchange:
 
 **FRAMINGS.md #6 — economics shift.** The reflex split is "agents do mechanical, humans do interesting." Push: in the new economics, agents do *exhaustive* (every variant, every input, every code path) and humans do *creative* (what's worth investigating, what failures mean). Don't waste human attention on what agents can check exhaustively.
 
-**FRAMINGS.md #7 — agent output review.** When allocating to agents, name what the review pattern is. If a human is reviewing agent output, the review can't be looking for typos and inconsistencies (agents don't make those) — it has to look for plausible-sounding-but-wrong. Add a "review by" column or note where this matters.
+**FRAMINGS.md #7 — agent output review.** When allocating to agents, name the review pattern. A human reviewing agent output can't be looking for typos and inconsistencies (agents don't make those) — they have to look for plausible-sounding-but-wrong. Add a "review by" column or note where this matters.
 
 **FRAMINGS.md #9 — smells.** Ask explicitly: *"Where does the team need to feel the product, not just check it?"* Those rows go to human regardless of what the agent claims it can do.
 
@@ -75,7 +75,7 @@ While running the exchange:
 - Tag everything "unknown — try and see" to avoid commitment. The skill is honest about uncertainty, not a way to dodge it. If a row is genuinely unknown, tag it; if not, commit.
 - Ignore non-economic reasons. *"I want a human looking at this for trust reasons"* is a valid allocation reason. Don't argue; record it.
 - Allocate before the learning need is well-formed. If a learning need's question or methods are vague, allocation is meaningless. Push back to sub-step 3 if needed.
-- Firmly allocate a learning need the tooling check marked **blocked**. You can't honestly assign an investigation whose instrument or oracle doesn't exist yet — give it a `blocked — allocation deferred` row (or at most a provisional allocation at low confidence, noted as contingent on the build landing). And don't allocate the *build items themselves* here: who builds a missing instrument or oracle is `/tooling-strategy`'s call — its build plan carries a builder per item.
+- Firmly allocate a learning need the tooling check marked **blocked**. You can't honestly assign an investigation whose instrument or oracle doesn't exist yet — give it a `blocked — allocation deferred` row (or at most a provisional allocation at low confidence, with a note that it depends on the build landing). And don't allocate the *build items themselves* here: who builds a missing instrument or oracle is `/tooling-strategy`'s call — its build plan names a builder for each item.
 
 ## Push back when
 

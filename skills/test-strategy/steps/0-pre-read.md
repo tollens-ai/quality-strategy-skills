@@ -4,14 +4,14 @@
 
 Produce a short working digest at `quality/test-pre-read.md` covering two things:
 
-1. The risk map and plan of work from `quality/strategy.md`. This is the spine of the test strategy — every learning need traces back to it.
+1. The risk map and plan of work from `quality/strategy.md`. This is the spine of the test strategy — every learning need (a question the testing must answer) traces back to it.
 2. An inventory of existing test infrastructure in the project (what's there, what shape is it in, what gaps are obvious).
 
-The digest is a working artefact. It informs the rest of the skill but does not appear in the produced test strategy.
+The digest is a working file. It feeds the rest of the skill but doesn't appear in the finished test strategy.
 
 ## What you must not read
 
-**Do not read source code.** This is non-negotiable. See FRAMINGS.md #3 — independence of perspective is load-bearing for testing. If you read source before producing the strategy, you'll test against the builder's mental model rather than against what stakeholders need.
+**Do not read source code.** This is non-negotiable. See FRAMINGS.md #3 — testing only works if your perspective stays independent of the builder's. If you read source before producing the strategy, you'll test against the builder's mental model rather than against what stakeholders need.
 
 The temptation is real. The agent's reflex is to load context. Resist it. The strategy is your context.
 
@@ -22,7 +22,7 @@ If you find yourself unable to make sense of the strategy without code grounding
 1. **`quality/strategy.md`** — focus on:
    - **Part 5 (Quality Dimensions)** — what dimensions matter, with H/M/None ratings.
    - **Part 6 (Risk Map)** — required vs actual levels, confidence on both, per dimension. This is the most important input to the whole skill.
-   - **Part 7 (Plan of Work)** — what actions the strategy already proposes. Some will be testing; some will be fixing; some stakeholder. The test strategy operationalises the testing actions and may surface new ones. Part 7 may instead be a **recorded deferral** (the plan of work deliberately deferred to the follow-on skills — this skill is one of them); that's normal, not a defect. In that case there are no pre-classified testing items to list, and the learning needs derive from the risk map alone, which is the primary source anyway.
+   - **Part 7 (Plan of Work)** — what actions the strategy already proposes. Some will be testing; some will be fixing; some stakeholder. The test strategy turns the testing actions into concrete work and may add new ones. Part 7 may instead be a **recorded deferral** — the strategy deliberately left the plan of work to follow-on skills like this one. That's normal, not a defect. In that case there are no pre-classified testing items to list; derive the learning needs from the risk map alone, which is the primary source anyway.
    - **Part 3 (Stakeholders)** — three-lens analysis, especially Dealbreaker entries. Tier-1 learning needs often come from here.
    - **Part 4 (Non-goals)** — what we're explicitly *not* doing, so the test strategy doesn't accidentally test it.
 
@@ -37,29 +37,29 @@ If you find yourself unable to make sense of the strategy without code grounding
 
 ## How to ask
 
-This sub-step is mostly a read-and-record operation, with one user-facing question.
+This sub-step is mostly reading and recording, with one question for the user.
 
 After producing the digest, ask the user: *"Anything missing from this picture? Test infrastructure I wouldn't have spotted, or context about why it's the way it is — e.g. 'we deleted the test suite last quarter because it was slowing us down'?"*
 
-You're hunting for the off-paper context: prior decisions about testing that shaped the current state but aren't in the repo.
+You're hunting for the off-paper context: past decisions about testing that shaped where things are now but aren't written down in the repo.
 
 ## What you must not do
 
 - Read source code (see above).
 - Re-derive the risk map from scratch. The strategy is the source of truth for risk; if it seems wrong, that's a `/quality-strategy` revision, not a /test-strategy patch.
 - Treat existing test infrastructure as a starting point that must be preserved. Sometimes the right test strategy says "the existing tests don't address what matters — start over." Inventory tells us what's there; it doesn't dictate what should be.
-- Skip the inventory because the strategy is enough. Existing infrastructure is real signal — what tests have been written reflects what the team has previously thought worth testing, which may or may not align with the risk map.
+- Skip the inventory because the strategy is enough. Existing infrastructure is real signal — the tests a team has written show what they thought was worth testing, which may or may not match the risk map.
 
 ## Push back when
 
-- The user wants you to dig into the codebase to "understand it better." *"For test strategy, code-reading contaminates perspective. The strategy is the input. If something there is unclear, let's clarify in conversation."*
-- `quality/strategy.md` is missing Part 5 or Part 6. Stop. Direct to `/quality-strategy`. The test strategy can't be produced without a risk map.
-- The strategy has a risk map but every entry is `?`. The test strategy needs at least *some* prioritisable entries. If everything is unknown, the answer is to start with sub-step 0 of /quality-strategy's Part 6 work — not /test-strategy.
+- The user wants you to dig into the codebase to "understand it better." *"For test strategy, reading the code contaminates perspective. The strategy is the input. If something there is unclear, let's clarify in conversation."*
+- `quality/strategy.md` is missing Part 5 or Part 6. Stop. Direct to `/quality-strategy`. You can't produce a test strategy without a risk map.
+- The strategy has a risk map but every entry is `?`. The test strategy needs at least *some* entries it can rank. If everything is unknown, the answer is to start with sub-step 0 of /quality-strategy's Part 6 work — not /test-strategy.
 
 ## This sub-step is DONE when
 
 - [ ] `quality/test-pre-read.md` exists with two sections: **Risk map summary** (one paragraph per H/M dimension, naming required/actual/confidence/gap) and **Test infrastructure inventory** (filesystem pass, no source).
-- [ ] Plan of work items are listed with classification noted (testing / fixing / stakeholder), so sub-step 3 knows which to operationalise — or, if Part 7 is a recorded deferral, the digest says so and the section is explicitly empty.
+- [ ] Plan of work items are listed with classification noted (testing / fixing / stakeholder), so sub-step 3 knows which ones to turn into testing work — or, if Part 7 is a recorded deferral, the digest says so and the section is explicitly empty.
 - [ ] Non-goals from Part 4 are listed verbatim — they bound the test strategy and feed sub-step 5.
 - [ ] The user has been asked about off-paper context (deleted suites, abandoned approaches, "we tried that and it didn't work") and any answers are captured.
 - [ ] No source code has been read.
@@ -103,7 +103,7 @@ For each H or M dimension:
 - <prior decisions, abandoned approaches, anything that wouldn't be visible from the repo>
 ```
 
-After writing, summarise back to the user in 3-4 lines (what's there, what's notably absent, anything surprising). Then run a **correctness check** — at this stage you only want factual errors, not implications or priorities:
+After writing, summarise back to the user in 3-4 lines (what's there, what's missing, anything surprising). Then run a **correctness check** — at this stage you only want factual errors, not implications or priorities:
 
 > *"Skim this for anything factually wrong — a risk-map row I summarised incorrectly, test infrastructure I misread or missed, a non-goal I copied wrong. I'm not asking whether the priorities are right yet — just whether anything here is simply inaccurate."*
 

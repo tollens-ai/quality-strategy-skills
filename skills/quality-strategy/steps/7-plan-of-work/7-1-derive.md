@@ -2,9 +2,9 @@
 
 ## Goal
 
-Translate the risk map into a list of actions. This is the first of three sub-steps in Step 7 (Plan of Work); it just enumerates what needs doing, without yet classifying or sequencing.
+Translate the risk map into a list of actions. This is the first of three sub-steps in Step 7 (Plan of Work); it just lists what needs doing, without yet classifying or sequencing.
 
-The plan of work falls naturally out of the risk map. It is not a separate creative exercise; it is the logical consequence of everything built so far.
+The plan of work falls naturally out of the risk map. It is not a separate creative exercise; it follows directly from everything built so far.
 
 ## What you need from the previous sub-step
 
@@ -14,15 +14,15 @@ Read all of Part 6 (Risk Map) from `quality/strategy.md`, especially the "Hottes
 
 By the end of this sub-step the strategy doc must capture, for the first release:
 
-1. **An enumerated list of actions** — one per row of the risk map that has a non-zero gap, plus actions to resolve high-impact unknowns (low-confidence rows).
+1. **A numbered list of actions** — one per row of the risk map that has a non-zero gap, plus actions to resolve high-impact unknowns (low-confidence rows).
 2. **For each action:** what it is, what gap or unknown it addresses, and which dimension(s) it touches.
-3. **Actions for resolving unknowns first** — for every **Unknown actual** and every **Low-confidence required or actual** on a high-impact dimension, an action that resolves the gap (testing/asking for Unknowns; either testing or fixing for Lows depending on whether the gap or the assessment is the issue).
-4. **"Aware, not investing this release" notes** — for any H/M-impact dimension the team is consciously aware of but deliberately *not* investing in this release, a no-action-with-reason entry recording that decision. This is the role the old `L` rating used to play (5.4 no longer rates L): the deferral is a plan-of-work decision, made here with the impact in full view. Record it the same way as a non-goal-confirming note (see "How to ask"). Distinguish it from a **None** (no stakeholder bar references the dimension) and from a **non-goal** (deliberately excluded): this is a dimension that matters, consciously deferred.
-5. **Don't classify yet** — that's sub-step 7.2. Just enumerate.
+3. **Actions for resolving unknowns first** — for every **Unknown actual** and every **Low-confidence required or actual** on a high-impact dimension, an action that resolves the gap (testing or asking work for Unknowns; for Lows, testing work if the assessment is shaky, fixing work if the gap itself is the problem).
+4. **"Aware, not investing this release" notes** — for any H/M-impact dimension the team knows about but is deliberately *not* investing in this release, an entry that records the decision: no action, and why. This is the job the old `L` rating used to do (5.4 no longer rates L): deferring is a plan-of-work decision, made here with the impact in full view. Record it the same way as a non-goal-confirming note (see "How to ask"). Don't confuse it with a **None** (no stakeholder bar mentions the dimension) or a **non-goal** (deliberately excluded): this is a dimension that matters, consciously put off.
+5. **Don't classify yet** — that's sub-step 7.2. Just list.
 
 ## How to ask
 
-This sub-step is mostly mechanical derivation, but the user should review the list before it gets locked in.
+Most of this sub-step is mechanical, but the user should review the list before it gets locked in.
 
 Walk through the risk map systematically:
 

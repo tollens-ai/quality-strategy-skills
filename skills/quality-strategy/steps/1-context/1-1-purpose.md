@@ -17,7 +17,7 @@ By the end of this sub-step the strategy doc must capture:
 1. **The product's purpose** — the problem it solves, expressed not as a feature list but as a "what would the world look different if this product existed" statement. One to three sentences.
 2. **The immediate goal of this version** — what scope is in vs out for the version being built right now.
 3. **The longer-term ambition** — where this is heading, if different from the immediate goal. (If the user says it is the same, capture that and move on.)
-4. **The strategy's job, right now** — what this strategy is *for*. This sets the right output and the right review severity for everything downstream (see SKILL.md → "The four-question frame and the strategy's job"). Ask the user to pick the closest:
+4. **The strategy's job, right now** — what this strategy is *for*. This decides what the strategy should produce, and how strict its review should be, all the way downstream (see SKILL.md → "The four-question frame and the strategy's job"). Ask the user to pick the closest:
    - **Durable production strategy** — active product/release; ongoing quality management.
    - **Pre-implementation strategy** — little or no code yet; the job is to focus the build and name what evidence the first implementation must produce.
    - **Agentic one-shot experiment** — the main question is whether the docs can steer an agent to a correct, usable artifact with minimal human steering.
@@ -28,7 +28,7 @@ By the end of this sub-step the strategy doc must capture:
 
 ## How to ask
 
-Phrasing is yours. Match the user's conversational register — terse if they are, conversational if they are. Don't read off a script.
+Phrasing is yours. Match the user's tone — terse if they're terse, chatty if they're chatty. Don't read off a script.
 
 Start by surfacing what the pre-read inferred: *"From the README, this looks like X — is that close to right?"* Refine based on the user's answer. Don't accept their first framing if it is a feature list — reframe toward the problem being solved.
 

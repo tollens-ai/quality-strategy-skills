@@ -20,15 +20,15 @@ By the end of this sub-step the strategy doc captures:
 
 2. **What it is not** — explicitly *not* a test plan, *not* a coverage target, *not* a quality strategy. A short anti-list helps prevent drift.
 
-3. **The relationship to the quality strategy** — one sentence stating that this doc operationalises `quality/strategy.md` and feeds back into it via the update protocol.
+3. **The relationship to the quality strategy** — one sentence stating that this doc operationalises `quality/strategy.md` (turns its risk map into investigation work) and feeds back into it via the update protocol.
 
-4. **Where this sits in the four-question frame** — orient the reader with the four quality questions: (1) what does good look like? (2) how do we know if what we have is good? (3) is what we have good? (4) how do we make it good? The *quality* strategy answers Q1; this *test* strategy is how the team answers Q3 — but only honestly once **Q2** is settled, which is why the tooling & oracle adequacy check (sub-step 3.5, `/tooling-adequacy`) is part of the flow. One or two sentences, not a lecture.
+4. **Where this sits in the four-question frame** — orient the reader with the four quality questions: (1) what does good look like? (2) how do we know if what we have is good? (3) is what we have good? (4) how do we make it good? The *quality* strategy answers Q1; this *test* strategy is how the team answers Q3. But Q3 can only be answered honestly once **Q2** is settled — that's why the tooling & oracle adequacy check (sub-step 3.5, `/tooling-adequacy`) is part of the flow. One or two sentences, not a lecture.
 
-5. **What this strategy is for, right now (its job)** — one line naming the job: steering a durable production effort, a pre-implementation build, a one-shot agentic attempt, or a deliberately thin slice. This shapes how much investigation is warranted (a thin slice legitimately has fewer, lighter learning needs). Lightweight here — just ask *"what is this test strategy mainly for right now?"* and record the answer; the fuller treatment lives in the quality strategy.
+5. **What this strategy is for, right now (its job)** — one line naming the job: steering a durable production effort, a pre-implementation build, a one-shot agentic attempt, or a deliberately thin slice. This shapes how much investigation the project deserves (a thin slice legitimately gets fewer, lighter learning needs). Keep it light here — just ask *"what is this test strategy mainly for right now?"* and record the answer; the fuller treatment lives in the quality strategy.
 
 ## How to ask
 
-This sub-step is mostly drafted-and-confirmed rather than interviewed. Draft the purpose section based on the pre-read, then read it back and ask the user *"does this name what we're trying to accomplish in your language?"*
+In this sub-step you mostly draft and confirm rather than interview. Draft the purpose section from the pre-read, then read it back and ask the user *"does this name what we're trying to accomplish in your language?"*
 
 Two framings that must show up — see FRAMINGS.md #1 and #2.
 
@@ -48,16 +48,16 @@ You don't need to use these exact words, but the produced section should not rea
 ## What you must not do
 
 - Write a list of test types we'll do. (That's sub-step 3.)
-- State coverage targets or bug-rate goals. Proxies are not quality (FRAMINGS.md #8).
+- State coverage targets or bug-rate goals. Those are proxies — stand-ins for quality, not quality itself (FRAMINGS.md #8).
 - Frame the strategy as serving the build process. The strategy serves stakeholders — the same ones the quality strategy identified — by closing the gap between what's needed and what's actually true.
 - Pad. If the purpose is one sentence, leave it one sentence. Don't write three to feel substantive.
 
 ## Push back when
 
 - The user phrases the purpose as "make sure features work." *"That's a test plan framing — it assumes you already know what 'work' means and just need to verify. The test strategy is for finding out what's actually true, including in places no one's specified yet."*
-- The user wants to defer the purpose statement until after learning needs are derived. *"The purpose framing affects what counts as a learning need. Worth pinning even briefly first — we can refine after sub-step 3 if needed."*
+- The user wants to defer the purpose statement until after learning needs are derived. *"The purpose framing affects what counts as a learning need. Worth pinning down, even roughly, first — we can refine after sub-step 3 if needed."*
 - The user proposes a coverage target as the purpose. *"Coverage is a proxy. The purpose is the thing the proxy is approximating — what are we actually trying to find out?"*
-- The user resists the "no test phase" framing because their team currently operates with one. *"That's a real tension. The strategy can document the team's current sequence while still naming the testing thinking that applies upstream of the test phase."* Don't ignore the tension; surface it as an `OPEN QUESTION:` if needed.
+- The user resists the "no test phase" framing because their team currently operates with one. *"That's a real tension. The strategy can record how your team sequences work today while still naming the testing thinking that should happen before the test phase."* Don't ignore the tension; surface it as an `OPEN QUESTION:` if needed.
 
 ## This sub-step is DONE when
 

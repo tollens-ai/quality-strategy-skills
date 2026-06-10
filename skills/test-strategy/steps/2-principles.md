@@ -2,13 +2,13 @@
 
 ## Goal
 
-State the six governing principles that drive the test strategy's decisions. These are the canonical defaults from Edmund Pringle's quality framework. The user can deviate, but it requires a deliberate choice with a stated reason — see OPEN-QUESTIONS.md ("Six governing principles fixed by default").
+State the six governing principles that drive the test strategy's decisions. These are the canonical defaults from Edmund Pringle's quality framework. The user can deviate, but only deliberately and with a stated reason — see OPEN-QUESTIONS.md ("Six governing principles fixed by default").
 
 By the end of this sub-step the strategy doc has a Principles section with the six (or the user's deliberate variant), each with a one-paragraph explanation in the team's voice.
 
 ## What you need from the previous sub-step
 
-The Purpose section in `quality/test-strategy.md` and the test pre-read. Principles need to make sense in the context of the project — a principle stated abstractly is just decoration; a principle tied to the project's actual unknowns is operational.
+The Purpose section in `quality/test-strategy.md` and the test pre-read. Principles need to make sense in the context of the project — stated in the abstract, a principle is decoration; tied to the project's actual unknowns, it does work.
 
 ## The six canonical principles
 
@@ -47,8 +47,8 @@ Then walk through the principles one at a time, briefly. For each:
 
 ## Push back when
 
-- The user wants to skip this section because "the principles are obvious." *"They're the load-bearing defaults for the next two sub-steps. Even if you'd state them yourself, putting them in the doc means future readers — including you in three months — don't have to re-derive."*
-- The user wants to invert principle 4 (test as the builder). *"That's a major deviation — independence-of-perspective is one of the core CDT framings. What's the reason? If it's 'we want to verify implementation correctness specifically', that's checking, which is a sub-component but not the primary frame."*
+- The user wants to skip this section because "the principles are obvious." *"They're the load-bearing defaults for the next two sub-steps. Even if you'd state them yourself, putting them in the doc means future readers — including you in three months — don't have to work them out again."*
+- The user wants to invert principle 4 (test as the builder). *"That's a major deviation — independence of perspective is one of the framework's core framings. What's the reason? If it's 'we want to verify the implementation is correct, specifically', that's checking — a part of the work, but not the main frame."*
 - The user wants to drop principle 6 (the human/agent split). *"That's the principle that drives sub-step 4 (Allocation). Want to talk through what's prompting the discomfort before we drop it?"*
 - The user proposes an additional principle that conflicts with one of the six. Surface the conflict explicitly — don't quietly stack contradictions.
 

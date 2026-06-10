@@ -5,7 +5,7 @@ description: Turn a complete-but-dense quality or test strategy into something o
 
 # Operational Distillation
 
-A finished strategy is optimised for the moment it was written, not the moment it's read. Someone returning weeks later — or an agent picking it up cold to triage a new finding — has to skim the whole thing to re-anchor. This skill adds the consumption-time layer the strategy lacks: a short distillation at the top that lets a reader re-orient fast and triage without reading end-to-end.
+A finished strategy is optimised for the moment it was written, not the moment it's read. Someone returning weeks later — or an agent picking it up cold to triage a new finding — has to skim the whole thing to get their bearings back. This skill adds what the finished doc lacks: a short distillation at the top, so a reader can re-orient fast and triage without reading end-to-end.
 
 It produces, at the top of the strategy doc:
 
@@ -33,7 +33,7 @@ File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **
 
 - **Grounding.** Read `$PLUGIN_ROOT/PHILOSOPHY.md` — in particular the indicators this skill serves: *quick re-orientation* and *decision support at the edges*.
 - **The strategy.** Read the target doc end-to-end. You cannot distill what you haven't read; a TL;DR written from the headings alone will be wrong.
-- **Which doc.** By default this skill distills `$PROJECT_DIR/quality/strategy.md` (the quality strategy). When pointed at `$PROJECT_DIR/quality/test-strategy.md` — or when the user or orchestrator names it — distill that doc instead, and adapt the extraction and insertion accordingly (see the test-strategy variant in step 1 and the doc-agnostic Output template). If which doc to distill is ambiguous, ask.
+- **Which doc.** By default this skill distills `$PROJECT_DIR/quality/strategy.md` (the quality strategy). When pointed at `$PROJECT_DIR/quality/test-strategy.md` — or when the user or orchestrator names it — distill that doc instead, and adapt what you extract and where you insert it (see the test-strategy variant in step 1; the Output template works for either doc). If it's unclear which doc to distill, ask.
 
 ## The work, in order
 
@@ -44,7 +44,7 @@ From the full doc, pull only what a returning reader most needs:
 - **What & for whom** — purpose (Part 1) and the one or two stakeholders who matter most (Part 3).
 - **What good looks like, sharply** — the dimensions rated H and the Dealbreakers (Parts 3, 5).
 - **Where we actually are** — the hottest risk-map rows: largest gaps in highest-impact dimensions, and the most consequential Unknowns (Part 6).
-- **First moves** — the plan's earliest / blocking actions (Part 7, Phase 0–1). If Part 7 is a recorded deferral to the follow-on skills, point first moves at the risk map's hottest items and the named follow-ons (`/test-strategy`, `/tooling-strategy`) instead.
+- **First moves** — the plan's earliest / blocking actions (Part 7, Phase 0–1). If Part 7 just records that the plan is deferred to the follow-on skills, point first moves at the risk map's hottest items and the named follow-ons (`/test-strategy`, `/tooling-strategy`) instead.
 - **What's deliberately out** — the one or two non-goals most likely to be mistaken for gaps (Part 4).
 
 Throughout the TL;DR and rubric, **use names, not coordinates** (PHILOSOPHY: *write for both readers*): the distillation is read cold, so refer to actions and dimensions by their short human names with any label trailing as a pointer — *"the payment-divergence simulation (Action F)"*, never a bare letter or number.
@@ -61,11 +61,11 @@ The quality-strategy extraction above is the default; use this variant only when
 
 ### 2. Write the Operational TL;DR (6–10 lines)
 
-Tight, plain, scannable. Every line earns its place. It answers, in order: what is this, who matters most, what's the sharpest quality bar, where's the biggest risk right now, what's the first move, what's deliberately out of scope. No process narration, no hedging prose — a returning reader's fastest path back to context.
+Tight, plain, scannable. Every line earns its place. It answers, in order: what is this, who matters most, what's the sharpest quality bar, where's the biggest risk right now, what's the first move, what's deliberately out of scope. Don't narrate how the strategy was made, and don't hedge — this is a returning reader's fastest path back to context.
 
 ### 3. Write the one-page triage rubric
 
-A reader hits a new thing — a bug report, a feature ask, a complaint, an odd result — and needs to decide *what bucket is this, does it matter, what do I do* without escalating. Give them the decision aid:
+A reader hits a new thing — a bug report, a feature ask, a complaint, an odd result — and needs to decide *what bucket is this, does it matter, what do I do* without escalating. Give them a decision aid:
 
 - **Map to a dimension / stakeholder** — "is this about a dimension we rated H/M, and whose bar does it touch?"
 - **Severity from the strategy** — touches a Dealbreaker → urgent; touches an H gap → important; touches a None / non-goal → likely out of scope, say so and stop.
@@ -82,7 +82,7 @@ Only if the project has recurring operational decisions or commands worth a quic
 
 ### 5. Place it at the top and check it against the body
 
-Insert the distillation immediately after the title / `Last updated` line, above the first substantive section — the `## Strategy job` paragraph and Part 1 for a quality strategy, or the equivalent top section (purpose) for a test strategy. Then re-read it against the body: every claim in the TL;DR and rubric must be supported by the body, and nothing load-bearing in the body (a Dealbreaker, the hottest risk) should be absent from the TL;DR. The distillation is a faithful view — if it and the body disagree, the body wins and the distillation is wrong.
+Insert the distillation immediately after the title / `Last updated` line, above the first substantive section — the `## Strategy job` paragraph and Part 1 for a quality strategy, or the equivalent top section (purpose) for a test strategy. Then re-read it against the body: every claim in the TL;DR and rubric must have backing in the body, and the TL;DR must not miss anything load-bearing in the body (a Dealbreaker, the hottest risk). The distillation is a faithful view — if it and the body disagree, the body wins and the distillation is wrong.
 
 ## Push back when
 
@@ -140,6 +140,6 @@ The TL;DR + triage rubric (+ optional cheat sheet) inserted at the top of the ta
 …
 ```
 
-The insertion anchor is generic: place the distillation immediately after the title / `Last updated` line, above the first substantive section — the `## Strategy job` paragraph (then Part 1) for a quality strategy, or the equivalent top section (purpose) for a test strategy.
+The insertion point is the same for either doc: place the distillation immediately after the title / `Last updated` line, above the first substantive section — the `## Strategy job` paragraph (then Part 1) for a quality strategy, or the equivalent top section (purpose) for a test strategy.
 
-When run from `/quality-strategy` against the quality strategy, also write a scratch file at `$PROJECT_DIR/quality/.scratch/7.3-operational-distillation.md` recording which Parts the distillation drew from (the sealed-dispatch scratch file the review skill audits — see `/quality-strategy` SKILL.md, "Sealed-context dispatch and scratch files"). A standalone run — whether against the quality or the test strategy — needs no orchestrator scratch file: insert the distillation into the doc as above and confirm to the user what was added.
+When run from `/quality-strategy` against the quality strategy, also write a scratch file at `$PROJECT_DIR/quality/.scratch/7.3-operational-distillation.md` recording which Parts the distillation drew from (the sealed-dispatch scratch file the review skill audits — see `/quality-strategy` SKILL.md, "Sealed-context dispatch and scratch files"). A standalone run — whether against the quality or the test strategy — needs no orchestrator scratch file: insert the distillation into the doc as above and tell the user what you added.

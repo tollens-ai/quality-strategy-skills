@@ -16,11 +16,11 @@ This skill is part of the `quality-strategy` plugin. Before anything else, resol
 - **PLUGIN_ROOT** — the plugin's install directory: `${CLAUDE_PLUGIN_ROOT}` (Claude Code expands this to an absolute path when it loads this file; read it off and note it down). The grounding file this skill reads — `PHILOSOPHY.md` — lives under it.
 - **PROJECT_DIR** — the absolute path of the project whose strategy you're checking (normally the current working directory; confirm with the user if it's ambiguous). The strategy docs live under `$PROJECT_DIR/quality/`.
 
-File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **Substitute the resolved absolute paths before you act on them** — both when you Read a file yourself and when you put a path into a subagent brief. The Read tool does no variable expansion and resolves relative paths against the current working directory, not this skill's directory; a dispatched subagent inherits none of your context. So an unsubstituted placeholder or a bare relative path will fail — always pass fully-resolved absolute paths.
+File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **Substitute the resolved absolute paths before you act on them** — both when you Read a file yourself and when you put a path into a subagent brief. The Read tool does not expand variables, and it resolves relative paths against the current working directory, not this skill's directory; a dispatched subagent inherits none of your context. So an unsubstituted placeholder or a bare relative path will fail — always pass full absolute paths.
 
 ## When to use
 
-- **From `/quality-strategy`, at each step boundary** — dispatched as a sealed-context subagent at the close of a step (after the step's sub-steps are written, before the substantive checkpoint is surfaced). It checks the Parts written *so far* for contradictions, so a contradiction introduced in this step against an earlier step is caught at the boundary rather than at final review. The orchestrator folds any findings into the substantive checkpoint it then surfaces.
+- **From `/quality-strategy`, at each step boundary** — the orchestrator runs this skill as a sealed-context subagent (one that sees only its brief, not the conversation) when a step closes: after the step's sub-steps are written, before the user sees the substantive checkpoint. It checks the Parts written *so far*, so a contradiction this step introduces against an earlier step gets caught at the boundary, not at final review. The orchestrator folds any findings into the checkpoint it then surfaces.
 - **From `/test-strategy`** — the same, on `quality/test-strategy.md` against `quality/strategy.md` (a test strategy can contradict the quality strategy it operationalises).
 - **Standalone** — to audit any existing strategy doc for internal contradictions, cold.
 
@@ -32,7 +32,7 @@ File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **
 
 ## How to navigate the doc
 
-Locate Part boundaries by their headings (`## Part 1: Context`, `## Part 3: Stakeholders`, etc.) and the sub-section headings within them. Read the whole present doc once, building a short index of the load-bearing claims per Part: stakeholder bars (Part 3), non-goals (Part 4), dimension ratings (Part 5), risk-map required/actual/gap (Part 6), plan-of-work actions (Part 7), and the context/workflow/release facts (Part 1–2).
+Locate Part boundaries by their headings (`## Part 1: Context`, `## Part 3: Stakeholders`, etc.) and the sub-section headings within them. Read everything that exists once, and build a short index of the load-bearing claims in each Part: stakeholder bars (Part 3), non-goals (Part 4), dimension ratings (Part 5), risk-map required/actual/gap (Part 6), plan-of-work actions (Part 7), and the context/workflow/release facts (Part 1–2).
 
 ## The contradiction classes to check
 

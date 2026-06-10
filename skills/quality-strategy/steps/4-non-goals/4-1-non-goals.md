@@ -2,11 +2,11 @@
 
 ## Goal
 
-Capture, for the first release, what the project is **explicitly not doing** and why. Non-goals are decisions, not oversights — naming what you're deliberately not optimising is half of the strategy. A strategy without non-goals is unbounded and unactionable.
+Capture, for the first release, what the project is **explicitly not doing** and why. Non-goals are decisions, not oversights — naming what you're deliberately not optimising is half of the strategy. A strategy without non-goals has no edges, so you can't act on it.
 
 ## What you need from the previous sub-step
 
-Read Parts 1, 2, and 3 from `quality/strategy.md`. The release roadmap (2.1) and stakeholder analysis (3.1, 3.2) are particularly important — non-goals often correspond directly to stakeholders not being served, releases not being targeted, or dimensions a stakeholder explicitly doesn't care about.
+Read Parts 1, 2, and 3 from `quality/strategy.md`. The release roadmap (2.1) and stakeholder analysis (3.1, 3.2) are particularly important — non-goals often map straight onto stakeholders you're not serving, releases you're not targeting, or dimensions a stakeholder explicitly doesn't care about.
 
 Read the **Discrepancies** and **Design observations** sections of `quality/pre-read.md`. The pre-read may surface things the project clearly is *not* doing despite docs hinting it could (e.g. a `docs/` mention of "enterprise SSO" with no code for it).
 
@@ -20,7 +20,7 @@ By the end of this sub-step the strategy doc must capture, **for the first relea
 
 ## How to ask
 
-The user will probably under-deliver on this if asked openly. Walk the standard non-goal categories explicitly to help them surface non-goals they wouldn't think of unprompted:
+Asked cold, the user will probably come up short. Walk through the standard non-goal categories one by one to surface non-goals they wouldn't think of on their own:
 
 - **Stakeholder groups not being served in this release** — from Part 3, are there stakeholder groups the project chose not to serve this time?
 - **Quality dimensions irrelevant given the release purpose** — given what this release is for (Part 2), what doesn't matter? Scalability for a closed alpha; accessibility for a backend-only milestone; etc.

@@ -2,11 +2,11 @@
 
 ## Goal
 
-Final review of the dimension list and ratings before moving to Step 6. Catches the failure modes that an in-the-flow agent + user pair often miss: skewed distributions, stakeholder-coverage gaps, cross-stakeholder tensions, and missing rationale.
+Final review of the dimension list and ratings before moving to Step 6. Catches the failure modes an agent and user deep in the flow often miss: skewed distributions, stakeholder-coverage gaps, cross-stakeholder tensions, and missing rationale.
 
 This sub-step is mostly the agent doing checks and surfacing findings; the user resolves any flagged issues.
 
-(Note: the unpack pass lives in 5.2 and the old/new-world pass in 5.3, not here, because an inventory that hasn't had those passes applied isn't a valid inventory and would produce wrong ratings in 5.4. By the time we reach 5.5, the inventory and ratings should already be at the right grain.)
+(Note: the unpack pass lives in 5.2 and the old/new-world pass in 5.3, not here — an inventory that skipped those passes isn't valid and would have produced wrong ratings in 5.4. By the time you reach 5.5, the inventory and ratings should already be at the right grain.)
 
 ## What you need from the previous sub-step
 
@@ -38,7 +38,7 @@ Walk Part 5's H dimensions. For each, scan Part 3's stakeholders to see if any h
 - A dimension rated H because it serves stakeholder X's Delight, but stakeholder Y's Dealbreaker would be triggered if it's pursued aggressively.
 - Two H dimensions that pull in opposite directions (e.g. observability requires verbose logging; performance requires minimal overhead).
 
-Flag tensions explicitly. They don't necessarily need to be resolved here — the risk map and plan of work will surface them again — but they need to be visible.
+Flag tensions explicitly. You don't have to resolve them here — the risk map and plan of work will surface them again — but they must be visible.
 
 ### Check 4 — Non-goal alignment
 

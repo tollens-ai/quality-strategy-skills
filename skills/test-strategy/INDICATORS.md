@@ -1,16 +1,16 @@
 # Indicators of a good test strategy
 
-A good test strategy is judged not by what the document looks like, but by what executing it produces. The right test is forward-looking: *if the team runs this strategy exactly as written, will the quality strategy end up in a better place — moved in the right direction, with the right priority, with the right efficiency?*
+Judge a test strategy by what running it produces, not by what the document looks like. The right test is forward-looking: *if the team runs this strategy exactly as written, will the quality strategy end up in a better place — moved in the right direction, with the right priority, with the right efficiency?*
 
-The five indicators below collapse around that question. They are referenced by `/test-strategy-review` and by `/test-strategy` sub-step 5's substantive checkpoint.
+The five indicators below all come down to that question. `/test-strategy-review` and `/test-strategy` sub-step 5's substantive checkpoint both refer to them.
 
-These are not properties of the document. They are predictions about the outcome of executing the document.
+These are not properties of the document. They are predictions about what happens when the team runs it.
 
 ---
 
 ## 1. Direction — every investigation moves the strategy
 
-Every learning need traces to closing a gap, resolving an unknown, or validating a claim in `quality/strategy.md`. Nothing investigates what the strategy says doesn't matter (None-rated dimensions, items in the non-goals). Information the strategy will produce is the right shape to feed back into Part 6 (risk map) — i.e. resolving the question changes a `?` to a known value, or updates a confidence rating, or revises a required level.
+Every learning need traces to closing a gap, resolving an unknown, or validating a claim in `quality/strategy.md`. Nothing investigates what the strategy says doesn't matter (None-rated dimensions, items in the non-goals). The information the strategy will produce is the right shape to feed back into Part 6 (risk map): answering the question changes a `?` to a known value, updates a confidence rating, or revises a required level.
 
 **Failure modes:**
 - Learning needs that don't trace to the risk map. Drift toward "what we thought worth testing" rather than "what the strategy says matters."
@@ -44,7 +44,7 @@ Every H/M dimension in the risk map is addressed by ≥1 learning need. Every De
 
 ## 4. Feasibility — the strategy can actually be executed
 
-Methods are concrete enough to act on (not "test the install" but "run install on Ubuntu, macOS, with and without prior Claude Code present"). Exit criteria are reachable — they describe a state the team could plausibly reach, not perfection. Allocation is honest about capability — agents aren't assigned work they'd plausibly fail at; humans aren't assigned work that's infeasible at the planned cadence. If the strategy can't be run as written, it doesn't move anything.
+Methods are concrete enough to act on (not "test the install" but "run install on Ubuntu, macOS, with and without prior Claude Code present"). Exit criteria are reachable — they describe a state the team could plausibly reach, not perfection. Allocation is honest about capability — agents aren't assigned work they'd plausibly fail at; humans aren't assigned work they can't realistically do as often as the plan needs. If the strategy can't be run as written, it doesn't move anything.
 
 **Failure modes:**
 - Methods phrased so vaguely the team would have to re-derive them.
@@ -70,12 +70,12 @@ Calibration items name what allocation depends on. Confidence ratings reflect re
 
 # Mechanical oracle checks (backstop)
 
-These are cheap structural checks. They are not the main review — `/test-strategy-review` runs them in parallel with the forward simulation as a backstop. Failures here usually indicate a per-sub-step DONE checklist was ticked without verification.
+These are cheap structural checks. They are not the main review — `/test-strategy-review` runs them in parallel with the forward simulation as a backstop. A failure here usually means a sub-step's DONE checklist was ticked without actually checking.
 
 1. **Five-field learning needs.** Every learning need has all five: question, methods, exit criterion, risk-map reference, risk-type tag (known/unknown/mixed).
 2. **Risk-map coverage.** Every H/M dimension in `quality/strategy.md` Part 6 has ≥1 corresponding learning need (or the strategy explicitly notes the gap).
 3. **Dealbreaker prioritisation.** Every Dealbreaker entry in Part 3 of the strategy is addressed by a Tier 1 or Tier 2 learning need.
-4. **Allocation confidence variation.** Allocation table has ≥1 row with confidence below high. (All-high is a flag for over-confidence; the skill is opinionated that first-pass calibration is unreliable.)
+4. **Allocation confidence variation.** Allocation table has ≥1 row with confidence below high. (All-high is a flag for over-confidence; the skill takes the view that first-pass calibration is unreliable.)
 5. **Agent rows have review patterns.** Every row allocated to an agent names who reviews the output and what the review pattern looks for.
 6. **No proxy goals.** No coverage targets ("achieve 80% coverage"), bug-count goals, or test-count goals appear as goals in the strategy. Proxies are signals during testing, not targets.
 7. **Update protocol concrete.** Update protocol section names ≥3 trigger types (per-tier, per-cycle, per-release or equivalent) and assigns responsibility.

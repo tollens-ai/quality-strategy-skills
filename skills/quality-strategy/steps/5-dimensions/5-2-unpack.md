@@ -4,7 +4,7 @@
 
 For each composite dimension in the raw inventory from 5.1, decide whether it's actually one thing or several things wearing a trenchcoat. Where it's several things, split it into sub-dimensions that can be rated independently.
 
-A dimension that hasn't been unpacked when it should have been will produce a misleading rating in 5.4 and a misleading risk-map row in Step 6 — because the sub-dimensions have meaningfully different priorities and the composite rating is wrong for most of them.
+Skip an unpack that was needed and you get a misleading rating in 5.4 and a misleading risk-map row in Step 6: the sub-dimensions have meaningfully different priorities, so the single composite rating is wrong for most of them.
 
 ## What you need from the previous sub-step
 
@@ -18,7 +18,7 @@ By the end of this sub-step:
 2. **Where unpacking is warranted, the composite is replaced by its sub-dimensions** in the inventory.
 3. **Where the dimension is genuinely atomic for this project**, that's been recorded as an explicit decision ("considered, not split because…"), not a silent skip.
 
-Composite labels to scrutinise especially:
+Composite labels to look at hardest:
 
 - **Performance** — almost always unpacks: scalability, resource consumption, elapsed time, UX responsiveness, jitter.
 - **Maintainability** — diagnosability, fixability, enhanceability, readability, understandability.

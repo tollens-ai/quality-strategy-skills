@@ -2,13 +2,13 @@
 
 ## Goal
 
-Produce the **consolidated raw inventory** of dimensions to consider for the first release: the bottom-up list (from stakeholders, design, release purpose) reconciled against a top-down reference-list pass run by a subagent.
+Produce the **consolidated raw inventory** — the full list of quality dimensions to consider for the first release. It comes from two passes merged: a bottom-up list (from stakeholders, design, release purpose) and a top-down reference-list pass run by a subagent.
 
-The inventory at the end of this sub-step is **raw**: composite dimensions ("performance" as a single label) may still be present, and trap dimensions ("readability") have not yet been checked for agent-vs-human framing. Those refinements happen in sub-steps 5.2 (Unpack) and 5.3 (Old/new-world). This sub-step focuses on coverage: did we get all the dimensions we should be considering?
+The inventory at the end of this sub-step is **raw**: composite dimensions (several things under one label, like "performance") may still be present, and trap dimensions (like "readability", whose meaning shifts by audience) haven't yet been checked for agent-vs-human framing. Those refinements happen in sub-steps 5.2 (Unpack) and 5.3 (Old/new-world). This sub-step focuses on coverage: did we get all the dimensions we should be considering?
 
 ## What you need from the previous sub-step
 
-Read all of Parts 1–4 from `quality/strategy.md`. The release purpose (Part 2), stakeholders and three-lens (Part 3), and non-goals (Part 4) are direct inputs to which dimensions matter. Read the **Design observations and likely-relevant dimensions** section of `quality/pre-read.md` — subagent C already surfaced design-implied dimensions.
+Read all of Parts 1–4 from `quality/strategy.md`. The release purpose (Part 2), stakeholders and three-lens (Part 3), and non-goals (Part 4) feed directly into which dimensions matter. Read the **Design observations and likely-relevant dimensions** section of `quality/pre-read.md` — subagent C already surfaced design-implied dimensions.
 
 ## The work, in order
 
@@ -20,7 +20,7 @@ Generate a candidate dimension list from what's already in the strategy doc and 
 - For each design observation in the pre-read's design section, take the implied dimensions surfaced by subagent C.
 - For the release purpose in Part 2, ask: *"what does this purpose require?"*
 
-Build the bottom-up list internally. Don't surface to the user yet.
+Build the bottom-up list internally. Don't show it to the user yet.
 
 ### 2. Top-down candidates (subagent)
 
@@ -53,7 +53,7 @@ Use the `Agent` tool with `subagent_type: general-purpose`. The brief:
 >
 > For each, classify as one of:
 > - **Clearly relevant** — the project context shows direct stakeholder concerns or design implications for this -ility.
-> - **Probably relevant** — there's a plausible reason this matters but it's not directly evidenced.
+> - **Probably relevant** — there's a plausible reason this matters, but nothing in the strategy or pre-read directly shows it.
 > - **Borderline** — could matter, but only in a future release or for a stakeholder not currently being served.
 > - **Not relevant** — actively excluded by non-goals or clearly outside the release purpose.
 >
@@ -65,10 +65,10 @@ Use the `Agent` tool with `subagent_type: general-purpose`. The brief:
 
 ### 3. Consolidate
 
-When the subagent returns, **first save its returned top-down list verbatim** to `quality/.scratch/5.1-dimension-scout.md` — the sealed-dispatch scratch file `/quality-strategy-review` audits (see SKILL.md → "Sealed-context dispatch and scratch files"). Then reconcile against the bottom-up list:
+When the subagent returns, **first save its returned top-down list verbatim** to `quality/.scratch/5.1-dimension-scout.md` — the sealed-dispatch scratch file `/quality-strategy-review` audits (see SKILL.md → "Sealed-context dispatch and scratch files"). Then merge it with the bottom-up list:
 
 - **In both lists** — keep, take the better-reasoned justification from either.
-- **Bottom-up only** — keep; these emerged from real project context.
+- **Bottom-up only** — keep; these came from real project context.
 - **Subagent only** — for each, surface to the user as a question: *"The reference-list pass flagged X as Clearly Relevant because [reason]. Should it be in the inventory?"* Don't include silently; don't drop silently.
 
 The user resolves subagent-only candidates.
@@ -85,7 +85,7 @@ You have explicit permission and encouragement to:
 
 - Push back when the user wants to drop a Clearly-Relevant subagent candidate without reasoning.
 - Add a dimension the user surfaces that neither bottom-up nor subagent caught.
-- Note tensions or surprises in the inventory; they'll matter in subsequent sub-steps.
+- Note tensions or surprises in the inventory; they'll matter in later sub-steps.
 
 What you must not do:
 
