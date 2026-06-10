@@ -32,7 +32,7 @@ Available now:
 | Skill | Purpose |
 |---|---|
 | `/quality-strategy` | Walk a 7-step interview to produce `quality/strategy.md`. Use when starting a project, planning a major release, or when "quality" is being talked about vaguely. |
-| `/quality-strategy-review` | Meta-audit. Applies seven indicators of a good quality strategy and surfaces failure modes. Used as the final step of `/quality-strategy` and standalone on existing strategies. |
+| `/quality-strategy-review` | Meta-audit. Applies seven indicators of a good quality strategy — org-wide clarity, instrumentation from the start, a legible work plan, precision over comfort, decision support at the edges, quick re-orientation, and explicit non-goals — and surfaces failure modes. Used as the final step of `/quality-strategy` and standalone on existing strategies. |
 | `/test-strategy` | Produce the engineering-level companion that operationalises the quality strategy — what to investigate, in what order, and how to split human vs agent effort. |
 | `/test-strategy-review` | Meta-audit of a test strategy: would executing it move the quality strategy in the right direction, with the right priority? |
 | `/strategy-variants` | Post-processing. From a finished, reviewed `quality/strategy.md`, derive audience-facing variants without touching the original: a distributable one-pager and a client-safe ("polite") version. Omits and re-pitches; never asserts quality the strategy doesn't support. |
@@ -46,7 +46,7 @@ Planned (not yet implemented):
 | Skill | Purpose |
 |---|---|
 | `/priority-analysis` | Optional multi-stakeholder help prioritising the plan of work. |
-| `/feedback-synthesis` | Curate `.skill-feedback.md` notes into a maintainer-friendly summary. |
+| `/feedback-synthesis` | Curate the notes the skills jot down about their own rough edges as you run (a `.skill-feedback.md` file at the project root) into a maintainer-friendly summary. |
 | `/pre-read` | Standalone project digest. |
 
 ## Install

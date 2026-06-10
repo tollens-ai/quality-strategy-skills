@@ -2,7 +2,7 @@
 
 The skills in this repo are facilitators for a particular way of thinking about software quality. This document is the spine. Anyone — human or agent — using the skills should read this first.
 
-The framework is **Edmund Pringle's**, drawing on the context-driven testing tradition (Bach, Bolton, Weinberg).
+The framework is **Edmund Pringle's**, drawing on the context-driven testing tradition (Bach, Bolton, Weinberg) — the school that holds there are no universal "best practices", only practices that fit a particular context.
 
 ## Quality is value to someone who matters
 
@@ -18,6 +18,7 @@ Implications:
 - Quality is not a property of the product. It's a relationship between the product and a person (or agent) who cares.
 - The same product can be high quality and low quality at the same time, depending on whose perspective you take.
 - If you don't know who matters and what they value, you cannot assess quality. The word is empty.
+- A **quality dimension** is one named axis along which the product can be better or worse for someone who matters — reliability, usability, latency, data integrity, how easily an agent can orient in the code, and so on. Dimensions are the concrete handles the abstract word "value" breaks down into. Much of the work the skills facilitate is exactly this: find the dimensions that matter *here*, decide how good each one has to be, and see where you actually stand on each.
 - "We have a quality problem" usually means the context shifted. The product hasn't changed; the stakeholders or what they value have. Plan for context shifts.
 
 ## Testing is investigation to find out what's actually true

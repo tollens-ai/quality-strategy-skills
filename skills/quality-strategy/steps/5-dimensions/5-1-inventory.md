@@ -16,7 +16,7 @@ Read all of Parts 1–4 from `quality/strategy.md`. The release purpose (Part 2)
 
 Generate a candidate dimension list from what's already in the strategy doc and pre-read:
 
-- For each stakeholder dealbreaker and good-enough in Part 3, ask: *"what dimension does this concern map to?"* Map to standard -ility names where one fits; use domain-specific names where they're clearer.
+- For each stakeholder dealbreaker and good-enough in Part 3, ask: *"what dimension does this concern map to?"* Map to standard -ility names (the conventional names for non-functional quality attributes — reliability, usability, maintainability, observability, and the like) where one fits; use domain-specific names where they're clearer.
 - For each design observation in the pre-read's design section, take the implied dimensions surfaced by subagent C.
 - For the release purpose in Part 2, ask: *"what does this purpose require?"*
 
