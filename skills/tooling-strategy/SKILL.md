@@ -11,6 +11,8 @@ The other two strategies *depend* on Q2 being answerable but don't plan how to m
 
 Building oracles is routinely the highest-value quality work an early-stage project can do — a weak oracle gives false confidence, and a missing one leaves the most important dimensions permanently Unknown — yet it rarely gets planned, because each gap surfaces in a different place and none of them looks urgent alone. Gathered in one place, weighed by what each build unblocks, the priorities are usually obvious.
 
+The demand arrives as **requirements** — "we must be able to judge X at this fidelity" — and this skill's job is to take each requirement the rest of the way: into a spec, a sourcing decision (build it, adopt something open-source, buy it, or extend what exists), and a place in a sequenced plan. Each piece of tooling is a mini-product. Its stakeholders are fixed and known — the team, the agents who will run it, the strategies that consume its verdicts — so none of the interview machinery is needed; but the same four questions apply in miniature, and they need real answers per item (see step 2).
+
 ## What this skill is not
 
 It is **not an audit, and it does not re-audit.** The per-item adequacy verdicts come from the two Q2 audit skills, which run inside the parent strategies: `/oracle-adequacy` (inside `/quality-strategy`, on the risk map's actual-state claims) and `/tooling-adequacy` (inside `/test-strategy`, on the learning needs). This skill *consumes* their outputs. If the inputs lack those verdicts, send the user back to the audit (it runs standalone) rather than improvising adequacy judgments here.
@@ -51,13 +53,16 @@ Collect every place the project currently *can't* answer "how good is it?":
 
 **Deduplicate across the two sides.** The same underlying build often appears twice — the risk map can't establish an actual for the same reason a learning need is blocked. Merge into one item that names both beneficiaries; the merged demand is precisely what makes it valuable.
 
-### 2. Consolidate into build items
+### 2. Spec each item — every tool is a mini-product
 
-For each item, make it concrete enough to build:
+The gathered demand is requirements; this step turns each into a spec and a decision. Per item:
 
-- **What it is** — instrument (exercise/observe) or oracle (judge), and for oracles, the kind from the taxonomy. *"Property set: intervals never shrink on a correct recall"*, not *"better testing for the scheduler."*
+- **What it must do** — instrument (exercise/observe) or oracle (judge), the kind from the taxonomy, and the question(s) it must answer at the fidelity they demand. *"Property set: intervals never shrink on a correct recall"*, not *"better testing for the scheduler."*
 - **What it unblocks** — the dimension(s) and learning need(s), by name. An item that unblocks nothing doesn't belong in the plan.
-- **Who can build it** — agent-buildable now (most reference oracles, property sets, harnesses are), needs human judgment or access (rubrics where a person is the oracle, production telemetry, real-user observation), or a pairing of the two.
+- **What "good" means for this tool** — one line. The universal dealbreaker is **false confidence**: a tool that passes wrong things is worse than no tool, because the Unknown was at least visible. Good enough = answers its question at the required fidelity, and cheap enough to actually get run.
+- **Source: build / adopt / buy / extend** — a concrete decision per item, not a default. The asymmetry to expect: *instruments* often already exist (fault injectors, load generators, fuzzers, coverage, monitors — adopting usually beats building); *oracles* more often need building, because they encode *this project's* definition of correct. "Extend" — bolting the missing oracle onto an existing harness — is frequently the cheapest real option. One line of reasoning either way.
+- **Calibration — the recursive Q2** — how we'll know the tool *itself* judges correctly. Cheap standard moves: seed known-bad cases and confirm it catches them; diff it against the reference implementation; human-verify its first real verdicts. A tool with no calibration plan is a false-confidence machine waiting to happen.
+- **Who does the work** — agent-buildable now (most reference oracles, property sets, harnesses are), needs human judgment or access (rubrics where a person is the oracle, production telemetry, real-user observation), or a pairing of the two.
 
 ### 3. Weigh value and cost
 
@@ -89,12 +94,16 @@ Then write the Update protocol section: re-run this skill when a phase of builds
 - **The user wants to build measurement for its own sake** — an oracle for a None-rated dimension, an instrument no learning need asked for. Value comes from what an item unblocks; if it unblocks nothing, it's not in this plan.
 - **An Over-confident actual is left standing with its build item deferred.** That's a strategy resting on sand, with the sand now documented. Either the oracle gets built or the confidence gets downgraded in the risk map — pick one, explicitly.
 - **Everything is Phase 1.** Sequencing *is* the strategy; a plan where nothing is deferred and nothing is ordered hasn't made any decisions.
+- **Every source decision comes back "build our own."** Under agent economics building is cheap — but maintaining isn't, and mature existing instruments usually beat bespoke ones. Ask per item: *"what existing tool was considered, and why was it rejected?"* Reflexive build-it-all is the new old-world bias.
+- **An adopted or bought tool is assumed adequate because it's popular.** Adequacy is per-question (that's the whole point of the audits) — a famous load-testing tool can still be blind to *your* question. Adopted tools get the same calibration plan as built ones.
 
 ## This skill is DONE when
 
 - [ ] Every Gated and Over-confident dimension from the risk map, and every blocked learning need from the test strategy (when present), appears in the plan — planned in a phase, or deferred with a stated reason. Nothing silently dropped.
 - [ ] Cross-side duplicates are merged, with both beneficiaries named.
-- [ ] Every build item names: instrument or oracle (and the oracle kind), what it unblocks, who builds it (agent / human / pair), and its value reasoning.
+- [ ] Every build item names: instrument or oracle (and the oracle kind), what it unblocks, who does the work (agent / human / pair), and its value reasoning.
+- [ ] Every build item carries a **source decision** — build / adopt / buy / extend — with one line of reasoning (and for adopt/buy, the candidate named).
+- [ ] Every build item has a **calibration note** — how we'll know the tool itself judges correctly.
 - [ ] The phases have stated sequencing reasons; deferred items have stated reasons.
 - [ ] Every planned item states what to re-assess when it lands.
 - [ ] The doc records which inputs it was derived from (and says so plainly if the test side was absent).
@@ -121,7 +130,7 @@ Write to `$PROJECT_DIR/quality/tooling-strategy.md` (the third strategy doc, bes
 
 *Why first: <one line — e.g. agent-cheap, unblocks the hottest rows>*
 
-1. **<Build item.>** <Instrument or oracle — kind.> Unblocks: <dimensions / learning needs>. Builder: <agent / human / pair>. When it lands: <what to re-assess>.
+1. **<Build item.>** <Instrument or oracle — kind; the question it must answer.> Unblocks: <dimensions / learning needs>. Source: <build / adopt <named tool> / buy <vendor> / extend <existing thing>> — <one-line why>. Work: <agent / human / pair>. Calibration: <how we'll know it judges correctly>. When it lands: <what to re-assess>.
 
 ### Phase 2 — <name>
 
