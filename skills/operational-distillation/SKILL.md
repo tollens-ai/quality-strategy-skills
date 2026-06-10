@@ -47,6 +47,8 @@ From the full doc, pull only what a returning reader most needs:
 - **First moves** — the plan's earliest / blocking actions (Part 7, Phase 0–1). If Part 7 is a recorded deferral to the follow-on skills, point first moves at the risk map's hottest items and the named follow-ons (`/test-strategy`, `/tooling-strategy`) instead.
 - **What's deliberately out** — the one or two non-goals most likely to be mistaken for gaps (Part 4).
 
+Throughout the TL;DR and rubric, **use names, not coordinates** (PHILOSOPHY: *write for both readers*): the distillation is read cold, so refer to actions and dimensions by their short human names with any label trailing as a pointer — *"the payment-divergence simulation (Action F)"*, never a bare letter or number.
+
 **Test-strategy variant.** When the target is `quality/test-strategy.md`, the doc has a different shape (purpose / principles / impact-tiered learning needs / allocation / closing), so pull instead:
 
 - **Purpose** — what this strategy investigates and which quality strategy it operationalises.

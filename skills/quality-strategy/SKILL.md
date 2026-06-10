@@ -207,6 +207,8 @@ At each scan, re-read the target text and strip these machinery patterns — kee
 
 This is *presentation* cleanup only. It changes nothing about what work runs or which scratch files get written — every sealed dispatch still executes and still writes its scratch file, which `/quality-strategy-review`'s scratch-file audit reads on disk. What changes is only what lands in the doc and what you say to the user.
 
+**Names before coordinates (PHILOSOPHY: *write for both readers*).** The doc's own cross-references, and everything you say to the user, follow the pack's dual-legibility rule: labels and numbers ("Action F", "dimension 14", "Part 6") are pointers for cross-referencing, not names. At first mention in any section — and in any user-facing turn — call the thing by its human name with the label trailing as a pointer: *"the payment-divergence simulation (Action F)"*, not a bare *"Action F"*. Each section of the strategy should stand on its own for a reader who didn't write it and doesn't have the rest of the doc in working memory.
+
 ## Initial pre-read
 
 Before reading sub-step 1.1, run sub-step 0 (`steps/0-pre-read/0-dispatch.md`). It dispatches a subagent that reads the project and produces a structured digest at `quality/pre-read.md`. Subsequent sub-steps reference the digest as starting hypothesis material so the main agent does not have to load the whole project into its own context window.

@@ -75,6 +75,8 @@ If you're unsure whether something is a contradiction or a gap, state the specif
 
 When dispatched from `/quality-strategy` (or `/test-strategy`) at a step boundary, return the findings to the orchestrator **and** write them to `$PROJECT_DIR/quality/.scratch/<step-boundary>-contradiction-check.md` (e.g. `3.2-contradiction-check.md` — the sealed-dispatch scratch file the review skill audits; see `/quality-strategy` SKILL.md, "Sealed-context dispatch and scratch files"). The orchestrator folds the findings into the substantive checkpoint it surfaces next.
 
+Phrase each finding for both readers — names before coordinates (PHILOSOPHY: *write for both readers*): state the two claims in plain words, with Part references trailing as pointers, so the user at the checkpoint can act on the finding without opening the doc to decode it.
+
 Standalone, surface the findings in the conversation. Shape:
 
 ```markdown
