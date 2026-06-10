@@ -41,13 +41,15 @@ When the build-item list is non-trivial, point the user at **`/tooling-strategy`
 
 ### Update protocol
 
-The update protocol is what stops the test strategy becoming frozen. Three triggers:
+The update protocol is what stops the test strategy becoming frozen. Three standing triggers, plus a fourth whenever the blocked-on-tooling list is non-empty:
 
 1. **After each tier of testing.** Update the risk map references — if Tier-1 testing resolved an unknown to a known, that changes the strategy's Part 6. Note that this update belongs in `quality/strategy.md` Part 6, not here; the test strategy is the trigger, the risk map is the source of truth.
 
 2. **After each cycle of testing (one full pass through the tiers).** Re-rate allocation. Items tagged "unknown — try and see" should now have data. Items where confidence was low should be reassessed. Items that were high-confidence but turned out to be wrong move toward "unknown — re-calibrate." See FRAMINGS.md #6 and OPEN-QUESTIONS.md ("Calibration as first-class output").
 
 3. **At release boundaries.** Full revision via `/test-strategy` with revision mode (d) — archive current, produce fresh for the new release.
+
+4. **When a blocked learning need's build item lands** *(only when the blocked list is non-empty)*. The tooling build plan (`quality/tooling-strategy.md`, when it exists) names which learning needs each build unblocks; when one lands, unblock those needs — tier them for real and allocate them, via revision mode (c). This is what turns the blocked section's "rerun this strategy after it lands" from a hope into a protocol.
 
 The protocol section should be specific about *who* runs each update. If the team has a cadence (e.g. weekly review), name it. If not, the protocol becomes "after each Tier-N testing block, [responsible party] runs the update."
 
@@ -104,7 +106,7 @@ The pattern (mirrored from /quality-strategy SKILL.md):
 
 - [ ] "What we're not testing" section exists with explicit reasons for each non-target.
 - [ ] Blocked-on-tooling section reflects `/tooling-adequacy`'s build items (each blocked learning need named with its build item), or states none.
-- [ ] Update protocol section exists with three named triggers (after-tier, after-cycle, at-release).
+- [ ] Update protocol section exists with three named triggers (after-tier, after-cycle, at-release) — plus the build-lands trigger when the blocked-on-tooling list is non-empty.
 - [ ] Calibration triggers from sub-step 4 are referenced in the after-cycle update.
 - [ ] Proxy guard applied if proxy creep was spotted; not added prophylactically if not.
 - [ ] Substantive checkpoint has been run on the whole strategy with a 6-10 line summary back to the user.
@@ -147,6 +149,8 @@ Calibration triggers to watch for first-cycle resolution:
 - <list from sub-step 4>
 
 **At release boundaries.** Full revision via `/test-strategy` revision mode (d). Archive current; produce fresh for the new release.
+
+**When a build item lands.** <present only if the blocked list above is non-empty> The tooling build plan names which learning needs each item unblocks; when one lands, unblock those needs — tier and allocate them via `/test-strategy` revision mode (c).
 
 **Responsibility.** <named — who runs each kind of update, or pattern by which it gets triggered>
 

@@ -75,6 +75,7 @@ While running the exchange:
 - Tag everything "unknown — try and see" to avoid commitment. The skill is honest about uncertainty, not a way to dodge it. If a row is genuinely unknown, tag it; if not, commit.
 - Ignore non-economic reasons. *"I want a human looking at this for trust reasons"* is a valid allocation reason. Don't argue; record it.
 - Allocate before the learning need is well-formed. If a learning need's question or methods are vague, allocation is meaningless. Push back to sub-step 3 if needed.
+- Firmly allocate a learning need the tooling check marked **blocked**. You can't honestly assign an investigation whose instrument or oracle doesn't exist yet — give it a `blocked — allocation deferred` row (or at most a provisional allocation at low confidence, noted as contingent on the build landing). And don't allocate the *build items themselves* here: who builds a missing instrument or oracle is `/tooling-strategy`'s call — its build plan carries a builder per item.
 
 ## Push back when
 
@@ -86,7 +87,7 @@ While running the exchange:
 
 ## This sub-step is DONE when
 
-- [ ] Every learning need (and major sub-method) has an allocation row.
+- [ ] Every learning need (and major sub-method) has an allocation row — blocked-on-tooling needs as `blocked — allocation deferred` (or provisional low-confidence), never a firm allocation.
 - [ ] Every row has: allocation, confidence, one-line reasoning.
 - [ ] The two-voice exchange has been run for every row — i.e. agent proposed and user pushed back, both perspectives are reflected. (This may be quick on rows where both agree immediately; the requirement is that both have spoken.)
 - [ ] At least one row has a confidence below high. If all rows are high-confidence on first pass, push back: that's likely over-confidence given nobody has calibrated intuition for the new economics yet.
