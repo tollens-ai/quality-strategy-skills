@@ -1,37 +1,32 @@
 # Quality Strategy Skills
 
-A set of Claude Code skills for producing and using a software *quality strategy* — a business-level document that says who matters for your project, what they value, where you're exposed, and what to do about it. Plus the engineering-level *test strategy* that operationalises it, and the *tooling strategy* that plans the oracles and instruments you need to judge any of it.
+Claude Code skills that interview you to produce a software *quality strategy* — who matters for your project, what they value, where you're exposed, and what to do about it — plus the *test strategy* and *tooling strategy* that turn it into action. When most of your code is written by agents who don't know what quality means for *your* project, an explicit strategy is what stops them shipping confidently in the wrong direction.
 
-The thinking is grounded in [**Edmund Pringle's quality framework**](https://github.com/tollens-ai/quality-assistant-prototype-03/tree/main/quality-brain): quality is value to someone who matters; testing is investigation to find out what's actually true; risk is danger to quality; the job is to maximise quality improvement for the time invested.
+Grounded in [**Edmund Pringle's quality framework**](https://github.com/tollens-ai/quality-assistant-prototype-03/tree/main/quality-brain): quality is value to someone who matters; testing is investigation to find out what's actually true; risk is danger to quality. For solo developers, small teams, engineering leaders — and anyone whose codebase agents now work in. You don't need a repo: running it at the idea stage is a first-class use.
 
-> **Status: alpha.** This pack is being shared with a first wave of testers. The skills are working and have been exercised across a wide range of simulated users, but they have had limited real-world mileage. Expect rough edges, tell us where it misfires (see [Feedback](#feedback)), and read [Known limitations](#known-limitations) before you start — there are gaps we already know about and are not hiding.
+> **Status: alpha.** Shared with a first wave of testers. The skills work and have been exercised hard against simulated users, but real-world mileage is limited. Expect rough edges, tell us where it misfires ([Feedback](#feedback)), and read [Known limitations](#known-limitations) first — we're not hiding the gaps.
 
-## Why this exists
+## Install
 
-Most teams don't have a quality strategy. The teams that do mostly have a test plan misnamed. We think a real quality strategy is load-bearing infrastructure for software in the age of AI agents — when most code is being written by agents who don't know what quality means for *your* project, an explicit strategy is what stops them shipping confidently in the wrong direction.
+This is a Claude Code plugin:
 
-Writing a quality strategy is just the start. Delivering the right quality for your product over time is an ongoing process, and a much bigger one — involving testing, measurement, stakeholder conversations, and the cumulative judgment of everyone shipping the software. This skill pack covers the front end of that work: producing the strategy, operationalising it as test and tooling strategies, and using it at decision points. It's intentionally minimal — markdown skills, no daemon, no database, no binary to install.
+```
+/plugin marketplace add tollens-ai/quality-strategy-skills
+/plugin install quality-strategy@tollens
+```
 
-## Where this comes from
+Then, in any project, start with `/quality-strategy`. Output goes to `quality/strategy.md` at the project root. (Skills are also available namespaced, e.g. `/quality-strategy:test-strategy`, if a bare name ever collides with another plugin.)
 
-Quality Strategy Skills is the first open-source release from **Tollens**. Tollens is an engineering management consultant for building genuinely good software and making good engineering decisions — it helps you externalise the usually-tacit sense of *what "good" means for your project, and how good you actually are*, into an explicit, living map that both people and AI agents can reason from.
+## The typical flow
 
-Producing a quality strategy — who matters, what they value, where you're exposed, and what to do about it — is the front of that work. This pack is the part of Tollens you can pick up and use today, standalone, with no account and no dependency on the rest — a working taster, not a crippled trial.
+1. **`/quality-strategy`** — the main event. A structured interview produces `quality/strategy.md`, ends with a built-in audit, and points you at the follow-ons.
+2. **`/test-strategy`** — turns the strategy into an investigation plan: what to find out, in what order, split between humans and agents.
+3. **`/tooling-strategy`** — when the docs surfaced things you can't measure or judge yet (common, and a finding rather than a failure): a prioritised build plan for the missing oracles and instruments. Steps 2 and 3 swap when the risk map comes out mostly blind — the skills recommend the order themselves; you can always overrule.
+4. **`/strategy-variants`** (optional) — a one-pager or client-safe version to circulate.
 
-Know what you're getting, though: these are **standalone skills, not an end-to-end workflow**. They produce and audit the strategy documents; fitting those into your team's day-to-day process is on you. The full Tollens product — in development — is the end-to-end version: agents supporting every step of the quality-management process, with feedback loops, evidence and reporting, and an overall release-confidence assessment, rather than a set of skills you wire up yourself.
+## How the skills fit together
 
-Put simply: **this pack is the map with the you-are-here arrow. Tollens is the satnav** — turn-by-turn for the whole journey, recalculating when you drift, with an ETA you can trust.
-
-## Who it's for
-
-- Solo developers and small teams who want a quality strategy but don't want to read a textbook to make one.
-- Anyone running AI agents who needs the agents to make quality calls without escalating every decision.
-- Engineering leaders who want a structured framework for what "good" looks like.
-- People at the **idea stage** — you do not need a repo. Running this before you write code is a first-class use (see [no-repo](#running-without-a-repo)).
-
-## The skills — and how they fit together
-
-Ten skills ship in the pack, but you only ever *start* four of them (bold below): one main interview, three follow-ons that each elaborate a slice of its output, and a set of sub-skills the strategies invoke for you as they run (dotted arrows — each also works standalone when you want one check on its own). Solid arrows are the flow of documents and decisions.
+Four skills you start (bold); the rest are checks and audits the strategies invoke for you as they run (dotted arrows — each also works standalone). Per-skill details: **[docs/SKILLS.md](docs/SKILLS.md)**.
 
 ```mermaid
 flowchart TD
@@ -78,130 +73,46 @@ flowchart TD
     class SDOC,TDOC,ODOC,VDOC doc
 ```
 
-The shape follows the four questions the pack is built on — *what does good look like? how do we know? is it good? how do we make it good?* — and one deliberate design rule: the strategy's plan of work (Part 7) is a **sketch** — optional, and skippable outright in favour of the follow-ons — and the follow-ons elaborate it. `/test-strategy` takes the testing work and turns it into an investigation plan. `/tooling-strategy` takes everything the other two docs *couldn't* answer — Unknowns, dimensions gated on missing oracles, learning needs blocked on missing instruments — and turns it into a prioritised build plan. `/strategy-variants` takes the finished strategy and reshapes it for an audience.
+The shape follows the pack's four questions — *what does good look like? how do we know? is it good? how do we make it good?* — and one rule: **you can only investigate what you can judge**, so the state of your risk map decides whether the investigation plan or the build plan comes first.
 
-### Which order? Let the risk map decide
+## What to expect
 
-The follow-ons are a flow, not a fixed sequence — that's the branching you see in the diagram above. The principle: **you can only investigate what you can judge.** A project that's mostly measurable goes interview → investigation plan, with the build plan mopping up the gaps afterwards. A project that's mostly *blind* — lots of "we genuinely can't tell" in the risk map — goes interview → build plan first, because an investigation plan written against unjudgeable dimensions is mostly "blocked". The skills recommend the branch themselves at each hand-off (the `/quality-strategy` closing, and `/test-strategy`'s tooling check when blocked items dominate its top tier); you can always overrule.
-
-### Skills you run directly
-
-| Skill | Purpose |
-|---|---|
-| `/quality-strategy` | Walk a 7-step interview to produce `quality/strategy.md`. Use when starting a project, planning a major release, or when "quality" is being talked about vaguely. |
-| `/test-strategy` | Produce the engineering-level companion that operationalises the quality strategy — what to investigate, in what order, and how to split human vs agent effort. |
-| `/tooling-strategy` | The strategy for "how do we know?". Gathers everything the quality and test strategies couldn't answer — Unknown/Gated/over-confident actuals, learning needs blocked on missing instruments or oracles — into one prioritised oracle/instrument build plan. Run it as soon as unanswerables exist: directly after `/quality-strategy` when the risk map is mostly blind, after `/test-strategy` when it's mostly answerable. The most re-runnable of the three. |
-| `/strategy-variants` | Post-processing. From a finished, reviewed `quality/strategy.md`, derive audience-facing variants without touching the original: a distributable one-pager and a client-safe ("polite") version. Omits and re-pitches; never asserts quality the strategy doesn't support. |
-
-### Sub-skills (invoked for you; each also runs standalone)
-
-| Skill | Purpose |
-|---|---|
-| `/quality-strategy-review` | Meta-audit. Applies seven indicators of a good quality strategy — org-wide clarity, instrumentation from the start, a legible work plan, precision over comfort, decision support at the edges, quick re-orientation, and explicit non-goals — and surfaces failure modes. Final step of `/quality-strategy`; also standalone on existing strategies. |
-| `/test-strategy-review` | Meta-audit of a test strategy: would executing it move the quality strategy in the right direction, with the right priority? |
-| `/oracle-adequacy` | The "how do we know?" check for the *quality* strategy — audits the oracles behind its actual-state assessments. Invoked during the risk-map pass, or standalone. Shares its oracle taxonomy with `/tooling-adequacy`. |
-| `/tooling-adequacy` | The "how do we know?" check for the *test* strategy. Audits whether each learning need has an adequate *instrument* (to exercise/observe) and *oracle* (to judge), including cheap simulated/reference oracles worth building. |
-| `/contradiction-check` | Cross-part contradiction detection for a strategy doc. Runs at `/quality-strategy` step boundaries, or standalone. Finds internal inconsistencies (not quality weaknesses). |
-| `/operational-distillation` | TL;DR + triage rubric at the top of a strategy, so it's usable at a glance. Runs at the end of `/quality-strategy`, or standalone. |
-
-Planned (not yet implemented):
-
-| Skill | Purpose |
-|---|---|
-| `/tooling-strategy-review` | Meta-audit of a tooling strategy, completing the strategy/review pairing the other two strategies have. |
-| `/priority-analysis` | Optional multi-stakeholder help prioritising the plan of work. |
-| `/feedback-synthesis` | Curate the notes the skills jot down about their own rough edges as you run (a `.skill-feedback.md` file at the project root) into a maintainer-friendly summary. |
-| `/pre-read` | Standalone project digest. |
-
-Sequencing for all of these: [ROADMAP.md](ROADMAP.md).
-
-## Install
-
-This is a Claude Code plugin. Add the marketplace, then install:
-
-```
-/plugin marketplace add tollens-ai/quality-strategy-skills
-/plugin install quality-strategy@tollens
-```
-
-Then in any project, start with `/quality-strategy`. Output goes to `quality/strategy.md` at the project root.
-
-Skills are also available namespaced (`/quality-strategy:test-strategy`, `/quality-strategy:quality-strategy-review`) — useful if a bare name ever collides with another plugin.
-
-## Quickstart — the typical flow
-
-1. **`/quality-strategy`** — the main event. A structured interview produces `quality/strategy.md`. It ends by running `/operational-distillation` (a TL;DR + triage rubric at the top) and `/quality-strategy-review` (the audit), and then points you at the follow-ons.
-2. **`/test-strategy`** — turns the strategy into an engineering plan: what to investigate, in what order, and how to split human vs agent effort. Ends with `/test-strategy-review`.
-3. **`/tooling-strategy`** (when the docs surfaced things you can't measure or judge yet — common, and a finding rather than a failure) — turns those gaps into a prioritised oracle/instrument build plan. Steps 2 and 3 swap when the risk map comes out mostly blind — see [Which order?](#which-order-let-the-risk-map-decide).
-4. **`/strategy-variants`** (optional) — when you need something to circulate to the team or show a client, derive a one-pager or a client-safe version from the finished strategy.
-
-You can also run any of the review/check skills (`/quality-strategy-review`, `/contradiction-check`, `/oracle-adequacy`, `/tooling-adequacy`, `/operational-distillation`) standalone against an existing strategy doc.
-
-## What the skills will and won't do
-
-**They interview you.** They do not infer your quality strategy from your code. The most important inputs — who matters, what they value, what's a non-goal, where you'll accept risk — cannot be guessed from a repo and would be guessed wrongly. The skills pre-read README, docs, and recent commits (when a repo exists) to bring informed questions to the conversation, but everything load-bearing is asked, not assumed.
-
-**They are facilitators, not authors.** The skills walk a structured process and push back when something is missing or vague. They don't replace your judgment.
-
-**They produce a living document.** `quality/strategy.md` is meant to be read, updated, and used at decision points — not written once and filed.
-
-**They hold the bar.** The skills will not skip your non-goals, collapse the dimension passes, or lower rigour because a job feels small — that refusal is the point. They *will* adapt how questions are phrased to you, and (when you're genuinely stuck) offer a clearly-labelled starting guess for you to push against. They will not present a guess as established fact.
-
-### Running without a repo
-
-You do not need a codebase to run `/quality-strategy`. Running it at the idea stage — before any code exists — is a first-class, supported use: a quality strategy is most valuable *before* the build, when it can still steer it. With no repo, the pre-read degrades honestly (it says it's interview-derived rather than dressing up guesses as scan results), and the interview carries the load it always carries. The only thing a missing repo costs is the pre-read's scan-derived hypotheses; everything load-bearing was always going to be asked, not read.
+- **They interview you.** Your quality strategy can't be inferred from your code — who matters, what they value, what's a non-goal would all be guessed wrongly. The skills pre-read the repo to ask informed questions; everything load-bearing is asked, not assumed.
+- **They hold the bar.** They won't skip your non-goals or lower rigour because a job feels small — that refusal is the point. They will adapt their phrasing to you, and offer a clearly-labelled starting guess when you're stuck.
+- **They produce living documents**, meant to be read, updated, and used at decision points — not written once and filed.
+- **It takes real thinking.** Plan for one to two working days of cognitive time, spread across several sessions — the skills are designed for breaks and resume cleanly. Faster than a couple of hours usually means answering too quickly.
+- **No repo needed.** At the idea stage the pre-read honestly says it's interview-derived instead of dressing up guesses as scan results, and the interview carries the load it always carries.
 
 ## Known limitations
 
-This is an alpha. Be aware of these before you rely on it:
+- **No dedicated dimensions yet for AI / non-deterministic products** — systems whose "correctness" is a metric distribution that drifts. The stakeholder/risk/planning machinery still helps; the "what does good look like and how would we know" core you'd hand-craft. Our top research item ([ROADMAP.md](ROADMAP.md)).
+- **Validated mostly in simulation.** Stress-tested against many simulated users and reviewed adversarially; limited real-world mileage. Provisional calls are recorded in `OPEN-QUESTIONS.md` with what would change our minds.
+- **`/tooling-strategy` is the newest skill** with the least mileage — expect rougher edges there.
+- **Cadence is one-size.** Every run gets the same thorough treatment regardless of project size; a lighter *view* of the same rigour is on the roadmap, a lower bar is not.
+- **Single-release depth.** Deep analysis covers one release at a time; re-run in revision mode when the next release's context is real.
 
-- **No dedicated quality dimensions yet for AI / non-deterministic / agentic products.** The dimension framework is strong for conventional software, but it does **not** yet have worked dimensions for systems whose "correctness" is a *metric distribution with a tolerance* rather than a green/red test, nor a built-in mechanism for **non-stationary** quality that drifts over time (model/data drift, prompt-sensitivity, eval-harness adequacy). If you're building an ML pipeline, a recommender, an LLM app, or another non-deterministic/agentic product, the skill will still help with stakeholders, non-goals, risk, and plan-of-work, but you will have to hand-craft the "what does good look like and how would we know" part for the non-deterministic core. Closing this gap is our top research item (see [Roadmap](#roadmap--future-work)).
-- **No-repo caveats.** Running without a repo is supported, but the pre-read can only surface what you tell it — it can't catch a contradiction between your stated intent and code that doesn't exist yet. Treat a no-repo strategy as a pre-implementation plan to revisit once there's something to scan.
-- **Validated mostly in simulation so far.** The skills have been stress-tested against many simulated users and reviewed adversarially, but real-world mileage is still limited. Some calls are explicitly provisional — see `OPEN-QUESTIONS.md`, which records design decisions made under uncertainty along with what would change our minds.
-- **`/tooling-strategy` is the newest skill** and has the least mileage in the pack. Its inputs and outputs are stable (it consumes the build items the two adequacy audits already produce), but expect rougher edges there than in `/quality-strategy`.
-- **Cadence is one-size.** Every run applies the same thorough cadence regardless of project size. That's deliberate (we'd rather not lower the bar by accident), but an expert on a small job may find the ceremony heavier than they'd like. A "lean/velocity" view of the same rigour is on the roadmap, not yet built.
-- **Internal decomposition is partial.** The skill's sealed-context dispatch + scratch-file auditability is in place for the analytical steps that have been decomposed (pre-read, dimension scout, dimension rating, oracle adequacy, contradiction checks, distillation); the remaining sub-steps are still run inline by the orchestrator. This is tracked, not hidden (`OPEN-QUESTIONS.md`).
-- **Single-release depth.** The deep analysis is for one release at a time; future releases get light notes and a re-run in revision mode when their context is real.
+## Where this comes from
 
-## Roadmap — future work
+This is the first open-source release from **Tollens** — an engineering management consultant that turns the tacit sense of *what "good" means for your project, and how good you actually are* into an explicit, living map that people and AI agents can both reason from. The pack is a working taster, standalone, no account needed — but it's **standalone skills, not an end-to-end workflow**: fitting the documents into your team's process is on you. The full Tollens product (in development) is the end-to-end version — agents supporting every step, feedback loops, evidence and reporting, release-confidence assessment.
 
-The full build order lives in **[ROADMAP.md](ROADMAP.md)**. The headline next piece: **shareable artefacts and quality dashboards** — a generative skill that turns `quality/strategy.md` into glanceable views (quality radar, risk heatmap, social card, interactive dashboard, or a freeform "describe the view you want"). After that, in rough order: first-class quality dimensions for AI/non-deterministic products (the top research item), `/tooling-strategy-review`, the lean-mode investigation, and per-stakeholder risk-map decomposition. Reasoning and falsification conditions for each are tracked in `OPEN-QUESTIONS.md`.
-
-## How long does it take?
-
-Plan for **one to two working days** of real thinking — not elapsed time, but cognitive time. A serious quality strategy is exhausting work. The interview surfaces decisions you've been avoiding, contradictions you didn't know you were carrying, and stakeholder questions you can't answer off the top of your head. You can't plough through it in one sitting and produce anything honest.
-
-Expect to spread it across **several sessions** of 60–90 minutes each, with `/clear` between, ideally across multiple days. The skill is designed for that — sub-steps are durable across interruptions, and natural break points are flagged. If yours takes a day or longer, that's a sign real thinking is happening. If it takes less than a couple of hours total, you've probably been answering too quickly.
+Put simply: **this pack is the map with the you-are-here arrow. Tollens is the satnav** — turn-by-turn for the whole journey, recalculating when you drift, with an ETA you can trust.
 
 ## What's where
 
-- `PHILOSOPHY.md` — the spine. Read this if you want to understand why the skills do what they do.
-- `OPEN-QUESTIONS.md` — design decisions made under uncertainty, places we're not sure we got it right, things to test in real-world running. The durable record of *why* the skills are shaped as they are.
-- `skills/` — the skills themselves. Each is a directory with a `SKILL.md` orchestrator and, where the work warrants it, a `steps/` directory with one file per phase.
+- **[docs/SKILLS.md](docs/SKILLS.md)** — per-skill reference, including planned skills.
+- **[ROADMAP.md](ROADMAP.md)** — what's next (headline: shareable artefacts and quality dashboards generated from your strategy).
+- **`PHILOSOPHY.md`** — the spine; why the skills do what they do.
+- **`OPEN-QUESTIONS.md`** — design decisions made under uncertainty, and what would change our minds.
+- **`skills/`** — the skills themselves.
 
 ## Feedback
 
-This is an alpha and the most useful thing you can do is tell us where it misfires. Open an issue: **[github.com/tollens-ai/quality-strategy-skills/issues](https://github.com/tollens-ai/quality-strategy-skills/issues)**.
-
-The most valuable reports are concrete: what you ran, what it produced, and what you expected instead. Especially wanted —
-
-- a dimension the interview missed for your project, or one it surfaced that didn't matter;
-- a place the facilitator inferred something it should have asked, or asked something it should have known;
-- anything in [Known limitations](#known-limitations) biting harder than described — particularly the AI / non-deterministic-product gap, which is our top research item.
+Tell us where it misfires: **[open an issue](https://github.com/tollens-ai/quality-strategy-skills/issues)**. The most valuable reports are concrete — what you ran, what it produced, what you expected instead. Especially wanted: dimensions the interview missed (or surfaced needlessly), places it inferred what it should have asked, and any [known limitation](#known-limitations) biting harder than described.
 
 ## Credits
 
-The quality framework is by **Edmund Pringle**, distilled into an open-source **[quality brain](https://github.com/tollens-ai/quality-assistant-prototype-03/tree/main/quality-brain)** — quality attributes, heuristics, and stakeholder models — that this pack draws on directly. His blog series at [epkconsulting.substack.com](https://epkconsulting.substack.com/) is the best narrative read on the subject. The framework draws on the context-driven testing tradition (Bach, Bolton, Weinberg).
-
-Skills implementation by **Yanqing Cheng**. Built with Claude Code.
+The quality framework is by **Edmund Pringle**, distilled into an open-source **[quality brain](https://github.com/tollens-ai/quality-assistant-prototype-03/tree/main/quality-brain)** that this pack draws on directly; his [blog series](https://epkconsulting.substack.com/) is the best narrative read on the subject. The framework draws on the context-driven testing tradition (Bach, Bolton, Weinberg). Skills implementation by **Yanqing Cheng**. Built with Claude Code.
 
 ## License
 
-Licensed under either of:
-
-- MIT License ([LICENSE-MIT](LICENSE-MIT))
-- Apache License, Version 2.0 ([LICENSE-APACHE](LICENSE-APACHE))
-
-at your option.
-
-Unless you explicitly state otherwise, any contribution intentionally submitted for inclusion in this work by you, as defined in the Apache-2.0 license, shall be dual licensed as above, without any additional terms or conditions.
+Licensed under either of [MIT](LICENSE-MIT) or [Apache-2.0](LICENSE-APACHE) at your option. Unless you explicitly state otherwise, any contribution intentionally submitted for inclusion in this work by you, as defined in the Apache-2.0 license, shall be dual licensed as above, without any additional terms or conditions.
