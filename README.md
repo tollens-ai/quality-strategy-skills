@@ -1,6 +1,6 @@
 # Quality Strategy Skills
 
-A set of Claude Code skills for producing and using a software *quality strategy* — a business-level document that says who matters for your project, what they value, where you're exposed, and what to do about it. Plus the engineering-level *test strategy* that operationalises it.
+A set of Claude Code skills for producing and using a software *quality strategy* — a business-level document that says who matters for your project, what they value, where you're exposed, and what to do about it. Plus the engineering-level *test strategy* that operationalises it, and the *tooling strategy* that plans the oracles and instruments you need to judge any of it.
 
 The thinking is grounded in [**Edmund Pringle's quality framework**](https://github.com/tollens-ai/quality-assistant-prototype-03/tree/main/quality-brain): quality is value to someone who matters; testing is investigation to find out what's actually true; risk is danger to quality; the job is to maximise quality improvement for the time invested.
 
@@ -10,7 +10,7 @@ The thinking is grounded in [**Edmund Pringle's quality framework**](https://git
 
 Most teams don't have a quality strategy. The teams that do mostly have a test plan misnamed. We think a real quality strategy is load-bearing infrastructure for software in the age of AI agents — when most code is being written by agents who don't know what quality means for *your* project, an explicit strategy is what stops them shipping confidently in the wrong direction.
 
-Writing a quality strategy is just the start. Delivering the right quality for your product over time is an ongoing process, and a much bigger one — involving testing, measurement, stakeholder conversations, and the cumulative judgment of everyone shipping the software. This skill pack covers the front end of that work: producing the strategy, operationalising it as a test strategy, and using it at decision points. It's intentionally minimal — markdown skills, no daemon, no database, no binary to install.
+Writing a quality strategy is just the start. Delivering the right quality for your product over time is an ongoing process, and a much bigger one — involving testing, measurement, stakeholder conversations, and the cumulative judgment of everyone shipping the software. This skill pack covers the front end of that work: producing the strategy, operationalising it as test and tooling strategies, and using it at decision points. It's intentionally minimal — markdown skills, no daemon, no database, no binary to install.
 
 ## Where this comes from
 
