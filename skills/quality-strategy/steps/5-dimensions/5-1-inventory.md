@@ -36,7 +36,7 @@ Use the `Agent` tool with `subagent_type: general-purpose`. The brief:
 >
 > Walk this reference list of quality -ilities. For each, decide whether it might matter for the **first release** of this project:
 >
-> - Functional correctness
+> - Functional correctness (and its sub-dimensions: feature-level correctness; **cross-feature interaction / flow completeness** — features that are right in isolation but wrong in combination, or journeys that fall in the gap between features; a signature gap of systems built feature-at-a-time by agents)
 > - Performance (and its sub-dimensions: scalability, resource consumption, elapsed time, UX responsiveness, jitter)
 > - Reliability, resilience, recoverability, availability
 > - Security, privacy
