@@ -68,7 +68,7 @@ This is deliberate: the context of a release shapes the strategy heavily, and pr
 
 ## How this skill is structured
 
-The work is divided into 7 numbered steps, each with one or more sub-steps — 21 sub-step files in total, plus the pre-read (sub-step 0) that runs before Step 1. Each sub-step lives in its own file under `steps/`. The full sequence:
+The work is divided into 7 numbered steps, each with one or more sub-steps — 21 sub-steps in total, including the pre-read (sub-step 0) that runs before Step 1. Each sub-step lives in its own file under `steps/`. The full sequence:
 
 | Sub-step | File | Produces |
 |---|---|---|
