@@ -109,6 +109,8 @@ Planned (not yet implemented):
 | `/feedback-synthesis` | Curate the notes the skills jot down about their own rough edges as you run (a `.skill-feedback.md` file at the project root) into a maintainer-friendly summary. |
 | `/pre-read` | Standalone project digest. |
 
+Sequencing for all of these: [ROADMAP.md](ROADMAP.md).
+
 ## Install
 
 This is a Claude Code plugin. Add the marketplace, then install:
@@ -159,12 +161,7 @@ This is an alpha. Be aware of these before you rely on it:
 
 ## Roadmap — future work
 
-In rough priority order. These are tracked in `OPEN-QUESTIONS.md` with the reasoning and falsification conditions for each.
-
-- **Quality dimensions for new-world (AI / non-deterministic / agentic) products** *(research, top priority)* — go back to the research stage and work out what quality dimensions exist for products whose quality is non-deterministic and drifts: metric-distribution "correctness", drift/time-awareness, eval-oracle adequacy, training/serving skew. Many users build exactly these products; the framework needs first-class dimensions for them, not a conventional-software workaround.
-- **Cadence / "lean-mode" investigation** — the open question is whether the 21 sub-steps surface dimensions that genuinely matter for every project or some are spurious for smaller ones. The answer decides whether "lean mode" means a lighter *view* of the same rigour, or nothing at all. We are probing this in validation runs before designing anything — we will not ship a mode that quietly lowers the bar.
-- **Per-stakeholder risk-map decomposition** — the dimension-rating step already runs per-stakeholder and surfaces cross-stakeholder divergence; the risk map (required/actual/gap, sub-steps 6.x) does not yet. Bringing the same per-stakeholder-then-merge treatment to the risk map is a definite to-do (it interacts with the cadence work, so it's sequenced after it).
-- **`/strategy-variants` field-hardening** — the one-pager / client-safe transformation shipped in this alpha; real client/team use will tell us whether the omit-never-lie discipline holds and whether a sharper "degrade to one move when funding-constrained" element is needed.
+The full build order lives in **[ROADMAP.md](ROADMAP.md)**. The headline next piece: **shareable artefacts and quality dashboards** — a generative skill that turns `quality/strategy.md` into glanceable views (quality radar, risk heatmap, social card, interactive dashboard, or a freeform "describe the view you want"). After that, in rough order: first-class quality dimensions for AI/non-deterministic products (the top research item), `/tooling-strategy-review`, the lean-mode investigation, and per-stakeholder risk-map decomposition. Reasoning and falsification conditions for each are tracked in `OPEN-QUESTIONS.md`.
 
 ## How long does it take?
 

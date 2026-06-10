@@ -1,6 +1,6 @@
 {
   "name": "quality-strategy",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Produce and use a software quality strategy — who matters, what they value, where you're exposed, and what to do about it — plus the test strategy that operationalises it. Grounded in Edmund Pringle's quality framework.",
   "author": { "name": "Yanqing Cheng" },
   "homepage": "https://github.com/tollens-ai/quality-strategy-skills",
