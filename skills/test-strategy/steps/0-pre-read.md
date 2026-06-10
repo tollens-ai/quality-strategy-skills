@@ -22,7 +22,7 @@ If you find yourself unable to make sense of the strategy without code grounding
 1. **`quality/strategy.md`** — focus on:
    - **Part 5 (Quality Dimensions)** — what dimensions matter, with H/M/None ratings.
    - **Part 6 (Risk Map)** — required vs actual levels, confidence on both, per dimension. This is the most important input to the whole skill.
-   - **Part 7 (Plan of Work)** — what actions the strategy already proposes. Some will be testing; some will be fixing; some stakeholder. The test strategy operationalises the testing actions and may surface new ones.
+   - **Part 7 (Plan of Work)** — what actions the strategy already proposes. Some will be testing; some will be fixing; some stakeholder. The test strategy operationalises the testing actions and may surface new ones. Part 7 may instead be a **recorded deferral** (the plan of work deliberately deferred to the follow-on skills — this skill is one of them); that's normal, not a defect. In that case there are no pre-classified testing items to list, and the learning needs derive from the risk map alone, which is the primary source anyway.
    - **Part 3 (Stakeholders)** — three-lens analysis, especially Dealbreaker entries. Tier-1 learning needs often come from here.
    - **Part 4 (Non-goals)** — what we're explicitly *not* doing, so the test strategy doesn't accidentally test it.
 
@@ -59,7 +59,7 @@ You're hunting for the off-paper context: prior decisions about testing that sha
 ## This sub-step is DONE when
 
 - [ ] `quality/test-pre-read.md` exists with two sections: **Risk map summary** (one paragraph per H/M dimension, naming required/actual/confidence/gap) and **Test infrastructure inventory** (filesystem pass, no source).
-- [ ] Plan of work items are listed with classification noted (testing / fixing / stakeholder), so sub-step 3 knows which to operationalise.
+- [ ] Plan of work items are listed with classification noted (testing / fixing / stakeholder), so sub-step 3 knows which to operationalise — or, if Part 7 is a recorded deferral, the digest says so and the section is explicitly empty.
 - [ ] Non-goals from Part 4 are listed verbatim — they bound the test strategy and feed sub-step 5.
 - [ ] The user has been asked about off-paper context (deleted suites, abandoned approaches, "we tried that and it didn't work") and any answers are captured.
 - [ ] No source code has been read.

@@ -98,8 +98,8 @@ Use the `Agent` tool with three calls in a single message.
 > 8. **Confidence vocabulary correct.** All confidences are H/M/L (or "—" for Unknown actuals).
 > 9. **Unknowns have resolution notes.** Every Unknown actual in Part 6 has a "to resolve" note (test / ask / review / instrument / build).
 > 10. **Distribution sanity.** Ratings use the H/M/None model (no L). Flag if more than 50% of dimensions are H, or if there are zero None entries where some are expected. (Aligned with sub-step 5.5's threshold.)
-> 11. **Actions classified.** Every Part 7 action is classified as testing / stakeholder / fixing.
-> 12. **Plan has phases.** Plan of work in Part 7 has distinct phases; Phase 0 (blockers) is either populated or explicitly empty with reasoning.
+> 11. **Actions classified.** Every Part 7 action is classified as testing / stakeholder / fixing. If Part 7 is a **recorded deferral** — a short section explicitly deferring the plan of work to the follow-on skills and naming where each slice will live (`/test-strategy`, `/tooling-strategy`) — checks 11 and 12 PASS vacuously. A Part 7 that is missing, empty, or vague *without* that explicit deferral note is a FAIL as before.
+> 12. **Plan has phases.** Plan of work in Part 7 has distinct phases; Phase 0 (blockers) is either populated or explicitly empty with reasoning. (Recorded deferral: see check 11.)
 > 13. **Pre-read sources cited.** Sub-step output sections cite pre-read sources where the agent did pre-read work.
 > 14. **Stakeholder coverage.** Every Part 3 stakeholder has at least one H or M dimension whose rationale connects to their bars.
 > 15. **Sub-group heuristic applied.** Each Part 3 stakeholder either has sub-groups, or a "considered, no meaningful split" note.
@@ -141,7 +141,7 @@ Use the `Agent` tool with three calls in a single message.
 >
 > 1. **Org-wide clarity.** Could a new engineer or agent read this and quickly understand what's going on, what matters, what success looks like? Or is it dense, jargon-heavy, missing the through-line?
 > 2. **Instrumentation from the start.** Are quality proxies chosen, and is there evidence they'll be measurable from day one rather than retrofitted? Or has measurement been deferred?
-> 3. **Legible work plan.** Is the plan of work ordered by *why*, not just *what*? Can you tell from reading it why each item is sequenced where it is? Are dependencies visible?
+> 3. **Legible work plan.** Is the plan of work ordered by *why*, not just *what*? Can you tell from reading it why each item is sequenced where it is? Are dependencies visible? (If Part 7 is a recorded deferral to the follow-on skills, judge this indicator on the deferral instead: does it name where each slice of the work will live, and do the risk map's hottest items make the first investigation obvious? Don't dock the strategy for the absence of a sketch it deliberately deferred.)
 > 4. **Precision over comfort.** Is the strategy specific enough to be wrong-able? Vague claims that nobody could disagree with are useless. A sharp claim that turns out to be wrong is valuable. Where is the strategy hiding behind generality?
 > 5. **Decision support at the edges.** Could an engineer or agent encountering a new finding (a bug, a feature request, a complaint, an unexpected result) quickly map it to this strategy and triage it without escalation? Or would the strategy fail the "is this in scope?" question?
 > 6. **Quick re-orientation.** Could someone lost in the weeds re-read this and rapidly re-anchor to what matters and for whom? Or does it require reading end-to-end every time?

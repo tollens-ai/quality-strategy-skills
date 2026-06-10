@@ -35,7 +35,7 @@ A quality strategy answers four questions, in order:
 1. **What does good look like?** — stakeholder bars, dimensions, required levels (Steps 1–6.1).
 2. **How do we know if what we have is good?** — the oracles and instruments by which we'd judge the actual state. This is its own question, not a free rider on Q3.
 3. **Is what we have good?** — the actual-state assessment, using the oracles from Q2 (Steps 6.2–6.3).
-4. **How do we make it good?** — the plan of work to close gaps (Step 7).
+4. **How do we make it good?** — the plan of work to close gaps (Step 7 — a sketch, and optional; see "The plan of work is a sketch" below).
 
 **Q2 is explicit on purpose.** The reliable failure mode is to collapse Q2 into Q3 — to assert an actual level by deferring to whatever signal happens to exist, never asking whether that signal can actually judge the dimension. So during the actual-state pass (sub-step 6.2) this skill invokes **`/oracle-adequacy`**, which interrogates, per dimension, whether the oracle behind its claimed actual is adequate — and turns "no oracle, so it's just Unknown" into a named oracle-build item that seeds the plan of work.
 
@@ -76,6 +76,20 @@ Part 7 (Step 7) enumerates, classifies, and sequences the work at *strategy* lev
 
 Stakeholder work and fixing work have no follow-on skill yet; they stay at sketch level in Part 7 like everything else. Keep Part 7 entries to one or two lines each, resist expanding any of them into a mini-plan in place, and point at the relevant follow-on instead — a Part 7 that duplicates `test-strategy.md`'s depth goes stale the moment the follow-on runs.
 
+**Step 7 is optional — the whole sketch can be deferred.** At the Step 6 boundary, once the 6.3 substantive checkpoint has confirmed, offer the user the choice: walk Step 7 now, or skip it and defer the plan of work wholesale to the follow-on skills. Skipping is the right call when the team will run `/test-strategy` and `/tooling-strategy` immediately — a sketch written minutes before its own elaboration adds nothing. The skip is **recorded, never silent**: append a short Part 7 deferral note —
+
+```markdown
+## Part 7: Plan of Work
+
+Deliberately deferred — elaborated by the follow-on skills rather than sketched here:
+testing work → `/test-strategy` (`quality/test-strategy.md`); oracle/instrument build
+items → `/tooling-strategy` (`quality/tooling-strategy.md`). <If a slice of the work has
+no follow-on planned — stakeholder work, fixing work — say in one line what happens to it.>
+First investigation: the risk map's hottest items (Part 6).
+```
+
+If any "aware, not investing this release" decisions surfaced during the risk-map discussion (the conscious deferrals sub-step 7.1 would normally record), capture them in the deferral note — that record must not be lost to the skip. Then run the same closing moves sub-step 7.3 prescribes, unchanged: the boundary `/contradiction-check` over the whole doc, `/operational-distillation`, and `/quality-strategy-review` (see "Final step: distill, then review"). The review treats a recorded deferral as satisfying its plan-of-work checks; a Part 7 that is simply missing or empty, with no deferral note, remains a failure.
+
 ## How this skill is structured
 
 The work is divided into 7 numbered steps, each with one or more sub-steps — 21 sub-steps in total, including the pre-read (sub-step 0) that runs before Step 1. Each sub-step lives in its own file under `steps/`. The full sequence:
@@ -105,6 +119,8 @@ The work is divided into 7 numbered steps, each with one or more sub-steps — 2
 | 7.2 Classify | `steps/7-plan-of-work/7-2-classify.md` | Each action as testing / stakeholder / fixing |
 | 7.3 Sequence | `steps/7-plan-of-work/7-3-sequence.md` | Phasing and dependencies |
 | 7.3 — Operational distillation | invoke `/operational-distillation` (separate skill) | TL;DR + triage rubric placed at the top of the strategy |
+
+Sub-steps 7.1–7.3 are **optional** — the user may defer the plan of work wholesale to the follow-on skills via a recorded deferral note (see "The plan of work is a sketch"); the 7.3 closing moves (contradiction check, distillation, review) run either way.
 
 ## Execution rules — non-negotiable
 
@@ -261,7 +277,7 @@ If `quality/strategy.md` already exists at full length (i.e. all sub-steps were 
 
 ## Final step: distill, then review
 
-After sub-step 7.3 is complete and the content is confirmed, two closing moves:
+After sub-step 7.3 is complete and the content is confirmed — or, if the user chose to skip Step 7, once the deferral note is recorded and the boundary `/contradiction-check` has run over the whole doc — two closing moves:
 
 1. **Distill.** Invoke `/operational-distillation` on the produced doc. It reads the whole strategy and inserts an Operational TL;DR (6–10 lines) plus a one-page triage rubric at the top, so a returning reader re-orients in seconds. The distillation is a *view* of the body, not a second source of truth — if they disagree, the body wins. (Sub-step 7.3 prompts this.)
 

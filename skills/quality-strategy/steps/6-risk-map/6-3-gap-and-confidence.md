@@ -94,4 +94,6 @@ Append to `quality/strategy.md` under Part 6 (the Part 6 header and Confidence v
 **Open questions from this sub-step:** <bullet list, or "none">
 ```
 
-Once written, summarise back in 5–7 lines highlighting the hottest items, then **run the step-boundary substantive checkpoint** (see SKILL.md): summarise the **whole step's output**, invite vague unease about this step, and invite cross-step rethinks of earlier sections in light of this step. Wait for explicit, considered confirmation. Then ask: *"Ready to move on to Step 7 (Plan of Work)?"*
+Once written, summarise back in 5–7 lines highlighting the hottest items, then **run the step-boundary substantive checkpoint** (see SKILL.md): summarise the **whole step's output**, invite vague unease about this step, and invite cross-step rethinks of earlier sections in light of this step. Wait for explicit, considered confirmation.
+
+Then offer the Step 7 choice — it is optional (see SKILL.md → "The plan of work is a sketch"): *"Step 7 sketches the plan of work — what to do about these gaps, classified and sequenced, at one or two lines per action. It's optional: if you're going straight into `/test-strategy` and `/tooling-strategy`, we can record the plan as deferred to those instead and close the strategy out now. Sketch it, or defer?"* If the user defers, follow the deferral path in SKILL.md (write the Part 7 deferral note, then the closing moves). If they sketch, proceed to sub-step 7.1.

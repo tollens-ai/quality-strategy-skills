@@ -56,7 +56,7 @@ A variant is *for someone*. Pin down who (an engineer who'll build against it? a
 - **What "good" means, sharply** — the dimensions rated H and the Dealbreakers that bear on this reader (Parts 3, 5).
 - **What's deliberately out** — the non-goals most likely to be mistaken for gaps (Part 4) — especially the ones this reader might otherwise expect.
 - **Where the real risk is** — the hottest risk-map rows that this reader needs to know about (Part 6), at the candor level appropriate to them (see step 3 for the client case).
-- **What happens next** — the first moves from the plan of work that involve or affect this reader (Part 7).
+- **What happens next** — the first moves from the plan of work that involve or affect this reader (Part 7; if Part 7 is a recorded deferral to the follow-on skills, use the risk map's hottest items — and the follow-on strategy docs, where they exist — instead).
 
 ### 2. Distributable one-pager, if requested
 

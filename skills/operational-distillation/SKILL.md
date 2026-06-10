@@ -44,7 +44,7 @@ From the full doc, pull only what a returning reader most needs:
 - **What & for whom** — purpose (Part 1) and the one or two stakeholders who matter most (Part 3).
 - **What good looks like, sharply** — the dimensions rated H and the Dealbreakers (Parts 3, 5).
 - **Where we actually are** — the hottest risk-map rows: largest gaps in highest-impact dimensions, and the most consequential Unknowns (Part 6).
-- **First moves** — the plan's earliest / blocking actions (Part 7, Phase 0–1).
+- **First moves** — the plan's earliest / blocking actions (Part 7, Phase 0–1). If Part 7 is a recorded deferral to the follow-on skills, point first moves at the risk map's hottest items and the named follow-ons (`/test-strategy`, `/tooling-strategy`) instead.
 - **What's deliberately out** — the one or two non-goals most likely to be mistaken for gaps (Part 4).
 
 **Test-strategy variant.** When the target is `quality/test-strategy.md`, the doc has a different shape (purpose / principles / impact-tiered learning needs / allocation / closing), so pull instead:

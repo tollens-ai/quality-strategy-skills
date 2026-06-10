@@ -10,7 +10,7 @@ This is the longest sub-step. It is also the one where /test-strategy adds the m
 
 - The risk map summary in `quality/test-pre-read.md`.
 - The principles in `quality/test-strategy.md`. Principles 2 (highest-impact-first) and 3 (cheapest-resolution-first-within-tier) drive the tiering and ordering.
-- The plan-of-work testing items from the strategy's Part 7.
+- The plan-of-work testing items from the strategy's Part 7 (when Part 7 was sketched; if it's a recorded deferral, this input is simply empty — the risk map carries the load).
 
 ## What to cover
 
