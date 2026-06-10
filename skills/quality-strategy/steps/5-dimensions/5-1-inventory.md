@@ -16,7 +16,7 @@ Read all of Parts 1–4 from `quality/strategy.md`. The release purpose (Part 2)
 
 Generate a candidate dimension list from what's already in the strategy doc and pre-read:
 
-- For each stakeholder dealbreaker and good-enough in Part 3, ask: *"what dimension does this concern map to?"* Map to standard -ility names where one fits; use domain-specific names where they're clearer.
+- For each stakeholder dealbreaker and good-enough in Part 3, ask: *"what dimension does this concern map to?"* Map to standard -ility names (the conventional names for non-functional quality attributes — reliability, usability, maintainability, observability, and the like) where one fits; use domain-specific names where they're clearer.
 - For each design observation in the pre-read's design section, take the implied dimensions surfaced by subagent C.
 - For the release purpose in Part 2, ask: *"what does this purpose require?"*
 
@@ -106,7 +106,7 @@ What you must not do:
 - [ ] The two lists have been consolidated, with subagent-only candidates explicitly resolved (added or dropped) by the user.
 - [ ] The raw inventory is captured with a one-line reason for each dimension.
 - [ ] Any deferred items are recorded as `OPEN QUESTION:`.
-- [ ] Pre-read sources are cited in the section's evidence field, naming actual files referenced (not blank, not placeholder).
+- [ ] Pre-read sources are cited in the section's evidence field — naming actual files referenced, or, for an interview-derived / no-repo pre-read, citing the interview honestly (never blank, never a placeholder).
 - [ ] The user has been given a 2–4 line wrap-up, asked if any quick concerns, and confirmed ready to continue. (Substantive checkpoint runs at step boundaries — see SKILL.md.)
 
 If any check fails, return to the questioning. Do not move to sub-step 5.2 (Unpack pass).

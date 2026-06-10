@@ -282,7 +282,7 @@ These are calls made while designing the pack, recorded here so the calls — an
 
 **What we did.** /test-strategy-review uses two subagents instead of /quality-strategy-review's three. One subagent runs the forward simulation; the other runs the mechanical oracle. Cross-cutting consistency (strategy ↔ test-strategy alignment) is folded into the simulation pass — checking whether execution moves the strategy *includes* checking that the test strategy and strategy don't contradict each other.
 
-**Why.** /test-strategy is much shorter than /quality-strategy (~900 lines vs ~2800). The expansion-and-collapse pattern still applies, but three subagents is overkill for the smaller surface area. Two distinct lenses (simulation vs oracle) are genuinely different; folding consistency into simulation works because consistency is a precondition for execution producing the right outcome.
+**Why.** /test-strategy is much shorter than /quality-strategy (roughly a third the size). The expansion-and-collapse pattern still applies, but three subagents is overkill for the smaller surface area. Two distinct lenses (simulation vs oracle) are genuinely different; folding consistency into simulation works because consistency is a precondition for execution producing the right outcome.
 
 **What would change our mind.** If consistency findings are systematically missed by the simulation subagent because it's busy walking the execution. If two subagents produce findings that overlap heavily — suggests the lenses aren't distinct enough. If three would have been the right call all along (e.g. simulation gets too long and benefits from a second perspective).
 
@@ -322,9 +322,9 @@ These are the design decisions worked out while designing the pack. They're reco
 
 ## Sentinel markers at sub-step output boundaries
 
-**What we did.** Every sub-step appends an HTML-comment sentinel at the end of its output (e.g. `<!-- end-of-sub-step-5.4 -->`); the strategy ends with `<!-- end-of-strategy -->`.
+**What we decided (not yet shipped).** Each sub-step should append an HTML-comment sentinel at the end of its output (e.g. `<!-- end-of-sub-step-5.4 -->`), with the strategy ending in `<!-- end-of-strategy -->`. This is a planned robustness improvement; the producer step files do not emit the sentinels yet, so the contradiction-check and review skills currently navigate by `## Part N:` headings (see the later "navigates by Part headings until sentinels land" entry). The decision is recorded here so the convention is fixed for when it lands.
 
-**Why.** Two jobs: (a) Edit-tool anchor uniqueness — sub-steps append to a growing doc, and unique end-markers give a reliable insertion point instead of fragile heading matches; (b) mechanical navigability — review skills and the contradiction-check can locate Part boundaries deterministically.
+**Why.** Two jobs: (a) Edit-tool anchor uniqueness — sub-steps append to a growing doc, and unique end-markers give a reliable insertion point instead of fragile heading matches; (b) mechanical navigability — review skills and the contradiction-check could locate Part boundaries deterministically rather than by heading match.
 
 **What would change our mind.** If some renderers surface the comments to users. If a simpler convention (stable, unique headings) proves sufficient for the review skills, making the markers redundant.
 

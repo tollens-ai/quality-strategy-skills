@@ -60,7 +60,7 @@ What you must not do:
 - [ ] The longer-term ambition is captured (or explicitly noted as identical to the immediate goal, with the user having confirmed they considered the question).
 - [ ] The strategy's job is captured as a one-paragraph `## Strategy job` statement at the top of the doc, naming the job category, what evidence the strategy must produce, and what's deliberately out of scope for this job.
 - [ ] Any items where the user said "come back to that" are recorded as `OPEN QUESTION:` lines in the strategy doc.
-- [ ] Pre-read sources are cited in the section's evidence field, naming actual files referenced (not blank, not placeholder).
+- [ ] Pre-read sources are cited in the section's evidence field — naming actual files referenced, or, for an interview-derived / no-repo pre-read, citing the interview honestly (never blank, never a placeholder).
 - [ ] The user has been given a 2–4 line wrap-up, asked if any quick concerns, and confirmed ready to continue. (Substantive checkpoint runs at step boundaries — see SKILL.md.)
 
 If any check fails, return to the questioning. Do not move to sub-step 1.2.

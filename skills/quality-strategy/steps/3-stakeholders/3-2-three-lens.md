@@ -54,7 +54,8 @@ What you must not do:
 - [ ] Internal stakeholders are not skipped.
 - [ ] Each lens is concrete enough to be checkable later — not abstract.
 - [ ] Any deferred items are recorded as `OPEN QUESTION:` lines.
-- [ ] Pre-read sources are cited in the section's evidence field, naming actual files referenced (not blank, not placeholder).
+- [ ] Pre-read sources are cited in the section's evidence field — naming actual files referenced, or, for an interview-derived / no-repo pre-read, citing the interview honestly (never blank, never a placeholder).
+- [ ] The step-boundary `/contradiction-check` was dispatched on the doc so far (it is the first move of the checkpoint, per SKILL.md) and its scratch file exists at `quality/.scratch/3.2-contradiction-check.md`.
 - [ ] The user has run the **step-boundary substantive checkpoint** (see SKILL.md), evaluating the whole step's output (not just this final sub-step), including any rethinks of earlier steps. Explicit, considered confirmation — not silence, not a non-committal response.
 
 If any check fails, return to the questioning. Do not move to Step 4.

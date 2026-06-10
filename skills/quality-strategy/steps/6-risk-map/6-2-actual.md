@@ -76,7 +76,7 @@ What you must not do:
 - [ ] `/oracle-adequacy` has been invoked on the proposed actuals; each dimension has a verdict (Trustworthy / Over-confident / Gated), Over-confident actuals have had their confidence downgraded or an oracle-build item named, and Gated dimensions carry their oracle-build item. Its scratch file exists at `quality/.scratch/6.2-oracle-adequacy.md`.
 - [ ] Confidence ratings use only H/M/L — no percentages.
 - [ ] Any deferred items are recorded as `OPEN QUESTION:`.
-- [ ] Pre-read sources are cited in the section's evidence field, naming actual files referenced (not blank, not placeholder).
+- [ ] Pre-read sources are cited in the section's evidence field — naming actual files referenced, or, for an interview-derived / no-repo pre-read, citing the interview honestly (never blank, never a placeholder).
 - [ ] The user has been given a 2–4 line wrap-up, asked if any quick concerns, and confirmed ready to continue. (Substantive checkpoint runs at step boundaries — see SKILL.md.)
 
 If any check fails, return to the questioning. Do not move to sub-step 6.3.

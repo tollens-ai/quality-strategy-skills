@@ -67,7 +67,7 @@ What you must not do:
 - [ ] Every composite that was unpacked has been replaced with its sub-dimensions in the inventory, each with a one-line reason and (where possible) a stakeholder-bar anchor.
 - [ ] Every composite that was *not* unpacked has been actively confirmed as atomic for this project, with reasoning recorded.
 - [ ] Any deferred items are recorded as `OPEN QUESTION:`.
-- [ ] Pre-read sources are cited in the section's evidence field, naming actual files referenced (not blank, not placeholder).
+- [ ] Pre-read sources are cited in the section's evidence field — naming actual files referenced, or, for an interview-derived / no-repo pre-read, citing the interview honestly (never blank, never a placeholder).
 - [ ] The user has been given a 2–4 line wrap-up, asked if any quick concerns, and confirmed ready to continue. (Substantive checkpoint runs at step boundaries — see SKILL.md.)
 
 If any check fails, return to the questioning. Do not move to sub-step 5.3 (Old/new-world pass).
