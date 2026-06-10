@@ -33,3 +33,4 @@ In rough priority order:
 
 - Add a daemon, a database, or a binary. The pack stays markdown skills.
 - Ship a "fast mode" that skips the thinking. Where we offer lighter ceremony it will be a lighter *view* of the same rigour, never a lower bar.
+- Grow this pack into the full end-to-end workflow. The pack stays standalone skills that you fit into your own process. The end-to-end version — agents supporting every step of quality management, with feedback loops, evidence and reporting, and release-confidence assessment — is what the Tollens product itself is for.

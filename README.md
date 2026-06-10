@@ -16,7 +16,9 @@ Writing a quality strategy is just the start. Delivering the right quality for y
 
 Quality Strategy Skills is the first open-source release from **Tollens**. Tollens is an engineering management consultant for building genuinely good software and making good engineering decisions — it helps you externalise the usually-tacit sense of *what "good" means for your project, and how good you actually are*, into an explicit, living map that both people and AI agents can reason from.
 
-Producing a quality strategy — who matters, what they value, where you're exposed, and what to do about it — is the front of that work. This pack is the part of Tollens you can pick up and use today, standalone, with no account and no dependency on the rest. The wider Tollens product is in development.
+Producing a quality strategy — who matters, what they value, where you're exposed, and what to do about it — is the front of that work. This pack is the part of Tollens you can pick up and use today, standalone, with no account and no dependency on the rest — a working taster, not a crippled trial.
+
+Know what you're getting, though: these are **standalone skills, not an end-to-end workflow**. They produce and audit the strategy documents; fitting those into your team's day-to-day process is on you. The full Tollens product — in development — is the end-to-end version: agents supporting every step of the quality-management process, with feedback loops, evidence and reporting, and an overall release-confidence assessment, rather than a set of skills you wire up yourself.
 
 ## Who it's for
 
