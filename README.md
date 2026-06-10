@@ -4,7 +4,7 @@ A set of Claude Code skills for producing and using a software *quality strategy
 
 The thinking is grounded in [**Edmund Pringle's quality framework**](https://github.com/tollens-ai/quality-assistant-prototype-03/tree/main/quality-brain): quality is value to someone who matters; testing is investigation to find out what's actually true; risk is danger to quality; the job is to maximise quality improvement for the time invested.
 
-> **Status: alpha.** This pack is being shared with a first wave of testers. The skills are working and have been exercised across a wide range of simulated users, but they have had limited real-world mileage. Expect rough edges, tell us where it misfires, and read [Known limitations](#known-limitations) before you start — there are gaps we already know about and are not hiding.
+> **Status: alpha.** This pack is being shared with a first wave of testers. The skills are working and have been exercised across a wide range of simulated users, but they have had limited real-world mileage. Expect rough edges, tell us where it misfires (see [Feedback](#feedback)), and read [Known limitations](#known-limitations) before you start — there are gaps we already know about and are not hiding.
 
 ## Why this exists
 
@@ -115,6 +115,16 @@ Expect to spread it across **several sessions** of 60–90 minutes each, with `/
 - `PHILOSOPHY.md` — the spine. Read this if you want to understand why the skills do what they do.
 - `OPEN-QUESTIONS.md` — design decisions made under uncertainty, places we're not sure we got it right, things to test in real-world running. The durable record of *why* the skills are shaped as they are.
 - `skills/` — the skills themselves. Each is a directory with a `SKILL.md` orchestrator and, where the work warrants it, a `steps/` directory with one file per phase.
+
+## Feedback
+
+This is an alpha and the most useful thing you can do is tell us where it misfires. Open an issue: **[github.com/tollens-ai/quality-strategy-skills/issues](https://github.com/tollens-ai/quality-strategy-skills/issues)**.
+
+The most valuable reports are concrete: what you ran, what it produced, and what you expected instead. Especially wanted —
+
+- a dimension the interview missed for your project, or one it surfaced that didn't matter;
+- a place the facilitator inferred something it should have asked, or asked something it should have known;
+- anything in [Known limitations](#known-limitations) biting harder than described — particularly the AI / non-deterministic-product gap, which is our top research item.
 
 ## Credits
 
