@@ -317,4 +317,6 @@ If the strategy passes (no unresolved blockers, flags reviewed), confirm:
 
 > *"Test strategy review passed. The strategy is ready to execute. Start with Tier 1 — the cheapest unknown is [reference]. After Tier 1 completes, run `/test-strategy` revision mode (c) to update allocation and risk-map references."*
 
+If the strategy's blocked-on-tooling section is non-empty, also point at **`/tooling-strategy`** (run it now if it hasn't run yet; re-run it if it predates this test strategy, so the build plan absorbs the sharpened demand) — execution can start on the answerable tiers while the builds land.
+
 If the review was invoked from `/test-strategy` itself, return control with a status indicating pass or remaining work.

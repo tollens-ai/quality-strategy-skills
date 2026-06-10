@@ -328,4 +328,11 @@ If the strategy passes (no unresolved blockers, flags reviewed), confirm to the 
 
 > *"Strategy review passed. The strategy is feature-complete and ready to use. Decision support, plan execution, and updates can now happen against it."*
 
+Then **recommend the next step — and let the risk map pick it.** The pack's follow-on order is a branch, not a fixed sequence (Q2 before Q3: you can only investigate what you can judge):
+
+- Risk map **dominated by Unknowns, Gated dimensions, and oracle-build items** → recommend **`/tooling-strategy`** first: plan the builds that make the project knowable, then `/test-strategy` once the means of knowing exist.
+- Risk map **mostly answerable** → recommend **`/test-strategy`** first; its learning needs sharpen the tooling demand, and `/tooling-strategy` then plans the combined build.
+
+Say which branch this strategy is on and why (cite the risk map you just reviewed — you have it in hand). Never present *quality strategy → test strategy* as "the designed sequence"; the designed sequence is this branch.
+
 If the strategy was reviewed in the context of running `/quality-strategy` itself, return control to the orchestrator with a status indicating pass or remaining work.
