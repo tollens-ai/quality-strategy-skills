@@ -32,6 +32,8 @@ File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **
 - **From `/quality-strategy`** — invoked during the risk-map actual-state pass (sub-step 6.2), after required levels (6.1) and before gap-and-confidence (6.3). Input: the H/M dimensions with their proposed actual levels (or Unknowns) and the evidence each is based on. Output: an oracle-adequacy assessment plus a list of **oracle-build items** that seed Step 7's plan of work and that 6.3 records against the affected dimensions.
 - **Standalone** — to audit the oracles behind an existing strategy's actuals. Input: the dimensions and claimed actuals from `$PROJECT_DIR/quality/strategy.md` (Parts 5–6), plus what the team can observe about the codebase.
 
+This skill judges adequacy and names the gaps; it does not plan the build. **`/tooling-strategy`** consumes its oracle-build items (together with `/tooling-adequacy`'s, from the test side) and turns them into a prioritised build plan.
+
 ## What you need
 
 - **Grounding.** Read `$PLUGIN_ROOT/PHILOSOPHY.md`. The disciplines that recur — make confidence visible; push back on vagueness; record assumptions; understand the why — are load-bearing here.

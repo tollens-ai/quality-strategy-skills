@@ -1,0 +1,144 @@
+---
+name: tooling-strategy
+description: Produce the strategy for the second quality question — "how do we know if what we have is good?" Gathers every place the quality and test strategies could NOT answer that (Unknown, Gated, and Over-confident actuals; learning needs blocked on instruments or oracles) and turns them into a prioritised oracle/instrument build plan at quality/tooling-strategy.md. Use after /quality-strategy (ideally also /test-strategy), when Unknowns are piling up in the risk map, or when deciding what measurement or test infrastructure to build next.
+---
+
+# Tooling Strategy
+
+This skill produces the third strategy in the pack — the strategy for **Q2, "how do we know if what we have is good?"**
+
+The other two strategies *depend* on Q2 being answerable but don't plan how to make it so. `/quality-strategy` judges the actual state (Q3) using whatever oracles exist, and honestly records where they don't — as Unknowns, Gated dimensions, and oracle-build items. `/test-strategy` plans the investigation, and honestly records which learning needs are blocked on missing instruments or oracles. Both strategies *name* the gaps in the means of knowing; neither plans the build. That's this skill's job: collect every "we can't actually answer that yet" from both strategies and turn the pile into one prioritised, sequenced **oracle and instrument build plan**.
+
+Building oracles is routinely the highest-value quality work an early-stage project can do — a weak oracle gives false confidence, and a missing one leaves the most important dimensions permanently Unknown — yet it rarely gets planned, because each gap surfaces in a different place and none of them looks urgent alone. Gathered in one place, weighed by what each build unblocks, the priorities are usually obvious.
+
+## What this skill is not
+
+It is **not an audit, and it does not re-audit.** The per-item adequacy verdicts come from the two Q2 audit skills, which run inside the parent strategies: `/oracle-adequacy` (inside `/quality-strategy`, on the risk map's actual-state claims) and `/tooling-adequacy` (inside `/test-strategy`, on the learning needs). This skill *consumes* their outputs. If the inputs lack those verdicts, send the user back to the audit (it runs standalone) rather than improvising adequacy judgments here.
+
+## Resolving file paths — do this first
+
+This skill is part of the `quality-strategy` plugin. Before anything else, resolve two absolute paths and use them throughout:
+
+- **PLUGIN_ROOT** — the plugin's install directory: `${CLAUDE_PLUGIN_ROOT}` (Claude Code expands this to an absolute path when it loads this file; read it off and note it down). The grounding files this skill reads — `PHILOSOPHY.md`, `skills/tooling-adequacy/SKILL.md` — live under it.
+- **PROJECT_DIR** — the absolute path of the project whose tooling you're planning (normally the current working directory; confirm with the user if it's ambiguous). The strategy docs live under `$PROJECT_DIR/quality/`.
+
+File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **Substitute the resolved absolute paths before you act on them.** The Read tool does no variable expansion and resolves relative paths against the current working directory, not this skill's directory — so an unsubstituted placeholder or a bare relative path will fail.
+
+## When to use
+
+- **After `/quality-strategy`** — the minimum input is a `quality/strategy.md` whose risk map (Part 6) carries oracle verdicts and oracle-build items. Ideally `/test-strategy` has also run, so the test side's blocked learning needs are on the table too.
+- **When Unknowns are piling up** — a risk map dominated by Unknown/Gated actuals on dimensions that matter is exactly the condition this skill exists to convert into a build plan.
+- **When deciding what test or measurement infrastructure to build next** — this skill's output *is* that decision, made with the full demand visible instead of ad hoc.
+- **Re-run** when build items land (they change what's answerable — see Update protocol in the output) or when either parent strategy is revised.
+
+## What you need
+
+- **Grounding.** Read `$PLUGIN_ROOT/PHILOSOPHY.md`. The disciplines that recur — make confidence visible; record assumptions; push back on vagueness — are load-bearing here. Read step 3 of `$PLUGIN_ROOT/skills/tooling-adequacy/SKILL.md` for the canonical oracle taxonomy (Specified / Property-or-metamorphic / Differential-or-simulated / Golden-master / Human-or-agent-judge) and the "kill the old-world reflex" move; every build item in the plan names its kind from that taxonomy.
+- **The quality side.** From `$PROJECT_DIR/quality/strategy.md`: Part 6 (the risk map — oracle verdicts, Unknowns with their to-resolve notes, oracle-build items, confidence ratings) and Part 5 (the H/M impact ratings, which weight the value of each build). Part 7 for any build-shaped actions already enumerated.
+- **The test side, if it exists.** From `$PROJECT_DIR/quality/test-strategy.md`: the "Blocked on tooling & oracles" section (blocked learning needs with their build items) and the learning-needs tiers (which weight value on this side). If `/test-strategy` hasn't run, proceed on the quality side alone and say so in the output — don't guess at learning needs that haven't been derived.
+- **The user.** The value calls below are theirs to confirm, and they usually know about means-of-knowing pains neither strategy captured (the flaky suite nobody trusts, the metric nobody believes). Ask.
+
+If `quality/strategy.md` doesn't exist, stop: this skill plans the build for gaps the other strategies have *found*, and has nothing to consume yet. Point the user at `/quality-strategy` first (or at `/oracle-adequacy` standalone, if they have an existing strategy doc from elsewhere that lacks oracle verdicts).
+
+## The work, in order
+
+### 1. Gather the demand
+
+Collect every place the project currently *can't* answer "how good is it?":
+
+- From the risk map: every **Gated** dimension (Unknown, blocked on a missing oracle) and every **Over-confident** dimension (a claimed actual whose oracle can't support it) with its oracle-build item; every **Unknown** with its to-resolve note.
+- From the test strategy (if present): every **blocked learning need** with its build item.
+- From the user: *"Anything else you already know you can't measure or judge, that neither doc captured?"* Record these honestly as user-reported, not strategy-derived.
+
+**Deduplicate across the two sides.** The same underlying build often appears twice — the risk map can't establish an actual for the same reason a learning need is blocked. Merge into one item that names both beneficiaries; the merged demand is precisely what makes it valuable.
+
+### 2. Consolidate into build items
+
+For each item, make it concrete enough to build:
+
+- **What it is** — instrument (exercise/observe) or oracle (judge), and for oracles, the kind from the taxonomy. *"Property set: intervals never shrink on a correct recall"*, not *"better testing for the scheduler."*
+- **What it unblocks** — the dimension(s) and learning need(s), by name. An item that unblocks nothing doesn't belong in the plan.
+- **Who can build it** — agent-buildable now (most reference oracles, property sets, harnesses are), needs human judgment or access (rubrics where a person is the oracle, production telemetry, real-user observation), or a pairing of the two.
+
+### 3. Weigh value and cost
+
+Propose a value/cost reading per item and confirm it with the user:
+
+- **Value** comes from what it unblocks: the impact rating of the dimensions (H beats M), the tier of the learning needs, and **breadth** — one harness that unblocks five learning needs beats five one-shot builds. Converting an Unknown on one of the risk map's *hottest* rows is the single highest-value move available.
+- **Cost** under agent economics: most oracle construction is now agent-cheap — don't price it at human cost. Flag the genuinely expensive items (infrastructure, production access, recruiting humans for judgment sessions) rather than letting them silently sink the plan.
+- **Trustworthiness of the build itself**: would the built oracle actually be able to judge the question? A cheap oracle that can't is worse than no oracle — it converts a visible Unknown into invisible false confidence. If an item's feasibility is doubtful, say so on the item; building a *probe* of it can be the Phase-1 entry.
+
+### 4. Sequence into a build plan
+
+Order the items into phases, with the reasoning stated:
+
+- **Quick wins first** — agent-cheap, high-unlock items (typically property sets and simulated/reference oracles on hot dimensions).
+- **Dependencies** — an oracle that judges observations needs its instrument to exist first; shared infrastructure that several items sit on comes before them.
+- **Group shared work** — items that ride the same harness or the same telemetry build belong in one phase.
+- **Defer with reasons** — low-value or speculative items are listed as deferred with a one-line reason, not silently dropped.
+
+### 5. Close the loop
+
+For each planned item, state what its landing changes: which risk-map rows should be re-assessed (the quality strategy's update protocol / a revision-mode pass over 6.2–6.3), which blocked learning needs unblock (the test strategy's after-tier update). The build plan is only worth executing because it converts Unknowns into knowables — name that conversion per item, so landing a build triggers the re-assessment instead of the new capability sitting unused.
+
+Then write the Update protocol section: re-run this skill when a phase of builds lands, or when either parent strategy is revised.
+
+## Push back when
+
+- **Every item is an instrument and none is an oracle** (or vice versa). "Build a dashboard" with no statement of how anyone judges what it shows is half a capability; answering a question takes both (see `/tooling-adequacy`).
+- **The judgment-oracle items all got deferred because they're "not automatable."** Human-as-oracle is a build item too — defining the rubric, naming the person, scheduling the session. Deferring everything a machine can't judge silently drops the trust/feel dimensions, which are often the hottest.
+- **The user wants to build measurement for its own sake** — an oracle for a None-rated dimension, an instrument no learning need asked for. Value comes from what an item unblocks; if it unblocks nothing, it's not in this plan.
+- **An Over-confident actual is left standing with its build item deferred.** That's a strategy resting on sand, with the sand now documented. Either the oracle gets built or the confidence gets downgraded in the risk map — pick one, explicitly.
+- **Everything is Phase 1.** Sequencing *is* the strategy; a plan where nothing is deferred and nothing is ordered hasn't made any decisions.
+
+## This skill is DONE when
+
+- [ ] Every Gated and Over-confident dimension from the risk map, and every blocked learning need from the test strategy (when present), appears in the plan — planned in a phase, or deferred with a stated reason. Nothing silently dropped.
+- [ ] Cross-side duplicates are merged, with both beneficiaries named.
+- [ ] Every build item names: instrument or oracle (and the oracle kind), what it unblocks, who builds it (agent / human / pair), and its value reasoning.
+- [ ] The phases have stated sequencing reasons; deferred items have stated reasons.
+- [ ] Every planned item states what to re-assess when it lands.
+- [ ] The doc records which inputs it was derived from (and says so plainly if the test side was absent).
+- [ ] The user has confirmed the priorities — explicit confirmation on the value calls, not silence.
+
+## Output
+
+Write to `$PROJECT_DIR/quality/tooling-strategy.md` (the third strategy doc, beside `strategy.md` and `test-strategy.md`). Shape:
+
+```markdown
+# Tooling strategy — how we'll know
+
+*Derived from quality/strategy.md (<its last-updated date>) and quality/test-strategy.md (<date>, or "not yet written — quality side only").*
+
+## What we can't answer today
+
+| # | Question we can't answer | Side | Blocked on | Impact |
+|---|---|---|---|---|
+| 1 | <dimension actual or learning need, in plain words> | quality / test / both | instrument: <…> / oracle: <…> | <H/M dimension(s), tier(s) it carries> |
+
+## Build plan
+
+### Phase 1 — <name>
+
+*Why first: <one line — e.g. agent-cheap, unblocks the hottest rows>*
+
+1. **<Build item.>** <Instrument or oracle — kind.> Unblocks: <dimensions / learning needs>. Builder: <agent / human / pair>. When it lands: <what to re-assess>.
+
+### Phase 2 — <name>
+
+…
+
+### Deferred
+
+- **<item>** — <one-line reason>.
+
+## Update protocol
+
+Re-run `/tooling-strategy` when a phase of builds lands or when `quality/strategy.md` / `quality/test-strategy.md` is revised. Landing a build item is not the end of its story: the re-assessment it unblocks (named per item above) is what converts the new capability into updated confidence in the risk map.
+
+**Assumptions made:** <bullet list, or "none">
+
+**Open questions:** <bullet list, or "none">
+```
+
+Summarise the plan back to the user in 5–7 lines — the phases, the headline quick wins, what got deferred — and confirm the priorities before declaring it done.

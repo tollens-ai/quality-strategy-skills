@@ -37,6 +37,8 @@ The `/tooling-adequacy` check (run after sub-step 3) may have found learning nee
 
 This is honesty about the strategy's own limits, not a refusal — the blocked area stays visible in the doc rather than being silently dropped or filled with investigation the tooling and oracles can't actually support. Distinguish it from *"what we're not testing"*: a non-target is a deliberate choice not to look; a blocked area is something we *do* want to know but can't yet. If `/tooling-adequacy` returned no build items, say so — every learning need has an adequate instrument and oracle.
 
+When the build-item list is non-trivial, point the user at **`/tooling-strategy`**: it gathers these items together with the quality strategy's oracle-build items (the risk map's Gated and Over-confident dimensions) into one prioritised build plan, instead of each side's gaps being tackled ad hoc.
+
 ### Update protocol
 
 The update protocol is what stops the test strategy becoming frozen. Three triggers:

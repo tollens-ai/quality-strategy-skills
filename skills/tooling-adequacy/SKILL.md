@@ -30,6 +30,8 @@ File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **
 - **From `/test-strategy`** — invoked after learning needs are derived (sub-step 3) and before allocation (sub-step 4). Input: the learning-needs list with their proposed methods. Output: a tooling-and-oracle adequacy assessment plus a list of **build items** that `/test-strategy`'s closing step gates on.
 - **Standalone** — to audit an existing codebase's test tooling and oracles against what the team wants to find out. Input: the questions the team wants answered (ask the user) plus the repo's test infrastructure.
 
+This skill judges adequacy and names the gaps; it does not plan the build. **`/tooling-strategy`** consumes its build items (together with `/oracle-adequacy`'s, from the quality side) and turns them into a prioritised build plan.
+
 ## What you need
 
 - **Grounding.** Read `$PLUGIN_ROOT/PHILOSOPHY.md` and `$PLUGIN_ROOT/skills/test-strategy/FRAMINGS.md`. Framings #1 (investigation, not checking), #4 (asking and testing are parallel), #5 (don't import old-world costs — central to the oracle reframe below), #6 (economics: checking is cheap, investigation is the bottleneck) and #9 (smells — humans are the oracle for some questions) are load-bearing here.
