@@ -1,28 +1,23 @@
 # Roadmap
 
-*Last updated 2026-06-10. This is the build order as we currently judge it — alpha feedback can and should reorder it. The reasoning behind the bigger calls, and what would change our minds, lives in [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md).*
+*Last updated 2026-06-11. This is the build order as we currently judge it — alpha feedback can and should reorder it. The reasoning behind the bigger calls, and what would change our minds, lives in [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md).*
 
 ## Now — alpha
 
 The pack is live with its first wave of testers. The current work is exercising every skill on real projects, fixing what misfires, and holding the bar described in the README. If you're testing: the most useful thing you can do is [open an issue](https://github.com/tollens-ai/quality-strategy-skills/issues) with what you ran, what it produced, and what you expected instead.
 
-## Next — shareable artefacts & quality dashboards
+## Just shipped — `/quality-artefacts` (0.3.0)
 
-A finished `quality/strategy.md` is honest, but it's several hundred lines of markdown — built to be *used*, not to be *glanced at* or *shared*. The next major piece is a generative post-processing skill that turns the strategy into views people can take in at a glance:
+The former headline "Next" item, now in the pack. A generative post-processing skill: describe the view you want ("a tweetable summary of where quality stands", "a dashboard of just the payment risks for my standup") and it designs a bespoke, self-contained SVG/HTML artefact from your strategy — honest about Unknowns (an unverifiable dimension is drawn as visibly uncharted, never painted green). The named presets — quality radar, risk heatmap, social card, interactive dashboard — are worked examples, not a menu; re-run after a strategy revision and the views update with it. Worked examples live on the Fernly sample under [`examples/fernly/`](examples/fernly/). Everything stays self-contained SVG/HTML — no daemon, no service, nothing to install.
 
-- **Quality radar** — dimensions as axes, required level vs where you actually are, the gaps visible in one shape.
-- **Risk heatmap** — dimensions × gap severity and confidence, colour-coded.
-- **Social card** — the project, its one-line quality verdict, and the headline risks, sized to screenshot.
-- **Interactive dashboard** — the whole strategy as a navigable HTML page: TL;DR, collapsible dimensions, sortable risk map.
-- **Freeform — the headline capability**: describe the view you want ("a dashboard of just the payment risks for my standup") and the skill builds that bespoke view from your strategy.
+## Next — quality dimensions for AI / non-deterministic / agentic products
 
-Everything self-contained SVG/HTML — no daemon, no service, nothing to install — keeping the pack's "markdown skills, nothing else" promise. Re-run it after a strategy revision and the views update with it: the strategy as a living, visible map of where quality stands, not a document that goes stale in a drawer.
+*(research — top priority).* The framework needs first-class dimensions for products whose "correctness" is a metric distribution that drifts over time: eval-oracle adequacy, drift-awareness, training/serving skew. Today you'd hand-craft this part (see Known limitations in the README).
 
 ## After that
 
 In rough priority order:
 
-- **Quality dimensions for AI / non-deterministic / agentic products** *(research — top priority)*. The framework needs first-class dimensions for products whose "correctness" is a metric distribution that drifts over time: eval-oracle adequacy, drift-awareness, training/serving skew. Today you'd hand-craft this part (see Known limitations in the README).
 - **`/tooling-strategy-review`** — the audit companion for the newest strategy skill, completing the strategy/review pairing the other two strategies have.
 - **Lean-mode investigation** — whether a lighter *view* of the same rigour is possible for small jobs without quietly lowering the bar. We're probing this with validation runs before designing anything.
 - **Per-stakeholder risk-map decomposition** — the dimension-rating step already works per-stakeholder and surfaces divergence; the risk map doesn't yet.
