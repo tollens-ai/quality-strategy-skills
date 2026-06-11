@@ -55,6 +55,15 @@ suites green in CI.
    timed walkthroughs of the last 5 real tickets of each class against the admin views
    produced by actions A and G.
 
+9. **LN-9: Where does the daily-care flow fight a real user's intention?**
+   Tied to the casual-parent Delight bar (Part 3) and the "oracle is a person"
+   entry in Part 6. Explicitly *not* answerable by spec checks or the property
+   suite — a flow can pass every automated check and still fight its user. The
+   oracle is human judgment, exercised through intention-based exploratory
+   charters ("repot day", "holiday backlog", "one-handed at the sink") and the
+   dogfood friction log (strategy action I). Pass evidence: charters complete
+   without workarounds; friction notes trend down across R1.
+
 ## Investigation order
 
 1. **LN-1 first, alone, as a gate** (Phase 0, ~1 week). Its answer redirects everything:
@@ -70,6 +79,9 @@ suites green in CI.
 5. **LN-5's durable half and LN-7 in Phase 2**, aligned with relaunch actions G and H.
 6. **LN-8 last**, as the acceptance test of the observability side-effects of everything
    above — run it two weeks before the September submission.
+7. **LN-9 runs continuously through Phases 1–2** rather than slotting once: it rides on
+   daily dogfood use, costs one session a month, and its friction log is read alongside
+   each phase's exit review.
 
 ## Human/agent split
 
@@ -79,6 +91,9 @@ suites green in CI.
   matrix (LN-5), and the pairing-funnel instrumentation (LN-7). All produce executable,
   re-runnable evidence — the agent-leverage dividend Part 7 of the quality strategy
   promises.
+- **Maya and Iris jointly own LN-9:** they are both the instrument and the oracle —
+  agents only build the friction-note flag and the triage view. Charters are written
+  from real intentions, not screens, and rotate monthly.
 - **Maya owns:** anything requiring production credentials or real money — the backup
   restore drill, live-store test transactions if the RevenueCat sandbox question
   resolves badly — plus labelling adjudication on the golden set, the churned-user

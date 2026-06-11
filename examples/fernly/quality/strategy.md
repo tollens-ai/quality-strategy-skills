@@ -148,6 +148,13 @@ Stakeholders, roughly in order of strategic weight this cycle: paying Greenhouse
 9. **No offline-first rearchitecture** — we harden specific offline behaviours (dimension 6) but do not rebuild around CRDTs this year. *Trigger to revisit: household-sync fixes from R1 prove unachievable on the current last-write-wins-with-vector-checks model.*
 10. **No tablet-optimised layouts** — iPad/Android tablet usage is 3% and the relaunch doesn't depend on it. *Trigger to revisit: Apple features us (featuring requires decent iPad support) or tablet usage passes 8%.*
 
+### Good enough on purpose (non-priorities, not non-goals)
+
+Different from the table above: these we *do* ship, knowingly rough. Each is a tradeoff made with open eyes, with the trigger that would reopen it written down — so nobody "discovers" them as defects, and nobody quietly gold-plates them either.
+
+1. **Schedule propagation is capped by the nightly worker.** Reminders are materialised nightly (Part 1), so an edit made late in the day can take until next morning to reach the widget's upcoming list — the in-app schedule view recomputes live; the widget does not. An event-driven pipeline would lift the cap, and is knowingly deferred: at ~4,000 users nobody has filed a ticket about it, plants do not operate on minutes, and a pipeline Maya can debug at 7am beats one that is real-time and opaque. *Revisit trigger: more than a handful of "widget shows yesterday's schedule" tickets in a month, or sensor-driven same-day rescheduling (R3) becoming routine.*
+2. **Plant search is a plain substring match.** No typo tolerance, no synonyms ("swiss cheese plant" finds nothing; "monstera" works). Good enough: photo-ID is the primary add path, search is the fallback, and the species DB is ~2,000 rows. *Revisit trigger: support tickets citing "couldn't find my plant", or search-then-abandon showing up once funnel telemetry exists.*
+
 ## Part 5: Quality Dimensions
 
 ### Final inventory
@@ -269,6 +276,12 @@ Stakeholders, roughly in order of strategic weight this cycle: paying Greenhouse
 - **Actual:** Known-poor. Today a reminder ticket means an hour across Fly logs, FCM console, and guesswork; photo tickets are better post-March (per-photo sync state exists in the DB but no admin view exposes it); payment tickets mean logging into three dashboards. We know exactly how bad it is because Maya lives it weekly. **Conf (act): H** — high confidence in a poor state.
 - **To strengthen:** The Phase 0/1 telemetry work is designed to double as support tooling (see action A's admin-view requirement).
 
+#### The daily-care flow — where the oracle is a person (M)
+
+- **Required:** the everyday loop — open the app, see what needs water today, tick it, maybe snap a journal photo — feels built by someone who waters plants: it anticipates real intentions (one-handed at the sink, repot day, back from a holiday to nine days of backlog) instead of fighting them. This is the casual-parent Delight bar (Part 3) made concrete, and it is deliberately a bar on *experience*, not on screens. **Conf (req): M** — bars on feel are judged, not specified.
+- **Actual:** good by our own daily use, never examined deliberately. The spec-level checks pass — every screen renders, every control does what its test asserts — and that evidence is **insufficient by design here**: a flow can pass every check and still fight the user's intention. **Conf (act): M (lived-in, unexamined).**
+- **Planned measurement — exploratory testing as the oracle, on purpose:** Action I. Charters derived from real intentions ("water everything in the kitchen before the school run", "repot day", "the holiday backlog"), walked monthly by Maya and Iris on their own plants; plus dogfood observability — a dogfood-build-only one-tap "this felt wrong" friction note, triaged monthly. Pass looks like: each charter completes without dropping to a workaround, and the friction log trends down across R1. No automated check replaces this; automation guards the floor (1b, 2), a person judges the delight.
+
 ## Part 7: Plan of Work
 
 ### Phase 0: Settle the reminder-delivery telemetry question (gate)
@@ -285,6 +298,7 @@ The Release 1 workstream: convert the data-integrity and sync Unknowns into meas
 - **C. Backup-restore drill** (testing) — actually restore last night's Postgres + object-storage backups to a scratch environment and verify a sampled account's journal is intact; script it; calendar it monthly. Converts dimension 2's restore story from L to H or surfaces that backups are broken while that's still survivable.
 - **D. Plant-ID golden dataset and score** (oracle-build) — assemble 500 real user photos (opt-in flagged set), have them labelled (Maya + a hired horticulture student, ~$400), score top-1 accuracy and uncertainty calibration. Replaces the over-confident 3a "feels fine" with a number; informs whether 3a work enters R2 scope.
 - **E. Household sync convergence simulation** (testing) — agent-built two-client simulator driving randomised concurrent edits, offline windows, and watered-event races against a test backend; assert convergence and no lost/doubled events. Resolves the dimension 4 Unknown. Fixes it reveals are R1 scope.
+- **I. Daily-care exploratory dogfood loop** (testing) — the charters and friction-note instrumentation from Part 6's daily-care entry: monthly intention-based exploration by Maya and Iris, a dogfood-only "this felt wrong" tap, monthly triage. The one Phase 1 item whose oracle is deliberately a person — it buys the delight evidence the automated oracles (A, B, D, E) cannot.
 - **F. Churned-user interviews** (stakeholder) — Maya emails 30 users who churned after a dead-plant exit survey, offers a year of Greenhouse for 20 minutes; validates that 1a fixes target the actual failure stories and recruits a win-back cohort for the relaunch.
 
 ### Phase 2: Greenhouse relaunch readiness
