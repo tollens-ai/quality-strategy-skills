@@ -24,6 +24,8 @@ By the end of this sub-step the strategy doc must capture, **for each dimension 
 2. **M** — if and only if some bar (Good Enough or Delight) references the dimension and **no** stakeholder has it as a Dealbreaker. It matters and should be actively managed; failure is unwelcome but survivable.
 3. **None** — if and only if **no** stakeholder bar at any lens references the dimension. Explicitly not a concern for this release.
 
+**Floors are never None.** A dimension that entered as a *floor* (5.1's guaranteed-inclusion layer — its factual predicate held) carries an always-on bar by definition, so it cannot be rated None however quiet the stakeholders were about it; rate it H or M on what the floor demands here (often M, sometimes H), never None. A *default-in* the user explicitly accepted the risk on in 5.1 (the eyes-open recorded fork) is the one case where a security/data-integrity/spend dimension may be None — and only with that recorded accepted-risk as its rationale, never silently.
+
 The rating yields a short **pointer** rationale, not a paragraph of judgement — e.g. *"H — Family Dealbreaker on data loss, Part 3.2"*. The pointer names the stakeholder and the specific bar (by lens: Delight / Good Enough / Dealbreaker); that's the whole rationale.
 
 ## How to ask
