@@ -71,7 +71,7 @@ When the subagent returns, **first save its returned top-down list verbatim** to
 - **Bottom-up only** — keep; these came from real project context.
 - **Subagent only** — for each, surface to the user as a question: *"The reference-list pass flagged X as Clearly Relevant because [reason]. Should it be in the inventory?"* Don't include silently; don't drop silently.
 
-The user resolves subagent-only candidates.
+The user resolves subagent-only candidates. And when one of them is something the user never mentioned but their **stated goals imply they'd care about**, don't deliver it as a list row — deliver it as a moment, with the trace: *"you didn't mention X anywhere — but given what you said about Y, you'd care a lot if X failed. Does that land?"* Record the answer either way; a rejected revelation is data, not failure (see SKILL.md → "Deliver revelations as moments").
 
 ## How to interview through this
 

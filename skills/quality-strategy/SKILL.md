@@ -30,6 +30,26 @@ What is fixed is the *substance* — the question that must get answered, the ch
 
 Keep the language **plain** (PHILOSOPHY: *say it plainly*) — in what you say *and* in what you write to the doc. Framework terms get a one-clause gloss on first use; everything else is everyday English: short words, active verbs, concrete examples. You sound like a sharp consultant talking, not a standards document.
 
+## Heavy only where it serves the user's goals
+
+This process is demanding, and an alpha tester named the risk plainly: it *"feels heavy for vibecoders."* The weight is a feature only when the user can see it serving **their own stated goals** — the stakeholder Dealbreakers and Delight bars, the release purpose, the things *they* said matter. Three standing rules keep it that way:
+
+- **Frame every why in the user's own words.** Every substantive ask or stretch of work gets its why framed in terms of what *this* user already said — *"we're digging here because you said losing a user's data is a dealbreaker"* — never in terms of the framework's own needs. Early on, before the stakeholder bars exist, the trace is the release purpose and whatever goals the user has stated so far; once Part 3 exists, trace to the named bars.
+- **The standing pruning rule.** An item — a question, a dimension, a check, an action — that traces to no stated goal is spurious weight. Either cut it, or challenge whether a goal is missing: *"nothing you've told me makes this matter — should it? Is there a stakeholder or a bar we haven't captured?"* Never carry untraceable weight silently.
+- **The honest fork when a goal-justified item meets resistance.** When the user pushes back on something the trace genuinely supports, show the trace, then offer the fork: *"this is here because you said X is a dealbreaker — so either this deserves the dig, or X isn't really a dealbreaker. Which is it?"* Be convinced the item matters for the goal, or revise the goal. **Both outcomes are legitimate**, and both get recorded — conviction lands in the section's rationale; revision lands as a change to the bar it traced to.
+
+This sharpens the substantive refusals rather than softening them: the things the skill refuses to skip (non-goals, the unpack and old/new-world passes, real checkpoints) are exactly what make the user's stated goals checkable — when a user balks at one of those, that is the trace to show.
+
+## Session start — the itinerary and the commit cadence
+
+Two moves at the start of every working session (first or resumed), before the next sub-step's work begins:
+
+**Give the itinerary, in plain words.** Walk the route by human name — what each step produces *for the user*, with rough relative sizes — not the sub-step table read aloud. For example: *"Seven steps, and the first two are quick: context (what the project is, who's working on it) and releases (what's shipping when). Then stakeholders — the first real thinking: who matters and what their bars are. Non-goals — short but load-bearing: what we're deliberately not doing. Dimensions — the longest step: the axes quality breaks into here. The risk map — the headline: where you're actually exposed. And the plan of work — short, and optional. We're at [X]."* On resumption the itinerary doubles as re-orientation: what's done, what remains.
+
+**Ask the commit-cadence question (git-managed projects).** Where `$PROJECT_DIR` is git-managed, ask once: *"As the strategy doc builds up, want me to commit at each step boundary, commit everything at the end, or leave the commits to you?"* Suggest commit-as-we-go as the default — rollback stays cheap, and each boundary commit doubles as visible progress. Honour the answer at every step boundary from then on; don't drift. Record the choice in `quality/.scratch/commit-cadence.md` so it survives `/clear`: a resumed session reads it and restates the standing choice in one line instead of re-asking, and re-asks only if the note is missing.
+
+The standing rule behind both (and behind the progress lines and visible exits at every boundary — see "Substantive checkpoint at step boundaries"): **the user must never feel the process is unbounded.** At any moment they should know where they are, what remains and roughly how big it is, and what they keep if they stop here.
+
 ## The four-question frame and the strategy's job
 
 A quality strategy answers four questions, in order:
@@ -61,6 +81,14 @@ Wherever this skill does substantive analytical work via a subagent — the pre-
 **Process-note leak prevention.** Orchestrator meta-observations about *the skill itself* (an awkward step, a suspected bug, phrasing that didn't land) go to `$PROJECT_DIR/.skill-feedback.md` only — never into `quality/strategy.md`. The strategy doc reads as an authored artifact, not a transcript of the skill running.
 
 The *machinery* of running the skill — dispatch/scratch narration ("Subagent dispatched: …", "[ran 5.4 inline]", "scratch would be `quality/.scratch/…`"), append bookkeeping, sub-step/turn lineage refs ("corrected, turn-23", "split out at 5.2") — likewise has no place in `quality/strategy.md`. **This is cleaned up at review time, not by loading the writing pass with a list of don'ts.** Write the finding or the question; the step-boundary review and the final `/quality-strategy-review` strip any machinery that slipped through (see "Presentation cleanup at review points" below). The reasoning: a pass that's busy doing the real analysis shouldn't also juggle a list of don'ts — that taxes the work and still misses leaks. Catching them where the doc is reviewed is both lighter on the writer and more thorough.
+
+## Deliver revelations as moments
+
+The highest-value thing this skill can produce is not the document — it's the moment the user realises something matters about their project that they never articulated (PHILOSOPHY: *the revelation is the product*). The sealed passes are where these surface: the dimension scout (5.1), the pre-read, the fresh-eyes recon in revision mode. Each reads the project without the user's framing, so each can find something the user never mentioned but their stated goals imply they'd care about.
+
+When that happens, **do not bury it in a consolidated list.** Name it back as a moment, traced to their own goals: *"you didn't mention X anywhere — but given what you said about Y, you'd care a lot if X failed. Does that land?"* Then record the outcome either way: if it lands, it enters the doc as the user's own, with the trace; if it doesn't, record that it was considered and why the user set it aside. **A rejected revelation is data, not failure** — it usually sharpens a non-goal.
+
+This is a delivery discipline, not a new pass. The work already happens; the discipline is to spend the find where it pays — as a named moment the user gets to react to, not row 17 of a table.
 
 ## Scope of this skill — first release only
 
@@ -112,7 +140,7 @@ The work is divided into 7 numbered steps, each with one or more sub-steps — 2
 | 5.2 Unpack pass | `steps/5-dimensions/5-2-unpack.md` | Split composite dimensions into sub-dimensions where priorities differ |
 | 5.3 Old/new-world pass | `steps/5-dimensions/5-3-old-new-world.md` | Split trap dimensions where the audience (human vs agent) changes the rating |
 | 5.4 Rate dimensions | `steps/5-dimensions/5-4-rate.md` | Mechanical-anchor impact rating (H/M/None) per dimension — per-stakeholder via a sealed dispatch, then merged; no L (L-style aware-but-not-investing is a Step 7 decision) |
-| 5.5 Sanity checks | `steps/5-dimensions/5-5-checks.md` | Distribution, stakeholder coverage, tensions, non-goal alignment |
+| 5.5 Sanity checks | `steps/5-dimensions/5-5-checks.md` | High justification, stakeholder coverage, tensions, non-goal alignment |
 | 6.1 Required levels | `steps/6-risk-map/6-1-required.md` | What level is needed for each H/M dimension |
 | 6.2 Actual levels | `steps/6-risk-map/6-2-actual.md` | Where we are on each H/M dimension |
 | 6.2 — Oracle adequacy (Q2) | invoke `/oracle-adequacy` (separate skill) | Per dimension: is the *oracle* that judges its actual level adequate? Produces oracle-build items that seed Step 7 |
@@ -160,6 +188,8 @@ This is the single most important user-facing pattern in the skill. The strategy
 
 1. Summarise the *whole step's* output back to the user in 5–8 lines, covering the decisions that matter across all sub-steps in the step — plus any contradictions the check surfaced. Not a recap of process — a recap of decisions.
 
+1b. **Give the progress line and the visible exit.** One line of where-we-are, with relative sizes: *"That was Step 5 — the longest one. Two steps left: the risk map, about half the size of what you just did, and a short optional plan of work."* And one line of what stopping here leaves them with: *"If you stopped now, you'd walk away with your stakeholders' bars and the rated dimensions on paper — already something you can act on — and we can resume from the doc any time."* Both are honest, not cheerleading: the doc genuinely is useful part-done, and resume genuinely is supported.
+
 2. Run the substantive checkpoint:
 
    > *"Take a real moment to read this back. We've completed [Step name]. Is anything off — even if you can't articulate why? Anything that gives you a weird feeling? Anything in earlier steps that, in light of this work, you now think is wrong? Even vague unease is worth surfacing. Catching it now is cheap; catching it later costs hours of rework."*
@@ -180,7 +210,7 @@ This is the single most important user-facing pattern in the skill. The strategy
    - **Articulable concern about an earlier step** — surface explicitly: *"That's about [earlier step]. Want to revisit that section before continuing? Or note as `OPEN QUESTION` and keep going?"* Cross-step revision is first-class, not a failure.
    - **Vague unease, can't articulate** — investigate together. Probing questions: *"What part of the section draws your eye?" "If you imagine this strategy in six months, where would the regret most likely come from?" "What's the closest you can get to naming it?"* Either it resolves and the section is corrected, or it remains as `OPEN QUESTION:` with the user's explicit acknowledgement that we're proceeding with that risk visible.
 
-5. **Only move on after explicit, considered confirmation** — not silence, not a non-committal response, not a polite "yes" with hesitation behind it.
+5. **Only move on after explicit, considered confirmation** — not silence, not a non-committal response, not a polite "yes" with hesitation behind it. Once confirmed, this is where the boundary commit lands if the user chose commit-as-we-go at session start — the commit snapshots the *confirmed* step, never a version still under discussion.
 
 ### Per-sub-step (intermediate) wrap-up
 
@@ -256,7 +286,7 @@ Step 5 is the longest single step (five sub-steps, with 5.1–5.3 stick-together
 On re-invocation, detect the state of `quality/strategy.md`. If a partial strategy exists:
 
 - Read the existing doc to determine the last completed sub-step.
-- Tell the user: *"I see a partial strategy. Last completed: sub-step X.Y. Want to resume from X.Y+1, or revisit something earlier first?"*
+- Tell the user, naming the step in human words, not bare coordinates: *"I see a partial strategy. Last completed: the dimension ratings (sub-step 5.4). Want to pick up from the sanity checks that follow, or revisit something earlier first?"* — and give the session-start itinerary (see "Session start — the itinerary and the commit cadence") so they see what's done, what remains, and the relative sizes.
 - If the user is resuming into the middle of a stick-together set (e.g. they completed 5.1 in the prior session and are now resuming at 5.2), name it: *"Note that 5.2 is part of a stick-together set with 5.1 and 5.3 — re-orient from the inventory in `quality/strategy.md` before we start to recover the working memory."*
 - Resume from the user's chosen sub-step.
 

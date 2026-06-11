@@ -25,7 +25,7 @@ Tier 1 addresses the highest-impact unknowns (existential to the release, dealbr
 
 **Failure modes:**
 - Tier 1 missing genuine existentials. (E.g. installability is unknown but lives in Tier 3.)
-- All-Tier-1: everything-critical = nothing-critical.
+- Tier-1 items with no existential or Dealbreaker trace. (A top-heavy tier list is not by itself the failure — by tiering time the low-stakes material was already cut, so Tier 1 dominating is often the honest shape. The failure is an *individual* item whose Tier-1 placement can't cite the risk-map row or stakeholder bar that makes it existential. When every item is justified, that's a genuinely high-stakes investigation — within-tier cheap-first ordering carries the prioritisation from there.)
 - Within-tier ordering ignores cost. A 10-minute test sits behind a day-long test for no reason.
 - Allocation entrenched before calibration items resolve — committing high confidence on items that should be "unknown — try and see."
 

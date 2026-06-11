@@ -6,6 +6,8 @@ For each dimension in the final inventory from 5.3, rate its **impact for the fi
 
 The rating captures **impact size only** — *how much does failure on this dimension cost, for the stakeholders who care?* It does **not** capture likelihood, and it does **not** capture "how high does the actual quality need to be" (that's 6.1). Likelihood lives downstream in the risk map: risk = impact × likelihood gets combined there, later — not collapsed into a single 5.4 score now.
 
+**High means important, not in-trouble.** A High rating says failure here would cost a stakeholder dearly — it says nothing about where the project currently stands. A High dimension can be comfortably at bar (a success story), or cheap to close; importance and current state are different axes, and the current state is Part 6's question, not this one's. Keep that distinction in the prose you write and the words you say: never use "High" to mean "at risk" or "in trouble".
+
 There is no L on purpose. "Aware of it but not investing right now" is a **plan-of-work decision (Step 7)**, not a rating. Dropping L kills the state-vs-priority drift at its source — ratings quietly sliding to match what the team plans to work on, rather than what failure costs. Rate each dimension by what the stakeholders' bars say its impact is; decide separately, in Step 7, whether to defer work on it — with that impact in full view.
 
 ## What you need from the previous sub-step
@@ -69,9 +71,9 @@ When the subagent returns, merge **per dimension**. This is real dialogue where 
 
 Talk exactly where stakeholders disagree — that contested call is where the user's input is worth most. Don't manufacture dialogue where the anchor converges, and don't collapse a real divergence into a silent max.
 
-### 3. Backstop — light distribution glance
+### 3. Backstop — light justification glance
 
-After the merge, glance at the distribution (H / M / None counts). This is **light** — the heavy distribution and coverage checks live in 5.5. Note that because H now requires a real Dealbreaker, inflation is structurally limited: you can't rate something H without a stakeholder bar that demands it.
+After the merge, glance over the Highs: each one must cite the Dealbreaker bar it rests on. This is **light** — the thorough justification and coverage checks live in 5.5. Don't be alarmed by a High-dominated table: by this point the low-stakes material has already left the list (dropped at the inventory, excluded as a non-goal, or rated None), so Highs dominating what remains is the expected shape, not inflation. Because H requires a real Dealbreaker, inflation is structurally limited anyway — the thing to verify is the citation behind each High, not the count of them.
 
 You have explicit permission and encouragement to:
 
@@ -147,7 +149,7 @@ Merged ratings, grouped by rating for readability. Impact size only — likeliho
 - **<dimension>** — <what was traded and why it's enough> — *reopen when: <trigger>*.
 - <or "none recorded this pass">
 
-**Distribution:** <count by rating, e.g. "6 H, 9 M, 4 None">
+**Rating counts:** <e.g. "6 H, 9 M, 4 None">
 
 **Sources consulted from pre-read:** <bullet list>
 

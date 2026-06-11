@@ -41,7 +41,16 @@ File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **
 
 If `quality/strategy.md` doesn't exist, stop: this skill plans the build for gaps the other strategies have *found*, and has nothing to consume yet. Point the user at `/quality-strategy` first (or at `/oracle-adequacy` standalone, if they have an existing strategy doc from elsewhere that lacks oracle verdicts).
 
+## Session start — itinerary and commit cadence
+
+At the start of every working session (first or resumed), before the next move's work, two quick moves:
+
+- **Give the itinerary, in plain words.** Five moves, by human name, with rough sizes: *"Gather everything the project can't answer about itself yet (quick — mostly collection); spec each build — what it must do, what it unblocks, build-or-adopt (the bulk of the work); weigh value against cost (short, mostly your calls to confirm); sequence it into phases (short); and close the loop — what each build triggers when it lands."* On resumption or a re-run, lead with what's done or changed since last time, then the remainder.
+- **Ask the commit-cadence question (git-managed projects).** Where `$PROJECT_DIR` is git-managed, ask once: *"Want me to commit at each move's boundary, commit everything at the end, or leave the commits to you?"* Suggest commit-as-we-go as the default (cheap rollback, visible progress). Honour the answer at every boundary.
+
 ## The work, in order
+
+Write the doc incrementally as each move completes, so what's done is durable; on re-entry, resume from the last completed move. At each move's boundary, give one progress line (where we are, what remains, relative sizes) and the visible exit — what the user already has if they stop here (the demand table alone is a useful artifact, and the doc picks up where it left off). The user should never feel the work is unbounded. This is also where the boundary commit lands if the user chose commit-as-we-go.
 
 ### 1. Gather the demand
 

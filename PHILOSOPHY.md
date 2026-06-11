@@ -74,6 +74,17 @@ Two disciplines:
 - **State confidence explicitly.** Don't just state conclusions. State how confident you are. "Probably fine" is information; "fine" without qualification hides the uncertainty.
 - **Don't use spurious precision.** "87% confident" implies a calibration you don't have. Use honest, coarse-grained levels: thoroughly checked / glanced / guessing. Or High / Medium / Low.
 
+## The revelation is the product
+
+The documents matter, but they are not the point. The highest-value moment this framework can produce is a **revelation**: the user realising something matters about their project — or something is true of it — that they never articulated, and often never consciously knew they cared about. Their own goals implied it all along; the framework's job is to surface the implication and say it back to them.
+
+The marks of a real one: it follows from what the user *already said* — a stated dealbreaker, a release purpose, a bar — not from generic best practice; and the reaction it draws is recognition, not instruction. A user being told something generic nods politely. A user shown an implication of their own goals lights up.
+
+Two disciplines follow:
+
+- **Hunt for them.** The passes that read the project without the user's framing (fresh-eyes scouts, blind recon) exist partly for this — they find the things the user's own framing hides.
+- **Deliver them as moments.** A revelation buried in a consolidated table is wasted. Name it back, with its trace: *"you didn't mention X anywhere — but given what you said about Y, you'd care a lot if X failed. Does that land?"* Record the answer either way — a rejected revelation is data (usually a sharper non-goal), not a failure.
+
 ## We live in the new world
 
 Agents are software's newest stakeholder *and* its newest team member. Both shifts matter, and both are now the default — not the exception.

@@ -47,6 +47,25 @@ Six sub-steps, each in its own file under `steps/`. Run them strictly in order.
 3. **At the end of each sub-step**, run its DONE checklist. If a check fails, return to the work; do not proceed.
 4. **Write output incrementally** to `quality/test-strategy.md`. If a session is interrupted, what's already written is durable.
 5. **At the end of sub-step 5**, summarise the whole produced doc back to the user and check for unease before declaring complete. Same substantive-checkpoint pattern as /quality-strategy, but only at the very end — sub-step boundaries get light wrap-ups.
+6. **Every sub-step wrap-up carries a progress line and a visible exit.** One line of where-we-are with relative sizes (*"that was learning needs — the longest part; allocation is about half that, then a short closing"*), and one line of what the user keeps if they stop here (the doc is useful part-done; resume is supported). The user should never feel the work is unbounded. This is also where the boundary commit lands if the user chose commit-as-we-go at session start.
+
+## Session start — itinerary and commit cadence
+
+Two moves at the start of every working session (first or resumed), before the next sub-step's work:
+
+**Give the itinerary, in plain words.** The stops, by human name, with what each produces for the user and rough relative sizes. For example: *"A quick pre-read; a short purpose section; the principles that govern the testing (short); learning needs — the heart of it and the longest part: the questions worth answering, in priority order — closed by a check that we can actually answer them (and what we'd have to build where we can't); allocation — who does what, human or agent; and a short closing. Most of the thinking is already in your quality strategy, so this is one or two focused sessions."* On resumption the itinerary doubles as re-orientation: what's done, what remains.
+
+**Ask the commit-cadence question (git-managed projects).** Where `$PROJECT_DIR` is git-managed, ask once: *"Want me to commit at each sub-step boundary, commit everything at the end, or leave the commits to you?"* Suggest commit-as-we-go as the default — rollback stays cheap and each boundary commit doubles as visible progress. Honour the answer at every boundary; don't drift. Record the choice in `quality/.scratch/commit-cadence.md` so it survives `/clear`: a resumed session reads it and restates the standing choice in one line instead of re-asking, and re-asks only if the note is missing.
+
+## The weight traces to the user's goals
+
+Same heaviness rule as `/quality-strategy` → "Heavy only where it serves the user's goals": the process may be demanding only where the user can see the weight serving their own stated goals. Structurally most of this skill already traces — every learning need cites a risk-map row (the Direction indicator) — but the trace must be **user-visible**, not just documented:
+
+- **Frame every why in the user's own words.** *"We're investigating X because your risk map says the actual is unknown and [stakeholder]'s dealbreaker sits on it"* — not *"the framework requires an exit criterion."*
+- **Pruning rule.** A learning need, method, or check that traces to no stated goal or risk-map row is spurious weight — cut it, or challenge whether the risk map is missing a goal. (The standing fresh-eyes defect recon is not prunable under this rule: its trace is every stated dealbreaker at once — unnamed defects threaten all of them. Sub-step 3 records the user's reason if they drop it.)
+- **The honest fork on resistance.** When the user pushes back on a goal-justified item, show the trace, then offer the fork: be convinced it matters for the goal, or revise the goal (re-rate the row it traces to). Both outcomes are legitimate; record whichever happens.
+
+This sharpens the skill's substantive refusals rather than softening them: the things it refuses to skip — the principles, the two-voice allocation exchange — are what keep the learning needs traceable to the user's goals at all. When a user balks at one of those, that is the trace to show.
 
 ## The four-question frame, and where Q2 runs
 
@@ -85,7 +104,7 @@ If `quality/test-strategy.md` already exists, ask the user:
 For (c), the most common mode after the first cycle: skip to sub-step 4 (Allocation re-rating) and sub-step 5 (Update protocol). The earlier sub-steps usually carry over with minor edits. Two disciplines keep the update honest — fixing all known problems is not the same as being good now; the gaps have moved since the last cycle:
 
 - **Look back with evidence.** Each Tier-1/2 learning need and low-confidence allocation row from the prior version gets a what-happened verdict: answered (cite the finding), still open, or overtaken by events. "Answered" without the evidence is recorded as *believed answered* at an honest confidence, not closed.
-- **Look forward fresh.** Scan what's new since the last cycle — features shipped, stakeholders added, context changed — for learning needs the prior doc could not have known about. New items go through sub-step 3's derivation and tiering before allocation is re-rated; (c) is "skip to sub-step 4" only when the scan comes back empty, and the doc says so when it does. And keep the standing fresh-eyes defect recon (sub-step 3's Pass 3) blind: its agents still must not read this document, prior version included. An update whose only change is closing prior items has verified the past, not assessed the present.
+- **Look forward fresh.** Scan what's new since the last cycle — features shipped, stakeholders added, context changed — for learning needs the prior doc could not have known about. New items go through sub-step 3's derivation and tiering before allocation is re-rated; (c) is "skip to sub-step 4" only when the scan comes back empty, and the doc says so when it does. And keep the standing fresh-eyes defect recon (sub-step 3's Pass 3) blind: its agents still must not read this document, prior version included. An update whose only change is closing prior items has verified the past, not assessed the present. When the fresh scan finds something the user never mentioned but their stated bars imply they care about, deliver it as a moment with its trace, not a buried list row (same delivery discipline as `/quality-strategy` → "Deliver revelations as moments").
 
 Record both — the verdicts, and what the scan newly found (or that it credibly found nothing) — in a short `## Since the last cycle` section, so the reader and `/test-strategy-review` can see what the cycle taught without re-deriving it.
 
