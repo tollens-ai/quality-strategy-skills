@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="900" viewBox="0 0 1240 900" role="img" aria-label="Fernly quality radar: required bar versus actual state, with two axes unknown">
+  <title>Fernly — quality radar (derived from quality/strategy.md, 2026-06-11)</title>
+  <desc>Radar of Fernly's eleven risk-map dimensions. The green polygon is the required bar (High dimensions at the outer ring, Medium at the inner). The terracotta line is the actual state, judged from the strategy's own words. Two axes — reminder delivery and household sync — are Unknown: no oracle exists to judge them, so the actual line breaks and the wedge is hatched. The holes in the map are the headline.</desc>
+  <metadata id="strategy-data">{
+    "project": "Fernly",
+    "derivedFrom": "quality/strategy.md",
+    "strategyDate": "2026-06-11",
+    "view": "quality radar — required vs actual",
+    "scaleNote": "actual positions are a judged read of the risk map's prose, not measurements; the strategy body wins",
+    "axes": [
+      {"id":"1a","name":"Reminder delivery","required":"H","actual":"Unknown — zero delivery telemetry","conf":"—"},
+      {"id":"1b","name":"Schedule correctness","required":"H","actual":"known-good, property-tested (~400 cases/run)","conf":"H","position":1.0},
+      {"id":"2","name":"Photo integrity","required":"H","actual":"upload path solid, restore never drilled","conf":"M–L","position":0.55},
+      {"id":"3a","name":"Plant-ID accuracy","required":"M","actual":"over-confident — 'feels fine', unmeasured","conf":"L","position":0.45},
+      {"id":"4","name":"Household sync","required":"H","actual":"Unknown — convergence never tested","conf":"—"},
+      {"id":"5","name":"Payment/entitlement","required":"H","actual":"no reconciliation; edge paths unexercised","conf":"L–M","position":0.30},
+      {"id":"6","name":"Offline behavior","required":"M","actual":"photo queue solid; multi-day untested","conf":"M–H","position":0.70},
+      {"id":"7","name":"Sensor pairing","required":"M","actual":"known-poor — 31% of support inbound","conf":"L on why","position":0.30},
+      {"id":"8","name":"Photo privacy","required":"H","actual":"known-good — signed URLs, authz suite, pen-test","conf":"H","position":0.95},
+      {"id":"10","name":"App-store polish","required":"M","actual":"mostly known-good; new paywall unreviewed","conf":"M–H","position":0.80},
+      {"id":"12","name":"Support observability","required":"M","actual":"known-poor — an hour per ticket","conf":"H (poor)","position":0.25}
+    ]
+  }</metadata>
+  <defs>
+    <style>
+      .disp { font-family: Georgia, 'Iowan Old Style', 'Times New Roman', serif; }
+      .mono { font-family: 'Courier New', Courier, monospace; }
+    </style>
+    <pattern id="unk" width="9" height="9" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+      <rect width="9" height="9" fill="none"/>
+      <line x1="0" y1="0" x2="0" y2="9" stroke="#8d86a8" stroke-width="1.5" opacity="0.45"/>
+    </pattern>
+  </defs>
+
+  <!-- cream paper with a faint leaf-vein ring -->
+  <rect width="1240" height="900" fill="#faf6ec"/>
+  <circle cx="430" cy="480" r="392" fill="none" stroke="#e8e0cc" stroke-width="26" opacity="0.6"/>
+  <rect x="22" y="22" width="1196" height="856" fill="none" stroke="#2e5d43" stroke-width="2"/>
+
+  <text x="56" y="76" class="mono" font-size="14" letter-spacing="4" fill="#7c8a6e">FERNLY · QUALITY RADAR · R1 “TRUST REPAIR” ARC</text>
+  <text x="54" y="120" class="disp" font-size="38" fill="#23402f">The shape of where we stand — <tspan font-style="italic" fill="#c4683f">holes included.</tspan></text>
+
+  <!-- rings -->
+  <g fill="none" stroke="#ddd3ba" stroke-width="1">
+    <polygon points="430.0,405.0 470.5,416.9 498.2,448.8 504.2,490.7 486.7,529.1 451.1,552.0 408.9,552.0 373.3,529.1 355.8,490.7 361.8,448.8 389.5,416.9"/>
+    <polygon points="430.0,330.0 511.1,353.8 566.4,417.7 578.5,501.3 543.4,578.2 472.3,623.9 387.7,623.9 316.6,578.2 281.5,501.3 293.6,417.7 348.9,353.8"/>
+    <polygon points="430.0,255.0 551.6,290.7 634.7,386.5 652.7,512.0 600.0,627.3 493.4,695.9 366.6,695.9 260.0,627.3 207.3,512.0 225.3,386.5 308.4,290.7"/>
+    <polygon points="430.0,180.0 592.2,227.6 702.9,355.4 726.9,522.7 656.7,676.5 514.5,767.8 345.5,767.8 203.3,676.5 133.1,522.7 157.1,355.4 267.8,227.6" stroke="#c9bd9f" stroke-width="1.5"/>
+  </g>
+
+  <!-- unknown wedges (1a at top, 4 lower right) -->
+  <path d="M 430 480 L 362.1 187.8 A 300 300 0 0 1 497.9 187.8 Z" fill="url(#unk)"/>
+  <path d="M 430 480 L 695.3 620.0 A 300 300 0 0 1 606.3 722.7 Z" fill="url(#unk)"/>
+
+  <!-- spokes -->
+  <g stroke="#ddd3ba" stroke-width="1">
+    <line x1="430" y1="480" x2="592.2" y2="227.6"/><line x1="430" y1="480" x2="702.9" y2="355.4"/>
+    <line x1="430" y1="480" x2="726.9" y2="522.7"/><line x1="430" y1="480" x2="514.5" y2="767.8"/>
+    <line x1="430" y1="480" x2="345.5" y2="767.8"/><line x1="430" y1="480" x2="203.3" y2="676.5"/>
+    <line x1="430" y1="480" x2="133.1" y2="522.7"/><line x1="430" y1="480" x2="157.1" y2="355.4"/>
+    <line x1="430" y1="480" x2="267.8" y2="227.6"/>
+  </g>
+  <g stroke="#8d86a8" stroke-width="1.4" stroke-dasharray="5 4" opacity="0.85">
+    <line x1="430" y1="480" x2="430" y2="180"/><line x1="430" y1="480" x2="656.7" y2="676.5"/>
+  </g>
+
+  <!-- required polygon -->
+  <polygon points="430.0,180.0 592.2,227.6 702.9,355.4 623.0,507.8 656.7,676.5 514.5,767.8 375.1,667.1 282.6,607.7 133.1,522.7 252.6,399.0 324.6,316.0"
+           fill="#2e5d43" fill-opacity="0.08" stroke="#2e5d43" stroke-width="2.2"/>
+
+  <!-- actual polylines (break at the two Unknown axes) -->
+  <polyline points="592.2,227.6 580.1,411.5 516.9,492.5" fill="none" stroke="#c4683f" stroke-width="2.8" stroke-linejoin="round"/>
+  <polyline points="455.4,566.4 391.5,611.0 385.8,518.3 147.9,520.6 288.1,415.2 403.6,439.0" fill="none" stroke="#c4683f" stroke-width="2.8" stroke-linejoin="round"/>
+  <g fill="#c4683f" stroke="#faf6ec" stroke-width="1.5">
+    <circle cx="592.2" cy="227.6" r="5"/><circle cx="580.1" cy="411.5" r="5"/><circle cx="516.9" cy="492.5" r="5"/>
+    <circle cx="455.4" cy="566.4" r="5"/><circle cx="391.5" cy="611.0" r="5"/><circle cx="385.8" cy="518.3" r="5"/>
+    <circle cx="147.9" cy="520.6" r="5"/><circle cx="288.1" cy="415.2" r="5"/><circle cx="403.6" cy="439.0" r="5"/>
+  </g>
+  <!-- ? markers on unknown axes -->
+  <text x="430" y="338" class="mono" font-size="26" font-weight="bold" fill="#8d86a8" text-anchor="middle">?</text>
+  <text x="548" y="588" class="mono" font-size="26" font-weight="bold" fill="#8d86a8" text-anchor="middle">?</text>
+
+  <!-- axis labels -->
+  <g class="mono" font-size="14.5">
+    <text x="430" y="158" text-anchor="middle" fill="#8d86a8" font-weight="bold">1a reminder delivery · — ?</text>
+    <text x="604" y="212" fill="#4a5a43">1b schedule · H</text>
+    <text x="718" y="346" fill="#4a5a43">2 photos · M–L</text>
+    <text x="740" y="510" fill="#4a5a43">3a ID · L*</text>
+    <text x="672" y="706" fill="#8d86a8" font-weight="bold">4 household sync · — ?</text>
+    <text x="528" y="800" fill="#4a5a43">5 payment · L–M</text>
+    <text x="332" y="800" text-anchor="end" fill="#4a5a43">6 offline · M–H</text>
+    <text x="186" y="706" text-anchor="end" fill="#4a5a43">7 pairing · L</text>
+    <text x="118" y="528" text-anchor="end" fill="#4a5a43">8 privacy · H</text>
+    <text x="142" y="346" text-anchor="end" fill="#4a5a43">10 store · M–H</text>
+    <text x="252" y="212" text-anchor="end" fill="#4a5a43">12 support · H(poor)</text>
+  </g>
+
+  <!-- right column: legend + reading -->
+  <g>
+    <text x="856" y="208" class="mono" font-size="13" letter-spacing="3" fill="#7c8a6e">HOW TO READ IT</text>
+    <line x1="856" y1="226" x2="902" y2="226" stroke="#2e5d43" stroke-width="2.2"/>
+    <text x="914" y="231" class="disp" font-size="16.5" fill="#3a3527">required bar (H = rim, M = inner)</text>
+    <line x1="856" y1="258" x2="902" y2="258" stroke="#c4683f" stroke-width="2.8"/>
+    <text x="914" y="263" class="disp" font-size="16.5" fill="#3a3527">actual state, in the doc's words</text>
+    <rect x="856" y="282" width="46" height="18" fill="url(#unk)" stroke="#8d86a8" stroke-width="1"/>
+    <text x="914" y="296" class="disp" font-size="16.5" fill="#3a3527">uncharted — no oracle can judge it yet</text>
+
+    <text x="856" y="354" class="mono" font-size="13" letter-spacing="3" fill="#7c8a6e">THE READING</text>
+    <text x="856" y="384" class="disp" font-size="17.5" fill="#3a3527">The two holes <tspan font-style="italic">are</tspan> the headline: reminder</text>
+    <text x="856" y="408" class="disp" font-size="17.5" fill="#3a3527">delivery — the #1 measured churn driver —</text>
+    <text x="856" y="432" class="disp" font-size="17.5" fill="#3a3527">and household sync have no oracle at all.</text>
+    <text x="856" y="456" class="disp" font-size="17.5" fill="#3a3527">Phase 0 builds the delivery ledger before</text>
+    <text x="856" y="480" class="disp" font-size="17.5" fill="#3a3527">anything else gets called “fixed”.</text>
+
+    <text x="856" y="528" class="disp" font-size="17.5" fill="#3a3527">Where the line runs close to the rim —</text>
+    <text x="856" y="552" class="disp" font-size="17.5" fill="#3a3527">schedule math, photo privacy — the doc has</text>
+    <text x="856" y="576" class="disp" font-size="17.5" fill="#3a3527">real evidence: a property suite, an authz</text>
+    <text x="856" y="600" class="disp" font-size="17.5" fill="#3a3527">test suite and a pen-test. Not vibes.</text>
+
+    <text x="856" y="648" class="disp" font-size="15" font-style="italic" fill="#7a7259">* 3a is rendered low because its evidence is low —</text>
+    <text x="856" y="670" class="disp" font-size="15" font-style="italic" fill="#7a7259">the doc calls the “feels fine” read over-confident.</text>
+
+    <text x="856" y="722" class="mono" font-size="12.5" fill="#9a9176">Positions are a judged read of the risk map's</text>
+    <text x="856" y="740" class="mono" font-size="12.5" fill="#9a9176">prose, not measurements. The body wins.</text>
+  </g>
+
+  <!-- provenance -->
+  <text x="56" y="846" class="mono" font-size="13" fill="#9a9176">derived from quality/strategy.md · 2026-06-11 · the strategy is the source of truth · confidence H/M/L = High/Medium/Low · — = Unknown: no oracle exists yet</text>
+</svg>
