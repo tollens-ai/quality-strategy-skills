@@ -8,7 +8,7 @@ The inventory at the end of this sub-step is **raw**: composite dimensions (seve
 
 ## What you need from the previous sub-step
 
-Read all of Parts 1–4 from `quality/strategy.md`. The release purpose (Part 2), stakeholders and three-lens (Part 3), and non-goals (Part 4) feed directly into which dimensions matter. Read the **Design observations and likely-relevant dimensions** section of `quality/pre-read.md` — subagent C already surfaced design-implied dimensions.
+Read all of Parts 1–4 from `quality/strategy.md`. The release purpose (Part 2), stakeholders and three-lens (Part 3), and non-goals (Part 4) feed directly into which dimensions matter. Read the **Design observations and likely-relevant dimensions** and **Floor predicates** sections of `quality/pre-read.md` — subagent C surfaced both the design-implied dimensions and the factual floor predicates the guaranteed-inclusion layer (step 4 below) reads.
 
 ## The work, in order
 
@@ -78,7 +78,7 @@ The user resolves subagent-only candidates. And when one of them is something th
 
 The bottom-up and top-down passes both surface dimensions *because a bar or a design observation pointed at them*. Some dimensions can't wait for that — the cost of their silent absence is too high, and the kp3136 launch-gate run proved it: the sweep produced **no security dimension at all** on a project whose headline risk was rating forgery through client-writable data. So two classes of dimension enter the inventory by a different door — not surfaced *if* something references them, but present *unless* explicitly handled. The difference between them is whether the user is even allowed to remove them.
 
-**Tier 1 — Floors (non-negotiable given a factual predicate).** A floor is unconditional once a plain factual predicate about the system holds — checked in the pre-read, never negotiated as a preference. There is no coherent project where, shown the trace, a user accepts violating one. For each floor whose predicate holds (read them from the pre-read's floor-predicate line — sub-step 0), the corresponding dimension enters the inventory, full stop. The only conversation is **what the floor demands *here*** — which may be very little — never **whether it applies.** The ratified catalogue:
+**Tier 1 — Floors (non-negotiable given a factual predicate).** A floor is unconditional once a plain factual predicate about the system holds — checked in the pre-read, never negotiated as a preference. There is no coherent project where, shown the trace, a user accepts violating one. For each floor whose predicate holds (read them from the **Floor predicates** section of `quality/pre-read.md`), the corresponding dimension enters the inventory, full stop. The only conversation is **what the floor demands *here*** — which may be very little — never **whether it applies.** The ratified catalogue:
 
 | Floor | Factual predicate (checked in pre-read) |
 |---|---|
