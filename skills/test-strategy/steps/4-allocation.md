@@ -96,6 +96,7 @@ While running the exchange:
 - [ ] Items tagged "unknown — try and see" are explicitly listed as calibration triggers for sub-step 5's update protocol.
 - [ ] Agent-allocated rows have a named review pattern (who reviews, what they're looking for).
 - [ ] Smell-presence question (FRAMINGS.md #9) was asked at least once.
+- [ ] Exploratory-testing rows are allocated to an exploratory tester (human by default; any agent allocation is `unknown — try and see` with a human-baseline calibration item), and testing-in-production rows have their instrumentation and recovery path named or rowed (FRAMINGS.md #11).
 - [ ] Pre-read sources cited.
 
 If any check fails, return to the exchange. Do not proceed to sub-step 5.

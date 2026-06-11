@@ -17,6 +17,8 @@ This is a Claude Code plugin:
 
 Then, in any project, start with `/quality-strategy`. Output goes to `quality/strategy.md` at the project root. (Skills are also available namespaced, e.g. `/quality-strategy:test-strategy`, if a bare name ever collides with another plugin.)
 
+New versions ship regularly — run `claude plugin update quality-strategy` to pick them up; [CHANGELOG.md](CHANGELOG.md) says what changed.
+
 ## The typical flow
 
 1. **`/quality-strategy`** — the main event. A structured interview produces `quality/strategy.md`, ends with a built-in audit, and points you at the follow-ons.

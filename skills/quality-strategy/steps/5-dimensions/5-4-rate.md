@@ -102,6 +102,7 @@ What you must not do:
 - [ ] Every **None** has been confirmed: no stakeholder bar at any lens references it.
 - [ ] Per-stakeholder ratings were produced by the **sealed-context subagent** and saved verbatim to `quality/.scratch/5.4-dimension-rating.md`.
 - [ ] Every **divergence** was surfaced to the user, and the merge decision is recorded with a one-line note.
+- [ ] Tradeoffs knowingly made at the merge are recorded (what was traded, the bar it still satisfies, the reopen trigger) — or the section records "none recorded this pass".
 - [ ] Rating vocabulary is **H / M / None** — no L, no percentages.
 - [ ] Any deferred items are recorded as `OPEN QUESTION:`.
 - [ ] Pre-read sources are cited in the section's evidence field — naming actual files referenced, or, for an interview-derived / no-repo pre-read, citing the interview honestly (never blank, never a placeholder).

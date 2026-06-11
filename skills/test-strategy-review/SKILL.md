@@ -28,7 +28,7 @@ File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **
 Read the following (all under `$PLUGIN_ROOT`):
 
 - `$PLUGIN_ROOT/PHILOSOPHY.md` — the framework grounding.
-- `$PLUGIN_ROOT/skills/test-strategy/FRAMINGS.md` — the ten anti-default framings that shape what a good test strategy looks like.
+- `$PLUGIN_ROOT/skills/test-strategy/FRAMINGS.md` — the eleven anti-default framings that shape what a good test strategy looks like.
 - `$PLUGIN_ROOT/skills/test-strategy/INDICATORS.md` — the five outcome-oriented indicators (Direction / Priority / Sufficiency / Feasibility / Honesty) plus the mechanical oracle list.
 
 ## What you need

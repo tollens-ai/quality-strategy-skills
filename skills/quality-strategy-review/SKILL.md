@@ -115,6 +115,7 @@ Use the `Agent` tool with three calls in a single message.
 > - **Dimension scout** — if Part 5 is present, expect `5.1-dimension-scout.md`.
 > - **Dimension rating** — if Part 5 dimension ratings are present, expect `5.4-dimension-rating.md`. A missing `5.4-dimension-rating.md` when Part 5 ratings exist is a **FAIL** — the rating dispatch was silently skipped or fabricated.
 > - **Oracle adequacy (Q2)** — if Part 6's actual-state assessment is present, expect `6.2-oracle-adequacy.md`.
+> - **Design deep-dive (conditional)** — if Part 6's actual-state assessment is present, expect `6.2-design-deep-dive.md` *or* an explicit skip note in the doc saying no thin-evidence dimension was design-shaped; neither present is a silently-skipped dispatch.
 > - **Step-boundary contradiction checks** — for EACH completed step boundary the doc has reached, expect a `<boundary>-contradiction-check.md`. The boundaries are 1.5, 2.1, 3.2, 4.1, 5.5, 6.3, 7.3 — i.e. for each Part present in the doc, the corresponding boundary check should have run (Part 1 → 1.5, Part 2 → 2.1, Part 3 → 3.2, Part 4 → 4.1, Part 5 → 5.5, Part 6 → 6.3, Part 7 → 7.3). A missing boundary contradiction-check scratch file for a Part that IS present is a **FAIL** — a required dispatch was silently skipped — regardless of whether the strategy claims it.
 > - **Distillation** — if the Operational TL;DR / triage rubric is present at the top of the doc, expect `7.3-operational-distillation.md`.
 >

@@ -108,6 +108,7 @@ This is the place to apply principle 5 (don't import old-world costs) explicitly
 - [ ] Items within each tier are ordered by cheapest-resolution-first.
 - [ ] At least one calibration item is included if the project has unknowns about human-vs-agent costs (most do; if not, the user has explicitly said why not).
 - [ ] Old-world-costs check has been done (FRAMINGS.md #5) — user was prompted at least once on whether previously-skipped items are now cheap.
+- [ ] Experience-shaped learning needs carry methods from the named classes (exploratory testing / testing in production, FRAMINGS.md #11) — none rests on spec-level checks alone.
 - [ ] The fresh-eyes defect-recon candidate (Pass 3) is in the tier list, or the user's reason for dropping it is recorded.
 - [ ] Pre-read sources cited.
 

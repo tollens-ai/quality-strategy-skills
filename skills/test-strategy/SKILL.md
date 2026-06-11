@@ -24,7 +24,7 @@ Two prerequisites:
 
 1. **`quality/strategy.md` must exist** at the project root, completed at least through Part 6 (Risk Map). If it does not, stop and direct the user to `/quality-strategy` first. You can't build a test strategy from nothing — without a risk map, you'd be guessing where to spend effort, which is the opposite of what this skill is for.
 
-2. **Read `$PLUGIN_ROOT/PHILOSOPHY.md`, `$PLUGIN_ROOT/skills/test-strategy/FRAMINGS.md`, and `$PLUGIN_ROOT/skills/test-strategy/INDICATORS.md`.** PHILOSOPHY.md explains the thinking behind the framework. FRAMINGS.md holds ten framings that counter agent defaults — without them, /test-strategy will drift toward producing a test plan rather than a test strategy. INDICATORS.md lists the five indicators (Direction / Priority / Sufficiency / Feasibility / Honesty) the finished strategy will be reviewed against; knowing them up front shapes the work. None of these are optional.
+2. **Read `$PLUGIN_ROOT/PHILOSOPHY.md`, `$PLUGIN_ROOT/skills/test-strategy/FRAMINGS.md`, and `$PLUGIN_ROOT/skills/test-strategy/INDICATORS.md`.** PHILOSOPHY.md explains the thinking behind the framework. FRAMINGS.md holds eleven framings that counter agent defaults — without them, /test-strategy will drift toward producing a test plan rather than a test strategy. INDICATORS.md lists the five indicators (Direction / Priority / Sufficiency / Feasibility / Honesty) the finished strategy will be reviewed against; knowing them up front shapes the work. None of these are optional.
 
 ## How this skill is structured
 
