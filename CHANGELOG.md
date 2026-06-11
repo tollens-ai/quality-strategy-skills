@@ -4,6 +4,14 @@ All notable changes to the `quality-strategy` plugin, oldest at the bottom. The 
 
 **Release discipline (maintainers):** every version bump updates this file *in the same commit* — a bump without a changelog entry doesn't merge.
 
+## [0.3.4] — 2026-06-11
+
+### Changed
+
+- `/quality-artefacts`, **the gallery** (live-testing items 13 / AU-1): a bare invocation or "what can you make?" no longer guesses a default view — it opens a gallery with the **freeform describe-your-own path headlined above** the worked examples, which become **pickable starting points** (social card / risk heatmap / multi-frame roast-with-receipts story / interactive dashboard / radar). The presets stay starting points, never a menu: when the user **did** bring a brief, they are still never routing keys — the "worked examples, not a menu" doctrine is untouched for that path.
+- `/quality-artefacts`, **register is elicited, never assumed** (items 14 / AU-3): when the ask carries no tone/register signal, the skill asks ("straight for stakeholders, or shall I roast you? — receipts either way") or folds register into the gallery moment, instead of defaulting to austere. Permission to want something fun, silly, or savage is granted **explicitly** — bland-in must not become austere-out; a roast cashes out to principle 1's evidence-backed-savagery licence.
+- `/quality-artefacts`, **revelation-led titles** (Retest C / AVo-7 carry-forward): principle 6 sharpened — when the source doc carries a never-realised-you-cared truth, the **title leads with it** (revelation as the hero line, the stat a supporting band). A generic framing title sitting above a revelation demoted to a caption or left to inference is now the **named failure**, with a FAIL/PASS instance; the step-4 owner-read checks it.
+
 ## [0.3.2] — 2026-06-11
 
 ### Added
