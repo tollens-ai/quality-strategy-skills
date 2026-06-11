@@ -8,11 +8,11 @@
 
 *A view of the body below — if anything here conflicts with Parts 1–7, the body wins.*
 
-Fernly keeps people's plants alive, and right now it doesn't always do that: missed reminders kill plants, dead plants kill retention, and a 4.2 App Store rating (down from 4.6) is killing acquisition. Everything in this strategy bends toward one event — the Greenhouse paid-tier relaunch in September — and the trust repair that has to land first.
+Fernly keeps people's plants alive, and right now it doesn't always do that: missed reminders kill plants, dead plants kill retention — the angry reviews say so, and nothing we run can measure either — and a 4.2 App Store rating (down from 4.6) can only be hurting acquisition. Everything in this strategy bends toward one event — the Greenhouse paid-tier relaunch in September — and the trust repair that has to land first.
 
 - **What & for whom.** A plant-care companion (iOS/Android + web) for ~4,000 free users and ~250 paying subscribers: watering/feeding schedules with smart reminders, photo plant-ID, a care journal, household sharing, and optional Bluetooth soil sensors. Built by Maya (founder-developer), a part-time designer, and a pool of coding agents.
 - **What good looks like.** A reminder that fires every time or tells us when it didn't; a journal photo that can never be silently lost again; a payment that always matches an entitlement; an App Store rating climbing back past 4.4 before the Greenhouse relaunch.
-- **Where we are.** Reminder delivery is our #1 churn driver and we have zero telemetry on it — we literally cannot see silent failures. Household sync convergence has never been tested. Plant-ID accuracy is assumed fine on no evidence. Payment-webhook reconciliation does not exist. Schedule math, by contrast, is genuinely solid (property-tested).
+- **Where we are.** Reminder delivery is our prime churn suspect — suspect, not finding, because we have zero telemetry on it and literally cannot see silent failures; the case rests on one-star reviews and the support inbox. Household sync convergence has never been tested. Plant-ID accuracy is assumed fine on no evidence. Payment-webhook reconciliation does not exist. Schedule math, by contrast, is genuinely solid (property-tested).
 - **First moves.** Phase 0 is a single gate: build reminder-delivery telemetry so we stop guessing. Then Trust Repair (Release 1): journal-photo round-trip oracle, backup-restore drill, household-sync simulation. Only then Greenhouse readiness (Release 2): entitlement matrix, webhook reconciliation.
 - **Deliberately out.** No community feed (ENFORCE), no custom hardware, no AI care chatbot, no gamification, no web feature parity. The non-goals exist to keep a two-person studio alive; see Part 4 before saying yes to anything.
 - **Load-bearing guards.** The schedule-correctness property suite (do not weaken it to ship faster), the photo-upload two-phase commit added after the March incident, and the App Store release checklist. These are the only nets currently under us.
@@ -22,7 +22,7 @@ Fernly keeps people's plants alive, and right now it doesn't always do that: mis
 Walk this in order for any incoming bug, feature request, or agent work item:
 
 1. **Does it touch journal photos or any user-created data?** If yes, treat as a data-integrity issue regardless of apparent severity. After the March photo loss, "probably fine" is not an acceptable answer here. Escalate to Maya same-day.
-2. **Could it cause a reminder to not fire, or to fire at the wrong time?** Silent non-delivery is the #1 churn cause. If the failure mode is *silent*, rank it above anything cosmetic, even crashes (a crash gets reported; a missed reminder gets a dead fern and a quiet uninstall).
+2. **Could it cause a reminder to not fire, or to fire at the wrong time?** Silent non-delivery is our prime churn suspect — it's what the dead-plant reviews and support emails keep naming. If the failure mode is *silent*, rank it above anything cosmetic, even crashes (a crash gets reported; a missed reminder gets a dead fern and a quiet uninstall).
 3. **Does it touch payments, entitlements, or the free/paid boundary?** Charging someone without granting access — or revoking 250 subscribers by accident — is a Greenhouse-relaunch dealbreaker. Check dimension 5 in the risk map before merging anything here.
 4. **Who is the affected stakeholder?** A paying Greenhouse subscriber or a 50-plant power user outranks a casual free user for this release cycle (they are the relaunch audience). Check Part 3 dealbreakers.
 5. **Is it on the non-goals list (Part 4)?** If yes, decline with the documented rationale, note the trigger-to-revisit, and move on. Do not relitigate in the issue thread.
@@ -46,7 +46,7 @@ Fernly is a plant-care companion app for iOS, Android, and the web. Core loop: y
 
 The business is freemium: free users get 10 plants; the paid "Greenhouse" tier ($3.99/month or $39.90/year) gets unlimited plants, sensor integration, and household sharing. Today: ~4,000 monthly-active free users, ~250 Greenhouse subscribers, ~$960 MRR. The September relaunch repositions Greenhouse with annual-first pricing, a refreshed onboarding, and sensor support out of beta.
 
-The quality story that matters most: **exit surveys say 38% of churned users left after a plant died, and the most common written reason is a reminder that never arrived.** Second: plant-ID complaints ("it called my pothos a philodendron — again") are 1-in-5 of one-star reviews. Third: in March 2026 a journal-photo sync bug deleted local photos before confirming upload, permanently losing photos for roughly 40 users; several were photos of plants that have since died. The App Store rating slid from 4.6 to 4.2 across these three stories. Fourth: sensor pairing generates 31% of support inbound for a feature 6% of users have.
+The quality story that matters most: **dead plants drive quits, and we believe — but cannot measure — that missed reminders are the cause.** Fernly has no churn instrumentation, so the evidence is the scrappy kind a two-person studio actually has: of the one-star App Store reviews that say anything specific, dead plants and wrong plant IDs dominate, and in the dead-plant ones the most-named culprit is a reminder that never arrived; the support inbox gets a steady trickle of "my reminder didn't fire" emails — presumably the visible tip, since most people uninstall without writing; and the friend whose feedback shaped v1 quit the app herself after her calathea died during a silent week. Second: plant-ID complaints ("it called my pothos a philodendron — again") run through roughly 1-in-5 of the one-star reviews. Third: in March 2026 a journal-photo sync bug deleted local photos before confirming upload, permanently losing photos for roughly 40 users; several were photos of plants that have since died. The App Store rating slid from 4.6 to 4.2 across these stories — the one quality meter we have that somebody else runs for us. Fourth: sensor pairing generates 31% of support inbound for a feature roughly 6% of users have — that one we *can* count, because Maya answers every email and the sensor accounts sync through our backend.
 
 ### The team
 
@@ -85,7 +85,7 @@ Target: September 2026. Theme: make the paid tier worth $39.90 and impossible to
 
 ### Release 3: Sensor Ecosystem
 
-Target: Q1 2027, sketch only. Broaden beyond the SproutSense probe to 2–3 sensor models, auto-adjusting schedules from moisture trends, maybe a "sensor health" view. Deliberately under-planned: everything here is contingent on R2 proving that sensor users retain better (current weak signal: they do, n=140, not significant).
+Target: Q1 2027, sketch only. Broaden beyond the SproutSense probe to 2–3 sensor models, auto-adjusting schedules from moisture trends, maybe a "sensor health" view. Deliberately under-planned: everything here is contingent on R2 proving that sensor users retain better (current weak signal from the server-side activity of the ~140 sensor accounts: they do, slightly — not statistically significant).
 
 ## Part 3: Who Matters
 
@@ -173,7 +173,7 @@ Stakeholders, roughly in order of strategic weight this cycle: paying Greenhouse
 
 #### High (Dealbreaker for ≥1 stakeholder)
 
-- **1a Reminder delivery reliability** — the dead-fern dealbreaker for casual users and the #1 measured churn driver; silent failure is the defining risk of the product. R1.
+- **1a Reminder delivery reliability** — the dead-fern dealbreaker for casual users and our prime churn suspect (the angry reviews and the support inbox both point here; nothing measures it); silent failure is the defining risk of the product. R1.
 - **1b Reminder schedule correctness** — a reminder that fires at the wrong time kills plants as surely as one that doesn't fire; power users' overrides make this combinatorial. R1.
 - **2 Journal/photo data integrity** — a lost journal photo of a plant that has since died is unrecoverable and unforgivable; the March incident makes this existential, and Maya's own dealbreaker. R1.
 - **4 Household sync correctness** — sync that lies causes double-watering deaths and overwritten histories; dealbreaker for households and a paid-tier feature. R1 testing, R2 bar.
@@ -190,7 +190,7 @@ Stakeholders, roughly in order of strategic weight this cycle: paying Greenhouse
 
 #### None (no stakeholder bar references it)
 
-- **3b Plant-ID latency** — current p90 is ~3.5s including cloud fallback; nobody has ever complained; a plant is not in a hurry.
+- **3b Plant-ID latency** — the cloud-fallback half takes ~2s measured server-side; the on-device path is unmeasured, and nobody has ever complained in a review or email; a plant is not in a hurry.
 - **9 Battery drain** — BLE polling is duty-cycled and no review or ticket mentions battery; watch it, don't work it.
 - **11 Maintainability/agent-friendliness** — load-bearing as a *means* (the agents' good-enough bar is handled by oracle-building in Part 7) but no end-user bar references it directly this cycle.
 
@@ -211,7 +211,7 @@ Stakeholders, roughly in order of strategic weight this cycle: paying Greenhouse
 #### 1a Reminder delivery reliability (H)
 
 - **Required:** ≥ 99% of materialised reminders arrive on-device within 15 minutes of schedule, and every non-delivery is visible to us within a day. **Conf (req): H.**
-- **Actual:** Unknown. We have no delivery telemetry whatsoever — the worker logs "sent to FCM/APNs" and nothing confirms device arrival, so silent failure is structurally invisible. The 38%-churn-from-dead-plants figure is the only signal, and it arrives months late. **Conf (act): —.**
+- **Actual:** Unknown. We have no delivery telemetry whatsoever — the worker logs "sent to FCM/APNs" and nothing confirms device arrival, so silent failure is structurally invisible. The only outside signals are one-star reviews and support emails about dead plants — written weeks after the failure, only by the users angry enough to write, naming causes we cannot verify. **Conf (act): —.**
 - **Resolve:** Phase 0, action A. This is the gate on everything else.
 
 #### 1b Reminder schedule correctness (H)
@@ -301,7 +301,7 @@ The Release 1 workstream: convert the data-integrity and sync Unknowns into meas
 - **D. Plant-ID golden dataset and score** (oracle-build) — assemble 500 real user photos (opt-in flagged set), have them labelled (Maya + a hired horticulture student, ~$400), score top-1 accuracy and uncertainty calibration. Replaces the over-confident 3a "feels fine" with a number; informs whether 3a work enters R2 scope.
 - **E. Household sync convergence simulation** (testing) — agent-built two-client simulator driving randomised concurrent edits, offline windows, and watered-event races against a test backend; assert convergence and no lost/doubled events. Resolves the dimension 4 Unknown. Fixes it reveals are R1 scope.
 - **I. Daily-care exploratory dogfood loop** (testing) — the charters and friction-note instrumentation from Part 6's daily-care entry: monthly intention-based exploration by Maya and Iris, a dogfood-only "this felt wrong" tap, monthly triage. The one Phase 1 item whose oracle is deliberately a person — it buys the delight evidence the automated oracles (A, B, D, E) cannot.
-- **F. Churned-user interviews** (stakeholder) — Maya emails 30 users who churned after a dead-plant exit survey, offers a year of Greenhouse for 20 minutes; validates that 1a fixes target the actual failure stories and recruits a win-back cohort for the relaunch.
+- **F. Churned-user interviews** (stakeholder) — Maya writes to the leavers we can actually find: everyone who emailed support about a dead plant or a silent reminder, plus lapsed Greenhouse subscribers (the one churn list we do have, via the billing records), offering a year of Greenhouse for 20 minutes. This is how the dead-plant churn story gets upgraded from reviews-and-anecdote to first-hand failure stories — and it recruits a win-back cohort for the relaunch.
 
 ### Phase 2: Greenhouse relaunch readiness
 
@@ -312,6 +312,6 @@ OPEN QUESTION: Can RevenueCat's sandbox actually simulate the refund and plan-ch
 
 ### Aware, not investing this release
 
-- **3b Plant-ID latency and 9 battery drain** — both rated None with quiet telemetry/reviews; we keep the existing dashboards and do nothing unless a threshold trips (p90 ID > 6s, or battery mentions appear in reviews).
+- **3b Plant-ID latency and 9 battery drain** — both rated None on quiet reviews and an empty support inbox; we keep watching the reviews and the server-side cloud-fallback timings (the only latency we can see) and do nothing unless a threshold trips (fallback ID time climbing past a few seconds, or battery mentions appearing in reviews).
 - **11 Maintainability/agent-friendliness** — served indirectly: every oracle in this plan (A, B, D, E, G) is also agent-verifiable infrastructure; no standalone refactoring workstream this cycle.
 - **Offline multi-day behavior (6)** — the 72h-offline scenario stays untested until after R2; the photo-queue half (the loss-risk half) is already covered by B.

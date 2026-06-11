@@ -94,9 +94,9 @@
 <section class="frame dark" id="f1">
   <p class="kick">FERNLY · A PLANT-CARE APP · ITS QUALITY STORY</p>
   <h2>A dead fern. A quiet uninstall.</h2>
-  <div class="hero-num" style="color:var(--terra)">38%</div>
-  <div class="hero-sub" style="color:var(--milk)">OF QUITS FOLLOW A DEAD PLANT — EXIT SURVEYS</div>
-  <p class="cap">Fernly is a plant-care app heading for a paid relaunch in September. Exit surveys say 38% of quitting users left after a plant died — and the most-named cause is a reminder that never arrived.</p>
+  <div class="hero-num" style="color:var(--terra);font-size:clamp(72px,14vw,180px)">4.6&thinsp;→&thinsp;4.2</div>
+  <div class="hero-sub" style="color:var(--milk)">OUR APP STORE RATING — THE ONE METER SOMEBODY ELSE RUNS</div>
+  <p class="cap">Fernly is a plant-care app heading for a paid relaunch in September — and with nothing measuring the things that kill plants, the App Store is the meter that tells its story. The rating slid from 4.6 to 4.2, and of the one-star reviews that say anything, dead plants dominate — the most-named cause, a reminder that never arrived.</p>
   <div class="hint">SCROLL ↓</div>
   <div class="frameprov">FERNLY, A PLANT-CARE APP · QUALITY STORY 1/6 · from quality/strategy.md · 2026-06-11</div>
 </section>
@@ -153,7 +153,7 @@
       <div class="lbl"><span class="bignum" style="color:var(--terra);font-size:1.6em">0</span> RESTORES PRACTICED</div>
     </div>
   </div>
-  <p class="cap">After losing 40 users' photos in March, Fernly backs everything up — but a restore has never once been practiced; in the strategy's own words, "we are one bad migration from finding out live." The plan scripts the first drill, then repeats it monthly.</p>
+  <p class="cap">After losing roughly 40 users' photos in March, Fernly backs everything up — but a restore has never once been practiced; in the strategy's own words, "we are one bad migration from finding out live." The plan scripts the first drill, then repeats it monthly.</p>
   <div class="frameprov">FERNLY, A PLANT-CARE APP · QUALITY STORY 4/6 · from quality/strategy.md · 2026-06-11</div>
 </section>
 
@@ -207,7 +207,7 @@
   "strategyDate": "2026-06-11",
   "view": "multi-frame quality story (public)", "skillVersion": "0.3.0",
   "frames": [
-    {"n": 1, "title": "A dead fern. A quiet uninstall.", "heroStat": {"value": "38%", "meaning": "of quits follow a dead plant (exit surveys)", "evidenceStrength": "surveyed"}, "source": "Part 1: exit surveys say 38% of churned users left after a plant died; most common written reason: a reminder that never arrived. Part 3 casual-parent dealbreaker: a dead fern, a one-star review naming the fern, a quiet uninstall"},
+    {"n": 1, "title": "A dead fern. A quiet uninstall.", "heroStat": {"value": "4.6 → 4.2", "meaning": "App Store rating slide across the dead-plant, photo-loss and plant-ID stories", "evidenceStrength": "measured — externally, by the App Store"}, "source": "Part 1: rating slid 4.6 to 4.2; no churn instrumentation exists, so the evidence base is one-star reviews (dead plants and wrong plant IDs dominate; most-named culprit, a reminder that never arrived), a support-inbox trickle of 'my reminder didn't fire', and one friend's dead calathea. Part 3 casual-parent dealbreaker: a dead fern, a one-star review naming the fern, a quiet uninstall"},
     {"n": 2, "title": "Do reminders arrive? Does sync agree? Unknown.", "holes": [{"dim": "reminder delivery (1a)", "evidence": "measured 0 times, ever"}, {"dim": "household sync (4)", "evidence": "convergence never tested, not once"}], "source": "both Conf(act) = — : no oracle exists"},
     {"n": 3, "title": "Where we have receipts.", "proven": [{"dim": "schedule math (1b)", "evidence": "~400 generated cases per CI run; 11 regressions caught since January"}, {"dim": "photo privacy (8)", "evidence": "February pen-test found no photo-access issues; authz suite in CI; 15-minute signed URLs"}]},
     {"n": 4, "title": "We back up. We never rehearse.", "heroStat": {"value": 0, "meaning": "backup restores ever practiced"}, "source": "risk map 2: backups exist, restoring them is untested — 'one bad migration from finding out live'; plan action C scripts a monthly drill"},

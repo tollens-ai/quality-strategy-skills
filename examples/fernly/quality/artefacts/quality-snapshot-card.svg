@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="Fernly quality snapshot: reminder delivery has been measured zero times, ever">
   <title>Fernly — where quality stands (derived from quality/strategy.md, 2026-06-11)</title>
-  <desc>Tweet-sized quality snapshot for Fernly, a plant-care reminder app. Hero stat: zero — the number of times reminder delivery, the number-one reason users quit, has ever been measured. Household sync is also unmeasurable today, photo-backup restore has never been rehearsed, while schedule math is proven by a property-test suite. First move: build the missing measurement.</desc>
+  <desc>Tweet-sized quality snapshot for Fernly, a plant-care reminder app. Hero stat: zero — the number of times reminder delivery, the suspected cause of the dead plants that fill the angry app-store reviews, has ever been measured. Household sync is also unmeasurable today, photo-backup restore has never been rehearsed, while schedule math is proven by a property-test suite. First move: build the missing measurement.</desc>
   <metadata id="strategy-data">{
     "project": "Fernly",
     "derivedFrom": "quality/strategy.md",
     "strategyDate": "2026-06-11",
     "view": "one-image quality snapshot (public)", "skillVersion": "0.3.0",
-    "heroStat": {"value": 0, "meaning": "times reminder delivery — the #1 reason users quit — has ever been measured"},
-    "headline": "Missed reminders kill plants. Dead plants kill retention.", "churnEvidence": "exit surveys: 38% of churned users left after a plant died; most common written reason: a reminder that never arrived",
+    "heroStat": {"value": 0, "meaning": "times reminder delivery — the suspected cause of the dead plants that dominate the one-star reviews — has ever been measured"},
+    "headline": "Missed reminders kill plants. Dead plants kill retention.", "churnEvidence": "of the one-star App Store reviews that say anything specific, dead plants and wrong plant IDs dominate; in the dead-plant ones the most-named cause is a reminder that never arrived — no churn instrumentation exists, so reviews and the support inbox are the whole evidence base",
     "rows": [
       {"verdict": "can't measure yet", "dimension": "Reminder delivery (1a)", "strategyConfidence": "—"},
       {"verdict": "can't measure yet", "dimension": "Household sync (4)", "strategyConfidence": "—"},
@@ -53,8 +53,8 @@
   <text x="66" y="220" class="disp" font-size="54" font-style="italic" fill="#d98c5f">Dead plants kill retention.</text>
 
   <!-- caption: 2 sentences, opens with what the project is -->
-  <text x="68" y="264" class="disp" font-size="19" fill="#b9c4ab">Fernly reminds people to water their plants. Exit surveys: 38% of quits follow a dead plant —</text>
-  <text x="68" y="290" class="disp" font-size="19" fill="#b9c4ab">the most-named cause, a reminder that never arrived.</text>
+  <text x="68" y="264" class="disp" font-size="19" fill="#b9c4ab">Fernly reminds people to water their plants. Of the one-star reviews that say anything,</text>
+  <text x="68" y="290" class="disp" font-size="19" fill="#b9c4ab">dead plants dominate — and the most-named cause is a reminder that never arrived.</text>
 
   <!-- hero stat -->
   <text x="218" y="528" class="disp" font-size="270" fill="#d98c5f" text-anchor="middle">0</text>

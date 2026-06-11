@@ -9,7 +9,7 @@
     "view": "static overview poster — the two holes (twelve dimensions)", "skillVersion": "0.3.0",
     "legend": {"healthy": "proven by tests or an outside check", "mostly": "mostly solid", "judged-by-people": "deliberately judged by people, not scripts", "paling": "known gap, work queued", "hole": "nobody can measure it yet (strategy confidence: —)"},
     "leaves": [
-      {"dimension": "Reminder delivery (1a)", "state": "hole", "note": "no delivery telemetry; #1 churn driver"},
+      {"dimension": "Reminder delivery (1a)", "state": "hole", "note": "no delivery telemetry; prime churn suspect per reviews and support inbox"},
       {"dimension": "Household sync (4)", "state": "hole", "note": "convergence never tested"},
       {"dimension": "Schedule math (1b)", "state": "healthy", "note": "property suite, 11 regressions caught"},
       {"dimension": "Photo privacy (8)", "state": "healthy", "note": "pen-test clean, authz suite in CI"},

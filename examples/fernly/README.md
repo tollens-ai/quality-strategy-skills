@@ -19,6 +19,8 @@ Everything in `quality/` follows from facts that are deliberately *not your fact
 
 For the same reason, **no skill in this pack reads this sample while it runs.** Keeping it out of every prompt path is a deliberate guard, not an oversight — agents anchor hard on whatever strategy document is in front of them, and a sample in context would quietly become a template. Contributors: don't add references to `examples/` from any `SKILL.md` or step file.
 
+One more maintenance rule: **the sample's fictional evidence must be the kind its fictional team could actually possess** — convenient evidence is a verisimilitude bug. (We shipped one: a quantified exit-survey churn stat in a product whose whole premise is that churn causes are invisible; fixed 2026-06-11. A two-person studio with zero instrumentation has App Store reviews, a support inbox, and anecdotes — not survey percentages.)
+
 ## Second role: the standard regression fixture
 
 Fernly is also the pack's fixture for exercising the *downstream* skills (the ones that consume a finished strategy) without a live interview. When changing `/quality-artefacts`, `/strategy-variants`, `/operational-distillation`, the review skills, or anything else that reads `quality/strategy.md`, smoke-test against a scratch copy of this directory:
