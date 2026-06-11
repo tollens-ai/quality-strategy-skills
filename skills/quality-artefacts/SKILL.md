@@ -105,6 +105,7 @@ Design the phone-screenshot frame before anything else: the graphic that carries
 - **SVG for the static and croppable** (cards, posters, heatmaps; fixed canvas sized to destination — a social card is 1200×675; text as real `<text>` elements). **HTML for the interactive and multi-frame** (inline CSS and vanilla inline JS only, no frameworks; for a story, full-viewport frames with CSS scroll-snap screenshot clean on their own; interactivity serves the reading, never decorates it).
 - **Dual legibility — the artefact serves agents too.** Every encoded value is also present as readable text (names, levels, confidence letters), and the underlying data is embedded machine-readably — a `<script type="application/json">` data island in HTML, a `<metadata>` block in SVG — so an agent can re-derive what the artefact shows without parsing pixels.
 - **Provenance caption, on the artefact itself**, visibly but unobtrusively: the project name, *derived from quality/strategy.md, <YYYY-MM-DD>*, and — where confidence appears — a one-line key in everyday words. The caption is what keeps a screenshot honest after it leaves home.
+- **Pack watermark**, alongside the provenance: *made with quality-strategy-skills (tollens-ai) · v<version>* — the version you noted from the manifest. Style it as a quiet footer chip in the artefact's own visual identity: provenance and shareable attribution, never a banner ad. The watermark plus version means a shared artefact carries its own origin story — and a stale version is visible in the wild.
 
 ### 4. Score yourself — render first, then the scorecard
 
@@ -145,7 +146,7 @@ Also derivable: per-stakeholder cards ("what does *good* mean for the agents?"),
 - [ ] Audience, message, and form pinned down — asked once if ambiguous, assumptions recorded if not asked.
 - [ ] Exactly one self-contained `.html` or `.svg` was written under `quality/artefacts/` (new, or the same view refreshed in place), named for its view; it renders offline from `file://` with zero external requests.
 - [ ] Every encoded value is also readable as text, and the underlying data is embedded machine-readably.
-- [ ] The artefact carries its provenance caption (project, derived-from line with date, confidence key in everyday words where used).
+- [ ] The artefact carries its provenance caption (project, derived-from line with date, confidence key in everyday words where used) and the pack watermark with version, as a quiet footer chip.
 - [ ] The seven principles were scored on the RENDERED output (every frame), with the mechanical sweeps run — and **all three hard gates scored 2/2 before presenting**.
 - [ ] The four shipped-bug checks ran: encoding declared in every form and verified mojibake-free in every plausible opening; the designer-wince judgment made; any product depiction checked detail-by-detail; any world-claim traced to the doc or cut.
 - [ ] The run is recorded in `quality/artefacts/.run-notes.md` (request, version, scorecard, assumptions) and the data island carries `skillVersion` and `selfScore`.

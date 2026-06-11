@@ -6,7 +6,7 @@
     "project": "Fernly",
     "derivedFrom": "quality/strategy.md",
     "strategyDate": "2026-06-11",
-    "view": "one-image quality snapshot (public)",
+    "view": "one-image quality snapshot (public)", "skillVersion": "0.3.0",
     "heroStat": {"value": 0, "meaning": "times reminder delivery — the #1 reason users quit — has ever been measured"},
     "headline": "Missed reminders kill plants. Dead plants kill retention.", "churnEvidence": "exit surveys: 38% of churned users left after a plant died; most common written reason: a reminder that never arrived",
     "rows": [
@@ -91,5 +91,6 @@
 
   <!-- provenance, everyday words -->
   <text x="70" y="630" class="mono" font-size="13" fill="#6f8a76">from Fernly's own quality strategy (quality/strategy.md, 2026-06-11) — the doc is the source of truth</text>
-  <text x="70" y="650" class="mono" font-size="13" fill="#6f8a76">hatched = nobody can measure this yet · orange = a known gap · green = backed by real evidence</text>
+  <text x="70" y="650" class="mono" font-size="13" fill="#6f8a76">hatched = can't measure yet · orange = known gap · green = backed by evidence</text>
+  <text x="1130" y="650" class="mono" font-size="12" fill="#54705c" text-anchor="end">made with quality-strategy-skills · tollens-ai · v0.3.0</text>
 </svg>

@@ -6,7 +6,7 @@
     "project": "Fernly",
     "derivedFrom": "quality/strategy.md",
     "strategyDate": "2026-06-11",
-    "view": "static overview poster — the two holes (twelve dimensions)",
+    "view": "static overview poster — the two holes (twelve dimensions)", "skillVersion": "0.3.0",
     "legend": {"healthy": "proven by tests or an outside check", "mostly": "mostly solid", "judged-by-people": "deliberately judged by people, not scripts", "paling": "known gap, work queued", "hole": "nobody can measure it yet (strategy confidence: —)"},
     "leaves": [
       {"dimension": "Reminder delivery (1a)", "state": "hole", "note": "no delivery telemetry; #1 churn driver"},
@@ -120,5 +120,6 @@
 
   <!-- provenance -->
   <text x="540" y="1274" class="mono" font-size="12.5" fill="#9a9176" text-anchor="middle">deep green = proven · light green = mostly solid · pale = judged by people · drying = known gap · hole = can't measure yet</text>
-  <text x="540" y="1300" class="mono" font-size="13" fill="#9a9176" text-anchor="middle">from Fernly's own quality strategy (quality/strategy.md, 2026-06-11) — the doc is the source of truth</text>
+  <text x="540" y="1294" class="mono" font-size="13" fill="#9a9176" text-anchor="middle">from Fernly's own quality strategy (quality/strategy.md, 2026-06-11) — the doc is the source of truth</text>
+  <text x="540" y="1314" class="mono" font-size="11.5" fill="#b3a98d" text-anchor="middle">made with quality-strategy-skills · tollens-ai · v0.3.0</text>
 </svg>
