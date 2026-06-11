@@ -67,7 +67,10 @@
   @media (max-width:1100px){.gatepath{flex-direction:column}.garrow{transform:rotate(90deg)}}
   /* frame 6: appendix map */
   .mapgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:10px;max-width:1060px;margin-top:1vh;width:100%}
-  .tile{border:1px solid #ddd3ba;background:#fff;padding:10px 12px;text-align:left}
+  .tile{border:1px solid #ddd3ba;padding:10px 12px;text-align:left}
+  .tile.gap{background:#f7e3d2;border-color:#dcb795}
+  .tile.mid{background:#e7eedd;border-color:#c2d0ac}
+  .tile.ok{background:#d9e9d9;border-color:#a8c9a8}
   .tile.unk{border:1.5px dashed var(--void);
     background:repeating-linear-gradient(45deg,#fff 0 9px,#f3f0fa 9px 18px)}
   .tile .nm{font-size:15.5px;color:var(--ink);margin:0 0 3px}
@@ -89,11 +92,11 @@
 
 <!-- FRAME 1 · the hero stat -->
 <section class="frame dark" id="f1">
-  <p class="kick">FERNLY · THE QUALITY STORY, TOLD HONESTLY</p>
-  <h2>The thing that kills us is invisible.</h2>
-  <div class="hero-num" style="color:var(--terra)">0</div>
-  <div class="hero-sub" style="color:var(--milk)">REMINDER DELIVERIES MEASURED — EVER</div>
-  <p class="cap">Fernly is a plant-care app heading for a paid relaunch in September; a reminder that never arrives is the #1 reason its users quit. Delivery has been measured exactly zero times — this story is the app's own strategy saying so out loud.</p>
+  <p class="kick">FERNLY · A PLANT-CARE APP · ITS QUALITY STORY</p>
+  <h2>A dead fern. A quiet uninstall.</h2>
+  <div class="hero-num" style="color:var(--terra)">38%</div>
+  <div class="hero-sub" style="color:var(--milk)">OF QUITS FOLLOW A DEAD PLANT — EXIT SURVEYS</div>
+  <p class="cap">Fernly is a plant-care app heading for a paid relaunch in September. Exit surveys say 38% of quitting users left after a plant died — and the most-named cause is a reminder that never arrived.</p>
   <div class="hint">SCROLL ↓</div>
   <div class="frameprov">FERNLY QUALITY STORY · 1/6 · from quality/strategy.md · 2026-06-11</div>
 </section>
@@ -106,12 +109,12 @@
     <div class="hole voidbox">
       <div class="q">?</div>
       <div class="nm">REMINDER DELIVERY</div>
-      <div class="why">does the reminder actually reach the phone?</div>
+      <div class="why">reaches the phone? measured 0 times, ever</div>
     </div>
     <div class="hole voidbox">
       <div class="q">?</div>
       <div class="nm">HOUSEHOLD SYNC</div>
-      <div class="why">do two partners' phones ever silently disagree?</div>
+      <div class="why">two phones agree? never tested, not once</div>
     </div>
   </div>
   <p class="cap">Hatched means no way to measure it exists today — when these features fail, they fail silently, and nobody can see it. The fix here isn't code; it's building the measuring stick.</p>
@@ -138,7 +141,7 @@
 
 <!-- FRAME 4 · the unrehearsed -->
 <section class="frame dark" id="f4">
-  <p class="kick">THE HONEST AWKWARD ONE</p>
+  <p class="kick">THE AWKWARD ONE</p>
   <h2>We back up. We never rehearse.</h2>
   <div class="drill">
     <div class="stack real">
@@ -156,10 +159,10 @@
 
 <!-- FRAME 5 · the first move -->
 <section class="frame dark" id="f5">
-  <p class="kick">WHAT HAPPENS NEXT</p>
-  <h2>One action. One week. One gate.</h2>
+  <p class="kick">WHAT HAPPENS NEXT — ONE ACTION, ONE WEEK, ONE GATE</p>
+  <h2>First: count every reminder we send.</h2>
   <div class="gatepath">
-    <div class="gstep now">BUILD THE DELIVERY LEDGER</div>
+    <div class="gstep now">LOG EVERY REMINDER, SEND → PHONE</div>
     <div class="garrow">→</div>
     <div class="gstep">fix what it shows</div>
     <div class="garrow">→</div>
@@ -167,28 +170,28 @@
     <div class="garrow">→</div>
     <div class="gstep">earn the relaunch</div>
   </div>
-  <p class="cap">Before fixing anything, Fernly builds the measurement that turns its biggest unknown into a number — nothing downstream gets called "fixed" until delivery can be seen. Everything else queues behind that gate, on purpose.</p>
+  <p class="cap">Fernly's first move logs every reminder from send to phone, so a silent miss shows up in the data instead of as a dead fern. Users feel it as fewer mystery misses — and "did my reminder fire?" becomes a support question with an answer.</p>
   <div class="frameprov">FERNLY QUALITY STORY · 5/6 · from quality/strategy.md · 2026-06-11</div>
 </section>
 
 <!-- FRAME 6 · appendix: the whole map -->
 <section class="frame light" id="f6">
   <p class="kick">THE WHOLE MAP, ONE TILE PER QUESTION</p>
-  <h2>All eleven, honestly labelled.</h2>
+  <h2>All eleven, one verdict each.</h2>
   <div class="mapgrid">
     <div class="tile unk"><p class="nm">Reminder delivery</p><p class="st"><b class="uk">CAN'T MEASURE YET</b> · ledger build is first in line</p></div>
     <div class="tile unk"><p class="nm">Household sync</p><p class="st"><b class="uk">CAN'T MEASURE YET</b> · two-device simulation planned</p></div>
-    <div class="tile"><p class="nm">Photo-backup restore</p><p class="st"><b class="no">NEVER REHEARSED</b> · first drill being scheduled</p></div>
-    <div class="tile"><p class="nm">Plant identification</p><p class="st"><b class="no">"FEELS FINE" — UNTESTED</b> · 500-photo scoring planned</p></div>
-    <div class="tile"><p class="nm">Payments &amp; subscriptions</p><p class="st"><b class="no">EDGE CASES UNEXERCISED</b> · nightly cross-check planned</p></div>
-    <div class="tile"><p class="nm">Sensor pairing</p><p class="st"><b class="no">KNOWN-POOR</b> · 31% of support load; diagnosis next</p></div>
-    <div class="tile"><p class="nm">Support diagnosis speed</p><p class="st"><b class="no">KNOWN-POOR</b> · an hour per ticket today</p></div>
-    <div class="tile"><p class="nm">Offline behaviour</p><p class="st"><b class="ok">MOSTLY SOLID</b> · multi-day case untested</p></div>
-    <div class="tile"><p class="nm">App-store readiness</p><p class="st"><b class="ok">MOSTLY SOLID</b> · new paywall still to review</p></div>
-    <div class="tile"><p class="nm">Schedule math</p><p class="st"><b class="ok">PROVEN</b> · ~400 generated tests on every change</p></div>
-    <div class="tile"><p class="nm">Photo privacy</p><p class="st"><b class="ok">PROVEN</b> · independent check passed</p></div>
+    <div class="tile gap"><p class="nm">Photo-backup restore</p><p class="st"><b class="no">NEVER REHEARSED</b> · first drill being scheduled</p></div>
+    <div class="tile gap"><p class="nm">Plant identification</p><p class="st"><b class="no">"FEELS FINE" — UNTESTED</b> · 500-photo scoring planned</p></div>
+    <div class="tile gap"><p class="nm">Payments &amp; subscriptions</p><p class="st"><b class="no">EDGE CASES UNEXERCISED</b> · nightly cross-check planned</p></div>
+    <div class="tile gap"><p class="nm">Sensor pairing</p><p class="st"><b class="no">KNOWN-POOR</b> · 31% of support load; diagnosis next</p></div>
+    <div class="tile gap"><p class="nm">Support diagnosis speed</p><p class="st"><b class="no">KNOWN-POOR</b> · an hour per ticket today</p></div>
+    <div class="tile mid"><p class="nm">Offline behaviour</p><p class="st"><b class="ok">MOSTLY SOLID</b> · multi-day case untested</p></div>
+    <div class="tile mid"><p class="nm">App-store readiness</p><p class="st"><b class="ok">MOSTLY SOLID</b> · new paywall still to review</p></div>
+    <div class="tile ok"><p class="nm">Schedule math</p><p class="st"><b class="ok">PROVEN</b> · ~400 generated tests on every change</p></div>
+    <div class="tile ok"><p class="nm">Photo privacy</p><p class="st"><b class="ok">PROVEN</b> · independent check passed</p></div>
   </div>
-  <p class="legend">hatched = nobody can measure it yet · PROVEN = backed by tests or an outside check · labels are the strategy's own honest readings, not scores</p>
+  <p class="legend">hatched = nobody can measure it yet · orange = known gap, work queued · green = evidence-backed, deeper green = proven · labels are the strategy's own readings, not scores</p>
   <div class="frameprov">FERNLY QUALITY STORY · 6/6 · from quality/strategy.md (2026-06-11) — the doc is the source of truth · self-contained file, works offline</div>
 </section>
 
@@ -203,12 +206,12 @@
   "strategyDate": "2026-06-11",
   "view": "multi-frame quality story (public)",
   "frames": [
-    {"n": 1, "title": "The thing that kills us is invisible.", "heroStat": {"value": 0, "meaning": "reminder deliveries measured, ever"}, "source": "risk map 1a: no delivery telemetry whatsoever; 38% of churn follows a dead plant"},
-    {"n": 2, "title": "Two questions nobody can answer yet.", "holes": ["reminder delivery (1a)", "household sync (4)"], "source": "both Conf(act) = — : no oracle exists"},
+    {"n": 1, "title": "A dead fern. A quiet uninstall.", "heroStat": {"value": "38%", "meaning": "of quits follow a dead plant (exit surveys)", "evidenceStrength": "surveyed"}, "source": "Part 1: exit surveys say 38% of churned users left after a plant died; most common written reason: a reminder that never arrived. Part 3 casual-parent dealbreaker: a dead fern, a one-star review naming the fern, a quiet uninstall"},
+    {"n": 2, "title": "Two questions nobody can answer yet.", "holes": [{"dim": "reminder delivery (1a)", "evidence": "measured 0 times, ever"}, {"dim": "household sync (4)", "evidence": "convergence never tested, not once"}], "source": "both Conf(act) = — : no oracle exists"},
     {"n": 3, "title": "Where we have receipts.", "proven": [{"dim": "schedule math (1b)", "evidence": "~400 generated cases per CI run; 11 regressions caught since January"}, {"dim": "photo privacy (8)", "evidence": "February pen-test clean; authz suite in CI; 15-minute signed URLs"}]},
     {"n": 4, "title": "We back up. We never rehearse.", "heroStat": {"value": 0, "meaning": "backup restores ever practiced"}, "source": "risk map 2: backups exist, restoring them is untested — 'one bad migration from finding out live'; plan action C scripts a monthly drill"},
-    {"n": 5, "title": "One action. One week. One gate.", "source": "Part 7 Phase 0: delivery telemetry gates everything; action A"},
-    {"n": 6, "title": "All eleven, honestly labelled.", "note": "plain-words verdicts for every risk-map dimension; ids in this data island only"}
+    {"n": 5, "title": "First: count every reminder we send.", "source": "Part 7 Phase 0 (one action, one week, one gate): delivery telemetry end-to-end, action A; user-visible effect: silent misses become data, support tickets become answerable"},
+    {"n": 6, "title": "All eleven, one verdict each.", "note": "plain-words verdicts for every risk-map dimension; ids in this data island only"}
   ],
   "confidenceKey": {"H": "High", "M": "Medium", "L": "Low", "—": "Unknown — nobody can measure this yet"}
 }

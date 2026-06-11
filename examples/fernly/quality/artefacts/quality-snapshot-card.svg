@@ -7,7 +7,7 @@
     "strategyDate": "2026-06-11",
     "view": "one-image quality snapshot (public)",
     "heroStat": {"value": 0, "meaning": "times reminder delivery — the #1 reason users quit — has ever been measured"},
-    "headline": "Missed reminders kill plants. Dead plants kill retention.",
+    "headline": "Missed reminders kill plants. Dead plants kill retention.", "churnEvidence": "exit surveys: 38% of churned users left after a plant died; most common written reason: a reminder that never arrived",
     "rows": [
       {"verdict": "can't measure yet", "dimension": "Reminder delivery (1a)", "strategyConfidence": "—"},
       {"verdict": "can't measure yet", "dimension": "Household sync (4)", "strategyConfidence": "—"},
@@ -45,15 +45,15 @@
   </g>
 
   <!-- kicker: plain words -->
-  <text x="70" y="80" class="mono" font-size="16" letter-spacing="4" fill="#8fb89a">FERNLY · A PLANT-CARE APP, MEASURED HONESTLY</text>
+  <text x="70" y="80" class="mono" font-size="16" letter-spacing="4" fill="#8fb89a">FERNLY · A PLANT-CARE APP · WHAT WE CAN PROVE TODAY</text>
 
   <!-- headline -->
   <text x="66" y="158" class="disp" font-size="54" fill="#f3eeda">Missed reminders kill plants.</text>
   <text x="66" y="220" class="disp" font-size="54" font-style="italic" fill="#d98c5f">Dead plants kill retention.</text>
 
   <!-- caption: 2 sentences, opens with what the project is -->
-  <text x="68" y="264" class="disp" font-size="19" fill="#b9c4ab">Fernly reminds people to water their plants — and a reminder that never arrives is the #1 reason they quit.</text>
-  <text x="68" y="290" class="disp" font-size="19" fill="#b9c4ab">This is what its own quality strategy says it can prove today.</text>
+  <text x="68" y="264" class="disp" font-size="19" fill="#b9c4ab">Fernly reminds people to water their plants. Exit surveys: 38% of quits follow a dead plant —</text>
+  <text x="68" y="290" class="disp" font-size="19" fill="#b9c4ab">the most-named cause, a reminder that never arrived.</text>
 
   <!-- hero stat -->
   <text x="218" y="528" class="disp" font-size="270" fill="#d98c5f" text-anchor="middle">0</text>
@@ -73,8 +73,8 @@
       <text x="648" y="403" font-size="17" fill="#e9e3cf">household sync</text>
     </g>
     <g>
-      <rect x="430" y="430" width="200" height="28" fill="none" stroke="#d98c5f" stroke-width="1.3"/>
-      <text x="530" y="449" font-size="13" letter-spacing="1" fill="#d98c5f" text-anchor="middle">NEVER REHEARSED</text>
+      <rect x="430" y="430" width="200" height="28" fill="#8a5435"/>
+      <text x="530" y="449" font-size="13" letter-spacing="1" fill="#f3e2d4" text-anchor="middle">NEVER REHEARSED</text>
       <text x="648" y="449" font-size="17" fill="#e9e3cf">photo-backup restore</text>
     </g>
     <g>
@@ -85,10 +85,10 @@
   </g>
 
   <!-- first move -->
-  <text x="430" y="560" class="disp" font-size="23" fill="#f3eeda">First move: <tspan fill="#8fb89a">build the missing measurement.</tspan></text>
+  <text x="430" y="560" class="disp" font-size="23" fill="#f3eeda">First move: <tspan fill="#8fb89a">count every reminder we send.</tspan></text>
   <text x="430" y="586" class="mono" font-size="14" fill="#8fb89a">one action · one week · one gate</text>
 
   <!-- provenance, everyday words -->
   <text x="70" y="630" class="mono" font-size="13" fill="#6f8a76">from Fernly's own quality strategy (quality/strategy.md, 2026-06-11) — the doc is the source of truth</text>
-  <text x="70" y="650" class="mono" font-size="13" fill="#6f8a76">hatched = nobody can measure this yet · solid green = backed by real evidence</text>
+  <text x="70" y="650" class="mono" font-size="13" fill="#6f8a76">hatched = nobody can measure this yet · orange = a known gap · green = backed by real evidence</text>
 </svg>
