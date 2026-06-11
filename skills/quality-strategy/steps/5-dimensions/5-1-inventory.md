@@ -38,11 +38,11 @@ Use the `Agent` tool with `subagent_type: general-purpose`. The brief:
 >
 > - Functional correctness (and its sub-dimensions: feature-level correctness; **cross-feature interaction / flow completeness** — features that are right in isolation but wrong in combination, or journeys that fall in the gap between features; a signature gap of systems built feature-at-a-time by agents)
 > - Performance (and its sub-dimensions: scalability, resource consumption, elapsed time, UX responsiveness, jitter)
-> - Reliability, resilience, recoverability, availability
+> - Reliability, resilience, recoverability, availability (recoverability includes safe rollback — which leans on observability again: knowing when, and what, to roll back)
 > - Security, privacy
 > - Usability, accessibility
-> - Diagnosability, debuggability, observability
-> - Maintainability, extensibility, testability
+> - Diagnosability, debuggability, observability (observability serves debuggability: wherever you find bugs, you must be able to debug and fix them)
+> - Maintainability, extensibility, testability, fixability (fixability includes robustness against regressions — a fix that stays fixed)
 > - Deployability, operability, portability, interoperability
 > - Data integrity, compliance, auditability
 > - Documentation, ramp-up-ability

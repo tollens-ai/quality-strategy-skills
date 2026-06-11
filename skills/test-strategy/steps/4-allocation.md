@@ -10,7 +10,7 @@ This sub-step works differently from the others. In most of the skill, the agent
 
 - The Learning Needs list with its calibration items.
 - The principles, especially principle 6 (automate repeatable, humanise judgmental).
-- FRAMINGS.md #6 (economics shift), #7 (agent output review), #9 (smells).
+- FRAMINGS.md #6 (economics shift), #7 (agent output review), #9 (smells), #11 (exploratory testing and testing in production).
 
 ## The two-voice exchange
 
@@ -67,6 +67,8 @@ While running the exchange:
 **FRAMINGS.md #7 — agent output review.** When allocating to agents, name the review pattern. A human reviewing agent output can't be looking for typos and inconsistencies (agents don't make those) — they have to look for plausible-sounding-but-wrong. Add a "review by" column or note where this matters.
 
 **FRAMINGS.md #9 — smells.** Ask explicitly: *"Where does the team need to feel the product, not just check it?"* Those rows go to human regardless of what the agent claims it can do.
+
+**FRAMINGS.md #11 — the two named method classes.** Rows whose method is **exploratory testing** are allocated to an **exploratory tester** — a human by default; an AI exploratory tester is *unproven — calibrate before trusting*, so any agent allocation here is at most `unknown — try and see` with a human-baseline calibration item attached, never high confidence. Rows whose method is **testing in production** are only allocatable once the instrumentation covering the named risks and the recovery path exist (or are themselves rows); allocating "ship it and watch" without the watching is not an allocation.
 
 ## What you must not do
 

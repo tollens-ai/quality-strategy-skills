@@ -65,6 +65,8 @@ When the subagent returns, merge **per dimension**. This is real dialogue where 
 
   The user decides. Record the merged rating **plus a one-line note** of the divergence and the decision.
 
+  Where the merge decision **knowingly accepts rough** — the team commits below some stakeholder's bar, or accepts that the bar will be met by a solution everyone knows isn't long-term robust — record it as a **tradeoff**: what was traded, which bar it still satisfies, and the trigger that would reopen it. This is where good-enough-on-purpose gets written down; it falls out of reconciling the lenses, not out of a separate list.
+
 Talk exactly where stakeholders disagree — that contested call is where the user's input is worth most. Don't manufacture dialogue where the anchor converges, and don't collapse a real divergence into a silent max.
 
 ### 3. Backstop — light distribution glance
@@ -138,6 +140,11 @@ Merged ratings, grouped by rating for readability. Impact size only — likeliho
 
 - **<dimension>** — Stakeholder A: H (Dealbreaker bar, Part 3.2); Stakeholder B: None. Merged to <rating> because <the user's decision>.
 - <or "none — all dimensions converged">
+
+**Tradeoffs knowingly made at the merge** (good-enough-on-purpose — each with the bar it still satisfies and its reopen trigger):
+
+- **<dimension>** — <what was traded and why it's enough> — *reopen when: <trigger>*.
+- <or "none recorded this pass">
 
 **Distribution:** <count by rating, e.g. "6 H, 9 M, 4 None">
 

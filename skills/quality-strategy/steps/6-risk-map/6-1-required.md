@@ -26,9 +26,12 @@ For each H/M dimension, ask in turn:
 
 Use the three-lens material from Part 3 as your starting position. Often the required level comes down to: avoid every relevant stakeholder's dealbreakers, and meet their good-enoughs. Say that out loud to the user: *"From Part 3, [stakeholder]'s Good Enough was X and their Dealbreaker was Y. Required level for [dimension] looks like: [synthesis]. Does that capture the bar, or is it missing something?"*
 
+**The bar cuts both ways (anti-overshoot).** A required level is a ceiling as well as a floor: when the actual later meets the bar, "goal is met" is a **positive verdict** — even where the solution wouldn't survive the next order of magnitude — and the right response is to record a future-release change note (what would reopen this, and when), not to gold-plate now. Don't let a required level quietly absorb robustness no stakeholder bar asked for; if the team knows the solution is rough-but-sufficient, that is a tradeoff to write down (the rating step records these where stakeholder bars recombine), not a reason to raise the bar.
+
 You have explicit permission and encouragement to:
 
 - Ground every required level in a stakeholder dealbreaker, good-enough, or release purpose. Required levels with no grounding are vibes.
+- Hold the bar **down** as firmly as up: when a proposed required level exceeds every stakeholder bar that grounds it, say so — the excess is gold-plating, and the future-release change note is the cheaper home for it.
 - Note when confidence in the required level is Low. Often it is — the project hasn't yet seen if the proposed bar is actually what stakeholders need.
 - Surface tensions: a required level that delights one stakeholder but breaks another's dealbreaker. Flag and ask the user to resolve.
 - Keep required levels concrete. Numbers, observable behaviours, specific outcomes — not abstractions.
@@ -46,6 +49,7 @@ What you must not do:
 - A required level is anchored to nothing in Parts 2 or 3. *"Which stakeholder needs this, and what specifically did they say?"*
 - Confidence is High but no stakeholder has actually been asked. *"That's High confidence based on what evidence? If no one has been asked, isn't this Medium or Low?"*
 - Two stakeholders' bars contradict and the user picks one without acknowledging the tension. *"That works for X, but Y said Z — how do you reconcile?"*
+- The user pushes a required level above every grounding bar "to be safe." *"Which stakeholder bar asks for that extra? If none does, meeting the stated bar is success — let's record what would reopen it as a change note instead of raising the bar."*
 
 ## This sub-step is DONE when
 

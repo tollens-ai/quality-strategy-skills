@@ -37,6 +37,14 @@ After you have a first pass of proposed actuals (or Unknowns) for the H/M dimens
 
 Fold the verdicts back into the actuals below. The dispatch writes its scratch file at `quality/.scratch/6.2-oracle-adequacy.md` (see SKILL.md → "Sealed-context dispatch and scratch files"). Don't let "no oracle" quietly become a permanent Unknown with nothing to do. With agents doing the work, an oracle is usually cheap to build — and naming that build is often the most valuable thing this strategy produces.
 
+## The second design touch — targeted deep-dive where the evidence is thin
+
+The pre-read's design observations were deliberately a light first touch: at pre-read time nobody knew what to look for. Now you do. After the first pass of proposed actuals (and the oracle verdicts below), look at where the scoring is running on thin evidence — dimensions sitting at Unknown, Low confidence, or Over-confident whose subject is design-shaped (architecture, error handling, data flow, coupling, testability) rather than purely behavioural. **Dispatch a targeted design review on exactly those areas — not a general review of the codebase.**
+
+Use the `Agent` tool with `subagent_type: general-purpose`. The brief, in outline: name the specific areas and the specific dimensions whose actuals need evidence; have it read the relevant code and design for those areas only; require every finding to come back as **evidence with a confidence marking** (what was examined, what it shows about the named dimension, High/Medium/Low) — never a bare opinion. Include the **standing lens** in every dispatch: **test-coverage-vs-risk skew** — where the tests cluster versus where this risk map says the danger is; well-tested low-risk corners beside untested dealbreakers is exactly the finding this touch exists to surface.
+
+Fold the findings back into the actuals as evidence: an Unknown may become a described actual at Medium confidence; an Over-confident actual may gain the basis it lacked, or lose its rating honestly. Findings are inputs to the actuals — the user confirms anything surprising before it lands. Skip the dispatch only when no thin-evidence dimension is design-shaped, and say so explicitly.
+
 ## How to ask
 
 For each H/M dimension, ask in turn:
@@ -73,6 +81,7 @@ What you must not do:
 - [ ] Every H/M dimension has either a qualitative actual level or an explicit "Unknown."
 - [ ] Every actual has a confidence rating (H/M/L, or "—" for Unknown) and an evidence basis (or "no investigation yet").
 - [ ] Every Unknown has a one-line note on what would resolve it (test / ask / review / instrument / build infrastructure).
+- [ ] Thin-evidence, design-shaped dimensions got the targeted design deep-dive (or its explicit skip note): findings recorded as evidence with confidence markings, the test-coverage-vs-risk-skew lens applied.
 - [ ] `/oracle-adequacy` has been invoked on the proposed actuals; each dimension has a verdict (Trustworthy / Over-confident / Gated), Over-confident actuals have had their confidence downgraded or an oracle-build item named, and Gated dimensions carry their oracle-build item. Its scratch file exists at `quality/.scratch/6.2-oracle-adequacy.md`.
 - [ ] Confidence ratings use only H/M/L — no percentages.
 - [ ] Any deferred items are recorded as `OPEN QUESTION:`.

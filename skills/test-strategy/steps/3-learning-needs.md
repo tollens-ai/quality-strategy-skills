@@ -47,6 +47,7 @@ For each candidate learning need:
 
 - Is this *checking* (verify a known expected behaviour) or *investigating* (find out what's actually happening)? If checking, it's a smaller part — phrase the question accordingly: *"do these specific behaviours match spec?"* — and make sure checking items don't dominate the strategy. See FRAMINGS.md #1. If checking dominates, push back: investigation should be the larger share.
 - Does the question include human-judgment dimensions (smell — the gut sense that something's off — trust, "does it feel right")? Mark those — they constrain allocation in sub-step 4. See FRAMINGS.md #9.
+- Is the question experience-shaped — delight, feel, "does it hold up against what users actually try to do"? Then the methods come from the two named classes in FRAMINGS.md #11: **exploratory testing** (charters from real intentions, run by an exploratory tester) and/or **testing in production** (real users plus the instrumentation that observes the named risks). Spec-level checks are not an oracle for these bars; listing only scripted checks against an experience question is the strategy failing quietly.
 - Does this include something we'd previously have said "not worth testing"? See FRAMINGS.md #5. Surface explicitly: *"Under human costs, would you have skipped this? Is it cheaper now with agents?"* If yes, it stays in.
 
 **Pass 3: The standing candidate — fresh-eyes defect recon.**
