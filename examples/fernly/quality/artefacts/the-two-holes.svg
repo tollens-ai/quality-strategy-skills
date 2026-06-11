@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350" role="img" aria-label="Fernly: eleven quality dimensions drawn as leaves — two are holes nobody can measure yet">
+  <title>Fernly — the two holes (derived from quality/strategy.md, 2026-06-11)</title>
+  <desc>Poster of Fernly's eleven quality dimensions as leaves. Healthy green leaves are proven by tests or outside checks (schedule math, photo privacy). Paling, drying leaves are known gaps with work queued (backup restore, plant identification, payments, sensor pairing, support diagnosis). Two leaf-shaped holes — reminder delivery and household sync — mark the dimensions nobody can measure yet. The holes are exactly where users get hurt.</desc>
+  <metadata id="strategy-data">{
+    "project": "Fernly",
+    "derivedFrom": "quality/strategy.md",
+    "strategyDate": "2026-06-11",
+    "view": "static overview poster — the two holes",
+    "legend": {"healthy": "proven by tests or an outside check", "paling": "known gap, work queued", "hole": "nobody can measure it yet (strategy confidence: —)"},
+    "leaves": [
+      {"dimension": "Reminder delivery (1a)", "state": "hole", "note": "no delivery telemetry; #1 churn driver"},
+      {"dimension": "Household sync (4)", "state": "hole", "note": "convergence never tested"},
+      {"dimension": "Schedule math (1b)", "state": "healthy", "note": "property suite, 11 regressions caught"},
+      {"dimension": "Photo privacy (8)", "state": "healthy", "note": "pen-test clean, authz suite in CI"},
+      {"dimension": "Photo-backup restore (2)", "state": "paling", "note": "never rehearsed"},
+      {"dimension": "Plant identification (3a)", "state": "paling", "note": "'feels fine', unmeasured (conf L)"},
+      {"dimension": "Payments (5)", "state": "paling", "note": "edge paths unexercised"},
+      {"dimension": "Sensor pairing (7)", "state": "paling", "note": "31% of support load"},
+      {"dimension": "Support diagnosis (12)", "state": "paling", "note": "an hour per ticket"},
+      {"dimension": "Offline behaviour (6)", "state": "mostly", "note": "photo queue solid, multi-day untested"},
+      {"dimension": "App-store readiness (10)", "state": "mostly", "note": "crash-free 99.62%, new paywall unreviewed"}
+    ]
+  }</metadata>
+  <defs>
+    <style>
+      .disp { font-family: Georgia, 'Iowan Old Style', 'Times New Roman', serif; }
+      .mono { font-family: 'Courier New', Courier, monospace; }
+    </style>
+    <path id="leaf" d="M0,6 C30,-12 40,-60 0,-130 C-40,-60 -30,-12 0,6 Z"/>
+    <pattern id="holehatch" width="9" height="9" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+      <rect width="9" height="9" fill="none"/>
+      <line x1="0" y1="0" x2="0" y2="9" stroke="#8d86a8" stroke-width="1.5" opacity="0.45"/>
+    </pattern>
+  </defs>
+
+  <!-- cream poster field -->
+  <rect width="1080" height="1350" fill="#faf6ec"/>
+  <rect x="26" y="26" width="1028" height="1298" fill="none" stroke="#2e5d43" stroke-width="2.5"/>
+
+  <!-- kicker + title -->
+  <text x="540" y="106" class="mono" font-size="15" letter-spacing="5" fill="#7c8a6e" text-anchor="middle">FERNLY · A PLANT-CARE APP, MEASURED HONESTLY</text>
+  <text x="540" y="186" class="disp" font-size="64" fill="#23402f" text-anchor="middle">Eleven things matter.</text>
+  <text x="540" y="258" class="disp" font-size="64" font-style="italic" fill="#b8643a" text-anchor="middle">Two are holes.</text>
+
+  <!-- ===== leaf rows ===== -->
+  <!-- row 1: the two holes, then the two proven -->
+  <g transform="translate(170,520)">
+    <use href="#leaf" transform="scale(1.45)" fill="url(#holehatch)" stroke="#8d86a8" stroke-width="1.6" stroke-dasharray="6 5"/>
+    <text x="0" y="-82" class="disp" font-size="40" fill="#8d86a8" text-anchor="middle">?</text>
+    <text x="0" y="36" class="mono" font-size="15" fill="#3a3527" text-anchor="middle">reminder delivery</text>
+    <text x="0" y="58" class="mono" font-size="12.5" fill="#6b5fa0" text-anchor="middle">can't measure yet</text>
+  </g>
+  <g transform="translate(417,520)">
+    <use href="#leaf" transform="scale(1.45)" fill="url(#holehatch)" stroke="#8d86a8" stroke-width="1.6" stroke-dasharray="6 5"/>
+    <text x="0" y="-82" class="disp" font-size="40" fill="#8d86a8" text-anchor="middle">?</text>
+    <text x="0" y="36" class="mono" font-size="15" fill="#3a3527" text-anchor="middle">household sync</text>
+    <text x="0" y="58" class="mono" font-size="12.5" fill="#6b5fa0" text-anchor="middle">can't measure yet</text>
+  </g>
+  <g transform="translate(664,520)">
+    <use href="#leaf" transform="scale(1.45)" fill="#2e5d43"/>
+    <text x="0" y="36" class="mono" font-size="15" fill="#3a3527" text-anchor="middle">schedule math</text>
+    <text x="0" y="58" class="mono" font-size="12.5" fill="#2a6f5f" text-anchor="middle">proven</text>
+  </g>
+  <g transform="translate(911,520)">
+    <use href="#leaf" transform="scale(1.45)" fill="#2e5d43"/>
+    <text x="0" y="36" class="mono" font-size="15" fill="#3a3527" text-anchor="middle">photo privacy</text>
+    <text x="0" y="58" class="mono" font-size="12.5" fill="#2a6f5f" text-anchor="middle">proven</text>
+  </g>
+
+  <!-- row 2: the drying leaves -->
+  <g transform="translate(170,810)">
+    <use href="#leaf" transform="scale(1.45) rotate(-6)" fill="#c98f63"/>
+    <text x="0" y="36" class="mono" font-size="15" fill="#3a3527" text-anchor="middle">backup restore</text>
+    <text x="0" y="58" class="mono" font-size="12.5" fill="#b8643a" text-anchor="middle">never rehearsed</text>
+  </g>
+  <g transform="translate(417,810)">
+    <use href="#leaf" transform="scale(1.45) rotate(5)" fill="#c98f63"/>
+    <text x="0" y="36" class="mono" font-size="15" fill="#3a3527" text-anchor="middle">plant identification</text>
+    <text x="0" y="58" class="mono" font-size="12.5" fill="#b8643a" text-anchor="middle">"feels fine", untested</text>
+  </g>
+  <g transform="translate(664,810)">
+    <use href="#leaf" transform="scale(1.45) rotate(-4)" fill="#c98f63"/>
+    <text x="0" y="36" class="mono" font-size="15" fill="#3a3527" text-anchor="middle">payments</text>
+    <text x="0" y="58" class="mono" font-size="12.5" fill="#b8643a" text-anchor="middle">edge cases unexercised</text>
+  </g>
+  <g transform="translate(911,810)">
+    <use href="#leaf" transform="scale(1.45) rotate(7)" fill="#c98f63"/>
+    <text x="0" y="36" class="mono" font-size="15" fill="#3a3527" text-anchor="middle">sensor pairing</text>
+    <text x="0" y="58" class="mono" font-size="12.5" fill="#b8643a" text-anchor="middle">known weak spot</text>
+  </g>
+
+  <!-- row 3: one drying + two mid-greens -->
+  <g transform="translate(293,1100)">
+    <use href="#leaf" transform="scale(1.45) rotate(4)" fill="#c98f63"/>
+    <text x="0" y="36" class="mono" font-size="15" fill="#3a3527" text-anchor="middle">support diagnosis</text>
+    <text x="0" y="58" class="mono" font-size="12.5" fill="#b8643a" text-anchor="middle">an hour per ticket</text>
+  </g>
+  <g transform="translate(540,1100)">
+    <use href="#leaf" transform="scale(1.45) rotate(-3)" fill="#6f8f6a"/>
+    <text x="0" y="36" class="mono" font-size="15" fill="#3a3527" text-anchor="middle">offline behaviour</text>
+    <text x="0" y="58" class="mono" font-size="12.5" fill="#55755b" text-anchor="middle">mostly solid</text>
+  </g>
+  <g transform="translate(787,1100)">
+    <use href="#leaf" transform="scale(1.45) rotate(5)" fill="#6f8f6a"/>
+    <text x="0" y="36" class="mono" font-size="15" fill="#3a3527" text-anchor="middle">app-store readiness</text>
+    <text x="0" y="58" class="mono" font-size="12.5" fill="#55755b" text-anchor="middle">mostly solid</text>
+  </g>
+
+  <!-- caption: 2 sentences, opens with what the project is -->
+  <text x="540" y="1216" class="disp" font-size="20" fill="#7a7259" text-anchor="middle">Fernly is a plant-care app; each leaf is one thing that matters about its quality.</text>
+  <text x="540" y="1244" class="disp" font-size="20" fill="#7a7259" text-anchor="middle">Green is proven, drying is a known gap — and the holes are where nobody can measure. Yet.</text>
+
+  <!-- provenance -->
+  <text x="540" y="1296" class="mono" font-size="13" fill="#9a9176" text-anchor="middle">from Fernly's own quality strategy (quality/strategy.md, 2026-06-11) — the doc is the source of truth</text>
+</svg>

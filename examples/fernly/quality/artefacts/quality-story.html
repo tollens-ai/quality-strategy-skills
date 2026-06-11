@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fernly — the quality story (from quality/strategy.md, 2026-06-11)</title>
+<style>
+  :root{
+    --green:#1d3a2a; --green2:#16301f; --vein:#2c4c38; --line:#39573f;
+    --cream:#faf6ec; --cream2:#f1ebdb; --ink:#23402f; --ink2:#3a3527; --inkmute:#7a7259;
+    --milk:#f3eeda; --sage:#b9c4ab; --mint:#8fb89a; --dim:#6f8a76;
+    --terra:#d98c5f; --terra-deep:#b8643a; --proven:#3f8f6d; --void:#9a93b8;
+    --disp:Georgia,'Iowan Old Style','Times New Roman',serif;
+    --mono:'Courier New',Courier,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-snap-type:y mandatory;scroll-behavior:smooth}
+  body{margin:0;font-family:var(--disp);background:var(--green)}
+  section.frame{
+    min-height:100vh;min-height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;
+    display:flex;flex-direction:column;justify-content:center;align-items:center;
+    padding:7vh 7vw;position:relative;overflow:hidden;text-align:center;
+  }
+  .kick{font-family:var(--mono);font-size:clamp(11px,1.3vw,14px);letter-spacing:.35em;margin:0 0 2.2vh}
+  h2{font-size:clamp(30px,5.2vw,62px);font-weight:normal;line-height:1.12;margin:0 0 3vh;max-width:18em}
+  .cap{font-size:clamp(15px,1.7vw,20px);line-height:1.5;max-width:36em;margin:3vh 0 0}
+  .frameprov{position:absolute;bottom:2.2vh;left:0;right:0;text-align:center;
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.08em}
+  .hero-num{font-size:clamp(120px,24vw,300px);line-height:.95}
+  .hero-sub{font-family:var(--mono);font-size:clamp(13px,1.6vw,17px);letter-spacing:.12em;margin-top:1vh}
+  /* dark frames */
+  .dark{background:var(--green);color:var(--milk)}
+  .dark .kick{color:var(--mint)} .dark .cap{color:var(--sage)} .dark .frameprov{color:var(--dim)}
+  /* light frames */
+  .light{background:var(--cream);color:var(--ink2)}
+  .light .kick{color:#7c8a6e} .light .cap{color:var(--inkmute)} .light .frameprov{color:#b3a98d}
+  .light h2{color:var(--ink)}
+  /* hatching for the unmeasurable */
+  .voidbox{border:2px dashed var(--void);
+    background:repeating-linear-gradient(45deg,transparent 0 9px,rgba(154,147,184,.16) 9px 18px)}
+  /* frame 2: the two holes */
+  .holes{display:flex;gap:4vw;justify-content:center;flex-wrap:wrap;margin-top:1vh}
+  .hole{width:min(34vw,330px);aspect-ratio:1/1.15;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:1.5vh}
+  .hole .q{font-family:var(--disp);font-size:clamp(60px,9vw,110px);color:var(--void)}
+  .hole .nm{font-family:var(--mono);font-size:clamp(13px,1.5vw,16px);letter-spacing:.12em;color:#cdc8e0}
+  .hole .why{font-size:clamp(13px,1.4vw,15.5px);color:var(--sage);max-width:16em}
+  /* frame 3: receipts */
+  .receipts{display:flex;gap:4vw;justify-content:center;flex-wrap:wrap;margin-top:1vh}
+  .receipt{width:min(36vw,360px);background:#fff;border:1px solid #ddd3ba;border-top:6px solid var(--proven);
+    padding:3vh 2vw;text-align:left}
+  .receipt .nm{font-size:clamp(18px,2.2vw,24px);color:var(--ink);margin:0 0 1vh}
+  .receipt .ev{font-family:var(--mono);font-size:clamp(12.5px,1.4vw,15px);color:var(--ink2);line-height:1.7}
+  .receipt .ev b{color:var(--proven)}
+  /* frame 4: drills */
+  .drill{display:flex;gap:6vw;justify-content:center;align-items:flex-end;margin-top:2vh}
+  .stack{display:flex;flex-direction:column-reverse;gap:6px}
+  .stack .bar{width:min(22vw,210px);height:clamp(14px,2.4vh,22px)}
+  .stack.real .bar{background:var(--mint);opacity:.9}
+  .stack .lbl{font-family:var(--mono);font-size:clamp(12px,1.4vw,15px);letter-spacing:.1em;margin-top:1.6vh;color:var(--milk)}
+  .stack.ghost .bar{border:1.5px dashed var(--terra);background:none}
+  .bignum{font-family:var(--disp)}
+  /* frame 5: the gate */
+  .gatepath{display:flex;align-items:center;gap:1.5vw;justify-content:center;flex-wrap:wrap;margin-top:2vh;font-family:var(--mono)}
+  .gstep{border:1.5px solid var(--line);padding:1.6vh 1.4vw;font-size:clamp(12px,1.4vw,15px);color:var(--sage)}
+  .gstep.now{background:var(--terra);border-color:var(--terra);color:var(--green);font-weight:bold}
+  .garrow{color:var(--dim);font-size:clamp(14px,1.8vw,20px)}
+  /* frame 6: appendix map */
+  .mapgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:10px;max-width:1060px;margin-top:1vh;width:100%}
+  .tile{border:1px solid #ddd3ba;background:#fff;padding:10px 12px;text-align:left}
+  .tile.unk{border:1.5px dashed var(--void);
+    background:repeating-linear-gradient(45deg,#fff 0 9px,#f3f0fa 9px 18px)}
+  .tile .nm{font-size:15.5px;color:var(--ink);margin:0 0 3px}
+  .tile .st{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--inkmute)}
+  .tile .st b{font-weight:normal}
+  .tile .st .ok{color:var(--proven)} .tile .st .no{color:var(--terra-deep)} .tile .st .uk{color:#6b5fa0}
+  .legend{font-family:var(--mono);font-size:12px;color:var(--inkmute);margin-top:2.4vh}
+  /* dots nav */
+  nav{position:fixed;right:14px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px;z-index:5}
+  nav a{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--mint);display:block;opacity:.65}
+  nav a.on{background:var(--mint);opacity:1}
+  .hint{position:absolute;bottom:6.5vh;left:0;right:0;text-align:center;font-family:var(--mono);
+    font-size:12px;letter-spacing:.2em;color:var(--dim);animation:bob 2.2s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+  @media (prefers-reduced-motion: reduce){.hint{animation:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<!-- FRAME 1 · the hero stat -->
+<section class="frame dark" id="f1">
+  <p class="kick">FERNLY · A PLANT-CARE APP, MEASURED HONESTLY</p>
+  <h2>The thing that kills us is invisible.</h2>
+  <div class="hero-num" style="color:var(--terra)">0</div>
+  <div class="hero-sub" style="color:var(--milk)">REMINDER DELIVERIES MEASURED — EVER</div>
+  <p class="cap">Fernly is a plant-care app heading for a paid relaunch in September; a reminder that never arrives is the #1 reason its users quit. Delivery has been measured exactly zero times — this story is the app's own strategy saying so out loud.</p>
+  <div class="hint">SCROLL ↓</div>
+  <div class="frameprov">FERNLY QUALITY STORY · 1/6 · from quality/strategy.md · 2026-06-11</div>
+</section>
+
+<!-- FRAME 2 · the holes -->
+<section class="frame dark" id="f2">
+  <p class="kick">WHERE THE MAP HAS HOLES</p>
+  <h2>Two questions nobody can answer yet.</h2>
+  <div class="holes">
+    <div class="hole voidbox">
+      <div class="q">?</div>
+      <div class="nm">REMINDER DELIVERY</div>
+      <div class="why">does the reminder actually reach the phone?</div>
+    </div>
+    <div class="hole voidbox">
+      <div class="q">?</div>
+      <div class="nm">HOUSEHOLD SYNC</div>
+      <div class="why">do two partners' phones ever silently disagree?</div>
+    </div>
+  </div>
+  <p class="cap">Hatched means no way to measure it exists today — these features work in daily use, but nobody can see them fail. The fix here isn't code; it's building the measuring stick.</p>
+  <div class="frameprov">FERNLY QUALITY STORY · 2/6 · from quality/strategy.md · 2026-06-11</div>
+</section>
+
+<!-- FRAME 3 · the receipts -->
+<section class="frame light" id="f3">
+  <p class="kick">NOT EVERYTHING IS A HOLE</p>
+  <h2>Where we have receipts.</h2>
+  <div class="receipts">
+    <div class="receipt">
+      <p class="nm">Schedule math</p>
+      <p class="ev"><b>~400 generated test cases</b> on every change<br><b>11 bugs caught</b> since January<br>covers seasons, timezones, clock changes</p>
+    </div>
+    <div class="receipt">
+      <p class="nm">Photo privacy</p>
+      <p class="ev"><b>independent security check</b> — passed<br><b>access tests run on every change</b><br>links expire in 15 minutes</p>
+    </div>
+  </div>
+  <p class="cap">Where Fernly claims solid ground, a test suite or an outside check says so — not vibes. The strategy's rule: a claim is only as good as the evidence behind it.</p>
+  <div class="frameprov">FERNLY QUALITY STORY · 3/6 · from quality/strategy.md · 2026-06-11</div>
+</section>
+
+<!-- FRAME 4 · the unrehearsed -->
+<section class="frame dark" id="f4">
+  <p class="kick">THE HONEST AWKWARD ONE</p>
+  <h2>We back up. We never rehearse.</h2>
+  <div class="drill">
+    <div class="stack real">
+      <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+      <div class="lbl">BACKUPS, NIGHTLY</div>
+    </div>
+    <div class="stack ghost">
+      <div class="bar"></div>
+      <div class="lbl"><span class="bignum" style="color:var(--terra);font-size:1.6em">0</span> RESTORES PRACTICED</div>
+    </div>
+  </div>
+  <p class="cap">After losing 40 users' photos in March, Fernly backs everything up — but a restore has never once been practiced; in the strategy's own words, "we are one bad migration from finding out live." The plan scripts the first drill, then repeats it monthly.</p>
+  <div class="frameprov">FERNLY QUALITY STORY · 4/6 · from quality/strategy.md · 2026-06-11</div>
+</section>
+
+<!-- FRAME 5 · the first move -->
+<section class="frame dark" id="f5">
+  <p class="kick">WHAT HAPPENS NEXT</p>
+  <h2>One action. One week. One gate.</h2>
+  <div class="gatepath">
+    <div class="gstep now">BUILD THE DELIVERY LEDGER</div>
+    <div class="garrow">→</div>
+    <div class="gstep">fix what it shows</div>
+    <div class="garrow">→</div>
+    <div class="gstep">prove sync + backups</div>
+    <div class="garrow">→</div>
+    <div class="gstep">earn the relaunch</div>
+  </div>
+  <p class="cap">Before fixing anything, Fernly builds the measurement that turns its biggest unknown into a number — nothing downstream gets called "fixed" until delivery can be seen. Everything else queues behind that gate, on purpose.</p>
+  <div class="frameprov">FERNLY QUALITY STORY · 5/6 · from quality/strategy.md · 2026-06-11</div>
+</section>
+
+<!-- FRAME 6 · appendix: the whole map -->
+<section class="frame light" id="f6">
+  <p class="kick">THE WHOLE MAP, ONE TILE PER QUESTION</p>
+  <h2>All eleven, honestly labelled.</h2>
+  <div class="mapgrid">
+    <div class="tile unk"><p class="nm">Reminder delivery</p><p class="st"><b class="uk">CAN'T MEASURE YET</b> · ledger build is first in line</p></div>
+    <div class="tile unk"><p class="nm">Household sync</p><p class="st"><b class="uk">CAN'T MEASURE YET</b> · two-device simulation planned</p></div>
+    <div class="tile"><p class="nm">Photo-backup restore</p><p class="st"><b class="no">NEVER REHEARSED</b> · first drill being scheduled</p></div>
+    <div class="tile"><p class="nm">Plant identification</p><p class="st"><b class="no">"FEELS FINE" — UNTESTED</b> · 500-photo scoring planned</p></div>
+    <div class="tile"><p class="nm">Payments &amp; subscriptions</p><p class="st"><b class="no">EDGE CASES UNEXERCISED</b> · nightly cross-check planned</p></div>
+    <div class="tile"><p class="nm">Sensor pairing</p><p class="st"><b class="no">KNOWN-POOR</b> · 31% of support load; diagnosis next</p></div>
+    <div class="tile"><p class="nm">Support diagnosis speed</p><p class="st"><b class="no">KNOWN-POOR</b> · an hour per ticket today</p></div>
+    <div class="tile"><p class="nm">Offline behaviour</p><p class="st"><b class="ok">MOSTLY SOLID</b> · multi-day case untested</p></div>
+    <div class="tile"><p class="nm">App-store readiness</p><p class="st"><b class="ok">MOSTLY SOLID</b> · new paywall still to review</p></div>
+    <div class="tile"><p class="nm">Schedule math</p><p class="st"><b class="ok">PROVEN</b> · property tests on every change</p></div>
+    <div class="tile"><p class="nm">Photo privacy</p><p class="st"><b class="ok">PROVEN</b> · independent check passed</p></div>
+  </div>
+  <p class="legend">hatched = nobody can measure it yet · PROVEN = backed by tests or an outside check · labels are the strategy's own honest readings, not scores</p>
+  <div class="frameprov">FERNLY QUALITY STORY · 6/6 · generated by /quality-artefacts from quality/strategy.md (2026-06-11) — the doc is the source of truth · self-contained file, works offline</div>
+</section>
+
+<nav id="dots" aria-label="frames">
+  <a href="#f1" class="on" aria-label="frame 1"></a><a href="#f2" aria-label="frame 2"></a><a href="#f3" aria-label="frame 3"></a><a href="#f4" aria-label="frame 4"></a><a href="#f5" aria-label="frame 5"></a><a href="#f6" aria-label="frame 6"></a>
+</nav>
+
+<script type="application/json" id="strategy-data">
+{
+  "project": "Fernly",
+  "derivedFrom": "quality/strategy.md",
+  "strategyDate": "2026-06-11",
+  "view": "multi-frame quality story (public)",
+  "frames": [
+    {"n": 1, "title": "The thing that kills us is invisible.", "heroStat": {"value": 0, "meaning": "reminder deliveries measured, ever"}, "source": "risk map 1a: no delivery telemetry whatsoever; 38% of churn follows a dead plant"},
+    {"n": 2, "title": "Two questions nobody can answer yet.", "holes": ["reminder delivery (1a)", "household sync (4)"], "source": "both Conf(act) = — : no oracle exists"},
+    {"n": 3, "title": "Where we have receipts.", "proven": [{"dim": "schedule math (1b)", "evidence": "~400 generated cases per CI run; 11 regressions caught since January"}, {"dim": "photo privacy (8)", "evidence": "February pen-test clean; authz suite in CI; 15-minute signed URLs"}]},
+    {"n": 4, "title": "We back up. We never rehearse.", "heroStat": {"value": 0, "meaning": "backup restores ever practiced"}, "source": "risk map 2: backups exist, restoring them is untested — 'one bad migration from finding out live'; plan action C scripts a monthly drill"},
+    {"n": 5, "title": "One action. One week. One gate.", "source": "Part 7 Phase 0: delivery telemetry gates everything; action A"},
+    {"n": 6, "title": "All eleven, honestly labelled.", "note": "plain-words verdicts for every risk-map dimension; ids in this data island only"}
+  ],
+  "confidenceKey": {"H": "High", "M": "Medium", "L": "Low", "—": "Unknown — nobody can measure this yet"}
+}
+</script>
+<script>
+  const dots = document.querySelectorAll('#dots a');
+  const frames = document.querySelectorAll('section.frame');
+  const obs = new IntersectionObserver(es => {
+    es.forEach(e => {
+      if (e.isIntersecting) {
+        const i = [...frames].indexOf(e.target);
+        dots.forEach((d, j) => d.classList.toggle('on', j === i));
+      }
+    });
+  }, {threshold: 0.6});
+  frames.forEach(f => obs.observe(f));
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp' && e.key !== 'PageDown' && e.key !== 'PageUp') return;
+    const cur = [...dots].findIndex(d => d.classList.contains('on'));
+    const next = (e.key === 'ArrowDown' || e.key === 'PageDown') ? Math.min(cur + 1, frames.length - 1) : Math.max(cur - 1, 0);
+    frames[next].scrollIntoView({behavior: 'smooth'});
+    e.preventDefault();
+  });
+</script>
+</body>
+</html>
