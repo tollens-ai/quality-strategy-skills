@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="Fernly quality snapshot: reminder delivery has been measured zero times, ever">
+  <title>Fernly — where quality stands (derived from quality/strategy.md, 2026-06-11)</title>
+  <desc>Tweet-sized quality snapshot for Fernly, a plant-care reminder app. Hero stat: zero — the number of times reminder delivery, the suspected cause of the dead plants that fill the angry app-store reviews, has ever been measured. Household sync is also unmeasurable today, photo-backup restore has never been rehearsed, while schedule math is proven by a property-test suite. First move: build the missing measurement.</desc>
+  <metadata id="strategy-data">{
+    "project": "Fernly",
+    "derivedFrom": "quality/strategy.md",
+    "strategyDate": "2026-06-11",
+    "view": "one-image quality snapshot (public)", "skillVersion": "0.3.0",
+    "heroStat": {"value": 0, "meaning": "times reminder delivery — the suspected cause of the dead plants that dominate the one-star reviews — has ever been measured"},
+    "headline": "Missed reminders kill plants. Dead plants kill retention.", "churnEvidence": "of the one-star App Store reviews that say anything specific, dead plants and wrong plant IDs dominate; in the dead-plant ones the most-named cause is a reminder that never arrived — no churn instrumentation exists, so reviews and the support inbox are the whole evidence base",
+    "rows": [
+      {"verdict": "can't measure yet", "dimension": "Reminder delivery (1a)", "strategyConfidence": "—"},
+      {"verdict": "can't measure yet", "dimension": "Household sync (4)", "strategyConfidence": "—"},
+      {"verdict": "never rehearsed", "dimension": "Photo-backup restore (2)", "strategyConfidence": "L on restore"},
+      {"verdict": "proven", "dimension": "Schedule math (1b)", "note": "property suite; 11 regressions caught since January", "strategyConfidence": "H"}
+    ],
+    "firstMove": "Phase 0: build the delivery ledger — the missing measurement."
+  }</metadata>
+  <defs>
+    <style>
+      .disp { font-family: Georgia, 'Iowan Old Style', 'Times New Roman', serif; }
+      .mono { font-family: 'Courier New', Courier, monospace; }
+    </style>
+    <pattern id="void" width="10" height="10" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+      <rect width="10" height="10" fill="none"/>
+      <line x1="0" y1="0" x2="0" y2="10" stroke="#9a93b8" stroke-width="1.6" opacity="0.4"/>
+    </pattern>
+  </defs>
+
+  <!-- deep fern green field -->
+  <rect width="1200" height="675" fill="#1d3a2a"/>
+  <rect width="1200" height="675" fill="none" stroke="#39573f" stroke-width="2"/>
+
+  <!-- stylised frond, right side, quiet -->
+  <g stroke="#2c4c38" fill="none" stroke-linecap="round" opacity="0.9">
+    <path d="M 1060 660 C 1020 480 1010 320 1050 120" stroke-width="7"/>
+    <path d="M 1052 560 C 970 540 920 490 900 420" stroke-width="5"/>
+    <path d="M 1052 560 C 1130 545 1175 500 1190 430" stroke-width="5"/>
+    <path d="M 1041 450 C 960 430 915 380 905 310" stroke-width="5"/>
+    <path d="M 1041 450 C 1120 437 1165 392 1180 320" stroke-width="5"/>
+    <path d="M 1036 340 C 965 320 925 275 915 215" stroke-width="5"/>
+    <path d="M 1036 340 C 1110 327 1150 285 1162 220" stroke-width="5"/>
+    <path d="M 1040 230 C 980 213 945 175 938 125" stroke-width="5"/>
+    <path d="M 1040 230 C 1105 218 1140 180 1150 125" stroke-width="5"/>
+  </g>
+
+  <!-- kicker: plain words -->
+  <text x="70" y="80" class="mono" font-size="16" letter-spacing="4" fill="#8fb89a">FERNLY · A PLANT-CARE APP · WHAT WE CAN PROVE TODAY</text>
+
+  <!-- headline -->
+  <text x="66" y="158" class="disp" font-size="54" fill="#f3eeda">Missed reminders kill plants.</text>
+  <text x="66" y="220" class="disp" font-size="54" font-style="italic" fill="#d98c5f">Dead plants kill retention.</text>
+
+  <!-- caption: 2 sentences, opens with what the project is -->
+  <text x="68" y="264" class="disp" font-size="19" fill="#b9c4ab">Fernly reminds people to water their plants. Of the one-star reviews that say anything,</text>
+  <text x="68" y="290" class="disp" font-size="19" fill="#b9c4ab">dead plants dominate — and the most-named cause is a reminder that never arrived.</text>
+
+  <!-- hero stat -->
+  <text x="218" y="528" class="disp" font-size="270" fill="#d98c5f" text-anchor="middle">0</text>
+  <rect x="78" y="548" width="280" height="2" fill="#39573f"/>
+  <text x="218" y="578" class="mono" font-size="16" fill="#e9e3cf" text-anchor="middle">deliveries measured — ever</text>
+
+  <!-- status chips, plain words -->
+  <g class="mono">
+    <g>
+      <rect x="430" y="338" width="200" height="28" fill="url(#void)" stroke="#9a93b8" stroke-width="1.3" stroke-dasharray="5 4"/>
+      <text x="530" y="357" font-size="13" letter-spacing="1" fill="#b3adcb" text-anchor="middle">CAN'T MEASURE YET</text>
+      <text x="648" y="357" font-size="17" fill="#e9e3cf">reminder delivery</text>
+    </g>
+    <g>
+      <rect x="430" y="384" width="200" height="28" fill="url(#void)" stroke="#9a93b8" stroke-width="1.3" stroke-dasharray="5 4"/>
+      <text x="530" y="403" font-size="13" letter-spacing="1" fill="#b3adcb" text-anchor="middle">CAN'T MEASURE YET</text>
+      <text x="648" y="403" font-size="17" fill="#e9e3cf">household sync</text>
+    </g>
+    <g>
+      <rect x="430" y="430" width="200" height="28" fill="#8a5435"/>
+      <text x="530" y="449" font-size="13" letter-spacing="1" fill="#f3e2d4" text-anchor="middle">NEVER REHEARSED</text>
+      <text x="648" y="449" font-size="17" fill="#e9e3cf">photo-backup restore</text>
+    </g>
+    <g>
+      <rect x="430" y="476" width="200" height="28" fill="#3f8f6d"/>
+      <text x="530" y="495" font-size="13" letter-spacing="1" fill="#10241a" text-anchor="middle" font-weight="bold">PROVEN</text>
+      <text x="648" y="495" font-size="17" fill="#e9e3cf">schedule math — 11 bugs caught by tests</text>
+    </g>
+  </g>
+
+  <!-- first move -->
+  <text x="430" y="560" class="disp" font-size="23" fill="#f3eeda">First move: <tspan fill="#8fb89a">count every reminder we send.</tspan></text>
+  <text x="430" y="586" class="mono" font-size="14" fill="#8fb89a">so a silent miss shows up in our data — not as your dead fern</text>
+
+  <!-- provenance, everyday words -->
+  <text x="70" y="630" class="mono" font-size="13" fill="#6f8a76">from Fernly's own quality strategy (quality/strategy.md, 2026-06-11) — the doc is the source of truth</text>
+  <text x="70" y="650" class="mono" font-size="13" fill="#6f8a76">hatched = can't measure yet · orange = known gap · green = backed by evidence</text>
+  <text x="1130" y="650" class="mono" font-size="12" fill="#54705c" text-anchor="end">made with quality-strategy-skills · tollens-ai · v0.3.0</text>
+</svg>

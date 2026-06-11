@@ -25,10 +25,11 @@ New versions ship regularly — run `claude plugin update quality-strategy` to p
 2. **`/test-strategy`** — turns the strategy into an investigation plan: what to find out, in what order, split between humans and agents.
 3. **`/tooling-strategy`** — when the docs surfaced things you can't measure or judge yet (common, and a finding rather than a failure): a prioritised build plan for the missing oracles and instruments. Steps 2 and 3 swap when the risk map comes out mostly blind — the skills recommend the order themselves; you can always overrule.
 4. **`/strategy-variants`** (optional) — a one-pager or client-safe version to circulate.
+5. **`/quality-artefacts`** (optional) — describe the view you want ("a tweetable summary of where quality stands", "a dashboard of the payment risks for my standup") and it designs a bespoke, self-contained SVG/HTML artefact from your strategy — honest about Unknowns, built to be screenshotted and shared. Worked examples in [`examples/fernly/quality/artefacts/`](examples/fernly/quality/artefacts/).
 
 ## How the skills fit together
 
-Four skills you start (bold); the rest are checks and audits the strategies invoke for you as they run (dotted arrows — each also works standalone). Per-skill details: **[docs/SKILLS.md](docs/SKILLS.md)**.
+Five skills you start (bold); the rest are checks and audits the strategies invoke for you as they run (dotted arrows — each also works standalone). Per-skill details: **[docs/SKILLS.md](docs/SKILLS.md)**.
 
 ```mermaid
 flowchart TD
@@ -46,6 +47,8 @@ flowchart TD
     ODOC[/"quality/tooling-strategy.md"/]
     SV["<b>/strategy-variants</b><br/>audience-facing variants"]
     VDOC[/"one-pager ·<br/>client-safe version"/]
+    QA["<b>/quality-artefacts</b><br/>bespoke shareable visuals"]
+    ADOC[/"quality/artefacts/<br/>*.svg · *.html"/]
     BUILD(["build the oracles<br/>& instruments"])
 
     QS -.-> OA
@@ -57,6 +60,7 @@ flowchart TD
     SDOC -->|"risk map mostly<br/>answerable"| TS
     SDOC -->|"risk map mostly blind —<br/>Unknowns + oracle gaps"| TOOL
     SDOC -->|"need something<br/>to circulate"| SV
+    SDOC -->|"need something glanceable —<br/>describe the view you want"| QA
 
     TS -.-> TA
     TS -.-> TSR
@@ -68,11 +72,12 @@ flowchart TD
     BUILD -.->|"Unknowns become knowable —<br/>update the risk map,<br/>unblock the learning needs"| SDOC
 
     SV --> VDOC
+    QA --> ADOC
 
     classDef sub fill:#f6f6f6,stroke:#aaaaaa,color:#444444
     class OA,CC,OD,QSR,TA,TSR sub
     classDef doc fill:#fdf6e3,stroke:#b58900,color:#333333
-    class SDOC,TDOC,ODOC,VDOC doc
+    class SDOC,TDOC,ODOC,VDOC,ADOC doc
 ```
 
 The shape follows the pack's four questions — *what does good look like? how do we know? is it good? how do we make it good?* — and one rule: **you can only investigate what you can judge**, so the state of your risk map decides whether the investigation plan or the build plan comes first.
@@ -102,7 +107,8 @@ Put simply: **this pack is the map with the you-are-here arrow. Tollens is the s
 ## What's where
 
 - **[docs/SKILLS.md](docs/SKILLS.md)** — per-skill reference, including planned skills.
-- **[ROADMAP.md](ROADMAP.md)** — what's next (headline: shareable artefacts and quality dashboards generated from your strategy).
+- **[ROADMAP.md](ROADMAP.md)** — what's next (headline: quality dimensions for AI / non-deterministic products).
+- **`examples/fernly/`** — a complete worked sample on a fictional project: full strategy, test strategy, and three generated artefacts. One project's answers, **not a template** — see [its README](examples/fernly/README.md).
 - **`PHILOSOPHY.md`** — the spine; why the skills do what they do.
 - **`OPEN-QUESTIONS.md`** — design decisions made under uncertainty, and what would change our minds.
 - **`skills/`** — the skills themselves.
