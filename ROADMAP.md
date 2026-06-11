@@ -22,6 +22,7 @@ In rough priority order:
 - **Lean-mode investigation** — whether a lighter *view* of the same rigour is possible for small jobs without quietly lowering the bar. We're probing this with validation runs before designing anything.
 - **Per-stakeholder risk-map decomposition** — the dimension-rating step already works per-stakeholder and surfaces divergence; the risk map doesn't yet.
 - **`/strategy-variants` field-hardening** — real client/team use will tell us whether the omit-never-lie discipline holds.
+- **A "progress story" artefact preset** — the before/after artefact: `/quality-artefacts` already archives the prior version of every view it refreshes, so the natural next move is a preset that renders two versions side by side — the year-over-year Wrapped move, showing the gaps that closed between strategy revisions.
 - **Smaller planned skills** — `/priority-analysis` (multi-stakeholder prioritisation help), `/feedback-synthesis` (curate the `.skill-feedback.md` notes the skills jot as they run), `/pre-read` (standalone project digest).
 
 ## What we won't do
