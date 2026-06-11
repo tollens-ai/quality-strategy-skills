@@ -38,11 +38,11 @@ Use the `Agent` tool with `subagent_type: general-purpose`. The brief:
 >
 > - Functional correctness (and its sub-dimensions: feature-level correctness; **cross-feature interaction / flow completeness** — features that are right in isolation but wrong in combination, or journeys that fall in the gap between features; a signature gap of systems built feature-at-a-time by agents)
 > - Performance (and its sub-dimensions: scalability, resource consumption, elapsed time, UX responsiveness, jitter)
-> - Reliability, resilience, recoverability, availability
+> - Reliability, resilience, recoverability, availability (recoverability includes safe rollback — which leans on observability again: knowing when, and what, to roll back)
 > - Security, privacy
 > - Usability, accessibility
-> - Diagnosability, debuggability, observability
-> - Maintainability, extensibility, testability
+> - Diagnosability, debuggability, observability (observability serves debuggability: wherever you find bugs, you must be able to debug and fix them)
+> - Maintainability, extensibility, testability, fixability (fixability includes robustness against regressions — a fix that stays fixed)
 > - Deployability, operability, portability, interoperability
 > - Data integrity, compliance, auditability
 > - Documentation, ramp-up-ability
@@ -71,7 +71,7 @@ When the subagent returns, **first save its returned top-down list verbatim** to
 - **Bottom-up only** — keep; these came from real project context.
 - **Subagent only** — for each, surface to the user as a question: *"The reference-list pass flagged X as Clearly Relevant because [reason]. Should it be in the inventory?"* Don't include silently; don't drop silently.
 
-The user resolves subagent-only candidates.
+The user resolves subagent-only candidates. And when one of them is something the user never mentioned but their **stated goals imply they'd care about**, don't deliver it as a list row — deliver it as a moment, with the trace: *"you didn't mention X anywhere — but given what you said about Y, you'd care a lot if X failed. Does that land?"* Record the answer either way; a rejected revelation is data, not failure (see SKILL.md → "Deliver revelations as moments").
 
 ## How to interview through this
 

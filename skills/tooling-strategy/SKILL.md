@@ -30,7 +30,7 @@ File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **
 
 - **After `/quality-strategy` — before *or* after `/test-strategy`.** This skill has two natural entry points, and the risk map — the strategy doc's table of quality dimensions, their actual state, and the confidence behind each claim — decides which (Q2 before Q3: you can only investigate what you can judge). When the risk map came out **dominated by Unknowns and Gated dimensions**, run this skill *immediately* — plan the builds that make the project knowable before planning the investigation. A test strategy written against dimensions nobody can judge is mostly "blocked". When the risk map is **mostly answerable**, let `/test-strategy` run first and sharpen the demand (its `/tooling-adequacy` check surfaces blocked learning needs), then run this skill on the combined pile.
 - **When deciding what test or measurement infrastructure to build next** — this skill's output *is* that decision, made with the full demand visible instead of ad hoc.
-- **Re-run freely.** This is the most re-runnable of the three strategies: re-run when build items land (they change what's answerable — see Update protocol in the output), when `/test-strategy` adds the test-side demand, or when either parent strategy is revised.
+- **Re-run freely.** This is the most re-runnable of the three strategies: re-run when build items land (they change what's answerable — see Update protocol in the output), when `/test-strategy` adds the test-side demand, or when either parent strategy is revised. **On any re-run over an existing `quality/tooling-strategy.md`, archive it first** — snapshot to `quality/archive/tooling-strategy-<last-updated-date>.md` (suffix `-2`, `-3`, … if the name is taken — never overwrite an archive) before changing a word, and mention the archive in the closing summary. Never silently rewrite history: the archive leaves a before/after trail the user can compare and share.
 
 ## What you need
 
@@ -41,7 +41,16 @@ File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **
 
 If `quality/strategy.md` doesn't exist, stop: this skill plans the build for gaps the other strategies have *found*, and has nothing to consume yet. Point the user at `/quality-strategy` first (or at `/oracle-adequacy` standalone, if they have an existing strategy doc from elsewhere that lacks oracle verdicts).
 
+## Session start — itinerary and commit cadence
+
+At the start of every working session (first or resumed), before the next move's work, two quick moves:
+
+- **Give the itinerary, in plain words.** Five moves, by human name, with rough sizes: *"Gather everything the project can't answer about itself yet (quick — mostly collection); spec each build — what it must do, what it unblocks, build-or-adopt (the bulk of the work); weigh value against cost (short, mostly your calls to confirm); sequence it into phases (short); and close the loop — what each build triggers when it lands."* On resumption or a re-run, lead with what's done or changed since last time, then the remainder.
+- **Ask the commit-cadence question (git-managed projects).** Where `$PROJECT_DIR` is git-managed, ask once: *"Want me to commit at each move's boundary, commit everything at the end, or leave the commits to you?"* Suggest commit-as-we-go as the default (cheap rollback, visible progress). Honour the answer at every boundary.
+
 ## The work, in order
+
+Write the doc incrementally as each move completes, so what's done is durable; on re-entry, resume from the last completed move. At each move's boundary, give one progress line (where we are, what remains, relative sizes) and the visible exit — what the user already has if they stop here (the demand table alone is a useful artifact, and the doc picks up where it left off). The user should never feel the work is unbounded. This is also where the boundary commit lands if the user chose commit-as-we-go.
 
 ### 1. Gather the demand
 
@@ -149,4 +158,4 @@ Re-run `/tooling-strategy` when a phase of builds lands or when `quality/strateg
 **Open questions:** <bullet list, or "none">
 ```
 
-Summarise the plan back to the user in 5–7 lines — the phases, the headline quick wins, what got deferred — and confirm the priorities before declaring it done.
+Summarise the plan back to the user in 5–7 lines — the phases, the headline quick wins, what got deferred, and (on a re-run) where the prior version was archived — and confirm the priorities before declaring it done.

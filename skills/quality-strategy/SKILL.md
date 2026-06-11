@@ -30,6 +30,26 @@ What is fixed is the *substance* — the question that must get answered, the ch
 
 Keep the language **plain** (PHILOSOPHY: *say it plainly*) — in what you say *and* in what you write to the doc. Framework terms get a one-clause gloss on first use; everything else is everyday English: short words, active verbs, concrete examples. You sound like a sharp consultant talking, not a standards document.
 
+## Heavy only where it serves the user's goals
+
+This process is demanding, and an alpha tester named the risk plainly: it *"feels heavy for vibecoders."* The weight is a feature only when the user can see it serving **their own stated goals** — the stakeholder Dealbreakers and Delight bars, the release purpose, the things *they* said matter. Three standing rules keep it that way:
+
+- **Frame every why in the user's own words.** Every substantive ask or stretch of work gets its why framed in terms of what *this* user already said — *"we're digging here because you said losing a user's data is a dealbreaker"* — never in terms of the framework's own needs. Early on, before the stakeholder bars exist, the trace is the release purpose and whatever goals the user has stated so far; once Part 3 exists, trace to the named bars.
+- **The standing pruning rule.** An item — a question, a dimension, a check, an action — that traces to no stated goal is spurious weight. Either cut it, or challenge whether a goal is missing: *"nothing you've told me makes this matter — should it? Is there a stakeholder or a bar we haven't captured?"* Never carry untraceable weight silently.
+- **The honest fork when a goal-justified item meets resistance.** When the user pushes back on something the trace genuinely supports, show the trace, then offer the fork: *"this is here because you said X is a dealbreaker — so either this deserves the dig, or X isn't really a dealbreaker. Which is it?"* Be convinced the item matters for the goal, or revise the goal. **Both outcomes are legitimate**, and both get recorded — conviction lands in the section's rationale; revision lands as a change to the bar it traced to.
+
+This sharpens the substantive refusals rather than softening them: the things the skill refuses to skip (non-goals, the unpack and old/new-world passes, real checkpoints) are exactly what make the user's stated goals checkable — when a user balks at one of those, that is the trace to show.
+
+## Session start — the itinerary and the commit cadence
+
+Two moves at the start of every working session (first or resumed), before the next sub-step's work begins:
+
+**Give the itinerary, in plain words.** Walk the route by human name — what each step produces *for the user*, with rough relative sizes — not the sub-step table read aloud. For example: *"Seven steps, and the first two are quick: context (what the project is, who's working on it) and releases (what's shipping when). Then stakeholders — the first real thinking: who matters and what their bars are. Non-goals — short but load-bearing: what we're deliberately not doing. Dimensions — the longest step: the axes quality breaks into here. The risk map — the headline: where you're actually exposed. And the plan of work — short, and optional. We're at [X]."* On resumption the itinerary doubles as re-orientation: what's done, what remains.
+
+**Ask the commit-cadence question (git-managed projects).** Where `$PROJECT_DIR` is git-managed, ask once: *"As the strategy doc builds up, want me to commit at each step boundary, commit everything at the end, or leave the commits to you?"* Suggest commit-as-we-go as the default — rollback stays cheap, and each boundary commit doubles as visible progress. Honour the answer at every step boundary from then on; don't drift. Record the choice in `quality/.scratch/commit-cadence.md` so it survives `/clear`: a resumed session reads it and restates the standing choice in one line instead of re-asking, and re-asks only if the note is missing.
+
+The standing rule behind both (and behind the progress lines and visible exits at every boundary — see "Substantive checkpoint at step boundaries"): **the user must never feel the process is unbounded.** At any moment they should know where they are, what remains and roughly how big it is, and what they keep if they stop here.
+
 ## The four-question frame and the strategy's job
 
 A quality strategy answers four questions, in order:
@@ -54,13 +74,21 @@ The same framework and the same rigour apply to all four; what differs is the ri
 
 ## Sealed-context dispatch and scratch files
 
-Wherever this skill does substantive analytical work via a subagent — the pre-read (sub-step 0), the dimension scout (5.1), the dimension rating (5.4), the Q2 oracle check (`/oracle-adequacy` at 6.2), the boundary contradiction check (`/contradiction-check`), and the distillation (`/operational-distillation` at 7.3) — the dispatch is **sealed-context**: the subagent sees only what it needs for its piece, not the parent's DONE criteria, not the rubric it will be judged against, not the destination doc's success conditions. The orchestrator's role is **dispatch / collect / reconcile / present**, not to do the analysis itself with the answer key in view. (This is the central anti-shortcut principle of the pack; full decomposition of the remaining sub-steps into sealed dispatches is tracked as later work — see OPEN-QUESTIONS.)
+Wherever this skill does substantive analytical work via a subagent — the pre-read (sub-step 0), the dimension scout (5.1), the dimension rating (5.4), the Q2 oracle check (`/oracle-adequacy` at 6.2), the targeted design deep-dive (6.2, when thin-evidence design-shaped dimensions exist), the boundary contradiction check (`/contradiction-check`), the distillation (`/operational-distillation` at 7.3), and — in revision mode — the two look-forward passes (the fresh defect recon and the what's-new context scan; see Revision mode) — the dispatch is **sealed-context**: the subagent sees only what it needs for its piece, not the parent's DONE criteria, not the rubric it will be judged against, not the destination doc's success conditions. The orchestrator's role is **dispatch / collect / reconcile / present**, not to do the analysis itself with the answer key in view. (This is the central anti-shortcut principle of the pack; full decomposition of the remaining sub-steps into sealed dispatches is tracked as later work — see OPEN-QUESTIONS.)
 
-**Every such dispatch writes a scratch file** at `$PROJECT_DIR/quality/.scratch/<sub-step>-<purpose>.md` recording the real intermediate work it did (e.g. `0-pre-read-*.md`, `5.1-dimension-scout.md`, `5.4-dimension-rating.md`, `6.2-oracle-adequacy.md`, `<boundary>-contradiction-check.md`, `7.3-operational-distillation.md`). This converts "did the orchestrator actually do the work?" from invisible to auditable: `/quality-strategy-review` mechanically checks that every claimed dispatch has its scratch file. A missing scratch file is hard evidence the dispatch didn't happen. `quality/.scratch/` is working state, not part of the strategy — do not treat it as authoritative output, and don't leak its contents into `quality/strategy.md`.
+**Every such dispatch writes a scratch file** at `$PROJECT_DIR/quality/.scratch/<sub-step>-<purpose>.md` recording the real intermediate work it did (e.g. `0-pre-read-*.md`, `5.1-dimension-scout.md`, `5.4-dimension-rating.md`, `6.2-oracle-adequacy.md`, `6.2-design-deep-dive.md` (conditional — an explicit skip note in the doc stands in when no dimension qualified), `<boundary>-contradiction-check.md`, `7.3-operational-distillation.md`; revision mode adds `revision-defect-recon.md` and `revision-context-scan.md`). This converts "did the orchestrator actually do the work?" from invisible to auditable: `/quality-strategy-review` mechanically checks that every claimed dispatch has its scratch file. A missing scratch file is hard evidence the dispatch didn't happen. `quality/.scratch/` is working state, not part of the strategy — do not treat it as authoritative output, and don't leak its contents into `quality/strategy.md`.
 
 **Process-note leak prevention.** Orchestrator meta-observations about *the skill itself* (an awkward step, a suspected bug, phrasing that didn't land) go to `$PROJECT_DIR/.skill-feedback.md` only — never into `quality/strategy.md`. The strategy doc reads as an authored artifact, not a transcript of the skill running.
 
 The *machinery* of running the skill — dispatch/scratch narration ("Subagent dispatched: …", "[ran 5.4 inline]", "scratch would be `quality/.scratch/…`"), append bookkeeping, sub-step/turn lineage refs ("corrected, turn-23", "split out at 5.2") — likewise has no place in `quality/strategy.md`. **This is cleaned up at review time, not by loading the writing pass with a list of don'ts.** Write the finding or the question; the step-boundary review and the final `/quality-strategy-review` strip any machinery that slipped through (see "Presentation cleanup at review points" below). The reasoning: a pass that's busy doing the real analysis shouldn't also juggle a list of don'ts — that taxes the work and still misses leaks. Catching them where the doc is reviewed is both lighter on the writer and more thorough.
+
+## Deliver revelations as moments
+
+The highest-value thing this skill can produce is not the document — it's the moment the user realises something matters about their project that they never articulated (PHILOSOPHY: *the revelation is the product*). The sealed passes are where these surface: the dimension scout (5.1), the pre-read, the fresh-eyes recon in revision mode. Each reads the project without the user's framing, so each can find something the user never mentioned but their stated goals imply they'd care about.
+
+When that happens, **do not bury it in a consolidated list.** Name it back as a moment, traced to their own goals: *"you didn't mention X anywhere — but given what you said about Y, you'd care a lot if X failed. Does that land?"* Then record the outcome either way: if it lands, it enters the doc as the user's own, with the trace; if it doesn't, record that it was considered and why the user set it aside. **A rejected revelation is data, not failure** — it usually sharpens a non-goal.
+
+This is a delivery discipline, not a new pass. The work already happens; the discipline is to spend the find where it pays — as a named moment the user gets to react to, not row 17 of a table.
 
 ## Scope of this skill — first release only
 
@@ -112,7 +140,7 @@ The work is divided into 7 numbered steps, each with one or more sub-steps — 2
 | 5.2 Unpack pass | `steps/5-dimensions/5-2-unpack.md` | Split composite dimensions into sub-dimensions where priorities differ |
 | 5.3 Old/new-world pass | `steps/5-dimensions/5-3-old-new-world.md` | Split trap dimensions where the audience (human vs agent) changes the rating |
 | 5.4 Rate dimensions | `steps/5-dimensions/5-4-rate.md` | Mechanical-anchor impact rating (H/M/None) per dimension — per-stakeholder via a sealed dispatch, then merged; no L (L-style aware-but-not-investing is a Step 7 decision) |
-| 5.5 Sanity checks | `steps/5-dimensions/5-5-checks.md` | Distribution, stakeholder coverage, tensions, non-goal alignment |
+| 5.5 Sanity checks | `steps/5-dimensions/5-5-checks.md` | High justification, stakeholder coverage, tensions, non-goal alignment |
 | 6.1 Required levels | `steps/6-risk-map/6-1-required.md` | What level is needed for each H/M dimension |
 | 6.2 Actual levels | `steps/6-risk-map/6-2-actual.md` | Where we are on each H/M dimension |
 | 6.2 — Oracle adequacy (Q2) | invoke `/oracle-adequacy` (separate skill) | Per dimension: is the *oracle* that judges its actual level adequate? Produces oracle-build items that seed Step 7 |
@@ -160,6 +188,8 @@ This is the single most important user-facing pattern in the skill. The strategy
 
 1. Summarise the *whole step's* output back to the user in 5–8 lines, covering the decisions that matter across all sub-steps in the step — plus any contradictions the check surfaced. Not a recap of process — a recap of decisions.
 
+1b. **Give the progress line and the visible exit.** One line of where-we-are, with relative sizes: *"That was Step 5 — the longest one. Two steps left: the risk map, about half the size of what you just did, and a short optional plan of work."* And one line of what stopping here leaves them with: *"If you stopped now, you'd walk away with your stakeholders' bars and the rated dimensions on paper — already something you can act on — and we can resume from the doc any time."* Both are honest, not cheerleading: the doc genuinely is useful part-done, and resume genuinely is supported.
+
 2. Run the substantive checkpoint:
 
    > *"Take a real moment to read this back. We've completed [Step name]. Is anything off — even if you can't articulate why? Anything that gives you a weird feeling? Anything in earlier steps that, in light of this work, you now think is wrong? Even vague unease is worth surfacing. Catching it now is cheap; catching it later costs hours of rework."*
@@ -180,7 +210,7 @@ This is the single most important user-facing pattern in the skill. The strategy
    - **Articulable concern about an earlier step** — surface explicitly: *"That's about [earlier step]. Want to revisit that section before continuing? Or note as `OPEN QUESTION` and keep going?"* Cross-step revision is first-class, not a failure.
    - **Vague unease, can't articulate** — investigate together. Probing questions: *"What part of the section draws your eye?" "If you imagine this strategy in six months, where would the regret most likely come from?" "What's the closest you can get to naming it?"* Either it resolves and the section is corrected, or it remains as `OPEN QUESTION:` with the user's explicit acknowledgement that we're proceeding with that risk visible.
 
-5. **Only move on after explicit, considered confirmation** — not silence, not a non-committal response, not a polite "yes" with hesitation behind it.
+5. **Only move on after explicit, considered confirmation** — not silence, not a non-committal response, not a polite "yes" with hesitation behind it. Once confirmed, this is where the boundary commit lands if the user chose commit-as-we-go at session start — the commit snapshots the *confirmed* step, never a version still under discussion.
 
 ### Per-sub-step (intermediate) wrap-up
 
@@ -206,6 +236,8 @@ At each scan, re-read the target text and strip these machinery patterns — kee
 - **Provenance / source-column vocabulary** — in the dimension inventory's source/evidence column and in rating rationales, the *name of the internal pass that surfaced or rated a dimension*: "Subagent pass", "reference-list pass", "subagent C's design observations", "Subagent dispatched: `dimension-scout`", "the per-stakeholder pass returned None … merged to H", "the oracle-adequacy pass as direct inputs". Keep the real grounding the column exists to carry — the stakeholder bar, the pre-read observation, the named file — and drop the dispatch/pass name that produced it. A "source" cell should cite *what the dimension rests on*, not *which internal pass emitted it*. (This pattern hides in table cells and rationale prose, so it survives a prose-only scan — look for it explicitly.)
 - **Scratch-file path citations** — a "Sources consulted: `quality/.scratch/5.1-dimension-scout.md`" or "rests on … + `quality/.scratch/5.4-dimension-rating.md`". `quality/.scratch/` is working state the reader does not have; cite the real underlying source (the pre-read digest, the stakeholder bars, the named code files) instead, or drop the citation. A `.scratch/` path must never appear as a source in the strategy doc.
 - **Inferred-as-scanned pre-read lines** — a "no audited gem detected" / "no `.github/workflows` found" written as if a scan ran when no code was actually read. Rephrase to the honest form the pre-read uses ("not yet established — confirm in interview") or cite the interview honestly. (This is the review-side companion to sub-step 0's honest-degradation rule.)
+
+One exemption: the `## Since the last revision` section a revision writes (see Revision mode) is content, not machinery — its what-happened verdicts and newly-found items compare the *project* against its prior strategy, which is analysis the reader wants. Leave it.
 
 This is *presentation* cleanup only. It changes nothing about what work runs or which scratch files get written — every sealed dispatch still executes and still writes its scratch file, which `/quality-strategy-review`'s scratch-file audit reads on disk. What changes is only what lands in the doc and what you say to the user.
 
@@ -254,7 +286,7 @@ Step 5 is the longest single step (five sub-steps, with 5.1–5.3 stick-together
 On re-invocation, detect the state of `quality/strategy.md`. If a partial strategy exists:
 
 - Read the existing doc to determine the last completed sub-step.
-- Tell the user: *"I see a partial strategy. Last completed: sub-step X.Y. Want to resume from X.Y+1, or revisit something earlier first?"*
+- Tell the user, naming the step in human words, not bare coordinates: *"I see a partial strategy. Last completed: the dimension ratings (sub-step 5.4). Want to pick up from the sanity checks that follow, or revisit something earlier first?"* — and give the session-start itinerary (see "Session start — the itinerary and the commit cadence") so they see what's done, what remains, and the relative sizes.
 - If the user is resuming into the middle of a stick-together set (e.g. they completed 5.1 in the prior session and are now resuming at 5.2), name it: *"Note that 5.2 is part of a stick-together set with 5.1 and 5.3 — re-orient from the inventory in `quality/strategy.md` before we start to recover the working memory."*
 - Resume from the user's chosen sub-step.
 
@@ -272,10 +304,26 @@ If `quality/strategy.md` already exists at full length (i.e. all sub-steps were 
 > (c) doing a full re-walk of the current strategy, using the existing content as starting hypothesis;
 > (d) **starting a new release** — in which case I'll archive the current strategy to `quality/archive/strategy-<release-name>-<YYYY-MM-DD>.md` and produce a fresh one for the new release?
 
+**Archive first — whatever the answer.** Before changing a word, snapshot the current doc to `quality/archive/strategy-<last-updated-date>.md` — the date the doc was last updated, from its header if it carries one, else the file's modification date (path (d) uses its release-name form above). If that filename is already taken, suffix `-2`, `-3`, … — never overwrite an archive. Never silently rewrite history: the archive leaves a before/after trail the user can compare and share, and it is the instrument `/quality-strategy-review` diffs against when it reviews the revision. Mention the archive in your closing summary so the user knows it exists. One exception: re-entering the skill to fix blockers from a `/quality-strategy-review` of this same, not-yet-done strategy is the tail of the same writing session, not a revision — don't archive again, and don't re-run the movements below.
+
 - For (a), proceed normally; the existing file will be overwritten as you go.
-- For (b), ask which sub-steps; jump to those, skip the rest.
-- For (c), proceed through all sub-steps but reference the existing content as starting hypothesis rather than starting from scratch.
-- For (d) — **new-release mode** — archive the current strategy first, then walk all sub-steps. Sub-steps that change less between releases (1.1 Purpose, 1.2 Team, 1.3 Workflows, 1.4 Release workflow, 1.5 Budget, 2.1 Roadmap) should pre-load the archived prior version's section as starting hypothesis and ask "what's changed?". Sub-steps that change more (3.1, 3.2, 4.1, 5.x, 6.x, 7.x) start more or less from scratch because the release context is fundamentally different.
+- For (b), ask which sub-steps; jump to those, skip the rest — and run the three movements below, scoped to the sections being revisited.
+- For (c), walk all sub-steps as the three movements below, using the existing content as starting hypothesis for the look-back.
+- For (d) — **new-release mode** — walk all sub-steps fresh. Sub-steps that change less between releases (1.1 Purpose, 1.2 Team, 1.3 Workflows, 1.4 Release workflow, 1.5 Budget, 2.1 Roadmap) should pre-load the archived prior version's section as starting hypothesis and ask "what's changed?". Sub-steps that change more (3.1, 3.2, 4.1, 5.x, 6.x, 7.x) start more or less from scratch because the release context is fundamentally different.
+
+### Revising = look back, then look forward, then reconcile
+
+A revision that only checks the prior doc's known problems concludes "we fixed everything — all good now". But known problems are only the ones you knew about; the project has changed since the doc named them, so **the gaps have moved**, and a pass anchored on the old doc will not find where they went. **Fixing all known problems is not the same as being good now.** So a revision (paths b and c) runs as three movements:
+
+1. **Look back (deliberately anchored).** For each H/M risk-map row, open question, and planned action in the prior version: what actually happened? A "fixed" claim needs evidence — the commit, the test, the measurement — or it is recorded as *believed fixed* at an honest confidence, not closed. Re-rate the actuals from what you find, not from what was planned.
+
+2. **Look forward (deliberately blind).** Fresh-eyes passes run **without the prior doc in their context**, via the sealed-dispatch machinery above: a fresh defect recon over the current source (the same independent blind-pass pattern as `/test-strategy`'s standing defect-recon learning need), and a fresh scan of what's new since last time — new features, new stakeholders, changed context. The standing question for both: *the gaps have moved — where to?* The blindness is load-bearing: in the pack's own observed runs — an anchored-versus-blind planning comparison in June 2026, and the runs behind the standing defect recon — analysis anchored on an existing doc reliably planned *around* defects that independent blind passes found. Each dispatch writes its scratch file: `quality/.scratch/revision-defect-recon.md` and `quality/.scratch/revision-context-scan.md`.
+
+3. **Reconcile.** Merge the forward findings into the back-verified structure. Where the fresh analysis contradicts inherited content, surface the contradiction to the user explicitly — never silently inherit the old claim. Inherited content escaping this-session checks is a known weakness of re-walks (the same class as the inherited-content cleanup below); reconciliation is where it gets caught.
+
+**Record the movements in the doc.** The movements' results land in a short `## Since the last revision` section near the top of the doc (below `## Strategy job`): the revision date and scope (full re-walk, or the sections a path-(b) revision touched); a what-happened verdict for each prior H/M row, open question, and planned action in scope — "fixed" with its evidence, *believed fixed* at a confidence, still open, or overtaken; and what the look-forward newly found (or the recorded skip note below). This section is content, not machinery — comparing the project against its prior strategy is analysis the reader wants, so the presentation scans leave it alone. It is also how `/quality-strategy-review` knows the doc is a revision and what scope to hold the look-back to.
+
+Scope the movements to fit: for (b), the look-back covers the prior items the revisited sections carry. The look-forward dispatches run whenever the revision re-asserts the risk map's actuals — skip them when the edit makes no claim about the project's current state (a wording fix, a stakeholder rename), or when the revision is a targeted re-assessment of named risk-map rows after a tooling build lands (the build's own evidence is the new input there, not a fresh recon). Record any skip in the `## Since the last revision` section, so the review knows it was deliberate.
 
 **Inherited-content cleanup (paths b, c, and resumption).** When you carry content over from an existing strategy rather than rewriting it from scratch, that content was never seen by *this* session's step-boundary presentation scans — so any machinery it already contains (provenance/source-column vocabulary, sealed-pass narration, turn or sub-step lineage, `.scratch/` citations) will survive untouched. Before the final review, run a **whole-doc** presentation-cleanup scan (see "Presentation cleanup at review points") over the entire strategy, inherited Parts included, and let the final `/quality-strategy-review` check 21 strip whatever remains. Do not assume a doc you inherited is clean just because the Parts you wrote this session are.
 
@@ -325,4 +373,5 @@ Pause the skill and surface a question (rather than push through) when:
 
 - `quality/strategy.md` at the project root — the strategy itself. Visible, top-level, meant to be read. Opens with the Operational TL;DR + triage rubric (from `/operational-distillation`) and the `## Strategy job` paragraph.
 - `quality/pre-read.md` — the project digest produced by sub-step 0. Working artefact; informs but does not become part of the strategy.
-- `quality/.scratch/<sub-step>-<purpose>.md` — sealed-dispatch scratch files (one per subagent dispatch). Working state, audited by `/quality-strategy-review`; not part of the strategy.
+- `quality/.scratch/<sub-step>-<purpose>.md` — sealed-dispatch scratch files (one per subagent dispatch; revision mode adds `revision-defect-recon.md` and `revision-context-scan.md`). Working state, audited by `/quality-strategy-review`; not part of the strategy.
+- `quality/archive/strategy-<date>.md` — pre-revision snapshots (see Revision mode). History, never overwritten.

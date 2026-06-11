@@ -81,6 +81,8 @@ What shape the system has, and what dimensions that shape implies will matter do
 >
 > Then read enough of the project to form architectural hypotheses. You don't need to understand every line — read for shape: layering, dependency direction, key abstractions, error-handling patterns, where the "interesting" or "load-bearing" code lives, which parts look mature vs scaffolded, which parts look unusually risky or unusually careful.
 >
+> This is deliberately a **light first touch**: at pre-read time nobody knows yet which areas the strategy will care about, so you cannot know what to look for — surface what stands out, and no more. A second, targeted design deep-dive happens later (risk-map sub-step 6.2), once the actuals scoring knows exactly which areas the evidence doesn't cover.
+>
 > Your output is a **narrative of design observations**. For each observation: a one-line title (what you observed), one-to-three lines describing it, and one-to-two lines connecting it to which quality dimensions are likely to matter downstream and why. Do **not** work through a checklist of dimensions. Work through what the design tells you, and let the dimensions fall out.
 >
 > Example shape:

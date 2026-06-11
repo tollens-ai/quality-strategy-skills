@@ -2,7 +2,7 @@
 
 ## Goal
 
-Final review of the dimension list and ratings before moving to Step 6. Catches the failure modes an agent and user deep in the flow often miss: skewed distributions, stakeholder-coverage gaps, cross-stakeholder tensions, and missing rationale.
+Final review of the dimension list and ratings before moving to Step 6. Catches the failure modes an agent and user deep in the flow often miss: unjustified Highs, stakeholder-coverage gaps, cross-stakeholder tensions, and missing rationale.
 
 This sub-step is mostly the agent doing checks and surfacing findings; the user resolves any flagged issues.
 
@@ -14,14 +14,16 @@ Read all of Part 5 (5.3's final inventory + 5.4's ratings) from `quality/strateg
 
 ## The checks (run in order)
 
-### Check 1 — Distribution
+### Check 1 — High justification
 
-Count the ratings by category (H / M / None). Push back on:
+Walk the Highs one by one. **Test justification, not distribution.** By rating time the low-stakes material has already been deliberately cut — dropped at the inventory, excluded as a non-goal, rated None — so a list where Highs dominate what remains is the *expected* shape, not evidence of inflation. Counting Highs and doubting the count fires on exactly the strategies that did the earlier pruning right. Instead:
 
-- **More than 50% rated High.** *"X of Y dimensions are High — meaning more than half have a stakeholder Dealbreaker behind them. Is everything truly a dealbreaker, or do some only have a Good Enough / Delight bar (Medium)? A distribution where most things are High loses information."*
-- **No None ratings at all in an early-stage project.** *"None is an explicit decision; in an alpha or early release there are usually things actively excluded. Are we sure no dimension is unreferenced by any stakeholder bar?"*
+- **Every High must cite the stakeholder Dealbreaker bar it rests on.** Where the citation is missing or generic, challenge that High *individually*: *"Which stakeholder, which bar? If no Dealbreaker demands this, it's Medium."*
+- **When every High is justified, say so plainly:** *"Every High here cites a real dealbreaker — this is a genuinely high-stakes surface."* Don't manufacture doubt about a count that the bars support.
+- **Keep the H/M distinction useful.** If literally everything converged on H, check the Medium anchor was actually applied — some bars are Good Enough or Delight, not Dealbreakers, and the dimensions resting only on those belong in M. The fix is per-dimension re-anchoring, never bulk demotion to make a distribution look balanced.
+- **No None ratings at all in an early-stage project** is still worth a question: *"None is an explicit decision; in an alpha or early release there are usually things actively excluded. Are we sure no dimension is unreferenced by any stakeholder bar?"*
 
-Because 5.4's **H** now requires a real Dealbreaker bar, rating inflation is structurally limited — you can't push something to High without a stakeholder who demands it. Note too that "aware of it but not investing right now" is **not** a rating here (there is no L): it's a Step 7 plan-of-work decision. Its absence from the ratings is expected, not a gap — don't flag it.
+Two standing reminders. **High means important, not in-trouble**: a High can be comfortably at bar or cheap to close — importance and current state are different axes (state is Part 6's question), and neither your prose nor your conversation should use "High" to mean "at risk". And "aware of it but not investing right now" is **not** a rating here (there is no L): it's a Step 7 plan-of-work decision; its absence from the ratings is expected, not a gap — don't flag it.
 
 ### Check 2 — Stakeholder coverage
 
@@ -51,7 +53,7 @@ Walk Part 4's non-goals. For each:
 
 Walk Part 5's ratings:
 
-- Every H rating should cite a named stakeholder **Dealbreaker** bar in its rationale.
+- Every H rating should cite a named stakeholder **Dealbreaker** bar in its rationale — Check 1 already walked these; here confirm the citations made it into the *doc*, not just the conversation.
 - Every None rating means **no stakeholder bar at any lens references the dimension** — that confirmation *is* the reasoning. Check it's a confirmed None, not a "we forgot about it" gap.
 
 Surface any missing.
@@ -62,7 +64,7 @@ This sub-step is mostly mechanical agent work. Run the checks in order, surface 
 
 You have explicit permission and encouragement to:
 
-- Push back hard on skewed distributions. A strategy where 80% of dimensions are H isn't focused.
+- Push back hard on any High whose rationale doesn't cite a real Dealbreaker bar. An unjustified High is the inflation that matters; a justified majority of Highs is not.
 - Surface tensions even when uncertain — flagged tensions are better than hidden ones.
 - Treat the checks as the agent's responsibility. The user shouldn't have to remember to ask "did you check distribution?"
 
@@ -70,18 +72,18 @@ What you must not do:
 
 - Skip checks because "the user already thought about this."
 - Resolve flagged issues silently. Every finding goes to the user.
-- Move on if the distribution is wildly skewed and the user hasn't actively confirmed.
+- Move on while any High lacks a named Dealbreaker bar and the user hasn't actively resolved it.
 
 ## Push back when
 
-- More than 50% of dimensions are High and the user dismisses the check. *"That's a lot of critical things — what would you cut if half had to be Medium?"*
+- A High's justification is challenged and the user waves it through ("it just is critical"). *"Which stakeholder, which bar? If we can't point at a dealbreaker, the honest rating is Medium — or we're missing a stakeholder bar, which is worth capturing now."*
 - A stakeholder has no H/M dimension touching their bars. *"[Stakeholder]'s dealbreaker was X. Where does that map to in our dimensions?"*
 - A non-goal contradicts an H-rated dimension. *"Part 4 said X is a non-goal, but Part 5 has Y rated High, which depends on X. How do we reconcile?"*
 - An H rating has no stakeholder bar named in its rationale. *"What stakeholder is this critical for, and what specifically did they say?"*
 
 ## This sub-step is DONE when
 
-- [ ] Distribution check has been run; if skewed, the user has actively confirmed or adjusted.
+- [ ] High-justification check has been run; every High cites its Dealbreaker bar (or was individually challenged and resolved), and an all-justified result was stated plainly rather than second-guessed.
 - [ ] Stakeholder coverage check has been run; each first-release stakeholder has at least one H or M dimension touching their bars (or a coverage gap is flagged as `OPEN QUESTION`).
 - [ ] Cross-stakeholder tensions have been flagged where they exist.
 - [ ] Non-goal alignment has been verified; any mismatches surfaced and resolved.
@@ -99,7 +101,7 @@ Append to `quality/strategy.md` under Part 5:
 ```markdown
 ### Sanity-check findings
 
-- **Distribution check:** <findings — was the spread reasonable, or did we adjust?>
+- **High-justification check:** <findings — every High cites its bar; any challenged and re-anchored; "all justified — genuinely high-stakes surface" when that's the truth>
 - **Stakeholder coverage:** <each first-release stakeholder confirmed covered, or coverage gaps flagged>
 - **Cross-stakeholder tensions:** <flagged tensions with one-line description; or "none identified">
 - **Non-goal alignment:** <verified clean; or "mismatches resolved as <X, Y>">

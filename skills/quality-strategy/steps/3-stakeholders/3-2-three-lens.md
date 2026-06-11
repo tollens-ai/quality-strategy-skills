@@ -31,7 +31,7 @@ You have explicit permission and encouragement to:
 - **Prompt for more colour.** If an answer is one-word ("speed"), push: *"What does delight-level speed look like concretely? Two seconds? One? What's the experience when it's that fast?"*
 - **Dig into anything that surprises you** — a dealbreaker that's much smaller than expected, a delight that's vaguer than expected, a Good Enough that's noticeably lower than the user's actual emotional reaction suggests.
 - **Reframe** if your first prompt didn't land. For internal stakeholders especially, "delight" may need translating ("what would feel like a win for the dev team this release?").
-- **Use the pre-read.** If subagent C surfaced design observations that imply specific bars for a stakeholder ("error messages are inconsistent → diagnosability dealbreakers likely live here"), ground the question in that.
+- **Use the pre-read.** If subagent C surfaced design observations that imply specific bars for a stakeholder ("error messages are inconsistent → diagnosability dealbreakers likely live here"), ground the question in that. And when the pre-read implies a bar the user hasn't named at all, deliver it as a moment with its trace — *"you haven't mentioned restore anywhere, but given what you said about never losing a user's data, a backup that's never been rehearsed would matter a lot to you. Does that land?"* — and record the answer either way; a rejected revelation is data, not failure (see SKILL.md → "Deliver revelations as moments").
 
 What you must not do:
 

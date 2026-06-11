@@ -47,6 +47,7 @@ For each candidate learning need:
 
 - Is this *checking* (verify a known expected behaviour) or *investigating* (find out what's actually happening)? If checking, it's a smaller part — phrase the question accordingly: *"do these specific behaviours match spec?"* — and make sure checking items don't dominate the strategy. See FRAMINGS.md #1. If checking dominates, push back: investigation should be the larger share.
 - Does the question include human-judgment dimensions (smell — the gut sense that something's off — trust, "does it feel right")? Mark those — they constrain allocation in sub-step 4. See FRAMINGS.md #9.
+- Is the question experience-shaped — delight, feel, "does it hold up against what users actually try to do"? Then the methods come from the two named classes in FRAMINGS.md #11: **exploratory testing** (charters from real intentions, run by an exploratory tester) and/or **testing in production** (real users plus the instrumentation that observes the named risks). Spec-level checks are not an oracle for these bars; listing only scripted checks against an experience question is the strategy failing quietly.
 - Does this include something we'd previously have said "not worth testing"? See FRAMINGS.md #5. Surface explicitly: *"Under human costs, would you have skipped this? Is it cheaper now with agents?"* If yes, it stays in.
 
 **Pass 3: The standing candidate — fresh-eyes defect recon.**
@@ -56,6 +57,7 @@ Always put one candidate on the table regardless of what the risk map says: *"Wh
 - **Methods:** several *independent* agent passes over the actual source, each with a different lens (security, data integrity, silent failure, cross-feature interaction), run by agents who have **not** read the quality strategy or this document. That blindness is the point — it's the independence-of-perspective principle (FRAMINGS.md #3) applied to agents: a fresh-eyes agent samples the defect pool differently from one anchored on the risk map, and observed runs show strategy-anchored agents reliably plan *around* defects rather than finding them, while each independent blind pass surfaces different criticals (no single pass finds them all).
 - **Exit criterion:** passes stop surfacing new criticals (loop-until-dry), not a fixed pass count.
 - Findings feed the risk map's actual/confidence columns; confirmed defects become known-risk fixes in the plan of work, not learning needs.
+- **Deliver the finds as moments.** When the recon surfaces a problem in something the user never mentioned but their stated bars imply they care about, name it back with the trace — *"you never mentioned the export path, but given your data-loss dealbreaker, you'd care a lot that it can silently drop rows. Does that land?"* — instead of burying it in the findings list. Record the answer either way; a rejected revelation is data, not failure (see `/quality-strategy` → "Deliver revelations as moments").
 
 The user can drop it with a stated reason (e.g. just done recently, code is trivially small) — but the default is in.
 
@@ -96,7 +98,7 @@ This is the place to apply principle 5 (don't import old-world costs) explicitly
 - The user proposes a learning need with no exit criterion. *"What would tell us we've learned enough? Without that, we don't know when to stop."*
 - The user wants to merge investigation and fixing into the same item. *"Those are different costs and different decisions. Let's split: the learning need is whether the gap exists; the fix goes in the plan of work."*
 - The user defers tiering. *"Tiering is the principle 2 + 3 application — without it, we don't know what to do first. Even rough is better than none — we can re-rate."*
-- The user has all-Tier-1 entries. *"Everything-is-critical means nothing is. What would you cut if you only had time for half?"*
+- Tier 1 is crowded. Test justification, not the count: by tiering time the low-stakes material never became a learning need at all, so a top-heavy list can be the honest shape. Every Tier-1 item must trace to an existential risk or a stakeholder Dealbreaker — challenge the ones whose trace is missing (*"what makes this existential — which risk-map row, which bar?"*) and move those down individually. When every Tier-1 item is justified, say so plainly — this is a genuinely high-stakes investigation — and let within-tier cheap-first ordering do the prioritising.
 - The user wants to drop calibration items because they "feel like meta-work." *"Calibration is what stops the strategy being wrong forever. The cost of doing it once is small; the cost of skipping it is repeated mis-allocation."*
 
 ## This sub-step is DONE when
@@ -107,6 +109,7 @@ This is the place to apply principle 5 (don't import old-world costs) explicitly
 - [ ] Items within each tier are ordered by cheapest-resolution-first.
 - [ ] At least one calibration item is included if the project has unknowns about human-vs-agent costs (most do; if not, the user has explicitly said why not).
 - [ ] Old-world-costs check has been done (FRAMINGS.md #5) — user was prompted at least once on whether previously-skipped items are now cheap.
+- [ ] Experience-shaped learning needs carry methods from the named classes (exploratory testing / testing in production, FRAMINGS.md #11) — none rests on spec-level checks alone.
 - [ ] The fresh-eyes defect-recon candidate (Pass 3) is in the tier list, or the user's reason for dropping it is recorded.
 - [ ] Pre-read sources cited.
 

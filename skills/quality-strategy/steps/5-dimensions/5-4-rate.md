@@ -6,6 +6,8 @@ For each dimension in the final inventory from 5.3, rate its **impact for the fi
 
 The rating captures **impact size only** — *how much does failure on this dimension cost, for the stakeholders who care?* It does **not** capture likelihood, and it does **not** capture "how high does the actual quality need to be" (that's 6.1). Likelihood lives downstream in the risk map: risk = impact × likelihood gets combined there, later — not collapsed into a single 5.4 score now.
 
+**High means important, not in-trouble.** A High rating says failure here would cost a stakeholder dearly — it says nothing about where the project currently stands. A High dimension can be comfortably at bar (a success story), or cheap to close; importance and current state are different axes, and the current state is Part 6's question, not this one's. Keep that distinction in the prose you write and the words you say: never use "High" to mean "at risk" or "in trouble".
+
 There is no L on purpose. "Aware of it but not investing right now" is a **plan-of-work decision (Step 7)**, not a rating. Dropping L kills the state-vs-priority drift at its source — ratings quietly sliding to match what the team plans to work on, rather than what failure costs. Rate each dimension by what the stakeholders' bars say its impact is; decide separately, in Step 7, whether to defer work on it — with that impact in full view.
 
 ## What you need from the previous sub-step
@@ -65,11 +67,13 @@ When the subagent returns, merge **per dimension**. This is real dialogue where 
 
   The user decides. Record the merged rating **plus a one-line note** of the divergence and the decision.
 
+  Where the merge decision **knowingly accepts rough** — the team commits below some stakeholder's bar, or accepts that the bar will be met by a solution everyone knows isn't long-term robust — record it as a **tradeoff**: what was traded, which bar it still satisfies, and the trigger that would reopen it. This is where good-enough-on-purpose gets written down; it falls out of reconciling the lenses, not out of a separate list.
+
 Talk exactly where stakeholders disagree — that contested call is where the user's input is worth most. Don't manufacture dialogue where the anchor converges, and don't collapse a real divergence into a silent max.
 
-### 3. Backstop — light distribution glance
+### 3. Backstop — light justification glance
 
-After the merge, glance at the distribution (H / M / None counts). This is **light** — the heavy distribution and coverage checks live in 5.5. Note that because H now requires a real Dealbreaker, inflation is structurally limited: you can't rate something H without a stakeholder bar that demands it.
+After the merge, glance over the Highs: each one must cite the Dealbreaker bar it rests on. This is **light** — the thorough justification and coverage checks live in 5.5. Don't be alarmed by a High-dominated table: by this point the low-stakes material has already left the list (dropped at the inventory, excluded as a non-goal, or rated None), so Highs dominating what remains is the expected shape, not inflation. Because H requires a real Dealbreaker, inflation is structurally limited anyway — the thing to verify is the citation behind each High, not the count of them.
 
 You have explicit permission and encouragement to:
 
@@ -100,6 +104,7 @@ What you must not do:
 - [ ] Every **None** has been confirmed: no stakeholder bar at any lens references it.
 - [ ] Per-stakeholder ratings were produced by the **sealed-context subagent** and saved verbatim to `quality/.scratch/5.4-dimension-rating.md`.
 - [ ] Every **divergence** was surfaced to the user, and the merge decision is recorded with a one-line note.
+- [ ] Tradeoffs knowingly made at the merge are recorded (what was traded, the bar it still satisfies, the reopen trigger) — or the section records "none recorded this pass".
 - [ ] Rating vocabulary is **H / M / None** — no L, no percentages.
 - [ ] Any deferred items are recorded as `OPEN QUESTION:`.
 - [ ] Pre-read sources are cited in the section's evidence field — naming actual files referenced, or, for an interview-derived / no-repo pre-read, citing the interview honestly (never blank, never a placeholder).
@@ -139,7 +144,12 @@ Merged ratings, grouped by rating for readability. Impact size only — likeliho
 - **<dimension>** — Stakeholder A: H (Dealbreaker bar, Part 3.2); Stakeholder B: None. Merged to <rating> because <the user's decision>.
 - <or "none — all dimensions converged">
 
-**Distribution:** <count by rating, e.g. "6 H, 9 M, 4 None">
+**Tradeoffs knowingly made at the merge** (good-enough-on-purpose — each with the bar it still satisfies and its reopen trigger):
+
+- **<dimension>** — <what was traded and why it's enough> — *reopen when: <trigger>*.
+- <or "none recorded this pass">
+
+**Rating counts:** <e.g. "6 H, 9 M, 4 None">
 
 **Sources consulted from pre-read:** <bullet list>
 

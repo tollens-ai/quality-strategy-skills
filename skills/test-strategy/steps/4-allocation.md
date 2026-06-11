@@ -10,7 +10,7 @@ This sub-step works differently from the others. In most of the skill, the agent
 
 - The Learning Needs list with its calibration items.
 - The principles, especially principle 6 (automate repeatable, humanise judgmental).
-- FRAMINGS.md #6 (economics shift), #7 (agent output review), #9 (smells).
+- FRAMINGS.md #6 (economics shift), #7 (agent output review), #9 (smells), #11 (exploratory testing and testing in production).
 
 ## The two-voice exchange
 
@@ -68,6 +68,8 @@ While running the exchange:
 
 **FRAMINGS.md #9 — smells.** Ask explicitly: *"Where does the team need to feel the product, not just check it?"* Those rows go to human regardless of what the agent claims it can do.
 
+**FRAMINGS.md #11 — the two named method classes.** Rows whose method is **exploratory testing** are allocated to an **exploratory tester** — a human by default; an AI exploratory tester is *unproven — calibrate before trusting*, so any agent allocation here is at most `unknown — try and see` with a human-baseline calibration item attached, never high confidence. Rows whose method is **testing in production** are only allocatable once the instrumentation covering the named risks and the recovery path exist (or are themselves rows); allocating "ship it and watch" without the watching is not an allocation.
+
 ## What you must not do
 
 - Skip the two-voice exchange and let the agent fill in the table alone. The whole point of this sub-step is reconciliation between two perspectives.
@@ -94,6 +96,7 @@ While running the exchange:
 - [ ] Items tagged "unknown — try and see" are explicitly listed as calibration triggers for sub-step 5's update protocol.
 - [ ] Agent-allocated rows have a named review pattern (who reviews, what they're looking for).
 - [ ] Smell-presence question (FRAMINGS.md #9) was asked at least once.
+- [ ] Exploratory-testing rows are allocated to an exploratory tester (human by default; any agent allocation is `unknown — try and see` with a human-baseline calibration item), and testing-in-production rows have their instrumentation and recovery path named or rowed (FRAMINGS.md #11).
 - [ ] Pre-read sources cited.
 
 If any check fails, return to the exchange. Do not proceed to sub-step 5.

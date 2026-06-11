@@ -124,3 +124,17 @@ Teams often mix the two up. A strategy that says "test more" in response to know
 **The learning-needs derivation should split them.** Each tier item should be honest about which kind of risk it's addressing. Items addressing unknown risk produce information; items addressing known risk produce fixes (and may not belong in a test strategy at all — they belong in the quality strategy's plan of work).
 
 Source: Ed's `core/Risk.md`, `quality-strategy/concept-risk.md`.
+
+---
+
+## #11 — Two named method classes agents forget: exploratory testing, and testing in production
+
+Agents derive methods that look like scripts: run X, assert Y. Two method classes that don't fit that shape keep falling out of strategies, and both are first-class here.
+
+**Exploratory testing** is skilled investigation — simultaneous learning, test design, and execution by an **exploratory tester** (that is the practitioner's title; never "explorer"). It is the standing oracle for experience bars — delight, feel, "hardened against real user intentions" — where spec-level checks are insufficient *by design*: a flow can pass every scripted check and still fight its user. Plan it with charters drawn from real intentions, time-boxed sessions, and debriefs whose findings feed the risk map's actual/confidence columns.
+
+**Testing in production** means letting real users have at it **with adequate observability instrumentation covering the risks and downsides** — the instrumentation is what makes it testing rather than hoping. A testing-in-production method is only well-formed when it names: what the real usage will exercise, what instrumentation observes each named risk, and the recovery path when the downside fires. Without those three, it is not a method; it's exposure.
+
+**AI exploratory testing is unproven — calibrate before trusting.** An agent can run charters and write convincing debriefs, but whether it notices what a skilled exploratory tester notices is an open question with no track record. Treat any AI-exploratory allocation as a calibration item (try one charter against a human baseline), never as a settled capability.
+
+Source: design session with Qing, 2026-06-11; Ed's `core/Testing.md` (investigation framing).

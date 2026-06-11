@@ -25,7 +25,7 @@ Walk through each row systematically:
 
 - For each dimension, take the required and actual from 6.1 and 6.2.
 - Work out the gap: matched / small gap / large gap / **Unknown** (when the actual is Unknown — the gap can't be measured).
-- Work out the impact: from the dimension's H/M rating and the rationale, how dangerous is this gap?
+- Work out the impact: from the dimension's H/M rating and the rationale, how dangerous is this gap? (Impact is the importance carried over from Part 5 — High means *important*, not *in trouble*. A High-impact dimension with no gap is a cold row and a success story; importance and current state combine in the heat calculation, but they never blur.)
 - Mark the heat: hottest = large gap + high impact + low confidence on either side. **Unknowns on high-impact dimensions are also hot** — you don't know where you are, and it matters a lot. They typically generate the highest-priority items in Step 7.
 - Coldest = small gap + lower impact + high confidence on both sides.
 
@@ -50,7 +50,7 @@ What you must not do:
 ## Push back when
 
 - The map looks uniformly cold and the project is early-stage. *"This is a young project; some confidences should be Low. Where are we actually guessing?"*
-- The map looks uniformly hot. *"Are all these really high-impact and large-gap, or has some inflation crept in?"*
+- The map looks uniformly hot. Check the inputs row by row rather than doubting the count: a hot row needs a real gap (or Unknown) *and* a real impact rating behind it. Where both hold for every row, say so plainly — *"this is a genuinely exposed surface right now"* — a uniformly hot map of a young, high-stakes project is honest, not inflated.
 - The user wants to override the heat rating without changing the inputs. *"Which input is wrong — required, actual, or confidence?"*
 
 ## This sub-step is DONE when
