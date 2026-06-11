@@ -343,4 +343,6 @@ Then **recommend the next step — and let the risk map pick it.** The pack's fo
 
 Say which branch this strategy is on and why (cite the risk map you just reviewed — you have it in hand). Never present *quality strategy → test strategy* as "the designed sequence"; the designed sequence is this branch.
 
+And — since the strategy just passed review and is now in its shareable, final form — **offer `/quality-artefacts` alongside the analytical branch**: *"it's also ready to turn into something you can share — `/quality-artefacts` builds a dashboard, a risk heatmap, or a social card from it."* This is the payoff moment for the work; name it next to `/test-strategy` and `/tooling-strategy`, not as an afterthought.
+
 If this review ran as part of `/quality-strategy` itself, return control to the orchestrator and report either pass or remaining work.

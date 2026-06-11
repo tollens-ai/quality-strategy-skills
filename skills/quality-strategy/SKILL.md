@@ -346,6 +346,8 @@ Once it passes, point the user at the follow-on skills so they know where to go 
 
 Either way, name both skills, say which order you recommend and why, and don't leave the user at a finished strategy with no onward path. `/test-strategy` is the engineering-level companion that turns this strategy into action — what to investigate, in what order, with what human/agent split; the risk map and plan of work you just produced are its direct inputs.
 
+**And offer the payoff — `/quality-artefacts`.** The analytical continuations are not the only onward path: the moment the strategy is done is also the moment it can become something *shareable*. Offer it explicitly — *"want to see this as a dashboard, or a card you can screenshot and share? `/quality-artefacts` turns the strategy into a bespoke visual — a risk heatmap, a social card, a one-glance summary of where quality stands."* This is the delight payoff of the work just finished, not a footnote in the README; surface it alongside `/test-strategy` and `/tooling-strategy`, not buried beneath them. (It reads the finished, reviewed `quality/strategy.md`, so it belongs here at the end — but plant the idea earlier too; see sub-step 6.3's risk-map close.)
+
 ## When the user is genuinely stuck — offer a labelled strawman
 
 Sometimes a user has no answer not because they're dodging the work but because they genuinely don't know yet — they can't name a stakeholder, can't put words to what "good" means, can't say what they'd de-prioritise. A blank page is paralysing; a wrong starting guess is not. People recognise what's wrong far more easily than they generate from nothing, so bouncing off a flawed suggestion often unlocks the real answer.
