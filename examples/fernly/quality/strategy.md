@@ -148,13 +148,6 @@ Stakeholders, roughly in order of strategic weight this cycle: paying Greenhouse
 9. **No offline-first rearchitecture** — we harden specific offline behaviours (dimension 6) but do not rebuild around CRDTs this year. *Trigger to revisit: household-sync fixes from R1 prove unachievable on the current last-write-wins-with-vector-checks model.*
 10. **No tablet-optimised layouts** — iPad/Android tablet usage is 3% and the relaunch doesn't depend on it. *Trigger to revisit: Apple features us (featuring requires decent iPad support) or tablet usage passes 8%.*
 
-### Good enough on purpose (non-priorities, not non-goals)
-
-Different from the table above: these we *do* ship, knowingly rough. Each is a tradeoff made with open eyes, with the trigger that would reopen it written down — so nobody "discovers" them as defects, and nobody quietly gold-plates them either.
-
-1. **Schedule propagation is capped by the nightly worker.** Reminders are materialised nightly (Part 1), so an edit made late in the day may not shift that night's reminders until the next materialisation run — the in-app schedule view recomputes live; the queued reminders do not. An event-driven pipeline would lift the cap, and is knowingly deferred: at ~4,000 users nobody has filed a ticket about it, plants do not operate on minutes, and a pipeline Maya can debug at 7am beats one that is real-time and opaque. *Revisit trigger: more than a handful of "I changed it but the old reminder still fired" tickets in a month, or sensor-driven same-day rescheduling (R3) becoming routine.*
-2. **Plant search is a plain substring match.** No typo tolerance, no synonyms ("swiss cheese plant" finds nothing; "monstera" works). Good enough: photo-ID is the primary add path, search is the fallback, and the species DB is ~2,000 rows. *Revisit trigger: support tickets citing "couldn't find my plant", or search-then-abandon showing up once funnel telemetry exists.*
-
 ## Part 5: Quality Dimensions
 
 ### Final inventory
@@ -200,6 +193,8 @@ Different from the table above: these we *do* ship, knowingly rough. Each is a t
 - **3b Plant-ID latency** — current p90 is ~3.5s including cloud fallback; nobody has ever complained; a plant is not in a hurry.
 - **9 Battery drain** — BLE polling is duty-cycled and no review or ticket mentions battery; watch it, don't work it.
 - **11 Maintainability/agent-friendliness** — load-bearing as a *means* (the agents' good-enough bar is handled by oracle-building in Part 7) but no end-user bar references it directly this cycle.
+
+**Tradeoff record (from reconciling the stakeholder bars above).** Where recombining the lenses produced a "bar met, knowingly rough" call rather than a higher rating, the tradeoff is recorded with the bar it satisfies and its reopen trigger, so good-enough-on-purpose stays a decision somebody made, not an accident somebody finds. This cycle, two such calls — schedule-propagation latency and plant-search fuzziness — carry their verdicts in Part 6 (§Met on purpose).
 
 ## Part 6: Risk Map
 
@@ -281,6 +276,13 @@ Different from the table above: these we *do* ship, knowingly rough. Each is a t
 - **Required:** the everyday loop — open the app, see what needs water today, tick it, maybe snap a journal photo — feels built by someone who waters plants: it anticipates real intentions (one-handed at the sink, repot day, back from a holiday to nine days of backlog) instead of fighting them. This is the casual-parent Delight bar (Part 3) made concrete, and it is deliberately a bar on *experience*, not on screens. **Conf (req): M** — bars on feel are judged, not specified.
 - **Actual:** good by our own daily use, never examined deliberately. The spec-level checks pass — every screen renders, every control does what its test asserts — and that evidence is **insufficient by design here**: a flow can pass every check and still fight the user's intention. **Conf (act): M (lived-in, unexamined).**
 - **Planned measurement — exploratory testing as the oracle, on purpose:** Action I. Charters derived from real intentions ("water everything in the kitchen before the school run", "repot day", "the holiday backlog"), walked monthly by Maya and Iris on their own plants; plus dogfood observability — a dogfood-build-only one-tap "this felt wrong" friction note, triaged monthly. Pass looks like: each charter completes without dropping to a workaround, and the friction log trends down across R1. No automated check replaces this; automation guards the floor (1b, 2), a person judges the delight.
+
+#### Met on purpose — good-enough verdicts (anti-overshoot)
+
+The required bar cuts both ways: when a dimension's bar is met, that is a **positive verdict** — even where the solution wouldn't survive the next order of magnitude — and the discipline is to write the future change note instead of gold-plating now.
+
+- **Schedule propagation (a facet of 1b).** *Required (household Good Enough — derived; no Part 3 bar names edit propagation explicitly):* schedule edits show immediately in the app, and reach the reminder queue by the next nightly materialisation — same-night reminder shifts are not promised. *Verdict: met.* Reminders are materialised nightly (Part 1), so a late edit may not shift that night's reminders until the next run; the in-app view recomputes live. An event-driven pipeline would lift the cap and is knowingly not being built: at ~4,000 users nobody has filed a ticket, plants do not operate on minutes, and a pipeline Maya can debug at 7am beats one that is real-time and opaque. **Conf (act): M** — the propagation behaviour is known from the materialisation design itself; only the user-tolerance half rests on the weaker zero-tickets signal. *Change note (future release):* more than a handful of "I changed it but the old reminder still fired" tickets in a month, or sensor-driven same-day rescheduling (R3) becoming routine, reopens this.
+- **Plant search (the fallback half of the add-a-plant path, beside 3a).** *Required (casual-parent Good Enough):* when photo-ID doesn't apply, search finds the plant by species name or exact common name. *Verdict: met.* A plain substring match over the ~2,000-row species DB — no typo tolerance, no synonyms ("swiss cheese plant" finds nothing; "monstera" works), and that is fine for a fallback path. **Conf (act): M.** *Change note:* support tickets citing "couldn't find my plant", or search-then-abandon showing up once funnel telemetry exists.
 
 ## Part 7: Plan of Work
 
