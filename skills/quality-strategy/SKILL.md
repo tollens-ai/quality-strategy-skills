@@ -277,7 +277,7 @@ After any of these, the conversation is at a natural seam and `/clear` loses not
 - After Step 6 (after 6.3)
 - After Step 7 (before review)
 
-At each of these natural break points, **proactively suggest `/clear`** rather than waiting for the user to notice the conversation is long: *"That's a natural break point. The strategy doc captures everything we've agreed; if you'd like to take a break or do this in another session, this is a good place to `/clear` and resume."* Don't make the user notice and ask.
+At each of these natural break points, **proactively suggest `/clear`** rather than waiting for the user to notice the conversation is long — and **say how to resume in the same breath**, so resuming is stated, never guessed: *"That's a natural break point. The strategy doc captures everything we've agreed; if you'd like to take a break or do this in another session, this is a good place to `/clear`. To pick up, just run `/quality-strategy` again — it reads your `quality/` docs and scratch state and resumes from where we left off; you won't lose your place."* Don't make the user notice and ask, and don't leave them to gamble that re-running the skill works — tell them it does.
 
 ### Step 5 specifically
 
