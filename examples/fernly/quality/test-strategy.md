@@ -15,7 +15,8 @@ It deliberately ignores the None-rated dimensions (3b plant-ID latency, 9 batter
 11 maintainability-as-an-end) and the post-R2 sensor ecosystem.
 
 Organising principle: every Unknown, over-confident, or known-absent actual in the risk
-map becomes a learning need below. We do not write new tests for dimensions that already
+map becomes a learning need below — plus the one bar whose oracle is deliberately a
+person (the daily-care flow, LN-9). We do not write new tests for dimensions that already
 hold H-confidence (1b schedule correctness, 8 photo privacy) beyond keeping their existing
 suites green in CI.
 
@@ -63,7 +64,6 @@ suites green in CI.
    charters ("repot day", "holiday backlog", "one-handed at the sink") and the
    dogfood friction log (strategy action I). Pass evidence: charters complete
    without workarounds; friction notes trend down across R1.
-
 ## Investigation order
 
 1. **LN-1 first, alone, as a gate** (Phase 0, ~1 week). Its answer redirects everything:
@@ -118,5 +118,8 @@ suites green in CI.
 - **No staging push credentials.** Reminder end-to-end tests run against production
   APNs/FCM with test accounts — tolerable, but a harness bug could notify real users.
   Mitigation: a test-cohort allowlist enforced in the scheduling worker.
+- **No friction-note channel exists yet.** LN-9's dogfood "this felt wrong" tap and its
+  triage view are a small dogfood-build-only flag to add (strategy action I) — until it
+  exists, friction lives in memory and gets lost.
 - **No device farm.** Accepted for this cycle on budget grounds; LN-7's in-app funnel
   telemetry is the explicit workaround, per the Gated note on dimension 7.
