@@ -19,6 +19,7 @@ Generate a candidate dimension list from what's already in the strategy doc and 
 - For each stakeholder dealbreaker and good-enough in Part 3, ask: *"what dimension does this concern map to?"* Map to standard -ility names (the conventional names for non-functional quality attributes — reliability, usability, maintainability, observability, and the like) where one fits; use domain-specific names where they're clearer.
 - For each design observation in the pre-read's design section, take the implied dimensions surfaced by subagent C.
 - For the release purpose in Part 2, ask: *"what does this purpose require?"*
+- **Agent-driven workflow → the agent-facing cluster.** A stated workflow is a goal statement: if Part 1 records that the user works through an autonomous agent — *"I just tell Claude roughly what I want and it builds it"*, agents on the team (1.2), an agent-driven dev or release flow (1.3, 1.4) — then that workflow *implies* the agent-facing dimension cluster the same way a stated launch implies signup scale. Add as candidates, each traced back to the workflow statement: **agent-diagnosability** (can the agent tell what went wrong?), **observability / debuggability pinned to the agent audience** (the agent is the one reading the logs), **testability pinned to agent-verifiable** (the agent must be able to confirm its own work without a human), and **agent-readability / context-efficiency** (can the agent orient in the code, cheaply?). Don't wait for the reference-list pass to surface these — the workflow already entails them; the bottom-up pass owes the trace. (The pack already carries the observability→debuggability/fixability/recoverability web; what this trigger adds is firing it *from the user's own stated workflow* rather than hoping the top-down pass catches it. This audience question is then settled properly in 5.3.)
 
 Build the bottom-up list internally. Don't show it to the user yet.
 
@@ -97,6 +98,7 @@ What you must not do:
 
 - The user wants to drop a Clearly-Relevant subagent candidate without reasoning. *"The reference-list pass flagged X as clearly relevant — what makes it not?"*
 - The candidate list is much shorter than the project warrants. *"This is a complex project; the inventory looks thin. What might we be missing?"*
+- Part 1 records an agent-driven workflow but no agent-facing dimensions came through. *"You said you work mostly through Claude — so an agent is your main reader and your main verifier. Shouldn't diagnosability-for-the-agent, agent-verifiable testability, and context-efficiency be on the list?"*
 - The user adds many dimensions without grounding any in stakeholder bars. *"What's driving this addition — a stakeholder bar, a design observation, something else?"*
 
 ## This sub-step is DONE when
