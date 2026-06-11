@@ -8,7 +8,7 @@ The pack is live with its first wave of testers. The current work is exercising 
 
 ## Just shipped — `/quality-artefacts` (0.3.0)
 
-The former headline "Next" item, now in the pack. A generative post-processing skill: describe the view you want ("a tweetable summary of where quality stands", "a dashboard of just the payment risks for my standup") and it designs a bespoke, self-contained SVG/HTML artefact from your strategy — honest about Unknowns (an unverifiable dimension is drawn as visibly uncharted, never painted green). The named presets — social card, multi-frame Wrapped-style story, risk heatmap, interactive dashboard — are worked examples, not a menu; re-run after a strategy revision and the views update with it. Worked examples live on the Fernly sample under [`examples/fernly/`](examples/fernly/). Everything stays self-contained SVG/HTML — no daemon, no service, nothing to install.
+The former headline "Next" item, now in the pack. A generative post-processing skill: describe the view you want ("a tweetable summary of where quality stands", "a dashboard of just the payment risks for my standup") and it designs a bespoke, self-contained SVG/HTML artefact from your strategy — honest about Unknowns (an unverifiable dimension is drawn as visibly uncharted, never painted green). The named presets — social card, multi-frame Wrapped-style story, risk heatmap, interactive dashboard, quality radar — are worked examples, not a menu; re-run after a strategy revision and the views update with it. Worked examples live on the Fernly sample under [`examples/fernly/`](examples/fernly/). Everything stays self-contained SVG/HTML — no daemon, no service, nothing to install.
 
 ## Next — quality dimensions for AI / non-deterministic / agentic products
 
