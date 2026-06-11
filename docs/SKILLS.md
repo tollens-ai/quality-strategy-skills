@@ -1,6 +1,6 @@
 # Skill reference
 
-Ten skills ship in the pack. You only ever *start* four of them; the rest are sub-skills the strategies invoke for you as they run — though each also works standalone when you want one check on its own. The [README's diagram](../README.md#how-the-skills-fit-together) shows how they connect.
+Eleven skills ship in the pack. You only ever *start* five of them; the rest are sub-skills the strategies invoke for you as they run — though each also works standalone when you want one check on its own. The [README's diagram](../README.md#how-the-skills-fit-together) shows how they connect. A complete worked sample of the documents (and three generated artefacts) lives at [`examples/fernly/`](../examples/fernly/README.md) — one fictional project's answers, not a template.
 
 ## Skills you run directly
 
@@ -10,6 +10,7 @@ Ten skills ship in the pack. You only ever *start* four of them; the rest are su
 | `/test-strategy` | Produce the engineering-level companion that operationalises the quality strategy — what to investigate, in what order, and how to split human vs agent effort. |
 | `/tooling-strategy` | The strategy for "how do we know?". Gathers everything the quality and test strategies couldn't answer — Unknown/Gated/over-confident actuals, learning needs blocked on missing instruments or oracles — into one prioritised oracle/instrument build plan. Run it as soon as unanswerables exist: directly after `/quality-strategy` when the risk map is mostly blind, after `/test-strategy` when it's mostly answerable. The most re-runnable of the three. |
 | `/strategy-variants` | Post-processing. From a finished, reviewed `quality/strategy.md`, derive audience-facing variants without touching the original: a distributable one-pager and a client-safe ("polite") version. Omits and re-pitches; never asserts quality the strategy doesn't support. |
+| `/quality-artefacts` | Post-processing. Describe the view you want — "a tweetable summary of where quality stands", "a dashboard of the payment risks for my standup" — and it designs ONE bespoke, self-contained SVG/HTML artefact from the strategy, written to `quality/artefacts/`. Generative, not templated: the presets (social card, multi-frame story, risk heatmap, interactive dashboard, quality radar) are worked examples, not a menu. Honest sourcing carries into the picture — an Unknown is drawn as visibly uncharted, never painted green. Works offline from `file://`; re-run after a revision to refresh a view. |
 
 ## Sub-skills (invoked for you; each also runs standalone)
 
