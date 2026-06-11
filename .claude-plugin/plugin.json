@@ -1,6 +1,6 @@
 {
   "name": "quality-strategy",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Produce and use a software quality strategy — who matters, what they value, where you're exposed, and what to do about it — plus the test and tooling strategies that operationalise it. Grounded in Edmund Pringle's quality framework.",
   "author": {
     "name": "Yanqing Cheng"

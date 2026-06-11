@@ -80,7 +80,12 @@ If `quality/test-strategy.md` already exists, ask the user:
 > (c) **updating after a test cycle** — re-rating allocation based on what we've learned about costs, updating the risk-map references, refining learning needs in light of findings;
 > (d) **starting a new release** — in which case I'll archive to `quality/archive/test-strategy-<release-name>-<YYYY-MM-DD>.md` and produce fresh.
 
-For (c), the most common mode after the first cycle: skip to sub-step 4 (Allocation re-rating) and sub-step 5 (Update protocol). The earlier sub-steps usually carry over with minor edits.
+**Archive first — whatever the answer.** Before changing a word, snapshot the current doc to `quality/archive/test-strategy-<last-updated-date>.md` (path (d) uses its release-name form above). Never silently rewrite history: the archive leaves a before/after trail the user can compare and share, and `/test-strategy-review` diffs against it when it reviews the update. Mention the archive in your closing summary.
+
+For (c), the most common mode after the first cycle: skip to sub-step 4 (Allocation re-rating) and sub-step 5 (Update protocol). The earlier sub-steps usually carry over with minor edits. Two disciplines keep the update honest — fixing all known problems is not the same as being good now; the gaps have moved since the last cycle:
+
+- **Look back with evidence.** Each Tier-1/2 learning need and low-confidence allocation row from the prior version gets a what-happened verdict: answered (cite the finding), still open, or overtaken by events. "Answered" without the evidence is recorded as *believed answered* at an honest confidence, not closed.
+- **Look forward fresh.** Scan what's new since the last cycle — features shipped, stakeholders added, context changed — for learning needs the prior doc could not have known about. And keep the standing fresh-eyes defect recon (sub-step 3's Pass 3) blind: its agents still must not read this document, prior version included. An update whose only change is closing prior items has verified the past, not assessed the present.
 
 ## Honest about uncertainty
 

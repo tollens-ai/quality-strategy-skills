@@ -44,6 +44,8 @@ If either is missing, stop:
 
 If `quality/test-pre-read.md` exists, read its inventory and discrepancies sections. If the pre-read found something the test strategy ignored, that is itself a review finding.
 
+If `quality/archive/` holds a prior version of the test strategy (`test-strategy-*.md`), this is a **revision review**: the most recent archived version is the review's instrument for the revision checks — subagent B diffs it against the current doc (check 14) rather than trusting the update's own account of what changed.
+
 ## The work, in order
 
 ### 1. Read both docs
@@ -162,7 +164,7 @@ Use the `Agent` tool with two calls in a single message.
 > - `$PROJECT_DIR/quality/test-strategy.md`
 > - `$PROJECT_DIR/quality/test-pre-read.md` (if it exists)
 >
-> Run the twelve oracle checks defined in INDICATORS.md (the "Mechanical oracle checks" section), plus check 13 below. For each, classify as **PASS / FLAG / FAIL** and write one line of explanation. For FLAGs and FAILs, include a one-line "what to fix" plus the meta-note about which sub-step's DONE should have caught this.
+> Run the twelve oracle checks defined in INDICATORS.md (the "Mechanical oracle checks" section), plus checks 13–14 below. For each, classify as **PASS / FLAG / FAIL** and write one line of explanation. For FLAGs and FAILs, include a one-line "what to fix" plus the meta-note about which sub-step's DONE should have caught this.
 >
 > The twelve checks (see INDICATORS.md for full text):
 >
@@ -179,10 +181,11 @@ Use the `Agent` tool with two calls in a single message.
 > 11. Calibration ↔ update protocol alignment.
 > 12. Open questions consolidated.
 > 13. **Scratch-file audit.** The Q2 tooling-and-oracle check is a sealed-context dispatch (`/tooling-adequacy`, invoked after learning needs). **Audit the required dispatch, not merely a claimed one** — derive the requirement from the strategy's *structure*, not from whether the doc narrates the check: if the test strategy HAS learning needs, the Q2 `/tooling-adequacy` dispatch was REQUIRED, so verify its scratch file exists at `$PROJECT_DIR/quality/.scratch/3.5-tooling-adequacy.md`. A missing scratch file is a FAIL whether or not the doc claims the check ran — hard evidence the Q2 dispatch was fabricated or silently skipped. An empty/stub scratch file is a FLAG (audit theatre). (The test strategy is a single linear flow with no step-boundary contradiction dispatches, so there is no boundary-check requirement to audit here.)
+> 14. **Revision integrity (updated test strategies only).** First detect whether this doc is an update of a prior version: a prior version exists under `$PROJECT_DIR/quality/archive/` (`test-strategy-*.md`), or the doc carries update markers (what-happened verdicts, "since the last cycle" language). If it is not, mark this check PASS (n/a). If it is — the rationale: *an update anchored on last time verifies the past instead of assessing the present; the gaps have moved* — then **diff, don't trust**: read the most recent archived version and diff it against the current doc yourself; the update's own account of what changed is a claim to verify against that diff, not a source. Check two things. **(a) Look-back integrity** — each Tier-1/2 learning need and low-confidence allocation row in the *prior* version carries a what-happened verdict (answered / still open / overtaken), and every "answered" or "closed" claim cites the finding that answered it, or is honestly marked *believed answered* at a stated confidence. An unevidenced "answered" is a FAIL — a closure claim needs grounding exactly as a learning need's exit criterion does. **(b) Look-forward presence** — the update contains genuinely new content not derivable from the prior doc: learning needs born from what changed since the last cycle, re-ratings driven by real cost data. An update whose diff shows only closures of prior items is the **anchoring signature** — treat "zero new learning needs" with the same suspicion as an all-high-confidence allocation: FAIL on a closures-only diff; FLAG when new content exists but is thin relative to how much the project changed. Also FLAG if the doc reads as an update but `quality/archive/` holds no prior version — the producer skill archives before revising, so a missing archive means history was silently rewritten.
 >
-> **Severity:** FAIL on checks 1–3 and 13 is a blocker. The rest are flags.
+> **Severity:** FAIL on checks 1–3, 13, and 14 is a blocker. The rest are flags.
 >
-> Output format: a markdown list of the thirteen checks with PASS/FLAG/FAIL, one-line explanation, suggested fix where applicable, and meta-note for FAIL/FLAG cases.
+> Output format: a markdown list of the fourteen checks with PASS/FLAG/FAIL, one-line explanation, suggested fix where applicable, and meta-note for FAIL/FLAG cases.
 
 ### 3. Collapse and filter (main agent)
 
@@ -206,7 +209,7 @@ Three guidelines:
 
 **Blockers** (must fix before declaring strategy done):
 
-- Oracle FAIL on checks 1–3 (five-field learning needs / risk-map coverage / Dealbreaker prioritisation) or check 13 (missing scratch file for the required Q2 dispatch when the strategy has learning needs — a fabrication or silent-skip signal, whether or not the doc claims the check ran).
+- Oracle FAIL on checks 1–3 (five-field learning needs / risk-map coverage / Dealbreaker prioritisation), check 13 (missing scratch file for the required Q2 dispatch when the strategy has learning needs — a fabrication or silent-skip signal, whether or not the doc claims the check ran), or check 14 (an unevidenced "answered" claim, or an update whose diff against the archived prior version shows only closures — it verified the past instead of assessing the present).
 - Forward simulation reveals execution would *not* meaningfully advance the strategy.
 - Hard contradiction between test strategy and quality strategy (e.g. Tier-1 investigation of something the strategy says is a non-goal).
 - Any indicator rated WEAK with concrete evidence the team would not be able to act on the strategy as written.
