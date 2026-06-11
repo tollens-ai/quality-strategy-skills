@@ -190,6 +190,8 @@ This is the single most important user-facing pattern in the skill. The strategy
 
 1b. **Give the progress line and the visible exit.** One line of where-we-are, with relative sizes: *"That was Step 5 — the longest one. Two steps left: the risk map, about half the size of what you just did, and a short optional plan of work."* And one line of what stopping here leaves them with: *"If you stopped now, you'd walk away with your stakeholders' bars and the rated dimensions on paper — already something you can act on — and we can resume from the doc any time."* Both are honest, not cheerleading: the doc genuinely is useful part-done, and resume genuinely is supported.
 
+   **Ground any time-empathy in the actual session.** A line acknowledging elapsed effort — *"we've been at this a good while"*, *"after all this work"* — is only honest when it's *true of this run*. A half-hour lightweight session is not "a good while", and a weariness line that doesn't match the clock reads as canned and quietly undermines the trust the progress lines are building. So check the real session — elapsed time, the weight of what was covered, how many steps in — before you reach for one, and skip it entirely when the run has been short or light. Like the example prompts, these are intent, not a script to recite on a timer.
+
 2. Run the substantive checkpoint:
 
    > *"Take a real moment to read this back. We've completed [Step name]. Is anything off — even if you can't articulate why? Anything that gives you a weird feeling? Anything in earlier steps that, in light of this work, you now think is wrong? Even vague unease is worth surfacing. Catching it now is cheap; catching it later costs hours of rework."*
