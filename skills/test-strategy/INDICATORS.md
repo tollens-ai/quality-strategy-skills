@@ -85,4 +85,4 @@ These are cheap structural checks. They are not the main review — `/test-strat
 11. **Calibration ↔ update protocol alignment.** Every calibration trigger named in sub-step 4's allocation appears in sub-step 5's update protocol as an item expected to be re-rated.
 12. **Open questions consolidated.** All `OPEN QUESTION:` items across sub-steps are listed in the strategy's final section.
 
-Each check returns **PASS / FLAG / FAIL**. FAIL on any of 1–3 is a blocker (the strategy is structurally unable to do its job). The rest are flags — judgement calls about whether to fix before declaring done.
+Each check returns **PASS / FLAG / FAIL**. FAIL on any of 1–3 is a blocker (the strategy is structurally unable to do its job). The rest are flags — judgement calls about whether to fix before declaring done. (`/test-strategy-review` adds checks 13–14 — the scratch-file audit and revision integrity — whose FAILs also block; see that skill.)

@@ -30,7 +30,7 @@ File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **
 
 - **After `/quality-strategy` — before *or* after `/test-strategy`.** This skill has two natural entry points, and the risk map — the strategy doc's table of quality dimensions, their actual state, and the confidence behind each claim — decides which (Q2 before Q3: you can only investigate what you can judge). When the risk map came out **dominated by Unknowns and Gated dimensions**, run this skill *immediately* — plan the builds that make the project knowable before planning the investigation. A test strategy written against dimensions nobody can judge is mostly "blocked". When the risk map is **mostly answerable**, let `/test-strategy` run first and sharpen the demand (its `/tooling-adequacy` check surfaces blocked learning needs), then run this skill on the combined pile.
 - **When deciding what test or measurement infrastructure to build next** — this skill's output *is* that decision, made with the full demand visible instead of ad hoc.
-- **Re-run freely.** This is the most re-runnable of the three strategies: re-run when build items land (they change what's answerable — see Update protocol in the output), when `/test-strategy` adds the test-side demand, or when either parent strategy is revised. **On any re-run over an existing `quality/tooling-strategy.md`, archive it first** — snapshot to `quality/archive/tooling-strategy-<last-updated-date>.md` before changing a word, and mention the archive in the closing summary. Never silently rewrite history: the archive leaves a before/after trail the user can compare and share.
+- **Re-run freely.** This is the most re-runnable of the three strategies: re-run when build items land (they change what's answerable — see Update protocol in the output), when `/test-strategy` adds the test-side demand, or when either parent strategy is revised. **On any re-run over an existing `quality/tooling-strategy.md`, archive it first** — snapshot to `quality/archive/tooling-strategy-<last-updated-date>.md` (suffix `-2`, `-3`, … if the name is taken — never overwrite an archive) before changing a word, and mention the archive in the closing summary. Never silently rewrite history: the archive leaves a before/after trail the user can compare and share.
 
 ## What you need
 
@@ -149,4 +149,4 @@ Re-run `/tooling-strategy` when a phase of builds lands or when `quality/strateg
 **Open questions:** <bullet list, or "none">
 ```
 
-Summarise the plan back to the user in 5–7 lines — the phases, the headline quick wins, what got deferred — and confirm the priorities before declaring it done.
+Summarise the plan back to the user in 5–7 lines — the phases, the headline quick wins, what got deferred, and (on a re-run) where the prior version was archived — and confirm the priorities before declaring it done.

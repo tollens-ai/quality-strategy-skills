@@ -170,3 +170,5 @@ If the review surfaces blockers, return to the relevant sub-step and re-do. The 
 Once the review passes, declare complete:
 
 > *"Test strategy is complete and review-passed. Doc lives at `quality/test-strategy.md`. The first thing to do is start Tier 1 — the cheapest unknown in there is [reference]. After Tier 1 completes, run me again in revision mode (c) to update allocation and risk-map references."*
+
+On a revision run, also name the snapshot in this declaration — *"the prior version is archived at `quality/archive/test-strategy-<date>.md`"* — so the before/after trail is visible (see SKILL.md → Revision mode).
