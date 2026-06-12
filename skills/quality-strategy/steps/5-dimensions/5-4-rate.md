@@ -24,6 +24,8 @@ By the end of this sub-step the strategy doc must capture, **for each dimension 
 2. **M** — if and only if some bar (Good Enough or Delight) references the dimension and **no** stakeholder has it as a Dealbreaker. It matters and should be actively managed; failure is unwelcome but survivable.
 3. **None** — if and only if **no** stakeholder bar at any lens references the dimension. Explicitly not a concern for this release.
 
+**Floors are never None.** A dimension that entered as a *floor* (5.1's guaranteed-inclusion layer — its factual predicate held) carries an always-on bar by definition, so it cannot be rated None however quiet the stakeholders were about it; rate it H or M on what the floor demands here (often M, sometimes H), never None. A *default-in* the user explicitly accepted the risk on in 5.1 (the eyes-open recorded fork) is the one case where a security/data-integrity/spend dimension may be None — and only with that recorded accepted-risk as its rationale, never silently.
+
 The rating yields a short **pointer** rationale, not a paragraph of judgement — e.g. *"H — Family Dealbreaker on data loss, Part 3.2"*. The pointer names the stakeholder and the specific bar (by lens: Delight / Good Enough / Dealbreaker); that's the whole rationale.
 
 ## How to ask
@@ -50,6 +52,8 @@ Use the `Agent` tool with `subagent_type: general-purpose`. The brief:
 >
 > Do **not** invent bars. If no bar of a stakeholder references a dimension, it is **None** for that stakeholder — do not reach for a plausible-sounding rating. Each cell must point at a specific bar (or record "no bar references it").
 >
+> **One exception — floors are never None.** A dimension whose inventory **Source** marks it a *floor* (the guaranteed-inclusion layer, e.g. "floor: holds PII", "floor: ships to others' machines") carries an always-on bar by definition — its factual predicate is the bar. Never rate a floor None for any stakeholder, even when no named bar references it: rate it on what the floor demands (H where a stakeholder treats its violation as a Dealbreaker, otherwise **M** as the floor minimum), and point the cell at the floor predicate as its bar.
+>
 > Return a per-stakeholder rating table: rows are dimensions, columns are stakeholders, each cell is `{H / M / None, pointer to the specific bar}` (e.g. *"H — Dealbreaker bar: 'never lose my data'"*).
 >
 > **Before returning, save this table verbatim** to `$PROJECT_DIR/quality/.scratch/5.4-dimension-rating.md` — the sealed-dispatch scratch file `/quality-strategy-review` audits (see SKILL.md → "Sealed-context dispatch and scratch files").
@@ -60,7 +64,7 @@ Use the `Agent` tool with `subagent_type: general-purpose`. The brief:
 
 When the subagent returns, merge **per dimension**. This is real dialogue where stakeholders disagree — not a mechanical take-the-max dressed up as discussion.
 
-- **Convergence** — all stakeholders agree, or the anchor clearly aggregates. Take the aggregate as a **high-confidence merged rating, silently**: any stakeholder Dealbreaker → **H**; else any other bar → **M**; else **None**.
+- **Convergence** — all stakeholders agree, or the anchor clearly aggregates. Take the aggregate as a **high-confidence merged rating, silently**: any stakeholder Dealbreaker → **H**; else any other bar → **M**; else **None** — *except a floor dimension, which never merges to None* (a floor with no Dealbreaker → **M**, its floor minimum). If the sealed table ever returns None for a floor, override it to M before writing; that's the one rating you correct rather than take as-is.
 - **Divergence** — stakeholders genuinely disagree (e.g. Stakeholder A: H Dealbreaker; Stakeholder B: None). **Surface it to the user explicitly:**
 
   > *"Stakeholder A treats [dimension] as a Dealbreaker (H); Stakeholder B doesn't reference it at all (None). You have one team — what does it commit to for this release?"*

@@ -85,6 +85,8 @@ If the user asks to take a break, point at the natural seams:
 - After sub-step 2 (purpose + principles set)
 - After sub-step 3 (learning needs derived)
 
+At any of these it's safe to `/clear` — and say how to resume in the same breath, so resuming is stated, never guessed: *"safe to `/clear` here; to pick up, just run `/test-strategy` again — it reads `quality/test-strategy.md` (and the quality strategy it builds on) and resumes from the next sub-step."* The user shouldn't have to gamble that re-running the skill works.
+
 Sub-steps 3 → 4 are more tightly coupled (allocation depends on the learning-needs list being fresh in working memory), so flag a break between them with: *"Allocation depends on the learning-needs list being fresh — want to push through to the end of sub-step 4, or break here and re-orient from the doc on resume?"*
 
 On resumption, detect the state of `quality/test-strategy.md` and resume from the next sub-step.
