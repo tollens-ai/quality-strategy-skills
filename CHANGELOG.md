@@ -4,6 +4,12 @@ All notable changes to the `quality-strategy` plugin, oldest at the bottom. The 
 
 **Release discipline (maintainers):** every version bump updates this file *in the same commit* — a bump without a changelog entry doesn't merge.
 
+## [0.3.5] — 2026-06-12
+
+### Changed
+
+- Dropped the overt Spotify-Wrapped references from all user-facing surfaces (skill description, principle 7, the no-brief gallery, the multi-frame story preset, ROADMAP, the Fernly sample README). The preset is described on its own terms — a full-viewport frame-by-frame slideshow telling the strategy's arc — with no behaviour change. Generated artefacts inherit the skill's vocabulary, so this also stops "Wrapped" appearing on rendered story frames.
+
 ## [0.3.4] — 2026-06-11
 
 ### Changed

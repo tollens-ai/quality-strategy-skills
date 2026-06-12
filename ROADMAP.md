@@ -8,7 +8,7 @@ The pack is live with its first wave of testers. The current work is exercising 
 
 ## Just shipped — `/quality-artefacts` (0.3.0)
 
-The former headline "Next" item, now in the pack. A generative post-processing skill: describe the view you want ("a tweetable summary of where quality stands", "a dashboard of just the payment risks for my standup") and it designs a bespoke, self-contained SVG/HTML artefact from your strategy — honest about Unknowns (an unverifiable dimension is drawn as visibly uncharted, never painted green). The named presets — social card, multi-frame Wrapped-style story, risk heatmap, interactive dashboard, quality radar — are worked examples, not a menu; re-run after a strategy revision and the views update with it. Worked examples live on the Fernly sample under [`examples/fernly/`](examples/fernly/). Everything stays self-contained SVG/HTML — no daemon, no service, nothing to install.
+The former headline "Next" item, now in the pack. A generative post-processing skill: describe the view you want ("a tweetable summary of where quality stands", "a dashboard of just the payment risks for my standup") and it designs a bespoke, self-contained SVG/HTML artefact from your strategy — honest about Unknowns (an unverifiable dimension is drawn as visibly uncharted, never painted green). The named presets — social card, multi-frame story, risk heatmap, interactive dashboard, quality radar — are worked examples, not a menu; re-run after a strategy revision and the views update with it. Worked examples live on the Fernly sample under [`examples/fernly/`](examples/fernly/). Everything stays self-contained SVG/HTML — no daemon, no service, nothing to install.
 
 ## Next — quality dimensions for AI / non-deterministic / agentic products
 
@@ -22,7 +22,7 @@ In rough priority order:
 - **Lean-mode investigation** — whether a lighter *view* of the same rigour is possible for small jobs without quietly lowering the bar. We're probing this with validation runs before designing anything.
 - **Per-stakeholder risk-map decomposition** — the dimension-rating step already works per-stakeholder and surfaces divergence; the risk map doesn't yet.
 - **`/strategy-variants` field-hardening** — real client/team use will tell us whether the omit-never-lie discipline holds.
-- **A "progress story" artefact preset** — the before/after artefact: `/quality-artefacts` already archives the prior version of every view it refreshes, so the natural next move is a preset that renders two versions side by side — the year-over-year Wrapped move, showing the gaps that closed between strategy revisions.
+- **A "progress story" artefact preset** — the before/after artefact: `/quality-artefacts` already archives the prior version of every view it refreshes, so the natural next move is a preset that renders two versions side by side — the year-over-year move, showing the gaps that closed between strategy revisions.
 - **Smaller planned skills** — `/priority-analysis` (multi-stakeholder prioritisation help), `/feedback-synthesis` (curate the `.skill-feedback.md` notes the skills jot as they run), `/pre-read` (standalone project digest).
 
 ## What we won't do
