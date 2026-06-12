@@ -38,7 +38,7 @@ This process is demanding, and an alpha tester named the risk plainly: it *"feel
 - **The standing pruning rule.** An item — a question, a dimension, a check, an action — that traces to no stated goal is spurious weight. Either cut it, or challenge whether a goal is missing: *"nothing you've told me makes this matter — should it? Is there a stakeholder or a bar we haven't captured?"* Never carry untraceable weight silently.
 - **The honest fork when a goal-justified item meets resistance.** When the user pushes back on something the trace genuinely supports, show the trace, then offer the fork: *"this is here because you said X is a dealbreaker — so either this deserves the dig, or X isn't really a dealbreaker. Which is it?"* Be convinced the item matters for the goal, or revise the goal. **Both outcomes are legitimate**, and both get recorded — conviction lands in the section's rationale; revision lands as a change to the bar it traced to.
 
-This sharpens the substantive refusals rather than softening them: the things the skill refuses to skip (non-goals, the unpack and old/new-world passes, real checkpoints) are exactly what make the user's stated goals checkable — when a user balks at one of those, that is the trace to show.
+This sharpens the substantive refusals rather than softening them: the things the skill refuses to skip (non-goals, the unpack pass and the old/new-world *reasoning*, real checkpoints) are exactly what make the user's stated goals checkable — when a user balks at one of those, that is the trace to show. (The old/new-world reasoning is non-skippable; what it is *not* is a ceremony the user sits through — it runs as machinery and surfaces only its outcomes. See sub-step 5.3.)
 
 ## Session start — the itinerary and the commit cadence
 
@@ -190,6 +190,8 @@ This is the single most important user-facing pattern in the skill. The strategy
 
 1b. **Give the progress line and the visible exit.** One line of where-we-are, with relative sizes: *"That was Step 5 — the longest one. Two steps left: the risk map, about half the size of what you just did, and a short optional plan of work."* And one line of what stopping here leaves them with: *"If you stopped now, you'd walk away with your stakeholders' bars and the rated dimensions on paper — already something you can act on — and we can resume from the doc any time."* Both are honest, not cheerleading: the doc genuinely is useful part-done, and resume genuinely is supported.
 
+   **Ground any time-empathy in the actual session.** A line acknowledging elapsed effort — *"we've been at this a good while"*, *"after all this work"* — is only honest when it's *true of this run*. A half-hour lightweight session is not "a good while", and a weariness line that doesn't match the clock reads as canned and quietly undermines the trust the progress lines are building. So check the real session — elapsed time, the weight of what was covered, how many steps in — before you reach for one, and skip it entirely when the run has been short or light. Like the example prompts, these are intent, not a script to recite on a timer.
+
 2. Run the substantive checkpoint:
 
    > *"Take a real moment to read this back. We've completed [Step name]. Is anything off — even if you can't articulate why? Anything that gives you a weird feeling? Anything in earlier steps that, in light of this work, you now think is wrong? Even vague unease is worth surfacing. Catching it now is cheap; catching it later costs hours of rework."*
@@ -275,7 +277,7 @@ After any of these, the conversation is at a natural seam and `/clear` loses not
 - After Step 6 (after 6.3)
 - After Step 7 (before review)
 
-At each of these natural break points, **proactively suggest `/clear`** rather than waiting for the user to notice the conversation is long: *"That's a natural break point. The strategy doc captures everything we've agreed; if you'd like to take a break or do this in another session, this is a good place to `/clear` and resume."* Don't make the user notice and ask.
+At each of these natural break points, **proactively suggest `/clear`** rather than waiting for the user to notice the conversation is long — and **say how to resume in the same breath**, so resuming is stated, never guessed: *"That's a natural break point. The strategy doc captures everything we've agreed; if you'd like to take a break or do this in another session, this is a good place to `/clear`. To pick up, just run `/quality-strategy` again — it reads your `quality/` docs and scratch state and resumes from where we left off; you won't lose your place."* Don't make the user notice and ask, and don't leave them to gamble that re-running the skill works — tell them it does.
 
 ### Step 5 specifically
 
@@ -344,6 +346,8 @@ Once it passes, point the user at the follow-on skills so they know where to go 
 
 Either way, name both skills, say which order you recommend and why, and don't leave the user at a finished strategy with no onward path. `/test-strategy` is the engineering-level companion that turns this strategy into action — what to investigate, in what order, with what human/agent split; the risk map and plan of work you just produced are its direct inputs.
 
+**And offer the payoff — `/quality-artefacts`.** The analytical continuations are not the only onward path: the moment the strategy is done is also the moment it can become something *shareable*. Offer it explicitly — *"want to see this as a dashboard, or a card you can screenshot and share? `/quality-artefacts` turns the strategy into a bespoke visual — a risk heatmap, a social card, a one-glance summary of where quality stands."* This is the delight payoff of the work just finished, not a footnote in the README; surface it alongside `/test-strategy` and `/tooling-strategy`, not buried beneath them. (It reads the finished, reviewed `quality/strategy.md`, so it belongs here at the end — but plant the idea earlier too; see sub-step 6.3's risk-map close.)
+
 ## When the user is genuinely stuck — offer a labelled strawman
 
 Sometimes a user has no answer not because they're dodging the work but because they genuinely don't know yet — they can't name a stakeholder, can't put words to what "good" means, can't say what they'd de-prioritise. A blank page is paralysing; a wrong starting guess is not. People recognise what's wrong far more easily than they generate from nothing, so bouncing off a flawed suggestion often unlocks the real answer.
@@ -357,7 +361,7 @@ So when a user is genuinely **stuck** (not evasive — stuck), you may offer a *
 **What this is — and isn't.** This is a facilitation aid for a stuck user, not a shortcut:
 
 - **Never present fabricated content as established fact.** A strawman is labelled as a guess at the moment you offer it. An unlabelled invention asserted as a finding is exactly the failure this framework exists to prevent (PHILOSOPHY → *interview don't infer*, *record assumptions*). The line is bright: *"here's a guess, scrutinise it hard"* is good facilitation; *"your stakeholders value X"* (invented, unlabelled, presented as fact) is banned.
-- **It does not soften the substantive refusals.** A strawman helps a user who's stuck; it does not let anyone skip the work the framework correctly insists on. Still refuse, as before: skipping non-goals, skipping the 5.2 unpack or 5.3 old/new-world passes, "just give me ratings", lowering rigour because the job feels small. Offering a strawman to an *unstuck* user who simply wants to move faster isn't facilitation — it's the corner-cutting the framework deliberately holds the line against. Use it for the blank page, not the impatient one.
+- **It does not soften the substantive refusals.** A strawman helps a user who's stuck; it does not let anyone skip the work the framework correctly insists on. Still refuse, as before: skipping non-goals, skipping the 5.2 unpack or the 5.3 old/new-world reasoning (the reasoning is mandatory even though it runs as machinery, not a user-facing walk), "just give me ratings", lowering rigour because the job feels small. Offering a strawman to an *unstuck* user who simply wants to move faster isn't facilitation — it's the corner-cutting the framework deliberately holds the line against. Use it for the blank page, not the impatient one.
 
 ## Escalation points — stop and ask the user
 

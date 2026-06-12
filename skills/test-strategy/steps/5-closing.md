@@ -25,7 +25,7 @@ This section makes the testing scope explicit by saying what's *out*. Three sour
 
 2. **Dimensions rated None, or deprioritised as "aware, not investing this release."** Quality dimensions the strategy decided don't matter at this level, or deliberately deferred in its plan of work — we don't spend test effort here either. Reference the dimension rating (or the deferral note), not just the dimension name.
 
-3. **Surfaced during learning-needs derivation.** Things that came up in sub-step 3 as "we considered investigating this but it's not in scope because..." Capture explicitly so it's recorded for future reviewers.
+3. **Surfaced during learning-needs derivation.** Things that came up in sub-step 3 as "we considered investigating this but it's not in scope because..." Capture explicitly so it's recorded for future reviewers. A non-target that *originates here* (not inherited from a quality-strategy non-goal) is a fresh scope cut, and the same discipline `/quality-strategy` applies to non-goals applies to it: reason it forward against the risk-map rows and stated goals before proposing it — *"the test infrastructure doesn't exercise X"* is the current state, never on its own a reason not to investigate X — and name it back for confirmation rather than batching it silently. An absence a stated goal demands is a blocked learning need (it belongs in *Blocked on tooling & oracles* below), not a non-target.
 
 Each non-target needs a one-line reason. *"We're not testing scalability"* is incomplete; *"We're not testing scalability — strategy Part 5 rates it None for this release; revisit at GA"* is right.
 

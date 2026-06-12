@@ -31,6 +31,18 @@ Walk through each row systematically:
 
 **Unknowns are normal, especially in first-pass strategies.** Resolving them is what Step 7's plan of work will mostly do. Don't pretend confidence about levels that haven't actually been investigated.
 
+### Counter-pressure before you name a behaviour a defect
+
+A gap, a hot item, a below-bar actual — each says *this behaviour is wrong*. Before you let it stand as a defect, ask the upstream question: **what does this behaviour protect?** Behaviour exists for reasons, and a thing that looks like a bug through one dimension is often a deliberate choice serving another. The kp3136 case: *"the clock doesn't pause on disconnect → players get flagged unfairly → angry players"* was named a defect — but a running-on-disconnect clock is the **domain norm** for chess sites, because pausing it lets a player disconnect to think for free. Same behaviour, two dimensions pulling opposite ways: fairness-to-the-disconnected vs anti-cheat integrity. Goal-tracing it to the stated *"angry players"* dealbreaker and stopping there names one side as a bug and never sees the other.
+
+So when a behaviour is heading for the risk map as a defect:
+
+- **Ask what it protects first** — the purpose, the domain convention, the other dimension it serves. Cite the domain norm where one exists (*"chess servers keep the clock running on disconnect on purpose"*).
+- **Where a genuine tension exists, present BOTH pulls as a tradeoff for the user to arbitrate** — not one side as a defect. *"This behaviour hurts disconnected players but defends against disconnect-to-think cheating. Which way does this release lean?"* The user decides; record the decision as a tradeoff (the same home as 5.4's *"Tradeoffs knowingly made at the merge"* — this is its **upstream twin**, firing at risk identification rather than at recombination), with the dimension it still satisfies and what would reopen it.
+- **Only name it a defect when no countervailing purpose survives the question.** A behaviour that protects nothing, once you've genuinely asked, is a clean defect — name it.
+
+This is one-directional goal-tracing's antidote: a stated dealbreaker pulls hard toward calling everything that threatens it a bug, and the counter-pressure is what keeps a domain-correct behaviour from being mis-filed as one.
+
 Then surface back to the user:
 - The full risk map.
 - The 3–5 hottest items, with reasoning.
@@ -52,11 +64,13 @@ What you must not do:
 - The map looks uniformly cold and the project is early-stage. *"This is a young project; some confidences should be Low. Where are we actually guessing?"*
 - The map looks uniformly hot. Check the inputs row by row rather than doubting the count: a hot row needs a real gap (or Unknown) *and* a real impact rating behind it. Where both hold for every row, say so plainly — *"this is a genuinely exposed surface right now"* — a uniformly hot map of a young, high-stakes project is honest, not inflated.
 - The user wants to override the heat rating without changing the inputs. *"Which input is wrong — required, actual, or confidence?"*
+- A behaviour is being named a defect purely because it threatens a stated dealbreaker, with no one having asked what it protects. *"Before we call this a bug — what's it there for? Is it a domain convention pulling the other way?"* If a genuine tension exists, present both pulls as a tradeoff for the user to arbitrate, not one side as a defect.
 
 ## This sub-step is DONE when
 
 - [ ] Every H/M dimension × relevant release has a complete risk map row: required, confidence-in-required, actual, confidence-in-actual, gap, impact.
 - [ ] Hottest items (large gap + high impact + low confidence) are flagged explicitly with one-line reasoning.
+- [ ] Each behaviour named as a defect/risk survived the **counter-pressure question** (what does it protect?); any genuine two-dimension tension was presented as a tradeoff for the user to arbitrate — citing the domain norm where one exists — and recorded as such, not booked as a one-sided bug.
 - [ ] Patterns and dependencies are noted.
 - [ ] Confidence is expressed in coarse honest levels — no percentages anywhere.
 - [ ] Any deferred items are recorded as `OPEN QUESTION:`.
@@ -95,5 +109,7 @@ Append to `quality/strategy.md` under Part 6 (the Part 6 header and Confidence v
 ```
 
 Once written, summarise back in 5–7 lines highlighting the hottest items, then **run the step-boundary substantive checkpoint** (see SKILL.md): summarise the **whole step's output**, invite vague unease about this step, and invite cross-step rethinks of earlier sections in light of this step. Wait for explicit, considered confirmation.
+
+The risk map is the headline of the whole strategy — so this is the natural moment to **plant the share-it payoff**: once the strategy is finished and reviewed, this map is exactly the kind of thing `/quality-artefacts` turns into a glanceable dashboard or a card you can screenshot and share. A one-line teaser is enough here — *"once we close this out, you'll be able to turn this risk map into a shareable dashboard with `/quality-artefacts`"* — the real offer lands at the end (see SKILL.md → "Final step"); don't derail the checkpoint into artefact-building now.
 
 Then offer the Step 7 choice — it is optional (see SKILL.md → "The plan of work is a sketch"): *"Step 7 sketches the plan of work — what to do about these gaps, classified and sequenced, at one or two lines per action. It's optional: if you're going straight into `/test-strategy` and `/tooling-strategy`, we can record the plan as deferred to those instead and close the strategy out now. Sketch it, or defer?"* If the user defers, follow the deferral path in SKILL.md (write the Part 7 deferral note, then the closing moves). If they sketch, proceed to sub-step 7.1.

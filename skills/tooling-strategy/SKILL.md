@@ -50,7 +50,7 @@ At the start of every working session (first or resumed), before the next move's
 
 ## The work, in order
 
-Write the doc incrementally as each move completes, so what's done is durable; on re-entry, resume from the last completed move. At each move's boundary, give one progress line (where we are, what remains, relative sizes) and the visible exit — what the user already has if they stop here (the demand table alone is a useful artifact, and the doc picks up where it left off). The user should never feel the work is unbounded. This is also where the boundary commit lands if the user chose commit-as-we-go.
+Write the doc incrementally as each move completes, so what's done is durable; on re-entry, resume from the last completed move. At each move's boundary, give one progress line (where we are, what remains, relative sizes) and the visible exit — what the user already has if they stop here (the demand table alone is a useful artifact, and the doc picks up where it left off). At a boundary it's safe to `/clear`; say how to resume in the same breath, so resuming is stated, never guessed — *"safe to `/clear`; to pick up, run `/tooling-strategy` again and it reads `quality/tooling-strategy.md` (and the strategies it draws from) and continues from the last completed move."* The user should never feel the work is unbounded, or have to gamble that re-running the skill works. This is also where the boundary commit lands if the user chose commit-as-we-go.
 
 ### 1. Gather the demand
 

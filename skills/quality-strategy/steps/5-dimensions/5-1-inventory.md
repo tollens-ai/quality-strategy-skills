@@ -8,7 +8,7 @@ The inventory at the end of this sub-step is **raw**: composite dimensions (seve
 
 ## What you need from the previous sub-step
 
-Read all of Parts 1–4 from `quality/strategy.md`. The release purpose (Part 2), stakeholders and three-lens (Part 3), and non-goals (Part 4) feed directly into which dimensions matter. Read the **Design observations and likely-relevant dimensions** section of `quality/pre-read.md` — subagent C already surfaced design-implied dimensions.
+Read all of Parts 1–4 from `quality/strategy.md`. The release purpose (Part 2), stakeholders and three-lens (Part 3), and non-goals (Part 4) feed directly into which dimensions matter. Read the **Design observations and likely-relevant dimensions** and **Floor predicates** sections of `quality/pre-read.md` — subagent C surfaced both the design-implied dimensions and the factual floor predicates the guaranteed-inclusion layer (step 4 below) reads.
 
 ## The work, in order
 
@@ -19,6 +19,7 @@ Generate a candidate dimension list from what's already in the strategy doc and 
 - For each stakeholder dealbreaker and good-enough in Part 3, ask: *"what dimension does this concern map to?"* Map to standard -ility names (the conventional names for non-functional quality attributes — reliability, usability, maintainability, observability, and the like) where one fits; use domain-specific names where they're clearer.
 - For each design observation in the pre-read's design section, take the implied dimensions surfaced by subagent C.
 - For the release purpose in Part 2, ask: *"what does this purpose require?"*
+- **Agent-driven workflow → the agent-facing cluster.** A stated workflow is a goal statement: if Part 1 records that the user works through an autonomous agent — *"I just tell Claude roughly what I want and it builds it"*, agents on the team (1.2), an agent-driven dev or release flow (1.3, 1.4) — then that workflow *implies* the agent-facing dimension cluster the same way a stated launch implies signup scale. Add as candidates, each traced back to the workflow statement: **agent-diagnosability** (can the agent tell what went wrong?), **observability / debuggability pinned to the agent audience** (the agent is the one reading the logs), **testability pinned to agent-verifiable** (the agent must be able to confirm its own work without a human), and **agent-readability / context-efficiency** (can the agent orient in the code, cheaply?). Don't wait for the reference-list pass to surface these — the workflow already entails them; the bottom-up pass owes the trace. (The pack already carries the observability→debuggability/fixability/recoverability web; what this trigger adds is firing it *from the user's own stated workflow* rather than hoping the top-down pass catches it. This audience question is then settled properly in 5.3.)
 
 Build the bottom-up list internally. Don't show it to the user yet.
 
@@ -73,6 +74,29 @@ When the subagent returns, **first save its returned top-down list verbatim** to
 
 The user resolves subagent-only candidates. And when one of them is something the user never mentioned but their **stated goals imply they'd care about**, don't deliver it as a list row — deliver it as a moment, with the trace: *"you didn't mention X anywhere — but given what you said about Y, you'd care a lot if X failed. Does that land?"* Record the answer either way; a rejected revelation is data, not failure (see SKILL.md → "Deliver revelations as moments").
 
+### 4. The guaranteed-inclusion layer — floors and default-ins
+
+The bottom-up and top-down passes both surface dimensions *because a bar or a design observation pointed at them*. Some dimensions can't wait for that — the cost of their silent absence is too high, and the kp3136 launch-gate run proved it: the sweep produced **no security dimension at all** on a project whose headline risk was rating forgery through client-writable data. So two classes of dimension enter the inventory by a different door — not surfaced *if* something references them, but present *unless* explicitly handled. The difference between them is whether the user is even allowed to remove them.
+
+**Tier 1 — Floors (non-negotiable given a factual predicate).** A floor is unconditional once a plain factual predicate about the system holds — checked in the pre-read, never negotiated as a preference. There is no coherent project where, shown the trace, a user accepts violating one. For each floor whose predicate holds (read them from the **Floor predicates** section of `quality/pre-read.md`), the corresponding dimension enters the inventory, full stop. The only conversation is **what the floor demands *here*** — which may be very little — never **whether it applies.** The ratified catalogue:
+
+| Floor | Factual predicate (checked in pre-read) |
+|---|---|
+| **No credential / secret leakage** | the system handles any secret, key, token, or password |
+| **No PII leakage** | the system holds personal data |
+| **No irrecoverable loss of entrusted data** | the system holds anything a user would want back (ephemeral-by-design flips the *predicate*, not the floor) |
+| **Legality** | always for shipped-code licensing; data-protection law additionally where the PII predicate holds |
+| **Blast radius** | the software ships to other people's machines (don't damage the host beyond the app's remit) |
+
+A floor whose predicate holds **cannot be rated None and cannot become a non-goal.** What 5.4 and 6.1 decide for it is *how much it demands on this project*, not whether it's in. Where a predicate came back **unknown or inferred** (a no-repo or interview-derived pre-read), it is a one-line factual question to settle with the user — *"does this store anything you'd be upset to lose?"* — not a thing to guess; confirm it, then apply the floor. (Note: **unbounded spend is *not* a floor** — an eyes-open "I accept the bill risk" is a coherent position — so it lives in Tier 2 as the flagship default-in.)
+
+**Tier 2 — Default-ins (present by default; removable only by an explicit, recorded disproof).** **Security** is default-in on every project; **data integrity / loss-of-data** is default-in wherever the system holds user data; **unbounded spend** is the flagship default-in wherever the system can spend money (API calls, compute, third-party usage). These appear in every sweep whether or not a stated bar referenced them — but unlike floors, the user *may* decide one is genuinely out of scope. The catch: **silent inclusion is as wrong as silent exclusion**, so the skill must *earn* the inclusion, with the goal-trace run **in reverse**:
+
+- Normal direction (the heaviness rule): an item must trace to a stated goal or get cut.
+- **Default-in (reverse) direction:** the skill is obligated to **build the trace from the user's own stated goals to the dimension** and present it to convince — *"you said you're launching on Twitter → that brings in strangers → strangers can forge ratings if the data's client-writable → that's a security concern you didn't name but your own goal implies."* Then offer the honest fork: be convinced and it's in, **or** record an explicit, eyes-open **accepted-risk** in the doc (*"considered security, accepted the risk for this release because …"*). What you may **not** do is drop it silently, or add it silently — the persuasion *is* the feature.
+
+Run this layer **before** you present the consolidated inventory, so floors and earned default-ins are already in the list the user reacts to. Floors and default-ins added here carry their grounding in the source column the same as any dimension — a floor cites its predicate; a default-in cites the reverse-trace (or its recorded accepted-risk).
+
 ## How to interview through this
 
 The pattern is: long stretches of agent work, short stretches of user input.
@@ -97,6 +121,7 @@ What you must not do:
 
 - The user wants to drop a Clearly-Relevant subagent candidate without reasoning. *"The reference-list pass flagged X as clearly relevant — what makes it not?"*
 - The candidate list is much shorter than the project warrants. *"This is a complex project; the inventory looks thin. What might we be missing?"*
+- Part 1 records an agent-driven workflow but no agent-facing dimensions came through. *"You said you work mostly through Claude — so an agent is your main reader and your main verifier. Shouldn't diagnosability-for-the-agent, agent-verifiable testability, and context-efficiency be on the list?"*
 - The user adds many dimensions without grounding any in stakeholder bars. *"What's driving this addition — a stakeholder bar, a design observation, something else?"*
 
 ## This sub-step is DONE when
@@ -104,6 +129,7 @@ What you must not do:
 - [ ] A bottom-up candidate list has been generated from Parts 1–4 and the pre-read.
 - [ ] The dimension-scout subagent has been dispatched and returned a top-down candidate list, saved verbatim to `quality/.scratch/5.1-dimension-scout.md`.
 - [ ] The two lists have been consolidated, with subagent-only candidates explicitly resolved (added or dropped) by the user.
+- [ ] The **floors-and-default-ins layer** has been applied: every floor whose pre-read predicate holds (or was confirmed in interview) is in the inventory and not droppable; each default-in (security always; data-integrity where user data exists; unbounded spend where the system can spend) is either in via a presented reverse-trace **or** carries an explicit, recorded eyes-open accepted-risk — none silently included, none silently dropped.
 - [ ] The raw inventory is captured with a one-line reason for each dimension.
 - [ ] Any deferred items are recorded as `OPEN QUESTION:`.
 - [ ] Pre-read sources are cited in the section's evidence field — naming actual files referenced, or, for an interview-derived / no-repo pre-read, citing the interview honestly (never blank, never a placeholder).
