@@ -101,6 +101,8 @@ What shape the system has, and what dimensions that shape implies will matter do
 >
 > Cover at minimum: overall shape, dependency direction, abstraction layers, error-handling pattern, observability posture, extensibility approach, security boundaries, data and state model. Anything else load-bearing is fair game.
 >
+> **Also answer five plain factual predicates** (the dimension sweep uses these to decide which quality *floors* are unconditionally in scope — see sub-step 5.1). For each, answer yes / no / unknown with a one-line basis, as a fact about the system, not a judgement of how well it's handled: **(1)** does the system handle any secret, key, token, or password? **(2)** does it hold personal data (PII)? **(3)** does it hold anything a user would want back if it were lost (entrusted data — note if it's ephemeral by design)? **(4)** does the software ship to or run on other people's machines? **(5)** can it spend money on someone's behalf (paid APIs, metered compute, third-party usage)? These are predicates, not risks — *"yes, it stores user accounts"*, not *"auth looks weak"*.
+>
 > Where the architecture you find contradicts what looks like aspirational design docs (a `docs/architecture.md` describing a different system than the code), flag the contradiction explicitly. The pre-read describes **what-is**; "should-be" claims that don't match are themselves data.
 >
 > Format: markdown, max 300 lines. Hypotheses, not facts ("looks like," "appears to," "no evidence of").
@@ -118,6 +120,9 @@ Then write `quality/pre-read.md` with this structure:
 
 ## Summary
 <5-line synthesis of the most important findings, including any cross-digest contradictions>
+
+## Floor predicates (factual — for the dimension sweep)
+<the five yes/no/unknown answers from subagent C, each with a one-line basis: handles secrets? holds PII? holds entrusted data a user would want back? ships to others' machines? can spend money? Tag any answer the pre-read could not actually scan as INFERRED. Sub-step 5.1 reads this section to decide which floors are unconditionally in scope.>
 
 ## Discrepancies and open questions
 <things claimed in docs (A) but not visible in code (B) or design (C); aspirational claims that the architecture doesn't support; anything else worth confirming with the user>

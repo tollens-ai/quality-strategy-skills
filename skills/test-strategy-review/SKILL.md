@@ -175,7 +175,7 @@ Use the `Agent` tool with two calls in a single message.
 > 5. Agent rows have review patterns.
 > 6. No proxy goals as targets.
 > 7. Update protocol concrete (≥3 trigger types, owners assigned).
-> 8. Non-targets explicit (≥1 with reason).
+> 8. Non-targets explicit (≥1 with reason). FLAG a non-target whose only reason is the current state of the test infrastructure ("the harness doesn't exercise X") rather than a deliberate decision traced to a risk-map row or non-goal — that is status-quo bias, and something a stated goal demands but the tooling can't reach yet is a *blocked learning need*, not a non-target.
 > 9. Pre-read sources cited.
 > 10. Independence preserved (no source code files in pre-read).
 > 11. Calibration ↔ update protocol alignment.

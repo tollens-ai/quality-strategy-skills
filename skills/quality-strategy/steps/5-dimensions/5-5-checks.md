@@ -58,6 +58,13 @@ Walk Part 5's ratings:
 
 Surface any missing.
 
+### Check 6 — Floors and default-ins present and earned
+
+The guaranteed-inclusion layer (sub-step 5.1) is the backstop against the kp3136 failure — a sweep that produced no security dimension on the project whose headline risk was rating forgery. Verify it held:
+
+- **Every floor whose predicate holds is present and not None.** Cross-check Part 5 against the pre-read's floor predicates (and any confirmed in interview): if the system handles secrets, holds PII, holds entrusted data, ships to others' machines, or is bound by licensing/data-protection law, the matching floor dimension must be in the inventory and rated H or M — never None, never a non-goal. A floor whose predicate holds but is absent or rated None is the bug this check exists to catch: *"the pre-read says it stores user accounts — where's the data-loss floor?"*
+- **Every default-in is either in, or carries a recorded accepted-risk.** Security (always), data integrity/loss (where user data exists), and unbounded spend (where the system can spend) must each appear — included via a presented reverse-trace, or explicitly recorded as an eyes-open accepted-risk in the doc. A default-in that is silently absent (no dimension, no accepted-risk note) is a flag: *"security isn't rated and there's no recorded decision to accept that risk — which is it?"* Silent inclusion is wrong too: a default-in that's in but was never traced to a goal nor confirmed gets the same challenge.
+
 ## How to interview through this
 
 This sub-step is mostly mechanical agent work. Run the checks in order, surface findings as a short list, and let the user resolve each. Don't grind through resolved items.
@@ -88,6 +95,7 @@ What you must not do:
 - [ ] Cross-stakeholder tensions have been flagged where they exist.
 - [ ] Non-goal alignment has been verified; any mismatches surfaced and resolved.
 - [ ] Every H rating cites a named stakeholder Dealbreaker bar; every None rating is a confirmed "no stakeholder bar references it" (not a forgotten gap).
+- [ ] **Floors and default-ins check has been run:** every floor whose predicate holds is present and not None; every default-in (security; data-integrity where user data exists; unbounded spend where the system can spend) is either in via a reverse-trace or carries a recorded eyes-open accepted-risk — none silently absent, none silently included.
 - [ ] Any deferred items are recorded as `OPEN QUESTION:`.
 - [ ] The step-boundary `/contradiction-check` was dispatched on the doc so far (it is the first move of the checkpoint, per SKILL.md) and its scratch file exists at `quality/.scratch/5.5-contradiction-check.md`.
 - [ ] The user has run the **step-boundary substantive checkpoint** (see SKILL.md), evaluating the whole step's output (not just this final sub-step), including any rethinks of earlier steps. Explicit, considered confirmation — not silence, not a non-committal response.
@@ -105,6 +113,7 @@ Append to `quality/strategy.md` under Part 5:
 - **Stakeholder coverage:** <each first-release stakeholder confirmed covered, or coverage gaps flagged>
 - **Cross-stakeholder tensions:** <flagged tensions with one-line description; or "none identified">
 - **Non-goal alignment:** <verified clean; or "mismatches resolved as <X, Y>">
+- **Floors and default-ins:** <floors whose predicates hold confirmed present and not None; each default-in confirmed in (reverse-traced) or carrying a recorded accepted-risk; or any gap flagged>
 - **Rationale coverage:** <verified; or any gaps flagged>
 
 **Sources consulted from pre-read:** <typically empty for this sub-step>

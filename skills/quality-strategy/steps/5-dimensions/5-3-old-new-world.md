@@ -4,7 +4,9 @@
 
 For each dimension in the post-unpack inventory from 5.2, decide whether the dimension means the same thing for agent stakeholders as it does for human ones — or whether the meaning shifts. Where it shifts meaningfully and the stakeholder mix includes both, split the dimension into audience-specific versions.
 
-Skip this check where it was needed and the 5.4 rating will mislead: what's High for an agent may be Low for a human (and vice versa), and a single rating hides that.
+The reasoning here is **mandatory** — every trap dimension gets the audience question, every decision gets recorded — but it runs as **machinery, not ceremony.** This pass is the agent's work that *feeds* the dimension list 5.4 will rate; it is not a walk the user sits through dimension by dimension. Do the audience analysis silently across the inventory, then surface only what actually changed — the splits you made and any genuine audience tension — for the user to react to. The user reacts to *outcomes* (a split, a tension), never to the procedure of asking "same or shifts?" twenty times. *Why this distinction matters:* in live runs the dimension-by-dimension confirmation walk read as internal logic leaking out — the user experiences a string of audience questions whose answer is usually "neutral", which is the machine showing its working rather than presenting a result. What's load-bearing is that the reasoning happened and the splits are right; that the user watched it happen adds nothing.
+
+Get the reasoning wrong and the 5.4 rating misleads: what's High for an agent may be Low for a human (and vice versa), and a single un-split rating hides that. So the pass cannot be skipped — but it is run, not performed.
 
 ## What you need from the previous sub-step
 
@@ -16,7 +18,7 @@ This skill takes the new-world stance (see PHILOSOPHY): agent stakeholders are t
 - Maintenance agents working in the codebase are stakeholders for maintainability / diagnosability / readability dimensions even if they're not product stakeholders.
 - "No agents now" rarely means "no agents ever."
 
-If after running the audience question on each trap dimension the user concludes none need splitting, record that decision per dimension with reasoning — not as a blanket "no agents, skipped."
+If after running the audience question on each trap dimension you conclude none need splitting, record that decision per dimension with reasoning — not as a blanket "no agents, skipped."
 
 ## What to cover
 
@@ -37,44 +39,46 @@ The trap dimensions, where old/new-world reframing changes the rating most often
 
 These are the labels almost always worth checking. Other dimensions may also shift by audience; the list above is not exhaustive. If a dimension's name ("usability," "ramp-up") makes you picture a specific human audience, that's a hint to check whether agents have a different version.
 
-## How to ask
+## How to run it
 
-For each dimension in the inventory, ask:
+Run the audience analysis yourself, across the whole inventory, before you bring anything to the user. For each dimension, settle the audience question internally:
 
-> *"Is this dimension's meaning the same for agent stakeholders as for human ones — or does it shift?"*
+> *Is this dimension's meaning the same for agent stakeholders as for human ones — or does it shift?*
 
-For dimensions that obviously don't shift by audience (e.g. "Spanish localisation," "PCI compliance"), don't manufacture splits — record as audience-neutral and move on.
+- **Audience-neutral dimensions** (e.g. "Spanish localisation," "PCI compliance") — record as neutral and move on. Don't manufacture splits, and don't ask the user about them.
+- **Trap dimensions that genuinely shift** — make the split in the inventory (e.g. "Readability for humans" and "Readability for agents"), with the reasoning recorded against it.
+- **Trap dimensions you judge neutral** — record the neutral decision *with its reason*, so the no-split is a considered call on disk, not a silent skip. (This recorded reasoning is what review check 16 and the contradiction check read; it does not need to be narrated to the user.)
 
-For potential trap dimensions, propose the split concretely:
+Then **surface only what changed** — and surface it as a finding, not a procedure:
 
-> *"For [dimension], do agents and humans care about the same thing here? For example, readability for humans is about can-a-new-engineer-follow-this; readability for agents is about can-the-agent-orient-quickly-in-this-code. If those are meaningfully different here, we should split — they may rate differently in 5.4."*
+- For each split you made, present it concretely as a moment the user can react to: *"I've split readability into a human version and an agent version — for humans it's can-a-new-engineer-follow-this; for agents it's can-the-agent-orient-quickly-in-this-code, and those will rate differently. Does that match how you see it?"* The user keeps, adjusts, or collapses the split.
+- For any genuine audience **tension**, name it: terse error messages help agents but hurt humans; verbose context helps agents but bloats human-facing docs. A tension the user should arbitrate is worth a sentence; a routine split is worth a line.
+- Do **not** walk the user through the dimensions you judged neutral. "I checked these eleven and they're audience-neutral" is the machine showing its working — the recorded decisions carry that; the user doesn't need the recital.
 
-The user confirms which to split. Replace the dimension with audience-specific versions in the inventory (e.g. "Readability for humans" and "Readability for agents").
-
-You have explicit permission and encouragement to:
-
-- Skip the audience question for dimensions where audience clearly doesn't matter. Don't ceremony-grind.
-- Surface tensions where one audience's needs trade off against the other (e.g. terse error messages are good for agents but poor for humans).
-- Note that when there are no agent stakeholders, this sub-step is mostly a walk of confirmations — still walk it; the act of confirming matters.
+When there are **no agent stakeholders**, this is almost entirely silent machinery: run the audience question over the trap dimensions anyway (future-release and maintenance agents still make it live — see above), record the neutral decisions with reasons, and tell the user the *outcome* in one line — *"none of these split by audience for this release; here's why in the doc"* — not a walk of confirmations.
 
 What you must not do:
 
-- Skip the audience question on trap dimensions (the ones listed above) without explicit confirmation.
+- Skip the audience question on any trap dimension — the reasoning is mandatory even when its answer is "neutral". What's optional is *narrating* it to the user, not *doing* it.
+- Turn the pass back into a ceremony: a dimension-by-dimension "same or shifts?" walk is exactly the internal-logic-leaking-out the machinery framing exists to kill.
 - Manufacture audience splits for dimensions that don't warrant them.
-- Forget to confirm the no-agent-stakeholders case explicitly — silent skipping looks identical to "considered and confirmed."
+- Let a neutral decision go unrecorded — a silent skip and a considered "neutral, because…" look identical to the user but not to the review. The reason on disk is what distinguishes them.
 
-## Push back when
+## Catch yourself when (internal checks)
 
-- A trap dimension is dismissed as audience-neutral without examination. *"Readability for whom — humans only, or also agents working in this codebase? If different audiences, the rating may differ; let's check."*
-- The audience question is skipped on a dimension whose natural language clearly references one audience. *"You've called this 'documentation' — is that human-readable docs, or also machine-parseable context for agents? Both?"*
-- The stakeholder list in Part 3 includes agents but no dimensions are getting audience-split. *"You have agent stakeholders in Part 3 — are none of these dimensions actually different for agents? That'd be unusual."*
+These are checks on your own analysis, not user push-backs — the pass is machinery now, so most of these fire silently and you correct them before anything reaches the user:
+
+- You're about to mark a trap dimension audience-neutral without actually examining it. *Readability for whom — humans only, or also agents working in this codebase?* Examine, then record the reason; don't default to neutral.
+- A dimension whose natural language clearly references one audience ("documentation", "error messages") is heading for a single rating. Check whether the agent version is a distinct thing before you let it rate as one.
+- Part 3 includes agent stakeholders but your analysis produced no splits at all. That's unusual — re-examine before accepting it. If it genuinely holds, that itself is worth one line to the user: *"you have agent stakeholders, but none of these dimensions actually split by audience this release — here's why."*
 
 ## This sub-step is DONE when
 
-- [ ] Every dimension in the post-unpack inventory has been examined for the audience question.
+- [ ] Every dimension in the post-unpack inventory has been examined for the audience question (the reasoning is mandatory — run, even where its answer is "neutral").
 - [ ] Every dimension that was audience-split has been replaced with audience-specific versions in the inventory.
-- [ ] Every trap dimension that was *not* audience-split has been actively confirmed as audience-neutral, with reasoning recorded.
-- [ ] If there are no agent stakeholders, that has been actively confirmed (not silently skipped).
+- [ ] Every trap dimension that was *not* audience-split has its audience-neutral decision **recorded with reasoning** in the doc (a reason on disk, not a silent skip — the splits and the no-splits both leave a trace review check 16 can read).
+- [ ] The splits made, and any genuine audience tensions, were surfaced to the user as findings to react to — and the neutral decisions were *not* walked through dimension by dimension (machinery, not ceremony).
+- [ ] If there are no agent stakeholders, the audience question still ran over the trap dimensions and the neutral decisions are recorded with reasons; the user heard the outcome in one line, not a walk of confirmations.
 - [ ] Any deferred items are recorded as `OPEN QUESTION:`.
 - [ ] Pre-read sources are cited in the section's evidence field — naming actual files referenced, or, for an interview-derived / no-repo pre-read, citing the interview honestly (never blank, never a placeholder).
 - [ ] The user has been given a 2–4 line wrap-up, asked if any quick concerns, and confirmed ready to continue. (Substantive checkpoint runs at step boundaries — see SKILL.md.)
@@ -108,4 +112,4 @@ The "Audience" column shows the old/new-world decision: dimensions where humans 
 **Open questions from this sub-step:** <bullet list, or "none">
 ```
 
-Once written, summarise back in 3–5 lines (naming the audience splits made and any trap dimensions kept neutral with reasoning), and ask the user (light wrap-up only — the substantive checkpoint runs at the step boundary, see SKILL.md): *"Ready to move on to sub-step 5.4 (Rate dimensions)?"*
+Once written, summarise back in 3–5 lines — but make it a summary of *outcomes*, not a recap of the procedure: name the splits you made (and any tension worth arbitrating), state in one line that the rest came out audience-neutral with reasons recorded, and don't walk the neutral dimensions one by one. Then ask the user (light wrap-up only — the substantive checkpoint runs at the step boundary, see SKILL.md): *"Ready to move on to sub-step 5.4 (Rate dimensions)?"*

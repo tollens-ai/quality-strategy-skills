@@ -10,6 +10,17 @@ Unknowns are not a failure. For first-pass strategies on real projects, **most a
 
 Read sub-step 6.1's required levels from `quality/strategy.md`. Read the **Code structure** and **Design observations** sections of `quality/pre-read.md` — subagent C may have surfaced design hypotheses about specific dimensions ("error handling looks inconsistent → reliability is likely Low or Unknown").
 
+## Actuals come from evidence, in this order — not from reading the code
+
+The actual level is a claim about *how the system really behaves*, and the strongest evidence for that is observation, not inspection. Reading the code tells you what it was *meant* to do; it is the **weakest** actuals oracle and the one that manufactures Over-confident ratings — the exact failure SC-5 and `/oracle-adequacy` exist to stop. So work the evidence hierarchy from the top, and only fall down it when the higher rungs are genuinely empty:
+
+1. **Existing test results, CI runs, reports.** Green CI, a coverage report, a load-test result, a prior audit — observed behaviour someone already captured. Strongest. Look here first.
+2. **The tests themselves.** Even unrun, what the suite *asserts* tells you what's actually being checked (and the gaps tell you what isn't).
+3. **Ask the user what testing and lived evidence exists.** *"What have you actually seen this do — in production, in testing, in use? What broke, what held?"* The user's lived experience of the running system is real evidence the repo doesn't contain; in a no-repo strategy it is often the *only* evidence, and it is first-class, not a fallback.
+4. **Code reading — last, and always labelled inference.** When nothing above answers it, reading the code is a starting hypothesis, never an observation: record it as **inference, not evidence**, and it **can never on its own support a confident "at bar"** — a code-derived actual caps at Medium confidence and usually lands at Unknown with a note to get real evidence. The design deep-dive below is this rung; its findings are inputs to confirm, not actuals.
+
+Default to **Unknown** before you reach for the code: an honest Unknown that names what would resolve it beats a comfortable Medium read off the source. This is the same posture `/oracle-adequacy` enforces per dimension — get there before it has to.
+
 ## What to cover
 
 By the end of this sub-step the strategy doc must capture, **for each H/M dimension**:
@@ -64,6 +75,8 @@ You have explicit permission and encouragement to:
 
 What you must not do:
 
+- **Assess actuals by reading the code when higher-rung evidence wasn't sought.** Before any code-derived actual, you must have looked for test results / CI / reports, looked at the tests, and asked the user what they've actually seen. A code read that skipped those rungs is the wrong-oracle failure this sub-step exists to prevent.
+- **Present a code-derived actual as an observation, or let it claim a confident "at bar".** Label it inference; cap its confidence at Medium; prefer Unknown-with-a-resolution-note over a comfortable read off the source.
 - Conflate Unknown with Low. They are different findings and produce different Step 7 actions (testing/review work vs fixing work).
 - Claim High confidence in an actual without specific evidence. *"What's the High confidence based on?"*
 - Skip the "what would resolve this" note for Unknowns. That note is the seed of Step 7's testing and stakeholder work.
@@ -79,6 +92,7 @@ What you must not do:
 ## This sub-step is DONE when
 
 - [ ] Every H/M dimension has either a qualitative actual level or an explicit "Unknown."
+- [ ] Actuals were sought down the **evidence hierarchy** — test results / CI / reports, then the tests, then what the user has actually seen — before any code reading; every code-derived actual is **labelled inference**, capped at Medium confidence, and none claims a confident "at bar" off the source alone.
 - [ ] Every actual has a confidence rating (H/M/L, or "—" for Unknown) and an evidence basis (or "no investigation yet").
 - [ ] Every Unknown has a one-line note on what would resolve it (test / ask / review / instrument / build infrastructure).
 - [ ] `/oracle-adequacy` has been invoked on the proposed actuals; each dimension has a verdict (Trustworthy / Over-confident / Gated), Over-confident actuals have had their confidence downgraded or an oracle-build item named, and Gated dimensions carry their oracle-build item. Its scratch file exists at `quality/.scratch/6.2-oracle-adequacy.md`.

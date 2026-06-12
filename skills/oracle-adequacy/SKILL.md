@@ -83,6 +83,7 @@ Oracle-build items (state the property set; write a reference/simulated oracle; 
 ### 5. Catch the mismatches
 
 - **Comfortable Medium with no oracle.** A dimension sitting at Medium confidence whose only basis is "the code looks fine" or "it's probably okay." The honest reading is usually Unknown-with-an-oracle-to-build, not Medium.
+- **Code-reading standing in for observation.** A behavioural actual (reliability, performance, data-integrity, security) whose *instrument* is "read the source" while real observation evidence — test results, CI, the tests themselves, the user's lived experience of the running system — was never sought is the wrong-oracle posture sub-step 6.2 ranks last. Reading the code shows intent, not behaviour: mark such an instrument **Inadequate** for a behavioural claim, treat the actual as **inference** (capped at Medium, usually Unknown), and name the observation that would actually judge it. The evidence hierarchy — results/CI → tests → ask the user → code last — is the order; a claim that jumped to the bottom rung is Over-confident until the higher rungs are checked.
 - **Automation aimed at judgement.** A trust/feel/taste dimension assigned a purely automated oracle. The human is the oracle there; say so.
 - **Repo-level adequacy claims.** "We have monitoring / a test suite / types, so our actuals are solid." Adequacy is per-dimension, not per-repo — a signal can judge some dimensions well and be blind to others.
 
