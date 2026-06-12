@@ -31,6 +31,8 @@ Encodes ten findings from Qing's launch-gate run of `/quality-strategy` (a full 
 - **Resume after `/clear` is stated, never guessed** (all three strategy skills): every break/clear seam now states the resume mechanism — run `/<skill>` again; it reads your `quality/` docs and resumes from where you left off. (Reproduced independently by two testers.)
 - **Time-empathy is grounded in the actual session** (`/quality-strategy` progress-line pattern): lines acknowledging elapsed effort appear only when true of *this* run — a half-hour lightweight session gets no weariness theatre.
 
+- `/test-strategy-review` gains the **scaffolding-leak backstop** the quality-strategy leg already had: subagent B's new check 15 ports `/quality-strategy-review`'s check 21 — a whole-doc scan (inherited content included) for process-note commentary, dispatch/scratch narration, turn/sub-step lineage refs, and `.scratch/` path citations in "Sources consulted" lines (FLAG-severity, matching the quality-strategy leg). Previously such a leak in a *test* strategy survived the skill's own audit. The same skill's Dealbreaker-prioritisation check (check 3) is reworded to match what it actually verifies — every Dealbreaker is *addressed by* a Tier-1/2 learning need, which does not forbid a dealbreaker dimension also carrying lower-tier needs.
+
 ## [0.3.2] — 2026-06-11
 
 ### Added
