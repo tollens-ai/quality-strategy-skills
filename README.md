@@ -6,6 +6,17 @@ Grounded in [**Edmund Pringle's quality framework**](https://github.com/tollens-
 
 > **Status: alpha.** Shared with a first wave of testers. The skills work and have been exercised hard against simulated users, but real-world mileage is limited. Expect rough edges, tell us where it misfires ([Feedback](#feedback)), and read [Known limitations](#known-limitations) first — we're not hiding the gaps.
 
+## If you're trying it in alpha
+
+The most useful thing you can do is run `/quality-strategy` on a real project and tell us what happened:
+
+- **Report a misfire publicly:** open a [GitHub issue](https://github.com/tollens-ai/quality-strategy-skills/issues) with what you ran, what it produced, and what you expected instead. If you're happy to share the generated `quality/strategy.md`, attach or paste a redacted copy there.
+- **Share privately:** [join the Tollens mailing list](https://tollens.ai/) and reply through the contact details you receive there.
+- **Tell us where it would land:** who would read the strategy, what meeting or process it would enter, what decision it would change, and what would make it hard to use.
+- **Show the artefacts:** if the strategy gives you a useful visual, summary, or one-pager, share that too — those outputs are part of what we're testing.
+- **Using this with a real team?** We're looking for a small number of design partners building software where quality really matters. Join the mailing list and tell us what you're building.
+- **Want to support the project?** Star the repo and share the artefacts that helped you explain your project's quality risks.
+
 ## Install
 
 This is a Claude Code plugin:
@@ -17,7 +28,7 @@ This is a Claude Code plugin:
 
 Then, in any project, start with `/quality-strategy`. Output goes to `quality/strategy.md` at the project root. (Skills are also available namespaced, e.g. `/quality-strategy:test-strategy`, if a bare name ever collides with another plugin.)
 
-New versions ship regularly — run `claude plugin update quality-strategy` to pick them up; [CHANGELOG.md](CHANGELOG.md) says what changed.
+New versions ship regularly — run `claude plugin update quality-strategy@tollens` to pick them up; [CHANGELOG.md](CHANGELOG.md) says what changed.
 
 ## The typical flow
 

@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to the `quality-strategy` plugin, oldest at the bottom. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versions are the plugin manifest's. To pick up a new version, run `claude plugin update quality-strategy` (or `/plugin update quality-strategy@tollens` inside Claude Code).
+All notable changes to the `quality-strategy` plugin, oldest at the bottom. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versions are the plugin manifest's. To pick up a new version, run `claude plugin update quality-strategy@tollens` (or `/plugin update quality-strategy@tollens` inside Claude Code).
 
 **Release discipline (maintainers):** every version bump updates this file *in the same commit* — a bump without a changelog entry doesn't merge.
 

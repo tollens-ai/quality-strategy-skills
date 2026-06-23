@@ -72,6 +72,13 @@ A reader hits a new thing — a bug report, a feature ask, a complaint, an odd r
 - **Route** — testing question → `/test-strategy` learning need; stakeholder question → confirm the bar; fixing → the plan of work.
 - **When in doubt** — the one or two questions that resolve most ambiguity for *this* project.
 
+Before you insert the rubric, run a **rating-label cross-check** against the body:
+
+1. Build a small table from Part 5: each dimension name → its exact merged rating (`H`, `M`, or `None`). **Part 5 is the source of truth for dimension ratings.** Do not infer ratings from Part 6 row headers, plan phases, risk language, or your own sense of urgency.
+2. Cross-check every rating label in the Operational TL;DR and triage rubric against that table. If the distillation says a dimension is High/Medium/None-rated (or groups it with High/Medium/None dimensions), the label must match Part 5 exactly.
+3. Keep separate concepts separate in wording: Part 5 rating = impact size; Part 6 confidence/actual state = evidence and current condition; Part 7 phase = work order. A Medium dimension can be Phase 0 if it blocks learning, and a High dimension can be already well-covered. Do not let those later sections silently relabel the dimension.
+4. If a useful rubric rule depends on Part 6 or Part 7 rather than Part 5, name that basis explicitly — e.g. "Unknown actual-state confidence" or "Phase 0 gate" — instead of calling it a different dimension rating.
+
 For a test strategy, the rubric maps a new finding to a **learning need / tier** (rather than a quality dimension): which learning need does it bear on, is that Tier 1, and does it change the allocation or exit criteria?
 
 Keep it to a page. It's a rubric, not a runbook.
@@ -97,6 +104,7 @@ Insert the distillation immediately after the title block — the title, the `La
 - [ ] A one-page triage rubric is present and usable to triage a new finding without escalation.
 - [ ] The operator cheat sheet is either present with real content or deliberately omitted.
 - [ ] Every distillation claim is supported by the body, and no load-bearing body item is missing from the TL;DR.
+- [ ] Every rating label in the TL;DR / triage rubric has been mechanically cross-checked against Part 5's merged H / M / None rating table; no Part 6 confidence, risk, or Part 7 phase language has been mistaken for a dimension rating.
 - [ ] The distillation is placed above the first substantive section (`## Strategy job` and Part 1 for a quality strategy, or the top section for a test strategy), not buried.
 - [ ] (When run from `/quality-strategy` against the quality strategy) a scratch file is written recording what was extracted (see Output). A standalone test-strategy run needs no scratch file.
 
