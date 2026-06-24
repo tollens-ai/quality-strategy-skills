@@ -6,9 +6,9 @@ Grounded in [**Edmund Pringle's quality framework**](https://github.com/tollens-
 
 > **Status: alpha.** Shared with a first wave of testers. The skills work and have been exercised hard against simulated users, but real-world mileage is limited. Expect rough edges, tell us where it misfires ([Feedback](#feedback)), and read [Known limitations](#known-limitations) first — we're not hiding the gaps.
 
-## Install
+## Install and start
 
-This is a Claude Code plugin:
+Prerequisite: [Claude Code](https://docs.anthropic.com/en/docs/claude-code) with plugin support. Open Claude Code for the project or folder where you want the `quality/` documents written, then type these as Claude Code slash commands (not shell commands):
 
 ```
 /plugin marketplace add tollens-ai/quality-strategy-skills
@@ -17,19 +17,25 @@ This is a Claude Code plugin:
 
 This pack depends on the companion **[`effective-comms`](https://github.com/tollens-ai/effective-comms-skills)** plugin — the shared communication gate the strategy skills run before a document is final. It is declared as a dependency and installed automatically from the same `tollens` marketplace; you don't add a second marketplace or install it by hand.
 
-Then, in any project, start with `/quality-strategy`. Output goes to `quality/strategy.md` at the project root. (Skills are also available namespaced, e.g. `/quality-strategy:test-strategy`, if a bare name ever collides with another plugin.)
+First run:
 
-New versions ship regularly — run `claude plugin update quality-strategy@tollens` to pick them up; [CHANGELOG.md](CHANGELOG.md) says what changed.
+```
+/quality-strategy
+```
+
+Output goes to `quality/strategy.md` under the folder Claude Code is working in. You do **not** need an existing git repo or codebase: for an idea-stage project, open Claude Code in whatever folder should hold the strategy notes and run the same command. (Skills are also available namespaced, e.g. `/quality-strategy:test-strategy`, if a bare name ever collides with another plugin.)
+
+New versions ship regularly — run `claude plugin update quality-strategy@tollens` in your shell, or `/plugin update quality-strategy@tollens` inside Claude Code, to pick them up; [CHANGELOG.md](CHANGELOG.md) says what changed.
 
 ## If you're trying it in alpha
 
-The most useful thing you can do is run `/quality-strategy` on a real project and tell us what happened:
+The most useful thing you can do is run `/quality-strategy` on a real project and tell us what happened. A partial run is useful too: if you only have an hour, stop where you are and report where it got heavy, confusing, or surprisingly helpful.
 
-- **Report a misfire publicly:** open a [GitHub issue](https://github.com/tollens-ai/quality-strategy-skills/issues) with what you ran, what it produced, and what you expected instead. If you're happy to share the generated `quality/strategy.md`, attach or paste a redacted copy there.
+- **Report a misfire publicly:** open a [GitHub issue](https://github.com/tollens-ai/quality-strategy-skills/issues) with what you ran, what it produced, and what you expected instead. Good reports include bad interview questions, wrong inferences, missed stakeholders, overlong output, awkward artefacts, or a process that felt too thorough for the project. If you're happy to share the generated `quality/strategy.md`, attach or paste a redacted copy there.
 - **Share privately:** [join the Tollens mailing list](https://tollens.ai/) and reply through the contact details you receive there.
 - **Tell us where it would land:** who would read the strategy, what meeting or process it would enter, what decision it would change, and what would make it hard to use.
 - **Show the artefacts:** if the strategy gives you a useful visual, summary, or one-pager, share that too — those outputs are part of what we're testing.
-- **Using this with a real team?** We're looking for a small number of design partners building software where quality really matters. Join the mailing list and tell us what you're building.
+- **Using this with a real team?** We're looking for a small number of design partners building software where quality really matters: high-stakes launches, complex agent-built systems, regulated or trust-heavy products, or teams that already argue about what "good enough" means. Join the mailing list and tell us what you're building.
 - **Want to support the project?** Star the repo and share the artefacts that helped you explain your project's quality risks.
 
 ## The typical flow
