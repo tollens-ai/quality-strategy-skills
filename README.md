@@ -6,17 +6,6 @@ Grounded in [**Edmund Pringle's quality framework**](https://github.com/tollens-
 
 > **Status: alpha.** Shared with a first wave of testers. The skills work and have been exercised hard against simulated users, but real-world mileage is limited. Expect rough edges, tell us where it misfires ([Feedback](#feedback)), and read [Known limitations](#known-limitations) first — we're not hiding the gaps.
 
-## If you're trying it in alpha
-
-The most useful thing you can do is run `/quality-strategy` on a real project and tell us what happened:
-
-- **Report a misfire publicly:** open a [GitHub issue](https://github.com/tollens-ai/quality-strategy-skills/issues) with what you ran, what it produced, and what you expected instead. If you're happy to share the generated `quality/strategy.md`, attach or paste a redacted copy there.
-- **Share privately:** [join the Tollens mailing list](https://tollens.ai/) and reply through the contact details you receive there.
-- **Tell us where it would land:** who would read the strategy, what meeting or process it would enter, what decision it would change, and what would make it hard to use.
-- **Show the artefacts:** if the strategy gives you a useful visual, summary, or one-pager, share that too — those outputs are part of what we're testing.
-- **Using this with a real team?** We're looking for a small number of design partners building software where quality really matters. Join the mailing list and tell us what you're building.
-- **Want to support the project?** Star the repo and share the artefacts that helped you explain your project's quality risks.
-
 ## Install
 
 This is a Claude Code plugin:
@@ -32,11 +21,22 @@ Then, in any project, start with `/quality-strategy`. Output goes to `quality/st
 
 New versions ship regularly — run `claude plugin update quality-strategy@tollens` to pick them up; [CHANGELOG.md](CHANGELOG.md) says what changed.
 
+## If you're trying it in alpha
+
+The most useful thing you can do is run `/quality-strategy` on a real project and tell us what happened:
+
+- **Report a misfire publicly:** open a [GitHub issue](https://github.com/tollens-ai/quality-strategy-skills/issues) with what you ran, what it produced, and what you expected instead. If you're happy to share the generated `quality/strategy.md`, attach or paste a redacted copy there.
+- **Share privately:** [join the Tollens mailing list](https://tollens.ai/) and reply through the contact details you receive there.
+- **Tell us where it would land:** who would read the strategy, what meeting or process it would enter, what decision it would change, and what would make it hard to use.
+- **Show the artefacts:** if the strategy gives you a useful visual, summary, or one-pager, share that too — those outputs are part of what we're testing.
+- **Using this with a real team?** We're looking for a small number of design partners building software where quality really matters. Join the mailing list and tell us what you're building.
+- **Want to support the project?** Star the repo and share the artefacts that helped you explain your project's quality risks.
+
 ## The typical flow
 
 1. **`/quality-strategy`** — the main event. A structured interview produces `quality/strategy.md`, ends with a built-in audit, and points you at the follow-ons.
 2. **`/test-strategy`** — turns the strategy into an investigation plan: what to find out, in what order, split between humans and agents.
-3. **`/tooling-strategy`** — when the docs surfaced things you can't measure or judge yet (common, and a finding rather than a failure): a prioritised build plan for the missing oracles and instruments. Steps 2 and 3 swap when the risk map comes out mostly blind — the skills recommend the order themselves; you can always overrule.
+3. **`/tooling-strategy`** — when the docs surfaced things you can't measure or judge yet (common, and a finding rather than a failure): a prioritised build plan for the missing **oracles** (ways to judge whether something is good) and **instruments** (ways to observe what's actually happening). Steps 2 and 3 swap when the risk map comes out mostly blind — the skills recommend the order themselves; you can always overrule.
 4. **`/strategy-variants`** (optional) — a one-pager or client-safe version to circulate.
 5. **`/quality-artefacts`** (optional) — describe the view you want ("a tweetable summary of where quality stands", "a dashboard of the payment risks for my standup") and it designs a bespoke, self-contained SVG/HTML artefact from your strategy — honest about Unknowns, built to be screenshotted and shared. Worked examples in [`examples/fernly/quality/artefacts/`](examples/fernly/quality/artefacts/).
 
