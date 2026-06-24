@@ -29,9 +29,9 @@ New versions ship regularly — run `claude plugin update quality-strategy@tolle
 
 ## If you're trying it in alpha
 
-The most useful thing you can do is run `/quality-strategy` on a real project and tell us what happened. A partial run is useful too: if you only have an hour, stop where you are and report where it got heavy, confusing, or surprisingly helpful.
+The most useful thing you can do is run `/quality-strategy` on a real project and tell us what happened. A partial run is useful too: if you only have an hour, stop where you are and report where the process got heavy, confusing, hard to complete, or surprisingly helpful. Feedback about the experience of using the skill is useful even if you never reached a finished `quality/strategy.md`.
 
-- **Report a misfire publicly:** open a [GitHub issue](https://github.com/tollens-ai/quality-strategy-skills/issues) with what you ran, what it produced, and what you expected instead. Good reports include bad interview questions, wrong inferences, missed stakeholders, overlong output, awkward artefacts, or a process that felt too thorough for the project. If you're happy to share the generated `quality/strategy.md`, attach or paste a redacted copy there.
+- **Report a misfire publicly:** open a [GitHub issue](https://github.com/tollens-ai/quality-strategy-skills/issues) with what you ran, what it produced, and what you expected instead. Good reports include bad interview questions, wrong inferences from what you told it, overlong output, awkward artefacts, unclear resume/progress cues, or a process that felt too thorough for the project. If you're happy to share the generated `quality/strategy.md`, attach or paste a redacted copy there.
 - **Share privately:** [join the Tollens mailing list](https://tollens.ai/) and reply through the contact details you receive there.
 - **Tell us where it would land:** who would read the strategy, what meeting or process it would enter, what decision it would change, and what would make it hard to use.
 - **Show the artefacts:** if the strategy gives you a useful visual, summary, or one-pager, share that too — those outputs are part of what we're testing.
