@@ -4,18 +4,26 @@ All notable changes to the `quality-strategy` plugin, oldest at the bottom. The 
 
 **Release discipline (maintainers):** every version bump updates this file *in the same commit* — a bump without a changelog entry doesn't merge.
 
-## [Unreleased] — `feature/effective-comms-qss-integration` (internal dogfood)
+## [Unreleased] — `feature/effective-comms-qss-integration`
 
-Not a public release — internal dogfood branch, no version bump. This is the first slice of **Effective Comms Skills (ECS)** hooked into QSS.
+Draft branch only — no `quality-strategy` version bump or public release yet.
 
 ### Added
 
-- **`/effective-comms` — the pack's communication gate.** A new, product-neutral skill that runs a prepare→review→revise pass over an agent-written user-facing output before it is finalized. It writes a short communications brief (objective / what good looks like; audience and context; what the reader needs, does not need, wants, already knows, and what the agent may be falsely assuming; evidence and uncertainty; form factor), then reviews the draft against an eight-check self-review rubric and an audience-perspective pass (a fresh subagent standing in for the reader where one is available, else an explicit separate pass). The rubric specifically catches the three feedback-derived QSS-output failures it exists for — **numbered references without plain-English meaning**, **hidden scratch-context assumptions**, and **retained rejected ideas** — plus names-before-coordinates, agent process-history leakage, purpose/audience mismatch, a buried recommendation, and illegible uncertainty. It is a *living checklist*: a newly-found communication failure is folded in as a named failure mode + rubric row + regression example, not a redesign. The skill is the canonical **Effective Comms Skills (ECS)** plugin (`effective-comms`, public at [github.com/tollens-ai/effective-comms-skills](https://github.com/tollens-ai/effective-comms-skills)) — `quality-strategy` declares it as a plugin **dependency**, so it is installed automatically alongside this pack from the same `tollens` marketplace. There is one canonical copy, maintained in the ECS repo, rather than a vendored duplicate inside QSS.
-- **ECS hooked into the producing skills, not left as dead documentation.** `/quality-strategy` (final step, and the skip-Step-7 closing moves), `/test-strategy` (new closing step), and `/tooling-strategy` (DONE checklist) now invoke `/effective-comms` on the finished doc before it is finalized. `/quality-strategy-review` (new check 23) and `/test-strategy-review` (new check 16) gained an Effective Comms backstop covering the reader-facing modes their existing process-note leak scans (check 21 / check 15) don't reach — numbered references without meaning, coordinate-before-name, retained rejected ideas, buried recommendation. `docs/SKILLS.md` and the README skill diagram list the new skill (twelve skills now ship).
+- **Effective Comms gate for QSS outputs.** `/quality-strategy`, `/test-strategy`, and `/tooling-strategy` now run `/effective-comms` before finalizing their user-facing documents. The gate checks whether the output works for its reader: no unexplained numbered references, no hidden author/scratch context, no retained rejected ideas unless provenance is the point, no leaked process history, no buried recommendation, and clear uncertainty.
+- **Review backstops for communication failures.** `/quality-strategy-review` (new check 23) and `/test-strategy-review` (new check 16) now flag reader-facing failures their existing process-leak scans do not catch, including coordinate-before-name wording, retained rejected ideas, and buried recommendations.
+- **Install-time dependency on the public ECS plugin.** QSS now declares `effective-comms ~0.1.0` as a Claude Code plugin dependency and resolves it from the public [`tollens-ai/effective-comms-skills`](https://github.com/tollens-ai/effective-comms-skills) repo. QSS does **not** vendor a copy of the ECS skill; there is one canonical ECS implementation.
 
-### Roadmap (stated, not built)
+### Changed
 
-- Multiple-audience staged passes; artifact-specific ECS leaves (`write-handoff`, `polish-technical-report`, …). The standalone public ECS package with install-time dependency resolution, previously listed here, is now in place (see Added). QSS depends on the `effective-comms` plugin with a `~0.1.0` version constraint. Public release is gated on dogfood/eval evidence.
+- README and `docs/SKILLS.md` explain the ECS dependency and show where the communication gate fits in the QSS flow.
+- QSS skill text received a small Effective Comms polish pass for the running-agent audience; no QSS strategy semantics changed.
+
+### Validation
+
+- ECS feedback regressions EC-1/EC-2/EC-3 passed in the private validation suite.
+- Claude Code install smoke passed locally: installing `quality-strategy@tollens` installed `effective-comms` automatically as a dependency.
+- Public release remains gated on version bump, release tagging, and a post-merge public marketplace install smoke.
 
 ## [0.3.6] — 2026-06-15
 
