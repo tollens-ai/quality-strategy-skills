@@ -12,9 +12,12 @@
     },
     {
       "name": "effective-comms",
+      "version": "0.1.0",
       "source": {
-        "source": "github",
-        "repo": "tollens-ai/effective-comms-skills"
+        "source": "url",
+        "url": "https://github.com/tollens-ai/effective-comms-skills.git",
+        "ref": "effective-comms--v0.1.0",
+        "sha": "0599c7f84836313c3c52ef490b39452307009379"
       },
       "description": "Effective communication checks for agent-written user-facing outputs — the shared communication gate quality-strategy runs before its documents are final. Canonical home: github.com/tollens-ai/effective-comms-skills."
     }
