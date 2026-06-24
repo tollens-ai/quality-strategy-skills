@@ -1,5 +1,7 @@
 # Worker report — ECS v0 + QSS integration
 
+> **Superseded (2026-06-24, architecture change).** This report describes the original slice in which Effective Comms was *bundled* inside the `quality-strategy` plugin (`skills/effective-comms/`). That is no longer the architecture: Effective Comms is now the standalone public `effective-comms` plugin, declared as a `quality-strategy` dependency and installed automatically from the `tollens` marketplace — there is one canonical ECS copy, in the ECS repo. The "no separate install / ECS is bundled" statements below are kept as a record of the earlier work and no longer reflect the current design. See `WORKER-REPORT-qss-ecs-dependency-migration.md`.
+
 Date: 2026-06-24
 Owner/reviewer: Applejack / Qing
 Spec: `qings-vault/outputs/claude-handoffs/ecs-qss-integration-2026-06-24.md`

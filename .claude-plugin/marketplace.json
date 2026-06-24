@@ -1,5 +1,6 @@
 {
   "name": "tollens",
+  "description": "Tollens Claude Code plugins for software quality strategy and agent communication workflows.",
   "owner": {
     "name": "Yanqing Cheng"
   },
@@ -8,6 +9,14 @@
       "name": "quality-strategy",
       "source": ".",
       "description": "Quality, test, and tooling strategy skills, plus shareable visual artefacts generated from them. Grounded in Edmund Pringle's quality framework."
+    },
+    {
+      "name": "effective-comms",
+      "source": {
+        "source": "github",
+        "repo": "tollens-ai/effective-comms-skills"
+      },
+      "description": "Effective communication checks for agent-written user-facing outputs — the shared communication gate quality-strategy runs before its documents are final. Canonical home: github.com/tollens-ai/effective-comms-skills."
     }
   ]
 }

@@ -1,5 +1,7 @@
 # Worker report — QSS skill-content polish via Effective Comms
 
+> **Partly superseded (2026-06-24, architecture change).** This report polished a *bundled* copy of the Effective Comms skill at `skills/effective-comms/SKILL.md`. That bundled copy has since been removed: Effective Comms is now the standalone public `effective-comms` plugin, declared as a `quality-strategy` dependency, so its content is maintained once in the ECS repo. The polish of the *other* QSS skills still stands; the row for `effective-comms/SKILL.md` and its Recommendation #1 (reconcile bundled → canonical) are resolved by the migration, not by editing a vendored file. See `WORKER-REPORT-qss-ecs-dependency-migration.md`.
+
 **Date:** 2026-06-24
 **Branch:** `feature/effective-comms-qss-integration`
 **Repo:** `/workspace/quality-strategy-skills`

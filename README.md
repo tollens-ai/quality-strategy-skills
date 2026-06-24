@@ -26,6 +26,8 @@ This is a Claude Code plugin:
 /plugin install quality-strategy@tollens
 ```
 
+This pack depends on the companion **[`effective-comms`](https://github.com/tollens-ai/effective-comms-skills)** plugin — the shared communication gate the strategy skills run before a document is final. It is declared as a dependency and installed automatically from the same `tollens` marketplace; you don't add a second marketplace or install it by hand.
+
 Then, in any project, start with `/quality-strategy`. Output goes to `quality/strategy.md` at the project root. (Skills are also available namespaced, e.g. `/quality-strategy:test-strategy`, if a bare name ever collides with another plugin.)
 
 New versions ship regularly — run `claude plugin update quality-strategy@tollens` to pick them up; [CHANGELOG.md](CHANGELOG.md) says what changed.
