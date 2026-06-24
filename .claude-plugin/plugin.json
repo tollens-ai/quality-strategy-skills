@@ -16,6 +16,9 @@
     "quality-dashboard"
   ],
   "dependencies": [
-    "effective-comms"
+    {
+      "name": "effective-comms",
+      "version": "~0.1.0"
+    }
   ]
 }

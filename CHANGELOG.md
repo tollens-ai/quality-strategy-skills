@@ -15,7 +15,7 @@ Not a public release — internal dogfood branch, no version bump. This is the f
 
 ### Roadmap (stated, not built)
 
-- Multiple-audience staged passes; artifact-specific ECS leaves (`write-handoff`, `polish-technical-report`, …). The standalone public ECS package with install-time dependency resolution, previously listed here, is now in place (see Added). Pinning the dependency to a published ECS version range awaits ECS tagging its releases; until then QSS tracks the canonical ECS plugin. Public release is gated on dogfood/eval evidence.
+- Multiple-audience staged passes; artifact-specific ECS leaves (`write-handoff`, `polish-technical-report`, …). The standalone public ECS package with install-time dependency resolution, previously listed here, is now in place (see Added). QSS depends on the `effective-comms` plugin with a `~0.1.0` version constraint. Public release is gated on dogfood/eval evidence.
 
 ## [0.3.6] — 2026-06-15
 
