@@ -5,11 +5,9 @@ description: Run an Effective Comms pass over an agent-written user-facing outpu
 
 # Effective Comms
 
-This skill makes an agent's user-facing communication actually land with its reader. It runs a **prepare → review → revise** pass over a draft (or over raw findings about to become a draft) so the final output succeeds at its communication objective, fits its audience, and avoids known agent-writing failure modes.
+This skill makes an agent's user-facing communication land with its reader. It runs a **prepare → review → revise** pass over a draft — or over raw findings about to become one — so the output succeeds at its objective, fits its audience, and avoids known agent-writing failure modes. It is **product-neutral** (it assumes no particular project, company, or toolchain) and it checks *judgment, not prose style* — it tells you what to check, not what shape every report must take.
 
-It is **product-neutral**: nothing here assumes a particular project, company, or toolchain. It is useful to anyone whose agent writes reports, updates, strategy docs, review findings, handoffs, or recommendations for a human reader. In this pack, this v0 slice is the communication gate that Quality Strategy Skills (QSS) runs before generated strategy, test-strategy, and tooling-strategy documents are considered finished. The review skills include Effective Comms backstop checks, while variants and artefacts remain roadmap follow-ups. ECS itself does not depend on QSS.
-
-This is an internal-dogfood v0. It is a **living checklist**: when a new recurring communication failure is noticed, it gets added as a named failure mode, a review check, a rubric line, and a regression example (see "The update loop"). It is deliberately a *judgment* process, not a template — it tells you what to check, not what shape every report must take.
+In this pack it is the communication gate QSS runs before the generated strategy, test-strategy, and tooling-strategy documents are considered finished; the review skills carry Effective Comms backstop checks. ECS does not depend on QSS.
 
 ## When to use it
 
@@ -94,16 +92,7 @@ The pass cannot be loaded "as vibes". Every check below must be applied and the 
 
 A check that cannot be satisfied is not silently passed — it becomes an explicit residual-risk line in the output or in the note back to the user.
 
-## The update loop — how this skill grows
-
-When a new recurring annoying communication failure is found in a real output, fold it in — in the same change — as all four of:
-
-1. a **named failure mode** (FM-…) in the rubric's "guards" column;
-2. a **review check** (a new rubric row, or a clause on an existing one);
-3. a **self-review rubric line** with its own verdict cell;
-4. a **regression example** in the pack's regression suite (the Effective Comms suite — see the dogfood log).
-
-This is what keeps ECS a living checklist rather than a frozen ontology. Do not redesign the pack to add a check; append.
+To extend the rubric, **append** a new failure mode and rubric row; do not redesign.
 
 ## Stop / output
 
@@ -115,14 +104,6 @@ The pass ends with one of:
 
 Record which phases and checks ran or were explicitly waived, so the pass is auditable and cannot have been a vibes pass. When QSS invokes this skill, that record is a one-line note in the calling skill's finalization step (e.g. "Effective Comms pass run; C1–C8 applied; one residual-risk note on X").
 
-## Roadmap — not in v0
+## Not yet in this version
 
-State these as plan, not as existing behavior:
-
-- **Multiple-audience staged passes** — write/review for a lower-stakes or internal audience, then transform/review for important stakeholders or a wider audience. v0 proves the single-audience checkpoint first.
-- **Artifact-specific leaves** — `write-handoff`, `polish-technical-report`, `convert-findings-to-user-update`, `write-decision-note`, etc. — earn their own skill only once dogfooding shows a recurring template carries judgment beyond this universal pass.
-- **Standalone public ECS package** — ECS is designed public-facing, but is bundled inside this plugin for now (no separate install). Public release is gated on dogfood/eval evidence.
-
-## Dogfood log
-
-v0 dogfood, 2026-06-24: run over a before/after fixture covering EC-1 (numbered references without meaning), EC-2 (hidden scratch context), and EC-3 (retained rejected ideas) drawn from real QSS-output feedback. The pass caught all three on the "before" snippets and confirmed the "after" snippets clean. Regression cases live in the Effective Comms suite of the QSS internal-testing regression set. Misses found in future dogfood runs become new rubric rows via the update loop above.
+State these as plan, not as existing behavior: multiple-audience staged passes (write/review for an internal audience, then transform/review for a wider one); artifact-specific leaves (`write-handoff`, `polish-technical-report`, …) that earn their own skill only once a recurring template carries judgment beyond this universal pass; and a standalone public ECS package (ECS is designed public-facing but is bundled here for now).
