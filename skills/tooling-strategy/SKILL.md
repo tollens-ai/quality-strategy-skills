@@ -117,6 +117,7 @@ Then write the Update protocol section: re-run this skill when a phase of builds
 - [ ] Every planned item states what to re-assess when it lands.
 - [ ] The doc records which inputs it was derived from (and says so plainly if the test side was absent).
 - [ ] The user has confirmed the priorities — explicit confirmation on the value calls, not silence.
+- [ ] The `/effective-comms` pass has been run on the finished doc — audience fit, hidden scratch context, names-before-coordinates, retained rejected ideas, and a buried recommendation all checked; any residual comms risk named, not left silent.
 
 ## Output
 

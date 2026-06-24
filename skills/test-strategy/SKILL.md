@@ -121,6 +121,10 @@ This skill's output is a hypothesis, not a final answer. Two areas in particular
 
 The doc shows this uncertainty openly (confidence columns, "unknown — try and see" tags, explicit re-rating triggers) rather than papering over it.
 
+## Final step: Effective Comms pass
+
+Before the test strategy is finalized for its reader, invoke `/effective-comms` on the produced doc. It is the communication gate the whole pack shares: it checks audience fit, hidden scratch context, names-before-coordinates, retained rejected ideas, leaked agent process-history, and a buried recommendation/next action — the ways a correct test strategy can still fail to land with the engineer who has to act on it. If a check fails, revise before finalizing; name any residual risk explicitly rather than leaving it silent. (`quality/.scratch/` is working state — keep its contents out of `quality/test-strategy.md`.)
+
 ## Output
 
 - `quality/test-strategy.md` at the project root — the test strategy itself.

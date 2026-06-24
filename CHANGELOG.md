@@ -4,6 +4,19 @@ All notable changes to the `quality-strategy` plugin, oldest at the bottom. The 
 
 **Release discipline (maintainers):** every version bump updates this file *in the same commit* — a bump without a changelog entry doesn't merge.
 
+## [Unreleased] — `feature/effective-comms-qss-integration` (internal dogfood)
+
+Not a public release — internal dogfood branch, no version bump. This is the first slice of **Effective Comms Skills (ECS)** hooked into QSS.
+
+### Added
+
+- **`/effective-comms` — the pack's communication gate.** A new, product-neutral skill that runs a prepare→review→revise pass over an agent-written user-facing output before it is finalized. It writes a short communications brief (objective / what good looks like; audience and context; what the reader needs, does not need, wants, already knows, and what the agent may be falsely assuming; evidence and uncertainty; form factor), then reviews the draft against an eight-check self-review rubric and an audience-perspective pass (a fresh subagent standing in for the reader where one is available, else an explicit separate pass). The rubric specifically catches the three feedback-derived QSS-output failures it exists for — **numbered references without plain-English meaning**, **hidden scratch-context assumptions**, and **retained rejected ideas** — plus names-before-coordinates, agent process-history leakage, purpose/audience mismatch, a buried recommendation, and illegible uncertainty. It is a *living checklist*: a newly-found communication failure is folded in as a named failure mode + rubric row + regression example, not a redesign. Bundled inside this plugin — **no separate ECS install** for this slice.
+- **ECS hooked into the producing skills, not left as dead documentation.** `/quality-strategy` (final step, and the skip-Step-7 closing moves), `/test-strategy` (new closing step), and `/tooling-strategy` (DONE checklist) now invoke `/effective-comms` on the finished doc before it is finalized. `/quality-strategy-review` (new check 23) and `/test-strategy-review` (new check 16) gained an Effective Comms backstop covering the reader-facing modes their existing process-note leak scans (check 21 / check 15) don't reach — numbered references without meaning, coordinate-before-name, retained rejected ideas, buried recommendation. `docs/SKILLS.md` and the README skill diagram list the new skill (twelve skills now ship).
+
+### Roadmap (stated, not built)
+
+- Multiple-audience staged passes; artifact-specific ECS leaves (`write-handoff`, `polish-technical-report`, …); a standalone public ECS package with install-time dependency resolution. Public release is gated on dogfood/eval evidence.
+
 ## [0.3.6] — 2026-06-15
 
 ### Added

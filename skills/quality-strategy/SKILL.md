@@ -118,7 +118,7 @@ no follow-on planned — stakeholder work, fixing work — say in one line what 
 First investigation: the risk map's hottest items (Part 6).
 ```
 
-If any "aware, not investing this release" decisions surfaced during the risk-map discussion (the conscious deferrals sub-step 7.1 would normally record), capture them in the deferral note — that record must not be lost to the skip. Then run the same closing moves sub-step 7.3 prescribes, unchanged: the boundary `/contradiction-check` over the whole doc, `/operational-distillation`, and `/quality-strategy-review` (see "Final step: distill, then review"). The review treats a recorded deferral as satisfying its plan-of-work checks; a Part 7 that is simply missing or empty, with no deferral note, remains a failure.
+If any "aware, not investing this release" decisions surfaced during the risk-map discussion (the conscious deferrals sub-step 7.1 would normally record), capture them in the deferral note — that record must not be lost to the skip. Then run the same closing moves sub-step 7.3 prescribes, unchanged: the boundary `/contradiction-check` over the whole doc, `/operational-distillation`, `/quality-strategy-review`, and the `/effective-comms` pass (see "Final step: distill, then review"). The review treats a recorded deferral as satisfying its plan-of-work checks; a Part 7 that is simply missing or empty, with no deferral note, remains a failure.
 
 ## How this skill is structured
 
@@ -149,8 +149,9 @@ The work is divided into 7 numbered steps, each with one or more sub-steps — 2
 | 7.2 Classify | `steps/7-plan-of-work/7-2-classify.md` | Each action as testing / stakeholder / fixing |
 | 7.3 Sequence | `steps/7-plan-of-work/7-3-sequence.md` | Phasing and dependencies |
 | 7.3 — Operational distillation | invoke `/operational-distillation` (separate skill) | TL;DR + triage rubric placed at the top of the strategy |
+| 7.3 — Effective Comms pass | invoke `/effective-comms` (separate skill) | Audience-fit / hidden-context / names-before-coordinates gate before the doc is finalized |
 
-Sub-steps 7.1–7.3 are **optional** — the user may defer the plan of work wholesale to the follow-on skills via a recorded deferral note (see "The plan of work is a sketch"); the 7.3 closing moves (contradiction check, distillation, review) run either way.
+Sub-steps 7.1–7.3 are **optional** — the user may defer the plan of work wholesale to the follow-on skills via a recorded deferral note (see "The plan of work is a sketch"); the 7.3 closing moves (contradiction check, distillation, review, Effective Comms pass) run either way.
 
 ## Execution rules — non-negotiable
 
@@ -339,7 +340,9 @@ After sub-step 7.3 is complete and the content is confirmed — or, if the user 
 
 2. **Review.** Invoke `/quality-strategy-review` on the produced doc. The review skill is the source of truth for "is this strategy any good" — it first runs a **contextual-fit gate** (reading the `## Strategy job` paragraph and adapting severity to the strategy's job), then applies the seven indicators and runs mechanical oracle checks (missing non-goals; all-High dimension ratings; percentage confidences; missing three-lens entries; missing scratch files for claimed dispatches; etc.).
 
-If the review surfaces failures, return to the relevant sub-step(s) and re-do. The strategy is not done until the review passes.
+3. **Effective Comms pass.** Before the strategy is finalized for its reader, invoke `/effective-comms` on the produced doc. It checks audience fit, hidden scratch context, names-before-coordinates, retained rejected ideas, and leaked agent process-history — the ways a correct strategy can still fail to communicate. If a check fails, revise the doc before finalizing; if a residual risk genuinely cannot be resolved, it is named explicitly rather than left silent. (`quality/.scratch/` is working state — never let its contents leak into `quality/strategy.md`; the Effective Comms pass is a backstop for exactly that.)
+
+If the review or the Effective Comms pass surfaces failures, return to the relevant sub-step(s) and re-do. The strategy is not done until both pass.
 
 Once it passes, point the user at the follow-on skills so they know where to go next (see "The plan of work is a sketch" above) — and recommend an **order** based on what the risk map just showed. The principle is **Q2 before Q3: you can only investigate what you can judge.**
 

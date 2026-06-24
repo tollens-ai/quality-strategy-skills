@@ -1,6 +1,6 @@
 # Skill reference
 
-Eleven skills ship in the pack. You only ever *start* five of them; the rest are sub-skills the strategies invoke for you as they run — though each also works standalone when you want one check on its own. The [README's diagram](../README.md#how-the-skills-fit-together) shows how they connect. A complete worked sample of the documents (and three generated artefacts) lives at [`examples/fernly/`](../examples/fernly/README.md) — one fictional project's answers, not a template.
+Twelve skills ship in the pack. You only ever *start* five of them; the rest are sub-skills the strategies invoke for you as they run — though each also works standalone when you want one check on its own. The [README's diagram](../README.md#how-the-skills-fit-together) shows how they connect. A complete worked sample of the documents (and three generated artefacts) lives at [`examples/fernly/`](../examples/fernly/README.md) — one fictional project's answers, not a template.
 
 ## Skills you run directly
 
@@ -22,6 +22,7 @@ Eleven skills ship in the pack. You only ever *start* five of them; the rest are
 | `/tooling-adequacy` | The "how do we know?" check for the *test* strategy. Audits whether each learning need has an adequate *instrument* (to exercise/observe) and *oracle* (to judge), including cheap simulated/reference oracles worth building. |
 | `/contradiction-check` | Cross-part contradiction detection for a strategy doc. Runs at `/quality-strategy` step boundaries, or standalone. Finds internal inconsistencies (not quality weaknesses). |
 | `/operational-distillation` | TL;DR + triage rubric at the top of a strategy, so it's usable at a glance. Runs at the end of `/quality-strategy`, or standalone. |
+| `/effective-comms` | The shared communication gate. Before a strategy, test strategy, tooling strategy, or review output is finalized, it runs a prepare→review→revise pass: a communications brief (objective / audience / what they need and already know), then a rubric that catches audience mismatch, hidden scratch context, numbered references without meaning, names-before-coordinates, retained rejected ideas, leaked agent process-history, and a buried recommendation. Product-neutral and bundled in the pack — no separate install. Runs at the end of each producing skill, or standalone on any agent-written user-facing output. |
 
 ## Planned (not yet implemented)
 

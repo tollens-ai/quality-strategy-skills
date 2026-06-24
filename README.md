@@ -49,6 +49,7 @@ flowchart TD
     CC["/contradiction-check<br/><i>internal consistency,<br/>every step boundary</i>"]
     OD["/operational-distillation<br/><i>TL;DR + triage rubric<br/>at the top of the doc</i>"]
     QSR["/quality-strategy-review<br/><i>the closing audit</i>"]
+    EC["/effective-comms<br/><i>the communication gate —<br/>audience fit before a doc is final</i>"]
     SDOC[/"quality/strategy.md"/]
     TS["<b>/test-strategy</b><br/>the investigation plan"]
     TA["/tooling-adequacy<br/><i>can each learning need<br/>actually be answered?</i>"]
@@ -66,6 +67,7 @@ flowchart TD
     QS -.-> CC
     QS -.-> OD
     QS -.-> QSR
+    QS -.-> EC
     QS --> SDOC
 
     SDOC -->|"risk map mostly<br/>answerable"| TS
@@ -75,9 +77,11 @@ flowchart TD
 
     TS -.-> TA
     TS -.-> TSR
+    TS -.-> EC
     TS --> TDOC
     TDOC -->|"blocked learning needs —<br/>the sharpened demand"| TOOL
 
+    TOOL -.-> EC
     TOOL --> ODOC
     ODOC --> BUILD
     BUILD -.->|"Unknowns become knowable —<br/>update the risk map,<br/>unblock the learning needs"| SDOC
@@ -86,7 +90,7 @@ flowchart TD
     QA --> ADOC
 
     classDef sub fill:#f6f6f6,stroke:#aaaaaa,color:#444444
-    class OA,CC,OD,QSR,TA,TSR sub
+    class OA,CC,OD,QSR,TA,TSR,EC sub
     classDef doc fill:#fdf6e3,stroke:#b58900,color:#333333
     class SDOC,TDOC,ODOC,VDOC,ADOC doc
 ```
