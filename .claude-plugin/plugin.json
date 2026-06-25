@@ -14,5 +14,11 @@
     "testing",
     "quality-engineering",
     "quality-dashboard"
+  ],
+  "dependencies": [
+    {
+      "name": "effective-comms",
+      "version": "~0.1.0"
+    }
   ]
 }

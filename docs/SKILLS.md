@@ -1,6 +1,6 @@
 # Skill reference
 
-Eleven skills ship in the pack. You only ever *start* five of them; the rest are sub-skills the strategies invoke for you as they run — though each also works standalone when you want one check on its own. The [README's diagram](../README.md#how-the-skills-fit-together) shows how they connect. A complete worked sample of the documents (and three generated artefacts) lives at [`examples/fernly/`](../examples/fernly/README.md) — one fictional project's answers, not a template.
+Twelve skills ship in the pack. You only ever *start* five of them; the rest are sub-skills the strategies invoke for you as they run — though each also works standalone when you want one check on its own. The [README's diagram](../README.md#how-the-skills-fit-together) shows how they connect. A complete worked sample of the documents (and three generated artefacts) lives at [`examples/fernly/`](../examples/fernly/README.md) — one fictional project's answers, not a template.
 
 ## Skills you run directly
 
@@ -22,6 +22,7 @@ Eleven skills ship in the pack. You only ever *start* five of them; the rest are
 | `/tooling-adequacy` | The "how do we know?" check for the *test* strategy. Audits whether each learning need has an adequate *instrument* (to exercise/observe) and *oracle* (to judge), including cheap simulated/reference oracles worth building. |
 | `/contradiction-check` | Cross-part contradiction detection for a strategy doc. Runs at `/quality-strategy` step boundaries, or standalone. Finds internal inconsistencies (not quality weaknesses). |
 | `/operational-distillation` | TL;DR + triage rubric at the top of a strategy, so it's usable at a glance. Runs at the end of `/quality-strategy`, or standalone. |
+| `/effective-comms` | The shared communication gate. In this v0 slice, `/quality-strategy`, `/test-strategy`, and `/tooling-strategy` run it before finalizing their user-facing documents; the review skills include narrower Effective Comms backstop checks. The pass prepares a communications brief (objective / audience / what they need and already know), then applies a rubric that catches audience mismatch, hidden scratch context, numbered references without meaning, names-before-coordinates, retained rejected ideas, leaked agent process-history, and a buried recommendation. Product-neutral, and shipped as its own plugin (`effective-comms`, [github.com/tollens-ai/effective-comms-skills](https://github.com/tollens-ai/effective-comms-skills)): `quality-strategy` declares it as a dependency, so it installs automatically with this pack — no manual second install. Runs standalone on any agent-written user-facing output; wiring `/strategy-variants` and `/quality-artefacts` is a roadmap follow-up. |
 
 ## Planned (not yet implemented)
 
