@@ -2,7 +2,7 @@
 
 ## Goal
 
-For each dimension in the final inventory from 5.3, rate its **impact for the first release** using mechanical anchors, **per stakeholder**, then **merge** to one rating per dimension. The vocabulary is **H / M / None** — there is deliberately **no L** at this step.
+For each dimension in the final inventory from 5.3, rate its **impact for this release** using mechanical anchors, **per stakeholder**, then **merge** to one rating per dimension. The vocabulary is **H / M / None** — there is deliberately **no L** at this step.
 
 The rating captures **impact size only** — *how much does failure on this dimension cost, for the stakeholders who care?* It does **not** capture likelihood, and it does **not** capture "how high does the actual quality need to be" (that's 6.1). Likelihood lives downstream in the risk map: risk = impact × likelihood gets combined there, later — not collapsed into a single 5.4 score now.
 
@@ -121,7 +121,7 @@ If any check fails, return to the dispatch or the merge. Do not move to sub-step
 Append to `quality/strategy.md` under Part 5, after the inventory:
 
 ```markdown
-### Dimension ratings (first release)
+### Dimension ratings (<release>)
 
 Merged ratings, grouped by rating for readability. Impact size only — likelihood lives in the risk map (Part 6).
 

@@ -90,7 +90,7 @@ If any check fails, return to the questioning. Do not move to sub-step 5.4 (Rate
 Update the inventory section in `quality/strategy.md`. Replace the post-unpack inventory from 5.2 with the post-old/new-world inventory — this is the **final** inventory that 5.4 will rate:
 
 ```markdown
-### Final inventory (first release)
+### Final inventory (<release>)
 
 | Dimension | One-line reason it matters | Source | Unpacked from | Audience |
 |---|---|---|---|---|

@@ -2,7 +2,7 @@
 
 ## Goal
 
-Capture, for the first release, what the project is **explicitly not doing** and why. Non-goals are decisions, not oversights — naming what you're deliberately not optimising is half of the strategy. A strategy without non-goals has no edges, so you can't act on it.
+Capture, for this release, what the project is **explicitly not doing** and why. Non-goals are decisions, not oversights — naming what you're deliberately not optimising is half of the strategy. A strategy without non-goals has no edges, so you can't act on it.
 
 ## What you need from the previous sub-step
 
@@ -12,7 +12,7 @@ Read the **Discrepancies** and **Design observations** sections of `quality/pre-
 
 ## What to cover
 
-By the end of this sub-step the strategy doc must capture, **for the first release**:
+By the end of this sub-step the strategy doc must capture, **for this release**:
 
 1. **A list of non-goals** — minimum 3. Concrete, specific statements of what is not being done.
 2. **For each non-goal: a one-line reason.** Why this is not a goal — the intentional tradeoff, not laziness or "no time."
@@ -28,7 +28,7 @@ Asked cold, the user will probably come up short. Walk through the standard non-
 - **Capabilities deferred to later releases** — features and concerns the roadmap implies are coming later.
 - **Things people will ask about and want a ready answer for** — common questions ("does this support Windows?" "is there an enterprise tier?") that you want a stock non-goal answer for.
 
-Walk the categories in order. For each, ask: *"Anything in this category that we're explicitly not doing for the first release?"* — and capture what comes back.
+Walk the categories in order. For each, ask: *"Anything in this category that we're explicitly not doing for this release?"* — and capture what comes back.
 
 ### Two disciplines on every candidate non-goal
 
@@ -84,7 +84,7 @@ If any check fails, return to the questioning. Do not move to Step 5.
 Append to `quality/strategy.md`:
 
 ```markdown
-## Part 4: Non-goals (first release)
+## Part 4: Non-goals (<release>)
 
 | # | Not doing | Reason | Trigger to revisit |
 |---|---|---|---|

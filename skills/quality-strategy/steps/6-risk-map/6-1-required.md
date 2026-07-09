@@ -2,7 +2,7 @@
 
 ## Goal
 
-For each H/M dimension from Step 5, describe what level it needs to reach for the first release to succeed — and say how confident we are that this is the right target. The required level is the *should-be* side of the gap; sub-step 6.2 captures the *what-is* side.
+For each H/M dimension from Step 5, describe what level it needs to reach for this release to succeed — and say how confident we are that this is the right target. The required level is the *should-be* side of the gap; sub-step 6.2 captures the *what-is* side.
 
 ## What you need from the previous sub-step
 
@@ -12,7 +12,7 @@ Read Part 5 (Quality Dimensions) from `quality/strategy.md` for the H/M-rated di
 
 By the end of this sub-step the strategy doc must capture, **for each H/M dimension**:
 
-1. **Required level** — a description, in words specific to this dimension, of what level it needs to reach for the first release to succeed. Concrete terms, not a generic shared scale.
+1. **Required level** — a description, in words specific to this dimension, of what level it needs to reach for this release to succeed. Concrete terms, not a generic shared scale.
 2. **Confidence in the required level** — H/M/L. How sure are we that this is the right target? Often Low, especially in early-stage projects where no stakeholder has actually confirmed the bar.
 3. **Grounded in** — which stakeholder dealbreakers and good-enoughs (from Part 3) and which release purpose (from Part 2) anchor this required level. Required levels with no grounding are floating.
 
@@ -68,7 +68,7 @@ If any check fails, return to the questioning. Do not move to sub-step 6.2.
 Append to `quality/strategy.md`:
 
 ```markdown
-## Part 6: Risk Map (first release)
+## Part 6: Risk Map (<release>)
 
 ### Confidence vocabulary
 
@@ -76,7 +76,7 @@ Append to `quality/strategy.md`:
 - **Medium confidence**: informed estimate from inspection or reasoning, not verified.
 - **Low confidence**: guessing, or working from stale information.
 
-### Required levels (first release)
+### Required levels (<release>)
 
 #### <Dimension name>
 

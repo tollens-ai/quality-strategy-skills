@@ -786,4 +786,16 @@ Calls made while preparing the pack for public alpha.
 
 ---
 
+## Per-release strategy + the release bank
+
+**What we did.** The strategy is now explicitly per-release: the doc header carries a `*Release:*` line (stamped at sub-step 2.1) and the per-release section headings name the release instead of hardcoding "(first release)" — which was wrong in new-release mode anyway. Multi-release dictation is captured via a **release bank**: at any sub-step, content the user gives for a different release is recorded faithfully (close to their words, labelled) in `quality/releases/<release-slug>.md`, acknowledged in half a line, and pre-loaded as named-back starting hypotheses when that release's strategy is started in new-release mode. Depth stays one release at a time.
+
+**Why.** The driving use: dictating several releases' worth of strategy in one session for efficiency. Flattening future-release content into the current release's sections corrupts both releases' analysis; dropping it forces re-dictation. Banking verbatim-ish (rather than analysing early) keeps the one-release-deep discipline — analysis of an unsettled release is speculation — while losing nothing. The bank lives beside the strategy (durable content, not `.scratch/`) because it must survive and travel with the docs family.
+
+**What would change our mind.** If banked notes rot faster than they help (new-release mode pre-loads stale claims the user has to bat away — the named-back-for-confirmation rule is the guard). If users want the bank *inside* the strategy doc (an appendix) rather than per-release files. If real sessions show the "half a line and move on" rule fights users who genuinely want to switch releases mid-session (the honest answer there may be: finish, then run new-release mode).
+
+**How we'd know.** Qing's Tollens Studio multi-release dictation run is the live test. Regression: SC-18.
+
+---
+
 *Add new items to this file when we make calls under uncertainty. Revisit after each real-world run.*

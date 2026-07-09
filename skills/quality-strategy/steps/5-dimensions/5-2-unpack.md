@@ -77,7 +77,7 @@ If any check fails, return to the questioning. Do not move to sub-step 5.3 (Old/
 Update the inventory section in `quality/strategy.md`. Replace the raw inventory table from 5.1 with the post-unpack inventory:
 
 ```markdown
-### Inventory after unpack pass (first release)
+### Inventory after unpack pass (<release>)
 
 | Dimension | One-line reason it matters | Source | Unpacked from |
 |---|---|---|---|

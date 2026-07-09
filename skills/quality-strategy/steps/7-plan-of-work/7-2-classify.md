@@ -18,7 +18,7 @@ Read sub-step 7.1's action list from `quality/strategy.md`. Read Part 6 (Risk Ma
 
 ## What to cover
 
-By the end of this sub-step the strategy doc must capture, for each first-release action from sub-step 7.1:
+By the end of this sub-step the strategy doc must capture, for each of this release's actions from sub-step 7.1:
 
 1. **Its classification** — testing, stakeholder, or fixing.
 2. **Brief justification** if not obvious — one line saying why this is the type it is.
@@ -71,7 +71,7 @@ Append to `quality/strategy.md`, replacing or extending the action list from 7.1
 ```markdown
 ### Action list (classified)
 
-For the first release:
+For this release:
 
 | # | Action | Type | Justification |
 |---|---|---|---|

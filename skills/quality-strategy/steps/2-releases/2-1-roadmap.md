@@ -22,6 +22,7 @@ By the end of this sub-step the strategy doc must capture:
    - What it's meant to *achieve* — the purpose, not the feature list. What questions does this release answer? What does success look like?
    - Rough sequencing (what comes before, what comes after).
 3. **Where the team is now** in the roadmap — last release shipped, current release in flight, what's after.
+4. **Which release THIS strategy covers** — the strategy is per-release (SKILL.md → "Scope of this skill"); normally it's the release in flight or next to ship. Confirm it with the user and stamp it into the doc header's `*Release:*` line (replacing the Step-1 placeholder if one is there). Every "(\<release\>)" heading later sub-steps write uses this name.
 
 ## How to ask
 
@@ -34,6 +35,8 @@ You have explicit permission and encouragement to:
 - Push past "we'll see" answers — there's always *some* sequencing, even if loose.
 - Treat sprints or continuous delivery as releases when that helps ("the next four weeks of work serving the alpha audience" can be a single "release" for strategy purposes).
 - Probe for the purpose of each release — *"What question does this release answer? What would tell you it succeeded?"*
+
+**When the user gives more than purpose-level detail for another release, bank it.** This step often unlocks a flood — the user starts dictating bars, risks, non-goals, or dimensions for releases beyond the one this strategy covers. Part 2 keeps the purpose-level summary for every release; anything deeper that belongs to a *different* release goes, faithfully and close to their words, into that release's bank file `quality/releases/<release-slug>.md` (SKILL.md → "Scope of this skill"). Acknowledge in half a line and move on — don't flatten it into this release's analysis, don't discard it, and don't detour into deep analysis of a release that isn't this one.
 
 What you must not do:
 
@@ -52,6 +55,8 @@ What you must not do:
 - [ ] The sequence of upcoming releases is documented (at least 2–3, ideally more if the user has thought further).
 - [ ] Each release has a name, one-sentence description, audience, purpose, and rough sequencing.
 - [ ] Where the team is currently in the sequence is captured.
+- [ ] The doc header's `*Release:*` line names the release this strategy covers, confirmed with the user.
+- [ ] Any beyond-purpose detail the user gave for other releases has been banked to `quality/releases/<release-slug>.md` — faithfully, per release — not flattened into this release's sections and not dropped.
 - [ ] Any deferred items or unconfirmed releases are flagged as `OPEN QUESTION:`.
 - [ ] Pre-read sources are cited in the section's evidence field — naming actual files referenced, or, for an interview-derived / no-repo pre-read, citing the interview honestly (never blank, never a placeholder).
 - [ ] The step-boundary `/contradiction-check` was dispatched on the doc so far (it is the first move of the checkpoint, per SKILL.md) and its scratch file exists at `quality/.scratch/2.1-contradiction-check.md`.

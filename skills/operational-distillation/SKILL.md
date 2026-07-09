@@ -89,7 +89,7 @@ Only if the project has recurring operational decisions or commands worth a quic
 
 ### 5. Place it at the top and check it against the body
 
-Insert the distillation immediately after the title block — the title, the `Last updated` line, and the producer's version stamp line if one is present (leave that stamp intact; it is deliberate attribution, not machinery) — above the first substantive section: the `## Strategy job` paragraph and Part 1 for a quality strategy, or the equivalent top section (purpose) for a test strategy. Then re-read it against the body: every claim in the TL;DR and rubric must have backing in the body, and the TL;DR must not miss anything load-bearing in the body (a Dealbreaker, the hottest risk). The distillation is a faithful view — if it and the body disagree, the body wins and the distillation is wrong.
+Insert the distillation immediately after the title block — the title, the `Last updated` line, the `Release:` line if present, and the producer's version stamp line if one is present (leave that stamp intact; it is deliberate attribution, not machinery) — above the first substantive section: the `## Strategy job` paragraph and Part 1 for a quality strategy, or the equivalent top section (purpose) for a test strategy. Then re-read it against the body: every claim in the TL;DR and rubric must have backing in the body, and the TL;DR must not miss anything load-bearing in the body (a Dealbreaker, the hottest risk). The distillation is a faithful view — if it and the body disagree, the body wins and the distillation is wrong.
 
 ## Push back when
 
@@ -149,6 +149,6 @@ The TL;DR + triage rubric (+ optional cheat sheet) inserted at the top of the ta
 …
 ```
 
-The insertion point is the same for either doc: place the distillation immediately after the title block (title, `Last updated`, and the producer's version stamp line if present — leave the stamp intact), above the first substantive section — the `## Strategy job` paragraph (then Part 1) for a quality strategy, or the equivalent top section (purpose) for a test strategy.
+The insertion point is the same for either doc: place the distillation immediately after the title block (title, `Last updated`, the `Release:` line if present, and the producer's version stamp line if present — leave the stamp intact), above the first substantive section — the `## Strategy job` paragraph (then Part 1) for a quality strategy, or the equivalent top section (purpose) for a test strategy.
 
 When run from `/quality-strategy` against the quality strategy, also write a scratch file at `$PROJECT_DIR/quality/.scratch/7.3-operational-distillation.md` recording which Parts the distillation drew from (the sealed-dispatch scratch file the review skill audits — see `/quality-strategy` SKILL.md, "Sealed-context dispatch and scratch files"). The orchestrator's brief carries the absolute docs-home path — a sealed dispatch can't ask where the docs live, so write where the brief says, never a path derived from your own working directory. A standalone run — whether against the quality or the test strategy — needs no orchestrator scratch file: insert the distillation into the doc as above and tell the user what you added.

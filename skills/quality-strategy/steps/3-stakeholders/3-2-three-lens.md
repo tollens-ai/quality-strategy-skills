@@ -6,11 +6,11 @@ For each stakeholder identified in sub-step 3.1, capture what quality means to t
 
 ## What you need from the previous sub-step
 
-Read sub-step 3.1's stakeholder list for the first release from `quality/strategy.md`. Read the **Discrepancies** and **Design observations** sections of `quality/pre-read.md` — they may contain hypotheses about what specific stakeholders care about.
+Read sub-step 3.1's stakeholder list for this release from `quality/strategy.md`. Read the **Discrepancies** and **Design observations** sections of `quality/pre-read.md` — they may contain hypotheses about what specific stakeholders care about.
 
 ## What to cover
 
-By the end of this sub-step the strategy doc must capture, **for each stakeholder of the first release**, all three of:
+By the end of this sub-step the strategy doc must capture, **for each stakeholder of this release**, all three of:
 
 1. **Delight** — what would exceed expectations? What would make this stakeholder feel "this is exactly what I needed"? The upper bound the project might reach for.
 2. **Good Enough** — what's the minimum for this release to succeed with this stakeholder? Not aspirational, not minimal — the threshold where they're satisfied enough that you've earned the right to keep going.
@@ -22,7 +22,7 @@ The three lenses are required for every stakeholder. If the user genuinely can't
 
 For each stakeholder, ask **all three lenses together in one prompt**, not one at a time. Phrasing is yours; example shape:
 
-> *"For [stakeholder], let's do the three lenses in one go: what would delight them, what's good enough for them in [first release], and what would be a dealbreaker? One or two lines each — concrete, not abstract."*
+> *"For [stakeholder], let's do the three lenses in one go: what would delight them, what's good enough for them in [this release], and what would be a dealbreaker? One or two lines each — concrete, not abstract."*
 
 The user can batch-answer in one message; parse and capture all three.
 
@@ -50,7 +50,7 @@ What you must not do:
 
 ## This sub-step is DONE when
 
-- [ ] Each first-release stakeholder has Delight, Good Enough, and Dealbreaker captured (or `OPEN QUESTION` recorded if pushed and still unable).
+- [ ] Each of this release's stakeholders has Delight, Good Enough, and Dealbreaker captured (or `OPEN QUESTION` recorded if pushed and still unable).
 - [ ] Internal stakeholders are not skipped.
 - [ ] Each lens is concrete enough to be checkable later — not abstract.
 - [ ] Any deferred items are recorded as `OPEN QUESTION:` lines.
@@ -65,7 +65,7 @@ If any check fails, return to the questioning. Do not move to Step 4.
 Append to `quality/strategy.md` under Part 3 (Who Matters), after the stakeholder list from sub-step 3.1:
 
 ```markdown
-### Three-lens analysis (first release)
+### Three-lens analysis (<release>)
 
 #### <Stakeholder name>
 
@@ -79,7 +79,7 @@ Append to `quality/strategy.md` under Part 3 (Who Matters), after the stakeholde
 - **Good Enough:** <…>
 - **Dealbreaker:** <…>
 
-… (repeat per stakeholder for the first release)
+… (repeat per stakeholder for this release)
 
 **Sources consulted from pre-read:** <bullet list>
 

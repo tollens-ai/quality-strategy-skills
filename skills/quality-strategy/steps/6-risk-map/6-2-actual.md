@@ -109,7 +109,7 @@ If any check fails, return to the questioning. Do not move to sub-step 6.3.
 Append to `quality/strategy.md` under Part 6:
 
 ```markdown
-### Actual levels (first release)
+### Actual levels (<release>)
 
 #### <Dimension name>
 

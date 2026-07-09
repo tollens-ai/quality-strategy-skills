@@ -27,7 +27,7 @@ Two standing reminders. **High means important, not in-trouble**: a High can be 
 
 ### Check 2 — Stakeholder coverage
 
-For each first-release stakeholder in Part 3:
+For each Part 3 stakeholder in Part 3:
 
 - Scan Part 5's H and M dimensions.
 - For each stakeholder, ask: *"is there at least one H or M dimension that touches this stakeholder's bars (Delight, Good Enough, Dealbreaker)?"*
@@ -91,7 +91,7 @@ What you must not do:
 ## This sub-step is DONE when
 
 - [ ] High-justification check has been run; every High cites its Dealbreaker bar (or was individually challenged and resolved), and an all-justified result was stated plainly rather than second-guessed.
-- [ ] Stakeholder coverage check has been run; each first-release stakeholder has at least one H or M dimension touching their bars (or a coverage gap is flagged as `OPEN QUESTION`).
+- [ ] Stakeholder coverage check has been run; each Part 3 stakeholder has at least one H or M dimension touching their bars (or a coverage gap is flagged as `OPEN QUESTION`).
 - [ ] Cross-stakeholder tensions have been flagged where they exist.
 - [ ] Non-goal alignment has been verified; any mismatches surfaced and resolved.
 - [ ] Every H rating cites a named stakeholder Dealbreaker bar; every None rating is a confirmed "no stakeholder bar references it" (not a forgotten gap).
@@ -110,7 +110,7 @@ Append to `quality/strategy.md` under Part 5:
 ### Sanity-check findings
 
 - **High-justification check:** <findings — every High cites its bar; any challenged and re-anchored; "all justified — genuinely high-stakes surface" when that's the truth>
-- **Stakeholder coverage:** <each first-release stakeholder confirmed covered, or coverage gaps flagged>
+- **Stakeholder coverage:** <each Part 3 stakeholder confirmed covered, or coverage gaps flagged>
 - **Cross-stakeholder tensions:** <flagged tensions with one-line description; or "none identified">
 - **Non-goal alignment:** <verified clean; or "mismatches resolved as <X, Y>">
 - **Floors and default-ins:** <floors whose predicates hold confirmed present and not None; each default-in confirmed in (reverse-traced) or carrying a recorded accepted-risk; or any gap flagged>

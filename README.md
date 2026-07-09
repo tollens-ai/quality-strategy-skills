@@ -121,7 +121,7 @@ The shape follows the pack's four questions — *what does good look like? how d
 - **Validated mostly in simulation.** Stress-tested against many simulated users and reviewed adversarially; limited real-world mileage. Provisional calls are recorded in `OPEN-QUESTIONS.md` with what would change our minds.
 - **`/tooling-strategy` is the newest skill** with the least mileage — expect rougher edges there.
 - **Cadence is one-size.** Every run gets the same thorough treatment regardless of project size; a lighter *view* of the same rigour is on the roadmap, a lower bar is not.
-- **Single-release depth.** Deep analysis covers one release at a time; re-run in revision mode when the next release's context is real.
+- **Single-release depth, multi-release capture.** Deep analysis covers one release at a time — the strategy names its release. In a `/quality-strategy` session you can dictate as many releases as you like: content for other releases is banked faithfully per release and pre-loaded when that release's strategy starts (new-release mode).
 
 ## Where this comes from
 

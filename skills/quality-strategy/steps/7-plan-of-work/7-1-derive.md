@@ -12,7 +12,7 @@ Read all of Part 6 (Risk Map) from `quality/strategy.md`, especially the "Hottes
 
 ## What to cover
 
-By the end of this sub-step the strategy doc must capture, for the first release:
+By the end of this sub-step the strategy doc must capture, for this release:
 
 1. **A numbered list of actions** — one per row of the risk map that has a non-zero gap, plus actions to resolve high-impact unknowns (low-confidence rows).
 2. **For each action:** what it is, what gap or unknown it addresses, and which dimension(s) it touches.
@@ -74,7 +74,7 @@ Append to `quality/strategy.md`:
 
 ### Action list (unsorted)
 
-For the first release:
+For this release:
 
 1. **<Short title.>** <One- or two-line description.> Addresses: <gap or unknown from risk map>. Touches: <dimension(s)>.
 2. **<…>**

@@ -6,13 +6,13 @@ Combine the required levels (sub-step 6.1) and actual levels (sub-step 6.2) into
 
 ## What you need from the previous sub-step
 
-Read sub-steps 6.1 (required levels with confidence) and 6.2 (actual levels with confidence) from `quality/strategy.md`. You should now have, for each H/M dimension for the first release: required level, confidence in required, actual level, confidence in actual.
+Read sub-steps 6.1 (required levels with confidence) and 6.2 (actual levels with confidence) from `quality/strategy.md`. You should now have, for each H/M dimension for this release: required level, confidence in required, actual level, confidence in actual.
 
 ## What to cover
 
 By the end of this sub-step the strategy doc must capture:
 
-1. **The risk map table** — for each H/M dimension in the first release: required, confidence-in-required, actual, confidence-in-actual, gap, impact-of-gap.
+1. **The risk map table** — for each H/M dimension in this release: required, confidence-in-required, actual, confidence-in-actual, gap, impact-of-gap.
 2. **The hottest items** flagged explicitly — large gap + high impact + low confidence on either side.
 3. **Patterns** — clusters of unknowns that could be resolved together; dependencies (you can't assess A until B is in place).
 4. **What confidence looks like by colour** — High = thoroughly checked or evidenced; Medium = informed estimate but not verified; Low = guessing or working from stale data.
@@ -85,7 +85,7 @@ If any check fails, return to the questioning. Do not move to Step 7.
 Append to `quality/strategy.md` under Part 6 (the Part 6 header and Confidence vocabulary block were written by sub-step 6.1 — do not re-emit them; just append the sections below):
 
 ```markdown
-### Risk map for <first release name>
+### Risk map for <release name>
 
 | Dimension | Required | Conf. (req) | Actual | Conf. (act) | Gap | Impact |
 |---|---|---|---|---|---|---|

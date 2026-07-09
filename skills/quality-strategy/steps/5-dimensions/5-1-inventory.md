@@ -2,7 +2,7 @@
 
 ## Goal
 
-Produce the **consolidated raw inventory** — the full list of quality dimensions to consider for the first release. It comes from two passes merged: a bottom-up list (from stakeholders, design, release purpose) and a top-down reference-list pass run by a subagent.
+Produce the **consolidated raw inventory** — the full list of quality dimensions to consider for this release. It comes from two passes merged: a bottom-up list (from stakeholders, design, release purpose) and a top-down reference-list pass run by a subagent.
 
 The inventory at the end of this sub-step is **raw**: composite dimensions (several things under one label, like "performance") may still be present, and trap dimensions (like "readability", whose meaning shifts by audience) haven't yet been checked for agent-vs-human framing. Those refinements happen in sub-steps 5.2 (Unpack) and 5.3 (Old/new-world). This sub-step focuses on coverage: did we get all the dimensions we should be considering?
 
@@ -35,7 +35,7 @@ Use the `Agent` tool with `subagent_type: general-purpose`. The brief:
 >
 > Then read `$DOCS_DIR/quality/strategy.md` (Parts 1–4) and `$DOCS_DIR/quality/pre-read.md` for full context on the project — what it is, who matters, what's been excluded, what the design looks like.
 >
-> Walk this reference list of quality -ilities. For each, decide whether it might matter for the **first release** of this project:
+> Walk this reference list of quality -ilities. For each, decide whether it might matter for **the release this strategy covers** (named in the doc header and Part 2):
 >
 > - Functional correctness (and its sub-dimensions: feature-level correctness; **cross-feature interaction / flow completeness** — features that are right in isolation but wrong in combination, or journeys that fall in the gap between features; a signature gap of systems built feature-at-a-time by agents)
 > - Performance (and its sub-dimensions: scalability, resource consumption, elapsed time, UX responsiveness, jitter)
@@ -58,7 +58,7 @@ Use the `Agent` tool with `subagent_type: general-purpose`. The brief:
 > - **Borderline** — could matter, but only in a future release or for a stakeholder not currently being served.
 > - **Not relevant** — actively excluded by non-goals or clearly outside the release purpose.
 >
-> For each Clearly or Probably relevant -ility, write one line on *why* it matters for this project's first release, citing what in the strategy or pre-read suggests it. Skip Borderline and Not-relevant ones in the output unless the borderline case looks especially worth flagging — don't pad.
+> For each Clearly or Probably relevant -ility, write one line on *why* it matters for the strategy's release, citing what in the strategy or pre-read suggests it. Skip Borderline and Not-relevant ones in the output unless the borderline case looks especially worth flagging — don't pad.
 >
 > Output format: a markdown list of relevant -ilities with their classification and one-line reason.
 >
@@ -144,7 +144,7 @@ Append to `quality/strategy.md`:
 ```markdown
 ## Part 5: Quality Dimensions
 
-### Raw inventory (first release, pre-refinement)
+### Raw inventory (<release>, pre-refinement)
 
 | Dimension | One-line reason it matters | Source |
 |---|---|---|
