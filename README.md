@@ -109,6 +109,7 @@ The shape follows the pack's four questions — *what does good look like? how d
 
 - **They interview you.** Your quality strategy can't be inferred from your code — who matters, what they value, what's a non-goal would all be guessed wrongly. The skills pre-read the repo to ask informed questions; everything load-bearing is asked, not assumed.
 - **They hold the bar.** They won't skip your non-goals or lower rigour because a job feels small — that refusal is the point. They will adapt their phrasing to you, and offer a clearly-labelled starting guess when you're stuck.
+- **Multi-repo products are first-class.** The session starts by asking which repo(s) are in scope; evidence is gathered per repo (with cross-repo seams surfaced), and the strategy describes the system, not whichever repo you happened to open.
 - **Your answers persist — and you choose who sees them.** Before anything is captured, the skills say where your answers will be recorded and ask where the docs should live: in the repo for everyone with access, or outside it as a private first pass you promote when it's ready.
 - **They produce living documents**, meant to be read, updated, and used at decision points — not written once and filed.
 - **It takes real thinking.** Plan for one to two working days of cognitive time, spread across several sessions — the skills are designed for breaks and resume cleanly. Faster than a couple of hours usually means answering too quickly.

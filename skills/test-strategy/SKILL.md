@@ -14,7 +14,7 @@ The skill is short by design. /quality-strategy does the heavy lifting — it pr
 This skill is part of the `quality-strategy` plugin. Before anything else, resolve three absolute paths and use them throughout:
 
 - **PLUGIN_ROOT** — the plugin's install directory: `${CLAUDE_PLUGIN_ROOT}` (Claude Code expands this to an absolute path when it loads this file; read it off and note it down). Every file this skill references — `PHILOSOPHY.md`, `skills/test-strategy/FRAMINGS.md`, `skills/test-strategy/INDICATORS.md`, and the sub-step files under `skills/test-strategy/steps/` — lives under it, as does `.claude-plugin/plugin.json`, whose `version` field stamps the generated test strategy (see sub-step 1).
-- **PROJECT_DIR** — the absolute path of the project you're building the test strategy for (normally the current working directory; confirm with the user if it's ambiguous).
+- **PROJECT_DIR** — the absolute path of the primary repo you're working from (normally the current working directory; usually also where the `quality/` docs live — it's the path the `$DOCS_DIR` rule below tests). The *analysis scope* is a separate thing and may be wider: the project may span **several repos** — read the repo scope `/quality-strategy` recorded in `quality/.scratch/session-config.md` (or ask, if there's no note), and treat every repo in it as in scope; sub-step 0's infrastructure inventory covers each one.
 - **DOCS_DIR** — where the `quality/` docs live; every `quality/...` path in this skill and its sub-step files resolves under it. `/quality-strategy` asks at session start where the strategy should be saved — in the repo, or outside it as a local first pass — and records the choice in `quality/.scratch/session-config.md` beside the strategy; the test strategy joins that same family and follows the same location. Normally `$DOCS_DIR` is `$PROJECT_DIR`; if `$PROJECT_DIR/quality/` is absent, ask the user where the strategy was saved rather than assuming — never scaffold a fresh `quality/` beside code whose strategy lives elsewhere. (If the path you're given ends in `/quality`, its parent is the docs home.)
 
 File references below use the `$PLUGIN_ROOT`, `$PROJECT_DIR`, and `$DOCS_DIR` placeholders. **Substitute the resolved absolute paths before you act on them** — both when you Read a file yourself (including the sub-step files) and when you put a path into a subagent brief. The Read tool does not expand variables, and it resolves relative paths against the current working directory, not this skill's directory. A dispatched subagent inherits none of your context. So an unsubstituted placeholder or a bare relative path will fail — always pass fully resolved absolute paths.
@@ -128,7 +128,7 @@ Before the test strategy is finalized for its reader, invoke `/effective-comms` 
 
 ## Output
 
-- `$DOCS_DIR/quality/test-strategy.md` — the test strategy itself, beside the quality strategy it builds on (the project root when the strategy lives in-repo).
+- `$DOCS_DIR/quality/test-strategy.md` — the test strategy itself, beside the quality strategy it builds on (the chosen repo's root when the strategy lives in-repo).
 - `$DOCS_DIR/quality/test-pre-read.md` — the working digest from sub-step 0. Informs but does not become part of the strategy.
 
 ## Escalation points — stop and ask the user

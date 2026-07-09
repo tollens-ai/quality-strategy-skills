@@ -2,7 +2,7 @@
 
 ## Goal
 
-Produce a structured **what-is** snapshot of the project: a digest of the project as it actually is (not as anyone wants it to be), written as hypotheses for later sub-steps to confirm or refute. The digest lives at `quality/pre-read.md` and lets the main agent ask informed questions in later sub-steps without loading the whole project into its own context window.
+Produce a structured **what-is** snapshot of the project: a digest of the project as it actually is (not as anyone wants it to be), written as hypotheses for later sub-steps to confirm or refute. "The project" means **every repo in the recorded scope** (session-config note) — a product spanning five repos gets a pre-read of all five, not of whichever one the session opened in. The digest lives at `quality/pre-read.md` and lets the main agent ask informed questions in later sub-steps without loading the whole project into its own context window.
 
 The pre-read describes **what-is**. The strategy doc that subsequent sub-steps produce describes **what-should-be**. The gap between them is what the strategy is for.
 
@@ -12,9 +12,9 @@ Nothing. This is the first sub-step — and the first thing in the whole process
 
 ## How
 
-Dispatch **three subagents in parallel** — use the `Agent` tool with three calls in a single message — each producing one part of the digest. Each subagent gets framework grounding (read `PHILOSOPHY.md` and `SKILL.md` first) and a focused brief.
+Dispatch **three subagents in parallel per repo in scope** — use the `Agent` tool with the calls in a single message — each producing one part of that repo's digest. (An **empty scope** — a no-repo, idea-stage run — still dispatches the set once, with no target repo: the briefs say there is no codebase to scan and the honest-degradation rules below carry the digest; the scratch files use the plain unslugged names.) Each subagent gets framework grounding (read `PHILOSOPHY.md` and `SKILL.md` first) and a focused brief. In the briefs below, `$PROJECT_DIR` is **the repo that dispatch targets**: substitute its absolute path per dispatch, and in a multi-repo scope also tell each subagent, in one line, that its repo is part of a multi-repo product (name the others) so it reads cross-repo references as seams to note, not noise — while staying inside its own repo.
 
-When all three return, reconcile their outputs into a single `quality/pre-read.md` file with a synthesis at the top, a discrepancies section, and the three digests as sections below.
+When all return, reconcile the outputs into a single `quality/pre-read.md`: a synthesis at the top, a discrepancies section, and the digests below — one set of digest sections for a single repo; one compressed section per repo for a multi-repo scope (see Reconciliation).
 
 ### Honest degradation when there's little or no code to read
 
@@ -32,7 +32,7 @@ What the project **claims** to be.
 >
 > First, read `$PLUGIN_ROOT/PHILOSOPHY.md` and `$PLUGIN_ROOT/skills/quality-strategy/SKILL.md` to ground yourself in what the strategy is doing.
 >
-> Then digest the project at `$PROJECT_DIR`. Read README, top-level markdown, `docs/`, `CONTRIBUTING.md`, package files (`package.json`, `Cargo.toml`, `pyproject.toml`, etc.), and recent commit messages (~30).
+> Then digest the repo at `$PROJECT_DIR`. Read README, top-level markdown, `docs/`, `CONTRIBUTING.md`, package files (`package.json`, `Cargo.toml`, `pyproject.toml`, etc.), and recent commit messages (~30).
 >
 > Surface, as **hypotheses** (not facts):
 > - Stated product purpose and scope.
@@ -54,7 +54,7 @@ What's mechanically there.
 >
 > First, read `$PLUGIN_ROOT/PHILOSOPHY.md` and `$PLUGIN_ROOT/skills/quality-strategy/SKILL.md` to ground yourself.
 >
-> Then map the project at `$PROJECT_DIR`:
+> Then map the repo at `$PROJECT_DIR`:
 > - Module / package / directory structure with sizes (LOC, file counts).
 > - Languages and frameworks actually in use (concrete versions from lockfiles or imports).
 > - Test infrastructure: test count, framework, types of tests (unit/integration/e2e), location.
@@ -79,7 +79,7 @@ What shape the system has, and what dimensions that shape implies will matter do
 >
 > First, read `$PLUGIN_ROOT/PHILOSOPHY.md` and `$PLUGIN_ROOT/skills/quality-strategy/SKILL.md` to ground yourself.
 >
-> Then read enough of the project to form architectural hypotheses. You don't need to understand every line — read for shape: layering, dependency direction, key abstractions, error-handling patterns, where the "interesting" or "load-bearing" code lives, which parts look mature vs scaffolded, which parts look unusually risky or unusually careful.
+> Then read enough of the repo at `$PROJECT_DIR` to form architectural hypotheses. You don't need to understand every line — read for shape: layering, dependency direction, key abstractions, error-handling patterns, where the "interesting" or "load-bearing" code lives, which parts look mature vs scaffolded, which parts look unusually risky or unusually careful.
 >
 > This is deliberately a **light first touch**: at pre-read time nobody knows yet which areas the strategy will care about, so you cannot know what to look for — surface what stands out, and no more. A second, targeted design deep-dive happens later (risk-map sub-step 6.2), once the actuals scoring knows exactly which areas the evidence doesn't cover.
 >
@@ -109,7 +109,7 @@ What shape the system has, and what dimensions that shape implies will matter do
 
 ### Reconciliation
 
-When all three subagents return, **first save each subagent's returned digest verbatim** to a scratch file — `quality/.scratch/0-pre-read-docs.md`, `quality/.scratch/0-pre-read-code.md`, `quality/.scratch/0-pre-read-design.md` — before reconciling. These are the sealed-dispatch scratch files `/quality-strategy-review` audits (see SKILL.md → "Sealed-context dispatch and scratch files"); they are the hard evidence the three dispatches actually happened. They are working state, not part of the strategy.
+When the subagents return, **first save each subagent's returned digest verbatim** to a scratch file — `quality/.scratch/0-pre-read-docs.md`, `quality/.scratch/0-pre-read-code.md`, `quality/.scratch/0-pre-read-design.md`; a multi-repo scope inserts a short repo slug — the repo directory's basename, lowercased, exactly as recorded beside each path in the session-config note — `quality/.scratch/0-pre-read-<repo>-{docs,code,design}.md`, one triple per repo — before reconciling. These are the sealed-dispatch scratch files `/quality-strategy-review` audits (see SKILL.md → "Sealed-context dispatch and scratch files"); they are the hard evidence the dispatches actually happened. They are working state, not part of the strategy.
 
 Then write `quality/pre-read.md` with this structure:
 
@@ -137,7 +137,9 @@ Then write `quality/pre-read.md` with this structure:
 <subagent A's output, lightly edited or in full>
 ```
 
-Order within the file is **most-actionable first**: the synthesis and discrepancies, then the design hypotheses, then the mechanical maps. Later sub-steps load only the sections they need.
+Order within the file is **most-actionable first**: the synthesis and discrepancies, then the design hypotheses, then the mechanical maps (that's the single-repo layout; a multi-repo scope reshapes the digest sections — see below). Later sub-steps load only the sections they need.
+
+**Multi-repo reconciliation.** The digest stays one file describing one system. The Summary, Floor predicates, and Discrepancies sections go system-level: the summary names the repos and how they fit together; a floor predicate holds for the product if it holds in **any** repo (say which — "holds PII: yes (api-repo)"); the discrepancies section is also where **cross-repo seams** go (one repo's client calling an API the other repo no longer serves, duplicated logic drifting apart, versions pinned differently). Then, instead of the three whole-digest sections above, write **one section per repo** (`## Repo: <name>`), each carrying the same three canonical subsections — `### Design observations and likely-relevant dimensions`, `### Code structure`, `### Docs and metadata` — compressed to what's load-bearing, target ~150 lines per repo; the verbatim scratch files remain the full record. (Keeping the canonical subsection names matters: later sub-steps say "read the Design observations section of the pre-read", and those pointers must resolve per repo.) Keep the SCANNED/INFERRED tags through the compression.
 
 If any area was scanned only thinly or not at all (no/little code, no repo access), stay honest about that in `quality/pre-read.md` too: say in the summary that the picture for that area came from the interview and still needs confirming, phrase absences as "not yet established — confirm in interview" (never as scan results), and keep the SCANNED vs INFERRED tags so a later sub-step never mistakes an inferred absence for an observed one.
 
@@ -150,10 +152,10 @@ If any area was scanned only thinly or not at all (no/little code, no repo acces
 
 ## This sub-step is DONE when
 
-- [ ] Three subagents have been dispatched in parallel with framework-grounding instructions.
-- [ ] All three digests have returned.
-- [ ] Each returned digest has been saved verbatim to its scratch file (`quality/.scratch/0-pre-read-{docs,code,design}.md`).
-- [ ] `quality/pre-read.md` has been written with the synthesis, discrepancies, and three digest sections in the order above.
+- [ ] The three-subagent set has been dispatched in parallel, with framework-grounding instructions, **for every repo in the recorded scope** — none analysed by assumption, none silently skipped.
+- [ ] All digests have returned.
+- [ ] Each returned digest has been saved verbatim to its scratch file (`quality/.scratch/0-pre-read-{docs,code,design}.md`; multi-repo: `0-pre-read-<repo>-{docs,code,design}.md` per repo).
+- [ ] `quality/pre-read.md` has been written with the synthesis, discrepancies, and digest sections in the order above (multi-repo: system-level synthesis/floors/discrepancies incl. cross-repo seams, then one compressed section per repo).
 - [ ] You have read the synthesis and discrepancies sections yourself and noted, in your working memory, the 3–5 most striking findings to confirm in upcoming sub-steps.
 
 ## Output

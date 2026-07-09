@@ -26,7 +26,7 @@ If you find yourself unable to make sense of the strategy without code grounding
    - **Part 3 (Stakeholders)** — three-lens analysis, especially Dealbreaker entries. Tier-1 learning needs often come from here.
    - **Part 4 (Non-goals)** — what we're explicitly *not* doing, so the test strategy doesn't accidentally test it.
 
-2. **Test infrastructure inventory** — a quick filesystem pass, no code reading:
+2. **Test infrastructure inventory** — a quick filesystem pass, no code reading, run **per repo in scope** (the quality strategy's session-config note records the repo list; a multi-repo product's inventory that covers one repo is an inventory of a fraction of the system):
    - `test/`, `tests/`, `spec/`, `__tests__/` — does this directory exist? How many files? What's the apparent shape (unit / integration / e2e)?
    - `.github/workflows/`, `.gitlab-ci.yml`, `circleci/` — does CI exist? What does it run?
    - `Makefile`, `package.json` scripts, `justfile`, `pyproject.toml` — are there test commands defined? What are they called?
@@ -58,7 +58,7 @@ You're hunting for the off-paper context: past decisions about testing that shap
 
 ## This sub-step is DONE when
 
-- [ ] `quality/test-pre-read.md` exists with two sections: **Risk map summary** (one paragraph per H/M dimension, naming required/actual/confidence/gap) and **Test infrastructure inventory** (filesystem pass, no source).
+- [ ] `quality/test-pre-read.md` exists with two sections: **Risk map summary** (one paragraph per H/M dimension, naming required/actual/confidence/gap) and **Test infrastructure inventory** (filesystem pass, no source; covering every repo in the recorded scope, per-repo blocks when there are several).
 - [ ] Plan of work items are listed with classification noted (testing / fixing / stakeholder), so sub-step 3 knows which ones to turn into testing work — or, if Part 7 is a recorded deferral, the digest says so and the section is explicitly empty.
 - [ ] Non-goals from Part 4 are listed verbatim — they bound the test strategy and feed sub-step 5.
 - [ ] The user has been asked about off-paper context (deleted suites, abandoned approaches, "we tried that and it didn't work") and any answers are captured.
@@ -91,6 +91,8 @@ For each H or M dimension:
 - ...
 
 ## Test infrastructure inventory
+
+<one block per repo in scope — a single-repo project has one block, unlabelled; a multi-repo project labels each block `### <repo>` so a bare repo shows up as bare, not averaged away>
 
 **Existing test directories:** <list with file counts and apparent type>
 **CI:** <what's configured, what it runs>

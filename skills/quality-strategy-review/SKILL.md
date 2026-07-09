@@ -115,7 +115,7 @@ Use the `Agent` tool with three calls in a single message.
 >
 > Derive the REQUIRED set from doc structure. (This list mirrors the dispatch set in `/quality-strategy` SKILL.md "Sealed-context dispatch and scratch files" — keep the two in sync when dispatches are added or renamed.)
 >
-> - **Pre-read** — if `$PROJECT_DIR/quality/pre-read.md` exists, expect `0-pre-read-*.md` (e.g. `0-pre-read-docs.md`, `0-pre-read-code.md`, `0-pre-read-design.md`).
+> - **Pre-read** — if `$PROJECT_DIR/quality/pre-read.md` exists, expect `0-pre-read-*.md` (e.g. `0-pre-read-docs.md`, `0-pre-read-code.md`, `0-pre-read-design.md`). A **multi-repo scope** — read the repo list (with each repo's scratch slug) from `quality/.scratch/session-config.md`; that note is the independent record, so only if it carries no scope may you fall back to inferring the list from the digest's `## Repo:` sections, and then FLAG that the scope could not be independently verified (a silently-skipped repo leaves no `## Repo:` section, so digest-derived lists can't catch it) — expects one `0-pre-read-<repo>-{docs,code,design}.md` triple **per in-scope repo**; an in-scope repo with no triple is a silently-skipped dispatch, a FAIL.
 > - **Dimension scout** — if Part 5 is present, expect `5.1-dimension-scout.md`.
 > - **Dimension rating** — if Part 5 dimension ratings are present, expect `5.4-dimension-rating.md`. A missing `5.4-dimension-rating.md` when Part 5 ratings exist is a **FAIL** — the rating dispatch was silently skipped or fabricated.
 > - **Oracle adequacy (Q2)** — if Part 6's actual-state assessment is present, expect `6.2-oracle-adequacy.md`.

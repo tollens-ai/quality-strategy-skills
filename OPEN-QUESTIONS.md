@@ -774,4 +774,16 @@ Calls made while preparing the pack for public alpha.
 
 ---
 
+## Multi-repo scope: per-repo dispatch sets, one system-level strategy
+
+**What we did.** Session start asks which repo(s) are in scope (before the save-location question, whose options depend on it). The pre-read dispatches its three-subagent set once per repo and reconciles into a single digest — system-level synthesis, floor predicates OR'd across repos ("holds PII: yes (api-repo)"), cross-repo seams in the discrepancies section, then one compressed ~150-line section per repo. Beyond ~5 repos the skill warns about depth/cost and offers scoping this pass to the load-bearing repos, recording the rest as out of scope. The strategy itself stays **one document for the system** — Parts 1–7 are not decomposed per repo; repos are analysis inputs that evidence may cite.
+
+**Why.** The one-repo operating assumption was silent — never stated, never asked — and a strategy for a five-repo product built from one repo's evidence describes a fraction of the system while reading as if it covered it. Per-repo dispatch sets keep each subagent's job concrete (one repo, full attention) and the scratch trail auditable per repo. One system strategy because stakeholders, bars, and risks belong to the product; a per-repo split would fragment exactly the cross-repo seams (client/API drift) that multi-repo products get wrong.
+
+**What would change our mind.** A real multi-repo run where per-repo digest compression loses the load-bearing detail (→ raise the budget or link scratch files harder). Products where one repo is so dominant the fan-out is ceremony. Real demand for per-repo risk maps (e.g. separately-owned repos with separate release trains) — that would be a per-repo *view*, not a doc split, and interacts with the tracked per-stakeholder risk-map TODO.
+
+**How we'd know.** Tomorrow's intended multi-repo alpha run; watch whether the digest's per-repo sections carry the interview or the user keeps reaching for the scratch files. Regression: IU-23 / SC-17.
+
+---
+
 *Add new items to this file when we make calls under uncertainty. Revisit after each real-world run.*
