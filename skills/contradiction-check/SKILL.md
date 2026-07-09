@@ -46,7 +46,7 @@ Walk these systematically. For each, a contradiction is a *specific pair of clai
 6. **Non-goal ↔ plan of work.** A Part 7 action that does work Part 4 declared a non-goal.
 7. **Confidence ↔ evidence.** A high-confidence actual in Part 6 whose evidence basis is "no investigation yet" or absent — an internal contradiction between the confidence claimed and the evidence cited.
 8. **Strategy job ↔ content.** The Strategy-job paragraph at the top says one thing about scope (e.g. "pre-implementation; production observability is out of scope") that a later Part contradicts (e.g. a production-observability Dealbreaker treated as in-scope).
-9. **(Test strategy only) test strategy ↔ quality strategy.** A learning need or allocation row that targets something the quality strategy rated None or listed as a non-goal; a tier that contradicts the risk map's impact ordering.
+9. **(Test strategy only) test strategy ↔ quality strategy.** A kept ility or agreed move that targets something the quality strategy rated None or listed as a non-goal; a priority order that contradicts the risk map's impact ordering; an H/M ility missing from the filter table entirely.
 
 These classes overlap deliberately — a single contradiction may show up under two of them. Report it once, under the clearest class.
 

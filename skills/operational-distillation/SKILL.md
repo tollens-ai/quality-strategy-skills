@@ -49,12 +49,12 @@ From the full doc, pull only what a returning reader most needs:
 
 Throughout the TL;DR and rubric, **use names, not coordinates** (PHILOSOPHY: *write for both readers*): the distillation is read cold, so refer to actions and dimensions by their short human names with any label trailing as a pointer — *"the payment-divergence simulation (Action F)"*, never a bare letter or number.
 
-**Test-strategy variant.** When the target is `quality/test-strategy.md`, the doc has a different shape (purpose / principles / impact-tiered learning needs / allocation / closing), so pull instead:
+**Test-strategy variant.** When the target is `quality/test-strategy.md`, the doc has a different shape (the filter table, then per-ility Have / Improve / Add with agreed moves), so pull instead:
 
 - **Purpose** — what this strategy investigates and which quality strategy it operationalises.
-- **Tier-1 learning needs** — the highest-impact information needs and the questions they answer.
+- **The top agreed moves** — the highest-priority investigations and the questions they answer.
 - **Allocation hot spots** — the rows where effort concentrates, plus any low-confidence or "try-and-see" rows the reader should treat as provisional.
-- **Gated / blocked sections** — any learning needs marked blocked-on-tooling.
+- **Blocked items** — any agreed moves marked blocked on missing instruments or oracles.
 - **Key non-targets** — the one or two things deliberately not being tested, most likely to be mistaken for gaps.
 
 The quality-strategy extraction above is the default; use this variant only when distilling a test strategy.
@@ -69,7 +69,7 @@ A reader hits a new thing — a bug report, a feature ask, a complaint, an odd r
 
 - **Map to a dimension / stakeholder** — "is this about a dimension we rated H/M, and whose bar does it touch?"
 - **Severity from the strategy** — touches a Dealbreaker → urgent; touches an H gap → important; touches a None / non-goal → likely out of scope, say so and stop.
-- **Route** — testing question → `/test-strategy` learning need; stakeholder question → confirm the bar; fixing → the plan of work.
+- **Route** — testing question → `/test-strategy`'s agreed moves; judging question → `/oracle-strategy`; process question → `/process-strategy`; stakeholder question → confirm the bar; fixing → the plan of work.
 - **When in doubt** — the one or two questions that resolve most ambiguity for *this* project.
 
 Before you insert the rubric, run a **rating-label cross-check** against the body:
@@ -79,7 +79,7 @@ Before you insert the rubric, run a **rating-label cross-check** against the bod
 3. Keep separate concepts separate in wording: Part 5 rating = impact size; Part 6 confidence/actual state = evidence and current condition; Part 7 phase = work order. A Medium dimension can be Phase 0 if it blocks learning, and a High dimension can be already well-covered. Do not let those later sections silently relabel the dimension.
 4. If a useful rubric rule depends on Part 6 or Part 7 rather than Part 5, name that basis explicitly — e.g. "Unknown actual-state confidence" or "Phase 0 gate" — instead of calling it a different dimension rating.
 
-For a test strategy, the rubric maps a new finding to a **learning need / tier** (rather than a quality dimension): which learning need does it bear on, is that Tier 1, and does it change the allocation or exit criteria?
+For a test strategy, the rubric maps a new finding to an **ility and its agreed moves** (rather than a quality dimension): which kept ility does it bear on, how high does that sit in the priority order, and does it change any agreed move or its answered-when state?
 
 Keep it to a page. It's a rubric, not a runbook.
 

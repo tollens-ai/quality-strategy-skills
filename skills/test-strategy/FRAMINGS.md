@@ -1,8 +1,8 @@
 # Framings — what /test-strategy must hold against agent defaults
 
-Left to its defaults, an agent drifts toward writing a test plan: a list of cases, a coverage target, a sequence of build-then-verify. That isn't a test strategy. The framings below are non-negotiable defaults grounded in Edmund Pringle's quality framework, written down here so each sub-step can apply them without working them out from scratch.
+Left to its defaults, an agent drifts toward writing a test plan: a list of cases, a coverage target, a sequence of build-then-verify. That isn't a test strategy. The framings below are non-negotiable defaults grounded in Edmund Pringle's quality framework, written down here so the lane's discussion can apply them without working them out from scratch.
 
-When you see "see FRAMINGS.md #N" in a sub-step file, it means that framing is load-bearing for that step. Don't skip it.
+When you see "FRAMINGS #N" cited in the skill, it means that framing is load-bearing at that point. Don't skip it.
 
 ---
 
@@ -84,7 +84,7 @@ Humans make inconsistent, visible mistakes. Agents make consistent, plausible-lo
 
 **Review processes designed for human error patterns will miss agent error patterns.** When agents do testing, the review pattern has to look for: *Does this actually solve the problem? Are the assumptions correct? Is this internally self-consistent in a way that hides a misunderstanding?*
 
-The allocation step must say so explicitly when assigning testing work to agents.
+Say so explicitly whenever an agreed move assigns testing work to agents.
 
 Source: Ed's `heuristics/Heuristic 14 - Agent Output Needs Different Review.md`.
 
@@ -121,7 +121,7 @@ Source: Ed's `smells/Smells.md`.
 
 Teams often mix the two up. A strategy that says "test more" in response to known risk is wrong — known risk needs fixing, not investigating. A strategy that says "fix it" in response to unknown risk is wrong — you don't know what to fix yet.
 
-**The learning-needs derivation should split them.** Each tier item should be honest about which kind of risk it's addressing. Items addressing unknown risk produce information; items addressing known risk produce fixes (and may not belong in a test strategy at all — they belong in the quality strategy's plan of work).
+**Keep the two apart in the discussion.** Each agreed move should be honest about which kind of risk it's addressing. Items addressing unknown risk produce information; items addressing known risk produce fixes (and may not belong in a test strategy at all — they belong in the quality strategy's plan of work).
 
 Source: Ed's `core/Risk.md`, `quality-strategy/concept-risk.md`.
 
@@ -135,6 +135,6 @@ Agents derive methods that look like scripts: run X, assert Y. Two method classe
 
 **Testing in production** means letting real users have at it **with adequate observability instrumentation covering the risks and downsides** — the instrumentation is what makes it testing rather than hoping. A testing-in-production method is only well-formed when it names: what the real usage will exercise, what instrumentation observes each named risk, and the recovery path when the downside fires. Without those three, it is not a method; it's exposure.
 
-**AI exploratory testing is unproven — calibrate before trusting.** An agent can run charters and write convincing debriefs, but whether it notices what a skilled exploratory tester notices is an open question with no track record. Treat any AI-exploratory allocation as a calibration item (try one charter against a human baseline), never as a settled capability.
+**AI exploratory testing is unproven — calibrate before trusting.** An agent can run charters and write convincing debriefs, but whether it notices what a skilled exploratory tester notices is an open question with no track record. Treat any move that assigns exploratory testing to an agent as a calibration experiment (try one charter against a human baseline), never as a settled capability.
 
 Source: design session with Qing, 2026-06-11; Ed's `core/Testing.md` (investigation framing).

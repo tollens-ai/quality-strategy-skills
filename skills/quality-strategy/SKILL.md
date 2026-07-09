@@ -67,10 +67,10 @@ A quality strategy answers four questions, in order:
 
 1. **What does good look like?** — stakeholder bars, dimensions, required levels (Steps 1–6.1).
 2. **How do we know if what we have is good?** — the oracles (ways of judging) and instruments (tools that measure) we'd use to judge the actual state. This is its own question, not a free rider on Q3.
-3. **Is what we have good?** — the actual-state assessment, using the oracles from Q2 (Steps 6.2–6.3).
+3. **Is what we have good?** — the actual-state assessment, each actual naming the basis that judges it (Steps 6.2–6.3).
 4. **How do we make it good?** — the plan of work to close gaps (Step 7 — a sketch, and optional; see "The plan of work is a sketch" below).
 
-**Q2 is explicit on purpose.** The common failure is to collapse Q2 into Q3 — to claim an actual level from whatever signal happens to exist, without ever asking whether that signal can judge the dimension. So during the actual-state pass (sub-step 6.2) this skill invokes **`/oracle-adequacy`**, which asks, for each dimension, whether the oracle behind its claimed actual is adequate — and turns "no oracle, so it's just Unknown" into a named oracle-build item that seeds the plan of work.
+**Q2 is explicit on purpose — and deliberately not executed here.** The common failure is to collapse Q2 into Q3 — to claim an actual level from whatever signal happens to exist, without ever asking whether that signal can judge the dimension. This skill's share of Q2 is **honesty**: sub-step 6.2 requires every actual to name its basis (what was observed, and what judges it) or be recorded as Unknown. The Q2 *sweep* — auditing each dimension's oracle and planning better judging — is the follow-on **`/oracle-strategy`** lane, run after the strategy closes; the quality strategy stays pure (who matters, what they value, where we stand) rather than attempting an oracle sweep it isn't equipped to carry.
 
 **The strategy's job.** Before the analysis, Step 1 (sub-step 1.1) asks what this strategy is *for, right now*, and records it as a `## Strategy job` paragraph at the top of the doc. The four jobs:
 
@@ -85,9 +85,9 @@ The same framework and the same rigour apply to all four; what differs is the ri
 
 ## Sealed-context dispatch and scratch files
 
-Wherever this skill does substantive analytical work via a subagent — the pre-read (sub-step 0), the dimension scout (5.1), the dimension rating (5.4), the Q2 oracle check (`/oracle-adequacy` at 6.2), the targeted design deep-dive (6.2, when thin-evidence design-shaped dimensions exist), the boundary contradiction check (`/contradiction-check`), the distillation (`/operational-distillation` at 7.3), and — in revision mode — the two look-forward passes (the fresh defect recon and the what's-new context scan; see Revision mode) — the dispatch is **sealed-context**: the subagent sees only what it needs for its piece, not the parent's DONE criteria, not the rubric it will be judged against, not the destination doc's success conditions. The orchestrator's role is **dispatch / collect / reconcile / present**, not to do the analysis itself with the answer key in view. This is the central anti-shortcut principle of the pack.
+Wherever this skill does substantive analytical work via a subagent — the pre-read (sub-step 0), the dimension scout (5.1), the dimension rating (5.4), the targeted design deep-dive (6.2, when thin-evidence design-shaped dimensions exist), the boundary contradiction check (`/contradiction-check`), the distillation (`/operational-distillation` at 7.3), and — in revision mode — the two look-forward passes (the fresh defect recon and the what's-new context scan; see Revision mode) — the dispatch is **sealed-context**: the subagent sees only what it needs for its piece, not the parent's DONE criteria, not the rubric it will be judged against, not the destination doc's success conditions. The orchestrator's role is **dispatch / collect / reconcile / present**, not to do the analysis itself with the answer key in view. This is the central anti-shortcut principle of the pack.
 
-**Every such dispatch writes a scratch file** at `$DOCS_DIR/quality/.scratch/<sub-step>-<purpose>.md` recording the real intermediate work it did (e.g. `0-pre-read-*.md`, `5.1-dimension-scout.md`, `5.4-dimension-rating.md`, `6.2-oracle-adequacy.md`, `6.2-design-deep-dive.md` (conditional — an explicit skip note in the doc stands in when no dimension qualified), `<boundary>-contradiction-check.md`, `7.3-operational-distillation.md`; revision mode adds `revision-defect-recon.md` and `revision-context-scan.md`). This converts "did the orchestrator actually do the work?" from invisible to auditable: `/quality-strategy-review` mechanically checks that every claimed dispatch has its scratch file. A missing scratch file is hard evidence the dispatch didn't happen. `quality/.scratch/` is working state, not part of the strategy — do not treat it as authoritative output, and don't leak its contents into `quality/strategy.md`.
+**Every such dispatch writes a scratch file** at `$DOCS_DIR/quality/.scratch/<sub-step>-<purpose>.md` recording the real intermediate work it did (e.g. `0-pre-read-*.md`, `5.1-dimension-scout.md`, `5.4-dimension-rating.md`, `6.2-design-deep-dive.md` (conditional — an explicit skip note in the doc stands in when no dimension qualified), `<boundary>-contradiction-check.md`, `7.3-operational-distillation.md`; revision mode adds `revision-defect-recon.md` and `revision-context-scan.md`). This converts "did the orchestrator actually do the work?" from invisible to auditable: `/quality-strategy-review` mechanically checks that every claimed dispatch has its scratch file. A missing scratch file is hard evidence the dispatch didn't happen. `quality/.scratch/` is working state, not part of the strategy — do not treat it as authoritative output, and don't leak its contents into `quality/strategy.md`.
 
 **Process-note leak prevention.** Orchestrator meta-observations about *the skill itself* (an awkward step, a suspected bug, phrasing that didn't land) go to `$DOCS_DIR/.skill-feedback.md` only — never into `quality/strategy.md`. The strategy doc reads as an authored artifact, not a transcript of the skill running.
 
@@ -113,21 +113,26 @@ When the team is ready to start a future release, re-invoke the skill in new-rel
 
 Part 7 (Step 7) lists, classifies, and sequences the work at *strategy* level — enough to see the shape of what's needed, the priorities, and the first moves. It is deliberately **not** a detailed work plan, and you should not let it become one. The detail belongs to the follow-on skills, each of which takes a slice of Part 7 and turns it into a first-class plan of its own:
 
-- **Testing work** → `/test-strategy` — what to investigate, in what order, how to split human and agent effort (`quality/test-strategy.md`).
-- **Oracle/instrument build items** → `/tooling-strategy` — the prioritised build plan that turns the risk map's Unknowns and Gated dimensions into knowables (`quality/tooling-strategy.md`).
+- **Testing work** → `/test-strategy` — the testing lane: where investigation would move the risk map (`quality/test-strategy.md`).
+- **Oracle work** → `/oracle-strategy` — the judging lane: where better oracles would make the project knowable (`quality/oracle-strategy.md`); agreed build items go on to `/tooling-strategy` for the prioritised build plan (`quality/tooling-strategy.md`).
+- **Rules and process work** → `/process-strategy` — the rules/invariants/processes lane: where changing how work is done prevents whole defect classes (`quality/process-strategy.md`).
 - **Communicating the strategy** → `/strategy-variants` — audience-facing variants of the finished doc.
+
+The three lanes are **deliberately lighter** than this skill — high-level ideas and questions per ility, one or two focused conversations each, the differential stated in their own prompts. Each ingests this strategy for the release, filters for the ilities its modality can make a dent on, and works have-already / could-improve / could-add through them with the user.
 
 Stakeholder work and fixing work have no follow-on skill yet; they stay at sketch level in Part 7 like everything else. Keep Part 7 entries to one or two lines each, resist expanding any of them into a mini-plan in place, and point at the relevant follow-on instead — a Part 7 that duplicates `test-strategy.md`'s depth goes stale the moment the follow-on runs.
 
-**Step 7 is optional — the whole sketch can be deferred.** At the Step 6 boundary, once the user has confirmed at the 6.3 substantive checkpoint, offer the choice: walk Step 7 now, or skip it and defer the plan of work wholesale to the follow-on skills. Skipping is the right call when the team will run `/test-strategy` and `/tooling-strategy` immediately — a sketch written minutes before its own elaboration adds nothing. The skip is **recorded, never silent**: append a short Part 7 deferral note —
+**Step 7 is optional — the whole sketch can be deferred.** At the Step 6 boundary, once the user has confirmed at the 6.3 substantive checkpoint, offer the choice: walk Step 7 now, or skip it and defer the plan of work wholesale to the follow-on lanes. Skipping is the right call when the team will run the lanes (`/test-strategy`, `/oracle-strategy`, `/process-strategy`) immediately — a sketch written minutes before its own elaboration adds nothing. The skip is **recorded, never silent**: append a short Part 7 deferral note —
 
 ```markdown
 ## Part 7: Plan of Work
 
-Deliberately deferred — elaborated by the follow-on skills rather than sketched here:
-testing work → `/test-strategy` (`quality/test-strategy.md`); oracle/instrument build
-items → `/tooling-strategy` (`quality/tooling-strategy.md`). <If a slice of the work has
-no follow-on planned — stakeholder work, fixing work — say in one line what happens to it.>
+Deliberately deferred — elaborated by the follow-on lanes rather than sketched here:
+testing work → `/test-strategy` (`quality/test-strategy.md`); oracle work →
+`/oracle-strategy` (`quality/oracle-strategy.md`, builds via `/tooling-strategy`);
+rules/process work → `/process-strategy` (`quality/process-strategy.md`). <If a slice of
+the work has no follow-on planned — stakeholder work, fixing work — say in one line what
+happens to it.>
 First investigation: the risk map's hottest items (Part 6).
 ```
 
@@ -156,7 +161,6 @@ The work is divided into 7 numbered steps, each with one or more sub-steps — 2
 | 5.5 Sanity checks | `steps/5-dimensions/5-5-checks.md` | High justification, stakeholder coverage, tensions, non-goal alignment |
 | 6.1 Required levels | `steps/6-risk-map/6-1-required.md` | What level is needed for each H/M dimension |
 | 6.2 Actual levels | `steps/6-risk-map/6-2-actual.md` | Where we are on each H/M dimension |
-| 6.2 — Oracle adequacy (Q2) | invoke `/oracle-adequacy` (separate skill) | Per dimension: is the *oracle* that judges its actual level adequate? Produces oracle-build items that seed Step 7 |
 | 6.3 Gap and confidence | `steps/6-risk-map/6-3-gap-and-confidence.md` | The risk map combining required + actual + confidence on both sides |
 | 7.1 Derive actions | `steps/7-plan-of-work/7-1-derive.md` | What needs doing, drawn from the risk map |
 | 7.2 Classify | `steps/7-plan-of-work/7-2-classify.md` | Each action as testing / stakeholder / fixing |
@@ -338,7 +342,7 @@ A revision that only checks the prior doc's known problems concludes "we fixed e
 
 1. **Look back (deliberately anchored).** For each H/M risk-map row, open question, and planned action in the prior version: what actually happened? A "fixed" claim needs evidence — the commit, the test, the measurement — or it is recorded as *believed fixed* at an honest confidence, not closed. Re-rate the actuals from what you find, not from what was planned.
 
-2. **Look forward (deliberately blind).** Fresh-eyes passes run **without the prior doc in their context**, via the sealed-dispatch machinery above: a fresh defect recon over the current source — covering every repo in the recorded scope (the session-config note carries the list), not just the one you're sitting in — the same independent blind-pass pattern as `/test-strategy`'s standing defect-recon learning need, and a fresh scan of what's new since last time — new features, new stakeholders, changed context. The standing question for both: *the gaps have moved — where to?* The blindness is load-bearing: analysis anchored on an existing doc reliably plans *around* the defects that independent blind passes find. Each dispatch writes its scratch file: `quality/.scratch/revision-defect-recon.md` and `quality/.scratch/revision-context-scan.md`.
+2. **Look forward (deliberately blind).** Fresh-eyes passes run **without the prior doc in their context**, via the sealed-dispatch machinery above: a fresh defect recon over the current source — covering every repo in the recorded scope (the session-config note carries the list), not just the one you're sitting in — the same independent blind-pass pattern as `/test-strategy`'s standing fresh-eyes defect recon, and a fresh scan of what's new since last time — new features, new stakeholders, changed context. The standing question for both: *the gaps have moved — where to?* The blindness is load-bearing: analysis anchored on an existing doc reliably plans *around* the defects that independent blind passes find. Each dispatch writes its scratch file: `quality/.scratch/revision-defect-recon.md` and `quality/.scratch/revision-context-scan.md`.
 
 3. **Reconcile.** Merge the forward findings into the back-verified structure. Where the fresh analysis contradicts inherited content, surface the contradiction to the user explicitly — never silently inherit the old claim. Inherited content escaping this-session checks is a known weakness of re-walks (the same class as the inherited-content cleanup below); reconciliation is where it gets caught.
 
@@ -362,14 +366,15 @@ After sub-step 7.3 is complete and the content is confirmed — or, if the user 
 
 If the review or the Effective Comms pass surfaces failures, return to the relevant sub-step(s) and re-do. The strategy is not done until both pass.
 
-Once it passes, point the user at the follow-on skills so they know where to go next (see "The plan of work is a sketch" above) — and recommend an **order** based on what the risk map just showed. The principle is **Q2 before Q3: you can only investigate what you can judge.**
+Once it passes, point the user at the three follow-on lanes so they know where to go next (see "The plan of work is a sketch" above) — each deliberately lighter than what they just finished: it ingests this strategy for the release, filters for the ilities its modality can dent, and works have / improve / add through them in a focused conversation or two. Recommend an **order** based on what the risk map just showed. The principle is **Q2 before Q3: you can only investigate what you can judge.**
 
-- **Risk map dominated by Unknowns, Gated dimensions, and oracle-build items** → recommend **`/tooling-strategy`** first: plan the oracle/instrument builds that make the project knowable, then run `/test-strategy` once (or as) the means of knowing exist. Planning a full investigation against dimensions nothing can currently judge produces a strategy that is mostly "blocked".
-- **Risk map mostly answerable** — oracles largely adequate, a manageable set of build items → recommend **`/test-strategy`** first: its learning needs will sharpen the tooling demand (its own Q2 check, `/tooling-adequacy`, surfaces what's blocked), and `/tooling-strategy` then plans the combined build.
+- **Risk map dominated by Unknowns whose to-resolve notes say "nothing can judge this yet"** → recommend **`/oracle-strategy`** first: decide how the project will judge those dimensions (with `/tooling-strategy` planning any agreed builds), then `/test-strategy` once (or as) the means of judging exist. Planning investigation against dimensions nothing can judge produces a plan that is mostly "blocked".
+- **Risk map mostly judgeable** — the bases are real, the gaps are not-yet-investigated → recommend **`/test-strategy`** first: investigation moves the map immediately, and what it can't answer sharpens the oracle lane's filter.
+- **Risks concentrated in how work gets done** — consistency, hygiene, release safety, regression discipline → put **`/process-strategy`** early: a rule or process prevents the class while testing would only keep finding instances.
 
-Either way, name both skills, say which order you recommend and why, and don't leave the user at a finished strategy with no onward path. `/test-strategy` is the engineering-level companion that turns this strategy into action — what to investigate, in what order, with what human/agent split; the risk map and plan of work you just produced are its direct inputs.
+Name all three lanes, say which order you recommend and why, and don't leave the user at a finished strategy with no onward path — the risk map and plan of work they just produced are the lanes' direct inputs.
 
-**And offer the payoff — `/quality-artefacts`.** The analytical continuations are not the only onward path: the moment the strategy is done is also the moment it can become something *shareable*. Offer it explicitly — *"want to see this as a dashboard, or a card you can screenshot and share? `/quality-artefacts` turns the strategy into a bespoke visual — a risk heatmap, a social card, a one-glance summary of where quality stands."* This is the delight payoff of the work just finished, not a footnote in the README; surface it alongside `/test-strategy` and `/tooling-strategy`, not buried beneath them. (It reads the finished, reviewed `quality/strategy.md`, so it belongs here at the end — but plant the idea earlier too; see sub-step 6.3's risk-map close.)
+**And offer the payoff — `/quality-artefacts`.** The analytical continuations are not the only onward path: the moment the strategy is done is also the moment it can become something *shareable*. Offer it explicitly — *"want to see this as a dashboard, or a card you can screenshot and share? `/quality-artefacts` turns the strategy into a bespoke visual — a risk heatmap, a social card, a one-glance summary of where quality stands."* This is the delight payoff of the work just finished, not a footnote in the README; surface it alongside the three lanes, not buried beneath them. (It reads the finished, reviewed `quality/strategy.md`, so it belongs here at the end — but plant the idea earlier too; see sub-step 6.3's risk-map close.)
 
 ## When the user is genuinely stuck — offer a labelled strawman
 

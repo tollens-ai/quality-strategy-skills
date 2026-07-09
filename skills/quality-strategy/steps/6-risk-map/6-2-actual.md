@@ -12,14 +12,14 @@ Read sub-step 6.1's required levels from `quality/strategy.md`. Read the **Code 
 
 ## Actuals come from evidence, in this order — not from reading the code
 
-The actual level is a claim about *how the system really behaves*, and the strongest evidence for that is observation, not inspection. Reading the code tells you what it was *meant* to do; it is the **weakest** actuals oracle and the one that manufactures Over-confident ratings — the exact failure SC-5 and `/oracle-adequacy` exist to stop. So work the evidence hierarchy from the top, and only fall down it when the higher rungs are genuinely empty:
+The actual level is a claim about *how the system really behaves*, and the strongest evidence for that is observation, not inspection. Reading the code tells you what it was *meant* to do; it is the **weakest** actuals oracle and the one that manufactures over-confident ratings — the exact failure this hierarchy exists to stop. So work the evidence hierarchy from the top, and only fall down it when the higher rungs are genuinely empty:
 
 1. **Existing test results, CI runs, reports.** Green CI, a coverage report, a load-test result, a prior audit — observed behaviour someone already captured. Strongest. Look here first. (Work the hierarchy across **every repo in scope** — a green CI in one repo says nothing about the repo with none.)
 2. **The tests themselves.** Even unrun, what the suite *asserts* tells you what's actually being checked (and the gaps tell you what isn't).
 3. **Ask the user what testing and lived evidence exists.** *"What have you actually seen this do — in production, in testing, in use? What broke, what held?"* The user's lived experience of the running system is real evidence the repo doesn't contain; in a no-repo strategy it is often the *only* evidence, and it is first-class, not a fallback.
 4. **Code reading — last, and always labelled inference.** When nothing above answers it, reading the code is a starting hypothesis, never an observation: record it as **inference, not evidence**, and it **can never on its own support a confident "at bar"** — a code-derived actual caps at Medium confidence and usually lands at Unknown with a note to get real evidence. The design deep-dive below is this rung; its findings are inputs to confirm, not actuals.
 
-Default to **Unknown** before you reach for the code: an honest Unknown that names what would resolve it beats a comfortable Medium read off the source. This is the same posture `/oracle-adequacy` enforces per dimension — get there before it has to.
+Default to **Unknown** before you reach for the code: an honest Unknown that names what would resolve it beats a comfortable Medium read off the source.
 
 ## What to cover
 
@@ -34,27 +34,21 @@ By the end of this sub-step the strategy doc must capture, **for each H/M dimens
    - Low = guessing or working from stale information.
    - For Unknown, confidence is implicitly "we don't know" — represent as "—" rather than claiming a confidence level.
 3. **Evidence basis** — what is the actual based on? Pre-read observations? A specific test? Stakeholder feedback? Or nothing — "no investigation yet" is a valid (and very common) answer in first-pass strategies.
-4. **What would resolve an Unknown** — for each Unknown, a one-line note on the type of activity that would establish a level. Pick from: targeted testing, asking specific stakeholders, code/design review of specific area, building observability/instrumentation, building test infrastructure or testability. Whichever is appropriate. This note seeds Step 7's plan of work.
+4. **What would resolve an Unknown** — for each Unknown, a one-line note on the type of activity that would establish a level. Pick from: targeted testing, asking specific stakeholders, code/design review of specific area, building observability/instrumentation, building test infrastructure or testability — or, when nothing could currently judge the result, say exactly that: "nothing can judge this yet" (the phrase `/oracle-strategy`'s filter keys on). Whichever is appropriate. This note seeds Step 7's plan of work.
 
-## Q2 — interrogate the oracles (invoke `/oracle-adequacy`)
+## Q2 is answered honestly here — and planned properly afterwards
 
-This sub-step is where the strategy answers **Q3 — "is what we have good?"** It can only answer that honestly if **Q2 — "how do we know?"** holds. Every actual you record rests on an oracle — something that judges whether what you observed really means the dimension is at the claimed level. If the oracle is weak, the actual is built on sand.
+This sub-step is where the strategy answers **Q3 — "is what we have good?"** It can only do that honestly if **Q2 — "how do we know?"** holds: every actual rests on something that judges whether what was observed really means the claimed level. What this sub-step owes Q2 is **honesty about the basis**: for each non-Unknown actual, the Evidence line must let a reader see both what was observed and what judges it — and an actual whose basis you can't name in a line is recorded as **Unknown**, never a comfortable Medium.
 
-After you have a first pass of proposed actuals (or Unknowns) for the H/M dimensions, **invoke `/oracle-adequacy`** on them (substituting the resolved absolute `$DOCS_DIR` doc and scratch paths into the brief — a sealed dispatch can't ask where the docs live). For each dimension it checks whether the *instrument* (the way you observe the state) and the *oracle* (the way you judge the level) are good enough, and returns a verdict:
-
-- **Trustworthy** — keep the actual and its confidence.
-- **Over-confident** — a non-Unknown actual whose oracle is Inadequate/Missing. Downgrade its confidence (often to Unknown) unless you build the oracle. This catches the "comfortable Medium with no real basis" failure.
-- **Gated** — the actual is Unknown and resolving it is blocked on an oracle that doesn't exist yet. `/oracle-adequacy` names the **oracle-build item** (state a property, write a simulated/reference oracle, define the SLO + measurement). Record that item against the dimension; it seeds Step 7's plan of work, and 6.3 marks the dimension as gated rather than papering over it.
-
-Fold the verdicts back into the actuals below. The dispatch writes its scratch file at `quality/.scratch/6.2-oracle-adequacy.md` (see SKILL.md → "Sealed-context dispatch and scratch files"). Don't let "no oracle" quietly become a permanent Unknown with nothing to do. With agents doing the work, an oracle is usually cheap to build — and naming that build is often the most valuable thing this strategy produces.
+What this sub-step deliberately does **not** do is run an oracle sweep. The quality strategy stays the pure what-matters-and-where-are-we document; auditing each dimension's oracle and planning better judging is the follow-on **`/oracle-strategy`** — a lighter lane that ingests this Part, filters for the dimensions where judging is the bottleneck, and works have/improve/add through them with the user (with `/oracle-adequacy` as its audit when trust in an existing oracle is contested, and `/tooling-strategy` for the build plan). Don't attempt that sweep mid-strategy — the earlier design that did produced a sweep the strategy wasn't equipped to carry. Where an Unknown is clearly blocked on "nothing can judge this yet", say so in its to-resolve note; that phrase is exactly what the oracle lane's filter looks for.
 
 ## The second design touch — targeted deep-dive where the evidence is thin
 
-The pre-read's design observations were deliberately a light first touch: at pre-read time nobody knew what to look for. Now you do. After the first pass of proposed actuals (and the oracle verdicts above), look at where the scoring is running on thin evidence — dimensions sitting at Unknown, Low confidence, or Over-confident whose subject is design-shaped (architecture, error handling, data flow, coupling, testability) rather than purely behavioural. **Dispatch a targeted design review on exactly those areas — not a general review of the codebase.**
+The pre-read's design observations were deliberately a light first touch: at pre-read time nobody knew what to look for. Now you do. After the first pass of proposed actuals, look at where the scoring is running on thin evidence — dimensions sitting at Unknown, at Low confidence, or on a basis too thin to support their claim, whose subject is design-shaped (architecture, error handling, data flow, coupling, testability) rather than purely behavioural. **Dispatch a targeted design review on exactly those areas — not a general review of the codebase.**
 
 Use the `Agent` tool with `subagent_type: general-purpose`. The brief, in outline: ground in `$PLUGIN_ROOT/PHILOSOPHY.md` first (the house pattern for every dispatch); name the specific areas and the specific dimensions whose actuals need evidence — and, in a multi-repo scope, which repo (absolute path) each area lives in, since the subagent can't guess the scope; have it read the relevant code and design for those areas only; require every finding to come back as **evidence with a confidence marking** (what was examined, what it shows about the named dimension, High/Medium/Low) — never a bare opinion; and **save its findings verbatim to `$DOCS_DIR/quality/.scratch/6.2-design-deep-dive.md`** (absolute path substituted into the brief) before returning (the sealed-dispatch scratch file `/quality-strategy-review` audits — see SKILL.md → "Sealed-context dispatch and scratch files"). Include the **standing lens** in every dispatch: **test-coverage-vs-risk skew** — where the tests cluster versus where this risk map says the danger is; well-tested low-risk corners beside untested dealbreakers is exactly the finding this touch exists to surface.
 
-Fold the findings back into the actuals as evidence: an Unknown may become a described actual at Medium confidence; an Over-confident actual may gain the basis it lacked, or lose its rating honestly. Findings are inputs to the actuals — the user confirms anything surprising before it lands. Skip the dispatch only when no thin-evidence dimension is design-shaped, and say so explicitly — the recorded skip note is what the review audit accepts in place of the scratch file.
+Fold the findings back into the actuals as evidence: an Unknown may become a described actual at Medium confidence; an actual whose basis was too thin may gain the evidence it lacked, or lose its rating honestly. Findings are inputs to the actuals — the user confirms anything surprising before it lands. Skip the dispatch only when no thin-evidence dimension is design-shaped, and say so explicitly — the recorded skip note is what the review audit accepts in place of the scratch file.
 
 ## How to ask
 
@@ -95,7 +89,7 @@ What you must not do:
 - [ ] Actuals were sought down the **evidence hierarchy** — test results / CI / reports, then the tests, then what the user has actually seen — before any code reading; every code-derived actual is **labelled inference**, capped at Medium confidence, and none claims a confident "at bar" off the source alone.
 - [ ] Every actual has a confidence rating (H/M/L, or "—" for Unknown) and an evidence basis (or "no investigation yet").
 - [ ] Every Unknown has a one-line note on what would resolve it (test / ask / review / instrument / build infrastructure).
-- [ ] `/oracle-adequacy` has been invoked on the proposed actuals; each dimension has a verdict (Trustworthy / Over-confident / Gated), Over-confident actuals have had their confidence downgraded or an oracle-build item named, and Gated dimensions carry their oracle-build item. Its scratch file exists at `quality/.scratch/6.2-oracle-adequacy.md`.
+- [ ] Every non-Unknown actual's Evidence line names both what was observed and what judges it; any actual whose basis couldn't be named in a line has been honestly recorded as Unknown. (No oracle sweep runs here — that is `/oracle-strategy`'s job after the strategy closes; Unknowns blocked on "nothing can judge this yet" say so in their to-resolve note.)
 - [ ] Thin-evidence, design-shaped dimensions got the targeted design deep-dive (or its explicit skip note): findings recorded as evidence with confidence markings, the test-coverage-vs-risk-skew lens applied, and the scratch file at `quality/.scratch/6.2-design-deep-dive.md` (or the skip note) in place.
 - [ ] Confidence ratings use only H/M/L — no percentages.
 - [ ] Any deferred items are recorded as `OPEN QUESTION:`.
@@ -116,16 +110,14 @@ Append to `quality/strategy.md` under Part 6:
 - **Actual:** <qualitative dimension-specific description, OR "Unknown">
 - **Confidence in actual:** <H/M/L, or "—" for Unknown>
 - **Evidence:** <what this is based on, or "no investigation yet">
-- **Oracle verdict:** <Trustworthy / Over-confident / Gated, from /oracle-adequacy>
-- **To resolve (if Unknown / Gated):** <one line — test what / ask whom / review what / instrument; or the oracle-build item: state which property, write which reference oracle, define which SLO + measurement>
+- **To resolve (if Unknown):** <one line — test what / ask whom / review what / instrument / build the means of judging ("nothing can judge this yet" is a valid, load-bearing note — the oracle lane reads it)>
 
 #### <Next dimension>
 
 - **Actual:** <…>
 - **Confidence in actual:** <…>
 - **Evidence:** <…>
-- **Oracle verdict:** <…>
-- **To resolve (if Unknown / Gated):** <…>
+- **To resolve (if Unknown):** <…>
 
 … (repeat per H/M dimension)
 

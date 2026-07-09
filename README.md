@@ -1,6 +1,6 @@
 # Quality Strategy Skills
 
-Claude Code skills that interview you to produce a software *quality strategy* — who matters for your project, what they value, where you're exposed, and what to do about it — plus the *test strategy* and *tooling strategy* that turn it into action. When most of your code is written by agents who don't know what quality means for *your* project, an explicit strategy is what stops them shipping confidently in the wrong direction.
+Claude Code skills that interview you to produce a software *quality strategy* — who matters for your project, what they value, where you're exposed, and what to do about it — plus the lighter follow-up lanes — *test*, *oracle*, and *process* strategy — and the *tooling strategy* build plan that turn it into action. When most of your code is written by agents who don't know what quality means for *your* project, an explicit strategy is what stops them shipping confidently in the wrong direction.
 
 Grounded in [**Edmund Pringle's quality framework**](https://github.com/tollens-ai/quality-assistant-prototype-03/tree/main/quality-brain): quality is value to someone who matters; testing is investigation to find out what's actually true; risk is danger to quality. For solo developers, small teams, engineering leaders — and anyone whose codebase agents now work in. You don't need a repo: running it at the idea stage is a first-class use.
 
@@ -41,28 +41,32 @@ The most useful thing you can do is run `/quality-strategy` on a real project an
 ## The typical flow
 
 1. **`/quality-strategy`** — the main event. A structured interview produces `quality/strategy.md`, ends with a built-in audit, and points you at the follow-ons.
-2. **`/test-strategy`** — turns the strategy into an investigation plan: what to find out, in what order, split between humans and agents.
-3. **`/tooling-strategy`** — when the docs surfaced things you can't measure or judge yet (common, and a finding rather than a failure): a prioritised build plan for the missing **oracles** (ways to judge whether something is good) and **instruments** (ways to observe what's actually happening). Steps 2 and 3 swap when the risk map comes out mostly blind — the skills recommend the order themselves; you can always overrule.
+2. **The three lanes** — deliberately *lighter* follow-ups (the differential is stated in their own prompts: high-level ideas and good questions, not another interview). Each ingests the strategy for the release, filters for the ilities its modality can make a dent on, and works what-you-have / what-to-improve / what-to-add through them with you: **`/test-strategy`** (where investigation would move the risk map), **`/oracle-strategy`** (where better ways of judging would make the project knowable), **`/process-strategy`** (where rules, invariants, standards, or repeatable processes would prevent whole defect classes). Run the ones your risk map calls for — the strategy recommends an order; you can always overrule.
+3. **`/tooling-strategy`** — when the lanes agreed things worth building: a prioritised build plan for the missing **oracles** (ways to judge whether something is good) and **instruments** (ways to observe what's actually happening).
 4. **`/strategy-variants`** (optional) — a one-pager or client-safe version to circulate.
 5. **`/quality-artefacts`** (optional) — describe the view you want ("a tweetable summary of where quality stands", "a dashboard of the payment risks for my standup") and it designs a bespoke, self-contained SVG/HTML artefact from your strategy — honest about Unknowns, built to be screenshotted and shared. Worked examples in [`examples/fernly/quality/artefacts/`](examples/fernly/quality/artefacts/).
 
 ## How the skills fit together
 
-Five skills you start (bold); the rest are checks and audits the strategies invoke for you as they run (dotted arrows — each also works standalone). Per-skill details: **[docs/SKILLS.md](docs/SKILLS.md)**.
+Seven skills you start (bold); the rest are checks and audits the strategies invoke for you as they run (dotted arrows — each also works standalone). Per-skill details: **[docs/SKILLS.md](docs/SKILLS.md)**.
 
 ```mermaid
 flowchart TD
     QS["<b>/quality-strategy</b><br/>the 7-step interview — START HERE"]
-    OA["/oracle-adequacy<br/><i>can the 'where we are' claims<br/>actually be judged?</i>"]
     CC["/contradiction-check<br/><i>internal consistency,<br/>every step boundary</i>"]
     OD["/operational-distillation<br/><i>TL;DR + triage rubric<br/>at the top of the doc</i>"]
     QSR["/quality-strategy-review<br/><i>the closing audit</i>"]
     EC["/effective-comms<br/><i>the communication gate —<br/>audience fit before a doc is final</i>"]
     SDOC[/"quality/strategy.md"/]
-    TS["<b>/test-strategy</b><br/>the investigation plan"]
-    TA["/tooling-adequacy<br/><i>can each learning need<br/>actually be answered?</i>"]
+    TS["<b>/test-strategy</b><br/>the testing lane — light"]
+    ORS["<b>/oracle-strategy</b><br/>the judging lane — light"]
+    PS["<b>/process-strategy</b><br/>the rules & process lane — light"]
+    TA["/tooling-adequacy<br/><i>can this question<br/>actually be answered?</i>"]
+    OA["/oracle-adequacy<br/><i>can the 'where we are' claims<br/>actually be judged?</i>"]
     TSR["/test-strategy-review<br/><i>the closing audit</i>"]
     TDOC[/"quality/test-strategy.md"/]
+    ORDOC[/"quality/oracle-strategy.md"/]
+    PDOC[/"quality/process-strategy.md"/]
     TOOL["<b>/tooling-strategy</b><br/>the oracle/instrument build plan"]
     ODOC[/"quality/tooling-strategy.md"/]
     SV["<b>/strategy-variants</b><br/>audience-facing variants"]
@@ -71,15 +75,15 @@ flowchart TD
     ADOC[/"quality/artefacts/<br/>*.svg · *.html"/]
     BUILD(["build the oracles<br/>& instruments"])
 
-    QS -.-> OA
     QS -.-> CC
     QS -.-> OD
     QS -.-> QSR
     QS -.-> EC
     QS --> SDOC
 
-    SDOC -->|"risk map mostly<br/>answerable"| TS
-    SDOC -->|"risk map mostly blind —<br/>Unknowns + oracle gaps"| TOOL
+    SDOC -->|"don't know<br/>where you stand"| TS
+    SDOC -->|"couldn't judge it<br/>if you saw it"| ORS
+    SDOC -->|"failures come from<br/>how work is done"| PS
     SDOC -->|"need something<br/>to circulate"| SV
     SDOC -->|"need something glanceable —<br/>describe the view you want"| QA
 
@@ -87,12 +91,19 @@ flowchart TD
     TS -.-> TSR
     TS -.-> EC
     TS --> TDOC
-    TDOC -->|"blocked learning needs —<br/>the sharpened demand"| TOOL
+    ORS -.-> OA
+    ORS -.-> EC
+    ORS --> ORDOC
+    PS -.-> EC
+    PS --> PDOC
+
+    TDOC -->|"questions blocked on<br/>missing instruments/oracles"| TOOL
+    ORDOC -->|"agreed builds —<br/>the sharpened demand"| TOOL
 
     TOOL -.-> EC
     TOOL --> ODOC
     ODOC --> BUILD
-    BUILD -.->|"Unknowns become knowable —<br/>update the risk map,<br/>unblock the learning needs"| SDOC
+    BUILD -.->|"Unknowns become knowable —<br/>update the risk map,<br/>unblock the lanes"| SDOC
 
     SV --> VDOC
     QA --> ADOC
@@ -100,10 +111,10 @@ flowchart TD
     classDef sub fill:#f6f6f6,stroke:#aaaaaa,color:#444444
     class OA,CC,OD,QSR,TA,TSR,EC sub
     classDef doc fill:#fdf6e3,stroke:#b58900,color:#333333
-    class SDOC,TDOC,ODOC,VDOC,ADOC doc
+    class SDOC,TDOC,ORDOC,PDOC,ODOC,VDOC,ADOC doc
 ```
 
-The shape follows the pack's four questions — *what does good look like? how do we know? is it good? how do we make it good?* — and one rule: **you can only investigate what you can judge**, so the state of your risk map decides whether the investigation plan or the build plan comes first.
+The shape follows the pack's four questions — *what does good look like? how do we know? is it good? how do we make it good?* — and one rule: **you can only investigate what you can judge**, so the state of your risk map decides which lane comes first — the testing lane, or the judging lane (with `/tooling-strategy` planning the agreed builds).
 
 ## What to expect
 
@@ -119,7 +130,7 @@ The shape follows the pack's four questions — *what does good look like? how d
 
 - **No dedicated dimensions yet for AI / non-deterministic products** — systems whose "correctness" is a metric distribution that drifts. The stakeholder/risk/planning machinery still helps; the "what does good look like and how would we know" core you'd hand-craft. Our top research item ([ROADMAP.md](ROADMAP.md)).
 - **Validated mostly in simulation.** Stress-tested against many simulated users and reviewed adversarially; limited real-world mileage. Provisional calls are recorded in `OPEN-QUESTIONS.md` with what would change our minds.
-- **`/tooling-strategy` is the newest skill** with the least mileage — expect rougher edges there.
+- **`/oracle-strategy` and `/process-strategy` are the newest skills** (and `/test-strategy` was recently reshaped to the same light lane pattern) with the least mileage — expect rougher edges there.
 - **Cadence is one-size.** Every run gets the same thorough treatment regardless of project size; a lighter *view* of the same rigour is on the roadmap, a lower bar is not.
 - **Single-release depth, multi-release capture.** Deep analysis covers one release at a time — the strategy names its release. In a `/quality-strategy` session you can dictate as many releases as you like: content for other releases is banked faithfully per release and pre-loaded when that release's strategy starts (new-release mode).
 

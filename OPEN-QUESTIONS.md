@@ -798,4 +798,16 @@ Calls made while preparing the pack for public alpha.
 
 ---
 
+## Pure quality strategy + three light lanes
+
+**What we did.** Stripped the oracle/testing sweep out of `/quality-strategy` (the 6.2 `/oracle-adequacy` dispatch and its verdict fields are gone; 6.2 now owes Q2 *honesty* — every actual names its basis or is Unknown, with "nothing can judge this yet" as a load-bearing to-resolve note). Its follow-ups became three explicitly-lighter sibling lanes — `/test-strategy` (reshaped from the heavy 6-sub-step form), `/oracle-strategy` and `/process-strategy` (new) — each: ingest the release's strategy → filter the ilities its modality can dent → per ility discuss have/improve/add. The thoroughness differential is stated in the lanes' own prompts. `/oracle-adequacy` and `/tooling-adequacy` stay as the audit engines the lanes offer when trust is contested; `/tooling-strategy` consumes the lanes' agreed builds; `/test-strategy-review` and INDICATORS.md re-aligned to the lighter doc shape.
+
+**Why.** The quality strategy attempted an oracle sweep and a testing sweep mid-interview and "isn't really equipped to do that" (the amendment's words): the sweeps bloated the main flow and still weren't deep enough to be the real lane. Splitting keeps the strategy pure (who matters / what they value / where we stand, per release) and makes each modality a focused conversation. Lighter-by-design because the lanes stand on the strategy's finished analysis — re-interviewing would duplicate it; what's needed is ideas, questions, and decisions.
+
+**What would change our mind.** If real lane runs keep escalating into the depth the old test-strategy machinery provided (tiered needs, allocation tables, calibration) — the answer then is a deep-dive follow-on built *from* a lane's agreed moves, not re-fattening the lanes. If dropping the mandatory 6.2 oracle audit lets over-confident actuals back into strategies (the review's honesty checks and the oracle lane are the guards — watch whether they catch what 6.2's dispatch used to).
+
+**How we'd know.** Qing's Tollens Studio run (the lanes were requested for exactly it); the release-phase regression run. Regression: SC-19.
+
+---
+
 *Add new items to this file when we make calls under uncertainty. Revisit after each real-world run.*
