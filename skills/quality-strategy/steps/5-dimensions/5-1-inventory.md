@@ -33,7 +33,7 @@ Use the `Agent` tool with `subagent_type: general-purpose`. The brief:
 >
 > First, read `$PLUGIN_ROOT/PHILOSOPHY.md` and `$PLUGIN_ROOT/skills/quality-strategy/SKILL.md` to ground yourself in the framework.
 >
-> Then read `$PROJECT_DIR/quality/strategy.md` (Parts 1–4) and `$PROJECT_DIR/quality/pre-read.md` for full context on the project — what it is, who matters, what's been excluded, what the design looks like.
+> Then read `$DOCS_DIR/quality/strategy.md` (Parts 1–4) and `$DOCS_DIR/quality/pre-read.md` for full context on the project — what it is, who matters, what's been excluded, what the design looks like.
 >
 > Walk this reference list of quality -ilities. For each, decide whether it might matter for the **first release** of this project:
 >

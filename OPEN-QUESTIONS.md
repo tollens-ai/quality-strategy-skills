@@ -762,4 +762,16 @@ Calls made while preparing the pack for public alpha.
 
 ---
 
+## Save location is asked, never assumed — and "local" means outside the working tree
+
+**What we did.** Session start now asks where the strategy docs should live before anything is written (in the repo for everyone, or a local first pass elsewhere), instead of silently writing to the cwd. Two judgment calls inside that: **(a)** the suggested "local" option is a directory *outside* any shared working tree (e.g. `~/strategies/<project-name>/` — deliberately not named `quality`, so the home and the `quality/` folder created inside it never blur), with in-repo-but-gitignored honoured only with an explicit accidental-`git add` warning; **(b)** promoting a local pass to the repo is deliberately machinery-free — copy the `quality/` folder in and commit — rather than a migration command.
+
+**Why.** Alpha feedback (Round 3 in `docs/ALPHA-FEEDBACK.md`): a tester in a shared repo self-censored and bounced off because candid answers were being committed where colleagues would read them. Candor needs the user to know, before answering, where their words go. Gitignored-in-repo isn't the suggested private option because a draft inside a shared checkout is one `git add -f` (or one over-broad pattern change) from published. No promote machinery because a folder copy is transparent and inspectable — exactly what you want for the moment a private draft goes public.
+
+**What would change our mind.** If real runs show the extra session-start question is friction for the common solo/in-repo case (one question, but it's the first thing users meet). If users routinely want gitignored-in-repo and the warning reads as nagging. If promote-by-copy loses things in practice (scratch state, archives) and a real migration step earns its keep.
+
+**How we'd know.** Watch alpha runs: does anyone stumble on the opening question or pick "local" and then struggle to resume/promote? Regression cases IU-21/IU-22 hold the behaviour meanwhile.
+
+---
+
 *Add new items to this file when we make calls under uncertainty. Revisit after each real-world run.*

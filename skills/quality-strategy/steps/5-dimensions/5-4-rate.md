@@ -42,7 +42,7 @@ Use the `Agent` tool with `subagent_type: general-purpose`. The brief:
 >
 > First, read `$PLUGIN_ROOT/PHILOSOPHY.md` to ground yourself in the framework (quality is value to someone who matters; impact is about cost to a stakeholder who cares).
 >
-> Then read `$PROJECT_DIR/quality/strategy.md` — specifically the **final dimension inventory** in Part 5 (the post-old/new-world inventory) and the **Part 3 stakeholder three-lens bars** (each stakeholder's Delight / Good Enough / Dealbreaker entries).
+> Then read `$DOCS_DIR/quality/strategy.md` — specifically the **final dimension inventory** in Part 5 (the post-old/new-world inventory) and the **Part 3 stakeholder three-lens bars** (each stakeholder's Delight / Good Enough / Dealbreaker entries).
 >
 > For **each dimension × each stakeholder**, apply this anchor mechanically against that stakeholder's bars:
 >
@@ -56,7 +56,7 @@ Use the `Agent` tool with `subagent_type: general-purpose`. The brief:
 >
 > Return a per-stakeholder rating table: rows are dimensions, columns are stakeholders, each cell is `{H / M / None, pointer to the specific bar}` (e.g. *"H — Dealbreaker bar: 'never lose my data'"*).
 >
-> **Before returning, save this table verbatim** to `$PROJECT_DIR/quality/.scratch/5.4-dimension-rating.md` — the sealed-dispatch scratch file `/quality-strategy-review` audits (see SKILL.md → "Sealed-context dispatch and scratch files").
+> **Before returning, save this table verbatim** to `$DOCS_DIR/quality/.scratch/5.4-dimension-rating.md` — the sealed-dispatch scratch file `/quality-strategy-review` audits (see SKILL.md → "Sealed-context dispatch and scratch files").
 >
 > Do **not** merge across stakeholders, do **not** produce a single rating per dimension, and do **not** comment on the overall distribution. Just the per-stakeholder table, grounded cell by cell in the bars.
 

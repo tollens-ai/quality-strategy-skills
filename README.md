@@ -8,7 +8,7 @@ Grounded in [**Edmund Pringle's quality framework**](https://github.com/tollens-
 
 ## Install and start
 
-Prerequisite: [Claude Code](https://docs.anthropic.com/en/docs/claude-code) with plugin support. Open Claude Code for the project or folder where you want the `quality/` documents written, then type these as Claude Code slash commands (not shell commands):
+Prerequisite: [Claude Code](https://docs.anthropic.com/en/docs/claude-code) with plugin support. Open Claude Code for the project or folder you want a strategy for, then type these as Claude Code slash commands (not shell commands):
 
 ```
 /plugin marketplace add tollens-ai/quality-strategy-skills
@@ -23,7 +23,7 @@ First run:
 /quality-strategy
 ```
 
-Output goes to `quality/strategy.md` under the folder Claude Code is working in. You do **not** need an existing git repo or codebase: for an idea-stage project, open Claude Code in whatever folder should hold the strategy notes and run the same command. (Skills are also available namespaced, e.g. `/quality-strategy:test-strategy`, if a bare name ever collides with another plugin.)
+Output goes to `quality/strategy.md` at a location the skill asks you about at the start: directly in the project, if the strategy should be everyone's the moment it exists — or a folder outside the repo, if you'd rather keep a private first pass and share it when it's ready. Your candid answers are written into these docs, so where they live (and who can read them) is your call, made before anything is captured. You do **not** need an existing git repo or codebase: for an idea-stage project, open Claude Code in whatever folder should hold the strategy notes and run the same command. (Skills are also available namespaced, e.g. `/quality-strategy:test-strategy`, if a bare name ever collides with another plugin.)
 
 New versions ship regularly — run `claude plugin update quality-strategy@tollens` in your shell, or `/plugin update quality-strategy@tollens` inside Claude Code, to pick them up; [CHANGELOG.md](CHANGELOG.md) says what changed.
 
@@ -109,6 +109,7 @@ The shape follows the pack's four questions — *what does good look like? how d
 
 - **They interview you.** Your quality strategy can't be inferred from your code — who matters, what they value, what's a non-goal would all be guessed wrongly. The skills pre-read the repo to ask informed questions; everything load-bearing is asked, not assumed.
 - **They hold the bar.** They won't skip your non-goals or lower rigour because a job feels small — that refusal is the point. They will adapt their phrasing to you, and offer a clearly-labelled starting guess when you're stuck.
+- **Your answers persist — and you choose who sees them.** Before anything is captured, the skills say where your answers will be recorded and ask where the docs should live: in the repo for everyone with access, or outside it as a private first pass you promote when it's ready.
 - **They produce living documents**, meant to be read, updated, and used at decision points — not written once and filed.
 - **It takes real thinking.** Plan for one to two working days of cognitive time, spread across several sessions — the skills are designed for breaks and resume cleanly. Faster than a couple of hours usually means answering too quickly.
 - **No repo needed.** At the idea stage the pre-read honestly says it's interview-derived instead of dressing up guesses as scan results, and the interview carries the load it always carries.

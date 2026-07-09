@@ -23,7 +23,7 @@ This skill exists because of two reliable agent failure modes. **(1)** When "how
 This skill is part of the `quality-strategy` plugin. Before anything else, resolve two absolute paths and use them throughout:
 
 - **PLUGIN_ROOT** — the plugin's install directory: `${CLAUDE_PLUGIN_ROOT}` (Claude Code expands this to an absolute path when it loads this file; read it off and note it down). The grounding files this skill reads — `PHILOSOPHY.md`, and `skills/tooling-adequacy/SKILL.md` for the shared oracle taxonomy — live under it.
-- **PROJECT_DIR** — the absolute path of the project whose actuals you're assessing (normally the current working directory; confirm with the user if it's ambiguous). The strategy docs live under `$PROJECT_DIR/quality/`.
+- **PROJECT_DIR** — the absolute path of the project whose actuals you're assessing (normally the current working directory; confirm with the user if it's ambiguous). The strategy docs normally live under `$PROJECT_DIR/quality/` — but `/quality-strategy` asks at session start where the strategy should be saved, so they may live elsewhere. If `$PROJECT_DIR/quality/` is absent, get the docs home instead of assuming: from the orchestrator's brief when this skill was dispatched, else by asking the user; if the path you're given ends in `/quality`, its parent is the home. From then on treat `$PROJECT_DIR` as that docs home wherever a path below says `$PROJECT_DIR/quality/...` — one substitution, made once, before you act on any path.
 
 File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **Substitute the resolved absolute paths before you act on them.** The Read tool does no variable expansion and resolves relative paths against the current working directory, not this skill's directory — so an unsubstituted placeholder or a bare relative path will fail.
 
@@ -106,7 +106,7 @@ Oracle-build items (state the property set; write a reference/simulated oracle; 
 
 ## Output
 
-When run from `/quality-strategy`, return the assessment to the orchestrator **and** write it to `$PROJECT_DIR/quality/.scratch/6.2-oracle-adequacy.md` (the sealed-dispatch scratch file the review skill audits — see `/quality-strategy` SKILL.md, "Sealed-context dispatch and scratch files"). Standalone, surface it in the conversation and offer to write it to `$PROJECT_DIR/quality/oracle-adequacy-<YYYY-MM-DD>.md`. Shape:
+When run from `/quality-strategy`, return the assessment to the orchestrator **and** write it to `$PROJECT_DIR/quality/.scratch/6.2-oracle-adequacy.md` (the sealed-dispatch scratch file the review skill audits — see `/quality-strategy` SKILL.md, "Sealed-context dispatch and scratch files"). The orchestrator's brief carries the absolute docs-home path — a sealed dispatch can't ask where the docs live, so write where the brief says, never a path derived from your own working directory. Standalone, surface it in the conversation and offer to write it to `$PROJECT_DIR/quality/oracle-adequacy-<YYYY-MM-DD>.md`. Shape:
 
 ```markdown
 # Oracle adequacy — actual-state assessment

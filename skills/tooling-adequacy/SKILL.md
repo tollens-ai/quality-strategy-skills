@@ -21,7 +21,7 @@ This skill exists because of two reliable agent failure modes. **(1)** When agen
 This skill is part of the `quality-strategy` plugin. Before anything else, resolve two absolute paths and use them throughout:
 
 - **PLUGIN_ROOT** — the plugin's install directory: `${CLAUDE_PLUGIN_ROOT}` (Claude Code expands this to an absolute path when it loads this file; read it off and note it down). The grounding files this skill reads — `PHILOSOPHY.md`, `skills/test-strategy/FRAMINGS.md` — live under it.
-- **PROJECT_DIR** — the absolute path of the project whose tooling and oracles you're assessing (normally the current working directory; confirm with the user if it's ambiguous). The strategy docs live under `$PROJECT_DIR/quality/`.
+- **PROJECT_DIR** — the absolute path of the project whose tooling and oracles you're assessing (normally the current working directory; confirm with the user if it's ambiguous). The strategy docs normally live under `$PROJECT_DIR/quality/` — but `/quality-strategy` asks at session start where the strategy should be saved, so they may live elsewhere. If `$PROJECT_DIR/quality/` is absent, get the docs home instead of assuming: from the orchestrator's brief when this skill was dispatched, else by asking the user; if the path you're given ends in `/quality`, its parent is the home. From then on treat `$PROJECT_DIR` as that docs home wherever a path below says `$PROJECT_DIR/quality/...` — one substitution, made once, before you act on any path.
 
 File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **Substitute the resolved absolute paths before you act on them.** The Read tool does no variable expansion and resolves relative paths against the current working directory, not this skill's directory — so an unsubstituted placeholder or a bare relative path will fail.
 
@@ -93,7 +93,7 @@ A learning need is **answerable** only if both instrument and oracle are Adequat
 
 ## Output
 
-When run from `/test-strategy`, return the assessment to the orchestrator **and** write it to `$PROJECT_DIR/quality/.scratch/3.5-tooling-adequacy.md` (the sealed-dispatch scratch file `/test-strategy-review` audits — hard evidence this Q2 check actually ran). Standalone, surface it in the conversation and offer to write it to `$PROJECT_DIR/quality/tooling-adequacy-<YYYY-MM-DD>.md`. Shape:
+When run from `/test-strategy`, return the assessment to the orchestrator **and** write it to `$PROJECT_DIR/quality/.scratch/3.5-tooling-adequacy.md` (the sealed-dispatch scratch file `/test-strategy-review` audits — hard evidence this Q2 check actually ran). The orchestrator's brief carries the absolute docs-home path — a sealed dispatch can't ask where the docs live, so write where the brief says, never a path derived from your own working directory. Standalone, surface it in the conversation and offer to write it to `$PROJECT_DIR/quality/tooling-adequacy-<YYYY-MM-DD>.md`. Shape:
 
 ```markdown
 # Tooling & oracle adequacy

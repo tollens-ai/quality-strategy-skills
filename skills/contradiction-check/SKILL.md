@@ -14,7 +14,7 @@ It exists because two different failure modes need two different catches. The su
 This skill is part of the `quality-strategy` plugin. Before anything else, resolve two absolute paths and use them throughout:
 
 - **PLUGIN_ROOT** — the plugin's install directory: `${CLAUDE_PLUGIN_ROOT}` (Claude Code expands this to an absolute path when it loads this file; read it off and note it down). The grounding file this skill reads — `PHILOSOPHY.md` — lives under it.
-- **PROJECT_DIR** — the absolute path of the project whose strategy you're checking (normally the current working directory; confirm with the user if it's ambiguous). The strategy docs live under `$PROJECT_DIR/quality/`.
+- **PROJECT_DIR** — the absolute path of the project whose strategy you're checking (normally the current working directory; confirm with the user if it's ambiguous). The strategy docs normally live under `$PROJECT_DIR/quality/` — but `/quality-strategy` asks at session start where the strategy should be saved, so they may live elsewhere. If `$PROJECT_DIR/quality/` is absent, get the docs home instead of assuming: from the orchestrator's brief when this skill was dispatched, else by asking the user; if the path you're given ends in `/quality`, its parent is the home. From then on treat `$PROJECT_DIR` as that docs home wherever a path below says `$PROJECT_DIR/quality/...` — one substitution, made once, before you act on any path.
 
 File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **Substitute the resolved absolute paths before you act on them** — both when you Read a file yourself and when you put a path into a subagent brief. The Read tool does not expand variables, and it resolves relative paths against the current working directory, not this skill's directory; a dispatched subagent inherits none of your context. So an unsubstituted placeholder or a bare relative path will fail — always pass full absolute paths.
 
@@ -73,7 +73,7 @@ If you're unsure whether something is a contradiction or a gap, state the specif
 
 ## Output
 
-When dispatched from `/quality-strategy` (or `/test-strategy`) at a step boundary, return the findings to the orchestrator **and** write them to `$PROJECT_DIR/quality/.scratch/<step-boundary>-contradiction-check.md` (e.g. `3.2-contradiction-check.md` — the sealed-dispatch scratch file the review skill audits; see `/quality-strategy` SKILL.md, "Sealed-context dispatch and scratch files"). The orchestrator folds the findings into the substantive checkpoint it surfaces next.
+When dispatched from `/quality-strategy` (or `/test-strategy`) at a step boundary, return the findings to the orchestrator **and** write them to `$PROJECT_DIR/quality/.scratch/<step-boundary>-contradiction-check.md` (e.g. `3.2-contradiction-check.md` — the sealed-dispatch scratch file the review skill audits; see `/quality-strategy` SKILL.md, "Sealed-context dispatch and scratch files"). The orchestrator folds the findings into the substantive checkpoint it surfaces next. The orchestrator's brief carries the absolute docs-home path — a sealed dispatch can't ask where the docs live, so write where the brief says, never a path derived from your own working directory.
 
 Phrase each finding for both readers — names before coordinates (PHILOSOPHY: *write for both readers*): state the two claims in plain words, with Part references trailing as pointers, so the user at the checkpoint can act on the finding without opening the doc to decode it.
 

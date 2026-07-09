@@ -16,7 +16,7 @@ Like `/strategy-variants`, this is a **post-processing step**: it runs after the
 This skill is part of the `quality-strategy` plugin. Before anything else, resolve two absolute paths and use them throughout:
 
 - **PLUGIN_ROOT** — the plugin's install directory: `${CLAUDE_PLUGIN_ROOT}` (Claude Code expands this to an absolute path when it loads this file; read it off and note it down). The grounding file this skill reads — `PHILOSOPHY.md` — lives under it, as does the plugin manifest whose version you record per run.
-- **PROJECT_DIR** — the absolute path of the project whose strategy you're rendering (normally the current working directory; confirm with the user if it's ambiguous). The strategy docs live under `$PROJECT_DIR/quality/`, and the artefact you produce goes to `$PROJECT_DIR/quality/artefacts/`.
+- **PROJECT_DIR** — the absolute path of the project whose strategy you're rendering (normally the current working directory; confirm with the user if it's ambiguous). The strategy docs normally live under `$PROJECT_DIR/quality/`, and the artefact you produce goes to `quality/artefacts/` beside them — but `/quality-strategy` asks at session start where the strategy should be saved, so the `quality/` family may live elsewhere. If `$PROJECT_DIR/quality/` is absent, get the docs home instead of assuming: ask the user where the strategy was saved; if the path you're given ends in `/quality`, its parent is the home. From then on treat `$PROJECT_DIR` as that docs home wherever a path below says `$PROJECT_DIR/quality/...` — one substitution, made once, before you act on any path.
 
 File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **Substitute the resolved absolute paths before you act on them.** The Read tool does no variable expansion and resolves relative paths against the current working directory, not this skill's directory — so an unsubstituted placeholder or a bare relative path will fail.
 
@@ -123,7 +123,7 @@ Then walk the seven principles and score each 0/1/2 with a one-line justificatio
 
 - **Record the run** in `$PROJECT_DIR/quality/artefacts/.run-notes.md` (append-only — create if absent, never rewrite past runs): date, the user's request, the artefact path, **the plugin version executed against** (from `$PLUGIN_ROOT/.claude-plugin/plugin.json`), the seven scores with their one-line justifications, and the assumptions made. Also stamp them into the artefact's machine-readable block (the JSON data island in HTML, the `<metadata>` block in SVG): `"skillVersion"`, and `"selfScore"` carrying the seven 0–2 scores plus the total — invisible on the surface.
 - Tell the user: **where it landed**, **how to open it** (it works offline), **how to share it** (screenshot SVG at full zoom; send HTML as-is), **where the previous version was archived** when this run refreshed an existing view (a before/after comparison is then one open away), and **a one-line self-score** — e.g. *"Self-score 13/14 — gates all 2/2; principle 7 at 1: the appendix frame trades hierarchy for completeness."* Name the design choices and assumptions so a re-run with a sharper brief is cheap.
-- Process notes about *the skill itself* (an awkward instruction, a misfire) go to `$PROJECT_DIR/.skill-feedback.md`, never into the artefact or the strategy.
+- Process notes about *the skill itself* (an awkward instruction, a misfire) go to `.skill-feedback.md` beside the `quality/` docs (wherever the strategy was saved), never into the artefact or the strategy.
 
 ## Worked examples, not a menu
 

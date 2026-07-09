@@ -11,18 +11,19 @@ The skill is short by design. /quality-strategy does the heavy lifting — it pr
 
 ## Resolving file paths — do this first
 
-This skill is part of the `quality-strategy` plugin. Before anything else, resolve two absolute paths and use them throughout:
+This skill is part of the `quality-strategy` plugin. Before anything else, resolve three absolute paths and use them throughout:
 
 - **PLUGIN_ROOT** — the plugin's install directory: `${CLAUDE_PLUGIN_ROOT}` (Claude Code expands this to an absolute path when it loads this file; read it off and note it down). Every file this skill references — `PHILOSOPHY.md`, `skills/test-strategy/FRAMINGS.md`, `skills/test-strategy/INDICATORS.md`, and the sub-step files under `skills/test-strategy/steps/` — lives under it, as does `.claude-plugin/plugin.json`, whose `version` field stamps the generated test strategy (see sub-step 1).
 - **PROJECT_DIR** — the absolute path of the project you're building the test strategy for (normally the current working directory; confirm with the user if it's ambiguous).
+- **DOCS_DIR** — where the `quality/` docs live; every `quality/...` path in this skill and its sub-step files resolves under it. `/quality-strategy` asks at session start where the strategy should be saved — in the repo, or outside it as a local first pass — and records the choice in `quality/.scratch/session-config.md` beside the strategy; the test strategy joins that same family and follows the same location. Normally `$DOCS_DIR` is `$PROJECT_DIR`; if `$PROJECT_DIR/quality/` is absent, ask the user where the strategy was saved rather than assuming — never scaffold a fresh `quality/` beside code whose strategy lives elsewhere. (If the path you're given ends in `/quality`, its parent is the docs home.)
 
-File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **Substitute the resolved absolute paths before you act on them** — both when you Read a file yourself (including the sub-step files) and when you put a path into a subagent brief. The Read tool does not expand variables, and it resolves relative paths against the current working directory, not this skill's directory. A dispatched subagent inherits none of your context. So an unsubstituted placeholder or a bare relative path will fail — always pass fully resolved absolute paths.
+File references below use the `$PLUGIN_ROOT`, `$PROJECT_DIR`, and `$DOCS_DIR` placeholders. **Substitute the resolved absolute paths before you act on them** — both when you Read a file yourself (including the sub-step files) and when you put a path into a subagent brief. The Read tool does not expand variables, and it resolves relative paths against the current working directory, not this skill's directory. A dispatched subagent inherits none of your context. So an unsubstituted placeholder or a bare relative path will fail — always pass fully resolved absolute paths.
 
 ## Before you start
 
 Two prerequisites:
 
-1. **`quality/strategy.md` must exist** at the project root, completed at least through Part 6 (Risk Map). If it does not, stop and direct the user to `/quality-strategy` first. You can't build a test strategy from nothing — without a risk map, you'd be guessing where to spend effort, which is the opposite of what this skill is for.
+1. **`$DOCS_DIR/quality/strategy.md` must exist**, completed at least through Part 6 (Risk Map). If it does not, stop and direct the user to `/quality-strategy` first. You can't build a test strategy from nothing — without a risk map, you'd be guessing where to spend effort, which is the opposite of what this skill is for.
 
 2. **Read `$PLUGIN_ROOT/PHILOSOPHY.md`, `$PLUGIN_ROOT/skills/test-strategy/FRAMINGS.md`, and `$PLUGIN_ROOT/skills/test-strategy/INDICATORS.md`.** PHILOSOPHY.md explains the thinking behind the framework. FRAMINGS.md holds eleven framings that counter agent defaults — without them, /test-strategy will drift toward producing a test plan rather than a test strategy. INDICATORS.md lists the five indicators (Direction / Priority / Sufficiency / Feasibility / Honesty) the finished strategy will be reviewed against; knowing them up front shapes the work. None of these are optional.
 
@@ -55,7 +56,7 @@ Two moves at the start of every working session (first or resumed), before the n
 
 **Give the itinerary, in plain words.** The stops, by human name, with what each produces for the user and rough relative sizes. For example: *"A quick pre-read; a short purpose section; the principles that govern the testing (short); learning needs — the heart of it and the longest part: the questions worth answering, in priority order — closed by a check that we can actually answer them (and what we'd have to build where we can't); allocation — who does what, human or agent; and a short closing. Most of the thinking is already in your quality strategy, so this is one or two focused sessions."* On resumption the itinerary doubles as re-orientation: what's done, what remains.
 
-**Ask the commit-cadence question (git-managed projects).** Where `$PROJECT_DIR` is git-managed, ask once: *"Want me to commit at each sub-step boundary, commit everything at the end, or leave the commits to you?"* Suggest commit-as-we-go as the default — rollback stays cheap and each boundary commit doubles as visible progress. Honour the answer at every boundary; don't drift. Record the choice in `quality/.scratch/commit-cadence.md` so it survives `/clear`: a resumed session reads it and restates the standing choice in one line instead of re-asking, and re-asks only if the note is missing.
+**Ask the commit-cadence question (when the docs home is git-managed).** First read `quality/.scratch/session-config.md` — the quality-strategy run usually already settled the cadence for this docs family; restate the standing choice in one line instead of re-asking. Where the note is missing (or silent on cadence) and `$DOCS_DIR` is git-managed, ask once: *"Want me to commit at each sub-step boundary, commit everything at the end, or leave the commits to you?"* Suggest commit-as-we-go as the default — rollback stays cheap and each boundary commit doubles as visible progress; where the docs sit in a repo other people share, say in the same breath that each boundary commit publishes that step's draft to everyone who pulls. Honour the answer at every boundary; don't drift. Record the choice in `session-config.md` so it survives `/clear`. (Older strategies may carry only `quality/.scratch/commit-cadence.md`; read the cadence from it and carry it forward.)
 
 ## The weight traces to the user's goals
 
@@ -71,7 +72,7 @@ This sharpens the skill's substantive refusals rather than softening them: the t
 
 This skill works through the four quality questions (introduced in sub-step 1). It is how the team answers **"is what we have actually good?"** (Q3) — by planning the investigation. To do that honestly, you must settle **Q2 — "how do we know?"** first: the instrument (the thing that exercises and observes the product) and the oracle (the thing that judges whether output is correct) behind a finding must themselves be adequate, or the finding is built on sand.
 
-So after sub-step 3 (learning needs) and before sub-step 4 (allocation), **invoke `/tooling-adequacy`** on the learning-needs list. For each learning need, it checks whether the *instrument* (to exercise/observe) and the *oracle* (to judge correctness) are adequate, and returns any **build items** — instrument or oracle gaps, including simulated/reference oracles worth building. Carry those build items forward to sub-step 5, which marks the affected learning needs as blocked-on-tooling rather than papering over them. If the build items dominate the top tier, sub-step 3's closing offers pausing for `/tooling-strategy` before allocation (see `steps/3-learning-needs.md`) — Q2 before Q3.
+So after sub-step 3 (learning needs) and before sub-step 4 (allocation), **invoke `/tooling-adequacy`** on the learning-needs list (substituting the resolved absolute `$DOCS_DIR` doc and scratch paths into the brief — a sealed dispatch can't ask where the docs live). For each learning need, it checks whether the *instrument* (to exercise/observe) and the *oracle* (to judge correctness) are adequate, and returns any **build items** — instrument or oracle gaps, including simulated/reference oracles worth building. Carry those build items forward to sub-step 5, which marks the affected learning needs as blocked-on-tooling rather than papering over them. If the build items dominate the top tier, sub-step 3's closing offers pausing for `/tooling-strategy` before allocation (see `steps/3-learning-needs.md`) — Q2 before Q3.
 
 This is a **sealed-context dispatch**: it writes its assessment to `quality/.scratch/3.5-tooling-adequacy.md` as hard evidence the Q2 check ran. `/test-strategy-review` audits for that scratch file — a claimed-but-missing dispatch is a fabrication signal. `quality/.scratch/` is working state, not part of the strategy.
 
@@ -85,11 +86,11 @@ If the user asks to take a break, point at the natural seams:
 - After sub-step 2 (purpose + principles set)
 - After sub-step 3 (learning needs derived)
 
-At any of these it's safe to `/clear` — and say how to resume in the same breath, so resuming is stated, never guessed: *"safe to `/clear` here; to pick up, just run `/test-strategy` again — it reads `quality/test-strategy.md` (and the quality strategy it builds on) and resumes from the next sub-step."* The user shouldn't have to gamble that re-running the skill works.
+At any of these it's safe to `/clear` — and say how to resume in the same breath, so resuming is stated, never guessed: *"safe to `/clear` here; to pick up, just run `/test-strategy` again — it reads `quality/test-strategy.md` (and the quality strategy it builds on) and resumes from the next sub-step."* The user shouldn't have to gamble that re-running the skill works. If the docs live outside the repo, add the one extra thing resuming needs: point the next session at the docs home if it starts in a folder without them.
 
 Sub-steps 3 → 4 are more tightly coupled (allocation depends on the learning-needs list being fresh in working memory), so flag a break between them with: *"Allocation depends on the learning-needs list being fresh — want to push through to the end of sub-step 4, or break here and re-orient from the doc on resume?"*
 
-On resumption, detect the state of `quality/test-strategy.md` and resume from the next sub-step.
+On resumption, re-find the docs home first (the working directory's `quality/` folder, or ask for the path if there isn't one — same rule as resolving `$DOCS_DIR` above), then detect the state of `quality/test-strategy.md` and resume from the next sub-step.
 
 ## Revision mode
 
@@ -127,8 +128,8 @@ Before the test strategy is finalized for its reader, invoke `/effective-comms` 
 
 ## Output
 
-- `quality/test-strategy.md` at the project root — the test strategy itself.
-- `quality/test-pre-read.md` — the working digest from sub-step 0. Informs but does not become part of the strategy.
+- `$DOCS_DIR/quality/test-strategy.md` — the test strategy itself, beside the quality strategy it builds on (the project root when the strategy lives in-repo).
+- `$DOCS_DIR/quality/test-pre-read.md` — the working digest from sub-step 0. Informs but does not become part of the strategy.
 
 ## Escalation points — stop and ask the user
 

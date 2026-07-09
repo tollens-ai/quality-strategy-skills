@@ -30,7 +30,7 @@ Twelve skills ship in the pack. You only ever *start* five of them; the rest are
 |---|---|
 | `/tooling-strategy-review` | Meta-audit of a tooling strategy, completing the strategy/review pairing the other two strategies have. |
 | `/priority-analysis` | Optional multi-stakeholder help prioritising the plan of work. |
-| `/feedback-synthesis` | Curate the notes the skills jot down about their own rough edges as you run (a `.skill-feedback.md` file at the project root) into a maintainer-friendly summary. |
+| `/feedback-synthesis` | Curate the notes the skills jot down about their own rough edges as you run (a `.skill-feedback.md` file beside the `quality/` docs) into a maintainer-friendly summary. |
 | `/pre-read` | Standalone project digest. |
 
 Sequencing for all of these: [ROADMAP.md](../ROADMAP.md).

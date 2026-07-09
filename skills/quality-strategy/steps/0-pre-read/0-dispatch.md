@@ -8,7 +8,7 @@ The pre-read describes **what-is**. The strategy doc that subsequent sub-steps p
 
 ## What you need from the previous sub-step
 
-Nothing. This is the first sub-step.
+Nothing. This is the first sub-step — and the first thing in the whole process that writes to disk, so the session-start choices (where the strategy lives, and so where `quality/pre-read.md` and the scratch files land — see SKILL.md → "Session start") must already be settled before you dispatch anything. If they aren't, go back and settle them first.
 
 ## How
 
