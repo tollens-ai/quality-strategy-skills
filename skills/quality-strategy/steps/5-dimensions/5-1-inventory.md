@@ -120,7 +120,7 @@ The pattern is: long stretches of agent work, short stretches of user input.
 
 1. Generate bottom-up candidates (silent), each scoped to this release and carrying its stakeholder/surface.
 2. Dispatch subagent for top-down pass (silent until it returns).
-3. Surface the consolidated list back to the user, **this release's candidates with their scope**. Ask: *"From the bottom-up plus the reference-list pass, the candidate dimensions for this release are X (for [scope]), Y (for [scope]), Z. Anything we should add? Anything that doesn't actually matter?"* If either pass turned up future-release candidates, surface those separately in the same breath — *"and these came up but only for the beta — banked there"* (or however the negotiated structure routes them) — not mixed into the this-release list. Adjust based on user input.
+3. Surface the consolidated list back to the user, **this release's candidates with their scope**. Ask: *"From the bottom-up plus the reference-list pass, the candidate dimensions for this release are X (for [scope]), Y (for [scope]), Z. Anything we should add? Anything that doesn't actually matter?"* If either pass turned up future-release candidates, surface those separately in the same breath — *"and these came up but only for the beta — banked there"* (or however the negotiated structure routes them) — not mixed into the this-release list. When the list is long and falls into natural clusters (SKILL.md → "Cluster-by-cluster, not one flat list" — same trigger test, a lighter touch here since this is still one settle-the-list pass, not yet a per-item confirmation loop), surface it cluster by cluster rather than as one flat run-on list. Adjust based on user input.
 
 You have explicit permission and encouragement to:
 

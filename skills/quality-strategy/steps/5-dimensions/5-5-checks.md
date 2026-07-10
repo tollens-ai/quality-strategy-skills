@@ -75,7 +75,7 @@ Mechanical pass, run last: scan Part 5's dimension names and rationale text (inv
 - **Feature or component names standing in as a Dimension** — a Dimension cell that names a capability ("remote operability," "the export flow," "onboarding") rather than an axis of goodness (reliability, usability, performance...). Flag: *"[name] is a feature/surface, not a quality axis — what's the actual dimension, with this as its scope?"*
 - **A "Noted for 6.2" entry with no matching dimension row**, or a dimension row that quietly absorbed the observation as its rationale instead of parking it — either direction breaks the lane split. Cross-check the two tables against each other.
 
-This check is mechanical, not judgment-heavy — a clean pass ("no adequacy language or feature-as-dimension found") is the expected, common result and should be stated plainly rather than treated with suspicion.
+This check is mechanical, not judgment-heavy — a clean pass ("no adequacy language or feature-as-dimension found") is the expected, common result and should be stated plainly rather than treated with suspicion. "Run last" governs when the scan executes in the check sequence, not how any findings get presented — if it does find something, present that finding cluster by cluster along with the other checks' findings (per this sub-step's own standing note above), not as a flat aside tacked on after the clustered walk.
 
 ## How to interview through this
 
