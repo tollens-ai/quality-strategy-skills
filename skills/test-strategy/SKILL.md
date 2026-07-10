@@ -73,7 +73,7 @@ Write to `$DOCS_DIR/quality/test-strategy.md`, incrementally as ilities are agre
 **Have already.** <what exercises this today and what it actually tells you>
 **Could improve.** <…>
 **Could add.** <idea candidates with the question each answers>
-**Agreed next moves.** <1–3 bullets: question · who (human/agent) · when; or "none — deliberately deferred">
+**Agreed next moves.** <1–3 bullets: question · answered-when (what would count as answered — a state, not a goal; for a proxy milestone, also name what remains unknown about the ility when it's satisfied) · who (human/agent) · when; or "none — deliberately deferred">
 
 ## Out of the testing lane this release
 
