@@ -859,3 +859,15 @@ Calls made while preparing the pack for public alpha.
 **How we'd know.** Regression SC-22 + PR tests `2026-07-10-req8.md`; grep real evaluation-strategy docs for proxies carrying their what-they-miss line.
 
 ---
+
+## Correction flow: entry triage + scoped template re-application over the dependency graph
+
+**What we did.** Path (b) of revision mode is now a real protocol (TOL-173/TOL-188). Entry triage first, with the skill diagnosing rather than trusting the user's framing — the discriminating question: "was the document wrong about what was true then, or has what's true changed since?" — routing to genuine-correction (scoped re-application), small-drift (same, recorded eyes-open), or context-changed (implicitly a new release: whole template, old doc as hypotheses). For corrections: locate the first-touched section, compute its downstream tree from the new explicit graph (`skills/quality-strategy/SECTION-DEPENDENCIES.md`, mirroring the sub-steps' own declared inputs), union for multiple corrections, record the plan in `## Since the last revision`, then re-apply the template to exactly that union — obvious inferences may be suggested but every downstream conclusion is user-ratified; unaffected dependents close as examined-unchanged confirmations. Untouched sections are never re-opened. Review check 24 diffs archive vs current: out-of-union edits FAIL, an under-computed union is a FAIL, union members without outcomes FLAG. A mode map at the top of Revision mode makes fresh/resumption/correction/re-walk/new-release explicit for agents landing mid-task.
+
+**Why.** Qing's design: corrections were previously "ask which sub-steps, jump to those" — no triage, no dependency reasoning, so a fixed bar could leave stale ratings downstream, and a context change dressed as a correction patched a strategy whose goals had moved. Users under-flag context changes; the goals change when the context does.
+
+**What would change our mind.** If real corrections show the graph's granularity is wrong (Part-level unions too coarse, sub-step too fine). If wide trees (bar corrections) make correction mode feel like a re-walk despite the keep-as-is mechanic — the fix would be smarter obvious-inference batching, not skipping ratification. If the graph drifts from the sub-steps (the same-commit update rule is the guard).
+
+**How we'd know.** Regression SC-23 + PR tests `2026-07-10-req6.md` (incl. TOL-188's bad-pass fixture: an out-of-union edit must FAIL check 24). Watch the first real correction session end-to-end.
+
+---

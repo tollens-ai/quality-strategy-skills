@@ -8,7 +8,7 @@ This is the final content sub-step. After this, the strategy goes to `/quality-s
 
 ## What you need from the previous sub-step
 
-Read sub-step 7.2's classified action list from `quality/strategy.md`, plus Part 6 (Risk Map) for context on dependencies and impact.
+Read sub-step 7.2's classified action list from `quality/strategy.md`, plus Part 6 (Risk Map) for context on dependencies and impact. Read Part 1's budget and constraints (sub-step 1.5) — the phasing has to be realistic against the stated time, people, and money, not just correctly ordered.
 
 ## What to cover
 
