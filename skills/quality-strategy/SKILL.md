@@ -21,7 +21,7 @@ File references below use the `$PLUGIN_ROOT` and `$DOCS_DIR` placeholders, plus 
 
 ## Before you start
 
-Read `$PLUGIN_ROOT/PHILOSOPHY.md` if you haven't already. The disciplines that recur in every step — interview don't infer; ask rather than guess; record assumptions; understand the why; make confidence visible; push back on vagueness; make non-goals explicit; stay sequential — are non-negotiable and applied throughout.
+Read `$PLUGIN_ROOT/PHILOSOPHY.md` if you haven't already. The disciplines that recur in every step — interview don't infer; ask rather than guess; record assumptions; understand the why; make confidence visible; push back on vagueness (ask for precision — when, how often, to what extent — never invent it); make non-goals explicit; stay sequential — are non-negotiable and applied throughout.
 
 ## Phrasing — adapt, don't recite
 

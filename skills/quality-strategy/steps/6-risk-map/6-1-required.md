@@ -24,7 +24,7 @@ For each H/M dimension, ask in turn:
 - *"How confident are we that's the right target? High, Medium, or Low?"*
 - *"What's it grounded in — which stakeholder bar, which release purpose?"*
 
-Use the three-lens material from Part 3 as your starting position. Often the required level comes down to: avoid every relevant stakeholder's dealbreakers, and meet their good-enoughs. Say that out loud to the user: *"From Part 3, [stakeholder]'s Good Enough was X and their Dealbreaker was Y. Required level for [dimension] looks like: [synthesis]. Does that capture the bar, or is it missing something?"*
+Use the three-lens material from Part 3 as your starting position. Often the required level comes down to: avoid every relevant stakeholder's dealbreakers, and meet their good-enoughs. Say that out loud to the user: *"From Part 3, [stakeholder]'s Good Enough was X and their Dealbreaker was Y. Required level for [dimension] looks like: [synthesis]. Does that capture the bar, or is it missing something?"* Carry each bar's **recurrence/tolerance** recorded in Part 3 into the synthesis: *"no sustained breakage"* and *"no bugs ever"* are different bars demanding different required levels — don't silently tighten a tolerant bar or loosen a strict one; where a bar's tolerance wasn't recorded and the required level turns on it, ask now rather than pick a reading.
 
 **The bar cuts both ways (anti-overshoot).** A required level is a ceiling as well as a floor: when the actual later meets the bar, "goal is met" is a **positive verdict** — even where the solution wouldn't survive the next order of magnitude — and the right response is to record a future-release change note (what would reopen this, and when), not to gold-plate now. Don't let a required level quietly absorb robustness no stakeholder bar asked for; if the team knows the solution is rough-but-sufficient, that is a tradeoff to write down, not a reason to raise the bar — append it to Part 5's "Tradeoffs knowingly made at the merge" list (the rating step's record of where stakeholder bars recombine), so it has a home in the doc rather than living only in conversation.
 
@@ -55,6 +55,7 @@ What you must not do:
 
 - [ ] Every H/M dimension from Part 5 has a row in Part 6 with a required level described in the dimension's own concrete terms — checked against the H/M dimension list from sub-step 5.4: every dimension has a row, and every row has a dimension.
 - [ ] Every required level has confidence (H/M/L) and grounding (stakeholder bar(s) and release purpose).
+- [ ] Where a grounding bar carries a recurrence/tolerance recorded in Part 3, the required level reflects it — not silently tightened or loosened; where the required level turned on a tolerance nobody recorded, the user was asked, or it is an `OPEN QUESTION:`.
 - [ ] Confidence ratings use only H/M/L — no percentages.
 - [ ] Tensions between stakeholder bars are surfaced where they exist.
 - [ ] Any deferred items are recorded as `OPEN QUESTION:`.

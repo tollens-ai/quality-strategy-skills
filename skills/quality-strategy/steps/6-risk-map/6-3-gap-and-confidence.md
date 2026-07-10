@@ -25,7 +25,7 @@ Walk through each row systematically:
 
 - For each dimension, take the required and actual from 6.1 and 6.2.
 - Work out the gap: matched / small gap / large gap / **Unknown** (when the actual is Unknown — the gap can't be measured).
-- Work out the impact: from the dimension's H/M rating and the rationale, how dangerous is this gap? (Impact is the importance carried over from Part 5 — High means *important*, not *in trouble*. A High-impact dimension with no gap is a cold row and a success story; importance and current state combine in the heat calculation, but they never blur.)
+- Work out the impact: from the dimension's H/M rating and the rationale, how dangerous is this gap? (Impact is the importance carried over from Part 5 — High means *important*, not *in trouble*. A High-impact dimension with no gap is a cold row and a success story; importance and current state combine in the heat calculation, but they never blur.) Respect the bar's recorded **recurrence/tolerance** (Part 3) when judging how dangerous the gap is: a Dealbreaker that fires on sustained breakage but tolerates one-offs makes a gap producing occasional, self-correcting failures less dangerous than one producing persistent failure — read the tolerance off the bar rather than treating every threat to a Dealbreaker as instantly fatal, and say which failure shape the gap actually produces. The Impact *letter* itself is still the Part 5 carry-over, unchanged by gap shape; the tolerance reasoning lands in the one-line reason and in whether the row makes the hottest-items list — never in the H/M value.
 - Mark the heat: hottest = large gap + high impact + low confidence on either side. **Unknowns on high-impact dimensions are also hot** — you don't know where you are, and it matters a lot. They typically generate the highest-priority items in Step 7.
 - Coldest = small gap + lower impact + high confidence on both sides.
 
@@ -70,6 +70,7 @@ What you must not do:
 
 - [ ] Every H/M dimension × relevant release has a complete risk map row: required, confidence-in-required, actual, confidence-in-actual, gap, impact.
 - [ ] Hottest items (large gap + high impact + low confidence) are flagged explicitly with one-line reasoning.
+- [ ] Each row's Impact letter matches its Part 5 rating (H/M — never downgraded per-gap); where the threatened bar carries a recorded recurrence/tolerance, the row's reason names the failure shape the gap produces (one-off vs sustained) and the tolerance reasoning lives there and in the heat, not in a changed letter.
 - [ ] Each behaviour named as a defect/risk survived the **counter-pressure question** (what does it protect?); any genuine two-dimension tension was presented as a tradeoff for the user to arbitrate — citing the domain norm where one exists — and recorded as such, not booked as a one-sided bug.
 - [ ] Patterns and dependencies are noted.
 - [ ] Confidence is expressed in coarse honest levels — no percentages anywhere.
@@ -89,7 +90,7 @@ Append to `quality/strategy.md` under Part 6 (the Part 6 header and Confidence v
 
 | Dimension | Required | Conf. (req) | Actual | Conf. (act) | Gap | Impact |
 |---|---|---|---|---|---|---|
-| <dimension> | <qualitative description> | H/M/L | <qualitative description, OR "Unknown"> | H/M/L (or "—" for Unknown) | <small / medium / large / Unknown> | <H/M/L with one-line reason> |
+| <dimension> | <qualitative description> | H/M/L | <qualitative description, OR "Unknown"> | H/M/L (or "—" for Unknown) | <small / medium / large / Unknown> | <H/M — the Part 5 rating carried over, with one-line reason> |
 
 ### Hottest items
 
