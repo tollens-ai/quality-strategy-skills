@@ -163,8 +163,8 @@ The work is divided into 7 numbered steps, each with one or more sub-steps — 2
 |---|---|---|
 | 0 — Pre-read | `steps/0-pre-read/0-dispatch.md` | Project digest at `quality/pre-read.md` |
 | 1.1 Purpose | `steps/1-context/1-1-purpose.md` | Product purpose, immediate goal, longer-term ambition |
-| 1.2 Team | `steps/1-context/1-2-team.md` | Roles including agent team members |
-| 1.3 Workflows | `steps/1-context/1-3-workflows.md` | How work actually flows |
+| 1.2 Team | `steps/1-context/1-2-team.md` | Roles + how they work together, including agent team members |
+| 1.3 Workflows | `steps/1-context/1-3-workflows.md` | How work actually flows — human + agentic-process walk, anticipated user workflows, working-well/friction per area |
 | 1.4 Release workflow | `steps/1-context/1-4-release-workflow.md` | How releases ship |
 | 1.5 Budget | `steps/1-context/1-5-budget.md` | Resources and constraints |
 | 2.1 Roadmap | `steps/2-releases/2-1-roadmap.md` | Per-release purposes |
