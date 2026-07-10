@@ -18,7 +18,7 @@ By the end of this sub-step the strategy doc must capture, **for each H/M dimens
 
 ## How to ask
 
-For each H/M dimension, ask in turn:
+Walk the H/M dimensions **cluster by cluster** when they fall into natural clusters (SKILL.md → "Cluster-by-cluster, not one flat list") — sharing a stakeholder, a theme, or a parent composite from 5.2 — one cluster at a time, confirmed, before moving to the next; a flat dimension-by-dimension walk stays fine when nothing meaningfully clusters (record *"considered, no clustering"*). Within each dimension, ask in turn:
 
 - *"For [dimension], what does the release need to look like to succeed? Describe it in concrete terms — what would a stakeholder see, do, or experience?"*
 - *"How confident are we that's the right target? High, Medium, or Low?"*
@@ -58,6 +58,7 @@ What you must not do:
 - [ ] Where a grounding bar carries a recurrence/tolerance recorded in Part 3, the required level reflects it — not silently tightened or loosened; where the required level turned on a tolerance nobody recorded, the user was asked, or it is an `OPEN QUESTION:`.
 - [ ] Confidence ratings use only H/M/L — no percentages.
 - [ ] Tensions between stakeholder bars are surfaced where they exist.
+- [ ] Where the dimensions fell into natural clusters, the walkthrough presented them cluster by cluster — or "considered, no clustering" is recorded.
 - [ ] Any deferred items are recorded as `OPEN QUESTION:`.
 - [ ] Pre-read sources are cited in the section's evidence field — naming actual files referenced, or, for an interview-derived / no-repo pre-read, citing the interview honestly (never blank, never a placeholder).
 - [ ] The user has been given a 2–4 line wrap-up, asked if any quick concerns, and confirmed ready to continue. (Substantive checkpoint runs at step boundaries — see SKILL.md.)
@@ -94,6 +95,8 @@ Append to `quality/strategy.md`:
 … (repeat per H/M dimension)
 
 **Sources consulted from pre-read:** <bullet list>
+
+**Clustering:** <the groupings used to walk the dimensions, or "considered, no clustering">
 
 **Assumptions made:** <bullet list, or "none">
 

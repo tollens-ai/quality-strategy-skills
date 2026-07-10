@@ -21,7 +21,7 @@ By the end of this sub-step the strategy doc must capture:
 
 This sub-step is mostly synthesis, not interview. The agent does the work; the user reviews and corrects.
 
-Walk through each row systematically:
+Walk through each row systematically — **cluster by cluster** when the dimensions fall into natural clusters (SKILL.md → "Cluster-by-cluster, not one flat list"), presenting one cluster's rows, confirming, then moving to the next; a flat row-by-row walk stays fine when nothing meaningfully clusters (record *"considered, no clustering"*):
 
 - For each dimension, take the required and actual from 6.1 and 6.2.
 - Work out the gap: matched / small gap / large gap / **Unknown** (when the actual is Unknown — the gap can't be measured).
@@ -74,6 +74,7 @@ What you must not do:
 - [ ] Each behaviour named as a defect/risk survived the **counter-pressure question** (what does it protect?); any genuine two-dimension tension was presented as a tradeoff for the user to arbitrate — citing the domain norm where one exists — and recorded as such, not booked as a one-sided bug.
 - [ ] Patterns and dependencies are noted.
 - [ ] Confidence is expressed in coarse honest levels — no percentages anywhere.
+- [ ] Where the risk map rows fell into natural clusters, the walkthrough presented them cluster by cluster — or "considered, no clustering" is recorded.
 - [ ] Any deferred items are recorded as `OPEN QUESTION:`.
 - [ ] Pre-read sources are cited in the section's evidence field — naming actual files referenced, or, for an interview-derived / no-repo pre-read, citing the interview honestly (never blank, never a placeholder).
 - [ ] The step-boundary `/contradiction-check` was dispatched on the doc so far (it is the first move of the checkpoint, per SKILL.md) and its scratch file exists at `quality/.scratch/6.3-contradiction-check.md`.
@@ -103,6 +104,8 @@ Append to `quality/strategy.md` under Part 6 (the Part 6 header and Confidence v
 <clusters of unknowns; dependencies between assessments>
 
 **Sources consulted from pre-read:** <bullet list>
+
+**Clustering:** <the groupings used to walk the risk map, or "considered, no clustering">
 
 **Assumptions made:** <bullet list, or "none">
 

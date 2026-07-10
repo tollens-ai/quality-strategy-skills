@@ -14,9 +14,11 @@ Read all of Part 5 (5.3's final inventory + 5.4's ratings) from `quality/strateg
 
 ## The checks (run in order)
 
+**Present findings cluster by cluster where they fall into natural clusters** — sharing a stakeholder, a theme, or a parent composite from 5.2 (SKILL.md → "Cluster-by-cluster, not one flat list") — rather than one flat dump across all six checks; record *"considered, no clustering"* when nothing meaningfully groups. This changes how findings are walked back to the user, not the checks themselves.
+
 ### Check 1 — High justification
 
-Walk the Highs one by one. **Test justification, not distribution.** By rating time the low-stakes material has already been deliberately cut — dropped at the inventory, excluded as a non-goal, rated None — so a list where Highs dominate what remains is the *expected* shape, not evidence of inflation. Counting Highs and doubting the count fires on exactly the strategies that did the earlier pruning right. Instead:
+Walk the Highs one by one, cluster by cluster where they cluster naturally. **Test justification, not distribution.** By rating time the low-stakes material has already been deliberately cut — dropped at the inventory, excluded as a non-goal, rated None — so a list where Highs dominate what remains is the *expected* shape, not evidence of inflation. Counting Highs and doubting the count fires on exactly the strategies that did the earlier pruning right. Instead:
 
 - **Every High must cite the stakeholder Dealbreaker bar it rests on.** Where the citation is missing or generic, challenge that High *individually*: *"Which stakeholder, which bar? If no Dealbreaker demands this, it's Medium."*
 - **When every High is justified, say so plainly:** *"Every High here cites a real dealbreaker — this is a genuinely high-stakes surface."* Don't manufacture doubt about a count that the bars support.
@@ -96,6 +98,7 @@ What you must not do:
 - [ ] Non-goal alignment has been verified; any mismatches surfaced and resolved.
 - [ ] Every H rating cites a named stakeholder Dealbreaker bar; every None rating is a confirmed "no stakeholder bar references it" (not a forgotten gap).
 - [ ] **Floors and default-ins check has been run:** every floor whose predicate holds is present and not None; every default-in (security; data-integrity where user data exists; unbounded spend where the system can spend) is either in via a reverse-trace or carries a recorded eyes-open accepted-risk — none silently absent, none silently included.
+- [ ] Where findings fell into natural clusters, they were presented cluster by cluster — or "considered, no clustering" is recorded.
 - [ ] Any deferred items are recorded as `OPEN QUESTION:`.
 - [ ] The step-boundary `/contradiction-check` was dispatched on the doc so far (it is the first move of the checkpoint, per SKILL.md) and its scratch file exists at `quality/.scratch/5.5-contradiction-check.md`.
 - [ ] The user has run the **step-boundary substantive checkpoint** (see SKILL.md), evaluating the whole step's output (not just this final sub-step), including any rethinks of earlier steps. Explicit, considered confirmation — not silence, not a non-committal response.
@@ -117,6 +120,8 @@ Append to `quality/strategy.md` under Part 5:
 - **Rationale coverage:** <verified; or any gaps flagged>
 
 **Sources consulted from pre-read:** <typically empty for this sub-step>
+
+**Clustering:** <the groupings used to present findings, or "considered, no clustering">
 
 **Assumptions made:** <bullet list, or "none">
 

@@ -49,6 +49,16 @@ An unscoped noun is where imprecise thinking hides. Whenever you name a dimensio
 
 This applies everywhere a dimension, bar, risk, or action gets named, throughout the whole strategy — sub-step 5.1's scope column is where it's most visible on the page, but the discipline is conversational first: say the scope out loud before it goes on the page, and push back on your own draft language if it names a dimension without saying whose and where.
 
+## Cluster-by-cluster, not one flat list
+
+When Step 5 (Dimensions) or Step 6 (Risk Map) has more than a handful of items and they fall into natural clusters — dimensions unpacked from the same composite (5.2), the agent-facing cluster (5.1), dimensions sharing a stakeholder or a theme the conversation has already surfaced — present and confirm them **cluster by cluster**: walk one cluster's items, get confirmation, move to the next. A single flat list dumped at the user for a large step forces them to hold everything in their head at once and makes disagreement hard to localise; a cluster at a time keeps the conversation anchored to one theme before moving on.
+
+This is a **presentation** discipline, not a re-derivation of the underlying work — the rating, the required/actual levels, the risk-map rows are still produced exactly the way each sub-step describes; clustering changes how they're walked back to the user for confirmation, not how they're computed.
+
+**Flat-list stays legal** when the items genuinely don't cluster — a short list, or one where nothing meaningfully groups. A rough test for "meaningfully": if you'd naturally introduce the group with a name before the user has to ask — *"let's do the security-shaped ones next"* — it clusters; if forcing a name for the group feels artificial, it doesn't. In the no-cluster case, record it plainly: *"considered, no clustering"* (with a one-line reason if it's not obvious), rather than silently presenting a flat list without having asked the question. What's not legal is a flat list nobody considered clustering at all — **and the record belongs in the doc, not only the conversation**: each sub-step's output carries a one-line "Clustering:" note (the groupings used, or "considered, no clustering") so a returning reader can verify it without replaying the transcript.
+
+This applies at 5.4 (rating summary and the High-justification glance), 5.5 (sanity-check findings), and 6.1–6.3 (required levels, actual levels, the risk map itself) — see each sub-step file for how it lands there.
+
 ## Session start — the itinerary, the repo scope, where the strategy lives, and the commit cadence
 
 Five moves at the start of every working session (first or resumed), before the next sub-step's work begins — and, on a first session, before sub-step 0 writes anything to disk:
@@ -236,7 +246,7 @@ This is the single most important user-facing pattern in the skill. The strategy
 
 0b. **Silently strip presentation leakage from this step's Part(s).** Re-read the section(s) this step just appended to `quality/strategy.md` and quietly remove machinery that isn't strategy — see "Presentation cleanup at review points" below for the patterns. Do this without narrating it; the cleanup never appears in what you say to the user. This is review-time cleanup of the freshly-written Part, the per-subsection counterpart to the final whole-doc review.
 
-1. Summarise the *whole step's* output back to the user in 5–8 lines, covering the decisions that matter across all sub-steps in the step — plus any contradictions the check surfaced. Not a recap of process — a recap of decisions.
+1. Summarise the *whole step's* output back to the user in 5–8 lines, covering the decisions that matter across all sub-steps in the step — plus any contradictions the check surfaced. Not a recap of process — a recap of decisions. Where Step 5 or Step 6's content falls into natural clusters, this summary (and the sub-step walkthroughs that built up to it) presents cluster by cluster rather than as one flat list (see "Cluster-by-cluster, not one flat list" above) — a large step read back as one undifferentiated block is exactly what makes "does this hang together?" hard to answer.
 
 1b. **Give the progress line and the visible exit.** One line of where-we-are, with relative sizes: *"That was Step 5 — the longest one. Two steps left: the risk map, about half the size of what you just did, and a short optional plan of work."* And one line of what stopping here leaves them with: *"If you stopped now, you'd walk away with your stakeholders' bars and the rated dimensions on paper — already something you can act on — and we can resume from the doc any time."* Both are honest, not cheerleading: the doc genuinely is useful part-done, and resume genuinely is supported.
 

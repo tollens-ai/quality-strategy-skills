@@ -79,6 +79,8 @@ Talk exactly where stakeholders disagree — that contested call is where the us
 
 After the merge, glance over the Highs: each one must cite the Dealbreaker bar it rests on. This is **light** — the thorough justification and coverage checks live in 5.5. Don't be alarmed by a High-dominated table: by this point the low-stakes material has already left the list (dropped at the inventory, excluded as a non-goal, or rated None), so Highs dominating what remains is the expected shape, not inflation. Because H requires a real Dealbreaker, inflation is structurally limited anyway — the thing to verify is the citation behind each High, not the count of them.
 
+When the Highs fall into natural clusters (SKILL.md → "Cluster-by-cluster, not one flat list") — sharing a stakeholder, a theme, or a parent composite from 5.2 — glance and present them cluster by cluster rather than as one flat table dump; note *"considered, no clustering"* when they don't meaningfully group.
+
 You have explicit permission and encouragement to:
 
 - Surface a divergence even when the aggregate is "obvious" by max — the point of the merge is the team's commitment, not the arithmetic.
@@ -110,6 +112,7 @@ What you must not do:
 - [ ] Every **divergence** was surfaced to the user, and the merge decision is recorded with a one-line note.
 - [ ] Tradeoffs knowingly made at the merge are recorded (what was traded, the bar it still satisfies, the reopen trigger) — or the section records "none recorded this pass".
 - [ ] Rating vocabulary is **H / M / None** — no L, no percentages.
+- [ ] Where the Highs (or the ratings generally) fall into natural clusters, the backstop glance and the closing summary presented them cluster by cluster — or "considered, no clustering" is recorded.
 - [ ] Any deferred items are recorded as `OPEN QUESTION:`.
 - [ ] Pre-read sources are cited in the section's evidence field — naming actual files referenced, or, for an interview-derived / no-repo pre-read, citing the interview honestly (never blank, never a placeholder).
 - [ ] The user has been given a 2–4 line wrap-up, asked if any quick concerns, and confirmed ready to continue. (Substantive checkpoint runs at step boundaries — see SKILL.md.)
@@ -157,9 +160,11 @@ Merged ratings, grouped by rating for readability. Impact size only — likeliho
 
 **Sources consulted from pre-read:** <bullet list>
 
+**Clustering:** <the groupings used to present and confirm ratings, or "considered, no clustering">
+
 **Assumptions made:** <bullet list, or "none">
 
 **Open questions from this sub-step:** <bullet list, or "none">
 ```
 
-Once written, summarise back in 3–5 lines (highlighting the count by rating and any contested ratings the merge resolved) and ask the user (light wrap-up only — the substantive checkpoint runs at the step boundary, see SKILL.md): *"Ready to move on to sub-step 5.5 (Sanity checks)?"*
+Once written, summarise back in 3–5 lines (highlighting the count by rating and any contested ratings the merge resolved) — cluster by cluster where the dimensions fall into natural clusters (SKILL.md → "Cluster-by-cluster, not one flat list"), rather than one flat count, with a recorded *"considered, no clustering"* when they don't — and ask the user (light wrap-up only — the substantive checkpoint runs at the step boundary, see SKILL.md): *"Ready to move on to sub-step 5.5 (Sanity checks)?"*

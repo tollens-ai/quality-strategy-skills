@@ -52,7 +52,7 @@ Fold the findings back into the actuals as evidence: an Unknown may become a des
 
 ## How to ask
 
-For each H/M dimension, ask in turn:
+Walk the H/M dimensions **cluster by cluster** when they fall into natural clusters (SKILL.md → "Cluster-by-cluster, not one flat list") — one cluster at a time, confirmed, before moving to the next; a flat walk stays fine when nothing meaningfully clusters (record *"considered, no clustering"*). Within each dimension, ask in turn:
 
 - *"For [dimension], where is the project actually now? Describe it in dimension-specific terms — OR mark it Unknown if we haven't actually checked."*
 - *"What's that based on? Evidence from a specific test or review? Estimate? Or genuinely don't know?"*
@@ -92,6 +92,7 @@ What you must not do:
 - [ ] Every non-Unknown actual's Evidence line names both what was observed and what judges it; any actual whose basis couldn't be named in a line has been honestly recorded as Unknown. (No oracle sweep runs here — that is `/evaluation-strategy`'s job after the strategy closes; Unknowns blocked on "nothing can judge this yet" say so in their to-resolve note.)
 - [ ] Thin-evidence, design-shaped dimensions got the targeted design deep-dive (or its explicit skip note): findings recorded as evidence with confidence markings, the test-coverage-vs-risk-skew lens applied, and the scratch file at `quality/.scratch/6.2-design-deep-dive.md` (or the skip note) in place.
 - [ ] Confidence ratings use only H/M/L — no percentages.
+- [ ] Where the dimensions fell into natural clusters, the walkthrough presented them cluster by cluster — or "considered, no clustering" is recorded.
 - [ ] Any deferred items are recorded as `OPEN QUESTION:`.
 - [ ] Pre-read sources are cited in the section's evidence field — naming actual files referenced, or, for an interview-derived / no-repo pre-read, citing the interview honestly (never blank, never a placeholder).
 - [ ] The user has been given a 2–4 line wrap-up, asked if any quick concerns, and confirmed ready to continue. (Substantive checkpoint runs at step boundaries — see SKILL.md.)
@@ -122,6 +123,8 @@ Append to `quality/strategy.md` under Part 6:
 … (repeat per H/M dimension)
 
 **Sources consulted from pre-read:** <bullet list>
+
+**Clustering:** <the groupings used to walk the dimensions, or "considered, no clustering">
 
 **Assumptions made:** <bullet list, or "none">
 
