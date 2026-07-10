@@ -36,11 +36,11 @@ You have explicit permission and encouragement to:
 
 - Combine actions where one piece of work resolves multiple risk-map entries.
 - Drop actions where the user confirms the gap is acceptable as-is (these become non-goal-confirming notes in the strategy).
-- Surface actions the user mentioned in earlier sub-steps that didn't make it into the risk map — late additions are fine.
+- Surface actions the user mentioned in earlier sub-steps that didn't make it into the risk map — late additions are fine. This includes **process-change candidates**: Part 1 names itself a revisable working basis, so if anywhere in the session it looked like changing the team, org, or workflow would reach the goals more efficiently than a product fix, that becomes an action here — never a silent edit back into Part 1.
 
 What you must not do:
 
-- Classify actions as testing / stakeholder / fixing yet. That's 7.2.
+- Classify actions as testing / stakeholder / fixing / process-change yet. That's 7.2.
 - Sequence actions yet. That's 7.3.
 - Elaborate an action into a mini-plan. One or two lines per action — the plan of work is a strategy-level sketch, and the follow-on lanes own the depth (`/test-strategy` for testing work, `/evaluation-strategy` for evaluation work (oracles and proxies) — builds via `/tooling-strategy` — and `/process-strategy` for rules and process work; see SKILL.md → "The plan of work is a sketch").
 - Skip Unknown actuals or Low-confidence rows on high-impact dimensions. They generate the most valuable actions in early-stage projects — testing/asking work for Unknowns, fixing or testing work for Lows depending on the gap.

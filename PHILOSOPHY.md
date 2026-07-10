@@ -51,13 +51,14 @@ You will never have enough time to test everything, fix everything, or know ever
 
 The single most valuable skill is deciding what to work on — and you can only do that if you understand who matters, what they value, and where the danger is.
 
-Three kinds of work follow naturally:
+Four kinds of work follow naturally:
 
 - **Testing work** removes uncertainty about *what is*. It investigates current quality on a dimension and upgrades confidence in where you actually are.
 - **Stakeholder work** removes uncertainty about *what should be*. It involves talking to stakeholders, observing users, reviewing market expectations.
-- **Fixing work** closes the gap between actual and required quality.
+- **Fixing work** closes the gap between actual and required quality on a product dimension.
+- **Process-change work** changes the team, organisation, or workflow itself — not the product. The strategy's own working basis (see "We live in the new world" and the context it captures) is revisable: sometimes the most efficient path to the goals is changing how work gets done, not what gets built.
 
-You cannot do fixing work efficiently until you have reasonable confidence on both sides of the gap. Don't fix to a target you're guessing at.
+You cannot do fixing work efficiently until you have reasonable confidence on both sides of the gap. Don't fix to a target you're guessing at. Process-change work isn't gated the same way — it targets the mechanism producing the product, not a risk-map row on the product itself.
 
 ## Confidence is the through-line
 

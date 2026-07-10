@@ -106,7 +106,7 @@ Append to `quality/strategy.md`, replacing or extending the classified list from
 
 ### How this plan gets elaborated
 
-This Part is the strategy-level sketch. <One or two lines pointing onward: testing work is elaborated by `/test-strategy` into `quality/test-strategy.md`; evaluation work by `/evaluation-strategy` into `quality/evaluation-strategy.md` (agreed builds by `/tooling-strategy` into `quality/tooling-strategy.md`); rules and process work by `/process-strategy` into `quality/process-strategy.md`. Name only the follow-ons this plan actually feeds.>
+This Part is the strategy-level sketch. <One or two lines pointing onward: testing work is elaborated by `/test-strategy` into `quality/test-strategy.md`; evaluation work by `/evaluation-strategy` into `quality/evaluation-strategy.md` (agreed builds by `/tooling-strategy` into `quality/tooling-strategy.md`); rules, process, and process-change work by `/process-strategy` into `quality/process-strategy.md`. Name only the follow-ons this plan actually feeds.>
 
 **Sources consulted from pre-read:** <bullet list>
 

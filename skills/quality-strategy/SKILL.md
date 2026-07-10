@@ -132,7 +132,7 @@ Part 7 (Step 7) lists, classifies, and sequences the work at *strategy* level �
 
 - **Testing work** → `/test-strategy` — the testing lane: where investigation would move the risk map (`quality/test-strategy.md`).
 - **Evaluation work** → `/evaluation-strategy` — the evaluation lane: where better quality instruments — oracles that judge, proxies that indicate — would make the project knowable (`quality/evaluation-strategy.md`); agreed build items go on to `/tooling-strategy` for the prioritised build plan (`quality/tooling-strategy.md`).
-- **Rules and process work** → `/process-strategy` — the rules/invariants/processes lane: where changing how work is done prevents whole defect classes (`quality/process-strategy.md`).
+- **Rules, process, and process-change work** → `/process-strategy` — the rules/invariants/processes lane: where changing how work is done — including the team, org, or workflow itself, Part 7's fourth action class — prevents whole defect classes or reaches the goals more efficiently than a product fix (`quality/process-strategy.md`).
 - **Communicating the strategy** → `/strategy-variants` — audience-facing variants of the finished doc.
 
 The three lanes are **deliberately lighter** than this skill — high-level ideas and questions per ility, one or two focused conversations each, the differential stated in their own prompts. Each ingests this strategy for the release, filters for the ilities its modality can make a dent on, and works have-already / could-improve / could-add through them with the user.
@@ -180,7 +180,7 @@ The work is divided into 7 numbered steps, each with one or more sub-steps — 2
 | 6.2 Actual levels | `steps/6-risk-map/6-2-actual.md` | Where we are on each H/M dimension |
 | 6.3 Gap and confidence | `steps/6-risk-map/6-3-gap-and-confidence.md` | The risk map combining required + actual + confidence on both sides |
 | 7.1 Derive actions | `steps/7-plan-of-work/7-1-derive.md` | What needs doing, drawn from the risk map |
-| 7.2 Classify | `steps/7-plan-of-work/7-2-classify.md` | Each action as testing / stakeholder / fixing |
+| 7.2 Classify | `steps/7-plan-of-work/7-2-classify.md` | Each action as testing / stakeholder / fixing / process-change |
 | 7.3 Sequence | `steps/7-plan-of-work/7-3-sequence.md` | Phasing and dependencies |
 | 7.3 — Operational distillation | invoke `/operational-distillation` (separate skill) | TL;DR + triage rubric placed at the top of the strategy |
 | 7.3 — Effective Comms pass | invoke `/effective-comms` (separate skill) | Audience-fit / hidden-context / names-before-coordinates gate before the doc is finalized |
