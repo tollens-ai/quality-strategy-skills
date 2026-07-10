@@ -53,7 +53,7 @@ Throughout the TL;DR and rubric, **use names, not coordinates** (PHILOSOPHY: *wr
 
 - **Purpose** — what this strategy investigates and which quality strategy it operationalises.
 - **The top agreed moves** — the highest-priority investigations and the questions they answer.
-- **Allocation hot spots** — the rows where effort concentrates, plus any low-confidence or "try-and-see" rows the reader should treat as provisional.
+- **Priority order** — which ilities were tackled first (Dealbreaker-linked ilities first, cheaper-to-learn within similar impact) and any agreed move worth flagging as especially high-priority or still uncertain.
 - **Blocked items** — any agreed moves marked blocked on missing instruments or oracles.
 - **Key non-targets** — the one or two things deliberately not being tested, most likely to be mistaken for gaps.
 
