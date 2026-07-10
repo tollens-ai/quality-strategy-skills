@@ -76,7 +76,7 @@ Each entry: what we did, why we did it, what would change our mind, and how we'd
 
 **How we'd know.** Compare real strategies to an early real-project strategy's structure — are the "live debates" being captured equivalently, or are they getting lost?
 
-**Resolved (Qing, 2026-07-10).** Three lenses stand — Discussed is not added as a fourth. Recorded honestly, as a hypothesis with no evidence behind it and not the basis for the ruling itself: "Discussed" may be a transcription artifact from whoever originally dumped the origin design session into the knowledge base, rather than something stated as a genuine fourth lens — "no evidence, obviously." The ruling doesn't lean on that hypothesis being right; it stands on the reasoning already given above (Discussed is a different class of thing than the other three; `OPEN QUESTION:` already captures it). Closed; not revisiting without new evidence per "What would change our mind" above.
+**Resolved (the maintainer, 2026-07-10).** Three lenses stand — Discussed is not added as a fourth. Recorded honestly, as a hypothesis with no evidence behind it and not the basis for the ruling itself: "Discussed" may be a transcription artifact from whoever originally dumped the origin design session into the knowledge base, rather than something stated as a genuine fourth lens — "no evidence, obviously." The ruling doesn't lean on that hypothesis being right; it stands on the reasoning already given above (Discussed is a different class of thing than the other three; `OPEN QUESTION:` already captures it). Closed; not revisiting without new evidence per "What would change our mind" above.
 
 ---
 
