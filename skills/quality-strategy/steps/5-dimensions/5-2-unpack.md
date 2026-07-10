@@ -4,7 +4,7 @@
 
 For each composite dimension in the raw inventory from 5.1, decide whether it's actually one thing or several things wearing a trenchcoat. Where it's several things, split it into sub-dimensions that can be rated independently.
 
-Skip an unpack that was needed and you get a misleading rating in 5.4 and a misleading risk-map row in Step 6: the sub-dimensions have meaningfully different priorities, so the single composite rating is wrong for most of them.
+Skip an unpack that was needed and you get a misleading rating in 5.4 and a misleading risk-map row in Step 6: the sub-dimensions have meaningfully different priorities, so the single composite rating is wrong for most of them — including where the priorities differ **by stakeholder**, not just by sub-concept (see below and SKILL.md → "Name the scope").
 
 ## What you need from the previous sub-step
 
@@ -39,9 +39,11 @@ For obviously-atomic dimensions (e.g. "compliance with HIPAA," "Spanish localisa
 
 For each composite, propose unpacking concretely:
 
-> *"Performance is several distinct things — scalability (handling large inputs), elapsed time (how long runs take), UX responsiveness (does it feel responsive), jitter (predictable timing). For this release, do these have meaningfully different priorities? If so, treat them as separate dimensions."*
+> *"Performance is several distinct things — scalability (handling large inputs), elapsed time (how long runs take), UX responsiveness (does it feel responsive), jitter (predictable timing). For this release, do these have meaningfully different priorities — including for different stakeholders? If so, treat them as separate dimensions."*
 
-The user confirms which to split. Replace the composite with the split sub-dimensions in the inventory. The "one-line reason" for each sub-dimension should anchor in a specific stakeholder bar where possible — the bar is often what surfaces the sub-dimension as relevant.
+**Splitting by stakeholder, not just by sub-concept.** A dimension can also need splitting when the *name* is one thing but the *meaning or priority* differs by who it's for — this comes up from 5.1's scope column: if the raw inventory carries "usability" scoped to two different stakeholders with genuinely different bars (a dev tool's own UI vs. the workflows it produces, or a human user vs. an agent caller), that's a split here even when nothing about the sub-concept itself is composite. Ask directly when 5.1 flagged this: *"Usability showed up for both [stakeholder A] and [stakeholder B] — do they actually want different things, or is one bar enough for both?"*
+
+The user confirms which to split. Replace the composite with the split sub-dimensions in the inventory, each carrying its own scope forward from 5.1. The "one-line reason" for each sub-dimension should anchor in a specific stakeholder bar where possible — the bar is often what surfaces the sub-dimension as relevant.
 
 You have explicit permission and encouragement to:
 
@@ -63,8 +65,8 @@ What you must not do:
 
 ## This sub-step is DONE when
 
-- [ ] Every dimension in the raw inventory has been examined for the unpack question.
-- [ ] Every composite that was unpacked has been replaced with its sub-dimensions in the inventory, each with a one-line reason and (where possible) a stakeholder-bar anchor.
+- [ ] Every dimension in the raw inventory has been examined for the unpack question — including whether it needs splitting **by stakeholder**, not only by sub-concept.
+- [ ] Every composite that was unpacked has been replaced with its sub-dimensions in the inventory, each with a one-line reason, its scope carried forward (or refined, for a stakeholder-driven split) from 5.1, and (where possible) a stakeholder-bar anchor.
 - [ ] Every composite that was *not* unpacked has been actively confirmed as atomic for this project, with reasoning recorded.
 - [ ] Any deferred items are recorded as `OPEN QUESTION:`.
 - [ ] Pre-read sources are cited in the section's evidence field — naming actual files referenced, or, for an interview-derived / no-repo pre-read, citing the interview honestly (never blank, never a placeholder).
@@ -79,9 +81,9 @@ Update the inventory section in `quality/strategy.md`. Replace the raw inventory
 ```markdown
 ### Inventory after unpack pass (<release>)
 
-| Dimension | One-line reason it matters | Source | Unpacked from |
-|---|---|---|---|
-| <name (atomic, or sub-dimension)> | <why this matters for this release> | <stakeholder bar / design observation / reference-list backstop> | <"atomic — considered and confirmed", or "Performance" / "Maintainability" / etc.> |
+| Dimension | Scope (stakeholder/capacity + surface) | One-line reason it matters for THIS release | Source | Unpacked from |
+|---|---|---|---|---|
+| <name (atomic, or sub-dimension)> | <carried forward from 5.1, refined if the split was stakeholder-driven> | <why this matters for this release> | <stakeholder bar / design observation / reference-list backstop> | <"atomic — considered and confirmed", or "Performance" / "Maintainability" / etc.> |
 
 The "Unpacked from" column shows which dimensions were split: atomic dimensions show *"atomic — confirmed"*; sub-dimensions show their parent composite. This makes the unpack pass evidence visible in the doc.
 

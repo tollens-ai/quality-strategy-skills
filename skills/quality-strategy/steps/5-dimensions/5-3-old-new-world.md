@@ -92,9 +92,9 @@ Update the inventory section in `quality/strategy.md`. Replace the post-unpack i
 ```markdown
 ### Final inventory (<release>)
 
-| Dimension | One-line reason it matters | Source | Unpacked from | Audience |
-|---|---|---|---|---|
-| <name (atomic / sub-dimension / audience-split)> | <why this matters> | <stakeholder bar / design observation / reference-list backstop> | <"atomic", or parent composite> | <"any" / "humans" / "agents" / "both — split"> |
+| Dimension | Scope (stakeholder/capacity + surface) | One-line reason it matters for THIS release | Source | Unpacked from | Audience |
+|---|---|---|---|---|---|
+| <name (atomic / sub-dimension / audience-split)> | <carried forward from 5.1/5.2, refined if the audience split changed it> | <why this matters> | <stakeholder bar / design observation / reference-list backstop> | <"atomic", or parent composite> | <"any" / "humans" / "agents" / "both — split"> |
 
 The "Audience" column shows the old/new-world decision: dimensions where humans and agents care about the same thing show *"any"*; trap dimensions confirmed as audience-neutral show *"any — confirmed"*; audience-split dimensions appear as separate rows with *"humans"* and *"agents"* respectively.
 

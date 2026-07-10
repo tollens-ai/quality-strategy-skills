@@ -8,20 +8,22 @@ The inventory at the end of this sub-step is **raw**: composite dimensions (seve
 
 ## What you need from the previous sub-step
 
-Read all of Parts 1–4 from `quality/strategy.md`. The release purpose (Part 2), stakeholders and three-lens (Part 3), and non-goals (Part 4) feed directly into which dimensions matter. Read the **Design observations and likely-relevant dimensions** and **Floor predicates** sections of `quality/pre-read.md` — subagent C surfaced both the design-implied dimensions and the factual floor predicates the guaranteed-inclusion layer (step 4 below) reads.
+Read all of Parts 1–4 from `quality/strategy.md`. The release purpose (Part 2), stakeholders and three-lens (Part 3), and non-goals (Part 4) feed directly into which dimensions matter. Read the **Design observations and likely-relevant dimensions** and **Floor predicates** sections of `quality/pre-read.md` — subagent C surfaced both the design-implied dimensions and the factual floor predicates the guaranteed-inclusion layer (step 4 below) reads. If 2.1 negotiated a multi-release doc structure, **re-read `quality/.scratch/session-config.md` now** — its recorded choice is what step 3 (Consolidate) routes future-release candidates by, and 2.1 may have happened sessions ago or across a `/clear`; don't rely on remembering it.
 
 ## The work, in order
 
 ### 1. Bottom-up candidates (silent)
 
-Generate a candidate dimension list from what's already in the strategy doc and pre-read:
+Generate a candidate dimension list from what's already in the strategy doc and pre-read — scoped to **this release** (the header release named at 2.1), not a mixed pass across whatever the doc and pre-read happen to contain, and each candidate carrying the **scope** (which stakeholder(s)/capacity, which surface of the product) it came from:
 
-- For each stakeholder dealbreaker and good-enough in Part 3, ask: *"what dimension does this concern map to?"* Map to standard -ility names (the conventional names for non-functional quality attributes — reliability, usability, maintainability, observability, and the like) where one fits; use domain-specific names where they're clearer.
-- For each design observation in the pre-read's design section, take the implied dimensions surfaced by subagent C.
-- For the release purpose in Part 2, ask: *"what does this purpose require?"*
+- For each stakeholder dealbreaker and good-enough **for this release** in Part 3, ask: *"what dimension does this concern map to?"* Map to standard -ility names (the conventional names for non-functional quality attributes — reliability, usability, maintainability, observability, and the like) where one fits; use domain-specific names where they're clearer. The candidate's scope is free here — bars are already per-stakeholder, so carry that stakeholder forward as the row's scope.
+- For each design observation in the pre-read's design section that bears on **this release**, take the implied dimensions surfaced by subagent C. A design observation that only implies a dimension for a *later* release is not a candidate here — it's material for whichever doc structure was negotiated at 2.1 for future-release content (see step 3, Consolidate).
+- For **this release's purpose** — 2.1's roadmap entry for the header release, not the whole roadmap — ask: *"what does this purpose require?"*
 - **Agent-driven workflow → the agent-facing cluster.** A stated workflow is a goal statement: if Part 1 records that the user works through an autonomous agent — *"I just tell Claude roughly what I want and it builds it"*, agents on the team (1.2), an agent-driven dev or release flow (1.3, 1.4) — then that workflow *implies* the agent-facing dimension cluster the same way a stated launch implies signup scale. Add as candidates, each traced back to the workflow statement: **agent-diagnosability** (can the agent tell what went wrong?), **observability / debuggability pinned to the agent audience** (the agent is the one reading the logs), **testability pinned to agent-verifiable** (the agent must be able to confirm its own work without a human), and **agent-readability / context-efficiency** (can the agent orient in the code, cheaply?). Don't wait for the reference-list pass to surface these — the workflow already entails them; the bottom-up pass owes the trace. (The pack already carries the observability→debuggability/fixability/recoverability web; what this trigger adds is firing it *from the user's own stated workflow* rather than hoping the top-down pass catches it. This audience question is then settled properly in 5.3.)
 
-Build the bottom-up list internally. Don't show it to the user yet.
+**The dev-tool double.** Where the project is itself a tool that produces or hosts other people's work — an IDE, a CI product, a framework, this pack itself — a candidate's scope must also say which side of that double it's about: the tool's own quality, or the quality of the work the tool helps its users produce (see SKILL.md → "Name the scope"). A dev tool's reliability is not the reliability of the projects it builds; name the side explicitly, the same way a stakeholder is named. (5.3's trap-dimension framing gestures at the same split for agent audiences — this is its general form, named here at first surfacing.)
+
+Build the bottom-up list internally, each candidate carrying its scope alongside its dimension name and source. Don't show it to the user yet.
 
 ### 2. Top-down candidates (subagent)
 
@@ -53,24 +55,27 @@ Use the `Agent` tool with `subagent_type: general-purpose`. The brief:
 > - Agent-friendliness, context-efficiency, human-attention-efficiency (new-world dimensions)
 >
 > For each, classify as one of:
-> - **Clearly relevant** — the project context shows direct stakeholder concerns or design implications for this -ility.
-> - **Probably relevant** — there's a plausible reason this matters, but nothing in the strategy or pre-read directly shows it.
-> - **Borderline** — could matter, but only in a future release or for a stakeholder not currently being served.
+> - **Clearly relevant** — the project context shows direct stakeholder concerns or design implications for this -ility, for **this release**.
+> - **Probably relevant** — there's a plausible reason this matters for this release, but nothing in the strategy or pre-read directly shows it.
+> - **Borderline — future release.** Could matter, but only in a release beyond this one — name which, if the context suggests it.
+> - **Borderline — stakeholder not yet served.** Could matter, but only for a stakeholder this release doesn't serve.
 > - **Not relevant** — actively excluded by non-goals or clearly outside the release purpose.
 >
-> For each Clearly or Probably relevant -ility, write one line on *why* it matters for the strategy's release, citing what in the strategy or pre-read suggests it. Skip Borderline and Not-relevant ones in the output unless the borderline case looks especially worth flagging — don't pad.
+> For each Clearly or Probably relevant -ility, write one line on *why* it matters for the strategy's release, citing what in the strategy or pre-read suggests it, **and its scope** — which stakeholder(s)/capacity and which surface of the product (and, where the project is itself a tool producing or hosting other people's work, which side of that double). Not-relevant ones are skipped in the output — don't pad. **Future-release Borderline ones are not skipped**: list them separately, under their own heading, each with its dimension, why it looks future-relevant, and which release it likely belongs to if guessable. Stakeholder-not-yet-served Borderline ones stay skipped in the output unless especially worth flagging.
 >
-> Output format: a markdown list of relevant -ilities with their classification and one-line reason.
+> Output format: a markdown list of relevant -ilities (with classification, one-line reason, and scope) for this release, followed by a separate short list of future-release candidates.
 >
 > Do **not** consolidate against the main agent's bottom-up list — that's the main agent's job. Just produce the top-down check.
 
 ### 3. Consolidate
 
-When the subagent returns, **first save its returned top-down list verbatim** to `quality/.scratch/5.1-dimension-scout.md` — the sealed-dispatch scratch file `/quality-strategy-review` audits (see SKILL.md → "Sealed-context dispatch and scratch files"). Then merge it with the bottom-up list:
+When the subagent returns, **first save its returned top-down list verbatim** to `quality/.scratch/5.1-dimension-scout.md` — the sealed-dispatch scratch file `/quality-strategy-review` audits (see SKILL.md → "Sealed-context dispatch and scratch files"). Then merge it with the bottom-up list, **this release's candidates only**:
 
-- **In both lists** — keep, take the better-reasoned justification from either.
+- **In both lists** — keep, take the better-reasoned justification from either; if the two disagree on scope, ask rather than pick one.
 - **Bottom-up only** — keep; these came from real project context.
-- **Subagent only** — for each, surface to the user as a question: *"The reference-list pass flagged X as Clearly Relevant because [reason]. Should it be in the inventory?"* Don't include silently; don't drop silently.
+- **Subagent only** — for each, surface to the user as a question: *"The reference-list pass flagged X as Clearly Relevant for [scope] because [reason]. Should it be in the inventory?"* Don't include silently; don't drop silently.
+- **Future-release candidates (either pass)** — never included in this release's inventory and never silently dropped: route per the doc structure negotiated at 2.1 (SKILL.md → "Scope of this skill") — to the release bank, a light section, the parallel release's own depth pass, or the separate document, whichever applies. Name the release and, in one line, why it looks relevant there. Tell the user in half a line (*"scalability came up but it's a beta concern — banked for the beta"*, or *"added as a light section for the beta"* if that's the negotiated structure) and move on; don't pre-rate it or dig deeper — that depth belongs to that release's own pass.
+- **Same -ility, different stakeholders, different meaning or priority** — never collapse into one unscoped row. When the same dimension name means different things, or carries different priority, for different stakeholders (a dev tool's classic shape: "usability" for the product's own user vs. "usability" for an agent calling its API), it enters as **separate scoped rows** by default. Only fold it into one row with a deferred-to-5.2 flag when the split is genuinely more than a scope label — some real unpacking judgment 5.2 is better placed to make — and even then the row must say so visibly in the table (e.g. *"Source: … — scope split deferred to 5.2, see note"*), not merely be considered so in the agent's head. One unscoped row with no flag standing in for several stakeholders' different concerns is exactly the imprecision this step exists to catch.
 
 The user resolves subagent-only candidates. And when one of them is something the user never mentioned but their **stated goals imply they'd care about**, don't deliver it as a list row — deliver it as a moment, with the trace: *"you didn't mention X anywhere — but given what you said about Y, you'd care a lot if X failed. Does that land?"* Record the answer either way; a rejected revelation is data, not failure (see SKILL.md → "Deliver revelations as moments").
 
@@ -101,9 +106,9 @@ Run this layer **before** you present the consolidated inventory, so floors and 
 
 The pattern is: long stretches of agent work, short stretches of user input.
 
-1. Generate bottom-up candidates (silent).
+1. Generate bottom-up candidates (silent), each scoped to this release and carrying its stakeholder/surface.
 2. Dispatch subagent for top-down pass (silent until it returns).
-3. Surface the consolidated list back to the user. Ask: *"From the bottom-up plus the reference-list pass, the candidate dimensions are X, Y, Z. Anything we should add? Anything that doesn't actually matter?"* Adjust based on user input.
+3. Surface the consolidated list back to the user, **this release's candidates with their scope**. Ask: *"From the bottom-up plus the reference-list pass, the candidate dimensions for this release are X (for [scope]), Y (for [scope]), Z. Anything we should add? Anything that doesn't actually matter?"* If either pass turned up future-release candidates, surface those separately in the same breath — *"and these came up but only for the beta — banked there"* (or however the negotiated structure routes them) — not mixed into the this-release list. Adjust based on user input.
 
 You have explicit permission and encouragement to:
 
@@ -116,6 +121,8 @@ What you must not do:
 - Treat the subagent's list as authoritative — it's a backstop, not a verdict. The user resolves subagent-only candidates.
 - Use the reference list as a checklist with the user. The reference list belongs to the subagent's brief, not to the user-facing interview.
 - Skip the consolidation step. Subagent-only candidates need explicit user input to add or drop.
+- Leave a dimension's scope unstated, or let a future-release candidate sit unrouted in this release's list.
+- Treat a dimension's presence in a prior release's inventory as, by itself, grounds for including it in this one — inclusion and priority are decided fresh, per release.
 
 ## Push back when
 
@@ -123,14 +130,19 @@ What you must not do:
 - The candidate list is much shorter than the project warrants. *"This is a complex project; the inventory looks thin. What might we be missing?"*
 - Part 1 records an agent-driven workflow but no agent-facing dimensions came through. *"You said you work mostly through Claude — so an agent is your main reader and your main verifier. Shouldn't diagnosability-for-the-agent, agent-verifiable testability, and context-efficiency be on the list?"*
 - The user adds many dimensions without grounding any in stakeholder bars. *"What's driving this addition — a stakeholder bar, a design observation, something else?"*
+- A dimension is named without its scope, or the same -ility name is used for what are clearly different stakeholders' different concerns without a split. *"Whose usability, specifically — and on which surface? That might be two different rows."*
+- A candidate is proposed on the strength of "it mattered for the last release." *"Does it matter for THIS release, on its own terms? A prior release's inventory doesn't carry over automatically."*
 
 ## This sub-step is DONE when
 
-- [ ] A bottom-up candidate list has been generated from Parts 1–4 and the pre-read.
+- [ ] A bottom-up candidate list has been generated from Parts 1–4 and the pre-read, scoped to this release.
 - [ ] The dimension-scout subagent has been dispatched and returned a top-down candidate list, saved verbatim to `quality/.scratch/5.1-dimension-scout.md`.
 - [ ] The two lists have been consolidated, with subagent-only candidates explicitly resolved (added or dropped) by the user.
 - [ ] The **floors-and-default-ins layer** has been applied: every floor whose pre-read predicate holds (or was confirmed in interview) is in the inventory and not droppable; each default-in (security always; data-integrity where user data exists; unbounded spend where the system can spend) is either in via a presented reverse-trace **or** carries an explicit, recorded eyes-open accepted-risk — none silently included, none silently dropped.
-- [ ] The raw inventory is captured with a one-line reason for each dimension.
+- [ ] The raw inventory is captured with a one-line reason for each dimension, and that reason says why it matters for **this release** specifically — not "it mattered before."
+- [ ] Every row carries its **scope** — stakeholder(s)/capacity and product surface (including the dev-tool side, where the project produces or hosts other people's work) — from first surfacing.
+- [ ] Where the same -ility means different things or carries different priority for different stakeholders, it appears as separate scoped rows (or is flagged for the split to happen at 5.2) — never one unscoped row standing in for several concerns.
+- [ ] Future-release candidates from either pass are routed per the doc structure negotiated at 2.1 (bank / light section / parallel pass / separate doc), named to the user in half a line — none silently dropped, none flattened into this release's inventory.
 - [ ] Any deferred items are recorded as `OPEN QUESTION:`.
 - [ ] Pre-read sources are cited in the section's evidence field — naming actual files referenced, or, for an interview-derived / no-repo pre-read, citing the interview honestly (never blank, never a placeholder).
 - [ ] The user has been given a 2–4 line wrap-up, asked if any quick concerns, and confirmed ready to continue. (Substantive checkpoint runs at step boundaries — see SKILL.md.)
@@ -146,11 +158,19 @@ Append to `quality/strategy.md`:
 
 ### Raw inventory (<release>, pre-refinement)
 
-| Dimension | One-line reason it matters | Source |
-|---|---|---|
-| <name> | <why this matters for this release> | <stakeholder bar / design observation / reference-list backstop> |
+| Dimension | Scope (stakeholder/capacity + surface) | One-line reason it matters for THIS release | Source |
+|---|---|---|---|
+| <name> | <who it's about + which surface — and which side of the tool/produced-work double, where the project is itself a tool> | <why this matters for this release specifically — not "it mattered before"> | <stakeholder bar / design observation / reference-list backstop> |
 
 This inventory is **raw** — sub-step 5.2 will unpack composite dimensions; sub-step 5.3 will check trap dimensions for agent-vs-human framing. The inventory will be refined and replaced by the end of 5.3.
+
+### Future-release candidates (routed per the negotiated doc structure)
+
+| Dimension | Likely release | Why it looks relevant there | Routed to |
+|---|---|---|---|
+| <name> | <release> | <one-line> | <bank file `quality/releases/<slug>.md` / light section in this doc / the parallel release's own pass / the separate document> |
+
+(Or "none this pass" — most sessions won't surface any.)
 
 **Sources consulted from pre-read:** <bullet list>
 
