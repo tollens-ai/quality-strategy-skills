@@ -5,7 +5,7 @@ description: A deliberately light follow-up to /quality-strategy for the rules-a
 
 # Process Strategy
 
-One of the three light follow-ups to `/quality-strategy` — the **rules and processes** lane, beside `/test-strategy` (testing) and `/oracle-strategy` (oracles). Testing finds out where you are; oracles let you judge what you see; **rules, invariants, and processes change what gets produced in the first place** — they prevent classes of defect instead of detecting instances of them.
+One of the three light follow-ups to `/quality-strategy` — the **rules and processes** lane, beside `/test-strategy` (testing) and `/evaluation-strategy` (oracles and proxies). Testing finds out where you are; evaluation tells you how you'd judge and track what you see; **rules, invariants, and processes change what gets produced in the first place** — they prevent classes of defect instead of detecting instances of them.
 
 Two shapes of thing live in this lane, and it pays to keep them distinct:
 
@@ -35,7 +35,7 @@ Substitute resolved absolute paths before acting on them — in your own Reads a
 
 **1. Ingest the release's quality strategy.** Read `quality/strategy.md`: the header's `Release:` line (this doc inherits it), Part 3's stakeholder bars, Part 5's H/M-rated ilities, Part 6's risk map, Part 1's team and workflows (who and what — humans, agents — would actually follow a rule or run a process), and Part 4's non-goals. Don't re-litigate the strategy; it's the input. Also read `quality/ideas.md` (the ideas ledger) if it exists: ideas the user volunteered spontaneously mid-strategy, in their words, with no role assigned. Consider each for this lane — is it a rule worth pinning, a process worth owning? — and raise the fits when their ility comes up; annotate an adopted entry in the ledger (*"→ taken up in process-strategy, <date>"*) rather than deleting it, since the same idea may also serve a sibling lane; an idea whose ility this lane's filter drops simply isn't raised here — it stays unannotated in the ledger for whichever lane kept that ility.
 
-**2. Filter — where can rules or processes make a dent?** From the H/M ilities, propose the subset where failures come from *how work is done* — repeatable behaviour a rule could forbid, an invariant could pin, or a process could catch: consistency and convention ilities, security hygiene, data-handling discipline, release safety, regression discipline ("a fix that stays fixed"), documentation quality, agent-readability. For each kept ility, one line of why; name the left-out ones with why not (usually: the gap is not knowing where you stand — that's the testing or oracle lane, not a rule). Confirm the filter with the user before drilling in.
+**2. Filter — where can rules or processes make a dent?** From the H/M ilities, propose the subset where failures come from *how work is done* — repeatable behaviour a rule could forbid, an invariant could pin, or a process could catch: consistency and convention ilities, security hygiene, data-handling discipline, release safety, regression discipline ("a fix that stays fixed"), documentation quality, agent-readability. For each kept ility, one line of why; name the left-out ones with why not (usually: the gap is not knowing where you stand — that's the testing or evaluation lane, not a rule). Confirm the filter with the user before drilling in.
 
 **3. Per kept ility, in priority order, discuss three questions.** High-level ideas and questions — offer candidates, ask, capture decisions. A few minutes per ility unless the user wants depth.
 
@@ -49,7 +49,7 @@ Substitute resolved absolute paths before acting on them — in your own Reads a
 
 - Every proposal is "write it in a doc". Ask what enforces it, or who reads it and when — prefer the enforceable form of the same rule.
 - A rule is proposed with no trace to a stakeholder bar or risk-map row. Untraceable weight gets cut here exactly as in the quality strategy — or challenge whether a bar is missing.
-- Process is proposed as a substitute for knowing (*"we'll add a review step"* for a dimension whose actual is Unknown). A process can't dent what nobody can judge — that's the oracle lane; hand it over rather than stacking ceremony.
+- Process is proposed as a substitute for knowing (*"we'll add a review step"* for a dimension whose actual is Unknown). A process can't dent what nobody can judge — that's the evaluation lane; hand it over rather than stacking ceremony.
 - The rules pile up faster than anyone could follow. Ask the halving question: *"if the team would actually follow only half of these, which half?"* — record the rest as deliberately not adopted.
 
 ## Output
@@ -84,7 +84,7 @@ Write to `$DOCS_DIR/quality/process-strategy.md`, incrementally as ilities are a
 
 On a later update, archive first (`quality/archive/process-strategy-<date>.md` — never overwrite an archive), refresh the header stamp, and record a short `## Since the last cycle` section: which agreed rules and processes actually took hold (and which were quietly dropped — that's data), and what's newly worth pinning.
 
-Close with the standing gate the pack shares: **invoke `/effective-comms`** on the doc before calling it final, and point at the sibling lanes (`/test-strategy`, `/oracle-strategy`) for the ilities this filter handed to them.
+Close with the standing gate the pack shares: **invoke `/effective-comms`** on the doc before calling it final, and point at the sibling lanes (`/test-strategy`, `/evaluation-strategy`) for the ilities this filter handed to them.
 
 ## Escalation points
 

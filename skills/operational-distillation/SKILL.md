@@ -69,7 +69,7 @@ A reader hits a new thing — a bug report, a feature ask, a complaint, an odd r
 
 - **Map to a dimension / stakeholder** — "is this about a dimension we rated H/M, and whose bar does it touch?"
 - **Severity from the strategy** — touches a Dealbreaker → urgent; touches an H gap → important; touches a None / non-goal → likely out of scope, say so and stop.
-- **Route** — testing question → `/test-strategy`'s agreed moves; judging question → `/oracle-strategy`; process question → `/process-strategy`; stakeholder question → confirm the bar; fixing → the plan of work.
+- **Route** — testing question → `/test-strategy`'s agreed moves; evaluation question (how would we judge or track this?) → `/evaluation-strategy`; process question → `/process-strategy`; stakeholder question → confirm the bar; fixing → the plan of work.
 - **When in doubt** — the one or two questions that resolve most ambiguity for *this* project.
 
 Before you insert the rubric, run a **rating-label cross-check** against the body:

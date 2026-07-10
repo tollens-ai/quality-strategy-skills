@@ -83,7 +83,7 @@ Where keeping client-affecting honesty and removing internal candor pull against
 
 ### 4. Emit as separate files and check against the body
 
-Write each requested variant to its own file — `quality/strategy-one-pager.md` and/or `quality/strategy-client.md` — leaving `quality/strategy.md` untouched. If a variant file already exists from a prior run (e.g. after a strategy revision), rewrite it in place from the current body rather than appending — the same way `/operational-distillation` refreshes a distillation that has drifted. Add a one-line header to each marking it a derived view (e.g. *"Audience view derived from quality/strategy.md on <YYYY-MM-DD>; the strategy is the source of truth."*).
+Write each requested variant to its own file — `quality/strategy-one-pager.md` and/or `quality/strategy-client.md` — leaving `quality/strategy.md` untouched. If a variant file already exists from a prior run (e.g. after a strategy revision), rewrite it in place from the current body rather than appending — the same way `/operational-distillation` refreshes a distillation that has drifted. Add a one-line header to each marking it a derived view and naming the release the strategy covers (e.g. *"Audience view derived from quality/strategy.md (<release>) on <YYYY-MM-DD>; the strategy is the source of truth."*).
 
 Then re-read each variant against the body. Check that the strategy supports every claim, and that nothing this reader depends on is missing. For the client variant specifically, confirm you have not (a) asserted any quality the body doesn't support, or (b) buried a client-affecting risk. If the body and a variant disagree, the body wins and the variant is wrong.
 

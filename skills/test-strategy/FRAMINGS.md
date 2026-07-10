@@ -90,15 +90,17 @@ Source: Ed's `heuristics/Heuristic 14 - Agent Output Needs Different Review.md`.
 
 ---
 
-## #8 — Proxies are not quality
+## #8 — Proxies are not quality — but proxy goals are legitimate when labelled
 
-A bug count is not quality. Test coverage is not quality. They're indirect signals that correlate with what you actually care about — but correlation is not identity.
+The shared definitions for the whole pack: an **oracle** and a **proxy** are both **quality instruments** — signals you consult to evaluate an ility — differing in **authority**. An **oracle** is trusted to **judge**: it tells you whether what you observe is good. A **proxy** **indicates**: it correlates with quality, is usually cheap to check, and has known blind spots — satisfying it never proves the ility is met. (Distinct from the pack's narrower use of *instrument* for the tool that lets you observe at all — a test rig, a telemetry feed; see `/tooling-adequacy`.) The `/evaluation-strategy` lane plans both.
 
-The moment you treat the proxy as the goal, you've lost sight of quality. You optimise for the proxy.
+A bug count is not quality. Test coverage is not quality. They're proxies — indirect signals that correlate with what you actually care about, and correlation is not identity. The failure mode is **treating proxy satisfaction as quality achieved**: the moment "coverage is green" is read as "correctness is handled", you've lost sight of quality and started optimising the proxy.
 
-**The strategy should call out which proxies it uses, what they're measuring, and what they might miss.** It should not include proxy targets as goals. Worth a guard at the closing step: *if you're tempted to write "achieve 80% coverage" as a goal, stop — that's a proxy, not the thing.*
+But **there is nothing wrong with a proxy as a goal — when it's labelled as one.** You should have 100% test coverage. You should have a review run over every code change. You should have clean architecture. These are all good quality proxies: cheap, leading, worth committing to. You just have to know — and say — that satisfying the proxy doesn't mean you got the thing right. (Mind the level: a reviewer judging one diff is an oracle *for that diff*; "a review ran over every change" is a proxy *for the ility*.)
 
-Source: Ed's `heuristics/Heuristic 4 - Proxies Are Not Quality.md`.
+**So the strategy calls out which proxies it uses, what each measures, and what it might miss — and a proxy target may stand as a goal when it does that.** An agreed move's "answered when" may cite a proxy milestone *if the move states what remains unknown about the ility when the proxy is satisfied*. The guard at the closing step: if you're tempted to write "achieve 80% coverage" as a goal, keep it — labelled as a proxy — and say what you still won't know about the ility when you hit it. (Many good proxies are simultaneously process rules — review-per-change is both; capture once, classify later.)
+
+Source: Ed's `heuristics/Heuristic 4 - Proxies Are Not Quality.md`; Qing design ruling 2026-07-10 (TOL-174).
 
 ---
 

@@ -1,13 +1,13 @@
 ---
 name: tooling-strategy
-description: Produce the strategy for the second quality question — "how do we know if what we have is good?" Gathers every place the strategy lanes could NOT answer that (risk-map Unknowns nothing can judge yet; build items agreed in /oracle-strategy; /test-strategy moves blocked on instruments or oracles) and turns them into a prioritised oracle/instrument build plan at quality/tooling-strategy.md. Use after /oracle-strategy (ideally also /test-strategy), when Unknowns are piling up in the risk map, or when deciding what measurement or test infrastructure to build next.
+description: Produce the strategy for the second quality question — "how do we know if what we have is good?" Gathers every place the strategy lanes could NOT answer that (risk-map Unknowns nothing can judge yet; build items agreed in /evaluation-strategy; /test-strategy moves blocked on instruments or oracles) and turns them into a prioritised oracle/instrument build plan at quality/tooling-strategy.md. Use after /evaluation-strategy (ideally also /test-strategy), when Unknowns are piling up in the risk map, or when deciding what measurement or test infrastructure to build next.
 ---
 
 # Tooling Strategy
 
 This skill produces the build-plan strategy for **Q2, "how do we know if what we have is good?"**
 
-The other strategies *depend* on Q2 being answerable but don't plan how to make it so. `/quality-strategy` judges the actual state (Q3) using whatever **oracles** exist — an oracle is anything that can judge whether an output is good — and honestly records where they don't: as Unknowns whose to-resolve notes say nothing can judge them yet. `/oracle-strategy` works out, per ility, what better judging would look like and agrees build-shaped moves. `/test-strategy` plans the investigation and records which questions are blocked on missing **instruments** — things that exercise or observe the system — or oracles. All of them *name* gaps; none plans the build. That's this skill's job: collect every "we can't actually answer that yet" from the lanes and turn the pile into one prioritised, sequenced **oracle and instrument build plan**.
+The other strategies *depend* on Q2 being answerable but don't plan how to make it so. `/quality-strategy` judges the actual state (Q3) using whatever **oracles** exist — an oracle is anything that can judge whether an output is good — and honestly records where they don't: as Unknowns whose to-resolve notes say nothing can judge them yet. `/evaluation-strategy` works out, per ility, what better judging and indication would look like — oracles and labelled proxies — and agrees build-shaped moves. `/test-strategy` plans the investigation and records which questions are blocked on missing **instruments** — things that exercise or observe the system — or oracles. All of them *name* gaps; none plans the build. That's this skill's job: collect every "we can't actually answer that yet" from the lanes and turn the pile into one prioritised, sequenced **oracle and instrument build plan**.
 
 Building oracles is routinely the highest-value quality work an early-stage project can do. A weak oracle gives false confidence; a missing one leaves the most important dimensions permanently Unknown. Yet this work rarely gets planned, because each gap surfaces in a different place and none looks urgent alone. Gather them in one place, weigh each build by what it unblocks, and the priorities are usually obvious.
 
@@ -15,7 +15,7 @@ The demand arrives as **requirements** — "we must be able to judge X at this f
 
 ## What this skill is not
 
-It is **not an audit, and it does not re-audit.** The per-item adequacy verdicts come from the two Q2 audit skills the lanes offer when trust is contested: `/oracle-adequacy` (from `/oracle-strategy`, on the oracles behind the risk map's actual-state claims) and `/tooling-adequacy` (from `/test-strategy`, on the means of answering its questions); both also run standalone. This skill *consumes* their outputs and the lanes' agreed moves. If an input's adequacy is contested and unaudited, send the user to the audit rather than improvising adequacy judgments here.
+It is **not an audit, and it does not re-audit.** The per-item adequacy verdicts come from the two Q2 audit skills the lanes offer when trust is contested: `/oracle-adequacy` (from `/evaluation-strategy`, on the oracles behind the risk map's actual-state claims) and `/tooling-adequacy` (from `/test-strategy`, on the means of answering its questions); both also run standalone. This skill *consumes* their outputs and the lanes' agreed moves. If an input's adequacy is contested and unaudited, send the user to the audit rather than improvising adequacy judgments here.
 
 ## Resolving file paths — do this first
 
@@ -28,7 +28,7 @@ File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **
 
 ## When to use
 
-- **After the lanes — or straight after `/quality-strategy` when the map is blind.** This skill has two natural entry points, and the risk map — the strategy doc's table of quality dimensions, their actual state, and the confidence behind each claim — decides which (Q2 before Q3: you can only investigate what you can judge). When the risk map came out **dominated by Unknowns nothing can judge yet**, run `/oracle-strategy` then this skill *immediately* — plan the builds that make the project knowable before planning the investigation. A test strategy written against dimensions nobody can judge is mostly "blocked". When the risk map is **mostly answerable**, let `/test-strategy` run first and sharpen the demand (its `/tooling-adequacy` audit surfaces blocked questions), then run this skill on the combined pile.
+- **After the lanes — or straight after `/quality-strategy` when the map is blind.** This skill has two natural entry points, and the risk map — the strategy doc's table of quality dimensions, their actual state, and the confidence behind each claim — decides which (Q2 before Q3: you can only investigate what you can judge). When the risk map came out **dominated by Unknowns nothing can judge yet**, run `/evaluation-strategy` then this skill *immediately* — plan the builds that make the project knowable before planning the investigation. A test strategy written against dimensions nobody can judge is mostly "blocked". When the risk map is **mostly answerable**, let `/test-strategy` run first and sharpen the demand (its `/tooling-adequacy` audit surfaces blocked questions), then run this skill on the combined pile.
 - **When deciding what test or measurement infrastructure to build next** — this skill's output *is* that decision, made with the full demand visible instead of ad hoc.
 - **Re-run freely.** This is the most re-runnable doc in the pack: re-run when build items land (they change what's answerable — see Update protocol in the output), when a lane adds new demand, or when the quality strategy is revised. **On any re-run over an existing `quality/tooling-strategy.md`, archive it first** — snapshot to `quality/archive/tooling-strategy-<last-updated-date>.md` (suffix `-2`, `-3`, … if the name is taken — never overwrite an archive) before changing a word, and mention the archive in the closing summary. Never silently rewrite history: the archive leaves a before/after trail the user can compare and share.
 
@@ -36,7 +36,7 @@ File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **
 
 - **Grounding.** Read `$PLUGIN_ROOT/PHILOSOPHY.md`. The disciplines that recur — make confidence visible; record assumptions; push back on vagueness — are load-bearing here. Read step 3 of `$PLUGIN_ROOT/skills/tooling-adequacy/SKILL.md` for the canonical oracle taxonomy (Specified / Property-or-metamorphic / Differential-or-simulated / Golden-master / Human-or-agent-judge) and the "kill the old-world reflex" move; every build item in the plan names its kind from that taxonomy.
 - **The quality side.** From `$PROJECT_DIR/quality/strategy.md`: Part 6 (the risk map — Unknowns with their to-resolve notes, above all the ones saying "nothing can judge this yet", and the confidence ratings) and Part 5 (the H/M impact ratings, which weight the value of each build). Part 7 for any build-shaped actions already enumerated (Part 7 may be a recorded deferral — fine; the risk map carries everything this skill needs).
-- **The oracle side, if it exists.** From `$PROJECT_DIR/quality/oracle-strategy.md`: the agreed next moves that are build-shaped, with any `/oracle-adequacy` verdicts behind them.
+- **The evaluation side, if it exists.** From `$PROJECT_DIR/quality/evaluation-strategy.md` (or a prior-era `quality/oracle-strategy.md` — the lane was renamed): the agreed next moves that are build-shaped, with any `/oracle-adequacy` verdicts behind them.
 - **The test side, if it exists.** From `$PROJECT_DIR/quality/test-strategy.md`: agreed moves recorded as blocked on missing instruments or oracles, with their build items. If a lane hasn't run, proceed on what exists and say so in the output — don't guess at demand that hasn't been derived.
 - **The user.** The value calls below are theirs to confirm, and they usually know pains neither strategy captured — the flaky suite nobody trusts, the metric nobody believes. Ask.
 
@@ -128,7 +128,7 @@ Write to `$PROJECT_DIR/quality/tooling-strategy.md` (beside `strategy.md` and th
 ```markdown
 # Tooling strategy — how we'll know
 
-*Derived from quality/strategy.md (<its last-updated date>), quality/oracle-strategy.md (<date>, or "not yet written"), and quality/test-strategy.md (<date>, or "not yet written").*
+*Derived from quality/strategy.md (<its last-updated date>), quality/evaluation-strategy.md (<date>, or "not yet written"), and quality/test-strategy.md (<date>, or "not yet written").*
 *Generated by the `tooling-strategy` skill — quality-strategy-skills (tollens-ai) v<version> · github.com/tollens-ai/quality-strategy-skills*
 
 ## What we can't answer today

@@ -76,7 +76,7 @@ A quality strategy answers four questions, in order:
 3. **Is what we have good?** — the actual-state assessment, each actual naming the basis that judges it (Steps 6.2–6.3).
 4. **How do we make it good?** — the plan of work to close gaps (Step 7 — a sketch, and optional; see "The plan of work is a sketch" below).
 
-**Q2 is explicit on purpose — and deliberately not executed here.** The common failure is to collapse Q2 into Q3 — to claim an actual level from whatever signal happens to exist, without ever asking whether that signal can judge the dimension. This skill's share of Q2 is **honesty**: sub-step 6.2 requires every actual to name its basis (what was observed, and what judges it) or be recorded as Unknown. The Q2 *sweep* — auditing each dimension's oracle and planning better judging — is the follow-on **`/oracle-strategy`** lane, run after the strategy closes; the quality strategy stays pure (who matters, what they value, where we stand) rather than attempting an oracle sweep it isn't equipped to carry.
+**Q2 is explicit on purpose — and deliberately not executed here.** The common failure is to collapse Q2 into Q3 — to claim an actual level from whatever signal happens to exist, without ever asking whether that signal can judge the dimension. This skill's share of Q2 is **honesty**: sub-step 6.2 requires every actual to name its basis (what was observed, and what judges it) or be recorded as Unknown. The Q2 *sweep* — auditing each dimension's oracle and planning better judging — is the follow-on **`/evaluation-strategy`** lane, run after the strategy closes; the quality strategy stays pure (who matters, what they value, where we stand) rather than attempting an oracle sweep it isn't equipped to carry.
 
 **The strategy's job.** Before the analysis, Step 1 (sub-step 1.1) asks what this strategy is *for, right now*, and records it as a `## Strategy job` paragraph at the top of the doc. The four jobs:
 
@@ -131,7 +131,7 @@ The ledger is durable content, not scratch — like the release bank, it survive
 Part 7 (Step 7) lists, classifies, and sequences the work at *strategy* level — enough to see the shape of what's needed, the priorities, and the first moves. It is deliberately **not** a detailed work plan, and you should not let it become one. The detail belongs to the follow-on skills, each of which takes a slice of Part 7 and turns it into a first-class plan of its own:
 
 - **Testing work** → `/test-strategy` — the testing lane: where investigation would move the risk map (`quality/test-strategy.md`).
-- **Oracle work** → `/oracle-strategy` — the judging lane: where better oracles would make the project knowable (`quality/oracle-strategy.md`); agreed build items go on to `/tooling-strategy` for the prioritised build plan (`quality/tooling-strategy.md`).
+- **Evaluation work** → `/evaluation-strategy` — the evaluation lane: where better quality instruments — oracles that judge, proxies that indicate — would make the project knowable (`quality/evaluation-strategy.md`); agreed build items go on to `/tooling-strategy` for the prioritised build plan (`quality/tooling-strategy.md`).
 - **Rules and process work** → `/process-strategy` — the rules/invariants/processes lane: where changing how work is done prevents whole defect classes (`quality/process-strategy.md`).
 - **Communicating the strategy** → `/strategy-variants` — audience-facing variants of the finished doc.
 
@@ -139,14 +139,14 @@ The three lanes are **deliberately lighter** than this skill — high-level idea
 
 Stakeholder work and fixing work have no follow-on skill yet; they stay at sketch level in Part 7 like everything else. Keep Part 7 entries to one or two lines each, resist expanding any of them into a mini-plan in place, and point at the relevant follow-on instead — a Part 7 that duplicates `test-strategy.md`'s depth goes stale the moment the follow-on runs.
 
-**Step 7 is optional — the whole sketch can be deferred.** At the Step 6 boundary, once the user has confirmed at the 6.3 substantive checkpoint, offer the choice: walk Step 7 now, or skip it and defer the plan of work wholesale to the follow-on lanes. Skipping is the right call when the team will run the lanes (`/test-strategy`, `/oracle-strategy`, `/process-strategy`) immediately — a sketch written minutes before its own elaboration adds nothing. The skip is **recorded, never silent**: append a short Part 7 deferral note —
+**Step 7 is optional — the whole sketch can be deferred.** At the Step 6 boundary, once the user has confirmed at the 6.3 substantive checkpoint, offer the choice: walk Step 7 now, or skip it and defer the plan of work wholesale to the follow-on lanes. Skipping is the right call when the team will run the lanes (`/test-strategy`, `/evaluation-strategy`, `/process-strategy`) immediately — a sketch written minutes before its own elaboration adds nothing. The skip is **recorded, never silent**: append a short Part 7 deferral note —
 
 ```markdown
 ## Part 7: Plan of Work
 
 Deliberately deferred — elaborated by the follow-on lanes rather than sketched here:
-testing work → `/test-strategy` (`quality/test-strategy.md`); oracle work →
-`/oracle-strategy` (`quality/oracle-strategy.md`, builds via `/tooling-strategy`);
+testing work → `/test-strategy` (`quality/test-strategy.md`); evaluation work →
+`/evaluation-strategy` (`quality/evaluation-strategy.md`, builds via `/tooling-strategy`);
 rules/process work → `/process-strategy` (`quality/process-strategy.md`). <If a slice of
 the work has no follow-on planned — stakeholder work, fixing work — say in one line what
 happens to it.>
@@ -385,8 +385,8 @@ If the review or the Effective Comms pass surfaces failures, return to the relev
 
 Once it passes, point the user at the three follow-on lanes so they know where to go next (see "The plan of work is a sketch" above) — each deliberately lighter than what they just finished: it ingests this strategy for the release, filters for the ilities its modality can dent, and works have / improve / add through them in a focused conversation or two. The lanes also read the ideas ledger (`quality/ideas.md`) — anything the user volunteered along the way meets its moment there, so mention it when it holds entries: *"the ideas you dropped as we went are queued up for the lanes too."* Recommend an **order** based on what the risk map just showed. The principle is **Q2 before Q3: you can only investigate what you can judge.**
 
-- **Risk map dominated by Unknowns whose to-resolve notes say "nothing can judge this yet"** → recommend **`/oracle-strategy`** first: decide how the project will judge those dimensions (with `/tooling-strategy` planning any agreed builds), then `/test-strategy` once (or as) the means of judging exist. Planning investigation against dimensions nothing can judge produces a plan that is mostly "blocked".
-- **Risk map mostly judgeable** — the bases are real, the gaps are not-yet-investigated → recommend **`/test-strategy`** first: investigation moves the map immediately, and what it can't answer sharpens the oracle lane's filter.
+- **Risk map dominated by Unknowns whose to-resolve notes say "nothing can judge this yet"** → recommend **`/evaluation-strategy`** first: decide how the project will judge those dimensions (with `/tooling-strategy` planning any agreed builds), then `/test-strategy` once (or as) the means of judging exist. Planning investigation against dimensions nothing can judge produces a plan that is mostly "blocked".
+- **Risk map mostly judgeable** — the bases are real, the gaps are not-yet-investigated → recommend **`/test-strategy`** first: investigation moves the map immediately, and what it can't answer sharpens the evaluation lane's filter.
 - **Risks concentrated in how work gets done** — consistency, hygiene, release safety, regression discipline → put **`/process-strategy`** early: a rule or process prevents the class while testing would only keep finding instances.
 
 Name all three lanes, say which order you recommend and why, and don't leave the user at a finished strategy with no onward path — the risk map and plan of work they just produced are the lanes' direct inputs.

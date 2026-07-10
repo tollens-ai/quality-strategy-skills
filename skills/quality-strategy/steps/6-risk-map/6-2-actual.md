@@ -34,13 +34,13 @@ By the end of this sub-step the strategy doc must capture, **for each H/M dimens
    - Low = guessing or working from stale information.
    - For Unknown, confidence is implicitly "we don't know" — represent as "—" rather than claiming a confidence level.
 3. **Evidence basis** — what is the actual based on? Pre-read observations? A specific test? Stakeholder feedback? Or nothing — "no investigation yet" is a valid (and very common) answer in first-pass strategies.
-4. **What would resolve an Unknown** — for each Unknown, a one-line note on the type of activity that would establish a level. Pick from: targeted testing, asking specific stakeholders, code/design review of specific area, building observability/instrumentation, building test infrastructure or testability — or, when nothing could currently judge the result, say exactly that: "nothing can judge this yet" (the phrase `/oracle-strategy`'s filter keys on). Whichever is appropriate. This note seeds Step 7's plan of work.
+4. **What would resolve an Unknown** — for each Unknown, a one-line note on the type of activity that would establish a level. Pick from: targeted testing, asking specific stakeholders, code/design review of specific area, building observability/instrumentation, building test infrastructure or testability — or, when nothing could currently judge the result, say exactly that: "nothing can judge this yet" (the phrase `/evaluation-strategy`'s filter keys on). Whichever is appropriate. This note seeds Step 7's plan of work.
 
 ## Q2 is answered honestly here — and planned properly afterwards
 
 This sub-step is where the strategy answers **Q3 — "is what we have good?"** It can only do that honestly if **Q2 — "how do we know?"** holds: every actual rests on something that judges whether what was observed really means the claimed level. What this sub-step owes Q2 is **honesty about the basis**: for each non-Unknown actual, the Evidence line must let a reader see both what was observed and what judges it — and an actual whose basis you can't name in a line is recorded as **Unknown**, never a comfortable Medium.
 
-What this sub-step deliberately does **not** do is run an oracle sweep. The quality strategy stays the pure what-matters-and-where-are-we document; auditing each dimension's oracle and planning better judging is the follow-on **`/oracle-strategy`** — a lighter lane that ingests this Part, filters for the dimensions where judging is the bottleneck, and works have/improve/add through them with the user (with `/oracle-adequacy` as its audit when trust in an existing oracle is contested, and `/tooling-strategy` for the build plan). Don't attempt that sweep mid-strategy — the earlier design that did produced a sweep the strategy wasn't equipped to carry. Where an Unknown is clearly blocked on "nothing can judge this yet", say so in its to-resolve note; that phrase is exactly what the oracle lane's filter looks for.
+What this sub-step deliberately does **not** do is run an oracle sweep. The quality strategy stays the pure what-matters-and-where-are-we document; auditing each dimension's oracle and planning better judging is the follow-on **`/evaluation-strategy`** — a lighter lane that ingests this Part, filters for the dimensions where judging is the bottleneck, and works have/improve/add through them with the user (with `/oracle-adequacy` as its audit when trust in an existing oracle is contested, and `/tooling-strategy` for the build plan). Don't attempt that sweep mid-strategy — the earlier design that did produced a sweep the strategy wasn't equipped to carry. Where an Unknown is clearly blocked on "nothing can judge this yet", say so in its to-resolve note; that phrase is exactly what the evaluation lane's filter looks for.
 
 ## The second design touch — targeted deep-dive where the evidence is thin
 
@@ -89,7 +89,7 @@ What you must not do:
 - [ ] Actuals were sought down the **evidence hierarchy** — test results / CI / reports, then the tests, then what the user has actually seen — before any code reading; every code-derived actual is **labelled inference**, capped at Medium confidence, and none claims a confident "at bar" off the source alone.
 - [ ] Every actual has a confidence rating (H/M/L, or "—" for Unknown) and an evidence basis (or "no investigation yet").
 - [ ] Every Unknown has a one-line note on what would resolve it (test / ask / review / instrument / build infrastructure).
-- [ ] Every non-Unknown actual's Evidence line names both what was observed and what judges it; any actual whose basis couldn't be named in a line has been honestly recorded as Unknown. (No oracle sweep runs here — that is `/oracle-strategy`'s job after the strategy closes; Unknowns blocked on "nothing can judge this yet" say so in their to-resolve note.)
+- [ ] Every non-Unknown actual's Evidence line names both what was observed and what judges it; any actual whose basis couldn't be named in a line has been honestly recorded as Unknown. (No oracle sweep runs here — that is `/evaluation-strategy`'s job after the strategy closes; Unknowns blocked on "nothing can judge this yet" say so in their to-resolve note.)
 - [ ] Thin-evidence, design-shaped dimensions got the targeted design deep-dive (or its explicit skip note): findings recorded as evidence with confidence markings, the test-coverage-vs-risk-skew lens applied, and the scratch file at `quality/.scratch/6.2-design-deep-dive.md` (or the skip note) in place.
 - [ ] Confidence ratings use only H/M/L — no percentages.
 - [ ] Any deferred items are recorded as `OPEN QUESTION:`.
@@ -110,7 +110,7 @@ Append to `quality/strategy.md` under Part 6:
 - **Actual:** <qualitative dimension-specific description, OR "Unknown">
 - **Confidence in actual:** <H/M/L, or "—" for Unknown>
 - **Evidence:** <what this is based on, or "no investigation yet">
-- **To resolve (if Unknown):** <one line — test what / ask whom / review what / instrument / build the means of judging ("nothing can judge this yet" is a valid, load-bearing note — the oracle lane reads it)>
+- **To resolve (if Unknown):** <one line — test what / ask whom / review what / instrument / build the means of judging ("nothing can judge this yet" is a valid, load-bearing note — the evaluation lane reads it)>
 
 #### <Next dimension>
 

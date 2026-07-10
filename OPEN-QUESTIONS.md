@@ -847,3 +847,15 @@ Calls made while preparing the pack for public alpha.
 **How we'd know.** Regression SC-21 + PR tests `2026-07-10-req7.md`; check real `quality/ideas.md` files for signal-to-noise after alpha runs.
 
 ---
+
+## Evaluation lane: oracles + proxies as quality instruments differing in authority
+
+**What we did.** Renamed `/oracle-strategy` to `/evaluation-strategy` and folded proxies into it. Shared definitions live in test-strategy FRAMINGS #8: an oracle is trusted to *judge* (tells you whether it is good); a proxy *indicates* (correlated, cheap, known blind spots) — both are quality instruments, differing in authority. The proxy-goal guard was rewritten (TOL-174): proxy goals are legitimate when labelled — 100% coverage, review-per-every-change, clean architecture are all good quality proxies — and the failure mode is treating proxy satisfaction as quality achieved; a move's answered-when may cite a proxy milestone if it states what remains unknown when the proxy is satisfied (test-strategy-review check 4 re-worded to match). Old `/oracle-strategy` pointers are honoured: the lane's prompt says treat them as pointing here, and `/tooling-strategy` reads a prior-era `quality/oracle-strategy.md` as the evaluation side.
+
+**Why.** Qing's ruling: the old "no proxy targets as goals" over-forbade — teams legitimately commit to proxy goals; what goes wrong is reading them as the thing itself. And oracles-vs-proxies was a false split for the lane: a project knows where it stands through both, and the craft is knowing each signal's authority.
+
+**What would change our mind.** If "quality instrument" collides in practice with the pack's narrower observation-instrument sense despite the disambiguation note. If labelled-proxy-goals in real docs drift back into unlabelled targets (the what-remains-unknown clause is the guard). If the rename strands older strategies' pointers in ways the treat-as-pointing-here rule doesn't catch.
+
+**How we'd know.** Regression SC-22 + PR tests `2026-07-10-req8.md`; grep real evaluation-strategy docs for proxies carrying their what-they-miss line.
+
+---

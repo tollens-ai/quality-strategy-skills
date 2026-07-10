@@ -1,6 +1,6 @@
 ---
 name: oracle-adequacy
-description: Audit whether a quality strategy's actual-state assessment can be trusted — for each dimension, is there an adequate oracle to judge what level the project is actually at, and an adequate instrument to observe it? The explicit "how do we know?" (Q2) check that agents skip by deferring to whatever measurement exists and by treating hard-to-judge dimensions as permanently Unknown. Use from /oracle-strategy when the have/improve/add discussion contests whether an existing oracle can be trusted, or standalone to audit the oracles behind an existing strategy's actuals.
+description: Audit whether a quality strategy's actual-state assessment can be trusted — for each dimension, is there an adequate oracle to judge what level the project is actually at, and an adequate instrument to observe it? The explicit "how do we know?" (Q2) check that agents skip by deferring to whatever measurement exists and by treating hard-to-judge dimensions as permanently Unknown. Use from /evaluation-strategy when the have/improve/add discussion contests whether an existing oracle can be trusted, or standalone to audit the oracles behind an existing strategy's actuals.
 ---
 
 # Oracle Adequacy
@@ -29,7 +29,7 @@ File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **
 
 ## When to use
 
-- **From `/oracle-strategy`** — the oracle lane's audit engine, offered when the have-already discussion contests whether the oracles behind a dimension's actuals can be trusted. Input: the dimensions in the lane's filter, with their actuals and evidence from the quality strategy's Part 6. Output: an oracle-adequacy assessment plus a list of **oracle-build items** the lane records against its agreed moves (and `/tooling-strategy` consumes).
+- **From `/evaluation-strategy`** — the evaluation lane's audit engine, offered when the have-already discussion contests whether the oracles behind a dimension's actuals can be trusted. Input: the dimensions in the lane's filter, with their actuals and evidence from the quality strategy's Part 6. Output: an oracle-adequacy assessment plus a list of **oracle-build items** the lane records against its agreed moves (and `/tooling-strategy` consumes).
 - **Standalone** — to audit the oracles behind an existing strategy's actuals. Input: the dimensions and claimed actuals from `$PROJECT_DIR/quality/strategy.md` (Parts 5–6), plus what the team can observe about the codebase.
 
 This skill judges adequacy and names the gaps; it does not plan the build. **`/tooling-strategy`** consumes its oracle-build items (together with `/tooling-adequacy`'s, from the test side) and turns them into a prioritised build plan.
@@ -102,11 +102,11 @@ Oracle-build items (state the property set; write a reference/simulated oracle; 
 - [ ] Each dimension has a verdict: Trustworthy / Over-confident / Gated.
 - [ ] An oracle-build item is named for every Over-confident and Gated dimension, tied to the dimension(s) it unblocks.
 - [ ] Comfortable-Medium-without-oracle and automation-aimed-at-judgement mismatches are flagged.
-- [ ] (When run from `/oracle-strategy`) the verdicts and oracle-build items are returned to the orchestrator so the lane can record them against its ilities and agreed moves, and a scratch file is written (see Output).
+- [ ] (When run from `/evaluation-strategy`) the verdicts and oracle-build items are returned to the orchestrator so the lane can record them against its ilities and agreed moves, and a scratch file is written (see Output).
 
 ## Output
 
-When run from `/oracle-strategy`, return the assessment to the orchestrator **and** write it to the scratch path the orchestrator's brief names (e.g. `quality/.scratch/oracle-adequacy-<YYYY-MM-DD>.md`) — hard evidence the audit ran; a claimed-but-missing audit output is a fabrication signal. The orchestrator's brief carries the absolute docs-home path — a sealed dispatch can't ask where the docs live, so write where the brief says, never a path derived from your own working directory. Standalone, surface it in the conversation and offer to write it to `$PROJECT_DIR/quality/oracle-adequacy-<YYYY-MM-DD>.md`. Shape:
+When run from `/evaluation-strategy`, return the assessment to the orchestrator **and** write it to the scratch path the orchestrator's brief names (e.g. `quality/.scratch/oracle-adequacy-<YYYY-MM-DD>.md`) — hard evidence the audit ran; a claimed-but-missing audit output is a fabrication signal. The orchestrator's brief carries the absolute docs-home path — a sealed dispatch can't ask where the docs live, so write where the brief says, never a path derived from your own working directory. Standalone, surface it in the conversation and offer to write it to `$PROJECT_DIR/quality/oracle-adequacy-<YYYY-MM-DD>.md`. Shape:
 
 ```markdown
 # Oracle adequacy — actual-state assessment
