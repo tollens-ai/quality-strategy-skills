@@ -8,7 +8,7 @@ Skip an unpack that was needed and you get a misleading rating in 5.4 and a misl
 
 ## What you need from the previous sub-step
 
-Read the raw inventory from sub-step 5.1's output in `quality/strategy.md`. Read Part 3 (stakeholders) — sub-dimensions often correspond directly to specific stakeholder bars (one stakeholder cares about one sub-dimension; another cares about a different one).
+Read the raw inventory from sub-step 5.1's output in `quality/strategy.md`. Read Part 3 (stakeholders) — sub-dimensions often correspond directly to specific stakeholder bars (one stakeholder cares about one sub-dimension; another cares about a different one). If unpack detail for a **different** release surfaces mid-conversation, route it per Part 2's document structure (SKILL.md → "Scope of this skill") and name it in half a line — never fold it into this release's unpacked inventory.
 
 ## What to cover
 

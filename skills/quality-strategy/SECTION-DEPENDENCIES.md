@@ -14,7 +14,7 @@ It mirrors each sub-step file's own "What you need from the previous sub-step" d
 | 1.3 Workflows | 1.4, 1.5, 2.1, 3.1, 4.1, 5.1, 7.1/7.2 (same direct-read note as 1.2) |
 | 1.4 Release workflow | 1.5, 2.1, 3.1, 4.1, 5.1 |
 | 1.5 Budget | 2.1, 3.1, 4.1, 5.1, 7.3 (budget shapes sequencing) |
-| 2.1 Roadmap + `Release:` header | 3.1, 4.1, 5.1 — *and every per-release section heading carries the release name* |
+| 2.1 Roadmap + `Release:` header + `Document structure:` field | 3.1, 4.1, 5.1, 6.1, 6.2, 6.3, 7.1, 7.2, 7.3 (every step reads the `Document structure:` field directly, not only via the transitive chain — it's what each step routes cross-release material by, and what tells it whether to run a separated per-release pass under "two releases in parallel") — *and every per-release section heading carries the release name* |
 | 3.1 Stakeholder list (incl. agent-stakeholder status) | 3.2, 4.1, 5.1, 5.3 (audience reasoning reads who's an agent), 5.5 |
 | 3.2 Three-lens bars (incl. recurrence/tolerance) | 4.1, 5.1, 5.2, 5.4, 5.5, 6.1 |
 | 4.1 Non-goals | 5.1, 5.4, 5.5, 6.1 |

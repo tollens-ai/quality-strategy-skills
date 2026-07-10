@@ -15,7 +15,7 @@ You cannot do fixing work efficiently until you have reasonable confidence on bo
 
 ## What you need from the previous sub-step
 
-Read sub-step 7.1's action list from `quality/strategy.md`. Read Part 6 (Risk Map) for context on which side of which gap each action addresses.
+Read sub-step 7.1's action list from `quality/strategy.md`. Read Part 6 (Risk Map) for context on which side of which gap each action addresses. If classification discussion drifts onto actions for a **different** release, route them per Part 2's document structure (SKILL.md → "Scope of this skill") and name it in half a line — never fold them into this release's plan.
 
 ## What to cover
 
@@ -63,6 +63,8 @@ What you must not do:
 
 - [ ] Every action from 7.1 has a classification (testing / stakeholder / fixing / process-change).
 - [ ] Non-obvious classifications have a one-line justification.
+- [ ] Any classification discussion that drifted onto a different release's action was routed per Part 2's document structure and named to the user — none folded into this release's classified list.
+- [ ] Under "two releases in parallel," this sub-step ran its own full pass for the parallel release too, clearly separated — not blended into this release's classified list.
 - [ ] Actions that span types have been split or noted explicitly.
 - [ ] Any process-change candidates surfaced earlier in the session (per Part 1's revisable-basis note) are captured here as actions, not silently folded back into Part 1.
 - [ ] The balance of types fits the project stage (early-stage projects skew toward testing and stakeholder work; mature ones can have more fixing; process-change appears whenever it appears — it has no expected baseline rate).
@@ -74,7 +76,7 @@ If any check fails, return to the questioning. Do not move to sub-step 7.3.
 
 ## Output
 
-Append to `quality/strategy.md`, replacing or extending the action list from 7.1:
+Append to `quality/strategy.md`, replacing or extending the action list from 7.1. Under "two releases in parallel," each release has its own `## Part 7` header from its own pass through 7.1 — extend the matching one, not the other release's:
 
 ```markdown
 ### Action list (classified)

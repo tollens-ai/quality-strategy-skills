@@ -4,7 +4,7 @@
 
 Identify who matters for **this release** — the release this strategy covers — the specific people, roles, and agents whose perspective on quality counts. Stakeholders drive everything that follows: you rate dimensions against what they value, assess risk against their needs, and shape the plan of work around their priorities.
 
-This skill's depth analysis covers one release at a time — the release this strategy is for (see SKILL.md → "Scope of this skill"). Note stakeholders for other releases briefly — and bank any real detail the user gives about them to that release's notes file (the release bank — SKILL.md → "Scope of this skill") — but run the three-lens depth analysis (Delight / Good Enough / Dealbreaker — sub-step 3.2) only for this release.
+This skill's depth analysis covers one release at a time — the release this strategy is for (see SKILL.md → "Scope of this skill"). Note stakeholders for other releases briefly — and route any real detail the user gives about them per Part 2's negotiated document-structure choice (its own section under "two releases in parallel," a light section, the release bank, or the separate document — SKILL.md → "Scope of this skill"), named to the user in half a line, never folded into this release's stakeholder list — but run the three-lens depth analysis (Delight / Good Enough / Dealbreaker — sub-step 3.2) only for this release, unless "two releases in parallel" is the negotiated structure, in which case the parallel release gets its own full stakeholder list and three-lens pass too, clearly separated from this one's.
 
 ## What you need from the previous sub-step
 
@@ -66,6 +66,8 @@ What you must not do:
 - [ ] Agent stakeholders are documented (default) — with each category (using the product / working in the codebase / integrating / reading the docs) actively walked, not just the first one that turned up an entry — OR the no-agent-stakeholders case is actively confirmed with a specific concrete reason recorded — generic "we don't have any" is not sufficient.
 - [ ] Internal stakeholders are documented (or actively excluded with reasoning), **and** the four who-does questions — product ownership, development, bug fixing, user support — have been actively considered for both humans and agents. No new stakeholder entry is required to satisfy this: a recorded "same person, already covered" or "nobody yet — noted" per question is a complete answer. A person's or agent's presence in another capacity (most often *user*) does not by itself satisfy this — see the capacity rule.
 - [ ] Future releases on the roadmap each have a one-line note about likely-new stakeholders, or "no notable change."
+- [ ] Any real (beyond one-line) stakeholder detail volunteered for another release was routed per Part 2's document structure and named to the user — none folded into this release's list.
+- [ ] Under "two releases in parallel," this sub-step ran its own full pass for the parallel release too, clearly separated (its own stakeholder list, not blended into this release's) — not just noted in passing.
 - [ ] Any deferred items are recorded as `OPEN QUESTION:`.
 - [ ] Pre-read sources are cited in the section's evidence field — naming actual files referenced, or, for an interview-derived / no-repo pre-read, citing the interview honestly (never blank, never a placeholder).
 - [ ] The user has been given a 2–4 line wrap-up, asked if any quick concerns, and confirmed ready to continue. (Substantive checkpoint runs at step boundaries — see SKILL.md.)
@@ -74,7 +76,7 @@ If any check fails, return to the questioning. Do not move to sub-step 3.2.
 
 ## Output
 
-Append to `quality/strategy.md`:
+Append to `quality/strategy.md`. Under "two releases in parallel" (SKILL.md → "Scope of this skill"), each release gets its own `### Stakeholders for <release name>` sub-section within this same `## Part 3` — run this sub-step once per release, clearly separated, never one blended list:
 
 ```markdown
 ## Part 3: Who Matters

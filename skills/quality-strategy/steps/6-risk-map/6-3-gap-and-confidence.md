@@ -6,7 +6,7 @@ Combine the required levels (sub-step 6.1) and actual levels (sub-step 6.2) into
 
 ## What you need from the previous sub-step
 
-Read sub-steps 6.1 (required levels with confidence) and 6.2 (actual levels with confidence) from `quality/strategy.md`. You should now have, for each H/M dimension **row** (dimension + scope — 6.1 and 6.2 share the identical row set, and this sub-step inherits it unchanged, never re-deriving a bare-dimension list): required level, confidence in required, actual level, confidence in actual, and — whenever this doc's negotiated structure covers more than one release — which release the row belongs to.
+Read sub-steps 6.1 (required levels with confidence) and 6.2 (actual levels with confidence) from `quality/strategy.md`. You should now have, for each H/M dimension **row** (dimension + scope — 6.1 and 6.2 share the identical row set, and this sub-step inherits it unchanged, never re-deriving a bare-dimension list): required level, confidence in required, actual level, confidence in actual, and — whenever this doc's negotiated structure covers more than one release — which release the row belongs to. Since 6.1 and 6.2 already route out any mid-step material for another release, this sub-step should never see cross-release material land in its inputs — but if synthesis-time discussion still surfaces it (the user reacting to the assembled risk map with a different release's concern), the same universal routing rule applies: route it to that release's home and name it, don't let it become a row here.
 
 ## What to cover
 
@@ -76,6 +76,8 @@ What you must not do:
 ## This sub-step is DONE when
 
 - [ ] Every H/M dimension **row** (dimension + scope) — for **every release this doc's negotiated structure actually covers**, named explicitly on the row whenever more than one release is in play, never left as an unstated "relevant release" — has a complete risk map row: required, confidence-in-required, actual, confidence-in-actual, gap, impact. No two differently-scoped same-named rows collapsed into one.
+- [ ] Any cross-release material surfacing during synthesis was routed per Part 2's document structure and named to the user — none turned into a risk-map row here.
+- [ ] Under "two releases in parallel," this sub-step ran its own full pass for the parallel release too, under its own `## Part 6` header — not blended into this release's.
 - [ ] Hottest items (large gap + high impact + low confidence) are flagged explicitly with one-line reasoning.
 - [ ] Each row's Impact letter matches its Part 5 rating (H/M — never downgraded per-gap); where the threatened bar carries a recorded recurrence/tolerance, the row's reason names the failure shape the gap produces (one-off vs sustained) and the tolerance reasoning lives there and in the heat, not in a changed letter.
 - [ ] Each behaviour named as a defect/risk survived the **counter-pressure question** (what does it protect?); any genuine two-dimension tension was presented as a tradeoff for the user to arbitrate — citing the domain norm where one exists — and recorded as such, not booked as a one-sided bug.

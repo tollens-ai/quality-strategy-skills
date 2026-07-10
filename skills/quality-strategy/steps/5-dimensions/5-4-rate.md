@@ -12,7 +12,7 @@ There is no L on purpose. "Aware of it but not investing right now" is a **plan-
 
 ## What you need from the previous sub-step
 
-Read sub-step 5.3's **final inventory** (post-unpack and post-old/new-world) from `quality/strategy.md`. Read Part 3 (Stakeholders) — specifically each stakeholder's three-lens bars (Delight / Good Enough / Dealbreaker), because the anchors are applied against those bars. Read Part 4 (Non-goals) — in dimension terms, a non-goal is a dimension no stakeholder bar references (None), or one dropped from the inventory entirely.
+Read sub-step 5.3's **final inventory** (post-unpack and post-old/new-world) from `quality/strategy.md`. Read Part 3 (Stakeholders) — specifically each stakeholder's three-lens bars (Delight / Good Enough / Dealbreaker), because the anchors are applied against those bars. Read Part 4 (Non-goals) — in dimension terms, a non-goal is a dimension no stakeholder bar references (None), or one dropped from the inventory entirely. If rating detail for a **different** release surfaces mid-conversation, route it per Part 2's document structure (SKILL.md → "Scope of this skill") and name it in half a line — never fold it into this release's ratings.
 
 ## What to cover
 

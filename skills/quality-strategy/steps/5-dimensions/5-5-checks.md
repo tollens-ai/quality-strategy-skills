@@ -10,7 +10,7 @@ This sub-step is mostly the agent doing checks and surfacing findings; the user 
 
 ## What you need from the previous sub-step
 
-Read all of Part 5 (5.3's final inventory + 5.4's ratings) from `quality/strategy.md`. Read Part 3 (stakeholders + three-lens) and Part 4 (non-goals) for cross-checking.
+Read all of Part 5 (5.3's final inventory + 5.4's ratings) from `quality/strategy.md`. Read Part 3 (stakeholders + three-lens) and Part 4 (non-goals) for cross-checking. If findings-discussion drifts into detail for a **different** release, route it per Part 2's document structure (SKILL.md → "Scope of this skill") and name it in half a line — never fold it into this release's findings.
 
 ## The checks (run in order)
 

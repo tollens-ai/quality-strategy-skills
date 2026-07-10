@@ -8,7 +8,7 @@ The plan of work falls naturally out of the risk map. It is not a separate creat
 
 ## What you need from the previous sub-step
 
-Read all of Part 6 (Risk Map) from `quality/strategy.md`, especially the "Hottest items" and "Patterns and dependencies" sections.
+Read all of Part 6 (Risk Map) from `quality/strategy.md`, especially the "Hottest items" and "Patterns and dependencies" sections. If action ideas surface for a **different** release mid-conversation, route them per Part 2's document structure (SKILL.md → "Scope of this skill") and name it in half a line — never fold them into this release's plan of work.
 
 ## What to cover
 
@@ -56,6 +56,8 @@ What you must not do:
 
 - [ ] Every non-zero-gap row in the risk map either has an action OR has been actively confirmed as acceptable as-is.
 - [ ] Any H/M-impact dimension the team is aware of but deliberately not investing in this release is recorded as an "aware, not investing this release" note (no-action-with-reason) — not silently dropped, and not confused with a None or a non-goal.
+- [ ] Any action idea volunteered for a different release was routed per Part 2's document structure and named to the user — none folded into this release's action list.
+- [ ] Under "two releases in parallel," this sub-step ran its own full pass for the parallel release too, clearly separated — not blended into this release's action list.
 - [ ] Every **Unknown actual** and every **Low-confidence row** on a high-impact dimension has at least one action — and the action type matches (testing/asking for Unknowns; testing or fixing for Lows depending on whether the assessment or the gap is the problem).
 - [ ] Each action is specific enough to act on (who could do it, what done looks like).
 - [ ] Each action notes which gap or unknown it addresses.
@@ -67,7 +69,7 @@ If any check fails, return to the questioning. Do not move to sub-step 7.2.
 
 ## Output
 
-Append to `quality/strategy.md`:
+Append to `quality/strategy.md`. Under "two releases in parallel" (SKILL.md → "Scope of this skill"), each release gets its own complete `## Part 7` header — run this sub-step once per release, clearly separated, never one blended action list:
 
 ```markdown
 ## Part 7: Plan of Work

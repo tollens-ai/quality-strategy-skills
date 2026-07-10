@@ -36,13 +36,14 @@ You have explicit permission and encouragement to:
 - Treat sprints or continuous delivery as releases when that helps ("the next four weeks of work serving the alpha audience" can be a single "release" for strategy purposes).
 - Probe for the purpose of each release — *"What question does this release answer? What would tell you it succeeded?"*
 
-**When the user gives more than purpose-level detail for another release, negotiate the doc structure — then route it.** This step often unlocks a flood — the user starts dictating bars, risks, non-goals, or dimensions for releases beyond the one this strategy covers. The first time that happens this session, offer the structural choice (SKILL.md → "Scope of this skill" names the four options: per-release doc + bank, light sections in this doc, two releases in parallel, or fully separate documents) rather than assuming banking — ask, get an answer, and record it in `quality/.scratch/session-config.md` before routing anything. Then route what the user just gave you per that choice — faithfully, close to their words, to the release bank, a light section, the parallel release's own depth pass, or the separate document, whichever was chosen. Acknowledge in half a line and move on — don't flatten it into this release's analysis, don't discard it, and don't detour into deep analysis of a release that isn't this one (unless "two releases in parallel" was the negotiated choice, in which case both get their depth pass by design).
+**When the user gives more than purpose-level detail for another release, negotiate the doc structure — then route it.** This step often unlocks a flood — the user starts dictating bars, risks, non-goals, or dimensions for releases beyond the one this strategy covers. The first time that happens this session, offer the structural choice (SKILL.md → "Scope of this skill" names the four options: per-release doc + bank, light sections in this doc, two releases in parallel, or fully separate documents) rather than assuming banking — ask, get an answer, and record it **twice**: in `quality/.scratch/session-config.md` (working reference) and stamped into this sub-step's own Output, in Part 2's "Document structure:" field (the durable record every later step reads — see SKILL.md → "Scope of this skill") — before routing anything. Then route what the user just gave you per that choice — faithfully, close to their words, to the release bank, a light section, the parallel release's own depth pass, or the separate document, whichever was chosen. Acknowledge in half a line and move on — don't flatten it into this release's analysis, don't discard it, and don't detour into deep analysis of a release that isn't this one (unless "two releases in parallel" was the negotiated choice, in which case both get their depth pass by design).
 
 What you must not do:
 
 - Accept a feature list as a release definition. The purpose matters more than the features.
 - Skip the "what does success look like" question for any release. Without it, later sub-steps can't rate dimensions.
 - Treat the roadmap as fixed — note that it's a best guess and will change.
+- Record the negotiated doc-structure choice only in scratch. It must also land in Part 2's "Document structure:" field — the durable record later steps and a cold read of the doc both depend on.
 
 ## Push back when
 
@@ -56,7 +57,7 @@ What you must not do:
 - [ ] Each release has a name, one-sentence description, audience, purpose, and rough sequencing.
 - [ ] Where the team is currently in the sequence is captured.
 - [ ] The doc header's `*Release:*` line names the release this strategy covers, confirmed with the user.
-- [ ] If the session surfaced more than one release with real content, the doc-structure choice (SKILL.md → "Scope of this skill") was offered and the negotiated answer recorded in `quality/.scratch/session-config.md`.
+- [ ] If the session surfaced more than one release with real content, the doc-structure choice (SKILL.md → "Scope of this skill") was offered and the negotiated answer recorded **both** in `quality/.scratch/session-config.md` **and** in Part 2's "Document structure:" field — the doc's own durable record, not just scratch.
 - [ ] Any beyond-purpose detail the user gave for other releases has been routed per that choice — faithfully, per release — not flattened into this release's sections and not dropped.
 - [ ] Any deferred items or unconfirmed releases are flagged as `OPEN QUESTION:`.
 - [ ] Pre-read sources are cited in the section's evidence field — naming actual files referenced, or, for an interview-derived / no-repo pre-read, citing the interview honestly (never blank, never a placeholder).
@@ -73,6 +74,8 @@ Append to `quality/strategy.md`:
 ## Part 2: Release Roadmap
 
 *Current position: <release in flight or just shipped>.*
+
+**Document structure:** <only when more than one release surfaced with real content this session — the negotiated choice: "per-release doc + bank" / "light sections in this doc" / "two releases in parallel" / "fully separate documents", plus which release(s) besides the header release are involved. Omit this field entirely for a single-release session — no negotiation happened, nothing to record.>
 
 ### Release: <name>
 

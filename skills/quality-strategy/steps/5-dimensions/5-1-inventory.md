@@ -14,7 +14,7 @@ This is the same axis split 5.4 names from the other side: "High means important
 
 ## What you need from the previous sub-step
 
-Read all of Parts 1–4 from `quality/strategy.md`. The release purpose (Part 2), stakeholders and three-lens (Part 3), and non-goals (Part 4) feed directly into which dimensions matter. Read the **Design observations and likely-relevant dimensions** and **Floor predicates** sections of `quality/pre-read.md` — subagent C surfaced both the design-implied dimensions and the factual floor predicates the guaranteed-inclusion layer (step 4 below) reads. If 2.1 negotiated a multi-release doc structure, **re-read `quality/.scratch/session-config.md` now** — its recorded choice is what step 3 (Consolidate) routes future-release candidates by, and 2.1 may have happened sessions ago or across a `/clear`; don't rely on remembering it.
+Read all of Parts 1–4 from `quality/strategy.md`. The release purpose (Part 2), stakeholders and three-lens (Part 3), and non-goals (Part 4) feed directly into which dimensions matter. Read the **Design observations and likely-relevant dimensions** and **Floor predicates** sections of `quality/pre-read.md` — subagent C surfaced both the design-implied dimensions and the factual floor predicates the guaranteed-inclusion layer (step 4 below) reads. If 2.1 negotiated a multi-release doc structure, **re-read it now** — Part 2's own "Document structure:" field is the durable record (fall back to `quality/.scratch/session-config.md` only if Part 2's field is somehow missing from an older doc); its recorded choice is what step 3 (Consolidate) routes future-release candidates by, and 2.1 may have happened sessions ago or across a `/clear`; don't rely on remembering it.
 
 ## The work, in order
 
@@ -160,6 +160,7 @@ What you must not do:
 - [ ] Every row carries its **scope** — stakeholder(s)/capacity and product surface (including the dev-tool side, where the project produces or hosts other people's work) — from first surfacing.
 - [ ] Where the same -ility means different things or carries different priority for different stakeholders, it appears as separate scoped rows (or is flagged for the split to happen at 5.2) — never one unscoped row standing in for several concerns.
 - [ ] Future-release candidates from either pass are routed per the doc structure negotiated at 2.1 (bank / light section / parallel pass / separate doc), named to the user in half a line — none silently dropped, none flattened into this release's inventory.
+- [ ] Under "two releases in parallel," this sub-step (and 5.2–5.5 downstream) ran its own full pass for the parallel release too, its own clearly separated inventory — not blended into this release's.
 - [ ] No row's reason cites current adequacy (coverage, testedness, bugginess) instead of importance; every deficiency observation that prompted a candidate is parked as a "noted for 6.2" line, not folded into the reason.
 - [ ] No Dimension cell names a feature or component — each holds an axis of goodness, with the feature (if one prompted it) named in the scope column instead.
 - [ ] The wrap-up self-check confirms: no adequacy verdicts — pessimistic or reassuring — were made this sub-step, in the doc or in conversation.

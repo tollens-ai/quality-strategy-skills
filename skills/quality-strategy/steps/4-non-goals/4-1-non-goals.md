@@ -6,6 +6,8 @@ Capture, for this release, the **quality bars this release is deliberately not r
 
 **This is not a restatement of the roadmap.** Features and capabilities deferred to later releases already live in Part 2 (the release roadmap) — that's their home. A deferred feature only belongs here if it implies a quality-bar decision for what IS being built this release (see category 4 below); a plain list of deferred features is not a non-goals list, however long.
 
+If the user volunteers a real non-goal for a **different** release mid-conversation, route it per Part 2's negotiated document structure (its own section under "two releases in parallel," a light section, the release bank, or the separate document — SKILL.md → "Scope of this skill"), named in half a line, never folded into this release's Part 4 list. Under "two releases in parallel," the parallel release gets its own full non-goals pass here too, clearly separated from this one's.
+
 ## What you need from the previous sub-step
 
 Read Parts 1, 2, and 3 from `quality/strategy.md`. The release roadmap (2.1) and stakeholder analysis (3.1, 3.2) are particularly important — non-goals often map straight onto stakeholders you're not serving, releases you're not targeting, or dimensions a stakeholder explicitly doesn't care about.
@@ -80,6 +82,8 @@ What you must not do:
 - [ ] Every non-goal has a one-line reason that names an intentional tradeoff, not a constraint.
 - [ ] Every non-goal has a trigger captured OR an explicit "not sure" / "no specific trigger" recorded.
 - [ ] The five standard categories have all been walked through (or actively skipped with a noted reason).
+- [ ] Any real non-goal volunteered for a different release was routed per Part 2's document structure and named to the user — none folded into this release's Part 4 list.
+- [ ] Under "two releases in parallel," this sub-step ran its own full pass for the parallel release too, clearly separated (its own non-goals list, not blended into this release's) — not just noted in passing.
 - [ ] Any deferred items are recorded as `OPEN QUESTION:`.
 - [ ] Pre-read sources are cited in the section's evidence field — naming actual files referenced, or, for an interview-derived / no-repo pre-read, citing the interview honestly (never blank, never a placeholder).
 - [ ] The step-boundary `/contradiction-check` was dispatched on the doc so far (it is the first move of the checkpoint, per SKILL.md) and its scratch file exists at `quality/.scratch/4.1-contradiction-check.md`.
@@ -89,7 +93,7 @@ If any check fails, return to the questioning. Do not move to Step 5.
 
 ## Output
 
-Append to `quality/strategy.md`:
+Append to `quality/strategy.md`. Under "two releases in parallel" (SKILL.md → "Scope of this skill"), each release gets its own complete `## Part 4: Non-goals (<release>)` section — run this sub-step once per release, clearly separated, never one blended list:
 
 ```markdown
 ## Part 4: Non-goals (<release>)

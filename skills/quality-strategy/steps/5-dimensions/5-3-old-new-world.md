@@ -10,7 +10,7 @@ Get the reasoning wrong and the 5.4 rating misleads: what's High for an agent ma
 
 ## What you need from the previous sub-step
 
-Read the post-unpack inventory from sub-step 5.2's output in `quality/strategy.md`. Read Part 3 (stakeholders) — specifically, note which stakeholders are agents.
+Read the post-unpack inventory from sub-step 5.2's output in `quality/strategy.md`. Read Part 3 (stakeholders) — specifically, note which stakeholders are agents. If audience-split detail for a **different** release surfaces mid-conversation, route it per Part 2's document structure (SKILL.md → "Scope of this skill") and name it in half a line — never fold it into this release's final inventory.
 
 This skill takes the new-world stance (see PHILOSOPHY): agent stakeholders are the default. Sub-step 3.1 should have surfaced them unless the user gave a specific concrete reason. **Run the audience question on trap dimensions regardless of what 3.1 recorded** — because:
 

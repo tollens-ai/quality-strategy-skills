@@ -8,7 +8,7 @@ Unknowns are not a failure. For first-pass strategies on real projects, **most a
 
 ## What you need from the previous sub-step
 
-Read sub-step 6.1's required levels from `quality/strategy.md` — **the same rows, keyed by dimension + scope**: 6.1 already resolved which same-named rows are actually separate (different stakeholder/surface), so 6.2 walks that identical row set rather than re-deriving it from a bare dimension list. Read the **Code structure** and **Design observations** sections of `quality/pre-read.md` — subagent C may have surfaced design hypotheses about specific dimensions ("error handling looks inconsistent → reliability is likely Low or Unknown") — treat these as scoped to whichever surface the observation was actually about, not automatically to every row sharing that dimension's name. Read Part 5's **"Noted for 6.2"** table too — 5.1 parked deficiency observations there precisely so this sub-step could pick them up as a starting point for the actuals it now judges; they're prompts to investigate, not pre-made verdicts. Where 2.1 negotiated a multi-release doc structure, carry forward which release each row belongs to, same as 6.1.
+Read sub-step 6.1's required levels from `quality/strategy.md` — **the same rows, keyed by dimension + scope**: 6.1 already resolved which same-named rows are actually separate (different stakeholder/surface), so 6.2 walks that identical row set rather than re-deriving it from a bare dimension list. Read the **Code structure** and **Design observations** sections of `quality/pre-read.md` — subagent C may have surfaced design hypotheses about specific dimensions ("error handling looks inconsistent → reliability is likely Low or Unknown") — treat these as scoped to whichever surface the observation was actually about, not automatically to every row sharing that dimension's name. Read Part 5's **"Noted for 6.2"** table too — 5.1 parked deficiency observations there precisely so this sub-step could pick them up as a starting point for the actuals it now judges; they're prompts to investigate, not pre-made verdicts. Where 2.1 negotiated a multi-release doc structure, carry forward which release each row belongs to, same as 6.1. **The universal routing rule applies here too** — the live symptom this fix exists to close was actual-level talk drifting onto a different release mid-conversation and getting folded into this release's actuals: if that happens, route the material to that release's home (SKILL.md → "Scope of this skill") and name it in half a line; don't record it as an actual for this release's row just because the dimension name matches.
 
 ## Actuals come from evidence, in this order — not from reading the code
 
@@ -95,6 +95,8 @@ What you must not do:
 - [ ] Every H/M dimension **row** (dimension + scope, matching 6.1's row set) has either a qualitative actual level or an explicit "Unknown" — no two differently-scoped same-named rows collapsed into one.
 - [ ] Every non-Unknown actual's Evidence line names which scope the evidence actually covers; no evidence from one scope was generalised to a different scope of the same-named dimension.
 - [ ] Whenever this doc's negotiated structure covers more than one release, every row states which release it belongs to, matching 6.1.
+- [ ] Any actual-level detail volunteered mid-conversation for a different release was routed per Part 2's document structure and named to the user — none folded into this release's actuals.
+- [ ] Under "two releases in parallel," this sub-step ran its own full pass for the parallel release too, under its own `## Part 6` header — not blended into this release's.
 - [ ] Actuals were sought down the **evidence hierarchy** — test results / CI / reports, then the tests, then what the user has actually seen — before any code reading; every code-derived actual is **labelled inference**, capped at Medium confidence, and none claims a confident "at bar" off the source alone.
 - [ ] Every actual has a confidence rating (H/M/L, or "—" for Unknown) and an evidence basis (or "no investigation yet").
 - [ ] Every Unknown has a one-line note on what would resolve it (test / ask / review / instrument / build infrastructure).
@@ -111,7 +113,7 @@ If any check fails, return to the questioning. Do not move to sub-step 6.3.
 
 ## Output
 
-Append to `quality/strategy.md` under Part 6:
+Append to `quality/strategy.md` under Part 6. Under "two releases in parallel," each release has its own `## Part 6` header from its own pass through 6.1 — append under the matching one, not the other release's:
 
 ```markdown
 ### Actual levels (<release>)
