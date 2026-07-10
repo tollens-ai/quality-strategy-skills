@@ -12,13 +12,13 @@ What alpha testers reported, what changed in response, and where. Testers are an
 
 **Follow-up (encoded 2026-07-10).** The candidness rationale is now folded into the ask itself rather than left implicit: the ask *tells* the user it wants their true, honest opinions and that where the docs live decides who reads them, in the same breath. Where in-repo means a wide audience, the skill outright recommends the private copy first — tidy or redact later (the user's own editorial pass), with `/strategy-variants` named as the route to a shareable view: it derives separate audience-facing files after the strategy is reviewed, never editing the honest doc itself. And candidness is raised at this one moment only, never sprung mid-session: a user who turns guarded mid-interview gets the standing choice restated in a line, not a fresh disclosure ceremony. Regression case IU-24 (companion to IU-21/22). Where: `skills/quality-strategy/SKILL.md` (Session start — the settle-where-it-lives move); `README.md`.
 
-## Round 2 — Qing, launch-gate run (2026-06-11)
+## Round 2 — maintainer launch-gate run (2026-06-11)
 
-A full cold `/quality-strategy` run on a real fixture (the king-and-pawn chess project, mid-launch), used as the launch gate for the pack. Ten findings, encoded in version 0.3.3. Several share a root cause Qing named outright — **status-quo bias and one-directional goal-tracing**: the skill treating the current state of the repo (what's built, what's absent) as evidence of user intent, and tracing risks in only the direction a stated goal pulls.
+A full cold `/quality-strategy` run on a real fixture (the king-and-pawn chess project, mid-launch), used as the launch gate for the pack. Ten findings, encoded in version 0.3.3. Several share a root cause the maintainer named outright — **status-quo bias and one-directional goal-tracing**: the skill treating the current state of the repo (what's built, what's absent) as evidence of user intent, and tracing risks in only the direction a stated goal pulls.
 
 ### 1. Non-goals are proposed, never assumed (IU-16 / IU-17)
 
-**The feedback.** The skill declared a batch of scope cuts (non-goals) *without asking* — visible only as a one-liner. One cut ("no custom SMTP") was inferred purely because the code didn't have it; it never reasoned forward that the stated Twitter launch implies a signup spike, and default-SMTP confirmation emails are exactly what breaks under that spike. Root cause, Qing's diagnosis: **status-quo bias** — absence in the codebase treated as a preference of the user.
+**The feedback.** The skill declared a batch of scope cuts (non-goals) *without asking* — visible only as a one-liner. One cut ("no custom SMTP") was inferred purely because the code didn't have it; it never reasoned forward that the stated Twitter launch implies a signup spike, and default-SMTP confirmation emails are exactly what breaks under that spike. Root cause, the maintainer's diagnosis: **status-quo bias** — absence in the codebase treated as a preference of the user.
 
 **The change.** Two disciplines at the non-goals step. **(a) Reason forward, never from absence:** a candidate non-goal derived from "it isn't built" must be tested forward against the stated goals and named events before it may even be *proposed*; an absence a stated goal demands is a gap, not a non-goal. **(b) Propose and confirm, one at a time:** each surviving candidate is named back with its one-line why and confirmed before it enters the doc — batching cuts behind a single one-liner is the named failure.
 
@@ -26,7 +26,7 @@ A full cold `/quality-strategy` run on a real fixture (the king-and-pawn chess p
 
 ### 2. Agent-driven workflow triggers the agent-facing cluster (SC-13)
 
-**The feedback.** Qing said her workflow is autonomous-agent-driven ("I just tell Claude vaguely what I want") — yet the dimension sweep came out light on the agent-facing cluster (testability not pinned to agent-verifiable; agent-diagnosability and observability missing). The stated workflow *is* a goal statement; it implies these dimensions the same way "Twitter launch" implies signup scale. The pack had the concepts; the sweep lacked the trigger. Vibecoders — the launch audience — near-universally have this workflow.
+**The feedback.** The maintainer said her workflow is autonomous-agent-driven ("I just tell Claude vaguely what I want") — yet the dimension sweep came out light on the agent-facing cluster (testability not pinned to agent-verifiable; agent-diagnosability and observability missing). The stated workflow *is* a goal statement; it implies these dimensions the same way "Twitter launch" implies signup scale. The pack had the concepts; the sweep lacked the trigger. Vibecoders — the launch audience — near-universally have this workflow.
 
 **The change.** The 5.1 bottom-up pass now fires the agent-facing cluster (agent-diagnosability, agent-audience observability/debuggability, agent-verifiable testability, agent-readability/context-efficiency) directly from a stated agent-driven workflow, each goal-traced to that workflow statement.
 
@@ -34,7 +34,7 @@ A full cold `/quality-strategy` run on a real fixture (the king-and-pawn chess p
 
 ### 3. Old/new-world pass is machinery, not a ceremony (IU-9)
 
-**The feedback.** The old/new-world (agent-vs-human audience) pass read as "internal logic leaking out" — a dimension-by-dimension confirmation walk whose answer was usually "neutral". Qing's call (override, try tonight): it shouldn't be its own user-facing ceremony; it should run before the dimensions presentation and feed it. Constraint: the reasoning stays mandatory.
+**The feedback.** The old/new-world (agent-vs-human audience) pass read as "internal logic leaking out" — a dimension-by-dimension confirmation walk whose answer was usually "neutral". The maintainer's call (override, try tonight): it shouldn't be its own user-facing ceremony; it should run before the dimensions presentation and feed it. Constraint: the reasoning stays mandatory.
 
 **The change.** 5.3 restructured — the audience reasoning is still mandatory and still recorded for every trap dimension, but it runs as silent machinery feeding the rated inventory; only the splits made and genuine audience tensions surface for the user to react to. Neutral decisions are recorded on disk, not recited.
 
@@ -50,7 +50,7 @@ A full cold `/quality-strategy` run on a real fixture (the king-and-pawn chess p
 
 ### 5. Floors and default-in dimensions (SC-14)
 
-**The feedback.** The sweep produced *no security dimension at all* — on the very project whose benchmark ground truth had an integrity/security hole (client-writable rating forgery) as the headline finding. Qing's design: two tiers. **Universal floors** (non-disprovable given a factual predicate) and **default-in dimensions** (present by default, removable only by an explicit recorded disproof) where the goal-trace runs in reverse — the skill *convinces* using the user's own goals, then offers the honest fork.
+**The feedback.** The sweep produced *no security dimension at all* — on the very project whose benchmark ground truth had an integrity/security hole (client-writable rating forgery) as the headline finding. The maintainer's design: two tiers. **Universal floors** (non-disprovable given a factual predicate) and **default-in dimensions** (present by default, removable only by an explicit recorded disproof) where the goal-trace runs in reverse — the skill *convinces* using the user's own goals, then offers the honest fork.
 
 **The change.** A guaranteed-inclusion layer in the sweep. **Floors** (ratified: credential leakage, PII leakage, irrecoverable loss of entrusted data, legality, blast radius) enter unconditionally where their factual predicate holds — checked in the pre-read, never None, never a non-goal; only what they demand here is negotiable. **Default-ins** (security always; data-integrity where user data exists; unbounded spend — the flagship — where the system can spend) appear by default; the skill builds the reverse goal-trace to convince, then forks to convinced-or-recorded-accepted-risk. Silent inclusion is as wrong as silent exclusion.
 
@@ -66,7 +66,7 @@ A full cold `/quality-strategy` run on a real fixture (the king-and-pawn chess p
 
 ### 7. Counter-pressure before naming a behaviour a defect (SC-16)
 
-**The feedback.** The skill named "clock doesn't pause on disconnect → flag unfairly → mad player" a defect-shaped risk. Qing's correction: that's the chess domain norm — sites keep the clock running on disconnect because pausing enables disconnect-to-think cheating. Same behaviour, two dimensions pulling opposite ways, presented as one-sided (goal-traced only to the stated "mad player" dealbreaker).
+**The feedback.** The skill named "clock doesn't pause on disconnect → flag unfairly → mad player" a defect-shaped risk. The maintainer's correction: that's the chess domain norm — sites keep the clock running on disconnect because pausing enables disconnect-to-think cheating. Same behaviour, two dimensions pulling opposite ways, presented as one-sided (goal-traced only to the stated "mad player" dealbreaker).
 
 **The change.** Before a behaviour is booked as a defect, 6.3 asks what it protects (purpose / domain convention); where a genuine tension exists, both pulls are presented as a tradeoff for the user to arbitrate (citing domain norms), never one side as a bug. The upstream twin of the 5.4 tradeoffs-at-recombination discipline.
 
@@ -82,7 +82,7 @@ A full cold `/quality-strategy` run on a real fixture (the king-and-pawn chess p
 
 ### 9. Resume after `/clear` is stated, never guessed (IU-10)
 
-**The feedback.** Reproduced by two independent testers (Tom #1 + simulated-user Retest B): a seam that says "safe to `/clear`" must also say exactly *how* to resume, so the user doesn't gamble that re-running the skill works.
+**The feedback.** Reproduced by two independent testers (alpha tester #1 + simulated-user Retest B): a seam that says "safe to `/clear`" must also say exactly *how* to resume, so the user doesn't gamble that re-running the skill works.
 
 **The change.** Every break/clear seam in all three strategy skills now states the resume mechanism: run `/<skill>` again; it reads your `quality/` docs and resumes from where you left off.
 

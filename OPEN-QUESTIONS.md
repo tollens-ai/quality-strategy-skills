@@ -794,7 +794,7 @@ Calls made while preparing the pack for public alpha.
 
 **What would change our mind.** If banked notes rot faster than they help (new-release mode pre-loads stale claims the user has to bat away — the named-back-for-confirmation rule is the guard). If users want the bank *inside* the strategy doc (an appendix) rather than per-release files. If real sessions show the "half a line and move on" rule fights users who genuinely want to switch releases mid-session (the honest answer there may be: finish, then run new-release mode).
 
-**How we'd know.** Qing's Tollens Studio multi-release dictation run is the live test. Regression: SC-18.
+**How we'd know.** The maintainer's live multi-release product-strategy dictation run is the live test. Regression: SC-18.
 
 ---
 
@@ -806,7 +806,7 @@ Calls made while preparing the pack for public alpha.
 
 **What would change our mind.** If real lane runs keep escalating into the depth the old test-strategy machinery provided (tiered needs, allocation tables, calibration) — the answer then is a deep-dive follow-on built *from* a lane's agreed moves, not re-fattening the lanes. If dropping the mandatory 6.2 oracle audit lets over-confident actuals back into strategies (the review's honesty checks and the oracle lane are the guards — watch whether they catch what 6.2's dispatch used to).
 
-**How we'd know.** Qing's Tollens Studio run (the lanes were requested for exactly it); the release-phase regression run. Regression: SC-19.
+**How we'd know.** The maintainer's live product run (the lanes were requested for exactly it); the release-phase regression run. Regression: SC-19.
 
 ---
 
@@ -816,11 +816,11 @@ Calls made while preparing the pack for public alpha.
 
 **What we did.** The session-start save-location ask now carries the honesty rationale in the words said to the user ("this works best when you can answer really honestly — your true opinions…"), recommends the private local pass outright when in-repo means a wide audience (tidy or redact later; `/strategy-variants` named as the derived-view route that never edits the honest doc), and is the *one* moment candidness is raised: no mid-session "this next part is sensitive" disclosures; a user who turns guarded gets the standing choice restated in a line.
 
-**Why.** TOL-185/TOL-189: surprising people with candidness mid-interview breaks trust exactly when the pointed questions arrive; folding the rationale into the ask up front licenses those questions before they're asked. The outright recommendation (not a neutral offer) is Qing's design: the wide-audience case has a right answer.
+**Why.** TOL-185/TOL-189: surprising people with candidness mid-interview breaks trust exactly when the pointed questions arrive; folding the rationale into the ask up front licenses those questions before they're asked. The outright recommendation (not a neutral offer) is the maintainer's design: the wide-audience case has a right answer.
 
 **What would change our mind.** If the honesty framing itself makes reserved users *more* guarded at minute one. If the wide-audience recommendation reads as steering users away from team transparency where in-repo was genuinely right.
 
-**How we'd know.** Regression IU-24 (David-mode fixture) + PR tests `2026-07-10-req10.md`; watch real session-starts for the ask landing as protective rather than bureaucratic.
+**How we'd know.** Regression IU-24 (the guarded-user fixture) + PR tests `2026-07-10-req10.md`; watch real session-starts for the ask landing as protective rather than bureaucratic.
 
 ---
 
@@ -828,7 +828,7 @@ Calls made while preparing the pack for public alpha.
 
 **What we did.** PHILOSOPHY's vagueness discipline now says the digging is done by asking (when? how often? to what extent?), never by the agent choosing a reading. Worked case: bars carry a recurrence/tolerance dimension (one-off vs sustained), elicited at three-lens and recorded inline on the bar; 6.1 carries it into required levels; 6.3 respects it in the impact reason and heat while the Impact letter stays the Part 5 carry-over.
 
-**Why.** Tom's deal-breaker misread: "bugs are a dealbreaker" read strictly when he actually tolerates one-offs and dies on sustained breakage — an invented fact wearing the user's voice, inflating required levels and impact downstream. The symmetric failure (invented leniency) waves a real dealbreaker through.
+**Why.** An alpha tester's deal-breaker misread: "bugs are a dealbreaker" read strictly when he actually tolerates one-offs and dies on sustained breakage — an invented fact wearing the user's voice, inflating required levels and impact downstream. The symmetric failure (invented leniency) waves a real dealbreaker through.
 
 **What would change our mind.** If the tolerance question fires on every bar and reads as interrogation (the guard is "only when the phrasing leaves the reading open"). If recording tolerance inline clutters the three-lens table beyond usefulness.
 
@@ -840,7 +840,7 @@ Calls made while preparing the pack for public alpha.
 
 **What we did.** Spontaneous user ideas (volunteered how-we'd-check-or-uphold suggestions that go beyond the question asked) land in `quality/ideas.md`: user's words, one bullet per idea, dimension+release linked, no role assigned at capture. No prompting for ideas mid-strategy — elicitation stays with the lanes, which read the ledger at ingest and annotate adopted entries rather than deleting. One file across releases; capture exempt from the pruning rule and precision push-back.
 
-**Why.** Users generate ideas mid-interview and the pack previously had nowhere to put them that wasn't a detour, a classification, or a loss. Classifying at capture closes off the other roles the same idea can play (review-per-change is a proxy *and* a process rule — Tom's diagnosability item is the canonical multi-role offering).
+**Why.** Users generate ideas mid-interview and the pack previously had nowhere to put them that wasn't a detour, a classification, or a loss. Classifying at capture closes off the other roles the same idea can play (review-per-change is a proxy *and* a process rule — an alpha tester's diagnosability item is the canonical multi-role offering).
 
 **What would change our mind.** If real ledgers fill with routine interview content (the beyond-the-question-asked boundary isn't holding). If lanes routinely ignore the ledger (the ingest hook isn't enough and needs a checklist gate). If users expect the ledger inside the strategy doc.
 
@@ -852,7 +852,7 @@ Calls made while preparing the pack for public alpha.
 
 **What we did.** Renamed `/oracle-strategy` to `/evaluation-strategy` and folded proxies into it. Shared definitions live in test-strategy FRAMINGS #8: an oracle is trusted to *judge* (tells you whether it is good); a proxy *indicates* (correlated, cheap, known blind spots) — both are quality instruments, differing in authority. The proxy-goal guard was rewritten (TOL-174): proxy goals are legitimate when labelled — 100% coverage, review-per-every-change, clean architecture are all good quality proxies — and the failure mode is treating proxy satisfaction as quality achieved; a move's answered-when may cite a proxy milestone if it states what remains unknown when the proxy is satisfied (test-strategy-review check 4 re-worded to match). Old `/oracle-strategy` pointers are honoured: the lane's prompt says treat them as pointing here, and `/tooling-strategy` reads a prior-era `quality/oracle-strategy.md` as the evaluation side.
 
-**Why.** Qing's ruling: the old "no proxy targets as goals" over-forbade — teams legitimately commit to proxy goals; what goes wrong is reading them as the thing itself. And oracles-vs-proxies was a false split for the lane: a project knows where it stands through both, and the craft is knowing each signal's authority.
+**Why.** The maintainer's ruling: the old "no proxy targets as goals" over-forbade — teams legitimately commit to proxy goals; what goes wrong is reading them as the thing itself. And oracles-vs-proxies was a false split for the lane: a project knows where it stands through both, and the craft is knowing each signal's authority.
 
 **What would change our mind.** If "quality instrument" collides in practice with the pack's narrower observation-instrument sense despite the disambiguation note. If labelled-proxy-goals in real docs drift back into unlabelled targets (the what-remains-unknown clause is the guard). If the rename strands older strategies' pointers in ways the treat-as-pointing-here rule doesn't catch.
 
@@ -864,7 +864,7 @@ Calls made while preparing the pack for public alpha.
 
 **What we did.** Path (b) of revision mode is now a real protocol (TOL-173/TOL-188). Entry triage first, with the skill diagnosing rather than trusting the user's framing — the discriminating question: "was the document wrong about what was true then, or has what's true changed since?" — routing to genuine-correction (scoped re-application), small-drift (same, recorded eyes-open), or context-changed (implicitly a new release: whole template, old doc as hypotheses). For corrections: locate the first-touched section, compute its downstream tree from the new explicit graph (`skills/quality-strategy/SECTION-DEPENDENCIES.md`, mirroring the sub-steps' own declared inputs), union for multiple corrections, record the plan in `## Since the last revision`, then re-apply the template to exactly that union — obvious inferences may be suggested but every downstream conclusion is user-ratified; unaffected dependents close as examined-unchanged confirmations. Untouched sections are never re-opened. Review check 24 diffs archive vs current: out-of-union edits FAIL, an under-computed union is a FAIL, union members without outcomes FLAG. A mode map at the top of Revision mode makes fresh/resumption/correction/re-walk/new-release explicit for agents landing mid-task.
 
-**Why.** Qing's design: corrections were previously "ask which sub-steps, jump to those" — no triage, no dependency reasoning, so a fixed bar could leave stale ratings downstream, and a context change dressed as a correction patched a strategy whose goals had moved. Users under-flag context changes; the goals change when the context does.
+**Why.** The maintainer's design: corrections were previously "ask which sub-steps, jump to those" — no triage, no dependency reasoning, so a fixed bar could leave stale ratings downstream, and a context change dressed as a correction patched a strategy whose goals had moved. Users under-flag context changes; the goals change when the context does.
 
 **What would change our mind.** If real corrections show the graph's granularity is wrong (Part-level unions too coarse, sub-step too fine). If wide trees (bar corrections) make correction mode feel like a re-walk despite the keep-as-is mechanic — the fix would be smarter obvious-inference batching, not skipping ratification. If the graph drifts from the sub-steps (the same-commit update rule is the guard).
 

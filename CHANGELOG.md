@@ -47,7 +47,7 @@ Draft branch only — no `quality-strategy` version bump or public release yet.
 
 ## [0.3.3] — 2026-06-11
 
-Encodes ten findings from Qing's launch-gate run of `/quality-strategy` (a full cold run on a real mid-launch fixture — see `docs/ALPHA-FEEDBACK.md`, Round 2). The through-line Qing named: **kill status-quo bias and one-directional goal-tracing** — stop treating the current state of the repo as evidence of user intent, and stop tracing risks in only the direction a stated goal pulls.
+Encodes ten findings from the maintainer's launch-gate run of `/quality-strategy` (a full cold run on a real mid-launch fixture — see `docs/ALPHA-FEEDBACK.md`, Round 2). The through-line the maintainer named: **kill status-quo bias and one-directional goal-tracing** — stop treating the current state of the repo as evidence of user intent, and stop tracing risks in only the direction a stated goal pulls.
 
 ### Added
 
