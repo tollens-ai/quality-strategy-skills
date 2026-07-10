@@ -871,3 +871,17 @@ Calls made while preparing the pack for public alpha.
 **How we'd know.** Regression SC-23 + PR tests `2026-07-10-req6.md` (incl. TOL-188's bad-pass fixture: an out-of-union edit must FAIL check 24). Watch the first real correction session end-to-end.
 
 ---
+
+## Strategy-variants hardening: the completeness gate + the named external audience
+
+**What we did.** Two release-test Majors (2026-07-10, both on the redact-later path that the save-location ask now advertises — "Candidness folded into the save-location ask" above, REQ-10) closed in `/strategy-variants`. First, the "don't run on an unfinished strategy" clause became a mechanical gate: step 1 of the work presence-checks Parts 1, 3, 4, and 6 (real content, not bare headings), and on failure produces nothing — no caveated variants; caveats stay behind when the page is forwarded. The stop message checks `quality/archive/` first: a thin live `strategy.md` usually means a new release is mid-write, and if an archived release passes the same check, the user may explicitly choose to derive variants of that release (the derived-view header then names it) — the check-the-archive-first fallback that release-test round 1's `/quality-artefacts` run improvised on its own judgment, made official here with the user's say-so added. Second, the client-safe variant no longer assumes a paying client exists: the audience is asked for by name ("who exactly is this for — name them"), with the no-client branch drawn from the strategy's own Part 3 stakeholders (OSS end users, funders/backers, due-diligence readers) — never invented; no nameable reader anywhere means the client-safe variant isn't produced (a requested one-pager is unaffected), never fabricated.
+
+**Why.** Release-test round 1 ran the variants against a legitimate Part-1-only new-release stub and produced hollow-but-caveated files where the skill's own clause said stop — the clause existed but wasn't a gate. Round 2 had to invent "OpenCollective backer / due-diligence reader" as the client-variant audience because the skill's framing (client, customer, exec sponsor) had no branch for a project with no client — exactly the alpha audience the REQ-10 save-location ask now sends here.
+
+**What would change our mind.** If the four-Part presence check proves too coarse (a doc with four filled Parts can still be mid-revision garbage — the review skill remains the quality gate) or too strict (a legitimate variant need that only leans on Parts 1/3). If the Part 3 candidate list turns the audience ask into a menu users rubber-stamp instead of a real naming.
+
+**Still owed (next batch).** The same gate shape for `/operational-distillation` — release-test finding 3: its thin-body refusal lives only under "Push back when"; its work order and DONE list never require the Parts to exist, so a fast pass could fabricate a TL;DR from a Part-1 stub. Same class as the variants gate fixed here.
+
+**How we'd know.** Regression suite `variants.md` (V-1/V-2) + PR tests `2026-07-10-req11.md`. Watch the first real no-client alpha user reach the client-safe variant.
+
+---
