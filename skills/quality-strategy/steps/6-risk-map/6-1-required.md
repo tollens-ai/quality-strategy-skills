@@ -6,21 +6,22 @@ For each H/M dimension from Step 5, describe what level it needs to reach for th
 
 ## What you need from the previous sub-step
 
-Read Part 5 (Quality Dimensions) from `quality/strategy.md` for the H/M-rated dimensions. Read Part 3 (Stakeholders) for the three-lens analysis — Good Enough and Dealbreaker lenses are direct inputs to required levels. Read Part 4 (Non-goals) to confirm scope (Low and None dimensions are not in the risk map).
+Read Part 5 (Quality Dimensions) from `quality/strategy.md` for the H/M-rated dimensions — and for each, its **Scope** (stakeholder(s)/capacity + surface) from 5.3's final inventory, the version 5.4 rated. A dimension name is not a unique key: two rows can share a name with different scopes (the classic dev-tool case — "usability" for the tool's own users vs. for agents calling its API), and each stays its own row all the way through Step 6, never merged back into one because the names match. Read Part 3 (Stakeholders) for the three-lens analysis — Good Enough and Dealbreaker lenses are direct inputs to required levels. Read Part 4 (Non-goals) to confirm scope (Low and None dimensions are not in the risk map). If 2.1 negotiated a multi-release doc structure (SKILL.md → "Scope of this skill"), note which release(s) this risk map covers — every row needs an explicit release tag below whenever more than one release is in play.
 
 ## What to cover
 
-By the end of this sub-step the strategy doc must capture, **for each H/M dimension**:
+By the end of this sub-step the strategy doc must capture, **for each H/M dimension row** (dimension **and its scope** — two same-named, differently-scoped rows are two rows, rated and required independently):
 
-1. **Required level** — a description, in words specific to this dimension, of what level it needs to reach for this release to succeed. Concrete terms, not a generic shared scale.
+1. **Required level** — a description, in words specific to this dimension **and this scope**, of what level it needs to reach for this release to succeed. Concrete terms, not a generic shared scale. A tool-side row and a produced-work-side row of the "same" -ility (the dev-tool double) routinely need different required levels — don't let one answer stand in for both.
 2. **Confidence in the required level** — H/M/L. How sure are we that this is the right target? Often Low, especially in early-stage projects where no stakeholder has actually confirmed the bar.
 3. **Grounded in** — which stakeholder dealbreakers and good-enoughs (from Part 3) and which release purpose (from Part 2) anchor this required level. Required levels with no grounding are floating.
+4. **Release** — whenever this doc's negotiated structure (2.1 / SKILL.md → "Scope of this skill") covers more than one release, name which release this row belongs to, explicitly, on the row itself — don't rely on the section header alone once more than one release's rows could plausibly sit near each other.
 
 ## How to ask
 
-Walk the H/M dimensions **cluster by cluster** when they fall into natural clusters (SKILL.md → "Cluster-by-cluster, not one flat list") — sharing a stakeholder, a theme, or a parent composite from 5.2 — one cluster at a time, confirmed, before moving to the next; a flat dimension-by-dimension walk stays fine when nothing meaningfully clusters (record *"considered, no clustering"*). Within each dimension, ask in turn:
+Walk the H/M dimension rows **cluster by cluster** when they fall into natural clusters (SKILL.md → "Cluster-by-cluster, not one flat list") — sharing a stakeholder, a theme, or a parent composite from 5.2 — one cluster at a time, confirmed, before moving to the next; a flat row-by-row walk stays fine when nothing meaningfully clusters (record *"considered, no clustering"*). Within each row, ask in turn — naming the scope, not just the dimension, whenever more than one row shares a dimension name:
 
-- *"For [dimension], what does the release need to look like to succeed? Describe it in concrete terms — what would a stakeholder see, do, or experience?"*
+- *"For [dimension] (scope: [scope]), what does the release need to look like to succeed? Describe it in concrete terms — what would a stakeholder see, do, or experience?"*
 - *"How confident are we that's the right target? High, Medium, or Low?"*
 - *"What's it grounded in — which stakeholder bar, which release purpose?"*
 
@@ -42,6 +43,8 @@ What you must not do:
 - State a required level with no grounding. Anchor it to Part 3 or Part 2.
 - Use percentages anywhere. Confidence is High / Medium / Low only.
 - Skip dimensions because they're "obvious." Even obvious required levels benefit from being written down.
+- Merge two rows that share a dimension name but carry different scopes into one required level. Same name, different scope, different row.
+- Leave a row's release implicit when this doc's negotiated structure covers more than one release.
 
 ## Push back when
 
@@ -50,11 +53,13 @@ What you must not do:
 - Confidence is High but no stakeholder has actually been asked. *"That's High confidence based on what evidence? If no one has been asked, isn't this Medium or Low?"*
 - Two stakeholders' bars contradict and the user picks one without acknowledging the tension. *"That works for X, but Y said Z — how do you reconcile?"*
 - The user pushes a required level above every grounding bar "to be safe." *"Which stakeholder bar asks for that extra? If none does, meeting the stated bar is success — let's record what would reopen it as a change note instead of raising the bar."*
+- Two same-named rows with different scopes are getting talked through as if they were one dimension. *"[Dimension] for [scope A] and [dimension] for [scope B] are two different rows with two different bars — let's do them separately."*
 
 ## This sub-step is DONE when
 
-- [ ] Every H/M dimension from Part 5 has a row in Part 6 with a required level described in the dimension's own concrete terms — checked against the H/M dimension list from sub-step 5.4: every dimension has a row, and every row has a dimension.
+- [ ] Every H/M dimension **row** (dimension + scope) from Part 5 has a row in Part 6 with a required level described in that row's own concrete terms — checked against the H/M dimension list from sub-step 5.4, cross-referenced against 5.3's Scope column: every row has a Part 6 row, and no two differently-scoped same-named rows were collapsed into one.
 - [ ] Every required level has confidence (H/M/L) and grounding (stakeholder bar(s) and release purpose).
+- [ ] Whenever this doc's negotiated structure covers more than one release, every row states which release it belongs to — never left to the section header alone.
 - [ ] Where a grounding bar carries a recurrence/tolerance recorded in Part 3, the required level reflects it — not silently tightened or loosened; where the required level turned on a tolerance nobody recorded, the user was asked, or it is an `OPEN QUESTION:`.
 - [ ] Confidence ratings use only H/M/L — no percentages.
 - [ ] Tensions between stakeholder bars are surfaced where they exist.
@@ -67,7 +72,7 @@ If any check fails, return to the questioning. Do not move to sub-step 6.2.
 
 ## Output
 
-Append to `quality/strategy.md`:
+Append to `quality/strategy.md`. Under the "two releases in parallel" doc structure (SKILL.md → "Scope of this skill"), each release gets its **own** complete `## Part 6` header, run through all of 6.1–6.3 once per release — never one shared header covering both, since the whole point of per-row release tags is moot if the header itself already disambiguates only one release at a time:
 
 ```markdown
 ## Part 6: Risk Map (<release>)
@@ -80,19 +85,21 @@ Append to `quality/strategy.md`:
 
 ### Required levels (<release>)
 
-#### <Dimension name>
+#### <Dimension name> — <scope>
 
-- **Required:** <qualitative, dimension-specific description of the bar>
+- **Required:** <qualitative, dimension-specific description of the bar, for this scope>
 - **Confidence in required:** <H/M/L>
 - **Grounded in:** <stakeholder bar(s) and release purpose>
+- **Release:** <only when this doc's negotiated structure covers more than one release — the release this row belongs to>
 
-#### <Next dimension>
+#### <Next dimension> — <scope>
 
 - **Required:** <…>
 - **Confidence in required:** <…>
 - **Grounded in:** <…>
+- **Release:** <…>
 
-… (repeat per H/M dimension)
+… (repeat per H/M dimension **row** — dimension + scope; two same-named, differently-scoped rows each get their own block, never merged)
 
 **Sources consulted from pre-read:** <bullet list>
 
