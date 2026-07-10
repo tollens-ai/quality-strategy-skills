@@ -57,7 +57,7 @@ Write the doc incrementally as each move completes, so what's done is durable; o
 
 Collect every place the project currently *can't* answer "how good is it?":
 
-- From the risk map: every **Unknown** with its to-resolve note — above all the ones that say **nothing can judge this yet**.
+- From the risk map: every **judge-blocked Unknown** — its to-resolve note says nothing can judge it yet, or names building the means of judging. An Unknown whose to-resolve note names an action instead — ask a stakeholder, run targeted testing, review a specific area — is not judge-blocked; it routes to the lane that owns that action (stakeholder work back through `/quality-strategy`, or testing/review through `/test-strategy`) rather than landing here. This mirrors the same **you can only investigate what you can judge** handoff `/test-strategy`'s filter states: this skill gathers the *judging* gaps, not every open Unknown.
 - From the oracle strategy (if present): every **build-shaped agreed move**, with any `/oracle-adequacy` verdicts (an *Over-confident* actual — a claim whose oracle can't support it — or a *Gated* Unknown) behind it.
 - From the test strategy (if present): every agreed move **blocked on missing instruments or oracles**, with its build item.
 - From the user: *"Anything else you already know you can't measure or judge, that neither doc captured?"* Record these honestly as user-reported, not strategy-derived.
