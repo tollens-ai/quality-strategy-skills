@@ -27,6 +27,8 @@ Composite labels to look at hardest:
 - **Usability** — discoverability, learnability, efficiency, error tolerance, satisfaction.
 - **Observability** — metrics, tracing, logging, alerting, post-hoc reconstruction.
 
+**Actual vs. perceived isn't Security-specific — it's a general unpack move.** Wherever a dimension's reality and a stakeholder's perception of it can diverge, the same actual-X / perceived-X split applies: actually-reliable vs. feels-reliable, actually-fast vs. feels-fast, and for AI/agentic products, the output is actually correct vs. users trust the output. Same trigger as everywhere else on this page — split when the two would carry meaningfully different priorities or evidence (an actual can be strong while a stakeholder's trust in it is weak, or vice versa); don't reach for it reflexively on every dimension, but don't leave it parked under Security either.
+
 These are the labels that almost always have meaningfully different priorities for sub-dimensions. Other dimensions in the inventory may also be composite; the labels above are not exhaustive.
 
 ## How to ask
