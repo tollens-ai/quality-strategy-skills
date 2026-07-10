@@ -8,7 +8,7 @@ Unknowns are not a failure. For first-pass strategies on real projects, **most a
 
 ## What you need from the previous sub-step
 
-Read sub-step 6.1's required levels from `quality/strategy.md`. Read the **Code structure** and **Design observations** sections of `quality/pre-read.md` — subagent C may have surfaced design hypotheses about specific dimensions ("error handling looks inconsistent → reliability is likely Low or Unknown").
+Read sub-step 6.1's required levels from `quality/strategy.md`. Read the **Code structure** and **Design observations** sections of `quality/pre-read.md` — subagent C may have surfaced design hypotheses about specific dimensions ("error handling looks inconsistent → reliability is likely Low or Unknown"). Read Part 5's **"Noted for 6.2"** table too — 5.1 parked deficiency observations there precisely so this sub-step could pick them up as a starting point for the actuals it now judges; they're prompts to investigate, not pre-made verdicts.
 
 ## Actuals come from evidence, in this order — not from reading the code
 
@@ -60,6 +60,8 @@ Walk the H/M dimensions **cluster by cluster** when they fall into natural clust
 
 Use the pre-read's design observations as starting hypothesis. *"Subagent C observed [observation], which suggests [dimension] is around [level]. Is that close, or do we have better information — or is it actually Unknown?"*
 
+**When a dimension has a matching "Noted for 6.2" row, raise it at that dimension** — not just once at intake. *"Part 5 parked an observation here: [what was observed]. Does that hold up as the actual, or has it changed / do we have better evidence?"* Treat it exactly like a design hypothesis: a starting point to confirm, refine, or override, never a pre-made verdict.
+
 You have explicit permission and encouragement to:
 
 - **Default to Unknown when there isn't evidence.** Strategies that pretend confidence about untested actuals are worse than strategies that admit uncertainty. Unknown is honest; Medium-without-evidence is a lie that hides work.
@@ -92,6 +94,7 @@ What you must not do:
 - [ ] Every Unknown has a one-line note on what would resolve it (test / ask / review / instrument / build infrastructure).
 - [ ] Every non-Unknown actual's Evidence line names both what was observed and what judges it; any actual whose basis couldn't be named in a line has been honestly recorded as Unknown. (No oracle sweep runs here — that is `/evaluation-strategy`'s job after the strategy closes; Unknowns blocked on "nothing can judge this yet" say so in their to-resolve note.)
 - [ ] Thin-evidence, design-shaped dimensions got the targeted design deep-dive (or its explicit skip note): findings recorded as evidence with confidence markings, the test-coverage-vs-risk-skew lens applied, and the scratch file at `quality/.scratch/6.2-design-deep-dive.md` (or the skip note) in place.
+- [ ] Every row in Part 5's "Noted for 6.2" table was raised against its matching dimension and reconciled into that dimension's actual (confirmed, refined, or overridden) — none left unaddressed because the walkthrough moved past that dimension before checking the table.
 - [ ] Confidence ratings use only H/M/L — no percentages.
 - [ ] Where the dimensions fell into natural clusters, the walkthrough presented them cluster by cluster — or "considered, no clustering" is recorded.
 - [ ] Any deferred items are recorded as `OPEN QUESTION:`.

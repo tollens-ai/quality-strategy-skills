@@ -2,7 +2,7 @@
 
 ## Goal
 
-Final review of the dimension list and ratings before moving to Step 6. Catches the failure modes an agent and user deep in the flow often miss: unjustified Highs, stakeholder-coverage gaps, cross-stakeholder tensions, and missing rationale.
+Final review of the dimension list and ratings before moving to Step 6. Catches the failure modes an agent and user deep in the flow often miss: unjustified Highs, stakeholder-coverage gaps, cross-stakeholder tensions, missing rationale, and adequacy language or feature names that drifted into the importance-only Step-5 lane.
 
 This sub-step is mostly the agent doing checks and surfacing findings; the user resolves any flagged issues.
 
@@ -14,7 +14,7 @@ Read all of Part 5 (5.3's final inventory + 5.4's ratings) from `quality/strateg
 
 ## The checks (run in order)
 
-**Present findings cluster by cluster where they fall into natural clusters** — sharing a stakeholder, a theme, or a parent composite from 5.2 (SKILL.md → "Cluster-by-cluster, not one flat list") — rather than one flat dump across all six checks; record *"considered, no clustering"* when nothing meaningfully groups. This changes how findings are walked back to the user, not the checks themselves.
+**Present findings cluster by cluster where they fall into natural clusters** — sharing a stakeholder, a theme, or a parent composite from 5.2 (SKILL.md → "Cluster-by-cluster, not one flat list") — rather than one flat dump across all seven checks; record *"considered, no clustering"* when nothing meaningfully groups. This changes how findings are walked back to the user, not the checks themselves.
 
 ### Check 1 — High justification
 
@@ -67,6 +67,16 @@ The guaranteed-inclusion layer (sub-step 5.1) is the backstop against the kp3136
 - **Every floor whose predicate holds is present and not None.** Cross-check Part 5 against the pre-read's floor predicates (and any confirmed in interview): if the system handles secrets, holds PII, holds entrusted data, ships to others' machines, or is bound by licensing/data-protection law, the matching floor dimension must be in the inventory and rated H or M — never None, never a non-goal. A floor whose predicate holds but is absent or rated None is the bug this check exists to catch: *"the pre-read says it stores user accounts — where's the data-loss floor?"*
 - **Every default-in is either in, or carries a recorded accepted-risk.** Security (always), data integrity/loss (where user data exists), and unbounded spend (where the system can spend) must each appear — included via a presented reverse-trace, or explicitly recorded as an eyes-open accepted-risk in the doc. A default-in that is silently absent (no dimension, no accepted-risk note) is a flag: *"security isn't rated and there's no recorded decision to accept that risk — which is it?"* Silent inclusion is wrong too: a default-in that's in but was never traced to a goal nor confirmed gets the same challenge.
 
+### Check 7 — Adequacy-vocabulary scan
+
+Mechanical pass, run last: scan Part 5's dimension names and rationale text (inventory, ratings, and the "Noted for 6.2" table) for the failure mode named in 5.1's lane rule — importance dressed up as adequacy, or a feature name standing in for an axis of goodness.
+
+- **Adequacy words in a dimension name or rationale** — "problem," "broken," "inconsistent," "lacking," "missing," "good," "bad," "solid," "weak," "a concern" and similar verdict language. A rationale is allowed to *reference* an observation that prompted a dimension (per the prompt-vs-reason conversion), but the dimension itself and its importance-ground must not carry a verdict. Flag: *"[dimension]'s rationale reads as a state verdict, not an importance ground — what stakeholder bar makes this matter, independent of whether it currently holds?"*
+- **Feature or component names standing in as a Dimension** — a Dimension cell that names a capability ("remote operability," "the export flow," "onboarding") rather than an axis of goodness (reliability, usability, performance...). Flag: *"[name] is a feature/surface, not a quality axis — what's the actual dimension, with this as its scope?"*
+- **A "Noted for 6.2" entry with no matching dimension row**, or a dimension row that quietly absorbed the observation as its rationale instead of parking it — either direction breaks the lane split. Cross-check the two tables against each other.
+
+This check is mechanical, not judgment-heavy — a clean pass ("no adequacy language or feature-as-dimension found") is the expected, common result and should be stated plainly rather than treated with suspicion.
+
 ## How to interview through this
 
 This sub-step is mostly mechanical agent work. Run the checks in order, surface findings as a short list, and let the user resolve each. Don't grind through resolved items.
@@ -89,6 +99,7 @@ What you must not do:
 - A stakeholder has no H/M dimension touching their bars. *"[Stakeholder]'s dealbreaker was X. Where does that map to in our dimensions?"*
 - A non-goal contradicts an H-rated dimension. *"Part 4 said X is a non-goal, but Part 5 has Y rated High, which depends on X. How do we reconcile?"*
 - An H rating has no stakeholder bar named in its rationale. *"What stakeholder is this critical for, and what specifically did they say?"*
+- A dimension's rationale reads as a state verdict rather than an importance ground, or a Dimension cell names a feature instead of a quality axis. *"That's telling me how it's doing, not why it matters — what stakeholder bar makes this important, and what's the actual axis, with [feature] as its scope?"*
 
 ## This sub-step is DONE when
 
@@ -98,6 +109,7 @@ What you must not do:
 - [ ] Non-goal alignment has been verified; any mismatches surfaced and resolved.
 - [ ] Every H rating cites a named stakeholder Dealbreaker bar; every None rating is a confirmed "no stakeholder bar references it" (not a forgotten gap).
 - [ ] **Floors and default-ins check has been run:** every floor whose predicate holds is present and not None; every default-in (security; data-integrity where user data exists; unbounded spend where the system can spend) is either in via a reverse-trace or carries a recorded eyes-open accepted-risk — none silently absent, none silently included.
+- [ ] **Adequacy-vocabulary scan has been run:** no dimension name or rationale carries state-verdict language in place of an importance ground, no Dimension cell names a feature instead of a quality axis, and the "Noted for 6.2" table cross-checks clean against the inventory — or every finding was surfaced and resolved.
 - [ ] Where findings fell into natural clusters, they were presented cluster by cluster — or "considered, no clustering" is recorded.
 - [ ] Any deferred items are recorded as `OPEN QUESTION:`.
 - [ ] The step-boundary `/contradiction-check` was dispatched on the doc so far (it is the first move of the checkpoint, per SKILL.md) and its scratch file exists at `quality/.scratch/5.5-contradiction-check.md`.
@@ -118,6 +130,7 @@ Append to `quality/strategy.md` under Part 5:
 - **Non-goal alignment:** <verified clean; or "mismatches resolved as <X, Y>">
 - **Floors and default-ins:** <floors whose predicates hold confirmed present and not None; each default-in confirmed in (reverse-traced) or carrying a recorded accepted-risk; or any gap flagged>
 - **Rationale coverage:** <verified; or any gaps flagged>
+- **Adequacy-vocabulary scan:** <clean pass stated plainly; or findings surfaced and how each was resolved>
 
 **Sources consulted from pre-read:** <typically empty for this sub-step>
 

@@ -6,6 +6,12 @@ Produce the **consolidated raw inventory** — the full list of quality dimensio
 
 The inventory at the end of this sub-step is **raw**: composite dimensions (several things under one label, like "performance") may still be present, and trap dimensions (like "readability", whose meaning shifts by audience) haven't yet been checked for agent-vs-human framing. Those refinements happen in sub-steps 5.2 (Unpack) and 5.3 (Old/new-world). This sub-step focuses on coverage: did we get all the dimensions we should be considering?
 
+### The Step-5 lane rule — importance only, never adequacy
+
+Step 5 answers exactly one question: **how much does this axis matter, for whom, this release?** It does not answer, and must not even gesture at: how good the project currently is at it (6.2's job), how confident anyone is in that assessment (6.3's job), what level it needs to reach (6.1's job), or how much testing it deserves (the test lane's job). Adequacy verdicts — *"problem"*, *"well covered"*, *"poorly tested"*, *"probably fine"*, *"under-covered"* — are banned from this sub-step's prose **and from the conversation itself**, in **both directions**: prejudging something a problem is exactly as wrong as prejudging it fine, because both skip the actual-state investigation 6.2 exists to do properly. A candidate a deficiency observation *prompted* is legitimate; a candidate whose *reason* is the deficiency itself is not — see the prompt-vs-reason conversion below.
+
+This is the same axis split 5.4 names from the other side: "High means important, not in-trouble" (5.4's doctrine) is what happens when importance and adequacy get tangled at *rating* time; this lane rule is what keeps them apart at *surfacing* time, one step earlier. Same distinction, enforced at both ends.
+
 ## What you need from the previous sub-step
 
 Read all of Parts 1–4 from `quality/strategy.md`. The release purpose (Part 2), stakeholders and three-lens (Part 3), and non-goals (Part 4) feed directly into which dimensions matter. Read the **Design observations and likely-relevant dimensions** and **Floor predicates** sections of `quality/pre-read.md` — subagent C surfaced both the design-implied dimensions and the factual floor predicates the guaranteed-inclusion layer (step 4 below) reads. If 2.1 negotiated a multi-release doc structure, **re-read `quality/.scratch/session-config.md` now** — its recorded choice is what step 3 (Consolidate) routes future-release candidates by, and 2.1 may have happened sessions ago or across a `/clear`; don't rely on remembering it.
@@ -22,6 +28,10 @@ Generate a candidate dimension list from what's already in the strategy doc and 
 - **Agent-driven workflow → the agent-facing cluster.** A stated workflow is a goal statement: if Part 1 records that the user works through an autonomous agent — *"I just tell Claude roughly what I want and it builds it"*, agents on the team (1.2), an agent-driven dev or release flow (1.3, 1.4) — then that workflow *implies* the agent-facing dimension cluster the same way a stated launch implies signup scale. Add as candidates, each traced back to the workflow statement: **agent-diagnosability** (can the agent tell what went wrong?), **observability / debuggability pinned to the agent audience** (the agent is the one reading the logs), **testability pinned to agent-verifiable** (the agent must be able to confirm its own work without a human), and **agent-readability / context-efficiency** (can the agent orient in the code, cheaply?). Don't wait for the reference-list pass to surface these — the workflow already entails them; the bottom-up pass owes the trace. (The pack already carries the observability→debuggability/fixability/recoverability web; what this trigger adds is firing it *from the user's own stated workflow* rather than hoping the top-down pass catches it. This audience question is then settled properly in 5.3.)
 
 **The dev-tool double.** Where the project is itself a tool that produces or hosts other people's work — an IDE, a CI product, a framework, this pack itself — a candidate's scope must also say which side of that double it's about: the tool's own quality, or the quality of the work the tool helps its users produce (see SKILL.md → "Name the scope"). A dev tool's reliability is not the reliability of the projects it builds; name the side explicitly, the same way a stakeholder is named. (5.3's trap-dimension framing gestures at the same split for agent audiences — this is its general form, named here at first surfacing.)
+
+**Prompt-vs-reason: a deficiency observation may prompt a candidate, but it can never *be* the reason.** The pre-read's design observations are frequently deficiency-shaped (*"X is lightly tested"*, *"no retries on Y"*) — that's a fine prompt, but the recorded reason must be an importance-ground: a stakeholder bar, a release-purpose trace, or a workflow trace, never the deficiency itself. Park the deficiency instead — explicitly and visibly, as a *"noted for 6.2"* line (see Output below), not lost and not judged now, just handed forward to the sub-step whose job is to judge it. Worked correction: a pre-read note that *"remoting is lightly tested"* does not become a dimension called *"remote operability — a problem"*; it becomes **reliability** (scope: the Windows→Linux remoting path) — *matters because that path is how Windows users reach the product at all* — plus a parked note for 6.2 that current test evidence there is thin.
+
+**Feature-vs-ility check.** A Dimension cell is never a feature or component name. "Remote operability," meaning "how well the Windows→Linux remoting feature works," is a feature wearing an -ility suffix, not an axis of goodness — the test: is this a thing the product *has*, or an axis of goodness *of* something it has? A feature name belongs in the **scope** column (the surface a dimension is about, already required above) — the Dimension cell holds the actual -ility (reliability, operability, correctness, …) that axis names.
 
 Build the bottom-up list internally, each candidate carrying its scope alongside its dimension name and source. Don't show it to the user yet.
 
@@ -125,6 +135,8 @@ What you must not do:
 - Skip the consolidation step. Subagent-only candidates need explicit user input to add or drop.
 - Leave a dimension's scope unstated, or let a future-release candidate sit unrouted in this release's list.
 - Treat a dimension's presence in a prior release's inventory as, by itself, grounds for including it in this one — inclusion and priority are decided fresh, per release.
+- **Record or voice an adequacy verdict at this sub-step** — "problem", "well covered", "probably fine", "under-tested" — in either direction. A deficiency observation may prompt a candidate; it is parked for 6.2, never written as the reason.
+- **Record a feature or component name as a Dimension.** Re-express as scope (the feature) + the actual -ility (the axis of goodness).
 
 ## Push back when
 
@@ -134,6 +146,9 @@ What you must not do:
 - The user adds many dimensions without grounding any in stakeholder bars. *"What's driving this addition — a stakeholder bar, a design observation, something else?"*
 - A dimension is named without its scope, or the same -ility name is used for what are clearly different stakeholders' different concerns without a split. *"Whose usability, specifically — and on which surface? That might be two different rows."*
 - A candidate is proposed on the strength of "it mattered for the last release." *"Does it matter for THIS release, on its own terms? A prior release's inventory doesn't carry over automatically."*
+- A row's reason cites coverage, testedness, or bugginess instead of an importance-ground. *"That's telling me the current state, not why it matters — which stakeholder bar or release purpose makes this important? The coverage note belongs parked for 6.2, not in the reason."*
+- Adequacy language slips into the conversation itself, not just the doc — *"this is probably fine"*, *"that's under-tested"*, *"that's a problem"*. *"Let's hold off on whether it's good or bad — that's 6.2's question. Right now: does it matter, and how much?"*
+- A Dimension cell names a feature or component rather than an axis of goodness. *"Is [name] a thing the product has, or an axis of how good something is? If it's the former, that's the scope — what's the -ility?"*
 
 ## This sub-step is DONE when
 
@@ -145,6 +160,9 @@ What you must not do:
 - [ ] Every row carries its **scope** — stakeholder(s)/capacity and product surface (including the dev-tool side, where the project produces or hosts other people's work) — from first surfacing.
 - [ ] Where the same -ility means different things or carries different priority for different stakeholders, it appears as separate scoped rows (or is flagged for the split to happen at 5.2) — never one unscoped row standing in for several concerns.
 - [ ] Future-release candidates from either pass are routed per the doc structure negotiated at 2.1 (bank / light section / parallel pass / separate doc), named to the user in half a line — none silently dropped, none flattened into this release's inventory.
+- [ ] No row's reason cites current adequacy (coverage, testedness, bugginess) instead of importance; every deficiency observation that prompted a candidate is parked as a "noted for 6.2" line, not folded into the reason.
+- [ ] No Dimension cell names a feature or component — each holds an axis of goodness, with the feature (if one prompted it) named in the scope column instead.
+- [ ] The wrap-up self-check confirms: no adequacy verdicts — pessimistic or reassuring — were made this sub-step, in the doc or in conversation.
 - [ ] Any deferred items are recorded as `OPEN QUESTION:`.
 - [ ] Pre-read sources are cited in the section's evidence field — naming actual files referenced, or, for an interview-derived / no-repo pre-read, citing the interview honestly (never blank, never a placeholder).
 - [ ] The user has been given a 2–4 line wrap-up, asked if any quick concerns, and confirmed ready to continue. (Substantive checkpoint runs at step boundaries — see SKILL.md.)
@@ -165,6 +183,14 @@ Append to `quality/strategy.md`:
 | <name> | <who it's about + which surface — and which side of the tool/produced-work double, where the project is itself a tool> | <why this matters for this release specifically — not "it mattered before"> | <stakeholder bar / design observation / reference-list backstop> |
 
 This inventory is **raw** — sub-step 5.2 will unpack composite dimensions; sub-step 5.3 will check trap dimensions for agent-vs-human framing. The inventory will be refined and replaced by the end of 5.3.
+
+### Noted for 6.2 (parked deficiency observations)
+
+| Dimension (this row) | What was observed | Source |
+|---|---|---|
+| <name, matching a row above> | <the deficiency that prompted this candidate — e.g. "lightly tested", "no retries observed" — parked as evidence, not judged here> | <pre-read design observation / user aside> |
+
+(Or "none this pass" — a candidate whose prompt was purely a stakeholder bar or release purpose has nothing to park here.) These rows are pointers for sub-step 6.2's actual-state pass, not adequacy verdicts — nothing here says whether the observation is good or bad, only that it exists and where to look.
 
 ### Future-release candidates (routed per the negotiated doc structure)
 
