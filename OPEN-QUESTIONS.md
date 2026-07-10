@@ -811,3 +811,39 @@ Calls made while preparing the pack for public alpha.
 ---
 
 *Add new items to this file when we make calls under uncertainty. Revisit after each real-world run.*
+
+## Candidness folded into the save-location ask — never sprung mid-session
+
+**What we did.** The session-start save-location ask now carries the honesty rationale in the words said to the user ("this works best when you can answer really honestly — your true opinions…"), recommends the private local pass outright when in-repo means a wide audience (tidy or redact later; `/strategy-variants` named as the derived-view route that never edits the honest doc), and is the *one* moment candidness is raised: no mid-session "this next part is sensitive" disclosures; a user who turns guarded gets the standing choice restated in a line.
+
+**Why.** TOL-185/TOL-189: surprising people with candidness mid-interview breaks trust exactly when the pointed questions arrive; folding the rationale into the ask up front licenses those questions before they're asked. The outright recommendation (not a neutral offer) is Qing's design: the wide-audience case has a right answer.
+
+**What would change our mind.** If the honesty framing itself makes reserved users *more* guarded at minute one. If the wide-audience recommendation reads as steering users away from team transparency where in-repo was genuinely right.
+
+**How we'd know.** Regression IU-24 (David-mode fixture) + PR tests `2026-07-10-req10.md`; watch real session-starts for the ask landing as protective rather than bureaucratic.
+
+---
+
+## Ask for precision on bars — never invent specificity
+
+**What we did.** PHILOSOPHY's vagueness discipline now says the digging is done by asking (when? how often? to what extent?), never by the agent choosing a reading. Worked case: bars carry a recurrence/tolerance dimension (one-off vs sustained), elicited at three-lens and recorded inline on the bar; 6.1 carries it into required levels; 6.3 respects it in the impact reason and heat while the Impact letter stays the Part 5 carry-over.
+
+**Why.** Tom's deal-breaker misread: "bugs are a dealbreaker" read strictly when he actually tolerates one-offs and dies on sustained breakage — an invented fact wearing the user's voice, inflating required levels and impact downstream. The symmetric failure (invented leniency) waves a real dealbreaker through.
+
+**What would change our mind.** If the tolerance question fires on every bar and reads as interrogation (the guard is "only when the phrasing leaves the reading open"). If recording tolerance inline clutters the three-lens table beyond usefulness.
+
+**How we'd know.** Regression SC-20 + PR tests `2026-07-10-req9.md`; watch whether 6.3 rows actually name failure shapes in real runs.
+
+---
+
+## The ideas ledger — capture once, classify later
+
+**What we did.** Spontaneous user ideas (volunteered how-we'd-check-or-uphold suggestions that go beyond the question asked) land in `quality/ideas.md`: user's words, one bullet per idea, dimension+release linked, no role assigned at capture. No prompting for ideas mid-strategy — elicitation stays with the lanes, which read the ledger at ingest and annotate adopted entries rather than deleting. One file across releases; capture exempt from the pruning rule and precision push-back.
+
+**Why.** Users generate ideas mid-interview and the pack previously had nowhere to put them that wasn't a detour, a classification, or a loss. Classifying at capture closes off the other roles the same idea can play (review-per-change is a proxy *and* a process rule — Tom's diagnosability item is the canonical multi-role offering).
+
+**What would change our mind.** If real ledgers fill with routine interview content (the beyond-the-question-asked boundary isn't holding). If lanes routinely ignore the ledger (the ingest hook isn't enough and needs a checklist gate). If users expect the ledger inside the strategy doc.
+
+**How we'd know.** Regression SC-21 + PR tests `2026-07-10-req7.md`; check real `quality/ideas.md` files for signal-to-noise after alpha runs.
+
+---
