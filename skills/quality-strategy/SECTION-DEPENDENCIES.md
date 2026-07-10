@@ -10,8 +10,8 @@ It mirrors each sub-step file's own "What you need from the previous sub-step" d
 |---|---|
 | Pre-read (`quality/pre-read.md`) | 1.1–1.5, 2.1, 3.1, 3.2, 4.1, 5.1, 6.2 — *informative: the pre-read is a working artefact; correcting it is not a doc correction, but a materially-changed pre-read is context-change territory (see the triage)* |
 | 1.1 Purpose + `## Strategy job` | 1.2, 1.3, 1.5, 2.1, 3.1, 4.1, 5.1 — *and the Strategy job paragraph steers `/quality-strategy-review` severity* |
-| 1.2 Team | 1.3, 1.5, 2.1, 3.1, 4.1, 5.1 |
-| 1.3 Workflows | 1.4, 1.5, 2.1, 3.1, 4.1, 5.1 |
+| 1.2 Team | 1.3, 1.5, 2.1, 3.1, 4.1, 5.1, 7.1/7.2 (process-change candidates — "would changing the team/org/workflow reach the goals more efficiently?" — can be surfaced from 1.2/1.3 directly at any point and land as a Part 7 action, not only via the transitive dimension/risk-map chain) |
+| 1.3 Workflows | 1.4, 1.5, 2.1, 3.1, 4.1, 5.1, 7.1/7.2 (same direct-read note as 1.2) |
 | 1.4 Release workflow | 1.5, 2.1, 3.1, 4.1, 5.1 |
 | 1.5 Budget | 2.1, 3.1, 4.1, 5.1, 7.3 (budget shapes sequencing) |
 | 2.1 Roadmap + `Release:` header | 3.1, 4.1, 5.1 — *and every per-release section heading carries the release name* |
