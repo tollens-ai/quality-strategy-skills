@@ -72,6 +72,7 @@ What you must not do:
 - **Assess actuals by reading the code when higher-rung evidence wasn't sought.** Before any code-derived actual, you must have looked for test results / CI / reports, looked at the tests, and asked the user what they've actually seen. A code read that skipped those rungs is the wrong-oracle failure this sub-step exists to prevent.
 - **Present a code-derived actual as an observation, or let it claim a confident "at bar".** Label it inference; cap its confidence at Medium; prefer Unknown-with-a-resolution-note over a comfortable read off the source.
 - Conflate Unknown with Low. They are different findings and produce different Step 7 actions (testing/review work vs fixing work).
+- **Average a compound actual into one confidence letter.** When the real state is two claims (part confidently known, part genuinely Unknown), don't flatten them into a single "Medium" or a single "Low" — record the compound shape honestly now, so 6.3 doesn't inherit a misleading number (see 6.3's "compound-confidence trap").
 - Claim High confidence in an actual without specific evidence. *"What's the High confidence based on?"*
 - Skip the "what would resolve this" note for Unknowns. That note is the seed of Step 7's testing and stakeholder work.
 - Use percentages.

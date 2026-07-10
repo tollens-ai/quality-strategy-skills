@@ -31,6 +31,8 @@ Walk through each row systematically — **cluster by cluster** when the dimensi
 
 **Unknowns are normal, especially in first-pass strategies.** Resolving them is what Step 7's plan of work will mostly do. Don't pretend confidence about levels that haven't actually been investigated.
 
+**Watch for the compound-confidence trap.** A recurring, easy-to-miss failure: 6.2's actual is genuinely a two-part claim — confidently known on one part, honestly Unknown on the rest (*"the payment path is well-tested; the refund path has never been touched"*) — and it gets flattened into one misleading confidence letter for this row (a averaged-feeling "Medium," or a single "Low" that hides the part that's actually solid) instead of being carried through as the compound claim it is. Don't average. If the actual behind a row is really two claims with two different confidences, say so explicitly here: split the row when the gap and impact also differ between the two parts, or state both confidences plainly in the row's reason when a split isn't warranted (*"Actual: High-confidence on the payment path, Unknown on refunds — treating this row as Unknown until the refund path is checked"*). This shape has bitten real sessions on both a first and a repeat run, caught only by the step-boundary contradiction check after the fact both times — name it here, don't lean on that backstop to catch it every time.
+
 ### Counter-pressure before you name a behaviour a defect
 
 A gap, a hot item, a below-bar actual — each says *this behaviour is wrong*. Before you let it stand as a defect, ask the upstream question: **what does this behaviour protect?** Behaviour exists for reasons, and a thing that looks like a bug through one dimension is often a deliberate choice serving another. The kp3136 case: *"the clock doesn't pause on disconnect → players get flagged unfairly → angry players"* was named a defect — but a running-on-disconnect clock is the **domain norm** for chess sites, because pausing it lets a player disconnect to think for free. Same behaviour, two dimensions pulling opposite ways: fairness-to-the-disconnected vs anti-cheat integrity. Goal-tracing it to the stated *"angry players"* dealbreaker and stopping there names one side as a bug and never sees the other.
@@ -65,6 +67,7 @@ What you must not do:
 - The map looks uniformly hot. Check the inputs row by row rather than doubting the count: a hot row needs a real gap (or Unknown) *and* a real impact rating behind it. Where both hold for every row, say so plainly — *"this is a genuinely exposed surface right now"* — a uniformly hot map of a young, high-stakes project is honest, not inflated.
 - The user wants to override the heat rating without changing the inputs. *"Which input is wrong — required, actual, or confidence?"*
 - A behaviour is being named a defect purely because it threatens a stated dealbreaker, with no one having asked what it protects. *"Before we call this a bug — what's it there for? Is it a domain convention pulling the other way?"* If a genuine tension exists, present both pulls as a tradeoff for the user to arbitrate, not one side as a defect.
+- A row's actual is really two claims (part known, part Unknown) flattened into one confidence letter. *"That's a compound claim, not one confidence — what's the honest confidence on each part?"* Don't average; split the row or state both in the reason.
 
 ## This sub-step is DONE when
 
@@ -72,6 +75,7 @@ What you must not do:
 - [ ] Hottest items (large gap + high impact + low confidence) are flagged explicitly with one-line reasoning.
 - [ ] Each row's Impact letter matches its Part 5 rating (H/M — never downgraded per-gap); where the threatened bar carries a recorded recurrence/tolerance, the row's reason names the failure shape the gap produces (one-off vs sustained) and the tolerance reasoning lives there and in the heat, not in a changed letter.
 - [ ] Each behaviour named as a defect/risk survived the **counter-pressure question** (what does it protect?); any genuine two-dimension tension was presented as a tradeoff for the user to arbitrate — citing the domain norm where one exists — and recorded as such, not booked as a one-sided bug.
+- [ ] No row's confidence flattens a genuinely compound actual (part known, part Unknown) into a single averaged letter — split rows or stated-both-in-the-reason where this shape is real.
 - [ ] Patterns and dependencies are noted.
 - [ ] Confidence is expressed in coarse honest levels — no percentages anywhere.
 - [ ] Where the risk map rows fell into natural clusters, the walkthrough presented them cluster by cluster — or "considered, no clustering" is recorded.
