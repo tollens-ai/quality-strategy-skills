@@ -10,7 +10,6 @@ A live-run release: every change here traces back to someone actually running `/
 
 ### Added
 
-- **Effective Comms gate for QSS outputs.** `/quality-strategy`, `/test-strategy`, and `/tooling-strategy` now run `/effective-comms` before finalizing their user-facing documents. The gate checks whether the output works for its reader: no unexplained numbered references, no hidden author/scratch context, no retained rejected ideas unless provenance is the point, no leaked process history, no buried recommendation, and clear uncertainty. Backed by a public, install-time dependency on the standalone [`effective-comms`](https://github.com/tollens-ai/effective-comms-skills) plugin (auto-installed alongside `quality-strategy`) and new review checks in `/quality-strategy-review` and `/test-strategy-review` that catch coordinate-before-name wording, retained rejected ideas, and buried recommendations if the gate ever misses one.
 - **Multi-release document structure, chosen once and honoured everywhere.** When a session covers more than one release with real detail, you're offered a choice up front — one document per release, light sections for the others in this same document, two releases worked in parallel at matched depth, or fully separate documents — recorded once where releases are laid out, and every later part of the interview reads that choice and organises itself around it. Content for a release other than the one in depth always goes to that release's own home and gets named back to you in half a line; it's never silently mixed into the release you're actively working on. This closes a real live-run miss where later-release material got folded into the current release's risk map.
 - **A named "process-change" action.** The plan of work can now recommend changing how the team works — not just what gets built or tested — as its own first-class action type, with Part 1 kept as an explicitly revisable working basis rather than something silently rewritten after the fact.
 - **Deeper capture of how the team actually works.** The context-setting interview now walks a concrete recent example of both human-led and agent-led work (who's delegated what, which agents and why, how work gets reviewed and gated, where a human stays in the loop) and asks, for each part of the process, both what's working well and what's friction — not just one pain point.
@@ -33,6 +32,21 @@ A live-run release: every change here traces back to someone actually running `/
 - **Non-goals stopped being just a restated feature-deferral list** — see "Non-goals are quality bars" above; this was the live-run bug that motivated it.
 - **The dimension inventory stopped mixing releases together and losing scope precision** — see "The dimension inventory is release-scoped" above; this was the live-run bug that motivated it, extended (once a further live-run session hit the same gap one step downstream) to keep that precision intact through the entire risk map.
 - **Surfacing a dimension's importance stopped quietly prejudging whether it's currently good or bad** — see "A clean separation" above; this was the live-run bug that motivated it. The fix catches the mistake in both directions: assuming something is broken is exactly as wrong as assuming it's fine.
+
+## [0.3.7] — 2026-06-26
+
+Ships the Effective Comms integration that landed on `main` after `0.3.6` was tagged. The `0.3.6` release stamped strategy docs with the skill version; this release wires the communication gate into the strategy producers and reviewers, and declares the ECS plugin dependency — so the released `0.3.7` content matches `main` again.
+
+### Added
+
+- **Effective Comms gate for QSS outputs.** `/quality-strategy`, `/test-strategy`, and `/tooling-strategy` now run `/effective-comms` before finalizing their user-facing documents. The gate checks whether the output works for its reader: no unexplained numbered references, no hidden author/scratch context, no retained rejected ideas unless provenance is the point, no leaked process history, no buried recommendation, and clear uncertainty.
+- **Review backstops for communication failures.** `/quality-strategy-review` (new check 23) and `/test-strategy-review` (new check 16) now flag reader-facing failures their existing process-leak scans do not catch, including coordinate-before-name wording, retained rejected ideas, and buried recommendations.
+- **Install-time dependency on the public ECS plugin.** QSS now declares `effective-comms ~0.1.0` as a Claude Code plugin dependency and resolves it from the public [`tollens-ai/effective-comms-skills`](https://github.com/tollens-ai/effective-comms-skills) repo. QSS does **not** vendor a copy of the ECS skill; there is one canonical ECS implementation. The `tollens` marketplace pins the dependency to `effective-comms--v0.1.0`.
+
+### Validation
+
+- ECS feedback regressions EC-1/EC-2/EC-3 passed in the private validation suite.
+- Claude Code install smoke passed locally: installing `quality-strategy@tollens` installed `effective-comms` automatically as a dependency.
 
 ## [0.3.6] — 2026-06-15
 
