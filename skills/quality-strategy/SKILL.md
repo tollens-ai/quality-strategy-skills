@@ -362,7 +362,7 @@ If a partial strategy exists:
 
 - Read the existing doc to determine the last completed sub-step.
 - Tell the user, naming the step in human words, not bare coordinates: *"I see a partial strategy. Last completed: the dimension ratings (sub-step 5.4). Want to pick up from the sanity checks that follow, or revisit something earlier first?"* — and give the session-start itinerary (see "Session start — the itinerary, the repo scope, where the strategy lives, and the commit cadence") so they see what's done, what remains, and the relative sizes.
-- If the user is resuming into the middle of a stick-together set (e.g. they completed 5.1 in the prior session and are now resuming at 5.2), name it: *"Note that 5.2 is part of a stick-together set with 5.1 and 5.3 — re-orient from the inventory in `quality/strategy.md` before we start to recover the working memory."*
+- If the user is resuming into the middle of a stick-together set (e.g. they completed the raw dimension inventory in the prior session and are now resuming at the unpack pass), name it in human words, same as above: *"Note that the unpack pass works best done in the same sitting as the raw inventory before it and the human-vs-agent framing check after it — re-orient from the inventory in `quality/strategy.md` before we start to recover the working memory."*
 - Resume from the user's chosen sub-step.
 
 ### Within a sub-step

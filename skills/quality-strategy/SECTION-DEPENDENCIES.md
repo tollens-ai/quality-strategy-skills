@@ -18,7 +18,7 @@ It mirrors each sub-step file's own "What you need from the previous sub-step" d
 | 3.1 Stakeholder list (incl. agent-stakeholder status) | 3.2, 4.1, 5.1, 5.3 (audience reasoning reads who's an agent), 5.5 |
 | 3.2 Three-lens bars (incl. recurrence/tolerance) | 4.1, 5.1, 5.2, 5.4, 5.5, 6.1 |
 | 4.1 Non-goals | 5.1, 5.4, 5.5, 6.1 |
-| 5.1 Inventory (raw) | 5.2, 6.2 (the "Noted for 6.2" parked-deficiency table — read directly, not transitively; those observations are prompts for 6.2's actual-state investigation, not pre-made verdicts) |
+| 5.1 Inventory (raw) | 5.2, 6.2 (the "Deficiency observations parked for actual-state review" table — read directly, not transitively; those observations are prompts for 6.2's actual-state investigation, not pre-made verdicts) |
 | 5.2 Unpack | 5.3 |
 | 5.3 Final inventory | 5.4, 5.5 |
 | 5.4 Ratings | 5.5, 6.1 |

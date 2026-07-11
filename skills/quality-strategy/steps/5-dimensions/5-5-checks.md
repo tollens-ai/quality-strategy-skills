@@ -62,18 +62,18 @@ Surface any missing.
 
 ### Check 6 — Floors and default-ins present and earned
 
-The guaranteed-inclusion layer (sub-step 5.1) is the backstop against the kp3136 failure — a sweep that produced no security dimension on the project whose headline risk was rating forgery. Verify it held:
+The guaranteed-inclusion layer (sub-step 5.1) is the backstop against the chess-platform launch-gate failure — a sweep that produced no security dimension on the project whose headline risk was rating forgery. Verify it held:
 
 - **Every floor whose predicate holds is present and not None.** Cross-check Part 5 against the pre-read's floor predicates (and any confirmed in interview): if the system handles secrets, holds PII, holds entrusted data, ships to others' machines, or is bound by licensing/data-protection law, the matching floor dimension must be in the inventory and rated H or M — never None, never a non-goal. A floor whose predicate holds but is absent or rated None is the bug this check exists to catch: *"the pre-read says it stores user accounts — where's the data-loss floor?"*
 - **Every default-in is either in, or carries a recorded accepted-risk.** Security (always), data integrity/loss (where user data exists), and unbounded spend (where the system can spend) must each appear — included via a presented reverse-trace, or explicitly recorded as an eyes-open accepted-risk in the doc. A default-in that is silently absent (no dimension, no accepted-risk note) is a flag: *"security isn't rated and there's no recorded decision to accept that risk — which is it?"* Silent inclusion is wrong too: a default-in that's in but was never traced to a goal nor confirmed gets the same challenge.
 
 ### Check 7 — Adequacy-vocabulary scan
 
-Mechanical pass, run last: scan Part 5's dimension names and rationale text (inventory, ratings, and the "Noted for 6.2" table) for the failure mode named in 5.1's lane rule — importance dressed up as adequacy, or a feature name standing in for an axis of goodness.
+Mechanical pass, run last: scan Part 5's dimension names and rationale text (inventory, ratings, and the "Deficiency observations parked for actual-state review" table) for the failure mode named in 5.1's lane rule — importance dressed up as adequacy, or a feature name standing in for an axis of goodness.
 
 - **Adequacy words in a dimension name or rationale, either direction** — pessimistic: "problem," "broken," "inconsistent," "lacking," "missing," "bad," "weak," "a concern"; reassuring: "good," "solid," "fine," "probably fine," "well covered," "no worries" — and similar verdict language either way. A rationale is allowed to *reference* an observation that prompted a dimension (per the prompt-vs-reason conversion), but the dimension itself and its importance-ground must not carry a verdict in either direction. Flag: *"[dimension]'s rationale reads as a state verdict, not an importance ground — what stakeholder bar makes this matter, independent of whether it currently holds?"*
 - **Feature or component names standing in as a Dimension** — a Dimension cell that names a capability ("remote operability," "the export flow," "onboarding") rather than an axis of goodness (reliability, usability, performance...). Flag: *"[name] is a feature/surface, not a quality axis — what's the actual dimension, with this as its scope?"*
-- **A "Noted for 6.2" entry with no matching dimension row**, or a dimension row that quietly absorbed the observation as its rationale instead of parking it — either direction breaks the lane split. Cross-check the two tables against each other.
+- **A "Deficiency observations parked for actual-state review" entry with no matching dimension row**, or a dimension row that quietly absorbed the observation as its rationale instead of parking it — either direction breaks the lane split. Cross-check the two tables against each other.
 
 This check is mechanical, not judgment-heavy — a clean pass ("no adequacy language or feature-as-dimension found") is the expected, common result and should be stated plainly rather than treated with suspicion. "Run last" governs when the scan executes in the check sequence, not how any findings get presented — if it does find something, present that finding cluster by cluster along with the other checks' findings (per this sub-step's own standing note above), not as a flat aside tacked on after the clustered walk.
 
@@ -109,7 +109,7 @@ What you must not do:
 - [ ] Non-goal alignment has been verified; any mismatches surfaced and resolved.
 - [ ] Every H rating cites a named stakeholder Dealbreaker bar; every None rating is a confirmed "no stakeholder bar references it" (not a forgotten gap).
 - [ ] **Floors and default-ins check has been run:** every floor whose predicate holds is present and not None; every default-in (security; data-integrity where user data exists; unbounded spend where the system can spend) is either in via a reverse-trace or carries a recorded eyes-open accepted-risk — none silently absent, none silently included.
-- [ ] **Adequacy-vocabulary scan has been run:** no dimension name or rationale carries state-verdict language in place of an importance ground, no Dimension cell names a feature instead of a quality axis, and the "Noted for 6.2" table cross-checks clean against the inventory — or every finding was surfaced and resolved.
+- [ ] **Adequacy-vocabulary scan has been run:** no dimension name or rationale carries state-verdict language in place of an importance ground, no Dimension cell names a feature instead of a quality axis, and the "Deficiency observations parked for actual-state review" table cross-checks clean against the inventory — or every finding was surfaced and resolved.
 - [ ] Where findings fell into natural clusters, they were presented cluster by cluster — or "considered, no clustering" is recorded.
 - [ ] Any deferred items are recorded as `OPEN QUESTION:`.
 - [ ] The step-boundary `/contradiction-check` was dispatched on the doc so far (it is the first move of the checkpoint, per SKILL.md) and its scratch file exists at `quality/.scratch/5.5-contradiction-check.md`.

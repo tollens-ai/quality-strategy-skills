@@ -91,7 +91,7 @@ The user resolves subagent-only candidates. And when one of them is something th
 
 ### 4. The guaranteed-inclusion layer — floors and default-ins
 
-The bottom-up and top-down passes both surface dimensions *because a bar or a design observation pointed at them*. Some dimensions can't wait for that — the cost of their silent absence is too high, and the kp3136 launch-gate run proved it: the sweep produced **no security dimension at all** on a project whose headline risk was rating forgery through client-writable data. So two classes of dimension enter the inventory by a different door — not surfaced *if* something references them, but present *unless* explicitly handled. The difference between them is whether the user is even allowed to remove them.
+The bottom-up and top-down passes both surface dimensions *because a bar or a design observation pointed at them*. Some dimensions can't wait for that — the cost of their silent absence is too high, and a real launch-gate run on a competitive chess platform proved it: the sweep produced **no security dimension at all** on a project whose headline risk was rating forgery through client-writable data. So two classes of dimension enter the inventory by a different door — not surfaced *if* something references them, but present *unless* explicitly handled. The difference between them is whether the user is even allowed to remove them.
 
 **Tier 1 — Floors (non-negotiable given a factual predicate).** A floor is unconditional once a plain factual predicate about the system holds — checked in the pre-read, never negotiated as a preference. There is no coherent project where, shown the trace, a user accepts violating one. For each floor whose predicate holds (read them from the **Floor predicates** section of `quality/pre-read.md`), the corresponding dimension enters the inventory, full stop. The only conversation is **what the floor demands *here*** — which may be very little — never **whether it applies.** The ratified catalogue:
 
@@ -161,7 +161,7 @@ What you must not do:
 - [ ] Where the same -ility means different things or carries different priority for different stakeholders, it appears as separate scoped rows (or is flagged for the split to happen at 5.2) — never one unscoped row standing in for several concerns.
 - [ ] Future-release candidates from either pass are routed per the doc structure negotiated at 2.1 (bank / light section / parallel pass / separate doc), named to the user in half a line — none silently dropped, none flattened into this release's inventory.
 - [ ] Under "two releases in parallel," this sub-step (and 5.2–5.5 downstream) ran its own full pass for the parallel release too, its own clearly separated inventory — not blended into this release's.
-- [ ] No row's reason cites current adequacy (coverage, testedness, bugginess) instead of importance; every deficiency observation that prompted a candidate is parked as a "noted for 6.2" line, not folded into the reason.
+- [ ] No row's reason cites current adequacy (coverage, testedness, bugginess) instead of importance; every deficiency observation that prompted a candidate is parked as a "deficiency observations parked for actual-state review" line, not folded into the reason.
 - [ ] No Dimension cell names a feature or component — each holds an axis of goodness, with the feature (if one prompted it) named in the scope column instead.
 - [ ] The wrap-up self-check confirms: no adequacy verdicts — pessimistic or reassuring — were made this sub-step, in the doc or in conversation.
 - [ ] Any deferred items are recorded as `OPEN QUESTION:`.
@@ -185,13 +185,13 @@ Append to `quality/strategy.md`:
 
 This inventory is **raw** — sub-step 5.2 will unpack composite dimensions; sub-step 5.3 will check trap dimensions for agent-vs-human framing. The inventory will be refined and replaced by the end of 5.3.
 
-### Noted for 6.2 (parked deficiency observations)
+### Deficiency observations parked for actual-state review
 
 | Dimension (this row) | What was observed | Source |
 |---|---|---|
 | <name, matching a row above> | <the deficiency that prompted this candidate — e.g. "lightly tested", "no retries observed" — parked as evidence, not judged here> | <pre-read design observation / user aside> |
 
-(Or "none this pass" — a candidate whose prompt was purely a stakeholder bar or release purpose has nothing to park here.) These rows are pointers for sub-step 6.2's actual-state pass, not adequacy verdicts — nothing here says whether the observation is good or bad, only that it exists and where to look.
+(Or "none this pass" — a candidate whose prompt was purely a stakeholder bar or release purpose has nothing to park here.) These rows are pointers for the actual-levels sub-step's actual-state pass (Part 6), not adequacy verdicts — nothing here says whether the observation is good or bad, only that it exists and where to look.
 
 ### Future-release candidates (routed per the negotiated doc structure)
 

@@ -12,7 +12,7 @@ Four things, before you start:
 
 - **The dimension+scope row set.** Read sub-step 6.1's required levels from `quality/strategy.md` — **the same rows, keyed by dimension + scope**: 6.1 already resolved which same-named rows are actually separate (different stakeholder/surface), so 6.2 walks that identical row set rather than re-deriving it from a bare dimension list.
 - **Design hypotheses, scoped.** Read the **Code structure** and **Design observations** sections of `quality/pre-read.md` — subagent C may have surfaced design hypotheses about specific dimensions ("error handling looks inconsistent → reliability is likely Low or Unknown") — treat these as scoped to whichever surface the observation was actually about, not automatically to every row sharing that dimension's name.
-- **Parked observations.** Read Part 5's **"Noted for 6.2"** table too — 5.1 parked deficiency observations there precisely so this sub-step could pick them up as a starting point for the actuals it now judges; they're prompts to investigate, not pre-made verdicts.
+- **Parked observations.** Read Part 5's **"Deficiency observations parked for actual-state review"** table too — 5.1 parked deficiency observations there precisely so this sub-step could pick them up as a starting point for the actuals it now judges; they're prompts to investigate, not pre-made verdicts.
 - **Release tags and routing.** Where 2.1 negotiated a multi-release doc structure, carry forward which release each row belongs to, same as 6.1. The universal routing rule applies here too — the live symptom this fix exists to close was actual-level talk drifting onto a different release mid-conversation and getting folded into this release's actuals: if that happens, route the material to that release's home (SKILL.md → "Scope of this skill") and name it in half a line; don't record it as an actual for this release's row just because the dimension name matches.
 
 ## Actuals come from evidence, in this order — not from reading the code
@@ -64,9 +64,9 @@ Walk the H/M dimensions **cluster by cluster** when they fall into natural clust
 - *"What's that based on — and does that evidence actually cover this scope, or a different one?"* Evidence from a specific test or review? Estimate? Or genuinely don't know?
 - *"If Unknown — what would tell us? Test what specifically, ask whom, review what?"*
 
-Use the pre-read's design observations as starting hypothesis. *"Subagent C observed [observation], which suggests [dimension] is around [level]. Is that close, or do we have better information — or is it actually Unknown?"*
+Use the pre-read's design observations as starting hypothesis. *"The pre-read noticed [observation], which suggests [dimension] is around [level]. Is that close, or do we have better information — or is it actually Unknown?"*
 
-**When a dimension has a matching "Noted for 6.2" row, raise it at that dimension** — not just once at intake. *"Part 5 parked an observation here: [what was observed]. Does that hold up as the actual, or has it changed / do we have better evidence?"* Treat it exactly like a design hypothesis: a starting point to confirm, refine, or override, never a pre-made verdict.
+**When a dimension has a matching "Deficiency observations parked for actual-state review" row, raise it at that dimension** — not just once at intake. *"Part 5 parked an observation here: [what was observed]. Does that hold up as the actual, or has it changed / do we have better evidence?"* Treat it exactly like a design hypothesis: a starting point to confirm, refine, or override, never a pre-made verdict.
 
 You have explicit permission and encouragement to:
 
@@ -107,7 +107,7 @@ What you must not do:
 - [ ] Every Unknown has a one-line note on what would resolve it (test / ask / review / instrument / build infrastructure).
 - [ ] Every non-Unknown actual's Evidence line names both what was observed and what judges it; any actual whose basis couldn't be named in a line has been honestly recorded as Unknown. (No oracle sweep runs here — that is `/evaluation-strategy`'s job after the strategy closes; Unknowns blocked on "nothing can judge this yet" say so in their to-resolve note.)
 - [ ] Thin-evidence, design-shaped dimensions got the targeted design deep-dive (or its explicit skip note): findings recorded as evidence with confidence markings, the test-coverage-vs-risk-skew lens applied, and the scratch file at `quality/.scratch/6.2-design-deep-dive.md` (or the skip note) in place.
-- [ ] Every row in Part 5's "Noted for 6.2" table was raised against its matching dimension and reconciled into that dimension's actual (confirmed, refined, or overridden) — none left unaddressed because the walkthrough moved past that dimension before checking the table.
+- [ ] Every row in Part 5's "Deficiency observations parked for actual-state review" table was raised against its matching dimension and reconciled into that dimension's actual (confirmed, refined, or overridden) — none left unaddressed because the walkthrough moved past that dimension before checking the table.
 - [ ] Confidence ratings use only H/M/L — no percentages.
 - [ ] Where the dimensions fell into natural clusters, the walkthrough presented them cluster by cluster — or "considered, no clustering" is recorded.
 - [ ] Any deferred items are recorded as `OPEN QUESTION:`.

@@ -101,4 +101,4 @@ The "Unpacked from" column shows which dimensions were split: atomic dimensions 
 **Open questions from this sub-step:** <bullet list, or "none">
 ```
 
-Once written, summarise back in 3–5 lines (naming the splits made and any composites kept atomic with reasoning), and ask the user (light wrap-up only — the substantive checkpoint runs at the step boundary, see SKILL.md): *"Ready to move on to sub-step 5.3 (Old/new-world pass)?"*
+Once written, summarise back in 3–5 lines (naming the splits made and any composites kept atomic with reasoning), and ask the user (light wrap-up only — the substantive checkpoint runs at the step boundary, see SKILL.md): *"Ready to move on to sub-step 5.3 (checking whether any of these mean something different for a human reader vs. an agent)?"*
