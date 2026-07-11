@@ -1,7 +1,7 @@
 {
   "name": "quality-strategy",
   "version": "0.4.0",
-  "description": "Produce and use a software quality strategy — who matters, what they value, where you're exposed, and what to do about it — plus the test and tooling strategies that operationalise it, and shareable visual artefacts generated from it. Grounded in Edmund Pringle's quality framework.",
+  "description": "Produce and use a software quality strategy — who matters, what they value, where you're exposed, and what to do about it — plus the test and tooling strategies that operationalise it, and shareable visual artefacts generated from it. Grounded in the Tollens quality framework.",
   "author": {
     "name": "Yanqing Cheng"
   },
