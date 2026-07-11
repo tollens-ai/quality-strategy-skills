@@ -8,11 +8,11 @@ The plan of work falls naturally out of the risk map. It is not a separate creat
 
 ## What you need from the previous sub-step
 
-Read all of Part 6 (Risk Map) from `quality/strategy.md`, especially the "Hottest items" and "Patterns and dependencies" sections.
+Read all of Part 6 (Risk Map) from `quality/strategy.md`, especially the "Hottest items" and "Patterns and dependencies" sections. If action ideas surface for a **different** release mid-conversation, route them per Part 2's document structure (SKILL.md → "Scope of this skill") and name it in half a line — never fold them into this release's plan of work.
 
 ## What to cover
 
-By the end of this sub-step the strategy doc must capture, for the first release:
+By the end of this sub-step the strategy doc must capture, for this release:
 
 1. **A numbered list of actions** — one per row of the risk map that has a non-zero gap, plus actions to resolve high-impact unknowns (low-confidence rows).
 2. **For each action:** what it is, what gap or unknown it addresses, and which dimension(s) it touches.
@@ -36,13 +36,13 @@ You have explicit permission and encouragement to:
 
 - Combine actions where one piece of work resolves multiple risk-map entries.
 - Drop actions where the user confirms the gap is acceptable as-is (these become non-goal-confirming notes in the strategy).
-- Surface actions the user mentioned in earlier sub-steps that didn't make it into the risk map — late additions are fine.
+- Surface actions the user mentioned in earlier sub-steps that didn't make it into the risk map — late additions are fine. This includes **process-change candidates**: Part 1 names itself a revisable working basis, so if anywhere in the session it looked like changing the team, org, or workflow would reach the goals more efficiently than a product fix, that becomes an action here — never a silent edit back into Part 1.
 
 What you must not do:
 
-- Classify actions as testing / stakeholder / fixing yet. That's 7.2.
+- Classify actions as testing / stakeholder / fixing / process-change yet. That's 7.2.
 - Sequence actions yet. That's 7.3.
-- Elaborate an action into a mini-plan. One or two lines per action — the plan of work is a strategy-level sketch, and the follow-on skills own the depth (`/test-strategy` for testing work, `/tooling-strategy` for oracle/instrument builds; see SKILL.md → "The plan of work is a sketch").
+- Elaborate an action into a mini-plan. One or two lines per action — the plan of work is a strategy-level sketch, and the follow-on lanes own the depth (`/test-strategy` for testing work, `/evaluation-strategy` for evaluation work (oracles and proxies) — builds via `/tooling-strategy` — and `/process-strategy` for rules and process work; see SKILL.md → "The plan of work is a sketch").
 - Skip Unknown actuals or Low-confidence rows on high-impact dimensions. They generate the most valuable actions in early-stage projects — testing/asking work for Unknowns, fixing or testing work for Lows depending on the gap.
 - Propose an action for every dimension regardless of gap. None-rated and small-gap dimensions don't need actions.
 
@@ -56,6 +56,8 @@ What you must not do:
 
 - [ ] Every non-zero-gap row in the risk map either has an action OR has been actively confirmed as acceptable as-is.
 - [ ] Any H/M-impact dimension the team is aware of but deliberately not investing in this release is recorded as an "aware, not investing this release" note (no-action-with-reason) — not silently dropped, and not confused with a None or a non-goal.
+- [ ] Any action idea volunteered for a different release was routed per Part 2's document structure and named to the user — none folded into this release's action list.
+- [ ] Under "two releases in parallel," this sub-step ran its own full pass for the parallel release too, clearly separated — not blended into this release's action list.
 - [ ] Every **Unknown actual** and every **Low-confidence row** on a high-impact dimension has at least one action — and the action type matches (testing/asking for Unknowns; testing or fixing for Lows depending on whether the assessment or the gap is the problem).
 - [ ] Each action is specific enough to act on (who could do it, what done looks like).
 - [ ] Each action notes which gap or unknown it addresses.
@@ -67,14 +69,14 @@ If any check fails, return to the questioning. Do not move to sub-step 7.2.
 
 ## Output
 
-Append to `quality/strategy.md`:
+Append to `quality/strategy.md`. Under "two releases in parallel" (SKILL.md → "Scope of this skill"), each release gets its own complete `## Part 7` header — run this sub-step once per release, clearly separated, never one blended action list:
 
 ```markdown
 ## Part 7: Plan of Work
 
 ### Action list (unsorted)
 
-For the first release:
+For this release:
 
 1. **<Short title.>** <One- or two-line description.> Addresses: <gap or unknown from risk map>. Touches: <dimension(s)>.
 2. **<…>**

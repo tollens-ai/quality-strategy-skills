@@ -2,7 +2,7 @@
 
 ## Goal
 
-For each dimension in the final inventory from 5.3, rate its **impact for the first release** using mechanical anchors, **per stakeholder**, then **merge** to one rating per dimension. The vocabulary is **H / M / None** — there is deliberately **no L** at this step.
+For each dimension in the final inventory from 5.3, rate its **impact for this release** using mechanical anchors, **per stakeholder**, then **merge** to one rating per dimension. The vocabulary is **H / M / None** — there is deliberately **no L** at this step.
 
 The rating captures **impact size only** — *how much does failure on this dimension cost, for the stakeholders who care?* It does **not** capture likelihood, and it does **not** capture "how high does the actual quality need to be" (that's 6.1). Likelihood lives downstream in the risk map: risk = impact × likelihood gets combined there, later — not collapsed into a single 5.4 score now.
 
@@ -12,7 +12,7 @@ There is no L on purpose. "Aware of it but not investing right now" is a **plan-
 
 ## What you need from the previous sub-step
 
-Read sub-step 5.3's **final inventory** (post-unpack and post-old/new-world) from `quality/strategy.md`. Read Part 3 (Stakeholders) — specifically each stakeholder's three-lens bars (Delight / Good Enough / Dealbreaker), because the anchors are applied against those bars. Read Part 4 (Non-goals) — in dimension terms, a non-goal is a dimension no stakeholder bar references (None), or one dropped from the inventory entirely.
+Read sub-step 5.3's **final inventory** (post-unpack and post-old/new-world) from `quality/strategy.md`. Read Part 3 (Stakeholders) — specifically each stakeholder's three-lens bars (Delight / Good Enough / Dealbreaker), because the anchors are applied against those bars. Read Part 4 (Non-goals) — in dimension terms, a non-goal is a dimension no stakeholder bar references (None), or one dropped from the inventory entirely. If rating detail for a **different** release surfaces mid-conversation, route it per Part 2's document structure (SKILL.md → "Scope of this skill") and name it in half a line — never fold it into this release's ratings.
 
 ## What to cover
 
@@ -42,7 +42,7 @@ Use the `Agent` tool with `subagent_type: general-purpose`. The brief:
 >
 > First, read `$PLUGIN_ROOT/PHILOSOPHY.md` to ground yourself in the framework (quality is value to someone who matters; impact is about cost to a stakeholder who cares).
 >
-> Then read `$PROJECT_DIR/quality/strategy.md` — specifically the **final dimension inventory** in Part 5 (the post-old/new-world inventory) and the **Part 3 stakeholder three-lens bars** (each stakeholder's Delight / Good Enough / Dealbreaker entries).
+> Then read `$DOCS_DIR/quality/strategy.md` — specifically the **final dimension inventory** in Part 5 (the post-old/new-world inventory) and the **Part 3 stakeholder three-lens bars** (each stakeholder's Delight / Good Enough / Dealbreaker entries).
 >
 > For **each dimension × each stakeholder**, apply this anchor mechanically against that stakeholder's bars:
 >
@@ -56,7 +56,7 @@ Use the `Agent` tool with `subagent_type: general-purpose`. The brief:
 >
 > Return a per-stakeholder rating table: rows are dimensions, columns are stakeholders, each cell is `{H / M / None, pointer to the specific bar}` (e.g. *"H — Dealbreaker bar: 'never lose my data'"*).
 >
-> **Before returning, save this table verbatim** to `$PROJECT_DIR/quality/.scratch/5.4-dimension-rating.md` — the sealed-dispatch scratch file `/quality-strategy-review` audits (see SKILL.md → "Sealed-context dispatch and scratch files").
+> **Before returning, save this table verbatim** to `$DOCS_DIR/quality/.scratch/5.4-dimension-rating.md` — the sealed-dispatch scratch file `/quality-strategy-review` audits (see SKILL.md → "Sealed-context dispatch and scratch files").
 >
 > Do **not** merge across stakeholders, do **not** produce a single rating per dimension, and do **not** comment on the overall distribution. Just the per-stakeholder table, grounded cell by cell in the bars.
 
@@ -78,6 +78,8 @@ Talk exactly where stakeholders disagree — that contested call is where the us
 ### 3. Backstop — light justification glance
 
 After the merge, glance over the Highs: each one must cite the Dealbreaker bar it rests on. This is **light** — the thorough justification and coverage checks live in 5.5. Don't be alarmed by a High-dominated table: by this point the low-stakes material has already left the list (dropped at the inventory, excluded as a non-goal, or rated None), so Highs dominating what remains is the expected shape, not inflation. Because H requires a real Dealbreaker, inflation is structurally limited anyway — the thing to verify is the citation behind each High, not the count of them.
+
+When the Highs fall into natural clusters (SKILL.md → "Cluster-by-cluster, not one flat list") — sharing a stakeholder, a theme, or a parent composite from 5.2 — glance and present them cluster by cluster rather than as one flat table dump; note *"considered, no clustering"* when they don't meaningfully group.
 
 You have explicit permission and encouragement to:
 
@@ -110,6 +112,7 @@ What you must not do:
 - [ ] Every **divergence** was surfaced to the user, and the merge decision is recorded with a one-line note.
 - [ ] Tradeoffs knowingly made at the merge are recorded (what was traded, the bar it still satisfies, the reopen trigger) — or the section records "none recorded this pass".
 - [ ] Rating vocabulary is **H / M / None** — no L, no percentages.
+- [ ] Where the Highs (or the ratings generally) fall into natural clusters, the backstop glance and the closing summary presented them cluster by cluster — or "considered, no clustering" is recorded.
 - [ ] Any deferred items are recorded as `OPEN QUESTION:`.
 - [ ] Pre-read sources are cited in the section's evidence field — naming actual files referenced, or, for an interview-derived / no-repo pre-read, citing the interview honestly (never blank, never a placeholder).
 - [ ] The user has been given a 2–4 line wrap-up, asked if any quick concerns, and confirmed ready to continue. (Substantive checkpoint runs at step boundaries — see SKILL.md.)
@@ -121,7 +124,7 @@ If any check fails, return to the dispatch or the merge. Do not move to sub-step
 Append to `quality/strategy.md` under Part 5, after the inventory:
 
 ```markdown
-### Dimension ratings (first release)
+### Dimension ratings (<release>)
 
 Merged ratings, grouped by rating for readability. Impact size only — likelihood lives in the risk map (Part 6).
 
@@ -157,9 +160,11 @@ Merged ratings, grouped by rating for readability. Impact size only — likeliho
 
 **Sources consulted from pre-read:** <bullet list>
 
+**Clustering:** <the groupings used to present and confirm ratings, or "considered, no clustering">
+
 **Assumptions made:** <bullet list, or "none">
 
 **Open questions from this sub-step:** <bullet list, or "none">
 ```
 
-Once written, summarise back in 3–5 lines (highlighting the count by rating and any contested ratings the merge resolved) and ask the user (light wrap-up only — the substantive checkpoint runs at the step boundary, see SKILL.md): *"Ready to move on to sub-step 5.5 (Sanity checks)?"*
+Once written, summarise back in 3–5 lines (highlighting the count by rating and any contested ratings the merge resolved) — cluster by cluster where the dimensions fall into natural clusters (SKILL.md → "Cluster-by-cluster, not one flat list"), rather than one flat count, with a recorded *"considered, no clustering"* when they don't — and ask the user (light wrap-up only — the substantive checkpoint runs at the step boundary, see SKILL.md): *"Ready to move on to sub-step 5.5 (Sanity checks)?"*

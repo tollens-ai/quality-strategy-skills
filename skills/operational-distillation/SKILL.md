@@ -20,7 +20,7 @@ The distillation is a *view* of the strategy, not a second source of truth. It r
 This skill is part of the `quality-strategy` plugin. Before anything else, resolve two absolute paths and use them throughout:
 
 - **PLUGIN_ROOT** — the plugin's install directory: `${CLAUDE_PLUGIN_ROOT}` (Claude Code expands this to an absolute path when it loads this file; read it off and note it down). The grounding file this skill reads — `PHILOSOPHY.md` — lives under it.
-- **PROJECT_DIR** — the absolute path of the project whose strategy you're distilling (normally the current working directory; confirm with the user if it's ambiguous). The strategy docs live under `$PROJECT_DIR/quality/`.
+- **PROJECT_DIR** — the absolute path of the project whose strategy you're distilling (normally the current working directory; confirm with the user if it's ambiguous). The strategy docs normally live under `$PROJECT_DIR/quality/` — but `/quality-strategy` asks at session start where the strategy should be saved, so they may live elsewhere. If `$PROJECT_DIR/quality/` is absent, get the docs home instead of assuming: from the orchestrator's brief when this skill was dispatched, else by asking the user; if the path you're given ends in `/quality`, its parent is the home. From then on treat `$PROJECT_DIR` as that docs home wherever a path below says `$PROJECT_DIR/quality/...` — one substitution, made once, before you act on any path.
 
 File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **Substitute the resolved absolute paths before you act on them.** The Read tool does no variable expansion and resolves relative paths against the current working directory, not this skill's directory — so an unsubstituted placeholder or a bare relative path will fail.
 
@@ -49,12 +49,12 @@ From the full doc, pull only what a returning reader most needs:
 
 Throughout the TL;DR and rubric, **use names, not coordinates** (PHILOSOPHY: *write for both readers*): the distillation is read cold, so refer to actions and dimensions by their short human names with any label trailing as a pointer — *"the payment-divergence simulation (Action F)"*, never a bare letter or number.
 
-**Test-strategy variant.** When the target is `quality/test-strategy.md`, the doc has a different shape (purpose / principles / impact-tiered learning needs / allocation / closing), so pull instead:
+**Test-strategy variant.** When the target is `quality/test-strategy.md`, the doc has a different shape (the filter table, then per-ility Have / Improve / Add with agreed moves), so pull instead:
 
 - **Purpose** — what this strategy investigates and which quality strategy it operationalises.
-- **Tier-1 learning needs** — the highest-impact information needs and the questions they answer.
-- **Allocation hot spots** — the rows where effort concentrates, plus any low-confidence or "try-and-see" rows the reader should treat as provisional.
-- **Gated / blocked sections** — any learning needs marked blocked-on-tooling.
+- **The top agreed moves** — the highest-priority investigations and the questions they answer.
+- **Priority order** — which ilities were tackled first (Dealbreaker-linked ilities first, cheaper-to-learn within similar impact) and any agreed move worth flagging as especially high-priority or still uncertain.
+- **Blocked items** — any agreed moves marked blocked on missing instruments or oracles.
 - **Key non-targets** — the one or two things deliberately not being tested, most likely to be mistaken for gaps.
 
 The quality-strategy extraction above is the default; use this variant only when distilling a test strategy.
@@ -69,7 +69,7 @@ A reader hits a new thing — a bug report, a feature ask, a complaint, an odd r
 
 - **Map to a dimension / stakeholder** — "is this about a dimension we rated H/M, and whose bar does it touch?"
 - **Severity from the strategy** — touches a Dealbreaker → urgent; touches an H gap → important; touches a None / non-goal → likely out of scope, say so and stop.
-- **Route** — testing question → `/test-strategy` learning need; stakeholder question → confirm the bar; fixing → the plan of work.
+- **Route** — testing question → `/test-strategy`'s agreed moves; evaluation question (how would we judge or track this?) → `/evaluation-strategy`; process question → `/process-strategy`; stakeholder question → confirm the bar; fixing → the plan of work.
 - **When in doubt** — the one or two questions that resolve most ambiguity for *this* project.
 
 Before you insert the rubric, run a **rating-label cross-check** against the body:
@@ -79,7 +79,7 @@ Before you insert the rubric, run a **rating-label cross-check** against the bod
 3. Keep separate concepts separate in wording: Part 5 rating = impact size; Part 6 confidence/actual state = evidence and current condition; Part 7 phase = work order. A Medium dimension can be Phase 0 if it blocks learning, and a High dimension can be already well-covered. Do not let those later sections silently relabel the dimension.
 4. If a useful rubric rule depends on Part 6 or Part 7 rather than Part 5, name that basis explicitly — e.g. "Unknown actual-state confidence" or "Phase 0 gate" — instead of calling it a different dimension rating.
 
-For a test strategy, the rubric maps a new finding to a **learning need / tier** (rather than a quality dimension): which learning need does it bear on, is that Tier 1, and does it change the allocation or exit criteria?
+For a test strategy, the rubric maps a new finding to an **ility and its agreed moves** (rather than a quality dimension): which kept ility does it bear on, how high does that sit in the priority order, and does it change any agreed move or its answered-when state?
 
 Keep it to a page. It's a rubric, not a runbook.
 
@@ -89,7 +89,7 @@ Only if the project has recurring operational decisions or commands worth a quic
 
 ### 5. Place it at the top and check it against the body
 
-Insert the distillation immediately after the title block — the title, the `Last updated` line, and the producer's version stamp line if one is present (leave that stamp intact; it is deliberate attribution, not machinery) — above the first substantive section: the `## Strategy job` paragraph and Part 1 for a quality strategy, or the equivalent top section (purpose) for a test strategy. Then re-read it against the body: every claim in the TL;DR and rubric must have backing in the body, and the TL;DR must not miss anything load-bearing in the body (a Dealbreaker, the hottest risk). The distillation is a faithful view — if it and the body disagree, the body wins and the distillation is wrong.
+Insert the distillation immediately after the title block — the title, the `Last updated` line, the `Release:` line if present, and the producer's version stamp line if one is present (leave that stamp intact; it is deliberate attribution, not machinery) — above the first substantive section: the `## Strategy job` paragraph and Part 1 for a quality strategy, or the equivalent top section (purpose) for a test strategy. Then re-read it against the body: every claim in the TL;DR and rubric must have backing in the body, and the TL;DR must not miss anything load-bearing in the body (a Dealbreaker, the hottest risk). The distillation is a faithful view — if it and the body disagree, the body wins and the distillation is wrong.
 
 ## Push back when
 
@@ -149,6 +149,6 @@ The TL;DR + triage rubric (+ optional cheat sheet) inserted at the top of the ta
 …
 ```
 
-The insertion point is the same for either doc: place the distillation immediately after the title block (title, `Last updated`, and the producer's version stamp line if present — leave the stamp intact), above the first substantive section — the `## Strategy job` paragraph (then Part 1) for a quality strategy, or the equivalent top section (purpose) for a test strategy.
+The insertion point is the same for either doc: place the distillation immediately after the title block (title, `Last updated`, the `Release:` line if present, and the producer's version stamp line if present — leave the stamp intact), above the first substantive section — the `## Strategy job` paragraph (then Part 1) for a quality strategy, or the equivalent top section (purpose) for a test strategy.
 
-When run from `/quality-strategy` against the quality strategy, also write a scratch file at `$PROJECT_DIR/quality/.scratch/7.3-operational-distillation.md` recording which Parts the distillation drew from (the sealed-dispatch scratch file the review skill audits — see `/quality-strategy` SKILL.md, "Sealed-context dispatch and scratch files"). A standalone run — whether against the quality or the test strategy — needs no orchestrator scratch file: insert the distillation into the doc as above and tell the user what you added.
+When run from `/quality-strategy` against the quality strategy, also write a scratch file at `$PROJECT_DIR/quality/.scratch/7.3-operational-distillation.md` recording which Parts the distillation drew from (the sealed-dispatch scratch file the review skill audits — see `/quality-strategy` SKILL.md, "Sealed-context dispatch and scratch files"). The orchestrator's brief carries the absolute docs-home path — a sealed dispatch can't ask where the docs live, so write where the brief says, never a path derived from your own working directory. A standalone run — whether against the quality or the test strategy — needs no orchestrator scratch file: insert the distillation into the doc as above and tell the user what you added.

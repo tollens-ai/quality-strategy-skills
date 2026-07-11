@@ -8,7 +8,7 @@ This is the final content sub-step. After this, the strategy goes to `/quality-s
 
 ## What you need from the previous sub-step
 
-Read sub-step 7.2's classified action list from `quality/strategy.md`, plus Part 6 (Risk Map) for context on dependencies and impact.
+Read sub-step 7.2's classified action list from `quality/strategy.md`, plus Part 6 (Risk Map) for context on dependencies and impact. Read Part 1's budget and constraints (sub-step 1.5) — the phasing has to be realistic against the stated time, people, and money, not just correctly ordered. If sequencing discussion drifts onto a **different** release's plan, route it per Part 2's document structure (SKILL.md → "Scope of this skill") and name it in half a line — never fold it into this release's phases.
 
 ## What to cover
 
@@ -65,6 +65,8 @@ What you must not do:
 
 - [ ] Each action from 7.2 is placed in a phase.
 - [ ] Each phase has a name, one-line purpose, and ordered actions.
+- [ ] Any sequencing discussion that drifted onto a different release's plan was routed per Part 2's document structure and named to the user — none folded into this release's phases.
+- [ ] Under "two releases in parallel," this sub-step ran its own full pass for the parallel release too, clearly separated — not blended into this release's phases.
 - [ ] Sequencing follows the principles: unknowns before fixes; blockers before everything; multi-resolving work grouped; None items excluded.
 - [ ] Internal testing / first-party use is present as a phase, or its absence is actively justified.
 - [ ] What's not in the plan is documented (deferred items, exclusions with reasoning).
@@ -79,7 +81,7 @@ If any check fails, return to the questioning. After this sub-step passes (and t
 
 ## Output
 
-Append to `quality/strategy.md`, replacing or extending the classified list from 7.2:
+Append to `quality/strategy.md`, replacing or extending the classified list from 7.2. Under "two releases in parallel," each release has its own `## Part 7` header — extend the matching one, not the other release's:
 
 ```markdown
 ### Plan of work (phased)
@@ -106,7 +108,7 @@ Append to `quality/strategy.md`, replacing or extending the classified list from
 
 ### How this plan gets elaborated
 
-This Part is the strategy-level sketch. <One or two lines pointing onward: testing work is elaborated by `/test-strategy` into `quality/test-strategy.md`; oracle/instrument build items by `/tooling-strategy` into `quality/tooling-strategy.md`. Name only the follow-ons this plan actually feeds — if there are no build items, don't advertise `/tooling-strategy`.>
+This Part is the strategy-level sketch. <One or two lines pointing onward: testing work is elaborated by `/test-strategy` into `quality/test-strategy.md`; evaluation work by `/evaluation-strategy` into `quality/evaluation-strategy.md` (agreed builds by `/tooling-strategy` into `quality/tooling-strategy.md`); rules, process, and process-change work by `/process-strategy` into `quality/process-strategy.md`. Name only the follow-ons this plan actually feeds.>
 
 **Sources consulted from pre-read:** <bullet list>
 

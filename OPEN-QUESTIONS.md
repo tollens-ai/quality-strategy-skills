@@ -76,6 +76,8 @@ Each entry: what we did, why we did it, what would change our mind, and how we'd
 
 **How we'd know.** Compare real strategies to an early real-project strategy's structure — are the "live debates" being captured equivalently, or are they getting lost?
 
+**Resolved (the maintainer, 2026-07-10).** Three lenses stand — Discussed is not added as a fourth. Recorded honestly, as a hypothesis with no evidence behind it and not the basis for the ruling itself: "Discussed" may be a transcription artifact from whoever originally dumped the origin design session into the knowledge base, rather than something stated as a genuine fourth lens — "no evidence, obviously." The ruling doesn't lean on that hypothesis being right; it stands on the reasoning already given above (Discussed is a different class of thing than the other three; `OPEN QUESTION:` already captures it). Closed; not revisiting without new evidence per "What would change our mind" above.
+
 ---
 
 ## First-release-only scope
@@ -762,4 +764,126 @@ Calls made while preparing the pack for public alpha.
 
 ---
 
+## Save location is asked, never assumed — and "local" means outside the working tree
+
+**What we did.** Session start now asks where the strategy docs should live before anything is written (in the repo for everyone, or a local first pass elsewhere), instead of silently writing to the cwd. Two judgment calls inside that: **(a)** the suggested "local" option is a directory *outside* any shared working tree (e.g. `~/strategies/<project-name>/` — deliberately not named `quality`, so the home and the `quality/` folder created inside it never blur), with in-repo-but-gitignored honoured only with an explicit accidental-`git add` warning; **(b)** promoting a local pass to the repo is deliberately machinery-free — copy the `quality/` folder in and commit — rather than a migration command.
+
+**Why.** Alpha feedback (Round 3 in `docs/ALPHA-FEEDBACK.md`): a tester in a shared repo self-censored and bounced off because candid answers were being committed where colleagues would read them. Candor needs the user to know, before answering, where their words go. Gitignored-in-repo isn't the suggested private option because a draft inside a shared checkout is one `git add -f` (or one over-broad pattern change) from published. No promote machinery because a folder copy is transparent and inspectable — exactly what you want for the moment a private draft goes public.
+
+**What would change our mind.** If real runs show the extra session-start question is friction for the common solo/in-repo case (one question, but it's the first thing users meet). If users routinely want gitignored-in-repo and the warning reads as nagging. If promote-by-copy loses things in practice (scratch state, archives) and a real migration step earns its keep.
+
+**How we'd know.** Watch alpha runs: does anyone stumble on the opening question or pick "local" and then struggle to resume/promote? Regression cases IU-21/IU-22 hold the behaviour meanwhile.
+
+---
+
+## Multi-repo scope: per-repo dispatch sets, one system-level strategy
+
+**What we did.** Session start asks which repo(s) are in scope (before the save-location question, whose options depend on it). The pre-read dispatches its three-subagent set once per repo and reconciles into a single digest — system-level synthesis, floor predicates OR'd across repos ("holds PII: yes (api-repo)"), cross-repo seams in the discrepancies section, then one compressed ~150-line section per repo. Beyond ~5 repos the skill warns about depth/cost and offers scoping this pass to the load-bearing repos, recording the rest as out of scope. The strategy itself stays **one document for the system** — Parts 1–7 are not decomposed per repo; repos are analysis inputs that evidence may cite.
+
+**Why.** The one-repo operating assumption was silent — never stated, never asked — and a strategy for a five-repo product built from one repo's evidence describes a fraction of the system while reading as if it covered it. Per-repo dispatch sets keep each subagent's job concrete (one repo, full attention) and the scratch trail auditable per repo. One system strategy because stakeholders, bars, and risks belong to the product; a per-repo split would fragment exactly the cross-repo seams (client/API drift) that multi-repo products get wrong.
+
+**What would change our mind.** A real multi-repo run where per-repo digest compression loses the load-bearing detail (→ raise the budget or link scratch files harder). Products where one repo is so dominant the fan-out is ceremony. Real demand for per-repo risk maps (e.g. separately-owned repos with separate release trains) — that would be a per-repo *view*, not a doc split, and interacts with the tracked per-stakeholder risk-map TODO.
+
+**How we'd know.** Tomorrow's intended multi-repo alpha run; watch whether the digest's per-repo sections carry the interview or the user keeps reaching for the scratch files. Regression: IU-23 / SC-17.
+
+---
+
+## Per-release strategy + the release bank
+
+**What we did.** The strategy is now explicitly per-release: the doc header carries a `*Release:*` line (stamped at sub-step 2.1) and the per-release section headings name the release instead of hardcoding "(first release)" — which was wrong in new-release mode anyway. Multi-release dictation is captured via a **release bank**: at any sub-step, content the user gives for a different release is recorded faithfully (close to their words, labelled) in `quality/releases/<release-slug>.md`, acknowledged in half a line, and pre-loaded as named-back starting hypotheses when that release's strategy is started in new-release mode. Depth stays one release at a time.
+
+**Why.** The driving use: dictating several releases' worth of strategy in one session for efficiency. Flattening future-release content into the current release's sections corrupts both releases' analysis; dropping it forces re-dictation. Banking verbatim-ish (rather than analysing early) keeps the one-release-deep discipline — analysis of an unsettled release is speculation — while losing nothing. The bank lives beside the strategy (durable content, not `.scratch/`) because it must survive and travel with the docs family.
+
+**What would change our mind.** If banked notes rot faster than they help (new-release mode pre-loads stale claims the user has to bat away — the named-back-for-confirmation rule is the guard). If users want the bank *inside* the strategy doc (an appendix) rather than per-release files. If real sessions show the "half a line and move on" rule fights users who genuinely want to switch releases mid-session (the honest answer there may be: finish, then run new-release mode).
+
+**How we'd know.** The maintainer's live multi-release product-strategy dictation run is the live test. Regression: SC-18.
+
+---
+
+## Pure quality strategy + three light lanes
+
+**What we did.** Stripped the oracle/testing sweep out of `/quality-strategy` (the 6.2 `/oracle-adequacy` dispatch and its verdict fields are gone; 6.2 now owes Q2 *honesty* — every actual names its basis or is Unknown, with "nothing can judge this yet" as a load-bearing to-resolve note). Its follow-ups became three explicitly-lighter sibling lanes — `/test-strategy` (reshaped from the heavy 6-sub-step form), `/oracle-strategy` and `/process-strategy` (new) — each: ingest the release's strategy → filter the ilities its modality can dent → per ility discuss have/improve/add. The thoroughness differential is stated in the lanes' own prompts. `/oracle-adequacy` and `/tooling-adequacy` stay as the audit engines the lanes offer when trust is contested; `/tooling-strategy` consumes the lanes' agreed builds; `/test-strategy-review` and INDICATORS.md re-aligned to the lighter doc shape.
+
+**Why.** The quality strategy attempted an oracle sweep and a testing sweep mid-interview and "isn't really equipped to do that" (the amendment's words): the sweeps bloated the main flow and still weren't deep enough to be the real lane. Splitting keeps the strategy pure (who matters / what they value / where we stand, per release) and makes each modality a focused conversation. Lighter-by-design because the lanes stand on the strategy's finished analysis — re-interviewing would duplicate it; what's needed is ideas, questions, and decisions.
+
+**What would change our mind.** If real lane runs keep escalating into the depth the old test-strategy machinery provided (tiered needs, allocation tables, calibration) — the answer then is a deep-dive follow-on built *from* a lane's agreed moves, not re-fattening the lanes. If dropping the mandatory 6.2 oracle audit lets over-confident actuals back into strategies (the review's honesty checks and the oracle lane are the guards — watch whether they catch what 6.2's dispatch used to).
+
+**How we'd know.** The maintainer's live product run (the lanes were requested for exactly it); the release-phase regression run. Regression: SC-19.
+
+---
+
 *Add new items to this file when we make calls under uncertainty. Revisit after each real-world run.*
+
+## Candidness folded into the save-location ask — never sprung mid-session
+
+**What we did.** The session-start save-location ask now carries the honesty rationale in the words said to the user ("this works best when you can answer really honestly — your true opinions…"), recommends the private local pass outright when in-repo means a wide audience (tidy or redact later; `/strategy-variants` named as the derived-view route that never edits the honest doc), and is the *one* moment candidness is raised: no mid-session "this next part is sensitive" disclosures; a user who turns guarded gets the standing choice restated in a line.
+
+**Why.** TOL-185/TOL-189: surprising people with candidness mid-interview breaks trust exactly when the pointed questions arrive; folding the rationale into the ask up front licenses those questions before they're asked. The outright recommendation (not a neutral offer) is the maintainer's design: the wide-audience case has a right answer.
+
+**What would change our mind.** If the honesty framing itself makes reserved users *more* guarded at minute one. If the wide-audience recommendation reads as steering users away from team transparency where in-repo was genuinely right.
+
+**How we'd know.** Regression IU-24 (the guarded-user fixture) + PR tests `2026-07-10-req10.md`; watch real session-starts for the ask landing as protective rather than bureaucratic.
+
+---
+
+## Ask for precision on bars — never invent specificity
+
+**What we did.** PHILOSOPHY's vagueness discipline now says the digging is done by asking (when? how often? to what extent?), never by the agent choosing a reading. Worked case: bars carry a recurrence/tolerance dimension (one-off vs sustained), elicited at three-lens and recorded inline on the bar; 6.1 carries it into required levels; 6.3 respects it in the impact reason and heat while the Impact letter stays the Part 5 carry-over.
+
+**Why.** An alpha tester's deal-breaker misread: "bugs are a dealbreaker" read strictly when he actually tolerates one-offs and dies on sustained breakage — an invented fact wearing the user's voice, inflating required levels and impact downstream. The symmetric failure (invented leniency) waves a real dealbreaker through.
+
+**What would change our mind.** If the tolerance question fires on every bar and reads as interrogation (the guard is "only when the phrasing leaves the reading open"). If recording tolerance inline clutters the three-lens table beyond usefulness.
+
+**How we'd know.** Regression SC-20 + PR tests `2026-07-10-req9.md`; watch whether 6.3 rows actually name failure shapes in real runs.
+
+---
+
+## The ideas ledger — capture once, classify later
+
+**What we did.** Spontaneous user ideas (volunteered how-we'd-check-or-uphold suggestions that go beyond the question asked) land in `quality/ideas.md`: user's words, one bullet per idea, dimension+release linked, no role assigned at capture. No prompting for ideas mid-strategy — elicitation stays with the lanes, which read the ledger at ingest and annotate adopted entries rather than deleting. One file across releases; capture exempt from the pruning rule and precision push-back.
+
+**Why.** Users generate ideas mid-interview and the pack previously had nowhere to put them that wasn't a detour, a classification, or a loss. Classifying at capture closes off the other roles the same idea can play (review-per-change is a proxy *and* a process rule — an alpha tester's diagnosability item is the canonical multi-role offering).
+
+**What would change our mind.** If real ledgers fill with routine interview content (the beyond-the-question-asked boundary isn't holding). If lanes routinely ignore the ledger (the ingest hook isn't enough and needs a checklist gate). If users expect the ledger inside the strategy doc.
+
+**How we'd know.** Regression SC-21 + PR tests `2026-07-10-req7.md`; check real `quality/ideas.md` files for signal-to-noise after alpha runs.
+
+---
+
+## Evaluation lane: oracles + proxies as quality instruments differing in authority
+
+**What we did.** Renamed `/oracle-strategy` to `/evaluation-strategy` and folded proxies into it. Shared definitions live in test-strategy FRAMINGS #8: an oracle is trusted to *judge* (tells you whether it is good); a proxy *indicates* (correlated, cheap, known blind spots) — both are quality instruments, differing in authority. The proxy-goal guard was rewritten (TOL-174): proxy goals are legitimate when labelled — 100% coverage, review-per-every-change, clean architecture are all good quality proxies — and the failure mode is treating proxy satisfaction as quality achieved; a move's answered-when may cite a proxy milestone if it states what remains unknown when the proxy is satisfied (test-strategy-review check 4 re-worded to match). Old `/oracle-strategy` pointers are honoured: the lane's prompt says treat them as pointing here, and `/tooling-strategy` reads a prior-era `quality/oracle-strategy.md` as the evaluation side.
+
+**Why.** The maintainer's ruling: the old "no proxy targets as goals" over-forbade — teams legitimately commit to proxy goals; what goes wrong is reading them as the thing itself. And oracles-vs-proxies was a false split for the lane: a project knows where it stands through both, and the craft is knowing each signal's authority.
+
+**What would change our mind.** If "quality instrument" collides in practice with the pack's narrower observation-instrument sense despite the disambiguation note. If labelled-proxy-goals in real docs drift back into unlabelled targets (the what-remains-unknown clause is the guard). If the rename strands older strategies' pointers in ways the treat-as-pointing-here rule doesn't catch.
+
+**How we'd know.** Regression SC-22 + PR tests `2026-07-10-req8.md`; grep real evaluation-strategy docs for proxies carrying their what-they-miss line.
+
+---
+
+## Correction flow: entry triage + scoped template re-application over the dependency graph
+
+**What we did.** Path (b) of revision mode is now a real protocol (TOL-173/TOL-188). Entry triage first, with the skill diagnosing rather than trusting the user's framing — the discriminating question: "was the document wrong about what was true then, or has what's true changed since?" — routing to genuine-correction (scoped re-application), small-drift (same, recorded eyes-open), or context-changed (implicitly a new release: whole template, old doc as hypotheses). For corrections: locate the first-touched section, compute its downstream tree from the new explicit graph (`skills/quality-strategy/SECTION-DEPENDENCIES.md`, mirroring the sub-steps' own declared inputs), union for multiple corrections, record the plan in `## Since the last revision`, then re-apply the template to exactly that union — obvious inferences may be suggested but every downstream conclusion is user-ratified; unaffected dependents close as examined-unchanged confirmations. Untouched sections are never re-opened. Review check 24 diffs archive vs current: out-of-union edits FAIL, an under-computed union is a FAIL, union members without outcomes FLAG. A mode map at the top of Revision mode makes fresh/resumption/correction/re-walk/new-release explicit for agents landing mid-task.
+
+**Why.** The maintainer's design: corrections were previously "ask which sub-steps, jump to those" — no triage, no dependency reasoning, so a fixed bar could leave stale ratings downstream, and a context change dressed as a correction patched a strategy whose goals had moved. Users under-flag context changes; the goals change when the context does.
+
+**What would change our mind.** If real corrections show the graph's granularity is wrong (Part-level unions too coarse, sub-step too fine). If wide trees (bar corrections) make correction mode feel like a re-walk despite the keep-as-is mechanic — the fix would be smarter obvious-inference batching, not skipping ratification. If the graph drifts from the sub-steps (the same-commit update rule is the guard).
+
+**How we'd know.** Regression SC-23 + PR tests `2026-07-10-req6.md` (incl. TOL-188's bad-pass fixture: an out-of-union edit must FAIL check 24). Watch the first real correction session end-to-end.
+
+---
+
+## Strategy-variants hardening: the completeness gate + the named external audience
+
+**What we did.** Two release-test Majors (2026-07-10, both on the redact-later path that the save-location ask now advertises — "Candidness folded into the save-location ask" above, REQ-10) closed in `/strategy-variants`. First, the "don't run on an unfinished strategy" clause became a mechanical gate: step 1 of the work presence-checks Parts 1, 3, 4, and 6 (real content, not bare headings), and on failure produces nothing — no caveated variants; caveats stay behind when the page is forwarded. The stop message checks `quality/archive/` first: a thin live `strategy.md` usually means a new release is mid-write, and if an archived release passes the same check, the user may explicitly choose to derive variants of that release (the derived-view header then names it) — the check-the-archive-first fallback that release-test round 1's `/quality-artefacts` run improvised on its own judgment, made official here with the user's say-so added. Second, the client-safe variant no longer assumes a paying client exists: the audience is asked for by name ("who exactly is this for — name them"), with the no-client branch drawn from the strategy's own Part 3 stakeholders (OSS end users, funders/backers, due-diligence readers) — never invented; no nameable reader anywhere means the client-safe variant isn't produced (a requested one-pager is unaffected), never fabricated.
+
+**Why.** Release-test round 1 ran the variants against a legitimate Part-1-only new-release stub and produced hollow-but-caveated files where the skill's own clause said stop — the clause existed but wasn't a gate. Round 2 had to invent "OpenCollective backer / due-diligence reader" as the client-variant audience because the skill's framing (client, customer, exec sponsor) had no branch for a project with no client — exactly the alpha audience the REQ-10 save-location ask now sends here.
+
+**What would change our mind.** If the four-Part presence check proves too coarse (a doc with four filled Parts can still be mid-revision garbage — the review skill remains the quality gate) or too strict (a legitimate variant need that only leans on Parts 1/3). If the Part 3 candidate list turns the audience ask into a menu users rubber-stamp instead of a real naming.
+
+**Still owed (next batch).** The same gate shape for `/operational-distillation` — release-test finding 3: its thin-body refusal lives only under "Push back when"; its work order and DONE list never require the Parts to exist, so a fast pass could fabricate a TL;DR from a Part-1 stub. Same class as the variants gate fixed here.
+
+**How we'd know.** Regression suite `variants.md` (V-1/V-2) + PR tests `2026-07-10-req11.md`. Watch the first real no-client alpha user reach the client-safe variant.
+
+---

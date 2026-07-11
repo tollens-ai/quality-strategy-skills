@@ -10,7 +10,7 @@ Get the reasoning wrong and the 5.4 rating misleads: what's High for an agent ma
 
 ## What you need from the previous sub-step
 
-Read the post-unpack inventory from sub-step 5.2's output in `quality/strategy.md`. Read Part 3 (stakeholders) — specifically, note which stakeholders are agents.
+Read the post-unpack inventory from sub-step 5.2's output in `quality/strategy.md`. Read Part 3 (stakeholders) — specifically, note which stakeholders are agents. If audience-split detail for a **different** release surfaces mid-conversation, route it per Part 2's document structure (SKILL.md → "Scope of this skill") and name it in half a line — never fold it into this release's final inventory.
 
 This skill takes the new-world stance (see PHILOSOPHY): agent stakeholders are the default. Sub-step 3.1 should have surfaced them unless the user gave a specific concrete reason. **Run the audience question on trap dimensions regardless of what 3.1 recorded** — because:
 
@@ -90,11 +90,11 @@ If any check fails, return to the questioning. Do not move to sub-step 5.4 (Rate
 Update the inventory section in `quality/strategy.md`. Replace the post-unpack inventory from 5.2 with the post-old/new-world inventory — this is the **final** inventory that 5.4 will rate:
 
 ```markdown
-### Final inventory (first release)
+### Final inventory (<release>)
 
-| Dimension | One-line reason it matters | Source | Unpacked from | Audience |
-|---|---|---|---|---|
-| <name (atomic / sub-dimension / audience-split)> | <why this matters> | <stakeholder bar / design observation / reference-list backstop> | <"atomic", or parent composite> | <"any" / "humans" / "agents" / "both — split"> |
+| Dimension | Scope (stakeholder/capacity + surface) | One-line reason it matters for THIS release | Source | Unpacked from | Audience |
+|---|---|---|---|---|---|
+| <name (atomic / sub-dimension / audience-split)> | <carried forward from 5.1/5.2, refined if the audience split changed it> | <why this matters> | <stakeholder bar / design observation / reference-list backstop> | <"atomic", or parent composite> | <"any" / "humans" / "agents" / "both — split"> |
 
 The "Audience" column shows the old/new-world decision: dimensions where humans and agents care about the same thing show *"any"*; trap dimensions confirmed as audience-neutral show *"any — confirmed"*; audience-split dimensions appear as separate rows with *"humans"* and *"agents"* respectively.
 

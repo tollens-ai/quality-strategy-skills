@@ -1,138 +1,91 @@
 ---
 name: test-strategy
-description: Produce or revise a test strategy for a project — an engineering-level companion to the quality strategy that defines what to investigate, in what order, and how human and agent effort should be allocated. Use after `/quality-strategy` has produced `quality/strategy.md`, when planning a release, or when test work is being decided ad hoc.
+description: A deliberately light follow-up to /quality-strategy for the testing lane — ingest the release's quality strategy, filter for the ilities testing can make a dent on (where you don't know where you stand and investigating would tell you), then per ility discuss what testing you have, what could be improved, and what could be added. High-level ideas and questions, not step-by-step hand-holding. Produces quality/test-strategy.md. Use after /quality-strategy completes for a release.
 ---
 
 # Test Strategy
 
-This skill produces `quality/test-strategy.md` — the engineering companion to the quality strategy. The quality strategy says *what matters*; the test strategy says *how to find out where you actually are*, so the team can close the gap as efficiently as possible.
+One of the three light follow-ups to `/quality-strategy` — the **testing** lane, beside `/evaluation-strategy` (how you judge and track what you see — oracles and proxies) and `/process-strategy` (rules, invariants, and processes). Testing is **investigation to find out what's actually true** — this lane plans where investigation will move the release's risk map, not a test plan of cases to execute.
 
-The skill is short by design. /quality-strategy does the heavy lifting — it produces the stakeholder analysis, dimensions, and risk map. /test-strategy turns that into a plan of investigation. Most of the thinking is already in the strategy; this skill's job is to bring the right framings to that step.
+**This skill is deliberately much lighter than `/quality-strategy` — a design decision, not a shortcut.** The quality strategy is the thorough one: a structured multi-session interview that walks you step by step and refuses to skip substance. This skill assumes that work is done and does something different: it gives you **high-level ideas and good questions**, per ility, and captures what you decide. It will not hold your hand through a step-by-step process, run analysis fan-outs, or re-derive what the quality strategy already established. One or two focused conversations, one short document.
 
 ## Resolving file paths — do this first
 
-This skill is part of the `quality-strategy` plugin. Before anything else, resolve two absolute paths and use them throughout:
+This skill is part of the `quality-strategy` plugin. Resolve two paths and use them throughout:
 
-- **PLUGIN_ROOT** — the plugin's install directory: `${CLAUDE_PLUGIN_ROOT}` (Claude Code expands this to an absolute path when it loads this file; read it off and note it down). Every file this skill references — `PHILOSOPHY.md`, `skills/test-strategy/FRAMINGS.md`, `skills/test-strategy/INDICATORS.md`, and the sub-step files under `skills/test-strategy/steps/` — lives under it, as does `.claude-plugin/plugin.json`, whose `version` field stamps the generated test strategy (see sub-step 1).
-- **PROJECT_DIR** — the absolute path of the project you're building the test strategy for (normally the current working directory; confirm with the user if it's ambiguous).
+- **PLUGIN_ROOT** — the plugin's install directory: `${CLAUDE_PLUGIN_ROOT}` (Claude Code expands this to an absolute path when it loads this file; read it off and note it down). Grounding files — `PHILOSOPHY.md`, `skills/test-strategy/FRAMINGS.md`, `skills/test-strategy/INDICATORS.md`, `.claude-plugin/plugin.json` (whose `version` field stamps the output) — live under it.
+- **DOCS_DIR** — where the `quality/` docs live; every `quality/...` path below resolves under it. Normally the current working directory — but `/quality-strategy` asks at session start where the strategy should be saved and records the choice in `quality/.scratch/session-config.md`; this doc joins that same family. If the working directory has no `quality/`, ask the user where the strategy was saved (a path ending in `/quality` means its parent is the home) — never scaffold a fresh `quality/` beside code whose strategy lives elsewhere.
 
-File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **Substitute the resolved absolute paths before you act on them** — both when you Read a file yourself (including the sub-step files) and when you put a path into a subagent brief. The Read tool does not expand variables, and it resolves relative paths against the current working directory, not this skill's directory. A dispatched subagent inherits none of your context. So an unsubstituted placeholder or a bare relative path will fail — always pass fully resolved absolute paths.
+Substitute resolved absolute paths before acting on them — in your own Reads and in any subagent brief; the Read tool does no variable expansion, and a dispatched subagent inherits none of your context.
 
 ## Before you start
 
-Two prerequisites:
+1. **`$DOCS_DIR/quality/strategy.md` must exist for this release**, completed at least through Part 6 (Risk Map). If it doesn't, stop and direct the user to `/quality-strategy` — without a risk map you'd be guessing where investigation pays, which is the opposite of this lane's job.
+2. **Read `$PLUGIN_ROOT/PHILOSOPHY.md` and `$PLUGIN_ROOT/skills/test-strategy/FRAMINGS.md`.** The eleven framings counter agent defaults — without them this lane drifts into writing a test plan instead of an investigation strategy. `INDICATORS.md` names the five indicators (Direction / Priority / Sufficiency / Feasibility / Honesty) the finished doc is judged against; knowing them up front shapes the discussion. None of these are optional.
+3. **Don't read the product's source code.** (FRAMINGS #3.) Investigation only pays if your perspective stays independent of the builder's; the strategy and the conversation are your context. If something is unclear, ask the user — don't load the source.
+4. **Session choices.** Read `quality/.scratch/session-config.md` and restate the standing choices in one line — *including* where these answers will be recorded and who can read them: this lane's discussion is candid too (what the tests actually tell you, what's untested hope), and the candor is only safe while the user knows where their words go. Ask only what the note is missing; if there is no note at all, run the save-location ask exactly as `/quality-strategy` → "Session start" defines it before anything is written. The project may span several repos — the recorded scope, not the cwd, is what "the product" means below.
 
-1. **`quality/strategy.md` must exist** at the project root, completed at least through Part 6 (Risk Map). If it does not, stop and direct the user to `/quality-strategy` first. You can't build a test strategy from nothing — without a risk map, you'd be guessing where to spend effort, which is the opposite of what this skill is for.
+## The session — ingest, filter, then discuss per ility
 
-2. **Read `$PLUGIN_ROOT/PHILOSOPHY.md`, `$PLUGIN_ROOT/skills/test-strategy/FRAMINGS.md`, and `$PLUGIN_ROOT/skills/test-strategy/INDICATORS.md`.** PHILOSOPHY.md explains the thinking behind the framework. FRAMINGS.md holds eleven framings that counter agent defaults — without them, /test-strategy will drift toward producing a test plan rather than a test strategy. INDICATORS.md lists the five indicators (Direction / Priority / Sufficiency / Feasibility / Honesty) the finished strategy will be reviewed against; knowing them up front shapes the work. None of these are optional.
+**1. Ingest the release's quality strategy.** Read `quality/strategy.md`: the header's `Release:` line (this doc inherits it), Part 3's stakeholder bars (Dealbreakers especially), Part 5's H/M-rated ilities, Part 6's risk map — required vs actual, the Unknowns, the confidence on both sides — and Part 4's non-goals (what must *not* get investigated). Don't re-litigate the strategy; it's the input. Also read `quality/ideas.md` (the ideas ledger) if it exists: ideas the user volunteered spontaneously mid-strategy, in their words, with no role assigned. Consider each for this lane — does it suggest a test charter, a probe, an investigation? — and raise the fits when their ility comes up; annotate an adopted entry in the ledger (*"→ taken up in test-strategy, <date>"*) rather than deleting it, since the same idea may also serve a sibling lane; an idea whose ility this lane's filter drops simply isn't raised here — it stays unannotated in the ledger for whichever lane kept that ility.
 
-## How this skill is structured
+**2. Filter — where can testing make a dent?** From the H/M ilities, propose the subset where *not knowing where you stand* is the problem and investigation would genuinely change the risk map: Unknown or low-confidence actuals on high-impact rows, claims that have never been exercised, Dealbreakers whose current evidence is hope. For each kept ility, one line of why; name the left-out ones with why not (usually: you already know where you stand — the gap is a build or a rule, so it belongs to a sibling lane; or nothing can judge the result yet — the evaluation lane first, since **you can only investigate what you can judge**). Confirm the filter with the user before drilling in.
 
-Six sub-steps, each in its own file under `steps/`. Run them strictly in order.
+**One standing candidate survives every filter: the fresh-eyes defect recon.** Sealed agents reading the product blind to this strategy, hunting defects nobody has named — its trace is every stated Dealbreaker at once, because unnamed defects threaten all of them, and its briefs must stay blind (agents who've read the strategy reliably plan *around* the gaps it names). Offer it every time; if the user drops it, record their reason in the doc rather than letting it vanish.
 
-| Sub-step | File | Produces |
-|---|---|---|
-| 0 — Pre-read | `steps/0-pre-read.md` | A short digest at `quality/test-pre-read.md` covering the strategy's risk map and existing test infrastructure |
-| 1 — Purpose | `steps/1-purpose.md` | The opening section of the test strategy — what we're investigating and why |
-| 2 — Principles | `steps/2-principles.md` | Six governing principles, stated and confirmed (or deliberately tweaked) |
-| 3 — Learning needs | `steps/3-learning-needs.md` | Impact-tiered list of information needs, each with question + methods + exit criterion |
-| 3.5 — Tooling & oracle adequacy | invoke `/tooling-adequacy` (separate skill) | Per learning need: is the *instrument* (exercise/observe) and the *oracle* (judge correctness) adequate? Produces build items that gate sub-step 5 |
-| 4 — Allocation | `steps/4-allocation.md` | Hypothesis allocation table with confidence column; two-voice exchange between agent and user |
-| 5 — Closing | `steps/5-closing.md` | What we're not testing + update protocol (including allocation re-rating) |
+**3. Per kept ility, in priority order, discuss three questions.** High-level ideas and questions — offer candidates, ask, capture what the user decides. Dealbreaker-linked ilities first; within similar impact, cheaper-to-learn first.
 
-## Execution rules
+- **What do you have already?** What testing exercises this ility today — suites, CI, manual habits, production incidents already teaching you? What does it *actually* tell you about this ility (not what it feels like it covers)? If whether the existing means can answer the question at all becomes the real issue — the instrument can't exercise it, or nothing can judge the output — that's a `/tooling-adequacy` audit; offer it rather than improvising one here, and dispatch it with the resolved absolute `$DOCS_DIR` doc path and a scratch destination (`quality/.scratch/tooling-adequacy-<YYYY-MM-DD>.md`) in the brief — a sealed dispatch can't ask where the docs live.
+- **What could be improved?** Where tests cluster away from the risk (well-tested low-risk corners beside untested dealbreakers), where a suite asserts the wrong thing, where green CI is read as more than what it checks (FRAMINGS #8 — proxies are not quality).
+- **What could be added?** Ideas by kind, not a plan: targeted probes that would flip a specific Unknown; **exploratory testing** by a person or agent where the dimension is experiential (a spec-check is never the only oracle for feel — FRAMINGS #11); **testing in production** where observability can carry it (also #11); asking a stakeholder, which is often the cheapest investigation of all (FRAMINGS #4); the standing fresh-eyes recon above. For each idea worth keeping: what question it answers, and what would count as answered.
 
-1. **Run sub-steps in order.** Each builds on the previous.
-2. **Read one sub-step file at a time.** Don't read N+1 until N is complete.
-3. **At the end of each sub-step**, run its DONE checklist. If a check fails, return to the work; do not proceed.
-4. **Write output incrementally** to `quality/test-strategy.md`. If a session is interrupted, what's already written is durable.
-5. **At the end of sub-step 5**, summarise the whole produced doc back to the user and check for unease before declaring complete. Same substantive-checkpoint pattern as /quality-strategy, but only at the very end — sub-step boundaries get light wrap-ups.
-6. **Every sub-step wrap-up carries a progress line and a visible exit.** One line of where-we-are with relative sizes (*"that was learning needs — the longest part; allocation is about half that, then a short closing"*), and one line of what the user keeps if they stop here (the doc is useful part-done; resume is supported). The user should never feel the work is unbounded. This is also where the boundary commit lands if the user chose commit-as-we-go at session start.
+**Capture as you go**: per ility, a few lines under Have / Improve / Add, plus one to three **agreed next moves** — each naming the question it answers, **what would count as answered** (a state, not a goal — a proxy milestone may stand as the answered-when if the move states what remains unknown about the ility when it's satisfied; FRAMINGS #8), who or what runs it (human or agent — agents make checking nearly free, humans carry judgment and smells; FRAMINGS #6, #9 — and any cost guess is honestly low-confidence until tried), and roughly when. Mark a move **blocked on <instrument/oracle>** when a `/tooling-adequacy` audit (or the discussion itself) shows its question can't yet be answered — `/tooling-strategy` collects exactly those markings. An idea the user rejects is recorded as considered-and-set-aside only if it sharpened something; otherwise dropped, not padded.
 
-## Session start — itinerary and commit cadence
+## Push back when
 
-Two moves at the start of every working session (first or resumed), before the next sub-step's work:
-
-**Give the itinerary, in plain words.** The stops, by human name, with what each produces for the user and rough relative sizes. For example: *"A quick pre-read; a short purpose section; the principles that govern the testing (short); learning needs — the heart of it and the longest part: the questions worth answering, in priority order — closed by a check that we can actually answer them (and what we'd have to build where we can't); allocation — who does what, human or agent; and a short closing. Most of the thinking is already in your quality strategy, so this is one or two focused sessions."* On resumption the itinerary doubles as re-orientation: what's done, what remains.
-
-**Ask the commit-cadence question (git-managed projects).** Where `$PROJECT_DIR` is git-managed, ask once: *"Want me to commit at each sub-step boundary, commit everything at the end, or leave the commits to you?"* Suggest commit-as-we-go as the default — rollback stays cheap and each boundary commit doubles as visible progress. Honour the answer at every boundary; don't drift. Record the choice in `quality/.scratch/commit-cadence.md` so it survives `/clear`: a resumed session reads it and restates the standing choice in one line instead of re-asking, and re-asks only if the note is missing.
-
-## The weight traces to the user's goals
-
-Same heaviness rule as `/quality-strategy` → "Heavy only where it serves the user's goals": the process may be demanding only where the user can see the weight serving their own stated goals. Structurally most of this skill already traces — every learning need cites a risk-map row (the Direction indicator) — but the trace must be **user-visible**, not just documented:
-
-- **Frame every why in the user's own words.** *"We're investigating X because your risk map says the actual is unknown and [stakeholder]'s dealbreaker sits on it"* — not *"the framework requires an exit criterion."*
-- **Pruning rule.** A learning need, method, or check that traces to no stated goal or risk-map row is spurious weight — cut it, or challenge whether the risk map is missing a goal. (The standing fresh-eyes defect recon is not prunable under this rule: its trace is every stated dealbreaker at once — unnamed defects threaten all of them. Sub-step 3 records the user's reason if they drop it.)
-- **The honest fork on resistance.** When the user pushes back on a goal-justified item, show the trace, then offer the fork: be convinced it matters for the goal, or revise the goal (re-rate the row it traces to). Both outcomes are legitimate; record whichever happens.
-
-This sharpens the skill's substantive refusals rather than softening them: the things it refuses to skip — the principles, the two-voice allocation exchange — are what keep the learning needs traceable to the user's goals at all. When a user balks at one of those, that is the trace to show.
-
-## The four-question frame, and where Q2 runs
-
-This skill works through the four quality questions (introduced in sub-step 1). It is how the team answers **"is what we have actually good?"** (Q3) — by planning the investigation. To do that honestly, you must settle **Q2 — "how do we know?"** first: the instrument (the thing that exercises and observes the product) and the oracle (the thing that judges whether output is correct) behind a finding must themselves be adequate, or the finding is built on sand.
-
-So after sub-step 3 (learning needs) and before sub-step 4 (allocation), **invoke `/tooling-adequacy`** on the learning-needs list. For each learning need, it checks whether the *instrument* (to exercise/observe) and the *oracle* (to judge correctness) are adequate, and returns any **build items** — instrument or oracle gaps, including simulated/reference oracles worth building. Carry those build items forward to sub-step 5, which marks the affected learning needs as blocked-on-tooling rather than papering over them. If the build items dominate the top tier, sub-step 3's closing offers pausing for `/tooling-strategy` before allocation (see `steps/3-learning-needs.md`) — Q2 before Q3.
-
-This is a **sealed-context dispatch**: it writes its assessment to `quality/.scratch/3.5-tooling-adequacy.md` as hard evidence the Q2 check ran. `/test-strategy-review` audits for that scratch file — a claimed-but-missing dispatch is a fabrication signal. `quality/.scratch/` is working state, not part of the strategy.
-
-## Pause and resume
-
-This skill is shorter and lighter than /quality-strategy — most of the heavy thinking lives in the strategy itself. You can usually finish it in **one or two focused sessions** rather than spreading it across days. There are no formal stick-together sets. The user can stop anywhere; the doc builds up as you go.
-
-If the user asks to take a break, point at the natural seams:
-
-- After sub-step 0 (pre-read complete)
-- After sub-step 2 (purpose + principles set)
-- After sub-step 3 (learning needs derived)
-
-At any of these it's safe to `/clear` — and say how to resume in the same breath, so resuming is stated, never guessed: *"safe to `/clear` here; to pick up, just run `/test-strategy` again — it reads `quality/test-strategy.md` (and the quality strategy it builds on) and resumes from the next sub-step."* The user shouldn't have to gamble that re-running the skill works.
-
-Sub-steps 3 → 4 are more tightly coupled (allocation depends on the learning-needs list being fresh in working memory), so flag a break between them with: *"Allocation depends on the learning-needs list being fresh — want to push through to the end of sub-step 4, or break here and re-orient from the doc on resume?"*
-
-On resumption, detect the state of `quality/test-strategy.md` and resume from the next sub-step.
-
-## Revision mode
-
-If `quality/test-strategy.md` already exists, ask the user:
-
-> I see an existing test strategy. Are we:
-> (a) starting fresh and replacing it;
-> (b) revisiting specific sub-steps;
-> (c) **updating after a test cycle** — re-rating allocation based on what we've learned about costs, updating the risk-map references, refining learning needs in light of findings;
-> (d) **starting a new release** — in which case I'll archive to `quality/archive/test-strategy-<release-name>-<YYYY-MM-DD>.md` and produce fresh.
-
-**Archive first — whatever the answer.** Before changing a word, snapshot the current doc to `quality/archive/test-strategy-<last-updated-date>.md` (path (d) uses its release-name form above). If that filename is already taken, suffix `-2`, `-3`, … — never overwrite an archive. Never silently rewrite history: the archive leaves a before/after trail the user can compare and share, and `/test-strategy-review` diffs against it when it reviews the update. Mention the archive in your closing summary. One exception: re-entering the skill to fix blockers from a `/test-strategy-review` of this same, not-yet-done strategy is the tail of the same writing session, not a revision — don't archive again.
-
-**Refresh the header stamp on any update.** An update is generated by *this* version of the skill, so update the header's `Last updated` date **and** re-resolve the version stamp from `$PLUGIN_ROOT/.claude-plugin/plugin.json` (the prior version's stamp is preserved in the archived snapshot). The live doc always names the version that last touched it, so a bug report traces to the right code.
-
-For (c), the most common mode after the first cycle: skip to sub-step 4 (Allocation re-rating) and sub-step 5 (Update protocol). The earlier sub-steps usually carry over with minor edits. Two disciplines keep the update honest — fixing all known problems is not the same as being good now; the gaps have moved since the last cycle:
-
-- **Look back with evidence.** Each Tier-1/2 learning need and low-confidence allocation row from the prior version gets a what-happened verdict: answered (cite the finding), still open, or overtaken by events. "Answered" without the evidence is recorded as *believed answered* at an honest confidence, not closed.
-- **Look forward fresh.** Scan what's new since the last cycle — features shipped, stakeholders added, context changed — for learning needs the prior doc could not have known about. New items go through sub-step 3's derivation and tiering before allocation is re-rated; (c) is "skip to sub-step 4" only when the scan comes back empty, and the doc says so when it does. And keep the standing fresh-eyes defect recon (sub-step 3's Pass 3) blind: its agents still must not read this document, prior version included. An update whose only change is closing prior items has verified the past, not assessed the present. When the fresh scan finds something the user never mentioned but their stated bars imply they care about, deliver it as a moment with its trace, not a buried list row (same delivery discipline as `/quality-strategy` → "Deliver revelations as moments").
-
-Record both — the verdicts, and what the scan newly found (or that it credibly found nothing) — in a short `## Since the last cycle` section, so the reader and `/test-strategy-review` can see what the cycle taught without re-deriving it.
-
-## Honest about uncertainty
-
-This skill's output is a hypothesis, not a final answer. Two areas in particular will probably be wrong on the first pass and will improve over cycles:
-
-- **Allocation.** Nobody — agents or humans — has calibrated intuition for the new cost economics. The first allocation table will have low-confidence rows that need real-world data to refine.
-- **Learning-needs prioritisation.** The risk map's confidence ratings are themselves uncertain. If a Tier-1 unknown turns out to be already-known after one quick test, the tiering was wrong. That's fine — that's what the update protocol is for.
-
-The doc shows this uncertainty openly (confidence columns, "unknown — try and see" tags, explicit re-rating triggers) rather than papering over it.
-
-## Final step: Effective Comms pass
-
-Before the test strategy is finalized for its reader, invoke `/effective-comms` on the produced doc. It is the communication gate the whole pack shares: it checks audience fit, hidden scratch context, names-before-coordinates, retained rejected ideas, leaked agent process-history, and a buried recommendation/next action — the ways a correct test strategy can still fail to land with the engineer who has to act on it. If a check fails, revise before finalizing; name any residual risk explicitly rather than leaving it silent. (`quality/.scratch/` is working state — keep its contents out of `quality/test-strategy.md`.)
+- The discussion drifts into enumerating test cases or building a test plan. That's execution; this lane decides *what's worth finding out*. Capture the question, not the case list.
+- The user wants investigation aimed at a None-rated dimension or a non-goal. Show the trace; the strategy says it doesn't matter — either honour that or revise the strategy (`/quality-strategy` revision mode), not this doc.
+- Every "have already" comes back "our tests cover it" with no per-ility answer to *"what did they last actually tell you about this?"*
+- The user drops the fresh-eyes recon casually. It's droppable — but only with a recorded reason; its trace is every Dealbreaker at once.
 
 ## Output
 
-- `quality/test-strategy.md` at the project root — the test strategy itself.
-- `quality/test-pre-read.md` — the working digest from sub-step 0. Informs but does not become part of the strategy.
+Write to `$DOCS_DIR/quality/test-strategy.md`, incrementally as ilities are agreed. Shape:
 
-## Escalation points — stop and ask the user
+```markdown
+# Test Strategy: <project> — <release>
 
-- `quality/strategy.md` is missing or incomplete (no risk map). Stop. Direct to `/quality-strategy` first.
-- The user wants to skip sub-step 2 (Principles) because "they're obvious." Push back — the principles are load-bearing for sub-steps 3 and 4. They can be tweaked, not skipped.
-- The user defers all allocation decisions to the agent ("you decide"). Push back — the two-voice exchange in sub-step 4 needs the user's evidence and judgment, not just the agent's cost estimates. If the user genuinely has no view, record that as a learning need in its own right: *"we don't have evidence about what's cheap for humans vs agents on this codebase — that's a calibration item."*
-- The user wants to merge the test strategy into `quality/strategy.md` as an appendix. Honour the request, but flag the trade-off: a separate file is easier to revise on its own, and allocation re-rating happens far more often than full strategy revision.
+*Last updated: <YYYY-MM-DD>*
+*Release: <from the quality strategy's header>*
+*Generated by the `test-strategy` skill — quality-strategy-skills (tollens-ai) v<version, read from $PLUGIN_ROOT/.claude-plugin/plugin.json at generation time> · github.com/tollens-ai/quality-strategy-skills*
+
+*A light companion to `quality/strategy.md` — high-level investigation ideas and decisions per ility, not a test plan. The five indicators in the plugin's INDICATORS.md are the bar.*
+
+## The filter — where testing makes a dent
+
+| Ility (from Part 5) | In this lane? | Why / why not |
+|---|---|---|
+
+**Fresh-eyes defect recon:** <on the table / agreed / dropped — with the user's reason if dropped>
+
+## <Ility 1 — priority order>
+
+**Have already.** <what exercises this today and what it actually tells you>
+**Could improve.** <…>
+**Could add.** <idea candidates with the question each answers>
+**Agreed next moves.** <1–3 bullets: question · answered-when (what would count as answered — a state, not a goal; for a proxy milestone, also name what remains unknown about the ility when it's satisfied) · who (human/agent) · when; or "none — deliberately deferred">
+
+## Out of the testing lane this release
+
+<the filtered-out ilities with their one-line why-nots>
+```
+
+On an update after a test cycle, archive first (`quality/archive/test-strategy-<date>.md`, never overwrite an archive), refresh the header stamp, and record a short `## Since the last cycle` section: what each prior agreed move actually taught (with the finding, or honestly *believed answered* at a confidence), and what's newly worth investigating — an update that only closes prior items has verified the past, not assessed the present.
+
+Close with the standing gates the pack shares: **invoke `/effective-comms`** on the doc before calling it final, then offer `/test-strategy-review` (the closing audit — it forward-walks the agreed moves against the five indicators), and point at the sibling lanes (`/evaluation-strategy`, `/process-strategy`) for the ilities this filter handed to them, and `/tooling-strategy` if blocked-on-tooling items accumulated.
+
+## Escalation points
+
+- The strategy's risk map is missing or every entry is `?` — stop; direct to `/quality-strategy` (or, if nothing can judge the dimensions at all, `/evaluation-strategy` first: you can only investigate what you can judge).
+- The user wants this session to write or run the tests. Capture the agreed moves, close the doc, do the work outside this skill.
+- The user asks for the full interview treatment — tiered learning needs, allocation tables, calibration cycles. Say plainly: this lane is deliberately light — high-level ideas and questions; the thoroughness lives in `/quality-strategy`, which already did the heavy work this lane stands on. If the release genuinely needs a deep investigation programme, build it *from* this doc's agreed moves, outside this skill.

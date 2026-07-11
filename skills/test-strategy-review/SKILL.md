@@ -1,335 +1,52 @@
 ---
 name: test-strategy-review
-description: Audit a test strategy document. Asks "will executing this strategy move the quality strategy in the right direction with the right priority?" by walking forward execution as the primary lens, with mechanical oracle checks as backstop. Use after /test-strategy completes, or to audit an existing quality/test-strategy.md cold.
+description: Audit a test strategy document. Asks "will carrying out these agreed moves move the quality strategy in the right direction with the right priority?" by forward-walking the moves as the primary lens, with mechanical checks as backstop. Use after /test-strategy completes, or to audit an existing quality/test-strategy.md cold.
 ---
 
 # Test Strategy Review
 
-This skill audits a test strategy document. It is the source of truth for *"is this test strategy any good?"*. Run it as the final step of `/test-strategy`, or on its own against any existing `quality/test-strategy.md`.
-
-The fundamental question is **outcome-shaped, not structure-shaped**: *"if the team executes this strategy exactly as written, does the quality strategy end up in a better place?"*
-
-The skill works in two moves — **expand, then collapse**. It is a lighter version of `/quality-strategy-review`'s three-subagent pattern, because a test strategy is a much smaller document:
-
-- **Expansion.** Two subagents run in parallel. Subagent A does the main review: a forward simulation — it walks through what would actually happen if the team executed the strategy as written. Subagent B runs mechanical oracle checks (pass/fail tests of the document's structure) as a backstop. Both are told to be aggressive — a missed problem (false negative) costs more than a false alarm (false positive).
-- **Collapse.** The main agent reads both outputs, drops findings that don't hold up, looks for findings that share a root cause, separates blockers (must fix) from flags (judgement calls), and writes one consolidated report.
+This skill audits a test strategy — the light testing lane `/test-strategy` produces. The document under review is deliberately light (a filter table plus per-ility Have / Improve / Add discussions and agreed moves), so the review is proportionate: one sealed forward-walk, a set of mechanical checks, one consolidated report. What it does *not* relax is the bar — the five indicators in `$PLUGIN_ROOT/skills/test-strategy/INDICATORS.md` (Direction / Priority / Sufficiency / Feasibility / Honesty) are predictions about what happens when the team runs the doc, and the review judges against them.
 
 ## Resolving file paths — do this first
 
 This skill is part of the `quality-strategy` plugin. Before anything else, resolve two absolute paths and use them throughout:
 
-- **PLUGIN_ROOT** — the plugin's install directory: `${CLAUDE_PLUGIN_ROOT}` (Claude Code expands this to an absolute path when it loads this file; read it off and note it down). The grounding and framework files this skill reads live under it.
-- **PROJECT_DIR** — the absolute path of the project whose test strategy you're reviewing (normally the current working directory; confirm with the user if it's ambiguous). The strategy docs live under `$PROJECT_DIR/quality/`.
+- **PLUGIN_ROOT** — the plugin's install directory: `${CLAUDE_PLUGIN_ROOT}` (Claude Code expands this to an absolute path when it loads this file; read it off and note it down). The grounding files this skill reads live under it.
+- **PROJECT_DIR** — the absolute path of the project whose test strategy you're reviewing (normally the current working directory; confirm with the user if it's ambiguous). The strategy docs normally live under `$PROJECT_DIR/quality/` — but `/quality-strategy` asks at session start where the strategy should be saved, so they may live elsewhere. If `$PROJECT_DIR/quality/` is absent, get the docs home instead of assuming: from the orchestrator's brief when this skill was dispatched, else by asking the user; if the path you're given ends in `/quality`, its parent is the home. From then on treat `$PROJECT_DIR` as that docs home wherever a path below says `$PROJECT_DIR/quality/...` — one substitution, made once, before you act on any path.
 
-File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **Substitute the resolved absolute paths before you act on them** — both when you Read a file yourself and when you put a path into a subagent brief. The Read tool does no variable expansion and resolves relative paths against the current working directory, not this skill's directory; a dispatched subagent inherits none of your context. So an unsubstituted placeholder or a bare relative path will fail — always pass fully-resolved absolute paths.
+File references below use the `$PLUGIN_ROOT` and `$PROJECT_DIR` placeholders. **Substitute the resolved absolute paths before you act on them** — both when you Read a file yourself and when you put a path into a subagent brief; a dispatched subagent inherits none of your context.
 
 ## Before you start
 
-Read the following (all under `$PLUGIN_ROOT`):
-
-- `$PLUGIN_ROOT/PHILOSOPHY.md` — the framework grounding.
-- `$PLUGIN_ROOT/skills/test-strategy/FRAMINGS.md` — the eleven anti-default framings that shape what a good test strategy looks like.
-- `$PLUGIN_ROOT/skills/test-strategy/INDICATORS.md` — the five outcome-oriented indicators (Direction / Priority / Sufficiency / Feasibility / Honesty) plus the mechanical oracle list.
-
-## What you need
-
-Two docs:
-
-- `quality/strategy.md` — the quality strategy. You review the test strategy *against* it; without it there is nothing to compare to.
-- `quality/test-strategy.md` — the test strategy being reviewed.
-
-If either is missing, stop:
-- No strategy: *"There's no quality strategy to review the test strategy against. Run `/quality-strategy` first."*
-- No test strategy: *"There's no test strategy to review. Run `/test-strategy` first."*
-
-If `quality/test-pre-read.md` exists, read its inventory and discrepancies sections. If the pre-read found something the test strategy ignored, that is itself a review finding.
-
-If `quality/archive/` holds prior versions of the test strategy (files whose names start with `test-strategy-`), the newest may be the instrument for a **revision review**: subagent B diffs it against the current doc (check 14) rather than trusting the update's own account of what changed. An archive alone does not make the doc an update — fresh-replace and new-release runs archive too; check 14 detects which this is.
+Read `$PLUGIN_ROOT/PHILOSOPHY.md`, `$PLUGIN_ROOT/skills/test-strategy/FRAMINGS.md`, and `$PLUGIN_ROOT/skills/test-strategy/INDICATORS.md`. If `$PROJECT_DIR/quality/test-strategy.md` doesn't exist, tell the user: *"There's no test strategy to review. Run `/test-strategy` first."* You also need `$PROJECT_DIR/quality/strategy.md` — the review is relative to the quality strategy the doc claims to serve; without it you can only check internal consistency, and you say so plainly.
 
 ## The work, in order
 
 ### 1. Read both docs
 
-Read `quality/strategy.md` (especially Parts 3, 4, 5, 6, 7) and `quality/test-strategy.md` end-to-end.
+Read `$PROJECT_DIR/quality/test-strategy.md` and `$PROJECT_DIR/quality/strategy.md` (Parts 3–6 at minimum) end-to-end. Note the release each names — a test strategy stamped for a different release than the quality strategy it cites is a finding, not a detail. If `quality/archive/` holds prior `test-strategy-*` versions, the newest is the diff instrument for check 8.
 
-Note every place the test strategy claims to address the strategy: each learning need (a question the testing must answer) and its risk-map reference, each allocation row (who or what does each piece of work) and its reasoning, each "what we're not testing" entry and its source reference. The simulation subagent will walk these traces.
+### 2. The forward walk (sealed dispatch — the primary lens)
 
-### 2. Dispatch two review subagents in parallel
+Dispatch one subagent (the `Agent` tool, general-purpose), sealed from your conclusions, with the resolved absolute paths of both docs and `$PLUGIN_ROOT`'s PHILOSOPHY / FRAMINGS / INDICATORS in its brief. Its job: **simulate carrying out the agreed moves exactly as written**, in order, and predict what comes back. After each move: what question got answered, what does Part 6's risk map look like now — which Unknowns became known, which confidences moved? Then judge the whole doc against the five indicators, aggressively (flag freely; the main agent filters): Direction (every kept ility and move traces to a risk-map row; nothing targets a None or non-goal), Priority (Dealbreaker-linked first; cheap-first within impact), Sufficiency (every H/M ility has a filter verdict; every Dealbreaker addressed by some lane or eyes-open declined; the fresh-eyes recon on the table or reason-recorded), Feasibility (each move concrete: question, answered-when state, who runs it, sane human/agent split), Honesty (guesses marked as guesses; "what the tests actually tell you" not proxy comfort). It returns findings with quotes and locations.
 
-Use the `Agent` tool with two calls in a single message.
+### 3. Mechanical checks (main agent)
 
-#### Subagent A — Forward simulation
+Run these yourself against the doc on disk:
 
-> You are subagent A, running a forward-simulation review of a test strategy. **The fundamental question is outcome-shaped:** *"if the team executes this strategy exactly as written, does the quality strategy end up in a better place — moved in the right direction, with the right priority, with reasonable efficiency?"*
->
-> You walk forward through execution. You don't audit document shape; you predict what would happen.
->
-> Be aggressive. A missed problem (false negative) is worse than a false alarm (false positive) — the main agent will filter your output. If you can imagine a way execution would stall, produce wrong information, or finish without moving the strategy, surface it.
->
-> First, read these files:
-> - `$PLUGIN_ROOT/PHILOSOPHY.md`
-> - `$PLUGIN_ROOT/skills/test-strategy/FRAMINGS.md`
-> - `$PLUGIN_ROOT/skills/test-strategy/INDICATORS.md`
-> - `$PLUGIN_ROOT/skills/test-strategy/SKILL.md`
->
-> Then read both docs:
-> - `$PROJECT_DIR/quality/strategy.md`
-> - `$PROJECT_DIR/quality/test-strategy.md`
-> - `$PROJECT_DIR/quality/test-pre-read.md` (if it exists)
->
-> ### The simulation
->
-> Walk forward as if the team executes the strategy exactly as written. Tier by tier:
->
-> 1. **Tier 1.** What questions get answered? Apply the methods. What information would come back? After Tier 1 completes, what does the quality strategy's Part 6 (Risk Map) look like — which `?` entries become known, which confidences change? Does the team now have what it needs to make the next decision (Tier 2 vs pivot)?
->
-> 2. **Tier 2.** Same walk. Does Tier 2's investigation depend on Tier 1's results? If so, does the strategy say so? If Tier 1's results would change Tier 2's plan, the strategy must leave room for that.
->
-> 3. **Tier 3+.** Same walk. By the time this finishes, is the quality strategy meaningfully advanced? Are stakeholders' Dealbreakers either resolved or visibly progressed? Are H/M-rated dimensions either resolved or explicitly punted?
->
-> 4. **Calibration cycle.** Walk what happens to the calibration items. After the first cycle, does the team have data to re-rate allocation? Are the calibration triggers in the update protocol actually triggered by what the strategy planned to do?
->
-> ### Apply the five indicators during simulation
->
-> For each indicator, decide **STRONG / MEDIUM / WEAK** based on what the simulation revealed. Quote specific learning needs, allocation rows, or update-protocol entries as evidence.
->
-> 1. **Direction.** Does every investigation move the strategy? Quote any learning need that doesn't trace to a Part 6 row, or that targets something the strategy says doesn't matter.
->
-> 2. **Priority.** Are first things first? Tier 1 should hold the highest-impact unknowns. Within tiers, cheap-first. If a Tier-1 item is genuinely lower-impact than a Tier-2 item, surface it.
->
-> 3. **Sufficiency.** Does the strategy actually close what needs closing? List any H/M dimension or Dealbreaker that the strategy doesn't address — silent gaps especially.
->
-> 4. **Feasibility.** Can the strategy be executed? Identify any method too vague to act on, exit criterion phrased as a goal not a state, or allocation that misuses the agent's strengths (e.g. agent on judgement-heavy work, human on exhaustive-checking work).
->
-> 5. **Honesty.** Is uncertainty preserved? Flag all-high-confidence allocation, all-unknown allocation, vague calibration items, or theatrical non-targets.
->
-> ### Cross-cutting consistency (folded in)
->
-> While walking, also check: does the test strategy contradict the quality strategy anywhere? Examples:
-> - Test strategy plans investigation in an area the strategy's Part 4 says is a non-goal.
-> - Test strategy treats a dimension as priority that the strategy rated None, deferred as "aware, not investing this release", or listed as a non-goal.
-> - Allocation honours principle 6 (automate repeatable, humanise judgmental) — judgement-heavy items don't go to agents alone, repeatable mechanical items don't go to humans alone.
-> - Calibration triggers in update protocol match calibration items in allocation.
-> - Voice consistent across sections (sign of a strategy not rushed).
->
-> Surface contradictions as separate findings, tagged with which part of the strategy is in conflict.
->
-> ### Output format
->
-> ```
-> ## Forward simulation
->
-> ### Tier-by-tier walk
->
-> **Tier 1.** [What gets answered. What the risk map looks like after. What the next decision is. Stalls / wrong-info / wasted-effort identified.]
->
-> **Tier 2.** [Same.]
->
-> ... (continue for each tier and the calibration cycle)
->
-> ### Five indicators
->
-> | Indicator | Strength | Evidence |
-> |---|---|---|
-> | Direction | Strong/Medium/Weak | [quoted evidence + one-line judgement] |
-> | Priority | … | … |
-> | Sufficiency | … | … |
-> | Feasibility | … | … |
-> | Honesty | … | … |
->
-> ### Cross-cutting consistency findings
->
-> - [list of contradictions, alignment issues, or coherence problems]
->
-> ### Headline judgement
->
-> [Two-three sentences: would executing this strategy move the quality strategy meaningfully forward? Where would it succeed, where would it fail?]
-> ```
+> 1. **Filter-table coverage.** Every H/M ility from the quality strategy's Part 5 appears in the filter table with a verdict (in this lane / named sibling lane / out, with reason). A silently absent H/M ility is a FAIL.
+> 2. **Dealbreaker coverage.** Every Part 3 Dealbreaker is addressed by an agreed move here, explicitly handed to a named sibling lane, or explicitly declined eyes-open with a reason. FAIL only a Dealbreaker with none of the three — a dealbreaker ility may legitimately also carry deferred lower-priority ideas; that alone is not a violation.
+> 3. **Fresh-eyes recon disposition.** The standing fresh-eyes defect recon is agreed, on the table, or dropped **with the user's recorded reason**. Silently absent is a FAIL; its briefs, if agreed, must be stated blind to the strategy.
+> 4. **Proxy milestones are labelled and bounded.** An agreed move's "answered when" may cite a proxy milestone (coverage %, green CI, review-per-change in place) — proxy goals are legitimate (FRAMINGS #8) — but only when the move states what remains unknown about the ility when the proxy is satisfied; that statement is what labels it a proxy. FLAG an answered-when that treats proxy satisfaction as the ility achieved (no what-remains-unknown stated) — not the mere presence of a proxy milestone.
+> 5. **Header stamps.** The header carries the release (matching the quality strategy's `*Release:*` line) and the version stamp with a resolved version (a literal `<version>` placeholder is a FLAG; the stamp itself is deliberate attribution — never strip it).
+> 6. **Independence preserved.** Nothing in the doc suggests the strategy was derived from reading the product's source (FRAMINGS #3) — e.g. moves justified by source-file internals no conversation or strategy section carries. FLAG with the quote.
+> 7. **Claimed audits have evidence.** `/test-strategy` no longer runs a mandatory tooling audit, but if the doc *claims* a `/tooling-adequacy` (or other) audit ran, its output must exist where claimed (`quality/.scratch/` or conversation record). A claimed-but-absent audit is a FAIL — fabrication signal.
+> 8. **Update integrity (updated test strategies only).** Detect an update: the doc's own `## Since the last cycle` section, or a diff against the newest `quality/archive/test-strategy-*` showing substantial carried-over content (an archive alone is NOT the signal — fresh runs archive too). An update by diff with no `## Since the last cycle` section is a FAIL — a silent revision. If you cannot read the filesystem, report INCONCLUSIVE, never PASS on faith. For a detected update, **diff, don't trust**: (a) every prior agreed move carries a what-happened verdict, and every "answered/closed" cites the finding or is honestly *believed answered* at a stated confidence — an unevidenced closure is a FAIL; (b) the update contains genuinely new content not derivable from the prior doc — a closures-only diff is the **anchoring signature**, a FAIL ("the gaps have moved; verifying the past is not assessing the present"); a recorded note that nothing relevantly changed stands in as n/a. FLAG a `## Since the last cycle` section with no prior version in `quality/archive/` — the producer archives before revising, so a missing archive means history was silently rewritten.
+> 9. **No process-note / scaffolding leak.** The port of `/quality-strategy-review`'s check 21. Run an actual grep-style scan over the **whole** doc, **including content inherited from a prior version** (exactly what earlier passes never re-saw). The body must be clean of process/provenance/lineage artifacts — they belong in `quality/.scratch/` or `.skill-feedback.md`. FLAG any that leaked (a doc peppered with individually-minor instances still FLAGs), and note the producer must **remove** them before the doc is done — a strip, not a note. Patterns: **(i)** first-person-about-the-skill commentary ("this step was awkward", "the skill asked me to…"); **(ii)** dispatch/scratch/sealed-pass narration ("[ran `/tooling-adequacy` inline]", "Subagent dispatched: …", "scratch would be `quality/.scratch/…`") — keep the decision, drop the mechanism; **(iii)** turn/step lineage refs ("corrected, turn-23", "folded in from the filter step") — cross-references to the doc's own named sections are fine, references to the process that built it are not; **(iv)** scratch-file path citations as sources — cite the real underlying source (the risk-map row, the named finding) or drop it. Two exemptions: a `## Since the last cycle` section is content, not machinery; the header version stamp is deliberate attribution — leave both.
+> 10. **Effective Comms backstop.** The producer runs `/effective-comms` before finalizing; this catches the reader-facing modes the leak scan doesn't: **(i)** numbered references without meaning (a row/ility cited only by ID); **(ii)** coordinate-before-name (a path or label leading where a human-readable name should); **(iii)** buried recommendation — the doc's "do this next" hard to find when actionability is its job. FLAG with a one-line "name it / lead with the name / surface the action".
 
-#### Subagent B — Mechanical oracle
+**Severity:** FAIL on checks 1–3, 7, and 8 is a blocker; the rest are flags.
 
-> You are subagent B, running mechanical oracle checks against a test strategy. **You are a backstop**, not the primary line of defence — the writing process should already have enforced these via per-sub-step DONE checklists. Your job is to verify nothing slipped through.
->
-> Be aggressive. A missed problem (false negative) is worse than a false alarm (false positive) — the main agent will filter your output.
->
-> **Meta-flag.** If you find an oracle check failing, that's also evidence the per-sub-step DONE checklist for the relevant sub-step was not enforced. When you flag a failure, note: *"this should have been caught in sub-step N's DONE, but wasn't."*
->
-> First, read these files:
-> - `$PLUGIN_ROOT/PHILOSOPHY.md`
-> - `$PLUGIN_ROOT/skills/test-strategy/INDICATORS.md`
-> - `$PLUGIN_ROOT/skills/test-strategy/SKILL.md`
->
-> Then read:
-> - `$PROJECT_DIR/quality/strategy.md`
-> - `$PROJECT_DIR/quality/test-strategy.md`
-> - `$PROJECT_DIR/quality/test-pre-read.md` (if it exists)
->
-> Run the twelve oracle checks defined in INDICATORS.md (the "Mechanical oracle checks" section), plus checks 13–15 below. For each, classify as **PASS / FLAG / FAIL** and write one line of explanation. For FLAGs and FAILs, include a one-line "what to fix" plus the meta-note about which sub-step's DONE should have caught this.
->
-> The twelve checks (see INDICATORS.md for full text):
->
-> 1. Five-field learning needs.
-> 2. Risk-map coverage (every H/M dimension addressed).
-> 3. Dealbreaker prioritisation (every Dealbreaker is *addressed by* ≥1 Tier 1 or Tier 2 learning need — see INDICATORS.md check 3 for the exact rule). The check is satisfied when each Dealbreaker has at least one Tier-1/2 need covering its dealbreaker-critical aspect; it does **not** require that *every* need touching a dealbreaker dimension sit in Tier 1/2. A dealbreaker dimension may legitimately also carry lower-tier needs (e.g. a survivable-degradation half in Tier 3) — that is not a violation. FAIL only a Dealbreaker with *no* Tier-1/2 need addressing it.
-> 4. Allocation confidence variation (≥1 row below high, or explicit reasoning for all-high).
-> 5. Agent rows have review patterns.
-> 6. No proxy goals as targets.
-> 7. Update protocol concrete (≥3 trigger types, owners assigned).
-> 8. Non-targets explicit (≥1 with reason). FLAG a non-target whose only reason is the current state of the test infrastructure ("the harness doesn't exercise X") rather than a deliberate decision traced to a risk-map row or non-goal — that is status-quo bias, and something a stated goal demands but the tooling can't reach yet is a *blocked learning need*, not a non-target.
-> 9. Pre-read sources cited.
-> 10. Independence preserved (no source code files in pre-read).
-> 11. Calibration ↔ update protocol alignment.
-> 12. Open questions consolidated.
-> 13. **Scratch-file audit.** The Q2 tooling-and-oracle check is a sealed-context dispatch (`/tooling-adequacy`, invoked after learning needs). **Audit the required dispatch, not merely a claimed one** — derive the requirement from the strategy's *structure*, not from whether the doc narrates the check: if the test strategy HAS learning needs, the Q2 `/tooling-adequacy` dispatch was REQUIRED, so verify its scratch file exists at `$PROJECT_DIR/quality/.scratch/3.5-tooling-adequacy.md`. A missing scratch file is a FAIL whether or not the doc claims the check ran — hard evidence the Q2 dispatch was fabricated or silently skipped. An empty/stub scratch file is a FLAG (audit theatre). (The test strategy is a single linear flow with no step-boundary contradiction dispatches, so there is no boundary-check requirement to audit here.)
-> 14. **Revision integrity (updated test strategies only).** First detect whether this doc is an *update* of an archived prior version. The signal is the doc's own `## Since the last cycle` section — or, if that section is missing, a diff against the newest prior version under `$PROJECT_DIR/quality/archive/` (files whose names start with `test-strategy-`) showing substantial carried-over content (same release, sections inherited largely unchanged). An archive alone is NOT the signal — fresh-replace and new-release runs archive too, and a genuinely fresh doc makes this check PASS (n/a). A doc that IS an update by diff but has no `## Since the last cycle` section is itself a FAIL — a silent revision. If you cannot access the filesystem to read `quality/archive/`, report INCONCLUSIVE — never PASS on faith. For a detected update — the rationale: *an update anchored on last time verifies the past instead of assessing the present; the gaps have moved* — **diff, don't trust**: the diff is your instrument; the update's own account of what changed is a claim to verify against it, not a source. Check two things. **(a) Look-back integrity** — each Tier-1/2 learning need and low-confidence allocation row in the *prior* version carries a what-happened verdict (answered / still open / overtaken), and every "answered" or "closed" claim cites the finding that answered it, or is honestly marked *believed answered* at a stated confidence. An unevidenced "answered" is a FAIL — a closure claim needs grounding exactly as a learning need's exit criterion does. **(b) Look-forward presence** — the update contains genuinely new content not derivable from the prior doc: learning needs born from what changed since the last cycle (derived and tiered, not just listed), re-ratings driven by real cost data. An update whose diff shows only closures of prior items is the **anchoring signature** — treat "zero new learning needs" with the same suspicion as an all-high-confidence allocation: FAIL on a closures-only diff; FLAG when new content exists but is thin relative to how much the project changed. A recorded note that the what's-new scan credibly came back empty, or that the edit made no claim about the project's current state, stands in — n/a, not a FAIL. Also FLAG if the doc carries a `## Since the last cycle` section but `quality/archive/` holds no prior version — the producer archives before revising, so a missing archive means history was silently rewritten.
->
-> 15. **No process-note / scaffolding leak.** This is the test-strategy leg's port of `/quality-strategy-review`'s check 21 — the same leak backstop the quality-strategy leg carries, so a scaffolding leak in a *test* strategy doesn't survive the skill's own audit. Run an actual grep-style scan over the **whole** `test-strategy.md`, **including any content inherited from a prior version in an update or resumption run** — that inherited content is exactly what the per-sub-step DONE checks never re-saw. The strategy body must be clean of process / provenance / lineage artifacts: they belong in `quality/.scratch/` or `.skill-feedback.md`, never in `quality/test-strategy.md`. FLAG any that leaked in — flag even when each instance is individually minor (a doc peppered with them still FLAGs) — and note that the producer must **remove** what this surfaces before the doc is declared done (this check is a strip, not just a note). The patterns:
->     - **(i) first-person-about-the-skill commentary** — "this sub-step was awkward", "the skill asked me to…".
->     - **(ii) dispatch / scratch / sealed-pass narration** — "[ran `/tooling-adequacy` inline]", "Subagent dispatched: …", "the sealed dispatch returned…", "scratch would be `quality/.scratch/…`". Keep the *decision* — the learning need, its tier, the allocation row — but the *mechanism* that produced it must be gone.
->     - **(iii) sub-step / turn lineage references** — both *turn* refs ("corrected, turn-23", "the turn-22 exchange") and *sub-step-number* refs ("split out at sub-step 3", "folded in from sub-step 4", "the 3.5 dispatch surfaced this"). Cross-references to the doc's own named sections ("see the allocation table", "the Tier-1 needs above") are fine; references to the *process* that built it are not.
->     - **(iv) scratch-file path citations** — a `quality/.scratch/<…>.md` path listed in a "Sources consulted" block, or as what a learning need or allocation row "rests on". Cite the real underlying source instead (the risk-map row, the named file, the tooling-adequacy *finding*) or drop it — `.scratch/` is working state the reader does not have. A transient `.scratch/3.x-…` path in a "Sources consulted" line is exactly what this catches.
->
-> Two exemptions: (1) a `## Since the last cycle` section is content, not machinery — its what-happened verdicts and newly-found needs compare the project against its prior strategy, which the reader wants; leave it. (2) The header **version stamp** (`*Generated by the test-strategy skill — quality-strategy-skills (tollens-ai) v<version> · …*`) is deliberate provenance attribution, like a document footer — it is what lets a bug report trace back to the skill version that generated the doc. Leave it intact; do not strip it as a scaffolding leak. (A still-unresolved literal `<version>` placeholder, however, *is* a flag.)
->
-> 16. **Effective Comms backstop.** The `/test-strategy` skill runs an `/effective-comms` pass before finalizing; this is the review's backstop for the reader-facing failure modes check 15's leak scan does *not* cover — the ways a correct test strategy still fails to land with the engineer who must act on it. Scan the whole doc for: **(i) numbered references without meaning** — a learning need / risk-map row / dimension referenced only by number or ID where the reader cannot tell what it is about; **(ii) coordinate-before-name** — a file path or internal label leading where a human-readable name should; **(iii) buried recommendation / unclear next action** — the strategy's "so what — do this next" is hard to find, when actionability is part of its job. FLAG any found, with a one-line "name it / lead with the name / surface the action." (Check 15 already covers hidden-context and process-history leakage; this adds the reader-legibility modes ECS guards. Severity: FLAG, matching check 15 — the producer should have caught these in its Effective Comms pass.)
->
-> **Severity:** FAIL on checks 1–3, 13, and 14 is a blocker. The rest — including check 15's leak FLAGs and check 16's Effective Comms FLAGs — are flags (matching the quality-strategy leg, where the equivalent leak scan is FLAG-severity).
->
-> Output format: a markdown list of the sixteen checks with PASS/FLAG/FAIL, one-line explanation, suggested fix where applicable, and meta-note for FAIL/FLAG cases.
+### 4. Collapse and report
 
-### 3. Collapse and filter (main agent)
-
-When both subagents return, run the collapse pass.
-
-For each finding from each subagent:
-
-- **Real and important** → surface as a review finding.
-- **Real but minor** → surface, marked low-priority.
-- **Spurious / off-base** → drop. **Note dropped findings briefly** so the user can spot if you over-filtered.
-
-Three guidelines:
-
-1. **Trust subagents but verify.** A simulation finding that says *"Tier 1 won't actually answer the existential question because methods are too vague"* is worth surfacing; one that says *"section is a bit dry"* probably isn't.
-
-2. **Look for compounding patterns.** A WEAK on Direction + a WEAK on Sufficiency + multiple oracle FAILs on risk-map coverage all point at the same root cause — the strategy isn't grounded in the risk map. Surface the pattern, not just the individual findings.
-
-3. **Distinguish blockers from flags.** Some findings should block declaring the strategy done. Others are judgement calls.
-
-#### Severity rules
-
-**Blockers** (must fix before declaring strategy done):
-
-- Oracle FAIL on checks 1–3 (five-field learning needs / risk-map coverage / Dealbreaker prioritisation), check 13 (missing scratch file for the required Q2 dispatch when the strategy has learning needs — a fabrication or silent-skip signal, whether or not the doc claims the check ran), or check 14 (an unevidenced "answered" claim, or an update whose diff against the archived prior version shows only closures — it verified the past instead of assessing the present).
-- Forward simulation reveals execution would *not* meaningfully advance the strategy.
-- Hard contradiction between test strategy and quality strategy (e.g. Tier-1 investigation of something the strategy says is a non-goal).
-- Any indicator rated WEAK with concrete evidence the team would not be able to act on the strategy as written.
-
-**Flags** (judgement — review and decide):
-
-- Oracle FLAGs (borderline structural results).
-- Indicators rated MEDIUM or borderline-WEAK.
-- Cross-cutting consistency findings that aren't outright contradictions.
-- Compounding patterns across multiple medium findings.
-
-### 4. Produce the report
-
-**Write every finding for both readers — names before coordinates** (PHILOSOPHY: *write for both readers*). A review is read by people who don't have the test strategy open and may not have written it. Every blocker and flag must be self-contained: at first mention of any doc element, give its human name and a few words of what it is, with the label as a trailing pointer — *"the sync-under-flaky-connectivity learning need (T1-3)"*, not *"T1-3"*. A bare coordinate or tier number is never the subject of a sentence. Gloss framework vocabulary (*"blocked on tooling"*, *"calibration trigger"*) in plain English on first use. The test for each finding: could a teammate who never wrote this strategy act on it without opening the doc to decode references? And keep the prose **plain** (PHILOSOPHY: *say it plainly*): short words, active verbs, one idea per sentence; framework terms glossed, everything else everyday English.
-
-Write the consolidated report and surface it in the conversation. Format:
-
-```markdown
-# Test Strategy Review for <project>
-
-*Reviewed <YYYY-MM-DD>*
-
-## Headline
-
-<2-3 sentences: would executing this strategy move the quality strategy in the right direction with the right priority? Where would it succeed, where would it fail?>
-
-## Blockers (must fix before declaring strategy done)
-
-- **<blocker title>** — <one or two lines describing the issue>. Suggested fix: <…>.
-
-(Or "None.")
-
-## Flags (judgement — review and decide)
-
-- **<flag title>** — <one or two lines>. Why it matters: <…>. Suggested action: <…>.
-
-## The five indicators
-
-| Indicator | Strength | Note |
-|---|---|---|
-| Direction | Strong/Medium/Weak | <one-line> |
-| Priority | … | … |
-| Sufficiency | … | … |
-| Feasibility | … | … |
-| Honesty | … | … |
-
-## Forward simulation summary
-
-<3-5 lines: what would happen tier by tier if the team executes this. Where would it succeed; where would it stall.>
-
-## What's strong
-
-- <3-5 concrete things this strategy does well>
-
-## What's weak
-
-- <3-5 concrete things to improve, prioritised>
-
-## Filtered out
-
-<bullets of subagent findings the main agent dropped as spurious or trivial, with brief reasoning. Lets the user spot over-filtering.>
-
----
-
-*If you want the full unfiltered subagent outputs for reference, they are available below.*
-
-<details>
-<summary>Subagent A (forward simulation) full output</summary>
-…
-</details>
-
-<details>
-<summary>Subagent B (oracle) full output</summary>
-…
-</details>
-```
-
-### 5. Offer walkthrough
-
-After the report, ask the user:
-
-> *"Want to walk through the blockers and flags one at a time, or are you good to take it from here?"*
-
-If walkthrough: go through each blocker and flag in order. For each, dig in if needed, suggest concrete fixes, and capture the user's decision.
-
-For blockers, the usual fix is to re-run the relevant `/test-strategy` sub-step in revision mode (b — revisit specific sub-steps).
-
-## Push back when
-
-- The user wants to skip fixing a blocker. *"That blocker is one of the things that makes this strategy actually load-bearing. Skip it and you get a strategy that looks complete but won't move the quality strategy when the team executes it."*
-- The user dismisses all flags without examining them. *"There were N flags — let's at least walk through them before closing out."*
-- The user wants to mark a clearly-WEAK indicator as resolved without changes. *"What specifically is going to be different now that you've thought about it? Without a change to the doc, the next person reading it will hit the same problem."*
-- The user resists the forward-simulation framing ("can't really know what would happen"). *"The simulation isn't a prediction with confidence — it's a structured way to find places where execution would stall. Surfacing those places now is cheap; finding them mid-execution costs cycles."*
-
-## This skill is DONE when
-
-- [ ] Two subagents have been dispatched in parallel and returned findings.
-- [ ] The main agent has run the collapse pass and produced a consolidated report.
-- [ ] The report has been shared with the user.
-- [ ] All blockers have been resolved (typically by re-running the relevant `/test-strategy` sub-step).
-- [ ] The user has reviewed flags and either resolved them or actively confirmed they're acceptable as-is.
-
-## Output
-
-Share the consolidated review report in the conversation. By default, don't write it to a file. If the user wants it saved, write to `quality/test-strategy-review-<YYYY-MM-DD>.md`.
-
-If the strategy passes (no unresolved blockers, flags reviewed), confirm:
-
-> *"Test strategy review passed. The strategy is ready to execute. Start with Tier 1 — the cheapest unknown is [reference]. After Tier 1 completes, run `/test-strategy` revision mode (c) to update allocation and risk-map references."*
-
-If the strategy's blocked-on-tooling section is non-empty, also point at **`/tooling-strategy`** (run it now if it hasn't run yet; re-run it if it ran before this test strategy, so the build plan picks up what the test strategy now asks for) — execution can start on the tiers that are already answerable while the builds land.
-
-If `/test-strategy` itself invoked this review, hand control back with a clear status: passed, or what work remains.
+Merge the forward-walk findings with the mechanical results: drop false or trivial findings, group shared root causes, split **blockers** (the doc would steer the team wrong or claims things that didn't happen) from **flags** (worth fixing, not blocking). Produce one consolidated report: the forward-walk's headline prediction (*"run as written, here's where the risk map lands"*), then per-indicator verdicts with quotes, then the mechanical checklist with PASS/FLAG/FAIL and one-line fixes. End with the two or three changes that would most improve what running the strategy produces. Offer to walk the user through any finding.
