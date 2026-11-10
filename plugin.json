@@ -1,0 +1,39 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "quality-strategy",
+  "version": "0.5.0",
+  "description": "Modular quality strategy: project context, stakeholder deepdives, release priorities and the strategy written up with a section per priority, then one priority at a time, with interviews, focused reviews, and reports.",
+  "author": {
+    "name": "Yanqing Cheng"
+  },
+  "homepage": "https://github.com/tollens-ai/quality-strategy-skills",
+  "repository": "https://github.com/tollens-ai/quality-strategy-skills",
+  "license": "MIT OR Apache-2.0",
+  "keywords": [
+    "quality",
+    "quality-strategy",
+    "quality-interview",
+    "testing",
+    "quality-engineering",
+    "quality-report",
+    "pre-read",
+    "strategy-review",
+    "stakeholder-deepdive",
+    "release-quality",
+    "quality-gaps",
+    "quality-work"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Quality Strategy",
+        "shortDescription": "Make a project's quality choices explicit: who matters, what good means, what is known, and what to do next.",
+        "longDescription": "Modular quality strategy: project context, stakeholder deepdives, release priorities and the strategy written up with a section per priority, then one priority at a time, with interviews, focused reviews, and reports.",
+        "developerName": "Yanqing Cheng",
+        "category": "Developer Tools",
+        "capabilities": ["Read", "Write"],
+        "websiteURL": "https://github.com/tollens-ai/quality-strategy-skills"
+      }
+    }
+  }
+}

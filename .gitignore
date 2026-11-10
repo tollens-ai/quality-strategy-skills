@@ -5,12 +5,9 @@
 .vscode/
 .idea/
 
-# Host-side agent-harness run artifacts (ephemeral; not part of the skill pack)
-.spike-callbacks/
-*-completion-callback
-*-overnight-latest.json
+# Claude Code local state, not part of the skill pack.
+.claude/*
+!.claude/skills/
 
-# Claude Code runtime/host state (handoffs, worktrees, scheduler lock, scratch).
-# This is the agent harness's working dir, not part of the published plugin —
-# the plugin manifest lives in .claude-plugin/, which is NOT ignored.
-.claude/
+# Built directory packages (release/build-plugin-package.sh).
+release/out/

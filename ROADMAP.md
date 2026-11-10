@@ -1,32 +1,55 @@
 # Roadmap
 
-*Last updated 2026-06-11. This is the build order as we currently judge it — alpha feedback can and should reorder it. The reasoning behind the bigger calls, and what would change our minds, lives in [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md).*
+This page is written for people. The skills carry their own instructions and do not depend on this page.
 
-## Now — alpha
+## Current release — modular strategy
 
-The pack is live with its first wave of testers. The current work is exercising every skill on real projects, fixing what misfires, and holding the bar described in the README. If you're testing: the most useful thing you can do is [open an issue](https://github.com/tollens-ai/quality-strategy-skills/issues) with what you ran, what it produced, and what you expected instead.
+The full quality strategy is split into steps, each a skill: project context, a deepdive for each
+stakeholder, release priorities, and the strategy written up straight after the priorities with a
+section for each priority. Each priority can then be worked further, one at a time, with
+`priority-deepdive`.
+`quality-strategy` explains what a strategy is for and why its steps come in the order they do,
+and says which step is next. A simple strategy can go on in one session; a big one is better split
+across fresh ones.
 
-## Just shipped — `/quality-artefacts` (0.3.0)
+The pack installs and runs as a plugin in both Claude Code and Codex.
 
-The former headline "Next" item, now in the pack. A generative post-processing skill: describe the view you want ("a tweetable summary of where quality stands", "a dashboard of just the payment risks for my standup") and it designs a bespoke, self-contained SVG/HTML artefact from your strategy — honest about Unknowns (an unverifiable dimension is drawn as visibly uncharted, never painted green). The named presets — social card, multi-frame story, risk heatmap, interactive dashboard, quality radar — are worked examples, not a menu; re-run after a strategy revision and the views update with it. Worked examples live on the Fernly sample under [`examples/fernly/`](examples/fernly/). Everything stays self-contained SVG/HTML — no daemon, no service, nothing to install.
+The release incorporates corrections from the authors' own use on real projects:
 
-## Next — quality dimensions for AI / non-deterministic / agentic products
+- a short workflow question;
+- four stakeholder levels, including Ugh;
+- High, Medium, Low or None ratings for the release, given by the strategy owner after each
+  stakeholder's view of what comes first for them, in their own words;
+- visible open questions and tensions;
+- provisional work, with correction on return.
 
-*(research — top priority).* The framework needs first-class dimensions for products whose "correctness" is a metric distribution that drifts over time: eval-oracle adequacy, drift-awareness, training/serving skew. Today you'd hand-craft this part (see Known limitations in the README).
+Low-ranked work remains worthwhile and can still block a release; rankings inform human judgment.
 
-## After that
+The most recent work is about whose strategy it is. An agent can suggest a great deal, but the
+strategy has to be its owner's. The agent decides nothing for them, and follows the steps even when
+it thinks it can guess the answers. It keeps four activities apart: what good looks like, how we
+would know, how good it is now, and what to do about it.
 
-In rough priority order:
+Earlier versions of the instructions were reviewed on paper step by step and rehearsed in parts
+with simulated users. The text as it ships was trimmed after those runs: it has been read on paper
+and its fixes walked step by step, and one simulated user has been taken through it, but it has not
+yet been used by a real person. Agents differ in
+how closely they keep to the instructions; [the release notes](CHANGELOG.md#how-this-release-was-checked)
+say which agents the pack was tried with and what was checked.
 
-- **`/tooling-strategy-review`** — the audit companion for the newest strategy skill, completing the strategy/review pairing the other two strategies have.
-- **Lean-mode investigation** — whether a lighter *view* of the same rigour is possible for small jobs without quietly lowering the bar. We're probing this with validation runs before designing anything.
-- **Per-stakeholder risk-map decomposition** — the dimension-rating step already works per-stakeholder and surfaces divergence; the risk map doesn't yet.
-- **`/strategy-variants` field-hardening** — real client/team use will tell us whether the omit-never-lie discipline holds.
-- **A "progress story" artefact preset** — the before/after artefact: `/quality-artefacts` already archives the prior version of every view it refreshes, so the natural next move is a preset that renders two versions side by side — the year-over-year move, showing the gaps that closed between strategy revisions.
-- **Smaller planned skills** — `/priority-analysis` (multi-stakeholder prioritisation help), `/feedback-synthesis` (curate the `.skill-feedback.md` notes the skills jot as they run), `/pre-read` (standalone project digest).
+Known limits: a whole strategy is a long conversation, and the pack has been used by few people
+besides its authors.
 
-## What we won't do
+## Next release — an explicit default strategy
 
-- Add a daemon, a database, or a binary. The pack stays markdown skills.
-- Ship a "fast mode" that skips the thinking. Where we offer lighter ceremony it will be a lighter *view* of the same rigour, never a lower bar.
-- Grow this pack into the full end-to-end workflow. The pack stays standalone skills that you fit into your own process. The end-to-end version — agents supporting every step of quality management, with feedback loops, evidence and reporting, and release-confidence assessment — is what the Tollens product itself is for.
+Provide a provisional software quality strategy so useful actions can be proposed before full
+discovery. Pre-read, interview findings, and strategy discussion refine its assumptions, with
+their sources and how well established they are kept visible. Interview discovery remains
+independent of the defaults. The current modules can already work provisionally from supplied
+context; they do not yet supply that default strategy.
+
+## Later
+
+Real use will guide further changes, including shorter conversations, support for nondeterministic
+products, report refresh, and larger projects. The pack remains skills people fit into their own
+working practices.

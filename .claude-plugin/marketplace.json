@@ -1,25 +1,17 @@
 {
   "name": "tollens",
-  "description": "Tollens Claude Code plugins for software quality strategy and agent communication workflows.",
+  "description": "Tollens Claude Code plugin for software quality strategy.",
   "owner": {
     "name": "Yanqing Cheng"
   },
+  "allowCrossMarketplaceDependenciesOn": [
+    "tollens-effective-comms"
+  ],
   "plugins": [
     {
       "name": "quality-strategy",
       "source": ".",
-      "description": "Quality, test, and tooling strategy skills, plus shareable visual artefacts generated from them. Grounded in the Tollens quality framework."
-    },
-    {
-      "name": "effective-comms",
-      "version": "0.1.0",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/tollens-ai/effective-comms-skills.git",
-        "ref": "effective-comms--v0.1.0",
-        "sha": "0599c7f84836313c3c52ef490b39452307009379"
-      },
-      "description": "Effective communication checks for agent-written user-facing outputs — the shared communication gate quality-strategy runs before its documents are final. Canonical home: github.com/tollens-ai/effective-comms-skills."
+      "description": "Modular quality strategy: project context, stakeholder deepdives, release priorities and the strategy written up with a section per priority, then one priority at a time, with interviews, focused reviews, and reports."
     }
   ]
 }

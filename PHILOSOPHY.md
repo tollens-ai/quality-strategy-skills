@@ -1,120 +1,68 @@
-# Philosophy
+# Tollens quality philosophy
 
-The skills in this repo are facilitators for a particular way of thinking about software quality. This document is the spine. Anyone — human or agent — using the skills should read this first.
+This explains how we think about quality and why the pack works the way it does.
 
-The framework is **Edmund Pringle's**, drawing on the context-driven testing tradition (Bach, Bolton, Weinberg) — the school that holds there are no universal "best practices", only practices that fit a particular context.
+This page is written for people. The skills carry their own instructions and do not depend on this page.
+
+## There is always more you could do
+
+Given infinite time and resources, you can always make a project better quality, and all of that
+work would be useful. Real projects have finite time and resources, so someone has to choose what to
+do, in what order, and when to stop. A quality strategy is a strategy for making those decisions.
 
 ## Quality is value to someone who matters
 
-This is the foundational definition. Everything else flows from it.
+We make those decisions from what matters to the people who matter. That means finding out who they
+are, what they need, and how well the project currently serves them, before deciding what work is
+worth doing.
 
-It forces two questions every time:
+Stakeholders can be people, agents, organisations or groups, and they rarely want the same things.
+The pack looks at one stakeholder at a time, so it can go deep into that person's situation and find
+everything about quality that matters to them. That depth is what keeps something important from
+being missed. Only then does it bring the views together, which is where the trade-offs show up:
+between one person's needs, and between people.
 
-1. **Who matters?** — Whose perspective on value counts for this project, this release, this decision?
-2. **What do they value?** — Specifically, in this context, not abstractly.
+"Good" depends on the context, so the pack asks for a release: a named delivery or milestone with a
+purpose and scope. What a release is for, and who it is for, sets how good each thing has to be.
 
-Implications:
+## Four questions, in order
 
-- Quality is not a property of the product. It's a relationship between the product and a person (or agent) who cares.
-- The same product can be high quality and low quality at the same time, depending on whose perspective you take.
-- If you don't know who matters and what they value, you cannot assess quality. The word is empty.
-- A **quality dimension** is one named axis along which the product can be better or worse for someone who matters — reliability, usability, latency, data integrity, how easily an agent can orient in the code, and so on. Dimensions are the concrete handles the abstract word "value" breaks down into. Much of the work the skills facilitate is exactly this: find the dimensions that matter *here*, decide how good each one has to be, and see where you actually stand on each.
-- "We have a quality problem" usually means the context shifted. The product hasn't changed; the stakeholders or what they value have. Plan for context shifts.
+- **What does good look like?** What each stakeholder needs, and how good it must be for this
+  release.
+- **How would we know?** A way to observe it, and a way to judge what we see.
+- **How good is it now?** What the evidence supports, and how sure we are.
+- **What do we do about it?** The work worth doing, and in what order.
 
-## Testing is investigation to find out what's actually true
+These are four separate activities, and each rests on the one before. A plan made without knowing
+how good things are now is a guess about what needs doing. A measurement made before agreeing how to
+measure may answer a question nobody asked. An assessment made without knowing what good looks like
+has nothing to measure against.
 
-Testing is not the act of running a test suite. It is the act of investigating to discover what the world (or the product) actually is — as distinct from what we want it to be, or believe it to be.
+## A mix of traditions, chosen to fit
 
-Two parts:
+We take a lot from context-driven testing: the right approach depends on the project, its people and
+the release in question. We are not only that. Coverage, checklists, standards and established
+practice have their place, and some stakeholders need exactly those. Each method shows part of the
+picture and misses part. The skill is in choosing the mix that fits this project and being able to
+say why.
 
-- **Checking** — confirming that specific things work the way we expect. Mechanical, repeatable, automatable. Cheap with agents.
-- **Investigating** — discovering what's actually going on, especially in places we didn't expect. Creative, exploratory, judgment-heavy.
+Some of this is new. Agents are now users, builders, maintainers and readers of software, and what
+they need from it can differ from what people need. The pack treats them as stakeholders in their
+own right.
 
-Most teams pour almost all their effort into checking and almost none into investigation. That's the imbalance to fix, and the imbalance the agent era makes more dramatic — checking gets cheaper still, so the leverage of investigation rises.
+## People decide
 
-**Testing starts at the start.** It is not a phase at the end of a project. The first test is whether the architecture is sensible. The next is whether the requirements are coherent. By the time anyone's running code, much of the most valuable testing has already happened.
+A strategy has to be its owner's strategy. An agent can suggest a great deal, but it cannot do their
+homework for them. Ratings, evidence and checklists inform a decision; people make it. The pack
+keeps what someone actually said apart from what an agent inferred, keeps what is unknown visible
+instead of filling it in, and leaves a disagreement between stakeholders standing when nobody has
+resolved it.
 
-## Risk is danger to quality
+Helping someone think matters more than finishing the process. A conversation that stops partway and
+leaves a person with an important question to consider can be worth more than a complete strategy
+built on a wrong assumption.
 
-Risk drives where to focus. Two forms:
+## Where to go next
 
-- **Unknown risk** — we don't know enough about an area to know if its quality matches what we want. The response is investigation.
-- **Known risk** — we know the quality is below what we want. The response is acceptance or improvement.
-
-Both have costs. The economics of quality work is the trade-off between those costs and the value at stake.
-
-The most dangerous quality gaps are the ones we have *low confidence* about. A known gap can be managed. An unknown gap ambushes you.
-
-## The economics of quality work
-
-You will never have enough time to test everything, fix everything, or know everything. The whole game is getting the most quality improvement for the time and effort invested.
-
-The single most valuable skill is deciding what to work on — and you can only do that if you understand who matters, what they value, and where the danger is.
-
-Four kinds of work follow naturally:
-
-- **Testing work** removes uncertainty about *what is*. It investigates current quality on a dimension and upgrades confidence in where you actually are.
-- **Stakeholder work** removes uncertainty about *what should be*. It involves talking to stakeholders, observing users, reviewing market expectations.
-- **Fixing work** closes the gap between actual and required quality on a product dimension.
-- **Process-change work** changes the team, organisation, or workflow itself — not the product. The strategy's own working basis (see "We live in the new world" and the context it captures) is revisable: sometimes the most efficient path to the goals is changing how work gets done, not what gets built.
-
-You cannot do fixing work efficiently until you have reasonable confidence on both sides of the gap. Don't fix to a target you're guessing at. Process-change work isn't gated the same way — it targets the mechanism producing the product, not a risk-map row on the product itself.
-
-## Confidence is the through-line
-
-The output of quality work is not perfection. It is **calibrated confidence** — knowing where you are, knowing where you need to be, and knowing how sure you are about both.
-
-Three confidences a working strategy produces:
-
-1. **Shared understanding** — everyone in the team has a consistent picture of what's going on and what the others think.
-2. **Completeness** — there is a credible, written account of what needs to happen for each release to succeed, by your own definition of success.
-3. **Situational awareness** — you may not know whether you'll hit a given bar by a given date, but you always know exactly where you are.
-
-Two disciplines:
-
-- **State confidence explicitly.** Don't just state conclusions. State how confident you are. "Probably fine" is information; "fine" without qualification hides the uncertainty.
-- **Don't use spurious precision.** "87% confident" implies a calibration you don't have. Use honest, coarse-grained levels: thoroughly checked / glanced / guessing. Or High / Medium / Low.
-
-## The revelation is the product
-
-The documents matter, but they are not the point. The highest-value moment this framework can produce is a **revelation**: the user realising something matters about their project — or something is true of it — that they never articulated, and often never consciously knew they cared about. Their own goals implied it all along; the framework's job is to surface the implication and say it back to them.
-
-The marks of a real one: it follows from what the user *already said* — a stated dealbreaker, a release purpose, a bar — not from generic best practice; and the reaction it draws is recognition, not instruction. A user being told something generic nods politely. A user shown an implication of their own goals lights up.
-
-Two disciplines follow:
-
-- **Hunt for them.** The passes that read the project without the user's framing (fresh-eyes scouts, blind recon) exist partly for this — they find the things the user's own framing hides.
-- **Deliver them as moments.** A revelation buried in a consolidated table is wasted. Name it back, with its trace: *"you didn't mention X anywhere — but given what you said about Y, you'd care a lot if X failed. Does that land?"* Record the answer either way — a rejected revelation is data (usually a sharper non-goal), not a failure.
-
-## We live in the new world
-
-Agents are software's newest stakeholder *and* its newest team member. Both shifts matter, and both are now the default — not the exception.
-
-This pack takes an opinionated stance: **the new world is the default world**. Every project covered by this skill is assumed to have agent stakeholders unless the user can articulate a specific reason why not. If you don't have agents using your product, agents working in your codebase, or agents reading your docs and integrating against your API today, you almost certainly will soon — and the strategy you produce now should anticipate that, not retrofit when it bites.
-
-- **Agents as stakeholders.** An agent consuming your API doesn't care about UI usability. It cares intensely about consistency, predictability, and documentation quality. If your stakeholder list says "users" and stops there, you're missing the agents who use, integrate with, or maintain the product.
-- **Agents as team members.** Agents have radically different cost and time profiles than humans. Things "not worth testing" under human cost constraints may be trivially worth it for agents. Things humans naturally do — record context, notice weirdness, ask clarifying questions — agents don't, unless explicitly designed to.
-- **Old-world bias is real.** "Readability" historically means "can a new engineer follow this?" In a small team where everyone knows the codebase, that's low priority. In a team with an army of Claude instances reading and writing the codebase daily, readability becomes "can an agent orient in this code?" — and it goes from low to high without the dimension changing names. Many quality dimensions need this kind of re-reading when agents are first-class participants.
-
-The skills in this repo treat agents as first-class throughout. When you're answering an interview question, the answer for human stakeholders may differ from the answer for agent stakeholders. Both matter, and both are required.
-
-If you're convinced your project is genuinely an old-world exception (no agents using it, no agents working on it, none coming), the skill will ask you to articulate why — and push back. The default is the new world.
-
-## Disciplines that recur in every skill
-
-These rules apply throughout, not at any single point. Every skill in this repo enforces them.
-
-- **Interview, don't infer.** Pre-read what's obvious in the project (README, recent commits, docs) and surface it as a hypothesis to confirm. Never assume the load-bearing inputs — who matters, what they value, what's a non-goal, where the team will accept risk. The most important inputs cannot be guessed from a repo and would be guessed wrongly.
-- **Ask rather than guess.** Where a human would pause and ask, an agent fills in a plausible answer and proceeds. If you find yourself filling in an answer the user hasn't given, stop and ask. Asking is cheap; cascading wrong assumptions are expensive.
-- **Record assumptions explicitly.** Whenever you proceed on something the user hasn't confirmed, write the assumption down alongside the conclusion that depends on it. Silent assumptions are invisible until something breaks; explicit ones can be challenged.
-- **Understand the why before you act.** Knowing what a stakeholder wants is half the work. Knowing why they want it is the rest. The same stated requirement can lead to very different responses depending on the underlying motivation. Don't accept "we need 99.9% uptime" without asking why.
-- **Make confidence visible.** Every assessment — every rating, every gap, every required level — carries an explicit confidence rating. Use coarse honest levels: High / Medium / Low, or *thoroughly checked* / *glanced* / *guessing*. Never percentages. Pseudo-precision implies investigation that wasn't done, and creates false comfort.
-- **Push back when something is vague — ask for precision, never invent it.** "Make it work" is not a stakeholder requirement. "Performance is high" is not a quality dimension rating. The skill's job is to keep digging until the answer is precise enough to be checked, challenged, and corrected — and the digging is done by *asking*, never by resolving the ambiguity yourself. When a stated bar could mean once or every time, a little or a lot, ask: *when? how often? to what extent?* A specific reading the user never gave is an invented fact wearing the user's voice — the strategy then guards the wrong bar with full confidence.
-- **Make non-goals explicit.** Everything cannot be a priority. Naming what you are deliberately not doing is half the job. A strategy with no non-goals hasn't been thought through.
-- **Say it plainly.** The framework's own terms — oracle, proxy, quality instrument (the oracle-or-proxy umbrella), instrument, dimension, risk map, learning need, Dealbreaker — are defined jargon: keep them, and gloss each on first use in any document or conversation. Everything else is everyday English: the short word over the long one, the active verb over the nominalisation, the concrete example over the abstraction — *"find out whether anyone can install it"* beats *"validate installation functionality."* If a sentence would make a developer who has never read a testing book reach for a dictionary, rewrite it. This applies to the skills' own files too: they set the register their outputs imitate — plainness in, plainness out.
-- **Write for both readers — names before coordinates.** Everything the skills produce is read by two audiences: humans and agents. Labels and coordinates — "Part 6", "Action F", "pre-read #4" — are precise handles for cross-referencing; keep them. But they are pointers, not names, and a human reading cold cannot resolve them. At first mention, give a thing its human name and a few words of content, with the coordinate trailing as a pointer: *"the planned payment-divergence simulation (Action F)"*, never a bare *"Action F"* as the subject of a sentence. Gloss framework vocabulary (*"Gated"*, *"the anchor rule"*) in plain English on first use. The test: someone who read the doc a month ago — or never wrote it — can act on the sentence without opening anything to decode it.
-- **Stay sequential.** The seven steps of a quality strategy are not optional, and not interchangeable. Later steps depend on earlier ones. Skipping ahead produces a strategy that looks complete but is built on sand.
-
-## Further reading
-
-- Edmund Pringle's blog series at [epkconsulting.substack.com](https://epkconsulting.substack.com/) — the source material.
+The [README](README.md) says what each skill is for and where to start. The
+[quality model](references/quality-model.md) defines the terms the pack uses.
