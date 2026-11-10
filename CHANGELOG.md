@@ -7,6 +7,16 @@ release can remove or replace skills. To pick up a new version in Claude Code,
 run `claude plugin update quality-strategy@tollens` (or `/plugin update quality-strategy@tollens`
 inside Claude Code).
 
+## [0.5.2] - 2026-11-10
+
+### Added
+
+- A terms page, [TERMS.md](TERMS.md), and a link to it in the plugin manifest.
+
+### Changed
+
+- The plugin's icon is a PNG in place of an SVG.
+
 ## [0.5.1] - 2026-11-10
 
 ### Added
@@ -219,6 +229,7 @@ remain readable.
 - First public alpha release: `/quality-strategy`, `/test-strategy`, `/tooling-strategy`,
   `/strategy-variants`, and their review and adequacy skills.
 
+[0.5.2]: https://github.com/tollens-ai/quality-strategy-skills/compare/v0.5.1...v0.5.2
 [0.5.1]: https://github.com/tollens-ai/quality-strategy-skills/compare/v0.5.0...v0.5.1
 [0.5.0]: https://github.com/tollens-ai/quality-strategy-skills/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/tollens-ai/quality-strategy-skills/releases/tag/v0.4.0
