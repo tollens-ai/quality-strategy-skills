@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "quality-strategy",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Modular quality strategy: project context, stakeholder deepdives, release priorities and the strategy written up with a section per priority, then one priority at a time, with interviews, focused reviews, and reports.",
   "author": {
     "name": "Yanqing Cheng"
@@ -26,13 +26,25 @@
   "extensions": {
     "com.openai": {
       "interface": {
-        "displayName": "Quality Strategy",
-        "shortDescription": "Make a project's quality choices explicit: who matters, what good means, what is known, and what to do next.",
-        "longDescription": "Modular quality strategy: project context, stakeholder deepdives, release priorities and the strategy written up with a section per priority, then one priority at a time, with interviews, focused reviews, and reports.",
-        "developerName": "Yanqing Cheng",
+        "displayName": "Tollens Quality Strategy",
+        "shortDescription": "Decide what good enough means",
+        "longDescription": "There is always more you could do to make a project better, and never the time to do all of it. Tollens Quality Strategy helps you decide what matters most for your next release, how good it has to be, and what to do first. It is for people who own or lead a software project and work on it with an AI agent, whether the project is new or already running.\n\nYou work through it in conversation with your agent. The agent asks what the project is for and who it matters to: your users, your customers, your team, the other agents that work on it. For each of these stakeholders it asks you what matters to them and how good that has to be. You then weigh those answers together and choose the priorities for one release. A priority is something the release has to get right, such as \"a saved file is never lost\" or \"a new user can finish setup without help\".\n\nThe agent then writes those priorities up as your quality strategy. Each priority gets a section that says what good looks like, how you will know how good it is, where it stands now and what to do about it. Anything still unanswered is written as an open question, with a next step that someone can take. After that you can pick any one priority and work it through in more depth.\n\nYou can also start somewhere else. Ask the agent to interview you about whatever worries you in the project. Ask it to read the project's files and tell you the major issues it sees, what the tests cover and what they miss. Ask it to review a quality plan you already have. Or ask for a report, written for a particular reader, of where the project's quality stands.\n\nThe agent records what you said in your own words and is told to keep its own interpretation separate. Where nobody knows something yet, it writes that down as unknown rather than guessing. What you get is a set of plain text documents in a folder you choose. It does not change your code.\n\nLimits. A whole strategy for a real project is several hours of conversation, usually better spread over several sessions, and the written strategy runs to many pages. Despite its instructions, an agent can write its own interpretation into the strategy as if it were a fact, so check anything a decision will rest on. Planning tests in detail is outside what it does.\n\nWhat it needs. An agent that can read and write files in a folder on your machine, as Codex does. Two parts also run small scripts that need Node.js installed there: the interview about what worries you, and the check of how far a strategy has got when you come back to it. It has been used in Codex and has not been tried in ChatGPT.",
+        "developerName": "Tollens",
         "category": "Developer Tools",
-        "capabilities": ["Read", "Write"],
-        "websiteURL": "https://github.com/tollens-ai/quality-strategy-skills"
+        "capabilities": [
+          "Read",
+          "Write"
+        ],
+        "defaultPrompt": [
+          "Help me decide what quality work matters most for my next release.",
+          "Interview me about what worries me in this project's quality.",
+          "Read this project's files and tell me the major issues, what the tests cover and what they miss."
+        ],
+        "websiteURL": "https://github.com/tollens-ai/quality-strategy-skills",
+        "supportURL": "https://github.com/tollens-ai/quality-strategy-skills/issues",
+        "privacyPolicyURL": "https://github.com/tollens-ai/quality-strategy-skills/blob/main/PRIVACY.md",
+        "logo": "./assets/tollens-icon.svg",
+        "composerIcon": "./assets/tollens-icon.svg"
       }
     }
   }
