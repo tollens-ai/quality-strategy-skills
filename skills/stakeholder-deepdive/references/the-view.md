@@ -23,8 +23,8 @@ already said:
 
 A bar means something only for someone in a situation. Take what you can from what is known and ask
 only for what is missing, because the points below are what the view needs to know, not a
-questionnaire. Ask about the
-stakeholder, or about the example person if that is how the user is building it:
+questionnaire. Ask about the stakeholder, or, if the user is building the view by describing an
+example person in the stakeholder's situation, about that person:
 
 - **Who they are.** A role is enough; don't invent a personal name. Use the user's grouping, not
   yours. [The quality model](../../../references/quality-model.md#what-is-judged-and-for-whom) says
@@ -105,8 +105,10 @@ because it is evidence and not a belief.
   view; the release's trade-off is the user's, later.
 
 Stay with this stakeholder: something that belongs elsewhere, such as what matters to someone
-else, is written down as [each turn](../../../references/each-turn.md) says, and you carry on. Go on
-while the replies are still adding something; stop when the user says that is all, or is tiring.
+else, is written down as [each turn](../../../references/each-turn.md) says, and you carry on. Keep
+asking about who they are and how good it must be while the replies are still adding something.
+When the user says that is all, or is tiring, ask no more of those questions and go on with the
+rest of this page.
 
 ## When they do not know
 
@@ -121,10 +123,10 @@ reason a fuller view out, help them.
 ## What matters to them, thing by thing
 
 The profile lists each thing that matters to this stakeholder, built from what the user said, the
-interview, the project context and [the kinds of
-quality](../../../references/quality-dimensions.md):
+interview, the project context and [the quality
+dimensions](../../../references/quality-dimensions.md):
 
-- **Each names the product or part and the kind of quality,** telling a tool apart from what it
+- **Each names the product or part and the quality dimension,** telling a tool apart from what it
   produces, so that the priorities step can put it together with another stakeholder's view of the
   same thing.
 - **A broad label is split only where one answer would hide a difference that matters,** as
@@ -134,7 +136,7 @@ quality](../../../references/quality-dimensions.md):
 - **Each comes from what matters to them,** not from a list of work to do. A bug or an earlier
   incident can suggest one, but it belongs because of what it costs this stakeholder. Pose problems
   here, not fixes.
-- **Look for what the user's account missed.** Use the kinds of quality to check, not as a list to
+- **Look for what the user's account missed.** Use the quality dimensions to check, not as a list to
   go through or recite, and suggest the few possibilities this stakeholder's situation makes likely,
   each marked as yours, with the reason. Check [who it assumes, people or
   agents](../../../references/quality-dimensions.md#check-human-and-agent-assumptions), because you

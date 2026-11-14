@@ -53,13 +53,16 @@ const USAGE = `Usage: records.mjs <command> [...]
   table <strategy.md> [--quality-dir <folder>] [--json]
                                             each priorities-table row with what it lacks (a rating,
                                             a bar, a section, counting a heading with nothing under
-                                            it as none), and what it may be without and still
-                                            be complete ("no reason given": the rating stands as the
-                                            owner's); with --quality-dir, each listed stakeholder
-                                            whose view is not done, and the profile files saved,
-                                            each with its first heading, for you to match, and
-                                            each recorded as one nobody here speaks for, which is
-                                            noted but does not count as a lack.
+                                            it as none); a row with no reason is complete,
+                                            because a rating given without one stands as the
+                                            owner's; while no row has a section, which is how the
+                                            strategy stands until it is written up, no row is
+                                            counted as lacking one, and nothing is said of it; with
+                                            --quality-dir, each listed stakeholder whose view is
+                                            not done, and the profile files saved, each with its
+                                            first heading, for you to match. A stakeholder nobody
+                                            here speaks for, and a view recorded as skipped, are
+                                            noted, with the reason recorded, and are not lacks.
 
 A section is a heading whose text matches a row's first cell; a sibling heading in the same run
 that matches no row is reported as a section without one, except "The release as a whole", which
@@ -288,7 +291,9 @@ function check(file, flags) {
     const quoted = /^["“](.+)["”]$/s.exec(link.text.trim());
     if (isTranscript(link.target) && quoted && !squash(fs.readFileSync(resolved, "utf8")).includes(squash(quoted[1]))) quotes.push(`${shown}: not found in ${link.target}`);
   }
-  const version = lines.some((l) => /written with the quality-strategy pack/i.test(l)) ? "present" : "missing";
+  // The version line is prose and may wrap, so it is looked for within each paragraph, not each line.
+  // A heading is a block of its own, so its words never join the prose under it.
+  const version = lines.map((l) => headingOf(l) ? `\n${l}\n` : l).join("\n").split(/\n\s*\n/).some((p) => /written with the quality-strategy pack/i.test(squash(p))) ? "present" : "missing";
   const folderLinks = flags["quality-dir"] ? folderBrokenLinks(path.resolve(flags["quality-dir"]), path.resolve(file)) : [];
   const json = {table: table ? "found" : "not found", rows: unmatchedRows, sections: orphans, parts, links: broken, version, quotes, folderLinks};
   const out = [];
@@ -299,7 +304,7 @@ function check(file, flags) {
     .map((p) => `  ${p.section}: ${[p.missing.length ? `missing ${p.missing.join(", ")}` : "", p.order !== "ok" ? "out of order" : ""].filter(Boolean).join("; ")}`);
   if (partLines.length) out.push("Sections whose four parts are not all there in order:", ...partLines);
   if (broken.length) out.push("Links that do not resolve:", ...broken.map((l) => `  ${l}`));
-  if (version === "missing") out.push("Version line: missing (no line says \"Written with the quality-strategy pack\")");
+  if (version === "missing") out.push("Version line: missing (nothing in the document says \"Written with the quality-strategy pack\")");
   if (quotes.length) out.push("Quotes not found in their transcript:", ...quotes.map((q) => `  ${q}`));
   if (folderLinks.length) out.push("Links in other records that do not resolve:", ...folderLinks.map((l) => `  ${l}`));
   return {text: out.length ? out.join("\n") : "check: nothing to report", json};
@@ -344,17 +349,24 @@ function table(file, flags) {
     return !lines.slice(m.line + 1, end).some((l) => l.trim());
   }).map((m) => m.row));
   // "lacks" is a cell or section the strategy needs and does not have. "notes" is a state the
-  // template allows and a writer must not repair: a rating with no reason stands as the owner's
-  // with nothing invented, and a stakeholder nobody here speaks for says so (round ss3: a writer
-  // filled four Why cells because this command called them lacking).
+  // template allows and a writer must not repair: a stakeholder nobody here speaks for says so. An
+  // empty Why cell is neither, and nothing is printed for it: a rating given without a reason
+  // stands as the owner's. Called a lack, it had a writer fill four Why cells (round ss3); printed
+  // as the note "no reason given", it put those words in front of a writer who then wrote them
+  // into fourteen (round ga1).
+  // Sections are written at the write-up, after the priorities step that runs this command. While
+  // no row has one, a lack printed on every row is twelve things to answer with nothing to do
+  // (round ga1). Said once instead, the line was copied into a record as an explanation (round ga1's
+  // reruns), so nothing is said. Once any row has a section, a row without one lacks it.
+  const sectioned = (found?.rows ?? []).filter((r) => !isNone(r));
+  const noSections = sectioned.length > 0 && unmatchedRows.length === sectioned.length;
   const rows = (found?.rows ?? []).map((r) => {
     const lacks = [], notes = [];
     if (!r.cells[1]) lacks.push("a rating");
     // A cell that only says the bar is not there ("Not set", "TBD", "?") is no bar (rc3b: a writer
     // carried "Not set." from an older strategy and this command called the row complete).
     if ((!r.cells[2] || isPlaceholder(r.cells[2])) && !isNone(r)) lacks.push("a bar");
-    if (!r.cells[4]) notes.push("no reason given");
-    if (unmatchedRows.includes(r.cells[0]) && !isNone(r)) lacks.push("a section");
+    if (unmatchedRows.includes(r.cells[0]) && !isNone(r)) { if (!noSections) lacks.push("a section"); }
     else if (empty.has(r.cells[0]) && !isNone(r)) lacks.push("a section (the heading has nothing under it)");
     return {priority: r.cells[0], lacks, notes};
   });
@@ -365,10 +377,13 @@ function table(file, flags) {
     const listed = (Array.isArray(steps(dir).stakeholders) ? steps(dir).stakeholders : []).filter((s) => isRecord(s) && typeof s.name === "string" && !s.retired);
     for (const s of listed) {
       const lacks = [], notes = [], status = s.parts?.view?.status ?? "not started";
+      // A view the user chose not to take is their decision, recorded with its reason: like a
+      // stakeholder nobody here speaks for, it is a state to report and not one to repair (round
+      // ga1: "lacks a view done (skipped)" had a writer explain the owner's choice away).
+      const view = s.parts?.view;
       if (isRecord(s.nobody_here)) notes.push(`nobody here speaks for them${s.nobody_here.date ? ` (${s.nobody_here.date})` : ""}`);
-      else {
-        if (status !== "done") lacks.push(`a view done (${status})`);
-      }
+      else if (status === "skipped") notes.push(`view skipped${view.date ? ` (${view.date})` : ""}${typeof view.note === "string" && view.note ? `, ${view.note}` : ""}`);
+      else if (status !== "done") lacks.push(`a view done (${status})`);
       stakeholders.push({name: s.name, lacks, notes});
     }
   }
@@ -382,10 +397,15 @@ function table(file, flags) {
   if (flags["quality-dir"]) out.push(profiles.length
     ? `Profiles saved in stakeholders/ (match them to the names above yourself; the script does not compare names): ${profiles.map((p) => `${path.basename(p.file)}${p.heading ? ` "${p.heading}"` : " (no heading)"}`).join(", ")}`
     : "Profiles saved in stakeholders/: none");
-  return {text: out.join("\n"), json: {rows, stakeholders, profiles}};
+  return {text: out.join("\n"), json: {rows, sections: noSections ? "none yet" : "counted", stakeholders, profiles}};
 }
 
+// --help anywhere prints the usage, because no option takes a value that begins "--"; -h only in
+// first place, so that a step's name is never taken for it.
+const wantsHelp = (argv) => argv.includes("--help") || argv[0] === "-h";
+
 function main(argv) {
+  if (wantsHelp(argv)) return USAGE;
   const {flags, words} = parse(argv);
   const [command, ...rest] = words;
   if (!command || command === "help") return USAGE;

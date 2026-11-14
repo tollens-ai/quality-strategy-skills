@@ -19,13 +19,16 @@ route to the user, explain it from the skill's map of the steps.
 4. **If `status` says the folder holds strategy documents not yet recorded,** an older
    version of these skills made them. Read them, tell the user which steps look finished, record
    those once they agree, and run `status` again.
-5. **If the folder is inside a repository, `status` shows `Commits: not recorded` and Setup is
-   done,** open `quality-setup` for the answer on committing alone and come back, because the commit
-   script reads only that record, and otherwise nobody would ever ask about committing in a strategy
-   already under way. If Setup is not done yet, the Setup item below opens it instead.
+5. **If the folder is inside a repository, git does not ignore it, `status` shows `Commits: not
+   recorded` and Setup is done,** open `quality-setup` for the answer on committing alone and come
+   back, because the commit script reads only that record, and otherwise nobody would ever ask
+   about committing in a strategy already under way. If Setup is not done yet, the Setup item below
+   opens it instead.
 6. **If what the user said on opening shows something has changed** since last time, such as a
    stakeholder who can now be spoken for, someone new who matters, or a step they no longer want,
-   record it and run `status` again, because it knows only what has been recorded.
+   open [where things stand](../../../references/where-things-stand.md) and record it as it says,
+   because it also says which documents already written to bring up to date. Then run `status`
+   again, because it knows only what has been recorded.
 
 ## Go by the line that starts `Next:`
 
@@ -36,9 +39,10 @@ route to the user, explain it from the skill's map of the steps.
      steps come in that order, when they ask, because a long explanation before they have said
      anything goes unread.
   2. If there is no saved arrangement, or it says the place is not agreed or does not say who the
-     documents are for, or the folder is inside a repository and `status` shows `Commits: not
-     recorded`, open `quality-setup`, follow it, and come back with the folder it agreed.
-     Otherwise don't open it or read the arrangement back, because they have already agreed it.
+     documents are for, or the folder is inside a repository, git does not ignore it and `status`
+     shows `Commits: not recorded`, open `quality-setup`, follow it, and come back with the folder
+     it agreed. Otherwise don't open it or read the arrangement back, because the arrangement is
+     already settled.
   3. Record what they asked for, in their words, with `asked "<their words>"`, because `status`
      shows it to every later session; and if they have already said what is on their mind about
      quality, record it with `mind`, so that nobody asks them again.
@@ -70,7 +74,8 @@ route to the user, explain it from the skill's map of the steps.
 Say which steps are done, as `status` lists them, and anything the progress note says this session
 should tell them. If `quality-setup` was opened in this conversation, begin with where the documents
 will live, who they are for, what is known about who can reach the place, and whether the records
-will be committed after each step, in the arrangement's words, because setup handed back without a
-word to them. Then name the next step, and offer it as [going on, or a fresh
-session](../../../references/stopping-and-coming-back.md) says. Unless they have just said what to do
-next, wait for the answer before starting it.
+will be committed after each step, in the arrangement's words, and with anything setup handed back
+for them still to hear about the place, because setup handed back without a word to them. Then name
+the next step, and offer it as [going on, or a fresh
+session](../../../references/stopping-and-coming-back.md) says. Unless they have just said what to
+do next, wait for the answer before starting it.

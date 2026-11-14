@@ -28,8 +28,8 @@ then return to the unanswered question.
 ## 1. Find the strategy and the priority
 
 Before your first message, find the quality folder with `node
-"$PLUGIN_ROOT/skills/quality-strategy/scripts/records.mjs" where`, and run `status` with `steps.mjs`
-in the same folder. If they are coming back, start as [stopping and coming
+"$PLUGIN_ROOT/skills/quality-strategy/scripts/records.mjs" where` and run `steps.mjs status
+--quality-dir <folder>` beside it. If they are coming back, start as [stopping and coming
 back](../../references/stopping-and-coming-back.md) says, because a question may be waiting for
 them.
 

@@ -19,10 +19,47 @@ someone can take. After that you can pick any one priority and work it through i
 
 The agent records what you said in your own words and is told to keep its own interpretation
 separate. Where nobody knows something yet, it writes that down as unknown rather than guessing.
-What you get is a set of plain text documents in a folder you choose. It does not change your code.
+It does not change your code.
 
 The pack is a set of skills, installed as a plugin for
 [Claude Code](https://docs.anthropic.com/en/docs/claude-code) or Codex.
+
+## What it costs and what you get for it
+
+If you ask your usual agent for a quality strategy, it will write you one in a few minutes. This
+pack costs a lot more time and a lot more tokens: a whole strategy for a real project takes
+several hours, most of it you reading and answering, and is usually better spread over several
+sessions. Though we have not yet measured the results, the pack is designed to give you five things
+that a quick request does not:
+
+- **Reasoning from your context, not prescribed best practice.** Most skill packs and guides for
+  software engineering, planning or strategy prescribe best practice. This pack reasons from first
+  principles about what is best for your project, given its context. Mission-critical healthcare
+  software, a demo, a beta for 100 friendly customers and a feature rollout to 10,000 paying users
+  each need different processes and practices: what to test, what not to test, and when to stop
+  testing.
+- **The context in your head, written down in your codebase.** Much of what your project's
+  quality depends on is known only to you. The pack gets it from you and saves it, with the
+  decisions made from it, as documents in your project that you and your agents can refer to in
+  later work.
+- **Thoroughness.** Every quality priority your context calls for is written down, so there is
+  room to work through each one separately, in depth, rather than muddling them together.
+- **Enforced prioritisation.** Under release pressure something has to give. Putting the
+  priorities in order makes sure that what gives is the right thing.
+- **Nothing said in passing is forgotten.** If you tell an agent everything on your mind at once,
+  it tends to go down a rabbit hole on some things and quietly let others drop. The pack's open
+  interview keeps a careful record of everything you raise, because the "oh, by the way" from the
+  person leading a project is often the most useful lead on a quality problem.
+
+Yanqing Cheng, who implemented the pack, ran it on two of her own projects. A whole strategy took
+about 4 to 8 hours and 35 to 50 million tokens; working one priority through in more depth
+afterwards took about an hour and 8 million tokens more. Nearly all those tokens are the agent
+rereading the conversation from its cache, which costs much less than new input.
+
+Those runs recorded 10 to 20 concerns in the interview and 3 to 6 stakeholders' views, and came to
+20 to 30 priorities, each rated by how much it matters. Yours will differ.
+
+To see what the written strategy holds, read [the strategy template](references/strategy-template.md).
 
 ## Install and run
 
@@ -58,10 +95,11 @@ Then start a new session and call the `quality-strategy` skill:
 - in Claude Code, `/quality-strategy:quality-strategy`;
 - in Codex, `$quality-strategy:quality-strategy`.
 
-It asks whether anything about the project's quality is already on your mind, offers to read the
-project's files first, and tells you which step to start with. The other skills are called the same
-way, with their own name after the colon, and the agent gives you the command for each next step.
-You can stop partway and come back later: call `quality-strategy` again and it finds your place.
+It asks whether anything about the project's quality is already on your mind and tells you which
+step to start with. The other skills are called the same way, with their own name after the
+colon, and the agent gives you the command for each next step. You can stop partway and come back
+later: call `quality-strategy` again and it finds your place. The first step offers to read the
+project's files before asking its questions.
 
 Other agents can use the skills too. Give the agent a copy of this repository with its layout intact, and
 the `effective-comms` skills beside it, and ask it to read the `SKILL.md` of the skill you want.
@@ -91,30 +129,24 @@ These support the steps or work on their own:
 | [quality-strategy-review](skills/quality-strategy-review/SKILL.md) | A review of quality documents you already have |
 | [quality-report](skills/quality-report/SKILL.md) | A report or visual of where quality stands, made for a particular reader |
 
-To see the shape of the written strategy, with every heading and what goes under it, read
-[the strategy template](references/strategy-template.md).
-
 ## What to expect
 
-- **It takes time.** A whole strategy for a real project is several hours of conversation, usually
-  better spread over several sessions. A single skill, such as the interview or the reading of your
-  files, is much shorter.
-- **The written strategy is long.** It is built to be thorough and accurate before it is short. See
-  below for how to ask for a shorter version.
+- **The written strategy is long.** It is built to be thorough and accurate before it is short; "When
+  you want the strategy shorter" below says how to ask for a shorter version.
 - **The documents are yours.** They are saved as plain text in a folder you choose, by default
   `quality/` in your project. The agent agrees with you where they go and who they are for before
-  it saves anything frank, and commits them only if you say it may.
+  it saves anything candid or sensitive, and commits them only if you say it may.
 
 The [known issues](KNOWN-ISSUES.md) say what can go wrong and what to do about it.
 
 ## What you need to do yourself
 
-The skills do not yet prompt the agent to do these, or we have not tested how well it does them, so
-for now they rest on you.
+The skills do not yet handle the cases below, or we have not tested how well the agent handles
+them, so for now they are down to you.
 
 **Check what you act on.** When it writes the strategy up, an agent can state its own
-interpretation, or an earlier agent's, as if it were a fact. Each section says what it rests on.
-Before you act on a section, check anything a decision will rest on against those sources.
+interpretation, or an earlier agent's, as if it were a fact. Each section lists the sources it
+draws on. Before you act on a section, check anything a decision depends on against those sources.
 
 **If the project has an earlier strategy.** Starting a strategy for a new release when the folder
 already holds one for a previous release has not been tested. Tell your agent what to do with the
@@ -124,16 +156,16 @@ earlier one: keep it beside the new one, archive it, or build on it.
 priority where one rating would hide a difference that matters, but it does not judge when they
 have become too fine. Each priority that matters can later be worked through on its own, so aim
 for priorities that are each worth that, and ask the agent to merge two that are almost the same.
-Two priorities that one piece of work would settle are not, for that reason, the same priority.
+Keep two priorities apart even when one piece of work would deal with both.
 
 **When you want the strategy shorter.** No step yet rewrites the strategy shorter. Until one
 does, ask your agent yourself, for example: "Rewrite quality/strategy.md with less hedging and
 shorter descriptions. Keep every decision, condition, unknown and who said what, and save it beside
 the original." Compare the rewrite with the original before you rely on it.
 
-**Throughout.** If the agent names rows by number, or uses a skill's name where you expected plain
-words, ask it to say what it means. Asked how much is left, it answers for the current step; call
-`quality-strategy` for the steps still to come.
+**Throughout.** If the agent refers to priorities only by number, or uses a skill's name where you expected plain
+words, ask it to say what it means. If you ask how much is left, it answers only for the current
+step; call `quality-strategy` to see the steps still to come.
 
 ## The ideas behind it
 

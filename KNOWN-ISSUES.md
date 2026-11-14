@@ -1,8 +1,8 @@
 # Known issues
 
 These are the faults and limits we know of in the current release, with what to do about each.
-They come from use of this version on a real project and from runs with an agent playing the user,
-in Claude Code and in Codex. If you hit something that is not here, please
+They come from use of the 0.5 releases on a real project and from runs with an agent playing the
+user, in Claude Code and in Codex. If you hit something that is not here, please
 [tell us](https://github.com/tollens-ai/quality-strategy-skills/issues).
 
 ## Check before you rely on a strategy
@@ -25,7 +25,8 @@ in Claude Code and in Codex. If you hit something that is not here, please
   section, and check the other places against it.
 - **Which issues the agent tells you about after reading your files is its judgment.** In one
   case it told the user about a missing setting and not about a command that deletes a
-  configuration file. Read the full list in the digest it saves, not only what it says in the
+  configuration file. In a strategy, the agent saves everything this reading found as `pre-read.md`
+  in your quality folder. Read the full list there, not only what the agent says in the
   conversation.
 - **A priority can be marked "Unknown" when something is known.** Where nobody has said how good a
   priority must be, its section can sum up where it stands as "Unknown" even though the same
@@ -61,6 +62,9 @@ in Claude Code and in Codex. If you hit something that is not here, please
 - **How finely the priorities are divided is up to you.** The agent splits a priority where one
   rating would hide a difference, but does not judge when they have become too fine. The
   [README](README.md#what-you-need-to-do-yourself) says what to aim for.
+- **If you put off deciding whether the agent may commit your documents, it asks again next
+  time,** even when it said it would not, because only a yes or a no can be saved. Answer it when
+  you are ready, or tell it again that you have not decided.
 - **The agent suggests nothing itself about what the release will not aim at.** It asks you. Ask
   it for suggestions if you want them.
 - **In the interview, the agent can read your answer back with a gloss of its own.** Correct it.
@@ -70,6 +74,13 @@ in Claude Code and in Codex. If you hit something that is not here, please
 
 ## Not covered, or not yet tried
 
+- **No person has used 0.5.3 yet.** Its changes were tried with an agent playing the user: in
+  short runs of setup, the priorities step and the stakeholder deep dive, in Claude Code and in
+  Codex, and in one whole strategy from start to finish in Codex. No whole strategy has been run on
+  this version in Claude Code. One thing was not tried at all: coming back, after you update, to
+  documents whose setup an earlier version saved. After you update, check that the agent finds
+  your documents and does not ask again what you had already settled. If something that worked in
+  0.5.2 goes wrong, please tell us.
 - **Quality for agents and for AI products.** The pack offers a list of kinds of quality to
   consider, such as readability. The list does not yet separate what a person needs from what an
   agent needs, for example code a person can follow and code an agent can follow. It also has
@@ -78,11 +89,11 @@ in Claude Code and in Codex. If you hit something that is not here, please
 - **Security, keeping user data intact and runaway spending are not guaranteed a place.** The
   agent is told to consider them, but a strategy can miss them if the conversation goes
   elsewhere. Raise them yourself if they matter to your project.
-- **Where the documents are kept.** `quality-setup` tells you that anyone with access to the
-  repository can read them. In fact nothing is shared until you commit and push. If your
-  repository has no remote, or you keep the folder out of git, the skill has no ready answer and
-  the agent improvises, so say what you want. It also does not look for your project's own rules
-  about what may be written down, so tell it those.
+- **Where the documents are kept.** A new session finds your quality documents by itself only in
+  a `quality` folder in your project. If you keep them anywhere else, the agent tells you so at
+  setup, and you have to name the folder each time you come back. The agent also cannot check who
+  has access to a folder, a drive or a repository, though in test runs one told the user that the
+  documents "never leave this machine". Judge for yourself who can read the place you choose.
 - **Four paths have never been run:** starting a new release where the folder already holds an
   earlier strategy, going back to a priority you have already worked through, changing the order
   of the priorities afterwards, and working on a priority you rated None. If you take one, check

@@ -17,12 +17,12 @@ record tells you what was known or chosen then, not what has changed since. Read
 too, because a look at the files may have started or finished after the last saved reply.
 
 Set up checks for an answer on whether the records may be committed, and that check applies here
-too, because a return skips the rest of set up: if the quality folder is inside a repository and
-`node "$PLUGIN_ROOT/skills/quality-strategy/scripts/records.mjs" where --quality-dir <the folder>`
-shows `Commits: not recorded`, open `quality-setup` for that answer alone before anything else. If
-the saved arrangement already gives the answer, `quality-setup` records it without asking the
-user. If it has to ask, ask that question on its own first, and record the exchange the same way
-as the catch-up answers below.
+too, because a return skips the rest of set up: if the quality folder is inside a repository, git
+does not ignore it and `node "$PLUGIN_ROOT/skills/quality-strategy/scripts/records.mjs" where
+--quality-dir <the folder>` shows `Commits: not recorded`, open `quality-setup` for that answer
+alone before anything else. If the saved arrangement already gives the answer, `quality-setup`
+records it without asking the user. If it has to ask, ask that question on its own first, and
+record the exchange the same way as the catch-up answers below.
 
 If the reflection is waiting, see [returning to a pending
 reflection](#returning-to-a-pending-reflection) instead. If `next` is `write-up`, the reflection has

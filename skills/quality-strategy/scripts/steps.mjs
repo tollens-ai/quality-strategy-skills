@@ -75,8 +75,11 @@ const USAGE = `Usage: steps.mjs <command> --quality-dir <folder>
   stakeholder add "<name>"                  also brings back someone who was retired
   stakeholder rename "<old>" "<new>"
   stakeholder retire "<name>"               no longer matters for this release; their record is kept
-  stakeholder nobody-here "<name>"          nobody here speaks for them now: they cannot, or would rather wait for the stakeholder
-  stakeholder can-speak "<name>"
+  stakeholder nobody-here "<name>"          nobody here can give their view now
+  stakeholder can-speak "<name>"            their view is a step to take again
+                                            (nobody-here and a view skipped replace each other: recording
+                                            one drops the other. part "<name>" view "not started" makes a
+                                            skipped view a step to take again)
 
   draft --to <step> --request "<words>"     drafting without the user: write the assignment for the next
   draft <step> --request "<words>"          step not yet drafted before <step>, or for one step, or for
@@ -391,8 +394,11 @@ function apply(state, dir, command, rest, flags) {
     record(state, {id: stepId(rest[0])}, rest[1], flags);
   } else if (command === "part") {
     if (rest.length !== 3) refuse("part takes a stakeholder in quotes, a part and a status");
-    const name = findStakeholder(state, rest[0]).name;
-    for (const id of partIds(rest[1])) record(state, {id, stakeholder: name}, rest[2], flags);
+    const s = findStakeholder(state, rest[0]);
+    for (const id of partIds(rest[1])) record(state, {id, stakeholder: s.name}, rest[2], flags);
+    // Going on without a view has one record at a time (round ga1, design review): a view the
+    // user has decided not to take is no longer one that nobody here can give.
+    if (rest[2] === "skipped") delete s.nobody_here;
   } else if (command === "stakeholders") {
     const names = rest.map((name) => name.trim());
     if (names.length === 0 || names.some((name) => !name)) refuse("stakeholders takes one or more names in quotes, in the order to take them");
@@ -415,7 +421,12 @@ function apply(state, dir, command, rest, flags) {
     } else if (["retire", "nobody-here", "can-speak"].includes(action) && rest.length === 2) {
       const s = findStakeholder(state, name);
       if (action === "retire") s.retired = true;
-      if (action === "nobody-here") s.nobody_here ??= {date: flags.date ?? today(), ...(flags.note ? {note: flags.note} : {})};
+      if (action === "nobody-here") {
+        s.nobody_here ??= {date: flags.date ?? today(), ...(flags.note ? {note: flags.note} : {})};
+        // The other way round: a view waited for is no longer one the user decided not to take. A
+        // view started or drafted is kept, because that work is saved.
+        for (const [id] of PARTS) if (statusOf(s.parts[id]) === "skipped") record(state, {id, stakeholder: s.name}, "not started", {});
+      }
       if (action === "can-speak") delete s.nobody_here;
     } else refuse('stakeholder takes: add, retire, nobody-here or can-speak with a "<name>", or rename "<old>" "<new>"');
   } else refuse(`unknown command "${command}"\n\n${USAGE}`);
@@ -620,7 +631,12 @@ function draft(loaded, dir, rest, flags) {
   return {text: out.join("\n"), changed};
 }
 
+// --help anywhere prints the usage, because no option takes a value that begins "--"; -h only in
+// first place, so that a name or a note someone gives is never taken for it.
+const wantsHelp = (argv) => argv.includes("--help") || argv[0] === "-h";
+
 function main(argv) {
+  if (wantsHelp(argv)) return USAGE;
   const {flags, words} = parse(argv);
   const [command, ...rest] = words;
   if (!command || command === "help") return USAGE;

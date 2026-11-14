@@ -29,11 +29,13 @@ skill's path; `$PLUGIN_ROOT` is the part before `skills/`.
 
 ## Claude Code
 
-**Questions.** `AskUserQuestion` is one way to ask a question, or to ask the same question about each
-of a set of items. It shows each item with a few options and room for an answer in the person's own
-words, takes up to four items in one call, and waits for the answer, so it ends the turn as a
-question should. Ask about a set of more than four items as [each
-turn](each-turn.md) says.
+**Questions.** `AskUserQuestion` shows each item with a few options and room for an answer in the
+person's own words, takes up to four items in one call, and waits for the answer, so it ends the
+turn as a question should. The options are answers to pick from, so use it only for a question that
+[each turn](each-turn.md) says can be asked directly, such as a rating, or for the same such
+question about each of a set of items. Ask an open question in your message, because options under
+it would put your words on record as the person's. Ask about a set of more than four items as each
+turn says.
 
 **When Claude Code asks what you are doing,** mid-turn, answer about their project: what they will
 get next, or how much longer it will be if you have said that already.

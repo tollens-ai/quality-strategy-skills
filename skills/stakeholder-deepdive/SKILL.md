@@ -61,8 +61,10 @@ review; "move on to me" already says to leave it.
 user's own or their understanding of someone else's.
 
 Find the quality folder with `node "$PLUGIN_ROOT/skills/quality-strategy/scripts/records.mjs"
-where`. If it holds a strategy, run `steps.mjs status --quality-dir <the quality folder>`, beside
-it, because it lists the stakeholders and whose views are done.
+where`, and run `steps.mjs status --quality-dir <the quality folder>`, beside it. This conversation
+is a step of a strategy unless `status` says no strategy is recorded, as [where things
+stand](../../references/where-things-stand.md) explains; in a strategy, `status` lists the
+stakeholders and whose views are done.
 
 Take the stakeholder the user names. If they name none, take the one `status` names next and say
 who; with no strategy, ask whose view this is about as your first question, because nothing below
@@ -86,23 +88,24 @@ back to it](references/leaving-and-coming-back.md) now, because each changes wha
 use it, what matters to them and how good it must be, what comes first for them and why - and what
 they do not know, as questions with how they could find out.
 
-Open [the view](references/the-view.md) now.
-
-## 3. Save as you go, and close
+The view is saved as it is given, so before the first save, follow the arrangement that
+`records.mjs where` printed; if there is none, open `quality-setup`, then carry on here. If their
+view is already recorded in another document, agree with them which document will hold the one
+current account, because two copies drift apart. Outside a whole strategy, run `comms-prep`,
+because they will read the profile.
 
 Start the profile, `stakeholders/<slug>.md`, at the user's first answer about this stakeholder, and
 update it after each answer, before your reply, because an answer kept only in the conversation is
 lost if the window closes. Say each thing once: ten things that matter come to about a thousand
-words, quotes included. Before the first save, follow the arrangement that `records.mjs where`
-printed; if there is none, open `quality-setup`, then carry on here. If their view is already
-recorded in another document, agree with them which document will hold the one current account,
-because two copies drift apart. Outside a whole strategy, run `comms-prep`, because they will read
-the profile.
+words, quotes included.
+
+Open [the view](references/the-view.md) now.
+
+## 3. Close
 
 When the view is done, or they stop:
 
-1. Update the profile, with each question they could not answer and how they could find
-   out.
+1. Update the profile, with each question they could not answer and how they could find out.
 2. Check that what this conversation found that belongs to another part, such as someone else who
    matters or what was said about them, is recorded where [each
    turn](../../references/each-turn.md) says.
@@ -111,7 +114,8 @@ When the view is done, or they stop:
    can be assumed; don't ask if they have already said. Their answer goes at the head of the profile.
 4. Outside a whole strategy, run `comms-review` on the profile and deal with what it finds.
 5. In a strategy, record `part "<stakeholder>" view done`, or `started --note "<what is left and who
-   has to act>"` if they stopped before the end. On its own, with no strategy, record nothing.
+   has to act>"` if they stopped before the end; a view left because nobody here can give it gets
+   neither, because no view was taken. On its own, with no strategy, record nothing.
 6. Open [stopping and coming back](../../references/stopping-and-coming-back.md) and do what it
    says; in a strategy, the next step it offers is the one `status` names. Unless they have just
    said what to do next, wait for their answer, because no step starts before they choose it.

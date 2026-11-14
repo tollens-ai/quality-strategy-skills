@@ -11,8 +11,10 @@ to continue, not whether to do it in this session. Otherwise judge by how much h
 conversation: once it has got long, recommend a fresh session, because a session holding too much
 mixes one step's reasoning with the next, and the records carry everything forward. When you offer a
 fresh session, give the whole line for them to type: the command as [the harness page](harness.md)
-writes it, words saying that it continues the strategy, and the stakeholder or the folder where that
-matters. Before they leave, get the answer to any question you have already asked.
+writes it, words saying that it continues the strategy, and the stakeholder if the next step has
+one. Add the quality folder unless it is a `quality` folder in the project, because that is the only
+place where a new session finds the documents by itself. Before they leave, get the answer to any
+question you have already asked.
 
 **The closing message** is written from the records, not from memory. If the user's permission to
 commit still stands and the records have changed, run
@@ -32,8 +34,8 @@ if the commit fails, say so once and do not retry it.
   can rely on it. Until then, offer nothing as guidance, because your own interpretation is not a
   stakeholder's view.
 - If the user means to settle a question by asking someone else, mention that question once. Draft
-  nothing for that person, and if that person does not read the records, say that the user can ask
-  the question without showing them the records.
+  nothing for that person and suggest no way of reaching them, because what to ask and how are the
+  user's to choose.
 - End with the offer to go on or the line for a fresh session, and wait. If they go on when you
   recommended a fresh session, say once what may be lost, do as they ask, and recommend a fresh
   session again only when this one has grown a good deal longer.

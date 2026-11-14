@@ -15,15 +15,17 @@ the situation you chose would need answered.
 release, as concrete levels, or that nobody has said yet and why; and whose account each claim is?
 Are the important uncertainties and disagreements visible? Do nested or overlapping groups keep each
 member's own view, and is a tool's quality kept apart from the quality of what it produces? The part
-on the project should hold whatever about the project, its people and how they work bears on the
-kinds of quality that matter here, and that usually takes some detail: how maintainable something
+on the project should hold whatever about the project, its people and how they work bears on
+which quality dimensions matter here, and that usually takes some detail: how maintainable something
 must be depends on how work is done and checked, and whether a fix reaches people depends on how a
 release reaches them. Judge that part by whether the reasoning behind each priority can be seen to
 rest on something it says. Checking whose method is not described does not show that a person used
 the product.
 
 **The priorities.** Can the reader tell how good each must be, for whom and why, or that nobody has
-said? Does each rating keep its reason, or say none was given, and whose it is? Is the rating kept
+said? Does each rating keep the reason that was given for it, and whose it is? A rating given
+without a reason has none written, and that is not a gap to report, because a reason supplied
+afterwards, or a line saying none was given, says more than the person did. Is the rating kept
 apart from what people said about how good it must be, and does each thing said keep whose it is
 and what it was about, side by side where they differ, with a risk called accepted only where the
 user accepted it? Work back from the parts of the product and from each person's expectations, as
@@ -75,7 +77,7 @@ again.
 
 **A revised strategy.** Are conclusions still presented as current after what they rested on
 changed? Compare with an earlier version where there is one, matching up priorities by the part of
-the product, the kind of quality and the release. Compare conclusions and sources, and judge the
+the product, the quality dimension and the release. Compare conclusions and sources, and judge the
 structure against the template, not the earlier layout, because a part the template no longer has is
 not a loss. A priority whose stakeholders' accounts were added or changed can still be the same
 priority with changed sources: check its conclusions against those sources rather than treating it

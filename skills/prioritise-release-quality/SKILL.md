@@ -1,6 +1,6 @@
 ---
 name: prioritise-release-quality
-description: Combine every stakeholder's view into one set of quality priorities for a release, with how much each matters and what is not a priority for it. Use once each stakeholder who matters has had their deepdive, or to revise or re-order the release's priorities.
+description: Combine every stakeholder's view into one set of quality priorities for a release, with how much each matters and what is not a priority for it. Use once each stakeholder who matters has had their deepdive or been left for now, or to revise or re-order the release's priorities.
 ---
 
 # Prioritise release quality
@@ -80,10 +80,12 @@ it has everything a re-order needs.
 **Goal.** Base the priorities on what the release is for and on every stakeholder's own view.
 
 1. Find the quality folder with `node "$PLUGIN_ROOT/skills/quality-strategy/scripts/records.mjs"
-   where`. If it holds a strategy, run `steps.mjs status --quality-dir <the quality folder>`, beside
-   it, and read what it prints: the stakeholders, whose views are done, and the progress note. If
-   there is no strategy, this skill works on its own: ask who matters for this release; anyone they
-   name who has no profile counts as a missing view.
+   where`, and run `steps.mjs status --quality-dir <the quality folder>`, beside it. This
+   conversation is a step of a strategy unless `status` says no strategy is recorded, as [where
+   things stand](../../references/where-things-stand.md) explains. In a strategy, read what it
+   prints: the stakeholders, whose views are done, and the progress note. With no strategy, this
+   skill works on its own: ask who matters for this release; anyone they name who has no profile
+   counts as a missing view.
 2. Find out what the release is meant to achieve, which areas it covers and who decides, from the
    records and from what the user says. If the release isn't decided, the priorities are a draft:
    say so.
@@ -93,12 +95,13 @@ it has everything a re-order needs.
    was drafted without the user, for example from documents, read it back to them and get their
    answer before anything rests on it. A stakeholder already recorded as having nobody here to speak
    for them counts as a missing view; don't press about them now, and take them up whenever the user
-   does.
+   does. A view recorded as skipped is one the user decided not to take, so it is not missing.
 5. If any other stakeholder who matters has no view, say who, recommend their `stakeholder-deepdive`
    first, and ask which they want: that first, or the priorities without it. Wait for their choice,
    because it is theirs. If they choose to go on without it, tell them what the priorities will
-   lack, and in a strategy record `stakeholder nobody-here "<name>"` at once, because a choice kept
-   only until the close is lost if they stop first.
+   lack, and in a strategy record the choice at once, because a choice kept only until the close is
+   lost if they stop first. Their reason decides which record is true, as "Going on without a
+   stakeholder's view" in [where things stand](../../references/where-things-stand.md) says.
 
 ## 2. The table and the order
 

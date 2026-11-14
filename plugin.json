@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "quality-strategy",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "Modular quality strategy: project context, stakeholder deepdives, release priorities and the strategy written up with a section per priority, then one priority at a time, with interviews, focused reviews, and reports.",
   "author": {
     "name": "Yanqing Cheng"

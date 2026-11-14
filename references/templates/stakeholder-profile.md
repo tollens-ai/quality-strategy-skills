@@ -18,7 +18,7 @@ back to it in full and what they said about when>
 
 ## What matters to them, and how good it must be
 
-<for each thing that matters to them, the product or part and the kind of quality, so that two
+<for each thing that matters to them, the product or part and the quality dimension, so that two
 stakeholders' views of the same thing can be joined later. Then, in the user's words wherever they
 gave them: what would be good enough, what would make them say "ugh", what would be unacceptable,
 and what would delight them. Keep "ugh" and unacceptable apart only where the user drew the line

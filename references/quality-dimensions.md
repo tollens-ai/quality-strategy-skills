@@ -6,7 +6,7 @@ A good breakdown into quality dimensions widens the understanding of what matter
 
 The goal is to comprehensively cover all the important quality dimensions for each stakeholder of the project, so that the project's quality needs and gaps can be correctly prioritised.
 
-What a kind of quality is, and when to split a question or join two, are in [the quality
+What a quality dimension is, and when to split a question or join two, are in [the quality
 model](quality-model.md#what-is-judged-and-for-whom).
 
 ## Look for what might be missing
@@ -15,7 +15,7 @@ Start from the user's and stakeholders' named concerns. Use the candidate list a
 there is no need to go through every row and no default set. Bring candidates grounded in
 the project, because a catalogue recited is a worksheet, not thinking. 
 
-| Kind of quality | Questions to consider |
+| Quality dimension | Questions to consider |
 |---|---|
 | Correctness | What must it get right, and under which conditions? |
 | Performance and scale | How long does work take, how responsive does it feel, how predictable is the timing, what resources does it use, and what happens as demand or input grows? |
@@ -35,9 +35,9 @@ context an agent needs or how much of a person's attention the work takes.
 
 For each candidate:
 
-- **Trace it to value:** whose goal or bar makes this kind of quality matter, for this product or
-  part and in this situation?
-- **Look at the links between kinds.** An operator has to see a failure to find its cause, and find
+- **Trace it to value:** whose goal or bar makes this quality dimension matter, for this product
+  or part and in this situation?
+- **Look at the links between dimensions.** An operator has to see a failure to find its cause, and find
   the cause to restore the service; naming recovery alone hides the earlier needs.
   
 Consider, based on the project context, what dimensions might be unusual or missing. 
@@ -48,7 +48,7 @@ Also consider what dimensions might be ["obligations"](quality-model.md#obligati
 
 ## Sub-dimensions: unpack where the answers differ
 
-Before rating a kind of quality, ask what it actually covers here:
+Before rating a quality dimension, ask what it actually covers here:
 
 - A long-running tool can tolerate slow completion while needing immediate acknowledgement and
   clear progress. One "performance" rating hides two expectations.

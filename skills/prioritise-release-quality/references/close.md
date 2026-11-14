@@ -22,13 +22,13 @@ as yours, not yet answered, and go on with step 2.
    when the user has come back to change the priorities, change them in place wherever a rating or
    bar changed. In those parts, say which decisions are still open and what each needs before the
    owner can make it; who is still to be heard from, and which rows their view could change; and
-   which views were kept brief, with the rows a fuller view could change. A view the user wants to
-   come back to is not a missing one. Where they declined to give limits, say so once, with their
-   reason, because a reader would otherwise look for them. Write the bottom line from their answer
-   to step 1.
-3. Run `records.mjs table strategy.md --quality-dir <the quality folder>`, which lists each row with
-   anything it lacks. Make sure each thing a row lacks is an open question with a way of finding it
-   out, or say why it is not.
+   which views were kept brief, with the rows a fuller view could change. A view that was kept
+   brief is not a missing one, even when the user wants to come back to it in full. Where they
+   declined to give limits, say so once, with their reason, because a reader would otherwise look
+   for them. Write the bottom line from their answer to step 1.
+3. Run `records.mjs table <the quality folder>/strategy.md --quality-dir <the quality folder>`,
+   which lists each row and each stakeholder with anything it lacks. Make sure each thing it lists
+   as lacking is an open question with a way of finding it out, or say why it is not.
 4. Outside a whole strategy, run `comms-review` on what the strategy now says and deal with what it
    finds; in a strategy the write-up does this.
 5. In a strategy, record `step priorities done`, with any decisions left open named in its note,

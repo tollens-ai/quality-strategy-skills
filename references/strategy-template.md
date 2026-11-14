@@ -53,7 +53,7 @@ is.>
 
 ## The project
 
-<Everything about the project that affects the kinds of quality that matter here. This usually
+<Everything about the project that affects which quality dimensions matter here. This usually
 needs some detail. Say what is being built and why. Say who does the work, people and agents, how
 the work is done and checked now, and what goes well or badly about that. Say how a release reaches
 the people who use it. Say what limits the project works within, such as time, people, money,
@@ -70,13 +70,15 @@ prepares for, say that too. List the features deliberately left for a later rele
 view this is. Then say, in their words, what would be good enough for them, what would make them say
 "ugh", what would be unacceptable and, if they said, what would delight them. Keep to what bears on
 this release. Include any concern of theirs that did not become a priority, and what the owner
-decided about it. If nobody here speaks for a stakeholder, say so.>
+decided about it. If nobody here speaks for a stakeholder, say so. If the owner decided not to take a
+stakeholder's view, say that once, and give the reason as the owner's own.>
 
 ## What this release will not do
 
-<The kinds of quality this release deliberately does not aim for, each once with the owner's reason,
-so a reader can tell a limit that was chosen from one that was overlooked. This includes every
-priority rated None, and each level of quality the owner has said is more than this release needs.>
+<The quality dimensions this release deliberately does not aim for, each once with the owner's
+reason where they gave one, so a reader can tell a limit that was chosen from one that was overlooked. This includes
+every priority rated None, and each level of quality the owner has said is more than this release
+needs.>
 
 ## The priorities
 
@@ -241,11 +243,11 @@ for a real-time system operator."
 ### What this release will not do
 
 Include this part only when there is something to put in it. It is mostly about quality: for what
-the release does include, which kinds of quality it does not aim for, and what would be more than it
-needs. A feature left for a later release belongs in the part on the release. It can be named here
-as well when a reader would otherwise expect it, such as something people will ask about, because
-then the answer is ready. A list of nothing but deferred features is a sign that nobody has yet
-worked out what would be more than the release needs, and that is worth saying.
+the release does include, which quality dimensions it does not aim for, and what would be more than
+it needs. A feature left for a later release belongs in the part on the release. It can be named
+here as well when a reader would otherwise expect it, such as something people will ask about,
+because then the answer is ready. A list of nothing but deferred features is a sign that nobody has
+yet worked out what would be more than the release needs, and that is worth saying.
 
 Two examples of a non-goal with its reason. From the method: "We are not pursuing scalability for
 the alpha because our target users are working on small side projects". From that strategy, a level
@@ -260,9 +262,9 @@ can tell whether a source has changed since. Under the table, link from each cel
 rests on.
 
 Name each priority the way the records and the owner name it, so that the people who gave their
-views recognise it. A name usually says the kind of quality and what it covers, as that strategy's
-did: "Installability (gets running on their machine first time)", or "Security — actual (API keys
-safe, data stays local)" beside a separate "Security — perceived".
+views recognise it. A name usually says the quality dimension and what it covers, as that
+strategy's did: "Installability (gets running on their machine first time)", or "Security — actual
+(API keys safe, data stays local)" beside a separate "Security — perceived".
 
 Sort the rows by how much they matter. Keep unrated rows in view, and make the rows rated None easy
 to find. The reason in Why names a consequence for someone: who is affected and what happens if the
@@ -352,7 +354,7 @@ plainly does not apply to this project. Each item says where it comes from.
   stands, and whether the chosen ways of knowing can be tracked and shown to them; or, where
   reporting is left out for now, that it is and why. This comes from the method's note on reporting,
   and from that strategy, which recorded leaving it out as a known omission.
-- **Keeping distinct kinds of quality apart when priorities are put together,** including actual
+- **Keeping distinct quality dimensions apart when priorities are put together,** including actual
   quality and how it is perceived, wherever they could be rated differently, stand in different
   places now or need different work. They often matter just as much as each other and still differ
   in the rest: a product can be secure while its users do not trust it, and that needs different

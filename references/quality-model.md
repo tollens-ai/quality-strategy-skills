@@ -24,16 +24,16 @@ with; talk to the person in their own words.
 - **An area** is a part of the thing, such as a component or a journey through it. Keep the user's
   names and the way they divided things up, and suggest a rename or a merge rather than quietly
   replacing it, because the strategy is theirs. Nothing has to be divided up to be assessed.
-- **A kind of quality**, or quality dimension, is a way the thing can be better or worse for
-  someone: reliability, ease of use, recovering from failure, keeping data intact. A feature's name
-  is usually an area, not a kind of quality. [The kinds of quality](quality-dimensions.md) helps
-  find the ones that matter here.
+- **A quality dimension** is a way the thing can be better or worse for someone: reliability, ease
+  of use, recovering from failure, keeping data intact. A feature's name is usually an area, not a
+  quality dimension. [Quality dimensions](quality-dimensions.md) helps find the ones that matter
+  here.
 
 Keep who matters apart from what is judged: one stakeholder can relate to many things, and one
 thing can matter to many stakeholders.
 
-Every claim about quality is about something: a part of the thing, a kind of quality, someone's view
-of it, and the release or conditions where they matter. Say which, because two claims about
+Every claim about quality is about something: a part of the thing, a quality dimension, someone's
+view of it, and the release or conditions where they matter. Say which, because two claims about
 reliability can be about different things. A priority of the release can bring several stakeholders'
 views of the same thing together, with their different bars side by side, because the strategy owner
 is the one who decides between those bars. A different stakeholder or a different bar is not on its
@@ -43,8 +43,8 @@ Split a quality question only where one answer would hide a difference that matt
 each part of it must be, how much it matters, or what to decide, as when a long-running tool needs
 immediate acknowledgement but can be slow to finish. Different fixes, ways of checking or conditions
 are not reasons on their own; they are aspects of one question, each with its evidence. Split a
-broad kind of quality such as performance, or split people from agents, when their answers differ.
-List the questions that matter, not every combination of area and kind.
+broad quality dimension such as performance, or split people from agents, when their answers
+differ. List the questions that matter, not every combination of area and dimension.
 
 Two priorities can be joined into one when they are almost the same thing, or overlap so much that
 working on them separately would repeat the work. Whether to join them is the strategy owner's
@@ -114,9 +114,9 @@ you notice and ask what lies behind it. If someone corrects the stakeholder's ac
 correction and who made it; otherwise keep both the stakeholder's words and the owner's view.
 
 **What the release will not do** is its non-goals: the priorities rated None, and the bars beyond
-what this release needs, each with the owner's reason. They are mostly about quality. A feature left
-for later belongs in the release's scope and can be named as a non-goal as well, but a list of
-nothing but features says nothing about how good is good enough.
+what this release needs, each with the owner's reason where they gave one. They are mostly about
+quality. A feature left for later belongs in the release's scope and can be named as a non-goal
+as well, but a list of nothing but features says nothing about how good is good enough.
 
 ## Obligations that come with the facts
 

@@ -6,7 +6,7 @@ A quality strategy is a set of steps, each a skill of its own: the project's con
 stakeholder's view, priorities for a release, the written strategy, and then one priority at a
 time. The pack runs as a plugin in Claude Code and in Codex.
 
-Earlier versions have been used by the authors and a few other people. This version is new, and
+Earlier versions have been used by the authors and a few other people. Version 0.5 is new, and
 one of the authors has taken a project of her own through it. The
 [known issues](KNOWN-ISSUES.md) list what we know can go wrong.
 

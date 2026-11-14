@@ -23,12 +23,13 @@ only once the strategy owner has answered.
 
 ## Lay the views side by side
 
-Each row names the product or part, the kind of quality and the stakeholders it matters to, with
-what has been said about how good it must be beside it, saying whose each is, and, where the user
-gave any, their words on what comes first for each stakeholder.
+Each row names the product or part, the [quality
+dimension](../../../references/quality-model.md#what-is-judged-and-for-whom) and the stakeholders
+it matters to, with what has been said about how good it must be beside it, saying whose each is,
+and, where the user gave any, their words on what comes first for each stakeholder.
 
 - **Take the things that matter from each profile.** They are the user's understanding of that
-  stakeholder. Put those that concern the same part and the same kind of quality in one row, with
+  stakeholder. Put those that concern the same part and the same quality dimension in one row, with
   each stakeholder's bar and what comes first for them beside it, and say whose each is ("said, for
   the support team"). If a profile holds something you added, bring it in as the user answered it in
   that profile.
@@ -60,14 +61,18 @@ gave any, their words on what comes first for each stakeholder.
   differ](../../../references/quality-dimensions.md#unpack-where-the-answers-differ) describes.
   Parts of one thing that need different fixes or checks are aspects of one row, not reasons to
   split it. Putting rows together must not hide a difference: where the items you put together have
-  different bars, keep each one
-  visible in the row.
+  different bars, keep each one visible in the row.
 - **Nothing said yet.** Where nobody has said how good a row must be, or the user could not say it
   for a stakeholder, the row says so, and the question goes beside it.
-- **A missing view** is marked in every row its answer could change; if nothing shows which rows
-  those are, ask the user. Those rows stay in the list, marked provisional, and you mention the gap
-  once for all of them, because it is one fact about the group, and raising it at each row asks the
-  same question many times.
+- **A missing view,** one that nobody here can give or that the user will give later, is marked in
+  every row its answer could change; if nothing shows which rows those are, ask the user. Those rows
+  stay in the list, marked provisional, and you mention the gap once for all of them, because it is
+  one fact about the group, and raising it at each row asks the same question many times. A view
+  the user decided not to take is not a missing one: it marks no row provisional and adds no
+  question, because they are not waiting for an answer. Where their reason is about the people,
+  such as that another stakeholder's view covers them, each row that rests on it says whose view
+  its bar comes from and that the user takes it to cover the others, whose own view was not taken,
+  so that someone who takes the row away to work on knows what it stands on.
 
 Don't show the list yet, and don't spend a turn asking what they would change in it. Show it whole
 in the message that asks for their ordering, because nobody can order a list they have not seen
@@ -83,30 +88,28 @@ to someone, not as a piece of work to do.
 - **What was raised before:** the interview's records, the pre-read's major issues and the concerns
   saved in the project context. An item that is already covered needs no turn of its own. It is
   covered if it is a row or an aspect of one, an open question, something the strategy owner has
-  already said this release does not aim at (with their reason), or, if it is about who matters or
+  already said this release does not aim at (with their reason where they gave one), or, if it is about who matters or
   is a fact, recorded in the project context. An item that is not covered goes in as a row of yours.
 - **[Obligations that come with the
   facts](../../../references/quality-model.md#obligations-that-come-with-the-facts),** for
   everything the product already does, not only what this release adds. If the project context
   already records a fact with the user's answer about it, don't raise it again. For a new fact, put
-  it in the list, with the obligation you think follows from it, as yours. Record it in the project
-  context only once the user has heard it, because an obligation recorded before they have heard it
-  is only your guess, written up as if it were settled. An obligation to people who are not yet
-  stakeholders gets a row saying "no stakeholder yet", and those people go into the project context
-  as possible stakeholders.
+  it in the list, with the obligation you think follows from it, as yours; where the obligation is
+  to people who are not yet stakeholders, the row says "no stakeholder yet". Record the fact in the
+  project context, and those people in it as possible stakeholders, only once the user has heard
+  them, because either one recorded earlier is only your guess, written up as if it were settled.
 - **The areas the release covers, and the rest of the project context.**
-- **[The kinds of quality](../../../references/quality-dimensions.md),** for a concern that belongs
-  to no single stakeholder, checking [who it assumes, people or
+- **[The quality dimensions](../../../references/quality-dimensions.md),** for a concern that
+  belongs to no single stakeholder, checking [who it assumes, people or
   agents](../../../references/quality-dimensions.md#check-human-and-agent-assumptions) and whether
   [how good people believe it
   is](../../../references/quality-dimensions.md#separate-actual-quality-from-what-people-believe)
   needs a row of its own.
 
 A row of yours becomes theirs once the user answers it, either by naming it or with a plain yes to
-something they could weigh. Open questions stay
-where they are, in the profiles and the project context. So does a tension between views that bears
-on some rows: note the tension and those rows beside the list in your notes, so that when you come
-to rate those rows you remember to raise it.
+something they could weigh. Open questions stay where they are, in the profiles and the project
+context. So does a tension between views that bears on some rows: note the tension and those rows
+beside the list in your notes, so that when you come to rate those rows you remember to raise it.
 
 ## Order them
 
@@ -156,11 +159,11 @@ extra polish can be answered from it. Where their ordering already named some, s
 as theirs and ask what else. Propose no list of your own; you may name a row they have not put in
 their order.
 
-A non-priority is a kind of quality the release deliberately does not aim at. A feature left for
+A non-priority is a quality dimension the release deliberately does not aim at. A feature left for
 later belongs in the release's scope in the project context, and "we have no tests" says how things
 are now, not that checking is unnecessary. Naming a non-priority does not remove an obligation
 either: an obligation that comes with the facts stays, however it is rated. What they name is rated
-None, with their reason. Polish beyond what the release needs on a priority they keep, such as speed
+None, with their reason where they gave one. Polish beyond what the release needs on a priority they keep, such as speed
 past a response time, is not a None: it is a limit in that priority's bar, and its rating stands.
 
 ## Read the ratings from their order
@@ -199,7 +202,7 @@ Record each rating with its reason. Where a reason was already given, in what th
 order or in a profile, carry it, saying whose, because a reason that exists and is left out reads as
 missing. Leave the reason empty for a rating given without one, because writing that none was given
 reads as if they were asked and had nothing to say. A row they reject is rated None, with their
-reason.
+reason where they gave one, the same way.
 
 ## Check that nothing was lost
 
@@ -209,7 +212,7 @@ things that matter, the areas the release covers and the obligations that apply,
 each is covered:
 
 - **Raised before:** covered if it is a row or an aspect of one, an open question with why it
-  matters, something the strategy owner said is not a priority (with their reason), or, if it is
+  matters, something the strategy owner said is not a priority (with their reason where they gave one), or, if it is
   about who matters or is a fact, recorded in the project context. Don't ask again about one already
   answered earlier in this step.
 - **From a stakeholder, the areas or the obligations:** covered if it is a row. The exception is a

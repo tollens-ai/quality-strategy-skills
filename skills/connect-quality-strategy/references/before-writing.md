@@ -3,13 +3,13 @@
 Step 1 of [write the strategy up](../SKILL.md#1-read-the-records).
 
 Find the quality folder with `node "$PLUGIN_ROOT/skills/quality-strategy/scripts/records.mjs"
-where`, and run `status` with `steps.mjs`, from the same scripts folder. Read [what every document
-shares](../../../references/templates/every-document.md), because the strategy follows its rules,
-such as how to quote a reply given by number. Then read the progress note, the project context,
-each stakeholder's profile, the pre-read, the interview's summary and topics, any notes, and the
-strategy as it is now. Records written by older versions of the pack, such as a strategy with an
-Open section, notes files beside the strategy, or notes on priorities that were worked further, are
-read for what they mean rather than by their layout, as [older
+where`, and run `steps.mjs status --quality-dir <folder>` from the same scripts folder. Read [what
+every document shares](../../../references/templates/every-document.md), because the strategy
+follows its rules, such as how to quote a reply given by number. Then read the progress note, the
+project context, each stakeholder's profile, the pre-read, the interview's summary and topics, any
+notes, and the strategy as it is now. Records written by older versions of the pack, such as a
+strategy with an Open section, notes files beside the strategy, or notes on priorities that were
+worked further, are read for what they mean rather than by their layout, as [older
 records](../../../references/quality-model.md#older-records) says.
 
 If the release priorities were never set, there is nothing to write up yet, because the strategy

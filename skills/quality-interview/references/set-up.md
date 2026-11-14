@@ -25,15 +25,16 @@ as they were said.
    file counts, because a folder existing doesn't say who should read the records.
 4. **Decide how the opening message will end.** It has to settle where the records go and who they
    are for.
-   - **The saved arrangement stands** when it records both where the records go and who they are
-     for as agreed with the user, and, as far as the agent knows, who can read that place has not
-     changed since it was saved. The opening message then says in one line where the records go
-     and who they are for, as the saved arrangement has it, and ends with the first question. The
-     user agreed to the arrangement when it was saved, and asking again would cost them a turn;
-     they can still correct it, as step 6 says.
+   - **The saved arrangement stands** when it says where the records go and who they are for, does
+     not say the place is not agreed, and, as far as the agent knows, who can read that place has
+     not changed since it was saved. It stands whether who the records are for is the user's choice
+     or the agent's default, because `quality-setup` saves a default only where it chose not to
+     ask, and asking again would cost the user a turn. The opening message then says in one line
+     where the records go and who they are for, as the saved arrangement has it, and ends with the
+     first question; they can still correct it, as step 6 says.
 
      An older arrangement may not yet hold a separate answer on whether the records may be
-     committed, so check: if the folder is inside a repository and `node
+     committed, so check: if the folder is inside a repository, git does not ignore it and `node
      "$PLUGIN_ROOT/skills/quality-strategy/scripts/records.mjs" where --quality-dir <the folder>`
      shows `Commits: not recorded`, open `quality-setup` for that answer alone before the opening
      message. Pass the folder by name, because `where` on its own does not find a folder that holds
@@ -41,7 +42,7 @@ as they were said.
      without asking, and the arrangement still stands; if it has to ask the user, the opening
      message ends as the next point says.
    - **Otherwise** it ends with what [`quality-setup`](../../quality-setup/SKILL.md) says first,
-     because that skill agrees both with the user and saves them.
+     because that skill settles both and saves them.
 5. **Send the opening message:** about three sentences, then the ending just chosen. The sentences
    say:
    - that this is a conversation about what matters to them in the project's quality, which they
@@ -75,10 +76,11 @@ as they were said.
    is at the end of the opening message. Show its label, `Question 1`, and ask one question only.
 
    If `quality-setup` was opened in this conversation, begin the message with one line saying
-   where the records will go, who they are for and what is known about who can reach them.
-   `quality-setup` leaves this line to the skill that opened it. Saying it here, in the message that
-   asks Question 1, rather than in a set-up turn of its own, keeps `turns` ending with the user's
-   reply.
+   where the records will go, who they are for and what is known about who can reach them, and
+   add anything `quality-setup` handed back for them still to hear about the place.
+   `quality-setup` leaves all of this to the skill that opened it. Saying it here, in the message
+   that asks Question 1, rather than in a set-up turn of its own, keeps `turns` ending with the
+   user's reply.
 
    - If they have already said what is on their mind, earlier in this conversation or as the
      strategy's `steps.mjs status` shows, give their words back to them and ask them to say more

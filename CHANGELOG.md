@@ -7,6 +7,61 @@ release can remove or replace skills. To pick up a new version in Claude Code,
 run `claude plugin update quality-strategy@tollens` (or `/plugin update quality-strategy@tollens`
 inside Claude Code).
 
+## [0.5.3] - 2026-11-13
+
+### Changed
+
+- `quality-setup` says more exactly who can read your quality documents. Git shares them only once
+  they are committed and pushed, and from then on anyone with access to where they were pushed can
+  read every committed version. Anyone who can open the folder itself, for example on a shared
+  machine or a synced drive, can read them as soon as they are saved.
+- When your repository has many readers, `quality-setup` recommends keeping the documents, until
+  you are happy for them to be read, in a `quality` folder in the project that git ignores, which
+  means git never commits or pushes it. It used to recommend a folder outside the repository. The
+  agent sets the ignore rule for you, in your own clone's exclude file, so no shared file changes.
+- The agent asks whether it may commit the documents only where git can commit them. For a folder
+  git ignores it does not ask, and tells you that nothing there keeps earlier versions.
+- A new session finds the documents by itself only in a `quality` folder in the project, as
+  before. If you keep them anywhere else, the agent now tells you this at setup, and tells you
+  what to say when you come back so that it finds them. Documents you already keep elsewhere stay
+  where they are and work as they did: name the folder when you start a session.
+- When setup uses its own default for who the documents are for, the agent tells you it is a
+  default, so that you can change it.
+- When you go on without a stakeholder's view, the agent records which of three things you meant:
+  nobody in the conversation can give the view, you have decided not to take it, or you will give
+  it later. A view you decided not to take is no longer treated as missing or asked for again. The
+  strategy says once that it was not taken, with your reason, and a priority that rests on that
+  reason says so. You can change your mind at any time.
+- When you say you would rather ask a stakeholder yourself, the questions stay yours. The agent no
+  longer offers wording to send or a way of reaching them.
+- The skills say "quality dimension", meaning a way the product can be better or worse for someone,
+  such as reliability or ease of use, where they said "kind of quality".
+- The README says what a whole strategy costs in time and tokens, and what the pack is designed to
+  give you for it.
+- In Claude Code, the agent asks an open question in its message. It shows a menu of options only
+  for a question with a fixed set of answers, such as a rating.
+
+### Fixed
+
+- A rating you gave without a reason no longer gets "No reason given" written beside it in the
+  strategy. The reason is left empty.
+- A stakeholder's view that was left because nobody in the conversation could give it could be
+  recorded as done. It is now recorded only as a view nobody here could give.
+- `stakeholder-deepdive` settles where the documents are kept before it asks its questions. It
+  could save your first answer before the place was agreed.
+- At the end of the priorities step, the agent's check of the priorities table failed when run as
+  the skill gave it, and reported every priority as lacking a section before any section had been
+  written.
+- When the agent suggests that the project owes something to people who are not yet stakeholders,
+  it adds them to the project context only after it has put the suggestion to you. It could record
+  them before you had seen it.
+- The check of the written strategy no longer reports its version line as missing when the line
+  wraps.
+- The write-up and `priority-deepdive` no longer begin with a command that fails and is retried.
+- The helper scripts print their usage for `--help`.
+- The README said that `quality-strategy` offers to read your project's files. The project context
+  step makes that offer.
+
 ## [0.5.2] - 2026-11-10
 
 ### Added
@@ -229,6 +284,7 @@ remain readable.
 - First public alpha release: `/quality-strategy`, `/test-strategy`, `/tooling-strategy`,
   `/strategy-variants`, and their review and adequacy skills.
 
+[0.5.3]: https://github.com/tollens-ai/quality-strategy-skills/compare/v0.5.2...v0.5.3
 [0.5.2]: https://github.com/tollens-ai/quality-strategy-skills/compare/v0.5.1...v0.5.2
 [0.5.1]: https://github.com/tollens-ai/quality-strategy-skills/compare/v0.5.0...v0.5.1
 [0.5.0]: https://github.com/tollens-ai/quality-strategy-skills/compare/v0.4.0...v0.5.0

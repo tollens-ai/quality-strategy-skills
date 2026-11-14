@@ -34,7 +34,7 @@ something they never said.
 
 These apply to every format, from the first draft to the saved file.
 
-- **Keep apart, for each claim,** what it is about (the part of the product, the kind of quality,
+- **Keep apart, for each claim,** what it is about (the part of the product, the quality dimension,
   whose view and which release, where those matter), how much it matters, how good it is now, how
   sure the records are, and the order of work, because a report that blends them says something
   nobody decided. A priority that holds several stakeholders' views keeps each one's bar visible.
@@ -144,8 +144,8 @@ word on it. These are fixed:
 - **Make the page a map of the records, not a summary of the session.** Every word on it comes from
   the records you read, never from the conversation or your own interpretation of them, so that the
   reader sees what was recorded. Where a record lacks something the page would show, say so in plain
-  words at that place, such as "not recorded" or "no reason given", rather than leaving a blank or
-  filling it in, because a blank reads as an oversight and a supplied answer reads as a decision.
+  words at that place, such as "not recorded", rather than leaving a blank or filling it in,
+  because a blank reads as an oversight and a supplied answer reads as a decision.
   Keep that apart from an answer the owner gave, such as "not yet worked out", which is theirs.
   Where the records hold nothing at all of some kind, such as no next actions yet or no bottom line,
   say so in a sentence of its own. When the owner decided that they would release whatever
@@ -174,8 +174,8 @@ answers the four questions in order. It is harder from an older strategy laid ou
 you read by meaning, and from one partway through, where being honest about what is missing matters
 more than the navigation.
 
-Things that often help, to choose from for this reader: filters by rating, by stakeholder, by kind
-of quality and by what is still unsettled; a search; and, on each item, links to what it rests on
+Things that often help, to choose from for this reader: filters by rating, by stakeholder, by quality
+dimension and by what is still unsettled; a search; and, on each item, links to what it rests on
 and what it touches, with a way back.
 
 View it rendered, as for [a visual to share](#a-visual-to-share), and move around in it as its reader
@@ -228,10 +228,10 @@ paraphrase shifts what was decided, and name a biggest risk or a first action on
 do.
 
 The guide is a set of questions, written for this project, that place a new issue on its priority:
-which part of the product, which kind of quality, whose view and which release. The issue takes its
-importance from that priority; keep how bad it is apart from how soon it needs attention. An issue
-can belong to several priorities when it affects several groups or parts, and a tool's quality is
-kept apart from the quality of its output. Then say where each kind of issue goes, giving only the
+which part of the product, which quality dimension, whose view and which release. The issue takes
+its importance from that priority; keep how bad it is apart from how soon it needs attention. An
+issue can belong to several priorities when it affects several groups or parts, and a tool's quality
+is kept apart from the quality of its output. Then say where each kind of issue goes, giving only the
 routes the records support: an unclear expectation goes back to the stakeholders or the priorities;
 a question with no way to judge it, an unknown current state or a known gap goes to its priority's
 section, as a question with its next action, to be worked further with `priority-deepdive`. A

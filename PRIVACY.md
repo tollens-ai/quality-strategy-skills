@@ -1,7 +1,7 @@
 # Privacy
 
 Quality Strategy Skills, published by Tollens, is a set of instructions for your own AI agent, with
-two small scripts that keep its records on your machine. It has no server of its own.
+three small scripts that keep its records on your machine. It has no server of its own.
 
 - **What Tollens collects:** nothing. The pack does not send your conversations, your files or any
   usage data to Tollens, and its scripts make no network requests.
@@ -18,4 +18,4 @@ two small scripts that keep its records on your machine. It has no server of its
 
 Questions about privacy: yanqing@tollens.ai.
 
-Last updated: 10 November 2026.
+Last updated: 13 November 2026.

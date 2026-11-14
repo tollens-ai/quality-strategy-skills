@@ -35,11 +35,11 @@ document: the comms checks you leave are those on your own report.
 ## What the documents are for
 
 Use the text given or the documents the user names; otherwise the strategy, which
-`node "$PLUGIN_ROOT/skills/quality-strategy/scripts/records.mjs" where` finds. In a strategy, run
-`steps.mjs status --quality-dir <folder>` from the same scripts folder, because it tells a draft from
-what the user has seen and answered. Read strategies from older versions of the pack for what
-they mean, as [older records](../../references/quality-model.md#older-records) says; they need no
-converting.
+`node "$PLUGIN_ROOT/skills/quality-strategy/scripts/records.mjs" where` finds. For records in a
+quality folder, run `steps.mjs status --quality-dir <folder>` from the same scripts folder, because
+it tells a draft from what the user has seen and answered. Read strategies from older versions of
+the pack for what they mean, as [older records](../../references/quality-model.md#older-records)
+says; they need no converting.
 
 Take the scope from the request and what the documents say they are for. Ask only when the answer
 would change your judgment; otherwise say which scope you are assuming. If the reader's own account
